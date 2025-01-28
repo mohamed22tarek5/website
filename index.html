@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="icon.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Mohamed - Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    :root {
+      --primary-color: #4e9eff;
+      --background-dark: #121212;
+      --text-light: #ffffff;
+      --card-dark: #1e1e1e;
+      --secondary-color: #3a6cf4;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--background-dark);
+      color: var(--text-light);
+    }
+
+    header {
+      background-color: var(--card-dark);
+      width: 100%;
+      position: fixed;
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 200px;
+    }
+
+    .logo {
+      text-decoration: none;
+      text-transform: uppercase;
+      color: var(--primary-color);
+      font-weight: 700;
+      font-size: 1.8em;
+    }
+
+    .navigation {
+      display: flex;
+      align-items: center;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      color: var(--primary-color);
+      font-weight: 500;
+      padding-left: 30px;
+      transition: color 0.3s ease;
+    }
+
+    .navigation a:hover {
+      color: var(--text-light);
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .bar {
+      height: 3px;
+      width: 25px;
+      background-color: var(--primary-color);
+      margin: 4px 0;
+    }
+
+    section {
+      padding: 100px 200px;
+      background-color: var(--background-dark);
+    }
+
+    .main {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: url(images/part-blurry-image.webp) no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .main h2 {
+      color: var(--text-light);
+      font-size: 1.4em;
+      font-weight: 500;
+    }
+
+    .main h2 span {
+      display: inline-block;
+      margin: 10px;
+      color: var(--primary-color);
+      font-size: 3em;
+      font-weight: 600;
+    }
+
+    .main h3 {
+      color: var(--text-light);
+      font-size: 2em;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+
+    .main p {
+      color: var(--text-light);
+      font-size: 1.5em;
+      font-weight: 800;
+      letter-spacing: 5px;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+
+    .main-btn {
+      color: var(--text-light);
+      background-color: var(--secondary-color);
+      text-decoration: none;
+      letter-spacing: 1px;
+      font-size: 1.1em;
+      font-weight: 600;
+      display: inline-block;
+      padding: 0.9375em 2.1875em;
+      border-radius: 15px;
+      margin-bottom: 40px;
+      transition: 0.7s ease;
+    }
+
+    .main-btn:hover {
+      background-color: var(--primary-color);
+      transform: scale(1.1);
+    }
+
+    .social-icon a {
+      color: var(--text-light);
+      font-size: 1.7em;
+      padding-right: 30px;
+      transition: color 0.3s ease;
+    }
+
+    .social-icon a:hover {
+      color: var(--primary-color);
+    }
+
+    .title {
+      display: flex;
+      justify-content: center;
+      color: var(--primary-color);
+      font-size: 2.2em;
+      font-weight: 800;
+      margin-bottom: 30px;
+    }
+
+    .cotent {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background-color: var(--card-dark);
+      width: 21.25em;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      padding: 25px;
+      margin: 15px;
+      transition: 0.7s ease;
+      color: var(--text-light);
+    }
+
+    .card:hover {
+      transform: scale(1.1);
+    }
+
+    .icon {
+      color: var(--primary-color);
+      font-size: 8em;
+      text-align: center;
+    }
+
+    .info {
+      text-align: center;
+    }
+
+    .info h3 {
+      color: var(--primary-color);
+      font-size: 1.2em;
+      font-weight: 700;
+      margin: 10px;
+    }
+
+    .projects {
+      background-color: var(--background-dark);
+    }
+
+    .project-card {
+      background-color: var(--card-dark);
+      border: 1px solid var(--card-dark);
+      min-height: 14em;
+      width: 20em;
+      overflow: hidden;
+      border-radius: 10px;
+      margin: 20px;
+      transition: 0.7s ease;
+    }
+
+    .projects .cotent {
+      margin-top: 30px;
+    }
+
+    .project-card:hover {
+      transform: scale(1.1);
+    }
+
+    .project-card:hover .project-image {
+      opacity: .7;
+    }
+
+    .project-image img {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .project-info {
+      padding: 1em;
+      color: var(--text-light);
+    }
+
+    .project-category {
+      font-size: 0.8em;
+      color: var(--primary-color);
+    }
+
+    .project-titlle {
+      display: flex;
+      justify-content: space-between;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-top: 10px;
+      color: var(--text-light);
+    }
+    .project-carrd {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    background-color: var(--card-dark);
+    border: 1px solid var(--card-dark);
+    min-height: 14em;
+    width: 20em;
+    border-radius: 10px;
+    margin: 20px;
+    transition: 0.7s ease;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    color: var(--text-light);
+}
+
+.project-carrd:hover {
+    transform: scale(1.1);
+}
+
+.project-titlle {
+    font-size: 1.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--primary-color);
+}
+
+
+
+    .more-details {
+      text-decoration: none;
+      color: var(--primary-color);
+    }
+
+    .more-details:hover {
+      color: var(--text-light);
+    }
+
+    .contact .icon {
+      font-size: 4.5em;
+    }
+
+    .contact .info h3 {
+      color: var(--primary-color);
+    }
+
+    .contact .info p {
+      font-size: 0.8em;
+    }
+
+    footer {
+      background-color: var(--card-dark);
+      color: var(--text-light);
+      text-align: center;
+      padding: 20px;
+    }
+
+    .social-footer {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    .social-footer a {
+      color: var(--text-light);
+      font-size: 2em;
+      margin: 0 15px;
+      transition: color 0.3s ease;
+    }
+
+    .social-footer a:hover {
+      color: var(--primary-color);
+    }
+
+    /* Back to Top Button */
+    #back-to-top {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      border: none;
+      border-radius: 50%;
+      padding: 10px;
+      font-size: 1.5em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #back-to-top:hover {
+      background-color: var(--secondary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1023px) {
+      header, section {
+        padding: 50px 50px;
+      }
+
+      .navigation {
+        display: none;
+        flex-direction: column;
+        background-color: var(--card-dark);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding: 10px 0;
+      }
+
+      .navigation.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 630px) {
+      header, section {
+        padding: 20px 20px;
+      }
+    }
+
+    .container {
+      width: 80%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .profile-image {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <a href="index.html" class="logo">Mohamed Tarek</a>
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <nav class="navigation" id="nav-list">
+      <a href="Mohamed - CV.html">My CV</a>
+      <a href="Mohamed - Personal Information.html">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">My Projects</a>
+      <a href="Mohamed - Certificates.html">Certificates</a>
+    </nav>
+  </header>
+
+  <!-- Main Section -->
+  <section class="main">
+    <div>
+      <div class="container">
+        <div class="profile-header">
+          <img src="photo.jpg" alt="Mohamed Tarek" class="profile-image">
+          <h1>Mohamed Tarek</h1>
+          <p>Communications Engineer | Web Developer | Arduino project maker | PCB DESIGNER</p>
+        </div>
+        <a href="https://linktr.ee/m7mdtarek22" class="main-btn">ALL MY ACCOUNTS</a>
+        <div class="social-icon">
+          <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/mohamed22tarek5" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://api.whatsapp.com/qr/CGQGSWFBWC7GO1?autoload=1&app_absent=0" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="cards" id="services">
+    <h2 class="title">Services</h2>
+    <div class="cotent">
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-edit"></i>
+        </div>
+        <div class="info">
+          <h3>Content Creation</h3>
+          <p>Professional script writing and content development for various media platforms.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-video"></i>
+        </div>
+        <div class="info">
+          <h3>Video Production</h3>
+          <p>High-quality video editing and production services.</p>
+        </div>
+      </div>
+    <div class="project-carrd">
+      <strong class="project-title">
+          
+          <a href="Mohamed - Services.html" class="more-details">More services</a>
+      </strong>
+  </div>
+  </section>
+
+  <section class="projects" id="projects">
+    <h2 class="title">Projects</h2>
+    <div class="cotent">
+        <!-- Project 1 -->
+        <div class="project-card">
+            <div class="project-image">
+                <img src="images/part-blurry-image.webp" alt="Project 1">
+            </div>
+            <div class="project-info">
+                <p class="project-category">.NET Web Application</p>
+                <strong class="project-title">
+                    <span>E-Commerce Platform</span>
+                    <a href="#" class="more-details">More Details</a>
+                </strong>
+            </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+            <div class="project-image">
+                <img src="images/part-blurry-image.webp" alt="Project 2">
+            </div>
+            <div class="project-info">
+                <p class="project-category">Portfolio Website</p>
+                <strong class="project-title">
+                    <span>Personal Portfolio</span>
+                    <a href="#" class="more-details">More Details</a>
+                </strong>
+            </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+            <div class="project-image">
+                <img src="images/part-blurry-image.webp" alt="Project 3">
+            </div>
+            <div class="project-info">
+                <p class="project-category">Academic Management System</p>
+                <strong class="project-title">
+                    <span>Student Management</span>
+                    <a href="#" class="more-details">More Details</a>
+                </strong>
+            </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card">
+            <div class="project-image">
+                <img src="images/part-blurry-image.webp" alt="Project 4">
+            </div>
+            <div class="project-info">
+                <p class="project-category">Video Content Platform</p>
+                <strong class="project-title">
+                    <span>Content Creation</span>
+                    <a href="#" class="more-details">More Details</a>
+                </strong>
+            </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="project-card">
+            <div class="project-image">
+                <img src="images/part-blurry-image.webp" alt="Project 5">
+            </div>
+            <div class="project-info">
+                <p class="project-category">Machine Learning Project</p>
+                <strong class="project-title">
+                    <span>AI Model Development</span>
+                    <a href="#" class="more-details">More Details</a>
+                </strong>
+            </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="project-carrd">
+                <strong class="project-title">
+                    
+                    <a href="Mohamed - Project.html" class="more-details">More project</a>
+                </strong>
+            </div>
+       
+</section>
+
+  <!-- Contact Section -->
+  <section class="cards contact" id="contact">
+    <h2 class="title">Contact</h2>
+    <div class="cotent">
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-phone"></i>
+        </div>
+        <div class="info">
+          <h3>Phone</h3>
+          <p>+201090637406</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <div class="info">
+          <h3>Email</h3>
+          <p>mohamed.tarek.abdelhady.ali@gmail.com</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="social-footer">
+        <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/mohamed22tarek5" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://api.whatsapp.com/qr/CGQGSWFBWC7GO1?autoload=1&app_absent=0" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2024 Mohamed Portfolio. All Rights Reserved. &copy;M.T.A.
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navList = document.getElementById('nav-list');
+
+    mobileMenu.addEventListener('click', () => {
+      navList.classList.toggle('active');
+    });
+
+    // Back to Top Button
+    const backToTopButton = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.style.display = 'block';
+      } else {
+        backToTopButton.style.display = 'none';
+      }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
