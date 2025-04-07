@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>List Manager</title>
+  <style>
+    /* Apply styles to the container */
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Style the heading */
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    /* Style the input and button */
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* Style the list */
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button.remove {
+      background-color: #f44336;
+    }
+
+    button.remove:hover {
+      background-color: #d32f2f;
+    }
+
+    button.edit {
+      background-color: #2196f3;
+    }
+
+    button.edit:hover {
+      background-color: #1976d2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>List Manager</h1>
+
+    <input type="text" id="itemInput" placeholder="Enter an item">
+    <button onclick="addItem()">Add Item</button>
+    <br><br>
+    <ul id="itemList"></ul>
+  </div>
+
+  <script>
+    var items = []; // Array to store the list items
+
+    function addItem() {
+      var input = document.getElementById("itemInput");
+      var item = input.value.trim(); // Get the entered item and remove leading/trailing whitespaces
+
+      if (item !== "") {
+        items.push(item); // Add the item to the list array
+        input.value = ""; // Clear the input field
+        showItems(); // Update the list display
+      }
+    }
+
+    function removeItem(index) {
+      items.splice(index, 1); // Remove the item at the specified index from the list array
+      showItems(); // Update the list display
+    }
+
+    function editItem(index) {
+      var newInput = prompt("Enter the new item:");
+      if (newInput !== null) {
+        items[index] = newInput.trim(); // Update the item at the specified index in the list array
+        showItems(); // Update the list display
+      }
+    }
+
+    function showItems() {
+      var list = document.getElementById("itemList");
+      list.innerHTML = ""; // Clear the current list display
+
+      if (items.length === 0) {
+        var listItem = document.createElement("li");
+        listItem.textContent = "The list is empty.";
+        list.appendChild(listItem);
+      } else {
+        for (var i = 0; i < items.length; i++) {
+          var listItem = document.createElement("li");
+          listItem.textContent = items[i];
+          list.appendChild(listItem);
+
+          var removeButton = document.createElement("button");
+          removeButton.textContent = "Remove";
+          removeButton.className = "remove";
+          removeButton.setAttribute("onclick", "removeItem(" + i + ")");
+          listItem.appendChild(removeButton);
+
+          var editButton = document.createElement("button");
+          editButton.textContent = "Edit";
+          editButton.className = "edit";
+          editButton.setAttribute("onclick", "editItem(" + i + ")");
+          listItem.appendChild(editButton);
+        }
+      }
+    }
+  </script>
+</body>
+</html>
