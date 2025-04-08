@@ -1,98 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resistor Calculator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
+            background-color: #f5f5f5;
         }
-        
-        .calculator {
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+        h1 {
+            color: #2c3e50;
+            text-align: center;
         }
-        
-        .band-select {
-            margin: 10px 0;
-            padding: 8px;
-            width: 150px;
-        }
-        
-        .result {
-            font-size: 1.2em;
-            margin: 20px 0;
-            padding: 10px;
-            background: #f5f5f5;
-            border-radius: 4px;
-        }
-        
-        .resistor-display {
-            width: 300px;
-            height: 60px;
-            background: #d4a373;
-            margin: 20px 0;
-            position: relative;
-            background: #d4a373;
-            border-radius: 30px;
-        }
-        
-        .band {
-            width: 20px;
-            height: 60px;
-            position: absolute;
-            top: 0;
-        }
-        
         .tabs {
             margin-bottom: 20px;
+            display: flex;
+            border-bottom: 1px solid #ddd;
         }
-        
         .tab-button {
             padding: 10px 20px;
             margin-right: 10px;
             border: none;
             background: #f0f0f0;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 4px 4px 0 0;
+            border: 1px solid transparent;
         }
-        
         .tab-button.active {
-            background: #007bff;
+            background: #e74c3c;
             color: white;
+            border-bottom-color: transparent;
         }
-        
         .tab-content {
             display: none;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        
         .tab-content.active {
             display: block;
         }
         
-        .smd-input {
-            padding: 8px;
-            width: 200px;
+        /* Color Code Calculator Styles */
+        .band-select {
             margin: 10px 0;
+            padding: 8px;
+            width: 150px;
         }
-        
+        .resistor-display {
+            width: 300px;
+            height: 60px;
+            margin: 20px auto;
+            position: relative;
+            background: #d4a373;
+            border-radius: 30px;
+        }
+        .band {
+            width: 20px;
+            height: 60px;
+            position: absolute;
+            top: 0;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f1f1;
+            border-radius: 4px;
+            border-left: 4px solid #e74c3c;
+            font-size: 18px;
+        }
         .temp-coeff {
             margin-top: 10px;
             font-style: italic;
             color: #666;
         }
+        
+        /* SMD Calculator Styles */
+        .smd-input {
+            padding: 10px;
+            width: 200px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        /* Series & Parallel Resistor Calculator Styles */
+        .container {
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .resistors-container {
+            margin-top: 15px;
+        }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            width: 100px;
+        }
+        label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .resistor-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .unit-selector {
+            margin-left: 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .circuit-diagram {
+            margin: 20px 0;
+            text-align: center;
+        }
+        select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
+    <h1>Resistor Calculator</h1>
+    
     <div class="tabs">
         <button class="tab-button active" onclick="switchTab('color-code')">Color Code Calculator</button>
         <button class="tab-button" onclick="switchTab('smd')">SMD Calculator</button>
+        <button class="tab-button" onclick="switchTab('series')">Series Connection</button>
+        <button class="tab-button" onclick="switchTab('parallel')">Parallel Connection</button>
     </div>
-
-    <div id="color-code" class="tab-content active calculator">
+    
+    <!-- Color Code Calculator Tab -->
+    <div id="color-code" class="tab-content active">
         <h2>Color Code Resistor Calculator</h2>
         <div>
             <select id="bandCount" onchange="updateBands()">
@@ -109,14 +174,173 @@
         <div class="result" id="colorResult">Resistance: 0Ω ±0%</div>
         <div class="temp-coeff" id="tempCoeff"></div>
     </div>
-
-    <div id="smd" class="tab-content calculator">
+    
+    <!-- SMD Calculator Tab -->
+    <div id="smd" class="tab-content">
         <h2>SMD Resistor Calculator</h2>
-        <input type="text" class="smd-input" id="smdCode" placeholder="Enter SMD code (e.g., 103, 1002)" oninput="calculateSMD()">
+        <p>Enter SMD code (e.g., 103, 1002, 4R7)</p>
+        <input type="text" class="smd-input" id="smdCode" placeholder="Enter SMD code" oninput="calculateSMD()">
         <div class="result" id="smdResult">Resistance: 0Ω</div>
+    </div>
+    
+    <!-- Series Calculator Tab -->
+    <div id="series" class="tab-content">
+        <h2>Series Resistors Calculator</h2>
+        <p>Enter resistor values to calculate the equivalent resistance in series.</p>
+        
+        <div class="circuit-diagram">
+            <svg width="400" height="100" viewBox="0 0 400 100">
+                <!-- Power Source -->
+                <circle cx="30" cy="50" r="10" stroke="black" stroke-width="2" fill="white" />
+                <line x1="30" y1="30" x2="30" y2="70" stroke="black" stroke-width="2" />
+                <line x1="20" y1="40" x2="20" y2="60" stroke="black" stroke-width="2" />
+                
+                <!-- Wire to First Resistor -->
+                <line x1="40" y1="50" x2="80" y2="50" stroke="black" stroke-width="2" />
+                
+                <!-- First Resistor -->
+                <rect x="80" y="40" width="40" height="20" stroke="black" stroke-width="2" fill="#f9d5d1" />
+                <text x="100" y="55" text-anchor="middle" font-size="12">R₁</text>
+                
+                <!-- Wire between Resistors -->
+                <line x1="120" y1="50" x2="160" y2="50" stroke="black" stroke-width="2" />
+                
+                <!-- Second Resistor -->
+                <rect x="160" y="40" width="40" height="20" stroke="black" stroke-width="2" fill="#f9d5d1" />
+                <text x="180" y="55" text-anchor="middle" font-size="12">R₂</text>
+                
+                <!-- Wire after Second Resistor -->
+                <line x1="200" y1="50" x2="240" y2="50" stroke="black" stroke-width="2" />
+                
+                <!-- Third Resistor (with dots to indicate more) -->
+                <rect x="240" y="40" width="40" height="20" stroke="black" stroke-width="2" fill="#f9d5d1" />
+                <text x="260" y="55" text-anchor="middle" font-size="12">R₃</text>
+                
+                <!-- Dots to indicate more resistors -->
+                <circle cx="300" cy="50" r="2" fill="black" />
+                <circle cx="310" cy="50" r="2" fill="black" />
+                <circle cx="320" cy="50" r="2" fill="black" />
+                
+                <!-- Wire back to source -->
+                <line x1="340" y1="50" x2="370" y2="50" stroke="black" stroke-width="2" />
+                <line x1="370" y1="50" x2="370" y2="70" stroke="black" stroke-width="2" />
+                <line x1="370" y1="70" x2="30" y2="70" stroke="black" stroke-width="2" />
+            </svg>
+        </div>
+        
+        <div id="series-resistors" class="resistors-container">
+            <div class="resistor-input">
+                <label>R1:</label>
+                <input type="number" min="0" step="0.01" value="100">
+                <select class="unit-selector">
+                    <option value="1">Ω</option>
+                    <option value="1000" selected>kΩ</option>
+                    <option value="1000000">MΩ</option>
+                </select>
+            </div>
+            <div class="resistor-input">
+                <label>R2:</label>
+                <input type="number" min="0" step="0.01" value="220">
+                <select class="unit-selector">
+                    <option value="1">Ω</option>
+                    <option value="1000" selected>kΩ</option>
+                    <option value="1000000">MΩ</option>
+                </select>
+            </div>
+        </div>
+        
+        <button onclick="addResistor('series')">Add Resistor</button>
+        <button onclick="removeResistor('series')">Remove Resistor</button>
+        <button onclick="calculate('series')">Calculate</button>
+        
+        <div id="series-result" class="result">
+            <p>The equivalent resistance will be shown here.</p>
+        </div>
+    </div>
+    
+    <!-- Parallel Calculator Tab -->
+    <div id="parallel" class="tab-content">
+        <h2>Parallel Resistors Calculator</h2>
+        <p>Enter resistor values to calculate the equivalent resistance in parallel.</p>
+        
+        <div class="circuit-diagram">
+            <svg width="400" height="160" viewBox="0 0 400 160">
+                <!-- Power Source -->
+                <circle cx="30" cy="80" r="10" stroke="black" stroke-width="2" fill="white" />
+                <line x1="30" y1="60" x2="30" y2="100" stroke="black" stroke-width="2" />
+                <line x1="20" y1="70" x2="20" y2="90" stroke="black" stroke-width="2" />
+                
+                <!-- Main wire left -->
+                <line x1="40" y1="80" x2="80" y2="80" stroke="black" stroke-width="2" />
+                
+                <!-- Vertical junction left -->
+                <line x1="80" y1="30" x2="80" y2="130" stroke="black" stroke-width="2" />
+                
+                <!-- First Resistor -->
+                <line x1="80" y1="40" x2="320" y2="40" stroke="black" stroke-width="2" />
+                <rect x="180" y="30" width="40" height="20" stroke="black" stroke-width="2" fill="#f9d5d1" />
+                <text x="200" y="45" text-anchor="middle" font-size="12">R₁</text>
+                
+                <!-- Second Resistor -->
+                <line x1="80" y1="80" x2="320" y2="80" stroke="black" stroke-width="2" />
+                <rect x="180" y="70" width="40" height="20" stroke="black" stroke-width="2" fill="#f9d5d1" />
+                <text x="200" y="85" text-anchor="middle" font-size="12">R₂</text>
+                
+                <!-- Third Resistor -->
+                <line x1="80" y1="120" x2="320" y2="120" stroke="black" stroke-width="2" />
+                <rect x="180" y="110" width="40" height="20" stroke="black" stroke-width="2" fill="#f9d5d1" />
+                <text x="200" y="125" text-anchor="middle" font-size="12">R₃</text>
+                
+                <!-- Dots to indicate more resistors -->
+                <circle cx="200" cy="140" r="2" fill="black" />
+                <circle cx="200" cy="145" r="2" fill="black" />
+                <circle cx="200" cy="150" r="2" fill="black" />
+                
+                <!-- Vertical junction right -->
+                <line x1="320" y1="30" x2="320" y2="130" stroke="black" stroke-width="2" />
+                
+                <!-- Main wire right -->
+                <line x1="320" y1="80" x2="360" y2="80" stroke="black" stroke-width="2" />
+                
+                <!-- Wire back to source -->
+                <line x1="360" y1="80" x2="370" y2="80" stroke="black" stroke-width="2" />
+                <line x1="370" y1="80" x2="370" y2="100" stroke="black" stroke-width="2" />
+                <line x1="370" y1="100" x2="30" y2="100" stroke="black" stroke-width="2" />
+            </svg>
+        </div>
+        
+        <div id="parallel-resistors" class="resistors-container">
+            <div class="resistor-input">
+                <label>R1:</label>
+                <input type="number" min="0" step="0.01" value="100">
+                <select class="unit-selector">
+                    <option value="1">Ω</option>
+                    <option value="1000" selected>kΩ</option>
+                    <option value="1000000">MΩ</option>
+                </select>
+            </div>
+            <div class="resistor-input">
+                <label>R2:</label>
+                <input type="number" min="0" step="0.01" value="220">
+                <select class="unit-selector">
+                    <option value="1">Ω</option>
+                    <option value="1000" selected>kΩ</option>
+                    <option value="1000000">MΩ</option>
+                </select>
+            </div>
+        </div>
+        
+        <button onclick="addResistor('parallel')">Add Resistor</button>
+        <button onclick="removeResistor('parallel')">Remove Resistor</button>
+        <button onclick="calculate('parallel')">Calculate</button>
+        
+        <div id="parallel-result" class="result">
+            <p>The equivalent resistance will be shown here.</p>
+        </div>
     </div>
 
     <script>
+        // Color code calculator variables
         const colors = {
             'black': ['0', '0', '1', null, null],
             'brown': ['1', '1', '10', '1%', '100ppm'],
@@ -131,7 +355,21 @@
             'gold': [null, null, '0.1', '5%', null],
             'silver': [null, null, '0.01', '10%', null]
         };
-
+        
+        // Function to switch between tabs
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`button[onclick="switchTab('${tabId}')"]`).classList.add('active');
+        }
+        
+        // Color Code Calculator Functions
         function updateBands() {
             const bandCount = parseInt(document.getElementById('bandCount').value);
             const bandSelectors = document.getElementById('bandSelectors');
@@ -176,6 +414,10 @@
                         const option = document.createElement('option');
                         option.value = color;
                         option.style.backgroundColor = color;
+                        // Make text white for dark colors
+                        if (['black', 'blue', 'violet', 'brown'].includes(color)) {
+                            option.style.color = 'white';
+                        }
                         option.textContent = color.charAt(0).toUpperCase() + color.slice(1);
                         select.appendChild(option);
                     }
@@ -235,7 +477,8 @@
                 document.getElementById('tempCoeff').textContent = '';
             }
         }
-
+        
+        // SMD Calculator Functions
         function calculateSMD() {
             const code = document.getElementById('smdCode').value.toUpperCase();
             if (code.length < 2) return;
@@ -263,7 +506,119 @@
             document.getElementById('smdResult').textContent = 
                 `Resistance: ${formatResistance(resistance)}`;
         }
-
+        
+        // Series & Parallel Calculator Functions
+        function addResistor(type) {
+            const container = document.getElementById(type + '-resistors');
+            const count = container.children.length + 1;
+            
+            const resistorInput = document.createElement('div');
+            resistorInput.className = 'resistor-input';
+            
+            resistorInput.innerHTML = `
+                <label>R${count}:</label>
+                <input type="number" min="0" step="0.01" value="100">
+                <select class="unit-selector">
+                    <option value="1">Ω</option>
+                    <option value="1000" selected>kΩ</option>
+                    <option value="1000000">MΩ</option>
+                </select>
+            `;
+            
+            container.appendChild(resistorInput);
+        }
+        
+        function removeResistor(type) {
+            const container = document.getElementById(type + '-resistors');
+            if (container.children.length > 1) {
+                container.removeChild(container.lastChild);
+            }
+        }
+        
+        function calculate(type) {
+            const container = document.getElementById(type + '-resistors');
+            const inputs = container.querySelectorAll('input');
+            const units = container.querySelectorAll('select');
+            const resultDiv = document.getElementById(type + '-result');
+            
+            // Get all resistor values in Ohms
+            const resistors = [];
+            for (let i = 0; i < inputs.length; i++) {
+                const value = parseFloat(inputs[i].value);
+                const unit = parseFloat(units[i].value);
+                
+                if (isNaN(value) || value <= 0) {
+                    resultDiv.innerHTML = '<p style="color: red;">Error: All resistor values must be positive numbers.</p>';
+                    return;
+                }
+                
+                // Convert to Ohms
+                resistors.push(value * unit);
+            }
+            
+            let equivalentResistance;
+            let formula = '';
+            
+            if (type === 'series') {
+                // Calculate R = R1 + R2 + ... + Rn
+                equivalentResistance = 0;
+                formula = 'Req = ';
+                
+                for (let i = 0; i < resistors.length; i++) {
+                    equivalentResistance += resistors[i];
+                    formula += `R${i+1}`;
+                    if (i < resistors.length - 1) {
+                        formula += ' + ';
+                    }
+                }
+                
+                formula += ` = ${equivalentResistance} Ω`;
+            } else {
+                // Calculate 1/R = 1/R1 + 1/R2 + ... + 1/Rn
+                let sum = 0;
+                formula = '1/Req = ';
+                
+                for (let i = 0; i < resistors.length; i++) {
+                    sum += 1 / resistors[i];
+                    formula += `1/R${i+1}`;
+                    if (i < resistors.length - 1) {
+                        formula += ' + ';
+                    }
+                }
+                
+                // Special case for two resistors - show the product over sum formula
+                if (resistors.length === 2) {
+                    const productOverSum = (resistors[0] * resistors[1]) / (resistors[0] + resistors[1]);
+                    formula += ` = ${sum.toFixed(6)} (Ω<sup>-1</sup>)<br>`;
+                    formula += `For two resistors: Req = (R1 × R2) / (R1 + R2) = (${resistors[0]} × ${resistors[1]}) / (${resistors[0]} + ${resistors[1]}) = ${productOverSum.toFixed(4)} Ω`;
+                } else {
+                    formula += ` = ${sum.toFixed(6)} (Ω<sup>-1</sup>)<br>Therefore, Req = 1/${sum.toFixed(6)} = ${(1/sum).toFixed(4)} Ω`;
+                }
+                
+                equivalentResistance = 1 / sum;
+            }
+            
+            // Display the result with appropriate unit
+            let displayValue, unit;
+            
+            if (equivalentResistance >= 1000000) {
+                displayValue = equivalentResistance / 1000000;
+                unit = 'MΩ';
+            } else if (equivalentResistance >= 1000) {
+                displayValue = equivalentResistance / 1000;
+                unit = 'kΩ';
+            } else {
+                displayValue = equivalentResistance;
+                unit = 'Ω';
+            }
+            
+            resultDiv.innerHTML = `
+                <p><strong>Equivalent Resistance:</strong> ${displayValue.toFixed(4)} ${unit}</p>
+                <p><strong>Calculation:</strong><br>${formula}</p>
+            `;
+        }
+        
+        // Utility function for formatting resistance values
         function formatResistance(resistance) {
             if (!resistance && resistance !== 0) return '0Ω';
             
@@ -274,20 +629,8 @@
             }
             return resistance.toFixed(2) + 'Ω';
         }
-
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('active');
-            });
-            
-            document.getElementById(tabId).classList.add('active');
-            document.querySelector(`button[onclick="switchTab('${tabId}')"]`).classList.add('active');
-        }
-
-        // Initialize the calculator
+        
+        // Initialize the calculators
         updateBands();
     </script>
 </body>
