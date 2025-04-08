@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advanced Unit Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .converter-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .main-section {
+            flex: 2;
+            min-width: 600px;
+        }
+        .angle-section {
+            flex: 1;
+            min-width: 300px;
+        }
+        .panel {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .unit-group {
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        .unit-group h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #007bff;
+            font-size: 18px;
+        }
+        .unit-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .unit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .unit-item:hover {
+            background-color: #f0f7ff;
+        }
+        .unit-label {
+            display: flex;
+            align-items: center;
+            width: 150px;
+            font-size: 14px;
+        }
+        .unit-symbol {
+            margin-left: 5px;
+            color: #666;
+            font-weight: bold;
+        }
+        .unit-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: right;
+        }
+        .unit-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        .scientific {
+            font-size: 12px;
+            color: #666;
+            margin-left: 10px;
+            white-space: nowrap;
+            min-width: 120px;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        .button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .button.secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .button.secondary:hover {
+            background-color: #e0e0e0;
+        }
+        .angle-converter {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .angle-input-group {
+            display: flex;
+            align-items: center;
+        }
+        .angle-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .angle-label {
+            width: 100px;
+            font-size: 14px;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+            font-style: italic;
+        }
+        sup {
+            font-size: 0.8em;
+            vertical-align: super;
+        }
+    </style>
+</head>
+<body>
+    <h1>Advanced Unit Converter</h1>
+    
+    <div class="converter-container">
+        <div class="main-section">
+            <div class="controls">
+                <button class="button" onclick="swapColumns()">Swap Columns</button>
+                <button class="button secondary" onclick="clearAllFields()">Clear All</button>
+            </div>
+            
+            <div class="panel">
+                <div class="column" id="column1">
+                    <div class="unit-group">
+                        <h3>Metric System</h3>
+                        <ul class="unit-list">
+                            <li class="unit-item">
+                                <span class="unit-label">Kilometers <span class="unit-symbol">(km)</span></span>
+                                <input type="number" class="unit-input" id="kilometers" oninput="convertFrom(this, 'km')">
+                                <span class="scientific" id="km-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Meters <span class="unit-symbol">(m)</span></span>
+                                <input type="number" class="unit-input" id="meters" oninput="convertFrom(this, 'm')">
+                                <span class="scientific" id="m-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Decimeters <span class="unit-symbol">(dm)</span></span>
+                                <input type="number" class="unit-input" id="decimeters" oninput="convertFrom(this, 'dm')">
+                                <span class="scientific" id="dm-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Centimeters <span class="unit-symbol">(cm)</span></span>
+                                <input type="number" class="unit-input" id="centimeters" oninput="convertFrom(this, 'cm')">
+                                <span class="scientific" id="cm-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Millimeters <span class="unit-symbol">(mm)</span></span>
+                                <input type="number" class="unit-input" id="millimeters" oninput="convertFrom(this, 'mm')">
+                                <span class="scientific" id="mm-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Micrometers <span class="unit-symbol">(µm)</span></span>
+                                <input type="number" class="unit-input" id="micrometers" oninput="convertFrom(this, 'µm')">
+                                <span class="scientific" id="µm-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Nanometers <span class="unit-symbol">(nm)</span></span>
+                                <input type="number" class="unit-input" id="nanometers" oninput="convertFrom(this, 'nm')">
+                                <span class="scientific" id="nm-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Picometers <span class="unit-symbol">(pm)</span></span>
+                                <input type="number" class="unit-input" id="picometers" oninput="convertFrom(this, 'pm')">
+                                <span class="scientific" id="pm-sci"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="unit-group">
+                        <h3>Imperial/US Customary</h3>
+                        <ul class="unit-list">
+                            <li class="unit-item">
+                                <span class="unit-label">Miles <span class="unit-symbol">(mi)</span></span>
+                                <input type="number" class="unit-input" id="miles" oninput="convertFrom(this, 'mi')">
+                                <span class="scientific" id="mi-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Yards <span class="unit-symbol">(yd)</span></span>
+                                <input type="number" class="unit-input" id="yards" oninput="convertFrom(this, 'yd')">
+                                <span class="scientific" id="yd-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Feet <span class="unit-symbol">(ft)</span></span>
+                                <input type="number" class="unit-input" id="feet" oninput="convertFrom(this, 'ft')">
+                                <span class="scientific" id="ft-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Inches <span class="unit-symbol">(in)</span></span>
+                                <input type="number" class="unit-input" id="inches" oninput="convertFrom(this, 'in')">
+                                <span class="scientific" id="in-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Mils <span class="unit-symbol">(mil)</span></span>
+                                <input type="number" class="unit-input" id="mils" oninput="convertFrom(this, 'mil')">
+                                <span class="scientific" id="mil-sci"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="column" id="column2">
+                    <div class="unit-group">
+                        <h3>Nautical Units</h3>
+                        <ul class="unit-list">
+                            <li class="unit-item">
+                                <span class="unit-label">Nautical Miles <span class="unit-symbol">(nmi)</span></span>
+                                <input type="number" class="unit-input" id="nauticalMiles" oninput="convertFrom(this, 'nmi')">
+                                <span class="scientific" id="nmi-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Fathoms <span class="unit-symbol">(ftm)</span></span>
+                                <input type="number" class="unit-input" id="fathoms" oninput="convertFrom(this, 'ftm')">
+                                <span class="scientific" id="ftm-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Cables <span class="unit-symbol">(cable)</span></span>
+                                <input type="number" class="unit-input" id="cables" oninput="convertFrom(this, 'cable')">
+                                <span class="scientific" id="cable-sci"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="unit-group">
+                        <h3>Astronomical Units</h3>
+                        <ul class="unit-list">
+                            <li class="unit-item">
+                                <span class="unit-label">Astronomical Units <span class="unit-symbol">(au)</span></span>
+                                <input type="number" class="unit-input" id="astronomicalUnits" oninput="convertFrom(this, 'au')">
+                                <span class="scientific" id="au-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Light Years <span class="unit-symbol">(ly)</span></span>
+                                <input type="number" class="unit-input" id="lightYears" oninput="convertFrom(this, 'ly')">
+                                <span class="scientific" id="ly-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Parsecs <span class="unit-symbol">(pc)</span></span>
+                                <input type="number" class="unit-input" id="parsecs" oninput="convertFrom(this, 'pc')">
+                                <span class="scientific" id="pc-sci"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="unit-group">
+                        <h3>Specialized Units</h3>
+                        <ul class="unit-list">
+                            <li class="unit-item">
+                                <span class="unit-label">Angstroms <span class="unit-symbol">(Å)</span></span>
+                                <input type="number" class="unit-input" id="angstroms" oninput="convertFrom(this, 'Å')">
+                                <span class="scientific" id="Å-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Fermis <span class="unit-symbol">(fm)</span></span>
+                                <input type="number" class="unit-input" id="fermis" oninput="convertFrom(this, 'fm')">
+                                <span class="scientific" id="fm-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Furlongs <span class="unit-symbol">(fur)</span></span>
+                                <input type="number" class="unit-input" id="furlongs" oninput="convertFrom(this, 'fur')">
+                                <span class="scientific" id="fur-sci"></span>
+                            </li>
+                            <li class="unit-item">
+                                <span class="unit-label">Planck Lengths <span class="unit-symbol">(ℓ<sub>P</sub>)</span></span>
+                                <input type="number" class="unit-input" id="planckLengths" oninput="convertFrom(this, 'ℓP')">
+                                <span class="scientific" id="ℓP-sci"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="angle-section">
+            <div class="panel">
+                <h2>Angle Converter</h2>
+                <div class="angle-converter">
+                    <div class="angle-input-group">
+                        <span class="angle-label">Degrees (°):</span>
+                        <input type="number" class="angle-input" id="degrees" oninput="convertAngle(this, 'deg')">
+                        <span class="scientific" id="deg-sci"></span>
+                    </div>
+                    <div class="angle-input-group">
+                        <span class="angle-label">Radians (rad):</span>
+                        <input type="number" class="angle-input" id="radians" oninput="convertAngle(this, 'rad')">
+                        <span class="scientific" id="rad-sci"></span>
+                    </div>
+                    <div class="angle-input-group">
+                        <span class="angle-label">π Radians:</span>
+                        <input type="number" class="angle-input" id="piRadians" oninput="convertAngle(this, 'pi')">
+                        <span class="scientific" id="pi-sci"></span>
+                    </div>
+                    <div class="angle-input-group">
+                        <span class="angle-label">Gradians (grad):</span>
+                        <input type="number" class="angle-input" id="gradians" oninput="convertAngle(this, 'grad')">
+                        <span class="scientific" id="grad-sci"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel">
+                <h2>Common Angle Values</h2>
+                <div class="unit-group">
+                    <h3>Degrees to Radians</h3>
+                    <ul class="unit-list">
+                        <li class="unit-item">
+                            <span class="unit-label">30°</span>
+                            <span class="unit-input">= π/6 rad ≈ 0.5236 rad</span>
+                        </li>
+                        <li class="unit-item">
+                            <span class="unit-label">45°</span>
+                            <span class="unit-input">= π/4 rad ≈ 0.7854 rad</span>
+                        </li>
+                        <li class="unit-item">
+                            <span class="unit-label">60°</span>
+                            <span class="unit-input">= π/3 rad ≈ 1.0472 rad</span>
+                        </li>
+                        <li class="unit-item">
+                            <span class="unit-label">90°</span>
+                            <span class="unit-input">= π/2 rad ≈ 1.5708 rad</span>
+                        </li>
+                        <li class="unit-item">
+                            <span class="unit-label">180°</span>
+                            <span class="unit-input">= π rad ≈ 3.1416 rad</span>
+                        </li>
+                        <li class="unit-item">
+                            <span class="unit-label">360°</span>
+                            <span class="unit-input">= 2π rad ≈ 6.2832 rad</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="note">
+        Note: All conversions are based on standard conversion factors. Scientific notation shows the value in base units (meters for length, radians for angles).
+    </div>
+
+    <script>
+        // Conversion factors to meters (updated with new units)
+        const units = {
+            // Metric
+            'km': 1000,
+            'm': 1,
+            'dm': 0.1,
+            'cm': 0.01,
+            'mm': 0.001,
+            'µm': 0.000001,
+            'nm': 0.000000001,
+            'pm': 0.000000000001,
+            
+            // Imperial/US
+            'mi': 1609.344,
+            'yd': 0.9144,
+            'ft': 0.3048,
+            'in': 0.0254,
+            'mil': 0.0000254,
+            
+            // Nautical
+            'nmi': 1852,
+            'ftm': 1.8288,
+            'cable': 185.2,
+            
+            // Astronomical
+            'au': 149597870700,
+            'ly': 9460730472580800,
+            'pc': 30856775814913672,
+            
+            // Specialized
+            'Å': 0.0000000001,
+            'fm': 0.000000000000001,
+            'fur': 201.168,
+            'ℓP': 1.616255e-35
+        };
+
+        // Angle conversion factors
+        const angleUnits = {
+            'deg': Math.PI / 180,
+            'rad': 1,
+            'pi': Math.PI,
+            'grad': Math.PI / 200
+        };
+
+        // Convert from a specific unit to all others
+        function convertFrom(inputElement, unit) {
+            const value = parseFloat(inputElement.value);
+            if (isNaN(value)) {
+                if (inputElement.value === '') {
+                    clearFieldScientific(inputElement);
+                }
+                return;
+            }
+
+            const meters = value * units[unit];
+            
+            // Update all length fields except the one we're typing in
+            document.querySelectorAll('.unit-input').forEach(field => {
+                if (field !== inputElement && field.closest('.main-section')) {
+                    const fieldId = field.id;
+                    const fieldUnit = getUnitFromId(fieldId);
+                    const convertedValue = meters / units[fieldUnit];
+                    field.value = formatDecimal(convertedValue);
+                    updateScientificNotation(field, convertedValue * units[fieldUnit]);
+                }
+            });
+            
+            // Update scientific notation for the input field
+            updateScientificNotation(inputElement, meters);
+        }
+
+        // Convert angle units
+        function convertAngle(inputElement, unit) {
+            const value = parseFloat(inputElement.value);
+            if (isNaN(value)) {
+                if (inputElement.value === '') {
+                    clearFieldScientific(inputElement);
+                }
+                return;
+            }
+
+            const radians = value * angleUnits[unit];
+            
+            // Update all angle fields except the one we're typing in
+            document.querySelectorAll('.angle-input').forEach(field => {
+                if (field !== inputElement) {
+                    const fieldId = field.id;
+                    const fieldUnit = getAngleUnitFromId(fieldId);
+                    const convertedValue = radians / angleUnits[fieldUnit];
+                    field.value = formatDecimal(convertedValue);
+                    updateScientificNotation(field, convertedValue * angleUnits[fieldUnit]);
+                }
+            });
+            
+            // Update scientific notation for the input field
+            updateScientificNotation(inputElement, radians);
+        }
+
+        // Format decimal numbers nicely
+        function formatDecimal(num) {
+            if (num === 0) return '0';
+            
+            const absNum = Math.abs(num);
+            if (absNum >= 1000 || absNum < 0.001) {
+                return num.toExponential(6).replace(/(\.\d*?[1-9])0+e/, '$1e').replace(/\.?0+e/, 'e');
+            }
+            return num.toFixed(10).replace(/\.?0+$/, '');
+        }
+
+        // Update scientific notation display
+        function updateScientificNotation(inputElement, valueInBaseUnit) {
+            const sciElement = document.getElementById(inputElement.id + '-sci');
+            if (!sciElement) return;
+            
+            if (valueInBaseUnit === 0 || isNaN(valueInBaseUnit)) {
+                sciElement.textContent = '';
+                return;
+            }
+            
+            const absValue = Math.abs(valueInBaseUnit);
+            let sciValue;
+            
+            if (absValue >= 1e6 || absValue <= 1e-6) {
+                sciValue = valueInBaseUnit.toExponential(6)
+                    .replace(/e\+?(-?\d+)/, '×10<sup>$1</sup>')
+                    .replace(/e-/, '×10<sup>-');
+            } else {
+                sciValue = valueInBaseUnit.toFixed(6).replace(/\.?0+$/, '');
+            }
+            
+            sciElement.innerHTML = sciValue;
+        }
+
+        // Clear scientific notation for a field
+        function clearFieldScientific(inputElement) {
+            const sciElement = document.getElementById(inputElement.id + '-sci');
+            if (sciElement) sciElement.textContent = '';
+        }
+
+        // Get unit abbreviation from input id
+        function getUnitFromId(id) {
+            const unitMap = {
+                'kilometers': 'km',
+                'meters': 'm',
+                'decimeters': 'dm',
+                'centimeters': 'cm',
+                'millimeters': 'mm',
+                'micrometers': 'µm',
+                'nanometers': 'nm',
+                'picometers': 'pm',
+                'miles': 'mi',
+                'yards': 'yd',
+                'feet': 'ft',
+                'inches': 'in',
+                'mils': 'mil',
+                'nauticalMiles': 'nmi',
+                'fathoms': 'ftm',
+                'cables': 'cable',
+                'astronomicalUnits': 'au',
+                'lightYears': 'ly',
+                'parsecs': 'pc',
+                'angstroms': 'Å',
+                'fermis': 'fm',
+                'furlongs': 'fur',
+                'planckLengths': 'ℓP'
+            };
+            return unitMap[id];
+        }
+
+        // Get angle unit abbreviation from input id
+        function getAngleUnitFromId(id) {
+            const angleUnitMap = {
+                'degrees': 'deg',
+                'radians': 'rad',
+                'piRadians': 'pi',
+                'gradians': 'grad'
+            };
+            return angleUnitMap[id];
+        }
+
+        // Clear all input fields
+        function clearAllFields() {
+            document.querySelectorAll('.unit-input, .angle-input').forEach(field => {
+                field.value = '';
+            });
+            document.querySelectorAll('.scientific').forEach(el => {
+                el.textContent = '';
+            });
+        }
+
+        // Swap the two columns
+        function swapColumns() {
+            const column1 = document.getElementById('column1');
+            const column2 = document.getElementById('column2');
+            const parent = column1.parentNode;
+            
+            parent.insertBefore(column2, column1);
+        }
+    </script>
+</body>
+</html>
