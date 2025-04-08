@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        .calculator {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .input-field {
+            margin: 10px 0;
+            padding: 8px;
+            width: 200px;
+        }
+        
+        .result {
+            font-size: 1.2em;
+            margin: 20px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .tabs {
+            margin-bottom: 20px;
+        }
+        
+        .tab-button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            background: #f0f0f0;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .tab-button.active {
+            background: #007bff;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .info-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f8ff;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="tabs">
+        <button class="tab-button active" onclick="switchTab('ceramic')">Ceramic Capacitor</button>
+        <button class="tab-button" onclick="switchTab('electrolytic')">Electrolytic Capacitor</button>
+        <button class="tab-button" onclick="switchTab('info')">Info</button>
+    </div>
+
+    <div id="ceramic" class="tab-content active calculator">
+        <h2>Ceramic Capacitor Calculator</h2>
+        <p>Enter 3-digit code (e.g., 104, 472) or 2-digit code with multiplier (e.g., 4R7):</p>
+        <input type="text" class="input-field" id="ceramicCode" placeholder="e.g., 104" oninput="calculateCeramic()">
+        <div class="result" id="ceramicResult">Capacitance: </div>
+        
+        <h3>Common Codes:</h3>
+        <ul>
+            <li><strong>104</strong> = 100nF (0.1µF)</li>
+            <li><strong>473</strong> = 47nF (0.047µF)</li>
+            <li><strong>222</strong> = 2.2nF (2200pF)</li>
+            <li><strong>4R7</strong> = 4.7pF</li>
+        </ul>
+    </div>
+
+    <div id="electrolytic" class="tab-content calculator">
+        <h2>Electrolytic Capacitor Calculator</h2>
+        <p>Enter value with unit (e.g., 10µF, 47nF, 1000pF):</p>
+        <input type="text" class="input-field" id="electrolyticValue" placeholder="e.g., 10µF" oninput="calculateElectrolytic()">
+        <div class="result" id="electrolyticResult">Capacitance: </div>
+        
+        <h3>Voltage Rating Colors (optional):</h3>
+        <select class="input-field" id="voltageColor" onchange="calculateElectrolytic()">
+            <option value="">Select color</option>
+            <option value="4">Black (4V)</option>
+            <option value="6.3">Brown (6.3V)</option>
+            <option value="10">Red (10V)</option>
+            <option value="16">Orange (16V)</option>
+            <option value="25">Yellow (25V)</option>
+            <option value="35">Green (35V)</option>
+            <option value="50">Blue (50V)</option>
+            <option value="63">Violet (63V)</option>
+        </select>
+        <div id="voltageResult"></div>
+    </div>
+
+    <div id="info" class="tab-content calculator">
+        <h2>Capacitor Code Information</h2>
+        
+        <div class="info-box">
+            <h3>Ceramic Capacitor Codes:</h3>
+            <p>Most ceramic capacitors use a 3-digit code:</p>
+            <ul>
+                <li><strong>First two digits</strong>: Significant figures</li>
+                <li><strong>Third digit</strong>: Multiplier (power of 10)</li>
+                <li><strong>Result is in picofarads (pF)</strong></li>
+            </ul>
+            <p><strong>Example:</strong> 104 = 10 × 10⁴ pF = 100,000pF = 100nF = 0.1µF</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>Electrolytic Capacitor Markings:</h3>
+            <p>Electrolytic capacitors are usually marked with:</p>
+            <ul>
+                <li>Actual capacitance value (e.g., 10µF)</li>
+                <li>Voltage rating (e.g., 16V)</li>
+                <li>Polarity markings (+, - or stripe)</li>
+            </ul>
+            <p>Some older capacitors may use color codes for voltage rating.</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>Unit Conversions:</h3>
+            <ul>
+                <li>1 Farad (F) = 1,000,000 microfarads (µF)</li>
+                <li>1 microfarad (µF) = 1,000 nanofarads (nF)</li>
+                <li>1 nanofarad (nF) = 1,000 picofarads (pF)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function calculateCeramic() {
+            const code = document.getElementById('ceramicCode').value.trim().toUpperCase();
+            let capacitance = 0;
+            let unit = 'pF';
+            
+            if (code.includes('R')) {
+                // Handle R notation (e.g., 4R7 = 4.7pF)
+                capacitance = parseFloat(code.replace('R', '.'));
+                unit = 'pF';
+            } else if (/^\d{2,3}$/.test(code)) {
+                // Handle standard 3-digit codes
+                const digits = code.length;
+                const value = parseInt(code.substring(0, digits-1));
+                const multiplier = parseInt(code.substring(digits-1));
+                capacitance = value * Math.pow(10, multiplier);
+                
+                // Convert to appropriate unit
+                if (capacitance >= 1000000) {
+                    capacitance = capacitance / 1000000;
+                    unit = 'µF';
+                } else if (capacitance >= 1000) {
+                    capacitance = capacitance / 1000;
+                    unit = 'nF';
+                } else {
+                    unit = 'pF';
+                }
+            }
+            
+            let resultText = 'Capacitance: ';
+            if (capacitance > 0 || code === '0') {
+                resultText += capacitance.toFixed(2).replace(/\.?0+$/, '') + unit;
+                // Show alternative units
+                if (unit === 'pF' && capacitance >= 1000) {
+                    const nfValue = capacitance / 1000;
+                    resultText += ' (' + nfValue.toFixed(2).replace(/\.?0+$/, '') + 'nF)';
+                } else if (unit === 'nF' && capacitance >= 1000) {
+                    const ufValue = capacitance / 1000;
+                    resultText += ' (' + ufValue.toFixed(2).replace(/\.?0+$/, '') + 'µF)';
+                } else if (unit === 'pF' && capacitance >= 1000000) {
+                    const ufValue = capacitance / 1000000;
+                    resultText += ' (' + ufValue.toFixed(2).replace(/\.?0+$/, '') + 'µF)';
+                }
+            }
+            
+            document.getElementById('ceramicResult').textContent = resultText;
+        }
+
+        function calculateElectrolytic() {
+            const valueStr = document.getElementById('electrolyticValue').value.trim();
+            const voltageColor = document.getElementById('voltageColor').value;
+            let capacitance = 0;
+            let unit = 'µF';
+            
+            // Parse the input value
+            const match = valueStr.match(/^([\d.]+)\s*([munp]?F)?$/i);
+            if (match) {
+                capacitance = parseFloat(match[1]);
+                if (match[2]) {
+                    unit = match[2].toUpperCase();
+                }
+                
+                // Convert all to µF for consistency
+                if (unit === 'PF') {
+                    capacitance = capacitance / 1000000;
+                    unit = 'µF';
+                } else if (unit === 'NF') {
+                    capacitance = capacitance / 1000;
+                    unit = 'µF';
+                } else if (unit === 'MF' || unit === 'F') {
+                    capacitance = capacitance * 1000000;
+                    unit = 'µF';
+                }
+            }
+            
+            let resultText = 'Capacitance: ';
+            if (capacitance > 0 || valueStr === '0') {
+                // Show in µF with nF and pF equivalents
+                resultText += capacitance.toFixed(2).replace(/\.?0+$/, '') + 'µF';
+                const nfValue = capacitance * 1000;
+                const pfValue = capacitance * 1000000;
+                resultText += ' (' + nfValue.toFixed(0) + 'nF, ' + pfValue.toFixed(0) + 'pF)';
+            }
+            
+            document.getElementById('electrolyticResult').textContent = resultText;
+            
+            // Show voltage rating if color selected
+            if (voltageColor) {
+                document.getElementById('voltageResult').textContent = 
+                    'Estimated Voltage Rating: ' + voltageColor + 'V';
+            } else {
+                document.getElementById('voltageResult').textContent = '';
+            }
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`button[onclick="switchTab('${tabId}')"]`).classList.add('active');
+        }
+
+        // Initialize with ceramic calculator
+        calculateCeramic();
+    </script>
+</body>
+</html>
