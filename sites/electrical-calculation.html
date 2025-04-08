@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrical Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .calculator {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .formula {
+            font-style: italic;
+            color: #666;
+            margin-top: 5px;
+        }
+        .info-section {
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Electrical Calculator</h1>
+    
+    <div class="calculator">
+        <div class="form-group">
+            <label for="calculation-type">What do you want to calculate?</label>
+            <select id="calculation-type">
+                <option value="voltage">Voltage (V)</option>
+                <option value="current">Current (I)</option>
+                <option value="resistance">Resistance (R)</option>
+                <option value="power">Power (P)</option>
+            </select>
+        </div>
+        
+        <div id="input-fields">
+            <!-- Input fields will be dynamically generated here -->
+        </div>
+        
+        <button id="calculate-btn">Calculate</button>
+        
+        <div id="results" class="results" style="display: none;">
+            <h3>Result:</h3>
+            <p id="result-value"></p>
+            <p id="formula" class="formula"></p>
+        </div>
+    </div>
+    
+    <div class="info-section">
+        <h2>Electrical Formulas</h2>
+        <table>
+            <tr>
+                <th>To Calculate</th>
+                <th>Formula</th>
+                <th>Variables</th>
+            </tr>
+            <tr>
+                <td>Voltage (V)</td>
+                <td>V = I × R</td>
+                <td>I = Current, R = Resistance</td>
+            </tr>
+            <tr>
+                <td>Voltage (V)</td>
+                <td>V = P ÷ I</td>
+                <td>P = Power, I = Current</td>
+            </tr>
+            <tr>
+                <td>Voltage (V)</td>
+                <td>V = √(P × R)</td>
+                <td>P = Power, R = Resistance</td>
+            </tr>
+            <tr>
+                <td>Current (I)</td>
+                <td>I = V ÷ R</td>
+                <td>V = Voltage, R = Resistance</td>
+            </tr>
+            <tr>
+                <td>Current (I)</td>
+                <td>I = P ÷ V</td>
+                <td>P = Power, V = Voltage</td>
+            </tr>
+            <tr>
+                <td>Current (I)</td>
+                <td>I = √(P ÷ R)</td>
+                <td>P = Power, R = Resistance</td>
+            </tr>
+            <tr>
+                <td>Resistance (R)</td>
+                <td>R = V ÷ I</td>
+                <td>V = Voltage, I = Current</td>
+            </tr>
+            <tr>
+                <td>Resistance (R)</td>
+                <td>R = V² ÷ P</td>
+                <td>V = Voltage, P = Power</td>
+            </tr>
+            <tr>
+                <td>Resistance (R)</td>
+                <td>R = P ÷ I²</td>
+                <td>P = Power, I = Current</td>
+            </tr>
+            <tr>
+                <td>Power (P)</td>
+                <td>P = V × I</td>
+                <td>V = Voltage, I = Current</td>
+            </tr>
+            <tr>
+                <td>Power (P)</td>
+                <td>P = V² ÷ R</td>
+                <td>V = Voltage, R = Resistance</td>
+            </tr>
+            <tr>
+                <td>Power (P)</td>
+                <td>P = I² × R</td>
+                <td>I = Current, R = Resistance</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculationType = document.getElementById('calculation-type');
+            const inputFields = document.getElementById('input-fields');
+            const calculateBtn = document.getElementById('calculate-btn');
+            const results = document.getElementById('results');
+            const resultValue = document.getElementById('result-value');
+            const formula = document.getElementById('formula');
+            
+            // Initial setup
+            updateInputFields();
+            
+            // Event listeners
+            calculationType.addEventListener('change', updateInputFields);
+            calculateBtn.addEventListener('click', calculate);
+            
+            function updateInputFields() {
+                const selectedCalculation = calculationType.value;
+                inputFields.innerHTML = '';
+                
+                switch(selectedCalculation) {
+                    case 'voltage':
+                        addInputOption([
+                            { id: 'current-resistance', label: 'Using Current and Resistance' },
+                            { id: 'power-current', label: 'Using Power and Current' },
+                            { id: 'power-resistance', label: 'Using Power and Resistance' }
+                        ]);
+                        break;
+                    case 'current':
+                        addInputOption([
+                            { id: 'voltage-resistance', label: 'Using Voltage and Resistance' },
+                            { id: 'power-voltage', label: 'Using Power and Voltage' },
+                            { id: 'power-resistance', label: 'Using Power and Resistance' }
+                        ]);
+                        break;
+                    case 'resistance':
+                        addInputOption([
+                            { id: 'voltage-current', label: 'Using Voltage and Current' },
+                            { id: 'voltage-power', label: 'Using Voltage and Power' },
+                            { id: 'power-current', label: 'Using Power and Current' }
+                        ]);
+                        break;
+                    case 'power':
+                        addInputOption([
+                            { id: 'voltage-current', label: 'Using Voltage and Current' },
+                            { id: 'voltage-resistance', label: 'Using Voltage and Resistance' },
+                            { id: 'current-resistance', label: 'Using Current and Resistance' }
+                        ]);
+                        break;
+                }
+            }
+            
+            function addInputOption(options) {
+                const formGroup = document.createElement('div');
+                formGroup.className = 'form-group';
+                
+                const label = document.createElement('label');
+                label.setAttribute('for', 'calculation-method');
+                label.textContent = 'Select Method:';
+                formGroup.appendChild(label);
+                
+                const select = document.createElement('select');
+                select.id = 'calculation-method';
+                
+                options.forEach(option => {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option.id;
+                    optionElement.textContent = option.label;
+                    select.appendChild(optionElement);
+                });
+                
+                formGroup.appendChild(select);
+                inputFields.appendChild(formGroup);
+                
+                select.addEventListener('change', updateMethodInputs);
+                updateMethodInputs();
+                
+                function updateMethodInputs() {
+                    // Remove existing input fields except the method selector
+                    const existingInputs = inputFields.querySelectorAll('.form-group:not(:first-child)');
+                    existingInputs.forEach(input => input.remove());
+                    
+                    const method = select.value;
+                    const [param1, param2] = method.split('-');
+                    
+                    addInputField(param1);
+                    addInputField(param2);
+                }
+                
+                function addInputField(param) {
+                    const formGroup = document.createElement('div');
+                    formGroup.className = 'form-group';
+                    
+                    const label = document.createElement('label');
+                    label.setAttribute('for', param);
+                    
+                    switch(param) {
+                        case 'voltage':
+                            label.textContent = 'Voltage (V):';
+                            break;
+                        case 'current':
+                            label.textContent = 'Current (A):';
+                            break;
+                        case 'resistance':
+                            label.textContent = 'Resistance (Ω):';
+                            break;
+                        case 'power':
+                            label.textContent = 'Power (W):';
+                            break;
+                    }
+                    
+                    const input = document.createElement('input');
+                    input.type = 'number';
+                    input.id = param;
+                    input.step = '0.001';
+                    
+                    formGroup.appendChild(label);
+                    formGroup.appendChild(input);
+                    inputFields.appendChild(formGroup);
+                }
+            }
+            
+            function calculate() {
+                const selectedCalculation = calculationType.value;
+                const method = document.getElementById('calculation-method').value;
+                const [param1, param2] = method.split('-');
+                
+                const value1 = parseFloat(document.getElementById(param1).value);
+                const value2 = parseFloat(document.getElementById(param2).value);
+                
+                if (isNaN(value1) || isNaN(value2)) {
+                    alert('Please enter valid numbers for both fields');
+                    return;
+                }
+                
+                let result, formulaText;
+                
+                switch(selectedCalculation) {
+                    case 'voltage':
+                        if (method === 'current-resistance') {
+                            result = value1 * value2; // I * R
+                            formulaText = `V = I × R = ${value1} A × ${value2} Ω = ${result} V`;
+                        } else if (method === 'power-current') {
+                            result = value1 / value2; // P / I
+                            formulaText = `V = P ÷ I = ${value1} W ÷ ${value2} A = ${result} V`;
+                        } else if (method === 'power-resistance') {
+                            result = Math.sqrt(value1 * value2); // sqrt(P * R)
+                            formulaText = `V = √(P × R) = √(${value1} W × ${value2} Ω) = ${result} V`;
+                        }
+                        break;
+                    case 'current':
+                        if (method === 'voltage-resistance') {
+                            result = value1 / value2; // V / R
+                            formulaText = `I = V ÷ R = ${value1} V ÷ ${value2} Ω = ${result} A`;
+                        } else if (method === 'power-voltage') {
+                            result = value1 / value2; // P / V
+                            formulaText = `I = P ÷ V = ${value1} W ÷ ${value2} V = ${result} A`;
+                        } else if (method === 'power-resistance') {
+                            result = Math.sqrt(value1 / value2); // sqrt(P / R)
+                            formulaText = `I = √(P ÷ R) = √(${value1} W ÷ ${value2} Ω) = ${result} A`;
+                        }
+                        break;
+                    case 'resistance':
+                        if (method === 'voltage-current') {
+                            result = value1 / value2; // V / I
+                            formulaText = `R = V ÷ I = ${value1} V ÷ ${value2} A = ${result} Ω`;
+                        } else if (method === 'voltage-power') {
+                            result = (value1 * value1) / value2; // V² / P
+                            formulaText = `R = V² ÷ P = ${value1}² V ÷ ${value2} W = ${result} Ω`;
+                        } else if (method === 'power-current') {
+                            result = value1 / (value2 * value2); // P / I²
+                            formulaText = `R = P ÷ I² = ${value1} W ÷ ${value2}² A = ${result} Ω`;
+                        }
+                        break;
+                    case 'power':
+                        if (method === 'voltage-current') {
+                            result = value1 * value2; // V * I
+                            formulaText = `P = V × I = ${value1} V × ${value2} A = ${result} W`;
+                        } else if (method === 'voltage-resistance') {
+                            result = (value1 * value1) / value2; // V² / R
+                            formulaText = `P = V² ÷ R = ${value1}² V ÷ ${value2} Ω = ${result} W`;
+                        } else if (method === 'current-resistance') {
+                            result = value1 * value1 * value2; // I² * R
+                            formulaText = `P = I² × R = ${value1}² A × ${value2} Ω = ${result} W`;
+                        }
+                        break;
+                }
+                
+                // Display the result
+                resultValue.textContent = `${result.toFixed(4)} ${getUnit(selectedCalculation)}`;
+                formula.textContent = formulaText;
+                results.style.display = 'block';
+            }
+            
+            function getUnit(type) {
+                switch(type) {
+                    case 'voltage': return 'Volts (V)';
+                    case 'current': return 'Amperes (A)';
+                    case 'resistance': return 'Ohms (Ω)';
+                    case 'power': return 'Watts (W)';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
