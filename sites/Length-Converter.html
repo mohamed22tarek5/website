@@ -161,8 +161,8 @@
     <div class="converter-container">
         <div class="main-section">
             <div class="controls">
-                <button class="button" onclick="swapColumns()">Swap Columns</button>
-                <button class="button secondary" onclick="clearAllFields()">Clear All</button>
+                <button class="button" onclick="UnitConverterUI.swapColumns()">Swap Columns</button>
+                <button class="button secondary" onclick="UnitConverterUI.clearAllFields()">Clear All</button>
             </div>
             
             <div class="panel">
@@ -172,42 +172,42 @@
                         <ul class="unit-list">
                             <li class="unit-item">
                                 <span class="unit-label">Kilometers <span class="unit-symbol">(km)</span></span>
-                                <input type="number" class="unit-input" id="kilometers" oninput="convertFrom(this, 'km')">
+                                <input type="number" class="unit-input" id="kilometers" oninput="UnitConverter.convertFrom(this, 'km')">
                                 <span class="scientific" id="km-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Meters <span class="unit-symbol">(m)</span></span>
-                                <input type="number" class="unit-input" id="meters" oninput="convertFrom(this, 'm')">
+                                <input type="number" class="unit-input" id="meters" oninput="UnitConverter.convertFrom(this, 'm')">
                                 <span class="scientific" id="m-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Decimeters <span class="unit-symbol">(dm)</span></span>
-                                <input type="number" class="unit-input" id="decimeters" oninput="convertFrom(this, 'dm')">
+                                <input type="number" class="unit-input" id="decimeters" oninput="UnitConverter.convertFrom(this, 'dm')">
                                 <span class="scientific" id="dm-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Centimeters <span class="unit-symbol">(cm)</span></span>
-                                <input type="number" class="unit-input" id="centimeters" oninput="convertFrom(this, 'cm')">
+                                <input type="number" class="unit-input" id="centimeters" oninput="UnitConverter.convertFrom(this, 'cm')">
                                 <span class="scientific" id="cm-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Millimeters <span class="unit-symbol">(mm)</span></span>
-                                <input type="number" class="unit-input" id="millimeters" oninput="convertFrom(this, 'mm')">
+                                <input type="number" class="unit-input" id="millimeters" oninput="UnitConverter.convertFrom(this, 'mm')">
                                 <span class="scientific" id="mm-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Micrometers <span class="unit-symbol">(µm)</span></span>
-                                <input type="number" class="unit-input" id="micrometers" oninput="convertFrom(this, 'µm')">
+                                <input type="number" class="unit-input" id="micrometers" oninput="UnitConverter.convertFrom(this, 'µm')">
                                 <span class="scientific" id="µm-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Nanometers <span class="unit-symbol">(nm)</span></span>
-                                <input type="number" class="unit-input" id="nanometers" oninput="convertFrom(this, 'nm')">
+                                <input type="number" class="unit-input" id="nanometers" oninput="UnitConverter.convertFrom(this, 'nm')">
                                 <span class="scientific" id="nm-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Picometers <span class="unit-symbol">(pm)</span></span>
-                                <input type="number" class="unit-input" id="picometers" oninput="convertFrom(this, 'pm')">
+                                <input type="number" class="unit-input" id="picometers" oninput="UnitConverter.convertFrom(this, 'pm')">
                                 <span class="scientific" id="pm-sci"></span>
                             </li>
                         </ul>
@@ -218,27 +218,27 @@
                         <ul class="unit-list">
                             <li class="unit-item">
                                 <span class="unit-label">Miles <span class="unit-symbol">(mi)</span></span>
-                                <input type="number" class="unit-input" id="miles" oninput="convertFrom(this, 'mi')">
+                                <input type="number" class="unit-input" id="miles" oninput="UnitConverter.convertFrom(this, 'mi')">
                                 <span class="scientific" id="mi-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Yards <span class="unit-symbol">(yd)</span></span>
-                                <input type="number" class="unit-input" id="yards" oninput="convertFrom(this, 'yd')">
+                                <input type="number" class="unit-input" id="yards" oninput="UnitConverter.convertFrom(this, 'yd')">
                                 <span class="scientific" id="yd-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Feet <span class="unit-symbol">(ft)</span></span>
-                                <input type="number" class="unit-input" id="feet" oninput="convertFrom(this, 'ft')">
+                                <input type="number" class="unit-input" id="feet" oninput="UnitConverter.convertFrom(this, 'ft')">
                                 <span class="scientific" id="ft-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Inches <span class="unit-symbol">(in)</span></span>
-                                <input type="number" class="unit-input" id="inches" oninput="convertFrom(this, 'in')">
+                                <input type="number" class="unit-input" id="inches" oninput="UnitConverter.convertFrom(this, 'in')">
                                 <span class="scientific" id="in-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Mils <span class="unit-symbol">(mil)</span></span>
-                                <input type="number" class="unit-input" id="mils" oninput="convertFrom(this, 'mil')">
+                                <input type="number" class="unit-input" id="mils" oninput="UnitConverter.convertFrom(this, 'mil')">
                                 <span class="scientific" id="mil-sci"></span>
                             </li>
                         </ul>
@@ -251,17 +251,17 @@
                         <ul class="unit-list">
                             <li class="unit-item">
                                 <span class="unit-label">Nautical Miles <span class="unit-symbol">(nmi)</span></span>
-                                <input type="number" class="unit-input" id="nauticalMiles" oninput="convertFrom(this, 'nmi')">
+                                <input type="number" class="unit-input" id="nauticalMiles" oninput="UnitConverter.convertFrom(this, 'nmi')">
                                 <span class="scientific" id="nmi-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Fathoms <span class="unit-symbol">(ftm)</span></span>
-                                <input type="number" class="unit-input" id="fathoms" oninput="convertFrom(this, 'ftm')">
+                                <input type="number" class="unit-input" id="fathoms" oninput="UnitConverter.convertFrom(this, 'ftm')">
                                 <span class="scientific" id="ftm-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Cables <span class="unit-symbol">(cable)</span></span>
-                                <input type="number" class="unit-input" id="cables" oninput="convertFrom(this, 'cable')">
+                                <input type="number" class="unit-input" id="cables" oninput="UnitConverter.convertFrom(this, 'cable')">
                                 <span class="scientific" id="cable-sci"></span>
                             </li>
                         </ul>
@@ -272,17 +272,17 @@
                         <ul class="unit-list">
                             <li class="unit-item">
                                 <span class="unit-label">Astronomical Units <span class="unit-symbol">(au)</span></span>
-                                <input type="number" class="unit-input" id="astronomicalUnits" oninput="convertFrom(this, 'au')">
+                                <input type="number" class="unit-input" id="astronomicalUnits" oninput="UnitConverter.convertFrom(this, 'au')">
                                 <span class="scientific" id="au-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Light Years <span class="unit-symbol">(ly)</span></span>
-                                <input type="number" class="unit-input" id="lightYears" oninput="convertFrom(this, 'ly')">
+                                <input type="number" class="unit-input" id="lightYears" oninput="UnitConverter.convertFrom(this, 'ly')">
                                 <span class="scientific" id="ly-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Parsecs <span class="unit-symbol">(pc)</span></span>
-                                <input type="number" class="unit-input" id="parsecs" oninput="convertFrom(this, 'pc')">
+                                <input type="number" class="unit-input" id="parsecs" oninput="UnitConverter.convertFrom(this, 'pc')">
                                 <span class="scientific" id="pc-sci"></span>
                             </li>
                         </ul>
@@ -293,22 +293,22 @@
                         <ul class="unit-list">
                             <li class="unit-item">
                                 <span class="unit-label">Angstroms <span class="unit-symbol">(Å)</span></span>
-                                <input type="number" class="unit-input" id="angstroms" oninput="convertFrom(this, 'Å')">
+                                <input type="number" class="unit-input" id="angstroms" oninput="UnitConverter.convertFrom(this, 'Å')">
                                 <span class="scientific" id="Å-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Fermis <span class="unit-symbol">(fm)</span></span>
-                                <input type="number" class="unit-input" id="fermis" oninput="convertFrom(this, 'fm')">
+                                <input type="number" class="unit-input" id="fermis" oninput="UnitConverter.convertFrom(this, 'fm')">
                                 <span class="scientific" id="fm-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Furlongs <span class="unit-symbol">(fur)</span></span>
-                                <input type="number" class="unit-input" id="furlongs" oninput="convertFrom(this, 'fur')">
+                                <input type="number" class="unit-input" id="furlongs" oninput="UnitConverter.convertFrom(this, 'fur')">
                                 <span class="scientific" id="fur-sci"></span>
                             </li>
                             <li class="unit-item">
                                 <span class="unit-label">Planck Lengths <span class="unit-symbol">(ℓ<sub>P</sub>)</span></span>
-                                <input type="number" class="unit-input" id="planckLengths" oninput="convertFrom(this, 'ℓP')">
+                                <input type="number" class="unit-input" id="planckLengths" oninput="UnitConverter.convertFrom(this, 'ℓP')">
                                 <span class="scientific" id="ℓP-sci"></span>
                             </li>
                         </ul>
@@ -323,22 +323,22 @@
                 <div class="angle-converter">
                     <div class="angle-input-group">
                         <span class="angle-label">Degrees (°):</span>
-                        <input type="number" class="angle-input" id="degrees" oninput="convertAngle(this, 'deg')">
+                        <input type="number" class="angle-input" id="degrees" oninput="AngleConverter.convertFrom(this, 'deg')">
                         <span class="scientific" id="deg-sci"></span>
                     </div>
                     <div class="angle-input-group">
                         <span class="angle-label">Radians (rad):</span>
-                        <input type="number" class="angle-input" id="radians" oninput="convertAngle(this, 'rad')">
+                        <input type="number" class="angle-input" id="radians" oninput="AngleConverter.convertFrom(this, 'rad')">
                         <span class="scientific" id="rad-sci"></span>
                     </div>
                     <div class="angle-input-group">
                         <span class="angle-label">π Radians:</span>
-                        <input type="number" class="angle-input" id="piRadians" oninput="convertAngle(this, 'pi')">
+                        <input type="number" class="angle-input" id="piRadians" oninput="AngleConverter.convertFrom(this, 'pi')">
                         <span class="scientific" id="pi-sci"></span>
                     </div>
                     <div class="angle-input-group">
                         <span class="angle-label">Gradians (grad):</span>
-                        <input type="number" class="angle-input" id="gradians" oninput="convertAngle(this, 'grad')">
+                        <input type="number" class="angle-input" id="gradians" oninput="AngleConverter.convertFrom(this, 'grad')">
                         <span class="scientific" id="grad-sci"></span>
                     </div>
                 </div>
@@ -384,148 +384,56 @@
     </div>
 
     <script>
-        // Conversion factors to meters (updated with new units)
-        const units = {
-            // Metric
-            'km': 1000,
-            'm': 1,
-            'dm': 0.1,
-            'cm': 0.01,
-            'mm': 0.001,
-            'µm': 0.000001,
-            'nm': 0.000000001,
-            'pm': 0.000000000001,
-            
-            // Imperial/US
-            'mi': 1609.344,
-            'yd': 0.9144,
-            'ft': 0.3048,
-            'in': 0.0254,
-            'mil': 0.0000254,
-            
-            // Nautical
-            'nmi': 1852,
-            'ftm': 1.8288,
-            'cable': 185.2,
-            
-            // Astronomical
-            'au': 149597870700,
-            'ly': 9460730472580800,
-            'pc': 30856775814913672,
-            
-            // Specialized
-            'Å': 0.0000000001,
-            'fm': 0.000000000000001,
-            'fur': 201.168,
-            'ℓP': 1.616255e-35
-        };
+        /**
+         * Constants Module - Stores all conversion factors and constants
+         */
+        const Constants = {
+            // Length conversion factors to meters
+            lengthUnits: {
+                // Metric
+                'km': 1000,
+                'm': 1,
+                'dm': 0.1,
+                'cm': 0.01,
+                'mm': 0.001,
+                'µm': 0.000001,
+                'nm': 0.000000001,
+                'pm': 0.000000000001,
+                
+                // Imperial/US
+                'mi': 1609.344,
+                'yd': 0.9144,
+                'ft': 0.3048,
+                'in': 0.0254,
+                'mil': 0.0000254,
+                
+                // Nautical
+                'nmi': 1852,
+                'ftm': 1.8288,
+                'cable': 185.2,
+                
+                // Astronomical
+                'au': 149597870700,
+                'ly': 9460730472580800,
+                'pc': 30856775814913672,
+                
+                // Specialized
+                'Å': 0.0000000001,
+                'fm': 0.000000000000001,
+                'fur': 201.168,
+                'ℓP': 1.616255e-35
+            },
 
-        // Angle conversion factors
-        const angleUnits = {
-            'deg': Math.PI / 180,
-            'rad': 1,
-            'pi': Math.PI,
-            'grad': Math.PI / 200
-        };
+            // Angle conversion factors to radians
+            angleUnits: {
+                'deg': Math.PI / 180,
+                'rad': 1,
+                'pi': Math.PI,
+                'grad': Math.PI / 200
+            },
 
-        // Convert from a specific unit to all others
-        function convertFrom(inputElement, unit) {
-            const value = parseFloat(inputElement.value);
-            if (isNaN(value)) {
-                if (inputElement.value === '') {
-                    clearFieldScientific(inputElement);
-                }
-                return;
-            }
-
-            const meters = value * units[unit];
-            
-            // Update all length fields except the one we're typing in
-            document.querySelectorAll('.unit-input').forEach(field => {
-                if (field !== inputElement && field.closest('.main-section')) {
-                    const fieldId = field.id;
-                    const fieldUnit = getUnitFromId(fieldId);
-                    const convertedValue = meters / units[fieldUnit];
-                    field.value = formatDecimal(convertedValue);
-                    updateScientificNotation(field, convertedValue * units[fieldUnit]);
-                }
-            });
-            
-            // Update scientific notation for the input field
-            updateScientificNotation(inputElement, meters);
-        }
-
-        // Convert angle units
-        function convertAngle(inputElement, unit) {
-            const value = parseFloat(inputElement.value);
-            if (isNaN(value)) {
-                if (inputElement.value === '') {
-                    clearFieldScientific(inputElement);
-                }
-                return;
-            }
-
-            const radians = value * angleUnits[unit];
-            
-            // Update all angle fields except the one we're typing in
-            document.querySelectorAll('.angle-input').forEach(field => {
-                if (field !== inputElement) {
-                    const fieldId = field.id;
-                    const fieldUnit = getAngleUnitFromId(fieldId);
-                    const convertedValue = radians / angleUnits[fieldUnit];
-                    field.value = formatDecimal(convertedValue);
-                    updateScientificNotation(field, convertedValue * angleUnits[fieldUnit]);
-                }
-            });
-            
-            // Update scientific notation for the input field
-            updateScientificNotation(inputElement, radians);
-        }
-
-        // Format decimal numbers nicely
-        function formatDecimal(num) {
-            if (num === 0) return '0';
-            
-            const absNum = Math.abs(num);
-            if (absNum >= 1000 || absNum < 0.001) {
-                return num.toExponential(6).replace(/(\.\d*?[1-9])0+e/, '$1e').replace(/\.?0+e/, 'e');
-            }
-            return num.toFixed(10).replace(/\.?0+$/, '');
-        }
-
-        // Update scientific notation display
-        function updateScientificNotation(inputElement, valueInBaseUnit) {
-            const sciElement = document.getElementById(inputElement.id + '-sci');
-            if (!sciElement) return;
-            
-            if (valueInBaseUnit === 0 || isNaN(valueInBaseUnit)) {
-                sciElement.textContent = '';
-                return;
-            }
-            
-            const absValue = Math.abs(valueInBaseUnit);
-            let sciValue;
-            
-            if (absValue >= 1e6 || absValue <= 1e-6) {
-                sciValue = valueInBaseUnit.toExponential(6)
-                    .replace(/e\+?(-?\d+)/, '×10<sup>$1</sup>')
-                    .replace(/e-/, '×10<sup>-');
-            } else {
-                sciValue = valueInBaseUnit.toFixed(6).replace(/\.?0+$/, '');
-            }
-            
-            sciElement.innerHTML = sciValue;
-        }
-
-        // Clear scientific notation for a field
-        function clearFieldScientific(inputElement) {
-            const sciElement = document.getElementById(inputElement.id + '-sci');
-            if (sciElement) sciElement.textContent = '';
-        }
-
-        // Get unit abbreviation from input id
-        function getUnitFromId(id) {
-            const unitMap = {
+            // Map of input element IDs to unit symbols for length
+            lengthUnitMap: {
                 'kilometers': 'km',
                 'meters': 'm',
                 'decimeters': 'dm',
@@ -549,39 +457,183 @@
                 'fermis': 'fm',
                 'furlongs': 'fur',
                 'planckLengths': 'ℓP'
-            };
-            return unitMap[id];
-        }
+            },
 
-        // Get angle unit abbreviation from input id
-        function getAngleUnitFromId(id) {
-            const angleUnitMap = {
+            // Map of input element IDs to unit symbols for angles
+            angleUnitMap: {
                 'degrees': 'deg',
                 'radians': 'rad',
                 'piRadians': 'pi',
                 'gradians': 'grad'
-            };
-            return angleUnitMap[id];
-        }
+            }
+        };
 
-        // Clear all input fields
-        function clearAllFields() {
-            document.querySelectorAll('.unit-input, .angle-input').forEach(field => {
-                field.value = '';
-            });
-            document.querySelectorAll('.scientific').forEach(el => {
-                el.textContent = '';
-            });
-        }
+        /**
+         * Formatter Module - Handles formatting of numbers and scientific notation
+         */
+        const Formatter = {
+            /**
+             * Format decimal numbers appropriately based on their magnitude
+             * @param {number} num - The number to format
+             * @returns {string} Formatted number as string
+             */
+            formatDecimal: function(num) {
+                if (num === 0) return '0';
+                
+                const absNum = Math.abs(num);
+                if (absNum >= 1000 || absNum < 0.001) {
+                    return num.toExponential(6)
+                        .replace(/(\.\d*?[1-9])0+e/, '$1e')
+                        .replace(/\.?0+e/, 'e');
+                }
+                return num.toFixed(10).replace(/\.?0+$/, '');
+            },
 
-        // Swap the two columns
-        function swapColumns() {
-            const column1 = document.getElementById('column1');
-            const column2 = document.getElementById('column2');
-            const parent = column1.parentNode;
-            
-            parent.insertBefore(column2, column1);
-        }
+            /**
+             * Update scientific notation display for a given input element
+             * @param {HTMLElement} inputElement - The input element
+             * @param {number} valueInBaseUnit - The value in base units (meters or radians)
+             */
+            updateScientificNotation: function(inputElement, valueInBaseUnit) {
+                const sciElement = document.getElementById(inputElement.id + '-sci');
+                if (!sciElement) return;
+                
+                if (valueInBaseUnit === 0 || isNaN(valueInBaseUnit)) {
+                    sciElement.textContent = '';
+                    return;
+                }
+                
+                const absValue = Math.abs(valueInBaseUnit);
+                let sciValue;
+                
+                if (absValue >= 1e6 || absValue <= 1e-6) {
+                    sciValue = valueInBaseUnit.toExponential(6)
+                        .replace(/e\+?(-?\d+)/, '×10<sup>$1</sup>')
+                        .replace(/e-/, '×10<sup>-');
+                } else {
+                    sciValue = valueInBaseUnit.toFixed(6).replace(/\.?0+$/, '');
+                }
+                
+                sciElement.innerHTML = sciValue;
+            },
+
+            /**
+             * Clear scientific notation for a field
+             * @param {HTMLElement} inputElement - The input element to clear notation for
+             */
+            clearScientificNotation: function(inputElement) {
+                const sciElement = document.getElementById(inputElement.id + '-sci');
+                if (sciElement) sciElement.textContent = '';
+            }
+        };
+
+        /**
+         * UnitConverter Module - Handles length unit conversions
+         */
+        const UnitConverter = {
+            /**
+             * Convert from a specific length unit to all others
+             * @param {HTMLElement} inputElement - The input element that triggered the conversion
+             * @param {string} unit - The unit symbol of the input element
+             */
+            convertFrom: function(inputElement, unit) {
+                const value = parseFloat(inputElement.value);
+                if (isNaN(value)) {
+                    if (inputElement.value === '') {
+                        Formatter.clearScientificNotation(inputElement);
+                    }
+                    return;
+                }
+
+                // Convert to base unit (meters)
+                const meters = value * Constants.lengthUnits[unit];
+                
+                // Update all length fields except the one we're typing in
+                document.querySelectorAll('.unit-input').forEach(field => {
+                    if (field !== inputElement && field.closest('.main-section')) {
+                        const fieldId = field.id;
+                        const fieldUnit = Constants.lengthUnitMap[fieldId];
+                        const convertedValue = meters / Constants.lengthUnits[fieldUnit];
+                        field.value = Formatter.formatDecimal(convertedValue);
+                        Formatter.updateScientificNotation(field, convertedValue * Constants.lengthUnits[fieldUnit]);
+                    }
+                });
+                
+                // Update scientific notation for the input field
+                Formatter.updateScientificNotation(inputElement, meters);
+            }
+        };
+
+        /**
+         * AngleConverter Module - Handles angle unit conversions
+         */
+        const AngleConverter = {
+            /**
+             * Convert from a specific angle unit to all others
+             * @param {HTMLElement} inputElement - The input element that triggered the conversion
+             * @param {string} unit - The unit symbol of the input element
+             */
+            convertFrom: function(inputElement, unit) {
+                const value = parseFloat(inputElement.value);
+                if (isNaN(value)) {
+                    if (inputElement.value === '') {
+                        Formatter.clearScientificNotation(inputElement);
+                    }
+                    return;
+                }
+
+                // Convert to base unit (radians)
+                const radians = value * Constants.angleUnits[unit];
+                
+                // Update all angle fields except the one we're typing in
+                document.querySelectorAll('.angle-input').forEach(field => {
+                    if (field !== inputElement) {
+                        const fieldId = field.id;
+                        const fieldUnit = Constants.angleUnitMap[fieldId];
+                        const convertedValue = radians / Constants.angleUnits[fieldUnit];
+                        field.value = Formatter.formatDecimal(convertedValue);
+                        Formatter.updateScientificNotation(field, convertedValue * Constants.angleUnits[fieldUnit]);
+                    }
+                });
+                
+                // Update scientific notation for the input field
+                Formatter.updateScientificNotation(inputElement, radians);
+            }
+        };
+
+        /**
+         * UnitConverterUI Module - Handles UI interactions
+         */
+        const UnitConverterUI = {
+            /**
+             * Clear all input fields and scientific notation
+             */
+            clearAllFields: function() {
+                document.querySelectorAll('.unit-input, .angle-input').forEach(field => {
+                    field.value = '';
+                });
+                document.querySelectorAll('.scientific').forEach(el => {
+                    el.textContent = '';
+                });
+            },
+
+            /**
+             * Swap the two columns in the main section
+             */
+            swapColumns: function() {
+                const column1 = document.getElementById('column1');
+                const column2 = document.getElementById('column2');
+                const parent = column1.parentNode;
+                
+                parent.insertBefore(column2, column1);
+            }
+        };
+
+        // Initialize any event listeners or setup required
+        document.addEventListener('DOMContentLoaded', function() {
+            // Any initialization code can go here
+            console.log('Unit Converter initialized');
+        });
     </script>
 </body>
 </html>
