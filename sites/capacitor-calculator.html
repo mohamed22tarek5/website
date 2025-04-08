@@ -1,27 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capacitor Calculators</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 20px auto;
+            max-width: 1000px;
+            margin: 0 auto;
             padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
         }
         
+        /* Tab styles */
+        .main-tabs {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            border-radius: 4px 4px 0 0;
+            margin-bottom: 0;
+        }
+        .main-tab-button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            color: #333;
+            font-weight: bold;
+        }
+        .main-tab-button:hover {
+            background-color: #ddd;
+        }
+        .main-tab-button.active {
+            background-color: #3498db;
+            color: white;
+        }
+        .main-tabcontent {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Code calculator styles */
         .calculator {
             border: 1px solid #ddd;
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 20px;
         }
-        
         .input-field {
             margin: 10px 0;
             padding: 8px;
             width: 200px;
         }
-        
         .result {
             font-size: 1.2em;
             margin: 20px 0;
@@ -29,11 +72,9 @@
             background: #f5f5f5;
             border-radius: 4px;
         }
-        
         .tabs {
             margin-bottom: 20px;
         }
-        
         .tab-button {
             padding: 10px 20px;
             margin-right: 10px;
@@ -42,20 +83,16 @@
             cursor: pointer;
             border-radius: 4px;
         }
-        
         .tab-button.active {
             background: #007bff;
             color: white;
         }
-        
         .tab-content {
             display: none;
         }
-        
         .tab-content.active {
             display: block;
         }
-        
         .info-box {
             margin-top: 20px;
             padding: 15px;
@@ -63,87 +100,320 @@
             border-radius: 5px;
             border-left: 4px solid #007bff;
         }
+        
+        /* Series/parallel calculator styles */
+        .capacitors-container {
+            margin-top: 15px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            width: 100px;
+        }
+        label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f9f9;
+            border-radius: 4px;
+            border-left: 4px solid #3498db;
+        }
+        .capacitor-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .capacitor-input span {
+            margin-left: 5px;
+        }
+        .unit-selector {
+            margin-left: 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .explanation {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f9f9f1;
+            border-radius: 4px;
+            border-left: 4px solid #f1c40f;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-tab-button {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+            .input-field {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="tabs">
-        <button class="tab-button active" onclick="switchTab('ceramic')">Ceramic Capacitor</button>
-        <button class="tab-button" onclick="switchTab('electrolytic')">Electrolytic Capacitor</button>
-        <button class="tab-button" onclick="switchTab('info')">Info</button>
+    <h1>Capacitor Calculators</h1>
+    
+    <!-- Main tabs to switch between calculators -->
+    <div class="main-tabs">
+        <button class="main-tab-button active" onclick="openMainTab(event, 'CodeCalculator')">Code Calculator</button>
+        <button class="main-tab-button" onclick="openMainTab(event, 'SeriesParallel')">Series/Parallel</button>
     </div>
+    
+    <!-- Code Calculator Tab -->
+    <div id="CodeCalculator" class="main-tabcontent" style="display: block;">
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('ceramic')">Ceramic Capacitor</button>
+            <button class="tab-button" onclick="switchTab('electrolytic')">Electrolytic Capacitor</button>
+            <button class="tab-button" onclick="switchTab('info')">Info</button>
+        </div>
 
-    <div id="ceramic" class="tab-content active calculator">
-        <h2>Ceramic Capacitor Calculator</h2>
-        <p>Enter 3-digit code (e.g., 104, 472) or 2-digit code with multiplier (e.g., 4R7):</p>
-        <input type="text" class="input-field" id="ceramicCode" placeholder="e.g., 104" oninput="calculateCeramic()">
-        <div class="result" id="ceramicResult">Capacitance: </div>
-        
-        <h3>Common Codes:</h3>
-        <ul>
-            <li><strong>104</strong> = 100nF (0.1µF)</li>
-            <li><strong>473</strong> = 47nF (0.047µF)</li>
-            <li><strong>222</strong> = 2.2nF (2200pF)</li>
-            <li><strong>4R7</strong> = 4.7pF</li>
-        </ul>
-    </div>
-
-    <div id="electrolytic" class="tab-content calculator">
-        <h2>Electrolytic Capacitor Calculator</h2>
-        <p>Enter value with unit (e.g., 10µF, 47nF, 1000pF):</p>
-        <input type="text" class="input-field" id="electrolyticValue" placeholder="e.g., 10µF" oninput="calculateElectrolytic()">
-        <div class="result" id="electrolyticResult">Capacitance: </div>
-        
-        <h3>Voltage Rating Colors (optional):</h3>
-        <select class="input-field" id="voltageColor" onchange="calculateElectrolytic()">
-            <option value="">Select color</option>
-            <option value="4">Black (4V)</option>
-            <option value="6.3">Brown (6.3V)</option>
-            <option value="10">Red (10V)</option>
-            <option value="16">Orange (16V)</option>
-            <option value="25">Yellow (25V)</option>
-            <option value="35">Green (35V)</option>
-            <option value="50">Blue (50V)</option>
-            <option value="63">Violet (63V)</option>
-        </select>
-        <div id="voltageResult"></div>
-    </div>
-
-    <div id="info" class="tab-content calculator">
-        <h2>Capacitor Code Information</h2>
-        
-        <div class="info-box">
-            <h3>Ceramic Capacitor Codes:</h3>
-            <p>Most ceramic capacitors use a 3-digit code:</p>
+        <div id="ceramic" class="tab-content active calculator">
+            <h2>Ceramic Capacitor Calculator</h2>
+            <p>Enter 3-digit code (e.g., 104, 472) or 2-digit code with multiplier (e.g., 4R7):</p>
+            <input type="text" class="input-field" id="ceramicCode" placeholder="e.g., 104" oninput="calculateCeramic()">
+            <div class="result" id="ceramicResult">Capacitance: </div>
+            
+            <h3>Common Codes:</h3>
             <ul>
-                <li><strong>First two digits</strong>: Significant figures</li>
-                <li><strong>Third digit</strong>: Multiplier (power of 10)</li>
-                <li><strong>Result is in picofarads (pF)</strong></li>
+                <li><strong>104</strong> = 100nF (0.1µF)</li>
+                <li><strong>473</strong> = 47nF (0.047µF)</li>
+                <li><strong>222</strong> = 2.2nF (2200pF)</li>
+                <li><strong>4R7</strong> = 4.7pF</li>
             </ul>
-            <p><strong>Example:</strong> 104 = 10 × 10⁴ pF = 100,000pF = 100nF = 0.1µF</p>
+        </div>
+
+        <div id="electrolytic" class="tab-content calculator">
+            <h2>Electrolytic Capacitor Calculator</h2>
+            <p>Enter value with unit (e.g., 10µF, 47nF, 1000pF):</p>
+            <input type="text" class="input-field" id="electrolyticValue" placeholder="e.g., 10µF" oninput="calculateElectrolytic()">
+            <div class="result" id="electrolyticResult">Capacitance: </div>
+            
+            <h3>Voltage Rating Colors (optional):</h3>
+            <select class="input-field" id="voltageColor" onchange="calculateElectrolytic()">
+                <option value="">Select color</option>
+                <option value="4">Black (4V)</option>
+                <option value="6.3">Brown (6.3V)</option>
+                <option value="10">Red (10V)</option>
+                <option value="16">Orange (16V)</option>
+                <option value="25">Yellow (25V)</option>
+                <option value="35">Green (35V)</option>
+                <option value="50">Blue (50V)</option>
+                <option value="63">Violet (63V)</option>
+            </select>
+            <div id="voltageResult"></div>
+        </div>
+
+        <div id="info" class="tab-content calculator">
+            <h2>Capacitor Code Information</h2>
+            
+            <div class="info-box">
+                <h3>Ceramic Capacitor Codes:</h3>
+                <p>Most ceramic capacitors use a 3-digit code:</p>
+                <ul>
+                    <li><strong>First two digits</strong>: Significant figures</li>
+                    <li><strong>Third digit</strong>: Multiplier (power of 10)</li>
+                    <li><strong>Result is in picofarads (pF)</strong></li>
+                </ul>
+                <p><strong>Example:</strong> 104 = 10 × 10⁴ pF = 100,000pF = 100nF = 0.1µF</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>Electrolytic Capacitor Markings:</h3>
+                <p>Electrolytic capacitors are usually marked with:</p>
+                <ul>
+                    <li>Actual capacitance value (e.g., 10µF)</li>
+                    <li>Voltage rating (e.g., 16V)</li>
+                    <li>Polarity markings (+, - or stripe)</li>
+                </ul>
+                <p>Some older capacitors may use color codes for voltage rating.</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>Unit Conversions:</h3>
+                <ul>
+                    <li>1 Farad (F) = 1,000,000 microfarads (µF)</li>
+                    <li>1 microfarad (µF) = 1,000 nanofarads (nF)</li>
+                    <li>1 nanofarad (nF) = 1,000 picofarads (pF)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Series/Parallel Calculator Tab -->
+    <div id="SeriesParallel" class="main-tabcontent">
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchCalcTab('SeriesTab')">Series Connection</button>
+            <button class="tab-button" onclick="switchCalcTab('ParallelTab')">Parallel Connection</button>
+            <button class="tab-button" onclick="switchCalcTab('ExplanationTab')">Theory</button>
         </div>
         
-        <div class="info-box">
-            <h3>Electrolytic Capacitor Markings:</h3>
-            <p>Electrolytic capacitors are usually marked with:</p>
-            <ul>
-                <li>Actual capacitance value (e.g., 10µF)</li>
-                <li>Voltage rating (e.g., 16V)</li>
-                <li>Polarity markings (+, - or stripe)</li>
-            </ul>
-            <p>Some older capacitors may use color codes for voltage rating.</p>
+        <!-- Series Tab -->
+        <div id="SeriesTab" class="tab-content active calculator">
+            <h2>Series Capacitors Calculator</h2>
+            <p>Enter capacitor values to calculate the equivalent capacitance in series.</p>
+            
+            <div id="series-capacitors" class="capacitors-container">
+                <div class="capacitor-input">
+                    <label>C1:</label>
+                    <input type="number" min="0" step="0.01" value="10">
+                    <select class="unit-selector">
+                        <option value="1e-12">pF</option>
+                        <option value="1e-9">nF</option>
+                        <option value="1e-6" selected>μF</option>
+                        <option value="1e-3">mF</option>
+                        <option value="1">F</option>
+                    </select>
+                </div>
+                <div class="capacitor-input">
+                    <label>C2:</label>
+                    <input type="number" min="0" step="0.01" value="22">
+                    <select class="unit-selector">
+                        <option value="1e-12">pF</option>
+                        <option value="1e-9">nF</option>
+                        <option value="1e-6" selected>μF</option>
+                        <option value="1e-3">mF</option>
+                        <option value="1">F</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button onclick="addCapacitor('series')">Add Capacitor</button>
+            <button onclick="removeCapacitor('series')">Remove Capacitor</button>
+            <button onclick="calculate('series')">Calculate</button>
+            
+            <div id="series-result" class="result-box">
+                <p>The equivalent capacitance will be shown here.</p>
+            </div>
         </div>
         
-        <div class="info-box">
-            <h3>Unit Conversions:</h3>
-            <ul>
-                <li>1 Farad (F) = 1,000,000 microfarads (µF)</li>
-                <li>1 microfarad (µF) = 1,000 nanofarads (nF)</li>
-                <li>1 nanofarad (nF) = 1,000 picofarads (pF)</li>
-            </ul>
+        <!-- Parallel Tab -->
+        <div id="ParallelTab" class="tab-content calculator">
+            <h2>Parallel Capacitors Calculator</h2>
+            <p>Enter capacitor values to calculate the equivalent capacitance in parallel.</p>
+            
+            <div id="parallel-capacitors" class="capacitors-container">
+                <div class="capacitor-input">
+                    <label>C1:</label>
+                    <input type="number" min="0" step="0.01" value="10">
+                    <select class="unit-selector">
+                        <option value="1e-12">pF</option>
+                        <option value="1e-9">nF</option>
+                        <option value="1e-6" selected>μF</option>
+                        <option value="1e-3">mF</option>
+                        <option value="1">F</option>
+                    </select>
+                </div>
+                <div class="capacitor-input">
+                    <label>C2:</label>
+                    <input type="number" min="0" step="0.01" value="22">
+                    <select class="unit-selector">
+                        <option value="1e-12">pF</option>
+                        <option value="1e-9">nF</option>
+                        <option value="1e-6" selected>μF</option>
+                        <option value="1e-3">mF</option>
+                        <option value="1">F</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button onclick="addCapacitor('parallel')">Add Capacitor</button>
+            <button onclick="removeCapacitor('parallel')">Remove Capacitor</button>
+            <button onclick="calculate('parallel')">Calculate</button>
+            
+            <div id="parallel-result" class="result-box">
+                <p>The equivalent capacitance will be shown here.</p>
+            </div>
+        </div>
+        
+        <!-- Explanation Tab -->
+        <div id="ExplanationTab" class="tab-content calculator">
+            <h2>Theory of Capacitors in Series and Parallel</h2>
+            
+            <div class="explanation">
+                <h3>Capacitors in Series</h3>
+                <p>When capacitors are connected in series, the equivalent capacitance is calculated using:</p>
+                <p style="text-align: center; font-size: 18px;">
+                    1/C<sub>eq</sub> = 1/C<sub>1</sub> + 1/C<sub>2</sub> + 1/C<sub>3</sub> + ... + 1/C<sub>n</sub>
+                </p>
+                <p>This means the equivalent capacitance is always smaller than the smallest individual capacitor in the series.</p>
+                
+                <h3>Capacitors in Parallel</h3>
+                <p>When capacitors are connected in parallel, the equivalent capacitance is calculated by adding the individual capacitances:</p>
+                <p style="text-align: center; font-size: 18px;">
+                    C<sub>eq</sub> = C<sub>1</sub> + C<sub>2</sub> + C<sub>3</sub> + ... + C<sub>n</sub>
+                </p>
+                <p>This means the equivalent capacitance is always larger than the largest individual capacitor in the parallel connection.</p>
+                
+                <h3>Physical Explanation</h3>
+                <p><strong>Series connection:</strong> In series, the same charge must exist on each capacitor, but the voltage is divided across all capacitors. This effectively creates a single capacitor with increased plate separation, resulting in decreased capacitance.</p>
+                <p><strong>Parallel connection:</strong> In parallel, each capacitor has the same voltage across it, but the charge is divided among all capacitors. This effectively creates a single capacitor with increased plate area, resulting in increased capacitance.</p>
+            </div>
         </div>
     </div>
 
     <script>
+        // Main tab switching
+        function openMainTab(evt, tabName) {
+            var i, tabcontent, tabbuttons;
+            tabcontent = document.getElementsByClassName("main-tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tabbuttons = document.getElementsByClassName("main-tab-button");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        // Code calculator tab switching
+        function switchTab(tabId) {
+            document.querySelectorAll('#CodeCalculator .tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('#CodeCalculator .tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`#CodeCalculator button[onclick="switchTab('${tabId}')"]`).classList.add('active');
+        }
+        
+        // Series/parallel calculator tab switching
+        function switchCalcTab(tabId) {
+            document.querySelectorAll('#SeriesParallel .tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('#SeriesParallel .tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`#SeriesParallel button[onclick="switchCalcTab('${tabId}')"]`).classList.add('active');
+        }
+
+        // Ceramic capacitor code calculator
         function calculateCeramic() {
             const code = document.getElementById('ceramicCode').value.trim().toUpperCase();
             let capacitance = 0;
@@ -191,6 +461,7 @@
             document.getElementById('ceramicResult').textContent = resultText;
         }
 
+        // Electrolytic capacitor calculator
         function calculateElectrolytic() {
             const valueStr = document.getElementById('electrolyticValue').value.trim();
             const voltageColor = document.getElementById('voltageColor').value;
@@ -238,19 +509,118 @@
             }
         }
 
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('active');
-            });
+        // Series/parallel calculator functions
+        function addCapacitor(type) {
+            const container = document.getElementById(type + '-capacitors');
+            const count = container.children.length + 1;
             
-            document.getElementById(tabId).classList.add('active');
-            document.querySelector(`button[onclick="switchTab('${tabId}')"]`).classList.add('active');
+            const capacitorInput = document.createElement('div');
+            capacitorInput.className = 'capacitor-input';
+            
+            capacitorInput.innerHTML = `
+                <label>C${count}:</label>
+                <input type="number" min="0" step="0.01" value="10">
+                <select class="unit-selector">
+                    <option value="1e-12">pF</option>
+                    <option value="1e-9">nF</option>
+                    <option value="1e-6" selected>μF</option>
+                    <option value="1e-3">mF</option>
+                    <option value="1">F</option>
+                </select>
+            `;
+            
+            container.appendChild(capacitorInput);
         }
-
-        // Initialize with ceramic calculator
+        
+        function removeCapacitor(type) {
+            const container = document.getElementById(type + '-capacitors');
+            if (container.children.length > 1) {
+                container.removeChild(container.lastChild);
+            }
+        }
+        
+        function calculate(type) {
+            const container = document.getElementById(type + '-capacitors');
+            const inputs = container.querySelectorAll('input');
+            const units = container.querySelectorAll('select');
+            const resultDiv = document.getElementById(type + '-result');
+            
+            // Get all capacitor values in Farads
+            const capacitors = [];
+            for (let i = 0; i < inputs.length; i++) {
+                const value = parseFloat(inputs[i].value);
+                const unit = parseFloat(units[i].value);
+                
+                if (isNaN(value) || value <= 0) {
+                    resultDiv.innerHTML = '<p style="color: red;">Error: All capacitor values must be positive numbers.</p>';
+                    return;
+                }
+                
+                // Convert to Farads
+                capacitors.push(value * unit);
+            }
+            
+            let equivalentCapacitance;
+            let formula = '';
+            
+            if (type === 'series') {
+                // Calculate 1/C = 1/C1 + 1/C2 + ... + 1/Cn
+                let sum = 0;
+                formula = '1/Ceq = ';
+                
+                for (let i = 0; i < capacitors.length; i++) {
+                    sum += 1 / capacitors[i];
+                    formula += `1/C${i+1}`;
+                    if (i < capacitors.length - 1) {
+                        formula += ' + ';
+                    }
+                }
+                
+                equivalentCapacitance = 1 / sum;
+                formula += ` = ${sum.toFixed(6)} (F<sup>-1</sup>)<br>Therefore, Ceq = 1/${sum.toFixed(6)} = ${equivalentCapacitance.toExponential(6)} F`;
+            } else {
+                // Calculate C = C1 + C2 + ... + Cn
+                equivalentCapacitance = 0;
+                formula = 'Ceq = ';
+                
+                for (let i = 0; i < capacitors.length; i++) {
+                    equivalentCapacitance += capacitors[i];
+                    formula += `C${i+1}`;
+                    if (i < capacitors.length - 1) {
+                        formula += ' + ';
+                    }
+                }
+                
+                formula += ` = ${equivalentCapacitance.toExponential(6)} F`;
+            }
+            
+            // Display the result with appropriate unit
+            let displayValue, unit;
+            
+            if (equivalentCapacitance >= 1) {
+                displayValue = equivalentCapacitance;
+                unit = 'F';
+            } else if (equivalentCapacitance >= 1e-3) {
+                displayValue = equivalentCapacitance * 1e3;
+                unit = 'mF';
+            } else if (equivalentCapacitance >= 1e-6) {
+                displayValue = equivalentCapacitance * 1e6;
+                unit = 'μF';
+            } else if (equivalentCapacitance >= 1e-9) {
+                displayValue = equivalentCapacitance * 1e9;
+                unit = 'nF';
+            } else {
+                displayValue = equivalentCapacitance * 1e12;
+                unit = 'pF';
+            }
+            
+            resultDiv.innerHTML = `
+                <p><strong>Equivalent Capacitance:</strong> ${displayValue.toFixed(4)} ${unit}</p>
+                <p><strong>Calculation:</strong><br>${formula}</p>
+            `;
+        }
+        
+        // Initialize calculators
         calculateCeramic();
     </script>
 </body>
