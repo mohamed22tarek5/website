@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wire Gauge Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .result-box {
+            transition: all 0.3s ease;
+        }
+        .result-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8 max-w-md">
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">Wire Gauge Calculator</h1>
+            <p class="text-gray-600">Find the right wire diameter for your electrical circuit</p>
+        </div>
+
+        <!-- Input Section -->
+        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Input Parameters</h2>
+            
+            <div class="space-y-4">
+                <div>
+                    <label for="current" class="block text-sm font-medium text-gray-700 mb-1">Current (Amps)</label>
+                    <input type="number" id="current" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., 10" step="0.1" min="0" value="5">
+                </div>
+                
+                <div>
+                    <label for="voltageDrop" class="block text-sm font-medium text-gray-700 mb-1">Max Voltage Drop (%)</label>
+                    <input type="number" id="voltageDrop" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., 3" step="0.1" min="0" max="10" value="3">
+                </div>
+                
+                <div>
+                    <label for="length" class="block text-sm font-medium text-gray-700 mb-1">Wire Length (meters)</label>
+                    <input type="number" id="length" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., 10" step="0.1" min="0" value="5">
+                </div>
+                
+                <div>
+                    <label for="voltage" class="block text-sm font-medium text-gray-700 mb-1">System Voltage (V)</label>
+                    <input type="number" id="voltage" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., 12" step="0.1" min="0" value="12">
+                </div>
+                
+                <button onclick="calculateWireGauge()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200">
+                    Calculate Wire Size
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Results</h2>
+            
+            <div class="space-y-3">
+                <div class="result-box bg-blue-50 p-4 rounded border border-blue-100">
+                    <p class="text-sm text-blue-600">Minimum Wire Size (AWG)</p>
+                    <p id="awgResult" class="text-xl font-bold text-blue-800">--</p>
+                </div>
+                
+                <div class="result-box bg-green-50 p-4 rounded border border-green-100">
+                    <p class="text-sm text-green-600">Minimum Wire Size (mm²)</p>
+                    <p id="mm2Result" class="text-xl font-bold text-green-800">--</p>
+                </div>
+                
+                <div class="result-box bg-yellow-50 p-4 rounded border border-yellow-100">
+                    <p class="text-sm text-yellow-600">Actual Voltage Drop</p>
+                    <p id="actualDrop" class="text-xl font-bold text-yellow-800">-- %</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes Section -->
+        <div class="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
+            <h3 class="font-semibold text-yellow-800">Important Notes:</h3>
+            <ul class="list-disc pl-5 text-sm text-yellow-700 mt-2 space-y-1">
+                <li>AWG = American Wire Gauge (smaller number = thicker wire)</li>
+                <li>For high-power applications, use thicker wire than calculated</li>
+                <li>Copper wire resistivity: 1.68×10⁻⁸ Ω·m (at 20°C)</li>
+                <li>For long distances, voltage drop becomes critical</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // AWG to mm² conversion table (up to AWG 40)
+        const awgToMm2 = [
+            { awg: 0, mm2: 53.5 },
+            { awg: 1, mm2: 42.4 },
+            { awg: 2, mm2: 33.6 },
+            { awg: 3, mm2: 26.7 },
+            { awg: 4, mm2: 21.2 },
+            { awg: 5, mm2: 16.8 },
+            { awg: 6, mm2: 13.3 },
+            { awg: 7, mm2: 10.5 },
+            { awg: 8, mm2: 8.37 },
+            { awg: 9, mm2: 6.63 },
+            { awg: 10, mm2: 5.26 },
+            { awg: 11, mm2: 4.17 },
+            { awg: 12, mm2: 3.31 },
+            { awg: 13, mm2: 2.62 },
+            { awg: 14, mm2: 2.08 },
+            { awg: 15, mm2: 1.65 },
+            { awg: 16, mm2: 1.31 },
+            { awg: 17, mm2: 1.04 },
+            { awg: 18, mm2: 0.823 },
+            { awg: 19, mm2: 0.653 },
+            { awg: 20, mm2: 0.518 },
+            { awg: 21, mm2: 0.410 },
+            { awg: 22, mm2: 0.326 },
+            { awg: 23, mm2: 0.258 },
+            { awg: 24, mm2: 0.205 },
+            { awg: 25, mm2: 0.162 },
+            { awg: 26, mm2: 0.129 },
+            { awg: 27, mm2: 0.102 },
+            { awg: 28, mm2: 0.0810 },
+            { awg: 29, mm2: 0.0642 },
+            { awg: 30, mm2: 0.0509 },
+            { awg: 31, mm2: 0.0404 },
+            { awg: 32, mm2: 0.0320 },
+            { awg: 33, mm2: 0.0254 },
+            { awg: 34, mm2: 0.0201 },
+            { awg: 35, mm2: 0.0160 },
+            { awg: 36, mm2: 0.0127 },
+            { awg: 37, mm2: 0.0100 },
+            { awg: 38, mm2: 0.00797 },
+            { awg: 39, mm2: 0.00632 },
+            { awg: 40, mm2: 0.00501 }
+        ];
+
+        function calculateWireGauge() {
+            // Get input values
+            const current = parseFloat(document.getElementById('current').value);
+            const voltageDropPercent = parseFloat(document.getElementById('voltageDrop').value);
+            const length = parseFloat(document.getElementById('length').value);
+            const voltage = parseFloat(document.getElementById('voltage').value);
+
+            // Validate inputs
+            if (isNaN(current) || current <= 0) {
+                alert("Current must be a positive number");
+                return;
+            }
+            if (isNaN(voltageDropPercent) || voltageDropPercent <= 0 || voltageDropPercent > 10) {
+                alert("Voltage drop must be between 0% and 10%");
+                return;
+            }
+            if (isNaN(length) || length <= 0) {
+                alert("Wire length must be positive");
+                return;
+            }
+            if (isNaN(voltage) || voltage <= 0) {
+                alert("System voltage must be positive");
+                return;
+            }
+
+            // Calculate max allowed resistance (R = V_drop / I)
+            const maxVoltageDrop = (voltageDropPercent / 100) * voltage;
+            const maxResistance = maxVoltageDrop / current;
+
+            // Calculate required cross-sectional area (A = ρ * L / R)
+            const resistivity = 1.68e-8; // Copper resistivity (Ω·m)
+            const areaMm2 = (resistivity * length * 2 / maxResistance) * 1e6; // Convert to mm²
+
+            // Find the smallest AWG that meets the requirement
+            let recommendedAwg = 40;
+            let recommendedMm2 = 0.0;
+
+            for (const wire of awgToMm2) {
+                if (wire.mm2 >= areaMm2 && wire.awg < recommendedAwg) {
+                    recommendedAwg = wire.awg;
+                    recommendedMm2 = wire.mm2;
+                }
+            }
+
+            // Calculate actual voltage drop with recommended wire
+            const actualResistance = (resistivity * length * 2) / (recommendedMm2 * 1e-6);
+            const actualVoltageDrop = (actualResistance * current / voltage) * 100;
+
+            // Display results
+            document.getElementById('awgResult').textContent = `AWG ${recommendedAwg}`;
+            document.getElementById('mm2Result').textContent = `${recommendedMm2.toFixed(2)} mm²`;
+            document.getElementById('actualDrop').textContent = `${actualVoltageDrop.toFixed(2)} %`;
+        }
+    </script>
+</body>
+</html>
