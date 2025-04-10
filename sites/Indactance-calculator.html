@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inductance Calculators</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        /* Tab styles */
+        .main-tabs {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            border-radius: 4px 4px 0 0;
+            margin-bottom: 0;
+        }
+        .main-tab-button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            color: #333;
+            font-weight: bold;
+        }
+        .main-tab-button:hover {
+            background-color: #ddd;
+        }
+        .main-tab-button.active {
+            background-color: #3498db;
+            color: white;
+        }
+        .main-tabcontent {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Color code calculator styles */
+        .calculator {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .band-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .band {
+            width: 40px;
+            height: 100px;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+        }
+        .band-label {
+            position: absolute;
+            bottom: -25px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+        }
+        .result {
+            font-size: 1.2em;
+            margin: 20px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        .tabs {
+            margin-bottom: 20px;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            background: #f0f0f0;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .tab-button.active {
+            background: #007bff;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .info-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f8ff;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        
+        /* Series/parallel calculator styles */
+        .inductors-container {
+            margin-top: 15px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            width: 100px;
+        }
+        label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f1f9f9;
+            border-radius: 4px;
+            border-left: 4px solid #3498db;
+        }
+        .inductor-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .inductor-input span {
+            margin-left: 5px;
+        }
+        .unit-selector {
+            margin-left: 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .explanation {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f9f9f1;
+            border-radius: 4px;
+            border-left: 4px solid #f1c40f;
+        }
+        .color-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .color-item {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        .color-swatch {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ddd;
+            margin-right: 5px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-tab-button {
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+            .band {
+                width: 30px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Inductance Calculators</h1>
+    
+    <!-- Main tabs to switch between calculators -->
+    <div class="main-tabs">
+        <button class="main-tab-button active" onclick="openMainTab(event, 'ColorCode')">Color Code</button>
+        <button class="main-tab-button" onclick="openMainTab(event, 'SeriesParallel')">Series/Parallel</button>
+    </div>
+    
+    <!-- Color Code Calculator Tab -->
+    <div id="ColorCode" class="main-tabcontent" style="display: block;">
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('4band')">4-Band</button>
+            <button class="tab-button" onclick="switchTab('5band')">5-Band</button>
+            <button class="tab-button" onclick="switchTab('info')">Info</button>
+        </div>
+
+        <div id="4band" class="tab-content active calculator">
+            <h2>4-Band Inductor Color Code Calculator</h2>
+            <p>Click on each band to select its color:</p>
+            
+            <div class="band-container">
+                <div class="band" id="band1" style="background-color: #966f33;" onclick="selectBand(1)"></div>
+                <div class="band" id="band2" style="background-color: #000000;" onclick="selectBand(2)"></div>
+                <div class="band" id="band3" style="background-color: #c0c0c0;" onclick="selectBand(3)"></div>
+                <div class="band" id="band4" style="background-color: #d4af37;" onclick="selectBand(4)"></div>
+            </div>
+            <div class="band-container">
+                <span class="band-label">1st Digit</span>
+                <span class="band-label">2nd Digit</span>
+                <span class="band-label">Multiplier</span>
+                <span class="band-label">Tolerance</span>
+            </div>
+            
+            <div class="result" id="colorCodeResult">Inductance: 10μH ±5%</div>
+            
+            <div class="color-legend">
+                <div class="color-item"><div class="color-swatch" style="background-color: #000000;"></div>Black (0)</div>
+                <div class="color-item"><div class="color-swatch" style="background-color: #966f33;"></div>Brown (1)</div>
+                <div class="color-item"><div class="color-swatch" style="background-color: #ff0000;"></div>Red (2)</div>
+                <div class="color-item"><div class="color-swatch" style="background-color: #ffa500;"></div>Orange (3)</div>
+                <div class="color-item"><div class="color-swatch" style="background-color: #ffff00;"></div>Yellow (4)</div>
+                <div class="color-item"><div class="color-swatch" style="background-color: #008000;"></div>Green (5)</div>
+                <div class="color-item"><div class="color-swatch" style="background-color: #0000ff;"></div>Blue (6)</div>
+                <div class="color-item"><div class="color-swatch" style="background-color: #800080;"></div>Violet (7)</div>
+                <div class="color-item"><div class="color-swatch" style="background-color: #808080;"></div>Gray (8)</div>
+                <div class="color-item"><div class="color-swatch" style="background-color: #ffffff;"></div>White (9)</div>
+                <div class="color-item"><div class="color-swatch" style="background-color: #d4af37;"></div>Gold (±5%)</div>
+                <div class="color-item"><div class="color-swatch" style="background-color: #c0c0c0;"></div>Silver (±10%)</div>
+            </div>
+        </div>
+
+        <div id="5band" class="tab-content calculator">
+            <h2>5-Band Inductor Color Code Calculator</h2>
+            <p>Click on each band to select its color:</p>
+            
+            <div class="band-container">
+                <div class="band" id="band1-5" style="background-color: #966f33;" onclick="selectBand5(1)"></div>
+                <div class="band" id="band2-5" style="background-color: #000000;" onclick="selectBand5(2)"></div>
+                <div class="band" id="band3-5" style="background-color: #ff0000;" onclick="selectBand5(3)"></div>
+                <div class="band" id="band4-5" style="background-color: #c0c0c0;" onclick="selectBand5(4)"></div>
+                <div class="band" id="band5-5" style="background-color: #d4af37;" onclick="selectBand5(5)"></div>
+            </div>
+            <div class="band-container">
+                <span class="band-label">1st Digit</span>
+                <span class="band-label">2nd Digit</span>
+                <span class="band-label">3rd Digit</span>
+                <span class="band-label">Multiplier</span>
+                <span class="band-label">Tolerance</span>
+            </div>
+            
+            <div class="result" id="colorCodeResult5">Inductance: 100μH ±5%</div>
+        </div>
+
+        <div id="info" class="tab-content calculator">
+            <h2>Inductor Color Code Information</h2>
+            
+            <div class="info-box">
+                <h3>4-Band Inductor Codes:</h3>
+                <ul>
+                    <li><strong>First two bands</strong>: Significant digits</li>
+                    <li><strong>Third band</strong>: Multiplier (power of 10)</li>
+                    <li><strong>Fourth band</strong>: Tolerance (Gold = ±5%, Silver = ±10%)</li>
+                    <li><strong>Result is in microhenries (μH)</strong></li>
+                </ul>
+                <p><strong>Example:</strong> Brown-Black-Silver-Gold = 10 × 0.01 = 0.1μH ±5%</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>5-Band Inductor Codes:</h3>
+                <ul>
+                    <li><strong>First three bands</strong>: Significant digits</li>
+                    <li><strong>Fourth band</strong>: Multiplier (power of 10)</li>
+                    <li><strong>Fifth band</strong>: Tolerance</li>
+                </ul>
+                <p><strong>Example:</strong> Brown-Black-Black-Silver-Gold = 100 × 0.01 = 1μH ±5%</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>Unit Conversions:</h3>
+                <ul>
+                    <li>1 Henry (H) = 1,000,000 microhenries (μH)</li>
+                    <li>1 millihenry (mH) = 1,000 microhenries (μH)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Series/Parallel Calculator Tab -->
+    <div id="SeriesParallel" class="main-tabcontent">
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchCalcTab('SeriesTab')">Series Connection</button>
+            <button class="tab-button" onclick="switchCalcTab('ParallelTab')">Parallel Connection</button>
+            <button class="tab-button" onclick="switchCalcTab('ExplanationTab')">Theory</button>
+        </div>
+        
+        <!-- Series Tab -->
+        <div id="SeriesTab" class="tab-content active calculator">
+            <h2>Series Inductors Calculator</h2>
+            <p>Enter inductor values to calculate the equivalent inductance in series.</p>
+            
+            <div id="series-inductors" class="inductors-container">
+                <div class="inductor-input">
+                    <label>L1:</label>
+                    <input type="number" min="0" step="0.01" value="10">
+                    <select class="unit-selector">
+                        <option value="1e-6">μH</option>
+                        <option value="1e-3" selected>mH</option>
+                        <option value="1">H</option>
+                    </select>
+                </div>
+                <div class="inductor-input">
+                    <label>L2:</label>
+                    <input type="number" min="0" step="0.01" value="22">
+                    <select class="unit-selector">
+                        <option value="1e-6">μH</option>
+                        <option value="1e-3" selected>mH</option>
+                        <option value="1">H</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button onclick="addInductor('series')">Add Inductor</button>
+            <button onclick="removeInductor('series')">Remove Inductor</button>
+            <button onclick="calculateInductance('series')">Calculate</button>
+            
+            <div id="series-result" class="result-box">
+                <p>The equivalent inductance will be shown here.</p>
+            </div>
+        </div>
+        
+        <!-- Parallel Tab -->
+        <div id="ParallelTab" class="tab-content calculator">
+            <h2>Parallel Inductors Calculator</h2>
+            <p>Enter inductor values to calculate the equivalent inductance in parallel.</p>
+            
+            <div id="parallel-inductors" class="inductors-container">
+                <div class="inductor-input">
+                    <label>L1:</label>
+                    <input type="number" min="0" step="0.01" value="10">
+                    <select class="unit-selector">
+                        <option value="1e-6">μH</option>
+                        <option value="1e-3" selected>mH</option>
+                        <option value="1">H</option>
+                    </select>
+                </div>
+                <div class="inductor-input">
+                    <label>L2:</label>
+                    <input type="number" min="0" step="0.01" value="22">
+                    <select class="unit-selector">
+                        <option value="1e-6">μH</option>
+                        <option value="1e-3" selected>mH</option>
+                        <option value="1">H</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button onclick="addInductor('parallel')">Add Inductor</button>
+            <button onclick="removeInductor('parallel')">Remove Inductor</button>
+            <button onclick="calculateInductance('parallel')">Calculate</button>
+            
+            <div id="parallel-result" class="result-box">
+                <p>The equivalent inductance will be shown here.</p>
+            </div>
+        </div>
+        
+        <!-- Explanation Tab -->
+        <div id="ExplanationTab" class="tab-content calculator">
+            <h2>Theory of Inductors in Series and Parallel</h2>
+            
+            <div class="explanation">
+                <h3>Inductors in Series</h3>
+                <p>When inductors are connected in series, the equivalent inductance is calculated by adding the individual inductances:</p>
+                <p style="text-align: center; font-size: 18px;">
+                    L<sub>eq</sub> = L<sub>1</sub> + L<sub>2</sub> + L<sub>3</sub> + ... + L<sub>n</sub>
+                </p>
+                <p>This means the equivalent inductance is always larger than the largest individual inductor in the series.</p>
+                
+                <h3>Inductors in Parallel</h3>
+                <p>When inductors are connected in parallel, the equivalent inductance is calculated using:</p>
+                <p style="text-align: center; font-size: 18px;">
+                    1/L<sub>eq</sub> = 1/L<sub>1</sub> + 1/L<sub>2</sub> + 1/L<sub>3</sub> + ... + 1/L<sub>n</sub>
+                </p>
+                <p>This means the equivalent inductance is always smaller than the smallest individual inductor in the parallel connection.</p>
+                
+                <h3>Physical Explanation</h3>
+                <p><strong>Series connection:</strong> In series, the same current flows through each inductor, and the voltage drops add up. The total inductance is the sum of individual inductances because the magnetic fields add constructively.</p>
+                <p><strong>Parallel connection:</strong> In parallel, the voltage across each inductor is the same, but the currents divide. The total inductance is less than any individual inductance because the magnetic fields interact to reduce the overall inductance.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Color definitions for bands
+        const colors = [
+            { name: "Black", code: "#000000", value: 0, multiplier: 1 },
+            { name: "Brown", code: "#966f33", value: 1, multiplier: 10 },
+            { name: "Red", code: "#ff0000", value: 2, multiplier: 100 },
+            { name: "Orange", code: "#ffa500", value: 3, multiplier: 1000 },
+            { name: "Yellow", code: "#ffff00", value: 4, multiplier: 10000 },
+            { name: "Green", code: "#008000", value: 5, multiplier: 100000 },
+            { name: "Blue", code: "#0000ff", value: 6, multiplier: 1000000 },
+            { name: "Violet", code: "#800080", value: 7, multiplier: 10000000 },
+            { name: "Gray", code: "#808080", value: 8, multiplier: 100000000 },
+            { name: "White", code: "#ffffff", value: 9, multiplier: 1000000000 },
+            { name: "Gold", code: "#d4af37", value: -1, multiplier: 0.1, tolerance: "±5%" },
+            { name: "Silver", code: "#c0c0c0", value: -1, multiplier: 0.01, tolerance: "±10%" }
+        ];
+
+        // Current band selections
+        let bandSelections = [0, 0, 2, 10]; // Default: Brown-Black-Silver-Gold
+        let bandSelections5 = [0, 0, 0, 2, 10]; // Default: Brown-Black-Black-Silver-Gold
+
+        // Main tab switching
+        function openMainTab(evt, tabName) {
+            var i, tabcontent, tabbuttons;
+            tabcontent = document.getElementsByClassName("main-tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tabbuttons = document.getElementsByClassName("main-tab-button");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        // Color code calculator tab switching
+        function switchTab(tabId) {
+            document.querySelectorAll('#ColorCode .tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('#ColorCode .tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`#ColorCode button[onclick="switchTab('${tabId}')"]`).classList.add('active');
+            
+            // Update the display when switching tabs
+            if (tabId === '4band') {
+                updateColorCodeResult();
+            } else if (tabId === '5band') {
+                updateColorCodeResult5();
+            }
+        }
+        
+        // Series/parallel calculator tab switching
+        function switchCalcTab(tabId) {
+            document.querySelectorAll('#SeriesParallel .tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('#SeriesParallel .tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`#SeriesParallel button[onclick="switchCalcTab('${tabId}')"]`).classList.add('active');
+        }
+
+        // Band selection for 4-band
+        function selectBand(bandNum) {
+            const currentColor = bandSelections[bandNum-1];
+            let newIndex = (currentColor + 1) % colors.length;
+            
+            // Skip colors that don't make sense for certain positions
+            if (bandNum === 4) { // Tolerance band
+                while (newIndex < 10 || colors[newIndex].tolerance === undefined) {
+                    newIndex = (newIndex + 1) % colors.length;
+                }
+            } else { // Digit or multiplier bands
+                while (newIndex >= 10) {
+                    newIndex = (newIndex + 1) % colors.length;
+                }
+            }
+            
+            bandSelections[bandNum-1] = newIndex;
+            document.getElementById(`band${bandNum}`).style.backgroundColor = colors[newIndex].code;
+            updateColorCodeResult();
+        }
+
+        // Band selection for 5-band
+        function selectBand5(bandNum) {
+            const currentColor = bandSelections5[bandNum-1];
+            let newIndex = (currentColor + 1) % colors.length;
+            
+            // Skip colors that don't make sense for certain positions
+            if (bandNum === 5) { // Tolerance band
+                while (newIndex < 10 || colors[newIndex].tolerance === undefined) {
+                    newIndex = (newIndex + 1) % colors.length;
+                }
+            } else { // Digit or multiplier bands
+                while (newIndex >= 10) {
+                    newIndex = (newIndex + 1) % colors.length;
+                }
+            }
+            
+            bandSelections5[bandNum-1] = newIndex;
+            document.getElementById(`band${bandNum}-5`).style.backgroundColor = colors[newIndex].code;
+            updateColorCodeResult5();
+        }
+
+        // Update 4-band result display
+        function updateColorCodeResult() {
+            const digit1 = colors[bandSelections[0]].value;
+            const digit2 = colors[bandSelections[1]].value;
+            const multiplier = colors[bandSelections[2]].multiplier;
+            const tolerance = colors[bandSelections[3]].tolerance;
+            
+            const inductance = (digit1 * 10 + digit2) * multiplier;
+            let displayValue, unit;
+            
+            if (inductance >= 1000000) {
+                displayValue = inductance / 1000000;
+                unit = "H";
+            } else if (inductance >= 1000) {
+                displayValue = inductance / 1000;
+                unit = "mH";
+            } else {
+                displayValue = inductance;
+                unit = "μH";
+            }
+            
+            document.getElementById("colorCodeResult").textContent = 
+                `Inductance: ${displayValue}${unit} ${tolerance}`;
+        }
+
+        // Update 5-band result display
+        function updateColorCodeResult5() {
+            const digit1 = colors[bandSelections5[0]].value;
+            const digit2 = colors[bandSelections5[1]].value;
+            const digit3 = colors[bandSelections5[2]].value;
+            const multiplier = colors[bandSelections5[3]].multiplier;
+            const tolerance = colors[bandSelections5[4]].tolerance;
+            
+            const inductance = (digit1 * 100 + digit2 * 10 + digit3) * multiplier;
+            let displayValue, unit;
+            
+            if (inductance >= 1000000) {
+                displayValue = inductance / 1000000;
+                unit = "H";
+            } else if (inductance >= 1000) {
+                displayValue = inductance / 1000;
+                unit = "mH";
+            } else {
+                displayValue = inductance;
+                unit = "μH";
+            }
+            
+            document.getElementById("colorCodeResult5").textContent = 
+                `Inductance: ${displayValue}${unit} ${tolerance}`;
+        }
+
+        // Series/parallel calculator functions
+        function addInductor(type) {
+            const container = document.getElementById(type + '-inductors');
+            const count = container.children.length + 1;
+            
+            const inductorInput = document.createElement('div');
+            inductorInput.className = 'inductor-input';
+            
+            inductorInput.innerHTML = `
+                <label>L${count}:</label>
+                <input type="number" min="0" step="0.01" value="10">
+                <select class="unit-selector">
+                    <option value="1e-6">μH</option>
+                    <option value="1e-3" selected>mH</option>
+                    <option value="1">H</option>
+                </select>
+            `;
+            
+            container.appendChild(inductorInput);
+        }
+        
+        function removeInductor(type) {
+            const container = document.getElementById(type + '-inductors');
+            if (container.children.length > 1) {
+                container.removeChild(container.lastChild);
+            }
+        }
+        
+        function calculateInductance(type) {
+            const container = document.getElementById(type + '-inductors');
+            const inputs = container.querySelectorAll('input');
+            const units = container.querySelectorAll('select');
+            const resultDiv = document.getElementById(type + '-result');
+            
+            // Get all inductor values in Henries
+            const inductors = [];
+            for (let i = 0; i < inputs.length; i++) {
+                const value = parseFloat(inputs[i].value);
+                const unit = parseFloat(units[i].value);
+                
+                if (isNaN(value) || value <= 0) {
+                    resultDiv.innerHTML = '<p style="color: red;">Error: All inductor values must be positive numbers.</p>';
+                    return;
+                }
+                
+                // Convert to Henries
+                inductors.push(value * unit);
+            }
+            
+            let equivalentInductance;
+            let formula = '';
+            
+            if (type === 'series') {
+                // Calculate L = L1 + L2 + ... + Ln
+                equivalentInductance = 0;
+                formula = 'Leq = ';
+                
+                for (let i = 0; i < inductors.length; i++) {
+                    equivalentInductance += inductors[i];
+                    formula += `L${i+1}`;
+                    if (i < inductors.length - 1) {
+                        formula += ' + ';
+                    }
+                }
+                
+                formula += ` = ${equivalentInductance.toExponential(6)} H`;
+            } else {
+                // Calculate 1/L = 1/L1 + 1/L2 + ... + 1/Ln
+                let sum = 0;
+                formula = '1/Leq = ';
+                
+                for (let i = 0; i < inductors.length; i++) {
+                    sum += 1 / inductors[i];
+                    formula += `1/L${i+1}`;
+                    if (i < inductors.length - 1) {
+                        formula += ' + ';
+                    }
+                }
+                
+                equivalentInductance = 1 / sum;
+                formula += ` = ${sum.toFixed(6)} (H<sup>-1</sup>)<br>Therefore, Leq = 1/${sum.toFixed(6)} = ${equivalentInductance.toExponential(6)} H`;
+            }
+            
+            // Display the result with appropriate unit
+            let displayValue, unit;
+            
+            if (equivalentInductance >= 1) {
+                displayValue = equivalentInductance;
+                unit = 'H';
+            } else if (equivalentInductance >= 1e-3) {
+                displayValue = equivalentInductance * 1e3;
+                unit = 'mH';
+            } else {
+                displayValue = equivalentInductance * 1e6;
+                unit = 'μH';
+            }
+            
+            resultDiv.innerHTML = `
+                <p><strong>Equivalent Inductance:</strong> ${displayValue.toFixed(4)} ${unit}</p>
+                <p><strong>Calculation:</strong><br>${formula}</p>
+            `;
+        }
+        
+        // Initialize the color code display
+        updateColorCodeResult();
+        updateColorCodeResult5();
+    </script>
+</body>
+</html>

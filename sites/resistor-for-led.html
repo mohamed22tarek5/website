@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED Resistor Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .result-box {
+            transition: all 0.3s ease;
+        }
+        .result-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8 max-w-md">
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">LED Resistor Calculator</h1>
+            <p class="text-gray-600">Find the right resistor for your LED circuit</p>
+        </div>
+
+        <!-- Input Section -->
+        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Input Parameters</h2>
+            
+            <div class="space-y-4">
+                <div>
+                    <label for="supplyVoltage" class="block text-sm font-medium text-gray-700 mb-1">Power Supply Voltage (V)</label>
+                    <input type="number" id="supplyVoltage" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., 12" step="0.1" min="0" value="12">
+                </div>
+                
+                <div>
+                    <label for="ledVoltage" class="block text-sm font-medium text-gray-700 mb-1">LED Forward Voltage (V)</label>
+                    <input type="number" id="ledVoltage" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., 2.0" step="0.1" min="0" max="5" value="2.0">
+                </div>
+                
+                <div>
+                    <label for="ledCurrent" class="block text-sm font-medium text-gray-700 mb-1">LED Current (mA)</label>
+                    <input type="number" id="ledCurrent" class="w-full px-3 py-2 border border-gray-300 rounded-md" placeholder="e.g., 20" step="1" min="1" max="50" value="20">
+                </div>
+                
+                <button onclick="calculateResistor()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200">
+                    Calculate Resistor
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Results</h2>
+            
+            <div class="space-y-3">
+                <div class="result-box bg-blue-50 p-4 rounded border border-blue-100">
+                    <p class="text-sm text-blue-600">Required Resistor Value</p>
+                    <p id="resistorValue" class="text-xl font-bold text-blue-800">-- Ω</p>
+                </div>
+                
+                <div class="result-box bg-green-50 p-4 rounded border border-green-100">
+                    <p class="text-sm text-green-600">Nearest Standard Resistor</p>
+                    <p id="standardResistor" class="text-xl font-bold text-green-800">-- Ω</p>
+                </div>
+                
+                <div class="result-box bg-yellow-50 p-4 rounded border border-yellow-100">
+                    <p class="text-sm text-yellow-600">Resistor Power (W)</p>
+                    <p id="resistorPower" class="text-xl font-bold text-yellow-800">-- W</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes Section -->
+        <div class="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
+            <h3 class="font-semibold text-yellow-800">Important Notes:</h3>
+            <ul class="list-disc pl-5 text-sm text-yellow-700 mt-2 space-y-1">
+                <li>Standard resistors: E12/E24 series (10%, 5% tolerance)</li>
+                <li>Use a higher wattage resistor for safety (e.g., 0.25W or 0.5W)</li>
+                <li>For multiple LEDs, calculate resistors separately or use a series/parallel configuration</li>
+                <li>Check LED datasheet for exact forward voltage and current</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Common standard resistor values (E12 series)
+        const standardResistors = [10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82, 100, 120, 150, 180, 220, 270, 330, 390, 470, 560, 680, 820];
+
+        function calculateResistor() {
+            // Get input values
+            const supplyVoltage = parseFloat(document.getElementById('supplyVoltage').value);
+            const ledVoltage = parseFloat(document.getElementById('ledVoltage').value);
+            const ledCurrent = parseFloat(document.getElementById('ledCurrent').value);
+
+            // Validate inputs
+            if (isNaN(supplyVoltage) || supplyVoltage <= 0) {
+                alert("Please enter a valid supply voltage");
+                return;
+            }
+            if (isNaN(ledVoltage) || ledVoltage <= 0 || ledVoltage >= supplyVoltage) {
+                alert("LED voltage must be between 0V and supply voltage");
+                return;
+            }
+            if (isNaN(ledCurrent) || ledCurrent <= 0) {
+                alert("LED current must be positive");
+                return;
+            }
+
+            // Calculate resistor value (Ohm's Law: R = (Vs - Vf) / I)
+            const resistorValue = (supplyVoltage - ledCurrent) / (ledCurrent / 1000); // Convert mA to A
+
+            // Find nearest standard resistor
+            let nearestResistor = standardResistors[0];
+            let minDifference = Math.abs(resistorValue - nearestResistor);
+
+            for (const r of standardResistors) {
+                const difference = Math.abs(resistorValue - r);
+                if (difference < minDifference) {
+                    minDifference = difference;
+                    nearestResistor = r;
+                }
+            }
+
+            // Calculate power dissipation (P = I²R)
+            const resistorPower = Math.pow(ledCurrent / 1000, 2) * nearestResistor;
+
+            // Display results
+            document.getElementById('resistorValue').textContent = resistorValue.toFixed(0) + " Ω";
+            document.getElementById('standardResistor').textContent = nearestResistor + " Ω";
+            document.getElementById('resistorPower').textContent = resistorPower.toFixed(3) + " W";
+        }
+    </script>
+</body>
+</html>
