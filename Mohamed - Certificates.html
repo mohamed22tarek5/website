@@ -13,6 +13,7 @@
             --text-light: #ffffff;
             --card-dark: #1e1e1e;
             --secondary-color: #3a6cf4;
+            --success-color: #4CAF50;
         }
 
         * {
@@ -36,6 +37,7 @@
             top: 0;
             width: 100%;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .navigation {
@@ -43,6 +45,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
@@ -50,11 +54,16 @@
             color: var(--primary-color);
             font-weight: 700;
             font-size: 1.8em;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
         }
 
         .nav-list {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             list-style: none;
         }
 
@@ -62,17 +71,35 @@
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+            position: relative;
         }
 
         .nav-list a:hover {
             color: var(--text-light);
         }
 
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-list a:hover::after {
+            width: 100%;
+        }
+
         .menu-toggle {
             display: none;
             flex-direction: column;
             cursor: pointer;
+            z-index: 1001;
         }
 
         .bar {
@@ -80,13 +107,26 @@
             width: 25px;
             background-color: var(--primary-color);
             margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
         }
 
         /* Certificates Container */
         .certificates-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 100px 20px 20px;
+            padding: 100px 20px 40px;
         }
 
         .section-title {
@@ -94,56 +134,89 @@
             color: var(--primary-color);
             font-size: 2.5em;
             margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 15px auto;
+            border-radius: 2px;
         }
 
         .certificates-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .certificate-card {
             background-color: var(--card-dark);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(78, 158, 255, 0.1);
         }
 
         .certificate-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border-color: rgba(78, 158, 255, 0.3);
+        }
+
+        .certificate-image-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
         }
 
         .certificate-image {
-            width: 320px;
-            height: 250px;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .certificate-card:hover .certificate-image {
+            transform: scale(1.05);
         }
 
         .certificate-details {
-            padding: 15px;
+            padding: 20px;
         }
 
         .certificate-title {
             color: var(--primary-color);
             margin-bottom: 10px;
+            font-size: 1.2em;
+            min-height: 3em;
         }
 
         .certificate-info {
             color: var(--text-light);
             margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 0.9em;
         }
 
         .certificate-actions {
             display: flex;
             justify-content: space-between;
+            gap: 10px;
         }
 
         .view-btn, .download-btn {
             text-decoration: none;
             padding: 8px 15px;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            flex: 1;
+            text-align: center;
         }
 
         .view-btn {
@@ -152,12 +225,13 @@
         }
 
         .download-btn {
-            background-color: #4CAF50;
+            background-color: var(--success-color);
             color: white;
         }
 
         .view-btn:hover, .download-btn:hover {
-            opacity: 0.8;
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
 
         /* Footer */
@@ -165,62 +239,104 @@
             background-color: var(--card-dark);
             color: var(--text-light);
             text-align: center;
-            padding: 20px;
-            margin-top: 30px;
+            padding: 30px 20px;
+            margin-top: 50px;
         }
 
         .footer-social {
             display: flex;
             justify-content: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            gap: 20px;
         }
 
         .footer-social a {
             color: var(--text-light);
             font-size: 1.5em;
-            margin: 0 15px;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
 
         .footer-social a:hover {
             color: var(--primary-color);
+            transform: translateY(-3px);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom {
+            opacity: 0.7;
+            font-size: 0.9em;
         }
 
         /* Back to Top Button */
         #back-to-top {
             display: none;
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 30px;
+            right: 30px;
             background-color: var(--primary-color);
             color: var(--text-light);
             border: none;
             border-radius: 50%;
-            padding: 10px;
+            padding: 12px;
             font-size: 1.5em;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 999;
         }
 
         #back-to-top:hover {
-            background-color: #2a5bd7;
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
+
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .certificate-card {
+            animation: fadeIn 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .certificate-card:nth-child(1) { animation-delay: 0.1s; }
+        .certificate-card:nth-child(2) { animation-delay: 0.2s; }
+        .certificate-card:nth-child(3) { animation-delay: 0.3s; }
+        .certificate-card:nth-child(4) { animation-delay: 0.4s; }
+        .certificate-card:nth-child(5) { animation-delay: 0.5s; }
+        .certificate-card:nth-child(6) { animation-delay: 0.6s; }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .certificates-grid {
-                grid-template-columns: 1fr;
+            .navigation {
+                padding: 0 15px;
             }
-
+            
             .nav-list {
                 display: none;
                 flex-direction: column;
                 background-color: var(--card-dark);
-                position: absolute;
-                top: 60px;
+                position: fixed;
+                top: 0;
                 left: 0;
                 width: 100%;
-                padding: 10px 0;
+                height: 100vh;
+                padding: 80px 20px 20px;
+                gap: 25px;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
             }
 
             .nav-list.active {
@@ -229,6 +345,32 @@
 
             .menu-toggle {
                 display: flex;
+            }
+            
+            .certificates-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .certificate-actions {
+                flex-direction: column;
+            }
+            
+            .footer-social {
+                gap: 15px;
+            }
+            
+            #back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3em;
             }
         }
     </style>
@@ -259,13 +401,15 @@
         <div class="certificates-grid">
             <!-- Certificate 1 -->
             <div class="certificate-card">
-                <img src="Certificates\1.jpg" loading="lazy" alt="Certificate 1" class="certificate-image">
+                <div class="certificate-image-container">
+                    <img src="Certificates/1.jpg" loading="lazy" alt="CCNA Certificate" class="certificate-image">
+                </div>
                 <div class="certificate-details">
                     <h3 class="certificate-title">CCNA</h3>
-                    <p class="certificate-info">Issued by:summer training</p>
+                    <p class="certificate-info">Issued by: Summer Training</p>
                     <div class="certificate-actions">
-                        <a href="Certificates\1.jpg" loading="lazy" class="view-btn">View Certificate</a>
-                        <a href="Certificates\1.jpg" loading="lazy" class="download-btn">
+                        <a href="Certificates/1.jpg" class="view-btn" target="_blank">View Certificate</a>
+                        <a href="Certificates/1.jpg" download="Mohamed_CCNA_Certificate.jpg" class="download-btn">
                             <i class="fas fa-download"></i> Download
                         </a>
                     </div>
@@ -274,13 +418,15 @@
         
             <!-- Certificate 2 -->
             <div class="certificate-card">
-                <img src="Certificates\2.jpg" loading="lazy" alt="Certificate 2" class="certificate-image">
+                <div class="certificate-image-container">
+                    <img src="Certificates/2.jpg" loading="lazy" alt="Network Fundamental+ Web Development Certificate" class="certificate-image">
+                </div>
                 <div class="certificate-details">
                     <h3 class="certificate-title">Network Fundamental+ Web Development</h3>
-                    <p class="certificate-info">Issued by: summer training Online </p>
+                    <p class="certificate-info">Issued by: Summer Training Online</p>
                     <div class="certificate-actions">
-                        <a href="Certificates\2.jpg" loading="lazy" class="view-btn">View Certificate</a>
-                        <a href="Certificates\2.jpg" loading="lazy" class="download-btn">
+                        <a href="Certificates/2.jpg" class="view-btn" target="_blank">View Certificate</a>
+                        <a href="Certificates/2.jpg" download="Mohamed_Network_WebDev_Certificate.jpg" class="download-btn">
                             <i class="fas fa-download"></i> Download
                         </a>
                     </div>
@@ -289,13 +435,15 @@
         
             <!-- Certificate 3 -->
             <div class="certificate-card">
-                <img src="Certificates\3.jpg" loading="lazy" alt="Certificate 3" class="certificate-image">
+                <div class="certificate-image-container">
+                    <img src="Certificates/3.jpg" loading="lazy" alt="Linux Course Certificate" class="certificate-image">
+                </div>
                 <div class="certificate-details">
-                    <h3 class="certificate-title">linux course for beginners</h3>
-                    <p class="certificate-info">Issued by:training Online</p>
+                    <h3 class="certificate-title">Linux Course for Beginners</h3>
+                    <p class="certificate-info">Issued by: Training Online</p>
                     <div class="certificate-actions">
-                        <a href="Certificates\3.jpg" loading="lazy" class="view-btn">View Certificate</a>
-                        <a href="Certificates\3.jpg" loading="lazy" class="download-btn">
+                        <a href="Certificates/3.jpg" class="view-btn" target="_blank">View Certificate</a>
+                        <a href="Certificates/3.jpg" download="Mohamed_Linux_Certificate.jpg" class="download-btn">
                             <i class="fas fa-download"></i> Download
                         </a>
                     </div>
@@ -304,13 +452,15 @@
         
             <!-- Certificate 4 -->
             <div class="certificate-card">
-                <img src="Certificates\4.jpg" loading="lazy" alt="Certificate 4" class="certificate-image">
+                <div class="certificate-image-container">
+                    <img src="Certificates/4.jpg" loading="lazy" alt="Home Automation Certificate" class="certificate-image">
+                </div>
                 <div class="certificate-details">
-                    <h3 class="certificate-title">Home Automation </h3>
-                    <p class="certificate-info">Issued by: training Online</p>
+                    <h3 class="certificate-title">Home Automation</h3>
+                    <p class="certificate-info">Issued by: Training Online</p>
                     <div class="certificate-actions">
-                        <a href="Certificates\4.jpg" loading="lazy" class="view-btn">View Certificate</a>
-                        <a href="Certificates\4.jpg" loading="lazy" class="download-btn">
+                        <a href="Certificates/4.jpg" class="view-btn" target="_blank">View Certificate</a>
+                        <a href="Certificates/4.jpg" download="Mohamed_Home_Automation_Certificate.jpg" class="download-btn">
                             <i class="fas fa-download"></i> Download
                         </a>
                     </div>
@@ -319,13 +469,15 @@
         
             <!-- Certificate 5 -->
             <div class="certificate-card">
-                <img src="Certificates\5.jpg" loading="lazy" alt="Certificate 5" class="certificate-image">
+                <div class="certificate-image-container">
+                    <img src="Certificates/5.jpg" loading="lazy" alt="System Protection Certificate" class="certificate-image">
+                </div>
                 <div class="certificate-details">
-                    <h3 class="certificate-title">protect Systems from Penetrations</h3>
-                    <p class="certificate-info">Issued by: training Online</p>
+                    <h3 class="certificate-title">Protect Systems from Penetrations</h3>
+                    <p class="certificate-info">Issued by: Training Online</p>
                     <div class="certificate-actions">
-                        <a href="Certificates\5.jpg" loading="lazy" class="view-btn">View Certificate</a>
-                        <a href="Certificates\5.jpg" loading="lazy" class="download-btn">
+                        <a href="Certificates/5.jpg" class="view-btn" target="_blank">View Certificate</a>
+                        <a href="Certificates/5.jpg" download="Mohamed_System_Protection_Certificate.jpg" class="download-btn">
                             <i class="fas fa-download"></i> Download
                         </a>
                     </div>
@@ -334,23 +486,20 @@
         
             <!-- Certificate 6 -->
             <div class="certificate-card">
-                <img src="Certificates\6.jpg" loading="lazy" alt="Certificate 6" class="certificate-image">
+                <div class="certificate-image-container">
+                    <img src="Certificates/6.jpg" loading="lazy" alt="Digital Marketing Certificate" class="certificate-image">
+                </div>
                 <div class="certificate-details">
-                    <h3 class="certificate-title">Digital marketings</h3>
-                    <p class="certificate-info">Issued by: training Online<p>
+                    <h3 class="certificate-title">Digital Marketing</h3>
+                    <p class="certificate-info">Issued by: Training Online</p>
                     <div class="certificate-actions">
-                        <a href="Certificates\6.jpg" loading="lazy" class="view-btn">View Certificate</a>
-                        <a href="Certificates\6.jpg" loading="lazy" class="download-btn">
+                        <a href="Certificates/6.jpg" class="view-btn" target="_blank">View Certificate</a>
+                        <a href="Certificates/6.jpg" download="Mohamed_Digital_Marketing_Certificate.jpg" class="download-btn">
                             <i class="fas fa-download"></i> Download
                         </a>
                     </div>
                 </div>
             </div>
-        
-           
-           
-
-            <!-- Add more certificate cards here -->
         </div>
     </div>
 
@@ -387,7 +536,26 @@
         const navList = document.getElementById('nav-list');
 
         mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
             navList.classList.toggle('active');
+            
+            // Toggle body scroll when menu is open
+            if (navList.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navList.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    navList.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
         });
 
         // Back to Top Button
@@ -395,7 +563,9 @@
 
         window.addEventListener('scroll', () => {
             if (window.pageYOffset > 300) {
-                backToTopButton.style.display = 'block';
+                backToTopButton.style.display = 'flex';
+                backToTopButton.style.alignItems = 'center';
+                backToTopButton.style.justifyContent = 'center';
             } else {
                 backToTopButton.style.display = 'none';
             }
@@ -403,6 +573,23 @@
 
         backToTopButton.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Smooth scrolling for all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
     </script>
 </body>
