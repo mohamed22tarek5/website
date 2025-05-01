@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mohamed's Project Portfolio - A showcase of my recent and notable projects in web development, software engineering, and content creation.">
-    <meta name="keywords" content="portfolio, web development, software engineering, projects, Mohamed Tarek">
+    <meta name="description" content="Mohamed's Project Portfolio - Showcasing innovative Arduino, PCB, and software projects with detailed descriptions and links">
+    <meta name="keywords" content="portfolio, Arduino projects, PCB design, smart home, electronics, Mohamed Tarek">
     <meta name="author" content="Mohamed Tarek">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="icon.jpg">
-    <title>Mohamed - Project Portfolio</title>
+    <title>Mohamed's Projects | Electronics & Software Portfolio</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
         :root {
             --primary-color: #4e9eff;
+            --primary-dark: #2a5bd7;
             --background-dark: #121212;
             --text-light: #ffffff;
             --card-dark: #1e1e1e;
             --secondary-color: #3a6cf4;
+            --success-color: #4CAF50;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -41,6 +46,7 @@
             top: 0;
             width: 100%;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .navigation {
@@ -48,6 +54,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
@@ -55,11 +63,16 @@
             color: var(--primary-color);
             font-weight: 700;
             font-size: 1.8em;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
         }
 
         .nav-list {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             list-style: none;
         }
 
@@ -67,17 +80,35 @@
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: var(--transition);
+            padding: 5px 0;
+            position: relative;
         }
 
         .nav-list a:hover {
             color: var(--text-light);
         }
 
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-list a:hover::after {
+            width: 100%;
+        }
+
         .menu-toggle {
             display: none;
             flex-direction: column;
             cursor: pointer;
+            z-index: 1001;
         }
 
         .bar {
@@ -85,6 +116,19 @@
             width: 25px;
             background-color: var(--primary-color);
             margin: 4px 0;
+            transition: var(--transition);
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
         }
 
         /* Container */
@@ -92,101 +136,145 @@
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 100px 20px 20px;
+            padding: 100px 20px 40px;
         }
 
-        /* Projects Section */
+        /* Projects Header */
         .projects-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
+            animation: fadeIn 0.8s ease forwards;
         }
 
         .projects-header h1 {
             color: var(--primary-color);
             font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .projects-header p {
             color: var(--text-light);
-            font-size: 1.1em;
+            font-size: 1.2em;
             opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
+        /* Projects Grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
 
+        /* Project Card */
         .project-card {
             background-color: var(--card-dark);
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(78, 158, 255, 0.2);
         }
 
         .project-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border-color: rgba(78, 158, 255, 0.5);
+        }
+
+        .project-image-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
         }
 
         .project-image {
             width: 100%;
-            height: auto;
-            display: block;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
         }
 
         .project-content {
-            padding: 20px;
-            text-align: center;
+            padding: 25px;
         }
 
         .project-title {
             color: var(--primary-color);
-            font-size: 1.5em;
+            font-size: 1.4em;
             margin-bottom: 15px;
+            font-weight: 600;
         }
 
         .project-tags {
-          
-            margin-top: 5px;
-            margin-bottom: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
         }
 
         .project-tag {
-            display: inline-block;
+            background-color: rgba(78, 158, 255, 0.2);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 500;
+            border: 1px solid var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .project-tag:hover {
             background-color: var(--primary-color);
-            color: var(--text-light);
-            font-size: 0.9em;
-            margin: 0 5px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            color: white;
         }
 
         .project-description {
             color: var(--text-light);
             opacity: 0.8;
             margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.6;
         }
 
         .project-links {
             display: flex;
-            justify-content: center;
             gap: 15px;
         }
 
         .project-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: white;
             text-decoration: none;
-            color: var(--primary-color);
-            font-weight: 500;
-            transition: color 0.3s ease;
+            border-radius: var(--border-radius);
+            font-size: 0.9em;
+            transition: var(--transition);
         }
 
         .project-link:hover {
-            color: var(--text-light);
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .project-link i {
+            margin-right: 8px;
+        }
+
+        .view-link {
+            background-color: var(--primary-color);
+        }
+
+        .github-link {
+            background-color: #333;
         }
 
         /* Footer */
@@ -194,20 +282,21 @@
             background-color: var(--card-dark);
             color: var(--text-light);
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
+            margin-top: 50px;
         }
 
         .footer-social {
             display: flex;
             justify-content: center;
-            margin-bottom: 15px;
+            gap: 25px;
+            margin-bottom: 20px;
         }
 
         .footer-social a {
             color: var(--text-light);
-            font-size: 2em;
-            margin: 0 15px;
-            transition: transform 0.3s ease, color 0.3s ease;
+            font-size: 1.8em;
+            transition: var(--transition);
         }
 
         .footer-social a:hover {
@@ -224,33 +313,54 @@
         #back-to-top {
             display: none;
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 30px;
+            right: 30px;
             background-color: var(--primary-color);
             color: var(--text-light);
             border: none;
             border-radius: 50%;
-            padding: 10px;
+            padding: 12px;
             font-size: 1.5em;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: var(--transition);
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 999;
         }
 
         #back-to-top:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .navigation {
+                padding: 0 15px;
+            }
+            
             .nav-list {
                 display: none;
                 flex-direction: column;
                 background-color: var(--card-dark);
-                position: absolute;
-                top: 60px;
+                position: fixed;
+                top: 0;
                 left: 0;
                 width: 100%;
-                padding: 10px 0;
+                height: 100vh;
+                padding: 80px 20px 20px;
+                gap: 25px;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
             }
 
             .nav-list.active {
@@ -260,15 +370,27 @@
             .menu-toggle {
                 display: flex;
             }
-        }
-
-        @media (max-width: 630px) {
-            header, .container {
-                padding: 20px 20px;
-            }
-
+            
             .projects-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            #back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .project-links {
+                flex-direction: column;
+            }
+            
+            .project-link {
+                justify-content: center;
             }
         }
     </style>
@@ -297,230 +419,296 @@
     <main>
         <div class="container">
             <div class="projects-header">
-                <h1>Project Portfolio</h1>
-                <p>A collection of my recent and notable projects</p>
+                <h1>My Engineering Projects</h1>
+                <p>Explore my collection of innovative Arduino, PCB, and software projects showcasing my technical skills and creativity</p>
             </div>
 
             <div class="projects-grid">
-                <div class="project-card">
-                    <img src="Project\5.png" loading="lazy" alt="Project 1" class="project-image">
+                <!-- Blind Glasses -->
+                <div class="project-card" style="animation-delay: 0.1s;">
+                    <div class="project-image-container">
+                        <img src="Project/5.png" loading="lazy" alt="Blind Glasses Project" class="project-image">
+                    </div>
                     <div class="project-content">
-                        <h2 class="project-title">blind glasses</h2>
+                        <h3 class="project-title">Blind Assistance Glasses</h3>
                         <div class="project-tags">
-                            <span class="project-tag">arduino</span>
-                            <span class="project-tag">C</span>
+                            <span class="project-tag">Arduino</span>
+                            <span class="project-tag">C Programming</span>
+                            <span class="project-tag">Ultrasonic Sensors</span>
                         </div>
-                        <p class="project-description">arduino project</p>
+                        <p class="project-description">Innovative wearable device using ultrasonic sensors to detect obstacles and provide audio feedback for visually impaired users.</p>
                         <div class="project-links">
-                            <a href="https://fb.watch/ipRaFH0KIr/" class="project-link">View video</a>
-                           
+                            <a href="https://fb.watch/ipRaFH0KIr/" target="_blank" rel="noopener noreferrer" class="project-link view-link">
+                                <i class="fas fa-play"></i> View Demo
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img src="Project\2.png" loading="lazy" alt="Project 2" class="project-image">
+                <!-- Portfolio Website -->
+                <div class="project-card" style="animation-delay: 0.2s;">
+                    <div class="project-image-container">
+                        <img src="Project/2.png" loading="lazy" alt="Portfolio Website" class="project-image">
+                    </div>
                     <div class="project-content">
-                        <h2 class="project-title">Portfolio Website</h2>
+                        <h3 class="project-title">Portfolio Website</h3>
                         <div class="project-tags">
-                            <span class="project-tag">HTML</span>
-                            <span class="project-tag">CSS</span>
-        
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
                         </div>
-                        <p class="project-description">Personal portfolio website showcasing skills, services, and projects</p>
+                        <p class="project-description">Responsive personal portfolio website showcasing my skills, projects, and professional journey with clean modern design.</p>
                         <div class="project-links">
-                            <a href="Project\2.png" loading="lazy" class="project-link">View image</a>
-                            <a href="https://github.com/mohamed22tarek5/website" class="project-link">GitHub</a>
+                            <a href="Project/2.png" loading="lazy" class="project-link view-link">
+                                <i class="fas fa-image"></i> Preview
+                            </a>
+                            <a href="https://github.com/mohamed22tarek5/website" target="_blank" rel="noopener noreferrer" class="project-link github-link">
+                                <i class="fab fa-github"></i> Code
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img src="Project\3.png" loading="lazy" alt="Project 3" class="project-image">
+                <!-- PCB Design -->
+                <div class="project-card" style="animation-delay: 0.3s;">
+                    <div class="project-image-container">
+                        <img src="Project/3.png" loading="lazy" alt="PCB Design Project" class="project-image">
+                    </div>
                     <div class="project-content">
-                        <h2 class="project-title">pcb Design</h2>
+                        <h3 class="project-title">20-Line Relay Module PCB</h3>
                         <div class="project-tags">
-                            <span class="project-tag">pcb</span>
+                            <span class="project-tag">Altium Designer</span>
+                            <span class="project-tag">PCB Layout</span>
+                            <span class="project-tag">Circuit Design</span>
                         </div>
-                        <p class="project-description">Design pcb relay module 20 line by ALtium</p>
+                        <p class="project-description">Professional PCB design for a 20-line relay module with optimized routing and component placement for industrial applications.</p>
                         <div class="project-links">
-                            <a href="Project\3.1.png" loading="lazy" class="project-link">View image</a>
-                        
+                            <a href="Project/3.1.png" loading="lazy" class="project-link view-link">
+                                <i class="fas fa-image"></i> View Design
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img src="Project\1.png" loading="lazy" alt="Project 4" class="project-image">
+                <!-- Smart Home V1 -->
+                <div class="project-card" style="animation-delay: 0.4s;">
+                    <div class="project-image-container">
+                        <img src="Project/1.png" loading="lazy" alt="Smart Home V1" class="project-image">
+                    </div>
                     <div class="project-content">
-                        <h2 class="project-title">smart home board V1</h2>
+                        <h3 class="project-title">Smart Home Control Board V1</h3>
                         <div class="project-tags">
-                            <span class="project-tag">arduino</span>
-                            <span class="project-tag">TinkerCad</span> 
-                            <span class="project-tag">c</span>
+                            <span class="project-tag">Arduino</span>
+                            <span class="project-tag">TinkerCAD</span>
+                            <span class="project-tag">C Programming</span>
                         </div>
-                        <p class="project-description">smart home board V1</p>
+                        <p class="project-description">First iteration of a smart home control system with basic automation features and remote control capabilities.</p>
                         <div class="project-links">
-                            <a href="Project\1.png" loading="lazy" class="project-link">View image</a>
+                            <a href="Project/1.png" loading="lazy" class="project-link view-link">
+                                <i class="fas fa-image"></i> View Schematic
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img src="Project\6.png" loading="lazy" alt="Project 5" class="project-image">
+                <!-- Smart Home V2 -->
+                <div class="project-card" style="animation-delay: 0.5s;">
+                    <div class="project-image-container">
+                        <img src="Project/6.png" loading="lazy" alt="Smart Home V2" class="project-image">
+                    </div>
                     <div class="project-content">
-                        <h2 class="project-title">smart home board V2</h2>
+                        <h3 class="project-title">Smart Home Control Board V2</h3>
                         <div class="project-tags">
-                            <span class="project-tag">arduino</span>
-                            <span class="project-tag">TinkerCad</span> 
-                            <span class="project-tag">c</span>
+                            <span class="project-tag">Arduino</span>
+                            <span class="project-tag">TinkerCAD</span>
+                            <span class="project-tag">C Programming</span>
                         </div>
-                        <p class="project-description">smart home board V2</p>
+                        <p class="project-description">Enhanced version with improved functionality and user interface for more sophisticated home automation scenarios.</p>
                         <div class="project-links">
-                            <a href="Project\6.png" loading="lazy" class="project-link">View image</a>
-                        
+                            <a href="Project/6.png" loading="lazy" class="project-link view-link">
+                                <i class="fas fa-image"></i> View Design
+                            </a>
                         </div>
                     </div>
                 </div>
-                
-                <div class="project-card">
-                    <img src="Project\7.png" loading="lazy" alt="Project 6" class="project-image">
+
+                <!-- Flasher and Charger -->
+                <div class="project-card" style="animation-delay: 0.6s;">
+                    <div class="project-image-container">
+                        <img src="Project/7.png" loading="lazy" alt="Flasher and Charger Circuit" class="project-image">
+                    </div>
                     <div class="project-content">
-                        <h2 class="project-title">flasher and charger</h2>
+                        <h3 class="project-title">Flasher & Charger Circuit</h3>
                         <div class="project-tags">
                             <span class="project-tag">Multisim</span>
+                            <span class="project-tag">Circuit Simulation</span>
+                            <span class="project-tag">Electronics</span>
                         </div>
-                        <p class="project-description">charger and flashbyer circuit  Multisim </p>
+                        <p class="project-description">Dual-purpose circuit designed for both battery charging and LED flashing applications with adjustable parameters.</p>
                         <div class="project-links">
-                            <a href="Project\7.png" loading="lazy" class="project-link">View image</a>
-                        
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="Project\8.png" loading="lazy" alt="Project 7" class="project-image">
-                    <div class="project-content">
-                        <h2 class="project-title">smart home board V3</h2>
-                        <div class="project-tags">
-                            <span class="project-tag">arduino</span>
-                            <span class="project-tag">TinkerCad</span> 
-                            <span class="project-tag">Proteus</span> 
-                            <span class="project-tag">c</span>
-                
-                        </div>
-                        <p class="project-description">Design smart home board 2 line </p>
-                        <div class="project-links">
-                            <a href="Project\8.png" loading="lazy" class="project-link">View image</a>
-                        
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="Project\9.png" loading="lazy" alt="Project 8" class="project-image">
-                    <div class="project-content">
-                        <h2 class="project-title">Gas-detector</h2>
-                        <div class="project-tags">
-                            <span class="project-tag">arduino</span>
-                            <span class="project-tag">TinkerCad</span> 
-                            <span class="project-tag">Proteus</span> 
-                            <span class="project-tag">c</span>
-                        </div>
-                        <p class="project-description">Gas detector code is designed to read an analog value from a sensor</p>
-                        <div class="project-links">
-                            <a href="Project\9.png" loading="lazy" class="project-link">View image</a>
-                        
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="Project\10.png" loading="lazy" alt="Project 9" class="project-image">
-                    <div class="project-content">
-                        <h2 class="project-title">RFID & person counter</h2>
-                        <div class="project-tags">
-                            <span class="project-tag">arduino</span>
-                            <span class="project-tag">Proteus</span> 
-                            <span class="project-tag">c</span>
-                        </div>
-                        <p class="project-description"> This project involves monitoring the presence of people in a room and RFID cards and record it </p>
-                        <div class="project-links">
-                            <a href="Project\10.png" loading="lazy" class="project-link">View image</a>
-                        
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <img src="Project\11.png" loading="lazy" alt="Project 10" class="project-image">
-                    <div class="project-content">
-                        <h2 class="project-title">smart home 4 line V4</h2>
-                        <div class="project-tags">
-                            <span class="project-tag">arduino</span>
-                            <span class="project-tag">TinkerCad</span> 
-                            <span class="project-tag">Proteus</span> 
-                            <span class="project-tag">c</span>
-                        </div>
-                        <p class="project-description">Design smart home board 4 line control by bluetooth </p>
-                        <div class="project-links">
-                            <a href="Project\11.png" loading="lazy" class="project-link">View image</a>
-                        
+                            <a href="Project/7.png" loading="lazy" class="project-link view-link">
+                                <i class="fas fa-image"></i> View Circuit
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <img src="Project\12.png" loading="lazy" alt="Project 11" class="project-image">
-                    <div class="project-content">
-                        <h2 class="project-title">Talking gloves</h2>
-                        <div class="project-tags">
-                            <span class="project-tag">arduino</span>
-                            <span class="project-tag">Proteus</span> 
-                            <span class="project-tag">c</span>
-                        </div>
-                        <p class="project-description">This device is designed to convert motion to speech by arduino
-
-                        </p>
-                        <div class="project-links">
-                            <a href="Project\12.png" loading="lazy" class="project-link">View image</a>
-                        
-                        </div>
+                <!-- Smart Home V3 -->
+                <div class="project-card" style="animation-delay: 0.7s;">
+                    <div class="project-image-container">
+                        <img src="Project/8.png" loading="lazy" alt="Smart Home V3" class="project-image">
                     </div>
-                </div><div class="project-card">
-                    <img src="Project\13.png" loading="lazy" alt="Project 12" class="project-image">
                     <div class="project-content">
-                        <h2 class="project-title">System Healthcare</h2>
+                        <h3 class="project-title">Smart Home Control Board V3</h3>
                         <div class="project-tags">
-                            <span class="project-tag">arduino</span>
-                            <span class="project-tag">TinkerCad</span> 
-                            <span class="project-tag">Proteus</span> 
-                            <span class="project-tag">c</span>
+                            <span class="project-tag">Arduino</span>
+                            <span class="project-tag">TinkerCAD</span>
+                            <span class="project-tag">Proteus</span>
+                            <span class="project-tag">C Programming</span>
                         </div>
-                        <p class="project-description">This device is designed to measure the patient's heart rate and blood pressure</p>
+                        <p class="project-description">Advanced 2-line control system with enhanced features and improved reliability for residential automation.</p>
                         <div class="project-links">
-                            <a href="Project\13.png" loading="lazy" class="project-link">View image</a>
-                        
-                        </div>
-                    </div>
-                </div><div class="project-card">
-                    <img src="Project\4.png" loading="lazy" alt="Project 13" class="project-image">
-                    <div class="project-content">
-                        <h2 class="project-title">Fire Car</h2>
-                        <div class="project-tags">
-                            <span class="project-tag">arduino</span>
-                            <span class="project-tag">TinkerCad</span> 
-                            <span class="project-tag">Proteus</span> 
-                            <span class="project-tag">c</span>
-                        </div>
-                        <p class="project-description">A fire truck designed to track a fire and extinguish it by running a water pump on it</p>
-                        <div class="project-links">
-                            <a href="Project\4.png" loading="lazy" class="project-link">View image</a>
-                        
+                            <a href="Project/8.png" loading="lazy" class="project-link view-link">
+                                <i class="fas fa-image"></i> View Design
+                            </a>
                         </div>
                     </div>
                 </div>
 
+                <!-- Gas Detector -->
+                <div class="project-card" style="animation-delay: 0.8s;">
+                    <div class="project-image-container">
+                        <img src="Project/9.png" loading="lazy" alt="Gas Detector Project" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Gas Detection System</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Arduino</span>
+                            <span class="project-tag">TinkerCAD</span>
+                            <span class="project-tag">Proteus</span>
+                            <span class="project-tag">C Programming</span>
+                        </div>
+                        <p class="project-description">Safety device that detects hazardous gas levels and triggers alarms with sensor calibration and threshold adjustment.</p>
+                        <div class="project-links">
+                            <a href="Project/9.png" loading="lazy" class="project-link view-link">
+                                <i class="fas fa-image"></i> View System
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- RFID & Person Counter -->
+                <div class="project-card" style="animation-delay: 0.9s;">
+                    <div class="project-image-container">
+                        <img src="Project/10.png" loading="lazy" alt="RFID & Person Counter" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">RFID & Occupancy Tracker</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Arduino</span>
+                            <span class="project-tag">Proteus</span>
+                            <span class="project-tag">C Programming</span>
+                            <span class="project-tag">RFID</span>
+                        </div>
+                        <p class="project-description">Integrated system for monitoring room occupancy and RFID-based access control with data logging capabilities.</p>
+                        <div class="project-links">
+                            <a href="Project/10.png" loading="lazy" class="project-link view-link">
+                                <i class="fas fa-image"></i> View Project
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Smart Home V4 -->
+                <div class="project-card" style="animation-delay: 1s;">
+                    <div class="project-image-container">
+                        <img src="Project/11.png" loading="lazy" alt="Smart Home V4" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Smart Home Control Board V4</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Arduino</span>
+                            <span class="project-tag">TinkerCAD</span>
+                            <span class="project-tag">Proteus</span>
+                            <span class="project-tag">C Programming</span>
+                            <span class="project-tag">Bluetooth</span>
+                        </div>
+                        <p class="project-description">4-line control system with Bluetooth connectivity for wireless home automation and remote monitoring.</p>
+                        <div class="project-links">
+                            <a href="Project/11.png" loading="lazy" class="project-link view-link">
+                                <i class="fas fa-image"></i> View Design
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Talking Gloves -->
+                <div class="project-card" style="animation-delay: 1.1s;">
+                    <div class="project-image-container">
+                        <img src="Project/12.png" loading="lazy" alt="Talking Gloves Project" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Sign Language Translator Gloves</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Arduino</span>
+                            <span class="project-tag">Proteus</span>
+                            <span class="project-tag">C Programming</span>
+                            <span class="project-tag">Flex Sensors</span>
+                        </div>
+                        <p class="project-description">Innovative device that translates sign language gestures into audible speech using flex sensors and motion detection.</p>
+                        <div class="project-links">
+                            <a href="Project/12.png" loading="lazy" class="project-link view-link">
+                                <i class="fas fa-image"></i> View Prototype
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Healthcare System -->
+                <div class="project-card" style="animation-delay: 1.2s;">
+                    <div class="project-image-container">
+                        <img src="Project/13.png" loading="lazy" alt="Healthcare System" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Patient Monitoring System</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Arduino</span>
+                            <span class="project-tag">TinkerCAD</span>
+                            <span class="project-tag">Proteus</span>
+                            <span class="project-tag">C Programming</span>
+                            <span class="project-tag">Medical IoT</span>
+                        </div>
+                        <p class="project-description">Comprehensive healthcare device measuring vital signs including heart rate and blood pressure with alert system.</p>
+                        <div class="project-links">
+                            <a href="Project/13.png" loading="lazy" class="project-link view-link">
+                                <i class="fas fa-image"></i> View System
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fire Car -->
+                <div class="project-card" style="animation-delay: 1.3s;">
+                    <div class="project-image-container">
+                        <img src="Project/4.png" loading="lazy" alt="Fire Car Project" class="project-image">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Autonomous Firefighting Vehicle</h3>
+                        <div class="project-tags">
+                            <span class="project-tag">Arduino</span>
+                            <span class="project-tag">TinkerCAD</span>
+                            <span class="project-tag">Proteus</span>
+                            <span class="project-tag">C Programming</span>
+                            <span class="project-tag">Robotics</span>
+                        </div>
+                        <p class="project-description">Self-navigating vehicle that detects and extinguishes fires with flame sensors, water pump, and obstacle avoidance.</p>
+                        <div class="project-links">
+                            <a href="Project/4.png" loading="lazy" class="project-link view-link">
+                                <i class="fas fa-image"></i> View Vehicle
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -528,18 +716,26 @@
     <!-- Footer -->
     <footer>
         <div class="footer-social">
-            <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
         </div>
         <div class="footer-bottom">
-            &copy; 2024 Mohamed Portfolio. All Rights Reserved. &copy;M.T.A.
+            &copy; 2024 Mohamed Tarek Portfolio. All Rights Reserved. &copy;M.T.A.
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" title="Go to top">
+    <button id="back-to-top" title="Go to top" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
 
@@ -550,7 +746,26 @@
         const navList = document.getElementById('nav-list');
 
         mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
             navList.classList.toggle('active');
+            
+            // Toggle body scroll when menu is open
+            if (navList.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navList.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    navList.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
         });
 
         // Back to Top Button
@@ -558,7 +773,9 @@
 
         window.addEventListener('scroll', () => {
             if (window.pageYOffset > 300) {
-                backToTopButton.style.display = 'block';
+                backToTopButton.style.display = 'flex';
+                backToTopButton.style.alignItems = 'center';
+                backToTopButton.style.justifyContent = 'center';
             } else {
                 backToTopButton.style.display = 'none';
             }
@@ -567,6 +784,52 @@
         backToTopButton.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+
+        // Smooth scrolling for all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.project-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Initialize animations
+        window.addEventListener('load', () => {
+            const animatedElements = document.querySelectorAll('.project-card');
+            animatedElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+            });
+            
+            // Trigger initial animation
+            animateOnScroll();
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
     </script>
 </body>
 </html>
