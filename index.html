@@ -95,7 +95,58 @@ header {
 .navigation a:hover::after {
   width: 100%;
 }
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px 0;
+}
 
+.title-row {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.separator {
+  margin: 0 10px;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.web-dev-title {
+  margin: 10px 0;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  gap: 15px;
+}
+
+@media (max-width: 768px) {
+  .title-row {
+    flex-direction: column;
+  }
+  
+  .separator {
+    display: none;
+  }
+  
+  .btn-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .main-btn {
+    width: 100%;
+    max-width: 250px;
+  }
+}
 .menu-toggle {
   display: none;
   flex-direction: column;
@@ -778,13 +829,25 @@ footer {
 <!-- Main Section -->
 <section class="main" id="top">
   <div class="container fade-in">
-    <div class="profile-header" style="text-align: center;">
-      <img src="photo.jpg" alt="Mohamed Tarek" class="profile-image slide-up">
-      <h1 class="slide-up">Mohamed Tarek</h1>
-      <p class="slide-up">Communications Engineer | Electronic Engineer </p>
-      <p class="slide-up">| Arduino Project Maker | PCB Designer</p>
-      <p class="slide-up"> Web Developer </p>
-
+      <div class="profile-header" style="text-align: center;">
+        <img src="photo.jpg" alt="Mohamed Tarek" class="profile-image slide-up">
+        <h1 class="slide-up">Mohamed Tarek</h1>
+        
+        <div class="title-container">
+          <div class="title-row">
+            <span>Communications Engineer</span>
+            <span class="separator">|</span>
+            <span>Electronic Engineer</span>
+          </div>
+          
+          <div class="title-row">
+            <span>Arduino Project Maker</span>
+            <span class="separator">|</span>
+            <span>PCB Designer</span>
+            <span class="separator">|</span>
+            <span>Web Developer</span>
+          </div>
+    
     </div>
     <div class="btn-container slide-up">
       <a href="Mohamed - social-media.html" class="main-btn">Social Media</a> 
