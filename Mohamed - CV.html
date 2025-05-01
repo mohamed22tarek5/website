@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed - CV</title>
+    <title>Mohamed - Professional CV</title>
     <link rel="icon" href="icon.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #3a6cf4;
+            --primary-dark: #2a5bd7;
             --background-dark: #121212;
             --background-secondary: #1e1e1e;
             --text-color: #e0e0e0;
             --text-light: #ffffff;
+            --success-color: #4CAF50;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         * {
@@ -39,6 +43,7 @@
             top: 0;
             width: 100%;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .navigation {
@@ -46,6 +51,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
@@ -53,11 +60,16 @@
             color: var(--primary-color);
             font-weight: 700;
             font-size: 1.8em;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
         }
 
         .nav-list {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             list-style: none;
         }
 
@@ -65,17 +77,35 @@
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+            position: relative;
         }
 
         .nav-list a:hover {
             color: var(--text-light);
         }
 
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-list a:hover::after {
+            width: 100%;
+        }
+
         .menu-toggle {
             display: none;
             flex-direction: column;
             cursor: pointer;
+            z-index: 1001;
         }
 
         .bar {
@@ -83,6 +113,19 @@
             width: 25px;
             background-color: var(--primary-color);
             margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
         }
 
         /* Container */
@@ -90,132 +133,264 @@
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 100px 20px 20px;
+            padding: 100px 20px 40px;
             flex: 1;
         }
 
         /* CV Header */
         .cv-header {
             text-align: center;
-            padding: 30px 0;
+            padding: 40px 0;
             background-color: var(--background-secondary);
-            margin-bottom: 20px;
-            border-radius: 10px;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cv-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--success-color));
         }
 
         .cv-header h1 {
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-size: 2.5em;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .cv-header p {
             color: var(--text-color);
             font-size: 1.2em;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         /* PDF Viewer */
+        .pdf-container {
+            position: relative;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
         .pdf-viewer {
             width: 100%;
             height: 800px;
-            border: 2px solid var(--primary-color);
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            background-color: var(--background-secondary);
+        }
+
+        .pdf-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pdf-overlay:hover {
+            opacity: 1;
+        }
+
+        .pdf-overlay-text {
+            color: white;
+            font-size: 1.5em;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(30, 30, 30, 0.8);
+            border-radius: var(--border-radius);
         }
 
         /* Download Button */
         .download-btn {
-            display: block;
+            display: inline-block;
             width: 250px;
             margin: 20px auto;
-            padding: 15px;
+            padding: 15px 25px;
             background-color: var(--primary-color);
             color: var(--text-light);
             text-align: center;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: var(--border-radius);
             transition: all 0.3s ease;
             font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
         }
 
         .download-btn:hover {
-            background-color: #2a5bd7;
+            background-color: var(--primary-dark);
             transform: translateY(-3px);
-            box-shadow: 0 4px 17px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
         }
 
         .download-btn i {
             margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .download-btn:hover i {
+            transform: translateY(-3px);
+        }
+
+        /* Alternative Download Options */
+        .download-options {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .download-options p {
+            margin-bottom: 15px;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .download-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .download-links a {
+            padding: 10px 20px;
+            background-color: var(--background-secondary);
+            color: var(--text-color);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--primary-color);
+        }
+
+        .download-links a:hover {
+            background-color: var(--primary-color);
+            color: var(--text-light);
         }
 
         /* Footer */
         .footer {
             background-color: var(--background-secondary);
             color: var(--text-color);
-            padding: 30px 50px;
+            padding: 40px 20px;
             text-align: center;
+            margin-top: 50px;
         }
 
         .footer-social {
             display: flex;
             justify-content: center;
             gap: 30px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .footer-social a {
             color: var(--text-color);
-            font-size: 2em;
-            transition: color 0.3s ease, transform 0.3s ease;
+            font-size: 1.8em;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
 
         .footer-social a:hover {
             color: var(--primary-color);
-            transform: scale(1.2);
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .footer-bottom {
             font-size: 0.9em;
             color: var(--text-color);
             opacity: 0.7;
+            margin-top: 15px;
         }
 
         /* Back to Top Button */
         #back-to-top {
             display: none;
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 30px;
+            right: 30px;
             background-color: var(--primary-color);
             color: var(--text-light);
             border: none;
             border-radius: 50%;
-            padding: 10px;
+            padding: 12px;
             font-size: 1.5em;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 999;
         }
 
         #back-to-top:hover {
-            background-color: #2a5bd7;
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .pdf-viewer {
-                height: 500px;
+                height: 600px;
             }
+        }
 
+        @media (max-width: 768px) {
+            .navigation {
+                padding: 0 15px;
+            }
+            
             .nav-list {
                 display: none;
                 flex-direction: column;
                 background-color: var(--background-secondary);
-                position: absolute;
-                top: 60px;
+                position: fixed;
+                top: 0;
                 left: 0;
                 width: 100%;
-                padding: 10px 0;
+                height: 100vh;
+                padding: 80px 20px 20px;
+                gap: 25px;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
             }
 
             .nav-list.active {
@@ -225,18 +400,83 @@
             .menu-toggle {
                 display: flex;
             }
-
-            .footer {
-                padding: 20px;
+            
+            .pdf-viewer {
+                height: 500px;
             }
-
+            
+            .cv-header h1 {
+                font-size: 2em;
+            }
+            
+            .download-btn {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .footer {
+                padding: 30px 15px;
+            }
+            
             .footer-social {
                 gap: 20px;
             }
-
+            
             .footer-social a {
                 font-size: 1.5em;
+                width: 40px;
+                height: 40px;
             }
+            
+            #back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .pdf-viewer {
+                height: 400px;
+            }
+            
+            .cv-header {
+                padding: 30px 15px;
+            }
+            
+            .cv-header h1 {
+                font-size: 1.8em;
+            }
+            
+            .download-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .download-links a {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cv-header, .pdf-container, .download-options {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .pdf-container {
+            animation-delay: 0.2s;
+        }
+
+        .download-options {
+            animation-delay: 0.4s;
         }
     </style>
 </head>
@@ -263,35 +503,58 @@
     <!-- Main Content -->
     <div class="container">
         <div class="cv-header">
-            <h1>Mohamed's CV</h1>
-            <p>Professional Profile and Career Overview</p>
+            <h1>Mohamed's Professional CV</h1>
+            <p>Comprehensive overview of my skills, experience, and qualifications</p>
         </div>
 
-        <iframe 
-            src="CV.pdf" 
-            class="pdf-viewer" 
-            frameborder="0"
-            allowfullscreen
-        ></iframe>
+        <div class="pdf-container">
+            <iframe 
+                src="CV.pdf" 
+                class="pdf-viewer" 
+                frameborder="0"
+                allowfullscreen
+                title="Mohamed's CV PDF Viewer"
+            ></iframe>
+            <div class="pdf-overlay">
+                <div class="pdf-overlay-text">
+                    <p>Scroll to view my CV</p>
+                    <p><i class="fas fa-arrow-down"></i></p>
+                </div>
+            </div>
+        </div>
 
-        <a href="CV.pdf" download class="download-btn">
-            <i class="fas fa-download"></i>Download CV
-        </a>
+        <div class="download-options">
+            <a href="CV.pdf" download="Mohamed_Professional_CV.pdf" class="download-btn">
+                <i class="fas fa-download"></i> Download Full CV
+            </a>
+            
+            <div class="download-links">
+                <a href="CV.pdf" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> Open in New Tab
+                </a>
+                <a href="CV.pdf" download="Mohamed_Professional_CV.pdf">
+                    <i class="fas fa-file-pdf"></i> PDF Version
+                </a>
+                <a href="#" id="print-cv">
+                    <i class="fas fa-print"></i> Print CV
+                </a>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-social">
-            <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" title="LinkedIn">
+            <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" title="LinkedIn" aria-label="LinkedIn">
                 <i class="fab fa-linkedin"></i>
             </a>
-            <a href="https://github.com/mohamed22tarek5" target="_blank" title="GitHub">
+            <a href="https://github.com/mohamed22tarek5" target="_blank" title="GitHub" aria-label="GitHub">
                 <i class="fab fa-github"></i>
             </a>
-            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" title="Instagram">
+            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" title="Instagram" aria-label="Instagram">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a href="https://wa.me/+201090637406" target="_blank" title="WhatsApp">
+            <a href="https://wa.me/+201090637406" target="_blank" title="WhatsApp" aria-label="WhatsApp">
                 <i class="fab fa-whatsapp"></i>
             </a>
         </div>
@@ -301,7 +564,7 @@
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" title="Go to top">
+    <button id="back-to-top" title="Go to top" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
 
@@ -312,7 +575,26 @@
         const navList = document.getElementById('nav-list');
 
         mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
             navList.classList.toggle('active');
+            
+            // Toggle body scroll when menu is open
+            if (navList.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navList.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    navList.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
         });
 
         // Back to Top Button
@@ -320,7 +602,9 @@
 
         window.addEventListener('scroll', () => {
             if (window.pageYOffset > 300) {
-                backToTopButton.style.display = 'block';
+                backToTopButton.style.display = 'flex';
+                backToTopButton.style.alignItems = 'center';
+                backToTopButton.style.justifyContent = 'center';
             } else {
                 backToTopButton.style.display = 'none';
             }
@@ -328,6 +612,35 @@
 
         backToTopButton.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Print CV functionality
+        document.getElementById('print-cv').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.open('CV.pdf', '_blank').print();
+        });
+
+        // Smooth scrolling for all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // PDF viewer loading state
+        const pdfViewer = document.querySelector('.pdf-viewer');
+        pdfViewer.addEventListener('load', () => {
+            pdfViewer.style.opacity = '1';
         });
     </script>
 </body>
