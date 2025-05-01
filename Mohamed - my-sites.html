@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Media - Mohamed</title>
+    <title>My Apps & Tools - Mohamed</title>
     <link rel="icon" href="icon.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #3a6cf4;
+            --primary-dark: #2a5bd7;
             --background-dark: #121212;
             --background-secondary: #1e1e1e;
             --text-color: #e0e0e0;
             --text-light: #ffffff;
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -39,6 +43,7 @@
             top: 0;
             width: 100%;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .navigation {
@@ -46,6 +51,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
@@ -53,11 +60,16 @@
             color: var(--primary-color);
             font-weight: 700;
             font-size: 1.8em;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
         }
 
         .nav-list {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             list-style: none;
         }
 
@@ -65,17 +77,35 @@
             color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: var(--transition);
+            padding: 5px 0;
+            position: relative;
         }
 
         .nav-list a:hover {
             color: var(--text-light);
         }
 
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-list a:hover::after {
+            width: 100%;
+        }
+
         .menu-toggle {
             display: none;
             flex-direction: column;
             cursor: pointer;
+            z-index: 1001;
         }
 
         .bar {
@@ -83,6 +113,19 @@
             width: 25px;
             background-color: var(--primary-color);
             margin: 4px 0;
+            transition: var(--transition);
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
         }
 
         /* Container */
@@ -90,28 +133,38 @@
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 100px 20px 20px;
+            padding: 100px 20px 40px;
             flex: 1;
-            text-align: center;
         }
 
         /* Profile Section */
         .profile {
-            margin-bottom: 40px;
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeIn 0.8s ease forwards;
         }
 
-        .profile img {
-            width: 150px;
-            height: 150px;
+        .profile-pic {
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            border: 4px solid var(--primary-color);
-            margin-bottom: 20px;
+            border: 5px solid var(--primary-color);
+            object-fit: cover;
+            margin: 0 auto 20px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
 
         .profile h1 {
             color: var(--primary-color);
             font-size: 2.5em;
             margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .profile p {
@@ -119,82 +172,159 @@
             font-size: 1.2em;
             max-width: 600px;
             margin: 0 auto;
+            opacity: 0.9;
         }
 
-        /* Social Media Buttons */
-        .social-media-buttons {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin-top: 50px;
+        /* App Categories */
+        .app-category {
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease forwards;
         }
 
-        .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 250px;
-            padding: 15px;
+        .app-category h2 {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        /* App Cards */
+        .app-card {
             background-color: var(--background-secondary);
-            color: var(--text-color);
-            text-decoration: none;
-            border-radius: 5px;
-            transition: all 0.3s ease;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(58, 108, 244, 0.2);
+        }
+
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border-color: rgba(58, 108, 244, 0.5);
+        }
+
+        .app-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(58, 108, 244, 0.2);
+        }
+
+        .app-details {
+            padding: 20px;
+        }
+
+        .app-title {
+            color: var(--primary-color);
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .app-title i {
+            margin-right: 10px;
             font-size: 1.2em;
         }
 
-        .social-btn i {
-            margin-right: 10px;
-            font-size: 1.5em;
+        .app-description {
+            color: var(--text-color);
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            opacity: 0.8;
         }
 
-        .social-btn.facebook {
-            background-color: #1877f2; /* Facebook blue */
+        .app-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            transition: var(--transition);
         }
 
-        .social-btn.instagram {
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); /* Instagram gradient */
-        }
-
-        .social-btn.whatsapp {
-            background-color: #25d366; /* WhatsApp green */
-        }
-
-        .social-btn.linkedin {
-            background-color: #0a66c2; /* LinkedIn blue */
-        }
-
-        .social-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        .app-link:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
         /* Footer */
         .footer {
             background-color: var(--background-secondary);
             color: var(--text-color);
-            padding: 30px 50px;
+            padding: 30px 20px;
             text-align: center;
+            margin-top: 50px;
         }
 
         .footer-bottom {
             font-size: 0.9em;
-            color: var(--text-color);
             opacity: 0.7;
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border: none;
+            border-radius: 50%;
+            padding: 12px;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+
+        #back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .navigation {
+                padding: 0 15px;
+            }
+            
             .nav-list {
                 display: none;
                 flex-direction: column;
                 background-color: var(--background-secondary);
-                position: absolute;
-                top: 60px;
+                position: fixed;
+                top: 0;
                 left: 0;
                 width: 100%;
-                padding: 10px 0;
+                height: 100vh;
+                padding: 80px 20px 20px;
+                gap: 25px;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
             }
 
             .nav-list.active {
@@ -203,6 +333,33 @@
 
             .menu-toggle {
                 display: flex;
+            }
+            
+            .profile h1 {
+                font-size: 2em;
+            }
+            
+            .app-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            #back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-pic {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .profile h1 {
+                font-size: 1.8em;
             }
         }
     </style>
@@ -223,7 +380,6 @@
                 <li><a href="Mohamed - Services.html">Services</a></li>
                 <li><a href="Mohamed - Project.html">My Projects</a></li>
                 <li><a href="Mohamed - Certificates.html">Certificates</a></li>
-
             </ul>
         </nav>
     </header>
@@ -232,71 +388,137 @@
     <div class="container">
         <!-- Profile Section -->
         <div class="profile">
-            <img src="photo.jpg" alt="Mohamed's Profile Picture"> <!-- Replace with your image -->
+            <img src="photo.jpg" alt="Mohamed's Profile Picture" class="profile-pic">
             <h1>Mohamed Tarek</h1>
-            <p>Welcome to my sites page!</p>
+            <p>Explore my collection of useful tools and applications</p>
         </div>
 
-        <!-- Social Media Buttons -->
-        <div class="social-media-buttons">
-                  <h2>Engineer apps</h2>
-                <a href="sites\resistor-calculator.html" target="_blank" class="social-btn" style="background-color: #333;">
-                    <i class="fas fa-link"></i>resistor calculator
-                </a> 
-                <a href="sites\capacitor-calculator.html" target="_blank" class="social-btn" style="background-color: #333;">
-                    <i class="fas fa-link"></i>capacitor calculator
-                </a>
-                 <a href="sites\Indactance-calculator.html" target="_blank" class="social-btn" style="background-color: #333;">
-                    <i class="fas fa-link"></i>Indactance calculator
-                </a> 
-                <a href="sites\resistor-for-led.html" target="_blank" class="social-btn" style="background-color: #333;">
-                    <i class="fas fa-link"></i>resistor for led
-                </a>
-                <a href="sites\Wire-Gauge-Calculator.html" target="_blank" class="social-btn" style="background-color: #333;">
-                    <i class="fas fa-link"></i>Wire Gauge Calculator
-                </a>
-                <a href="sites\Power-Factor-Calculator.html" target="_blank" class="social-btn" style="background-color: #333;">
-                    <i class="fas fa-link"></i>Power Factor Calculator
-                </a>
-                <a href="sites\Length-Converter.html" target="_blank" class="social-btn" style="background-color: #333;">
-                    <i class="fas fa-link"></i>length convertors
-                </a> 
-                <a href="sites\electrical-calculation.html" target="_blank" class="social-btn" style="background-color: #333;">
-                    <i class="fas fa-link"></i>electrical calculation
-                </a> 
-               
-
-
-                <h2>useful sites</h2>
-
-                <a href="sites\Medication-Reminder.html" target="_blank" class="social-btn" style="background-color: #333;">
-                    <i class="fas fa-link"></i>Medical Reminder
-                </a>
-                <a href="sites\to-do-list.html" target="_blank" class="social-btn" style="background-color: #333;">
-                    <i class="fas fa-link"></i>to do list
-                </a>
+        <!-- Engineer Apps -->
+        <div class="app-category" style="animation-delay: 0.2s;">
+            <h2><i class="fas fa-calculator"></i> Engineering Tools</h2>
+            <div class="app-grid">
+                <div class="app-card">
+                    <div class="app-details">
+                        <h3 class="app-title"><i class="fas fa-bolt"></i> Resistor Calculator</h3>
+                        <p class="app-description">Calculate resistor values, color codes, and power ratings for your electronic projects.</p>
+                        <a href="sites/resistor-calculator.html" target="_blank" class="app-link">Open Tool</a>
+                    </div>
+                </div>
                 
-
-
-                <h2>GAMES</h2>
-
-                <a href="sites/3d-car-game.html" target="_blank" class="social-btn" style="background-color: #333;">
-                    <i class="fas fa-link"></i>3D car game
-                </a>
-                <a href="sites\dino-game.html" target="_blank" class="social-btn" style="background-color: #333;">
-                    <i class="fas fa-link"></i>Dino Game 
-                </a>
-
+                <div class="app-card">
+                    <div class="app-details">
+                        <h3 class="app-title"><i class="fas fa-bolt"></i> Capacitor Calculator</h3>
+                        <p class="app-description">Calculate capacitance, voltage, and other parameters for capacitor circuits.</p>
+                        <a href="sites/capacitor-calculator.html" target="_blank" class="app-link">Open Tool</a>
+                    </div>
+                </div>
                 
+                <div class="app-card">
+                    <div class="app-details">
+                        <h3 class="app-title"><i class="fas fa-bolt"></i> Inductance Calculator</h3>
+                        <p class="app-description">Calculate inductance values and analyze inductor circuits.</p>
+                        <a href="sites/Indactance-calculator.html" target="_blank" class="app-link">Open Tool</a>
+                    </div>
+                </div>
+                
+                <div class="app-card">
+                    <div class="app-details">
+                        <h3 class="app-title"><i class="fas fa-lightbulb"></i> LED Resistor Calculator</h3>
+                        <p class="app-description">Determine the correct resistor value for your LED circuits.</p>
+                        <a href="sites/resistor-for-led.html" target="_blank" class="app-link">Open Tool</a>
+                    </div>
+                </div>
+                
+                <div class="app-card">
+                    <div class="app-details">
+                        <h3 class="app-title"><i class="fas fa-wire"></i> Wire Gauge Calculator</h3>
+                        <p class="app-description">Calculate the appropriate wire gauge for your electrical projects.</p>
+                        <a href="sites/Wire-Gauge-Calculator.html" target="_blank" class="app-link">Open Tool</a>
+                    </div>
+                </div>
+                
+                <div class="app-card">
+                    <div class="app-details">
+                        <h3 class="app-title"><i class="fas fa-charging-station"></i> Power Factor Calculator</h3>
+                        <p class="app-description">Calculate power factor, apparent power, and reactive power.</p>
+                        <a href="sites/Power-Factor-Calculator.html" target="_blank" class="app-link">Open Tool</a>
+                    </div>
+                </div>
+                
+                <div class="app-card">
+                    <div class="app-details">
+                        <h3 class="app-title"><i class="fas fa-ruler"></i> Length Converter</h3>
+                        <p class="app-description">Convert between different units of length measurement.</p>
+                        <a href="sites/Length-Converter.html" target="_blank" class="app-link">Open Tool</a>
+                    </div>
+                </div>
+                
+                <div class="app-card">
+                    <div class="app-details">
+                        <h3 class="app-title"><i class="fas fa-plug"></i> Electrical Calculations</h3>
+                        <p class="app-description">Various electrical engineering calculations and conversions.</p>
+                        <a href="sites/electrical-calculation.html" target="_blank" class="app-link">Open Tool</a>
+                    </div>
+                </div>
             </div>
         </div>
-    
+
+        <!-- Useful Apps -->
+        <div class="app-category" style="animation-delay: 0.4s;">
+            <h2><i class="fas fa-tools"></i> Productivity Tools</h2>
+            <div class="app-grid">
+                <div class="app-card">
+                    <div class="app-details">
+                        <h3 class="app-title"><i class="fas fa-pills"></i> Medication Reminder</h3>
+                        <p class="app-description">Never miss a dose with this helpful medication reminder tool.</p>
+                        <a href="sites/Medication-Reminder.html" target="_blank" class="app-link">Open Tool</a>
+                    </div>
+                </div>
+                
+                <div class="app-card">
+                    <div class="app-details">
+                        <h3 class="app-title"><i class="fas fa-tasks"></i> To-Do List</h3>
+                        <p class="app-description">Organize your tasks and boost your productivity.</p>
+                        <a href="sites/to-do-list.html" target="_blank" class="app-link">Open Tool</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Games -->
+        <div class="app-category" style="animation-delay: 0.6s;">
+            <h2><i class="fas fa-gamepad"></i> Games</h2>
+            <div class="app-grid">
+                <div class="app-card">
+                    <div class="app-details">
+                        <h3 class="app-title"><i class="fas fa-car"></i> 3D Car Game</h3>
+                        <p class="app-description">Enjoy this exciting 3D car racing game in your browser.</p>
+                        <a href="sites/3d-car-game.html" target="_blank" class="app-link">Play Game</a>
+                    </div>
+                </div>
+                
+                <div class="app-card">
+                    <div class="app-details">
+                        <h3 class="app-title"><i class="fas fa-running"></i> Dino Game</h3>
+                        <p class="app-description">The classic Chrome dinosaur game you can play anytime.</p>
+                        <a href="sites/dino-game.html" target="_blank" class="app-link">Play Game</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-bottom">
             &copy; 2024 Mohamed Portfolio. All Rights Reserved. &copy;M.T.A.
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" title="Go to top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- JavaScript -->
     <script>
@@ -305,7 +527,60 @@
         const navList = document.getElementById('nav-list');
 
         mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
             navList.classList.toggle('active');
+            
+            // Toggle body scroll when menu is open
+            if (navList.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navList.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    navList.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'flex';
+                backToTopButton.style.alignItems = 'center';
+                backToTopButton.style.justifyContent = 'center';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Smooth scrolling for all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
     </script>
 </body>
