@@ -1,586 +1,905 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Connect with Mohamed Tarek on social media and explore his professional networks">
-    <meta name="keywords" content="Mohamed Tarek, social media, contact, LinkedIn, GitHub, WhatsApp">
-    <meta name="author" content="Mohamed Tarek">
-    <title>Connect With Me | Mohamed Tarek</title>
-    <link rel="icon" href="icon.jpg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #3a6cf4;
-            --primary-dark: #2a5bd7;
-            --background-dark: #121212;
-            --background-secondary: #1e1e1e;
-            --text-color: #e0e0e0;
-            --text-light: #ffffff;
-            --border-radius: 10px;
-            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            --transition: all 0.3s ease;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mohamed Tarek - Communications Engineer, Web Developer, and Arduino Project Maker">
+  <meta name="keywords" content="portfolio, engineer, web developer, arduino, electronics, PCB design">
+  <meta name="author" content="Mohamed Tarek">
+  <meta property="og:title" content="Mohamed Tarek - Social Media">
+  <meta property="og:description" content="Connect with Mohamed Tarek across various social media platforms">
+  <meta property="og:image" content="https://example.com/photo.jpg">
+  <meta property="og:url" content="https://example.com">
+  <meta name="theme-color" content="#4e9eff">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  <title>Mohamed Tarek | Social Media</title>
+  <style>
+    :root {
+      --primary-color: #4e9eff;
+      --primary-dark: #3a6cf4;
+      --primary-light: #6ab1ff;
+      --background-dark: #121212;
+      --background-darker: #0a0a0a;
+      --background-secondary: #1a1a1a;
+      --card-dark: #1e1e1e;
+      --card-light: #252525;
+      --text-light: #ffffff;
+      --text-muted: #aaaaaa;
+      --success-color: #4caf50;
+      --error-color: #f44336;
+      --transition-speed: 0.3s;
+      --border-radius: 12px;
+      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+      --glass-effect: rgba(30, 30, 30, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-blur: blur(10px);
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
+    /* Light mode variables */
+    [data-theme="light"] {
+      --background-dark: #f5f7fa;
+      --background-darker: #e8ebf0;
+      --background-secondary: #ffffff;
+      --card-dark: #ffffff;
+      --card-light: #f9f9f9;
+      --text-light: #333333;
+      --text-muted: #666666;
+      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+      --glass-effect: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(0, 0, 0, 0.1);
+    }
 
-        body {
-            background-color: var(--background-dark);
-            color: var(--text-color);
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-        /* Header and Navigation */
-        header {
-            background-color: var(--background-secondary);
-            padding: 15px 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--background-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease;
+    }
 
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 0.5em;
+    }
 
-        .logo {
-            text-decoration: none;
-            color: var(--primary-color);
-            font-weight: 700;
-            font-size: 1.8em;
-            transition: opacity 0.3s ease;
-        }
+    p {
+      margin-bottom: 1em;
+      color: var(--text-muted);
+    }
 
-        .logo:hover {
-            opacity: 0.8;
-        }
+    a {
+      text-decoration: none;
+      color: var(--primary-color);
+      transition: color var(--transition-speed) ease;
+    }
 
-        .nav-list {
-            display: flex;
-            gap: 25px;
-            list-style: none;
-        }
+    a:hover {
+      color: var(--primary-light);
+    }
 
-        .nav-list a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 5px 0;
-            position: relative;
-        }
+    /* Layout */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-        .nav-list a:hover {
-            color: var(--text-light);
-        }
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
 
-        .nav-list a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
-        }
+    /* Glass effect */
+    .glass {
+      background: var(--glass-effect);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+    }
 
-        .nav-list a:hover::after {
-            width: 100%;
-        }
+    /* Header */
+    header {
+      background-color: var(--glass-effect);
+      width: 100%;
+      position: fixed;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      transition: all var(--transition-speed) ease;
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border-bottom: 1px solid var(--glass-border);
+    }
 
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            z-index: 1001;
-        }
+    header.scrolled {
+      padding: 10px 5%;
+      background-color: var(--glass-effect);
+    }
 
-        .bar {
-            height: 3px;
-            width: 25px;
-            background-color: var(--primary-color);
-            margin: 4px 0;
-            transition: var(--transition);
-        }
+    .logo {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+    }
 
-        .menu-toggle.active .bar:nth-child(1) {
-            transform: translateY(7px) rotate(45deg);
-        }
+    .logo i {
+      margin-right: 10px;
+      font-size: 1.2em;
+    }
 
-        .menu-toggle.active .bar:nth-child(2) {
-            opacity: 0;
-        }
+    .logo:hover {
+      color: var(--primary-light);
+    }
 
-        .menu-toggle.active .bar:nth-child(3) {
-            transform: translateY(-7px) rotate(-45deg);
-        }
+    /* Navigation */
+    .navigation {
+      display: flex;
+      align-items: center;
+    }
 
-        /* Container */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px 40px;
-            flex: 1;
-        }
+    .navigation a {
+      position: relative;
+      margin-left: 30px;
+      font-weight: 500;
+      color: var(--text-light);
+      padding: 5px 0;
+    }
 
-        /* Profile Section */
-        .profile {
-            text-align: center;
-            margin-bottom: 50px;
-            animation: fadeIn 0.8s ease forwards;
-        }
+    .navigation a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--primary-color);
+      transition: width var(--transition-speed) ease;
+    }
 
-        .profile-pic {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--primary-color);
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-            margin-bottom: 25px;
-        }
+    .navigation a:hover::after {
+      width: 100%;
+    }
 
-        .profile-pic:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-        }
+    .navigation a.active {
+      color: var(--primary-color);
+    }
 
-        .profile h1 {
-            color: var(--primary-color);
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
+    /* Mobile menu */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 1001;
+      padding: 10px;
+    }
 
-        .profile p {
-            color: var(--text-color);
-            font-size: 1.2em;
-            max-width: 600px;
-            margin: 0 auto;
-            opacity: 0.9;
-            line-height: 1.7;
-        }
+    .bar {
+      height: 3px;
+      width: 25px;
+      background-color: var(--primary-color);
+      margin: 4px 0;
+      transition: all var(--transition-speed) ease;
+    }
 
-        /* Social Media Buttons */
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
+    /* Profile Section */
+    .profile {
+      text-align: center;
+      margin-bottom: 60px;
+    }
 
-        .social-card {
-            background-color: var(--background-secondary);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            text-align: center;
-            transition: var(--transition);
-            box-shadow: var(--box-shadow);
-            border: 1px solid rgba(58, 108, 244, 0.2);
-        }
+    .profile-pic {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary-color);
+      box-shadow: var(--box-shadow);
+      margin-bottom: 30px;
+      transition: all var(--transition-speed) ease;
+    }
 
-        .social-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-            border-color: rgba(58, 108, 244, 0.5);
-        }
+    .profile-pic:hover {
+      transform: scale(1.05);
+      box-shadow: var(--box-shadow-hover);
+    }
 
-        .social-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            transition: var(--transition);
-        }
+    /* Social Media Grid */
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
 
-        .social-card:hover .social-icon {
-            transform: scale(1.2);
-        }
+    .social-card {
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      text-align: center;
+      box-shadow: var(--box-shadow);
+      transition: all var(--transition-speed) ease;
+    }
 
-        .social-card h3 {
-            color: var(--text-light);
-            margin-bottom: 10px;
-            font-size: 1.3em;
-        }
+    .social-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--box-shadow-hover);
+    }
 
-        .social-card p {
-            color: var(--text-color);
-            opacity: 0.8;
-            margin-bottom: 20px;
-            font-size: 0.95em;
-        }
+    .social-icon {
+      font-size: 3em;
+      margin-bottom: 20px;
+      transition: all var(--transition-speed) ease;
+    }
 
-        .social-link {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
-            font-weight: 500;
-        }
+    .social-card:hover .social-icon {
+      transform: scale(1.2);
+    }
 
-        .social-link:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
+    .social-card h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-size: 1.3em;
+    }
 
-        /* Platform Specific Colors */
-        .facebook { color: #1877f2; }
-        .instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .whatsapp { color: #25d366; }
-        .linkedin { color: #0a66c2; }
-        .twitter { color: #1da1f2; }
-        .github { color: #333; }
-        .linktree { color: #39e09b; }
+    .social-card p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
 
-        .facebook-bg { background-color: #1877f2; }
-        .instagram-bg { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
-        .whatsapp-bg { background-color: #25d366; }
-        .linkedin-bg { background-color: #0a66c2; }
-        .twitter-bg { background-color: #1da1f2; }
-        .github-bg { background-color: #333; }
-        .linktree-bg { background-color: #39e09b; }
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.9em;
+      transition: all var(--transition-speed) ease;
+    }
 
-        /* Footer */
-        footer {
-            background-color: var(--background-secondary);
-            color: var(--text-color);
-            padding: 30px 20px;
-            text-align: center;
-            margin-top: 50px;
-        }
+    .social-link i {
+      margin-right: 10px;
+    }
 
-        .footer-bottom {
-            font-size: 0.9em;
-            opacity: 0.7;
-        }
+    /* Platform Specific Colors */
+    .facebook { color: #1877f2; }
+    .facebook-bg { background-color: #1877f2; color: white; }
+    .facebook-bg:hover { background-color: #166fe5; }
+    
+    .instagram { 
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent; 
+    }
+    .instagram-bg { 
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); 
+      color: white; 
+    }
+    .instagram-bg:hover { opacity: 0.9; }
+    
+    .whatsapp { color: #25d366; }
+    .whatsapp-bg { background-color: #25d366; color: white; }
+    .whatsapp-bg:hover { background-color: #1da851; }
+    
+    .linkedin { color: #0a66c2; }
+    .linkedin-bg { background-color: #0a66c2; color: white; }
+    .linkedin-bg:hover { background-color: #0957aa; }
+    
+    .twitter { color: #1da1f2; }
+    .twitter-bg { background-color: #1da1f2; color: white; }
+    .twitter-bg:hover { background-color: #1a8cd8; }
+    
+    .github { color: #333; }
+    .github-bg { background-color: #333; color: white; }
+    .github-bg:hover { background-color: #222; }
+    
+    .linktree { color: #39e09b; }
+    .linktree-bg { background-color: #39e09b; color: white; }
+    .linktree-bg:hover { background-color: #2ec887; }
 
-        /* Back to Top Button */
-        #back-to-top {
-            display: none;
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            border: none;
-            border-radius: 50%;
-            padding: 12px;
-            font-size: 1.5em;
-            cursor: pointer;
-            transition: var(--transition);
-            width: 50px;
-            height: 50px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            z-index: 999;
-        }
+    /* Footer */
+    footer {
+      background-color: var(--background-secondary);
+      padding: 60px 0 30px;
+      color: var(--text-light);
+    }
 
-        #back-to-top:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-        }
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .footer-column h3 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-size: 1.3em;
+    }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navigation {
-                padding: 0 15px;
-            }
-            
-            .nav-list {
-                display: none;
-                flex-direction: column;
-                background-color: var(--background-secondary);
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                padding: 80px 20px 20px;
-                gap: 25px;
-                align-items: center;
-                justify-content: center;
-                transition: var(--transition);
-            }
+    .footer-links {
+      list-style: none;
+    }
 
-            .nav-list.active {
-                display: flex;
-            }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
 
-            .menu-toggle {
-                display: flex;
-            }
-            
-            .profile h1 {
-                font-size: 2em;
-            }
-            
-            .profile-pic {
-                width: 150px;
-                height: 150px;
-            }
-            
-            #back-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1.3em;
-            }
-        }
+    .footer-links a {
+      color: var(--text-muted);
+      transition: all var(--transition-speed) ease;
+      display: inline-block;
+    }
 
-        @media (max-width: 480px) {
-            .social-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .profile p {
-                font-size: 1em;
-            }
-        }
-    </style>
+    .footer-links a:hover {
+      color: var(--primary-color);
+      transform: translateX(5px);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--card-dark);
+      color: var(--text-light);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .footer-social a:hover {
+      background-color: var(--primary-color);
+      color: white;
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid var(--card-light);
+      color: var(--text-muted);
+      font-size: 0.9em;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-speed) ease;
+      z-index: 999;
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-5px);
+    }
+
+    /* Dark Mode Toggle */
+    .theme-toggle {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--card-dark);
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+      z-index: 999;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideLeft {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideRight {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .slide-up {
+      animation: slideUp 0.8s ease forwards;
+    }
+
+    .slide-left {
+      animation: slideLeft 0.8s ease forwards;
+    }
+
+    .slide-right {
+      animation: slideRight 0.8s ease forwards;
+    }
+
+    .delay-1 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.4s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.6s;
+    }
+
+    .delay-4 {
+      animation-delay: 0.8s;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .section-title h2 {
+        font-size: 2.2em;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+      }
+      
+      .navigation {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 350px;
+        height: 100vh;
+        background-color: var(--card-dark);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: right 0.3s ease;
+        z-index: 1000;
+      }
+      
+      .navigation.active {
+        right: 0;
+      }
+      
+      .navigation a {
+        margin: 15px 0;
+        font-size: 1.2em;
+      }
+      
+      .menu-toggle {
+        display: flex;
+      }
+      
+      .social-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile-pic {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .theme-toggle, .back-to-top {
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
+      }
+      
+      .theme-toggle {
+        bottom: 20px;
+        left: 20px;
+      }
+      
+      .back-to-top {
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="navigation">
-            <a href="index.html" class="logo">Home Page</a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <ul class="nav-list" id="nav-list">
-                <li><a href="Mohamed - CV.html">My CV</a></li>
-                <li><a href="Mohamed - Personal Information.html">About</a></li>
-                <li><a href="Mohamed - Services.html">Services</a></li>
-                <li><a href="Mohamed - Project.html">My Projects</a></li>
-                <li><a href="Mohamed - Certificates.html">Certificates</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Header -->
+  <header id="header">
+    <a href="index.html" class="logo"><i class="fas fa-code"></i> Mohamed Tarek</a>
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <nav class="navigation" id="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="Mohamed - Personal Information.html">About</a>
+      <a href="Mohamed - Services.html">Services</a>
+      <a href="Mohamed - Project.html">Projects</a>
+      <a href="Mohamed - Certificates.html">Certificates</a>
+      <a href="Mohamed - CV.html" class="btn btn-outline" style="margin-left: 20px;">My CV</a>
+    </nav>
+  </header>
 
-    <!-- Main Content -->
-    <main class="container">
-        <!-- Profile Section -->
-        <div class="profile">
-            <img src="photo.jpg" alt="Mohamed Tarek" class="profile-pic">
-            <h1>Mohamed Tarek</h1>
-            <p>Welcome to my social media hub! Connect with me across platforms to stay updated with my latest projects, insights, and professional journey. Whether you're interested in my engineering work, web development projects, or just want to say hello, I'd love to hear from you!</p>
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Profile Section -->
+    <section class="profile fade-in">
+      <img src="photo.jpg" alt="Mohamed Tarek" class="profile-pic slide-up">
+      <h1 class="slide-up delay-1">Connect With Me</h1>
+      <p class="slide-up delay-2">Welcome to my social media hub! Connect with me across platforms to stay updated with my latest projects, insights, and professional journey. Whether you're interested in my engineering work, web development projects, or just want to say hello, I'd love to hear from you!</p>
+    </section>
+
+    <!-- Social Media Grid -->
+    <div class="social-grid">
+      <!-- Facebook -->
+      <div class="social-card fade-in">
+        <i class="fab fa-facebook-f social-icon facebook"></i>
+        <h3>Facebook</h3>
+        <p>Connect with me personally and see my casual updates</p>
+        <a href="https://www.facebook.com/mohammed.tarek.5249349" target="_blank" rel="noopener noreferrer" class="social-link facebook-bg">
+          <i class="fab fa-facebook-f"></i> Visit Profile
+        </a>
+      </div>
+
+      <!-- Instagram -->
+      <div class="social-card fade-in delay-1">
+        <i class="fab fa-instagram social-icon instagram"></i>
+        <h3>Instagram</h3>
+        <p>Follow my daily life and creative projects</p>
+        <a href="https://instagram.com/_m7md_tarek_?igshid=YmMyMTA2M2Y=" target="_blank" rel="noopener noreferrer" class="social-link instagram-bg">
+          <i class="fab fa-instagram"></i> Follow Me
+        </a>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="social-card fade-in delay-2">
+        <i class="fab fa-whatsapp social-icon whatsapp"></i>
+        <h3>WhatsApp</h3>
+        <p>Message me directly for quick conversations</p>
+        <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" class="social-link whatsapp-bg">
+          <i class="fab fa-whatsapp"></i> Chat Now
+        </a>
+      </div>
+
+      <!-- LinkedIn -->
+      <div class="social-card fade-in delay-3">
+        <i class="fab fa-linkedin-in social-icon linkedin"></i>
+        <h3>LinkedIn</h3>
+        <p>Connect professionally and view my career journey</p>
+        <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" rel="noopener noreferrer" class="social-link linkedin-bg">
+          <i class="fab fa-linkedin-in"></i> Connect
+        </a>
+      </div>
+
+      <!-- Twitter -->
+      <div class="social-card fade-in">
+        <i class="fab fa-twitter social-icon twitter"></i>
+        <h3>Twitter</h3>
+        <p>Follow my thoughts and quick updates</p>
+        <a href="https://twitter.com/m7mdtarek225?t=_Sw1B7eTRoajvKqqM3BsNA&s=09" target="_blank" rel="noopener noreferrer" class="social-link twitter-bg">
+          <i class="fab fa-twitter"></i> Follow
+        </a>
+      </div>
+
+      <!-- GitHub -->
+      <div class="social-card fade-in delay-1">
+        <i class="fab fa-github social-icon github"></i>
+        <h3>GitHub</h3>
+        <p>Explore my coding projects and contributions</p>
+        <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" class="social-link github-bg">
+          <i class="fab fa-github"></i> View Profile
+        </a>
+      </div>
+
+      <!-- Linktree -->
+      <div class="social-card fade-in delay-2">
+        <i class="fas fa-link social-icon linktree"></i>
+        <h3>All My Accounts</h3>
+        <p>One link to access all my social media profiles</p>
+        <a href="https://linktr.ee/m7mdtarek22" target="_blank" rel="noopener noreferrer" class="social-link linktree-bg">
+          <i class="fas fa-link"></i> Visit Linktree
+        </a>
+      </div>
+
+      <!-- Skoon Team -->
+      <div class="social-card fade-in delay-3">
+        <i class="fas fa-users social-icon" style="color: var(--primary-color);"></i>
+        <h3>Skoon Team</h3>
+        <p>Check out our team's projects and collaborations</p>
+        <a href="https://linktr.ee/skoon_team" target="_blank" rel="noopener noreferrer" class="social-link">
+          <i class="fas fa-users"></i> Visit Team
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column fade-in">
+          <h3>Mohamed Tarek</h3>
+          <p>Communications Engineer and Web Developer creating innovative solutions that bridge hardware and software.</p>
+          <div class="footer-social">
+            <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
         </div>
-
-        <!-- Social Media Grid -->
-        <div class="social-grid">
-            <!-- Facebook -->
-            <div class="social-card" style="animation-delay: 0.2s;">
-                <i class="fab fa-facebook-f social-icon facebook"></i>
-                <h3>Facebook</h3>
-                <p>Connect with me personally and see my casual updates</p>
-                <a href="https://www.facebook.com/mohammed.tarek.5249349" target="_blank" rel="noopener noreferrer" class="social-link facebook-bg">
-                    <i class="fab fa-facebook-f"></i> Visit Profile
-                </a>
-            </div>
-
-            <!-- Instagram -->
-            <div class="social-card" style="animation-delay: 0.4s;">
-                <i class="fab fa-instagram social-icon instagram"></i>
-                <h3>Instagram</h3>
-                <p>Follow my daily life and creative projects</p>
-                <a href="https://instagram.com/_m7md_tarek_?igshid=YmMyMTA2M2Y=" target="_blank" rel="noopener noreferrer" class="social-link instagram-bg">
-                    <i class="fab fa-instagram"></i> Follow Me
-                </a>
-            </div>
-
-            <!-- WhatsApp -->
-            <div class="social-card" style="animation-delay: 0.6s;">
-                <i class="fab fa-whatsapp social-icon whatsapp"></i>
-                <h3>WhatsApp</h3>
-                <p>Message me directly for quick conversations</p>
-                <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" class="social-link whatsapp-bg">
-                    <i class="fab fa-whatsapp"></i> Chat Now
-                </a>
-            </div>
-
-            <!-- LinkedIn -->
-            <div class="social-card" style="animation-delay: 0.8s;">
-                <i class="fab fa-linkedin-in social-icon linkedin"></i>
-                <h3>LinkedIn</h3>
-                <p>Connect professionally and view my career journey</p>
-                <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" rel="noopener noreferrer" class="social-link linkedin-bg">
-                    <i class="fab fa-linkedin-in"></i> Connect
-                </a>
-            </div>
-
-            <!-- Twitter -->
-            <div class="social-card" style="animation-delay: 1s;">
-                <i class="fab fa-twitter social-icon twitter"></i>
-                <h3>Twitter</h3>
-                <p>Follow my thoughts and quick updates</p>
-                <a href="https://twitter.com/m7mdtarek225?t=_Sw1B7eTRoajvKqqM3BsNA&s=09" target="_blank" rel="noopener noreferrer" class="social-link twitter-bg">
-                    <i class="fab fa-twitter"></i> Follow
-                </a>
-            </div>
-
-            <!-- GitHub -->
-            <div class="social-card" style="animation-delay: 1.2s;">
-                <i class="fab fa-github social-icon github"></i>
-                <h3>GitHub</h3>
-                <p>Explore my coding projects and contributions</p>
-                <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" class="social-link github-bg">
-                    <i class="fab fa-github"></i> View Profile
-                </a>
-            </div>
-
-            <!-- Linktree -->
-            <div class="social-card" style="animation-delay: 1.4s;">
-                <i class="fas fa-link social-icon linktree"></i>
-                <h3>All My Accounts</h3>
-                <p>One link to access all my social media profiles</p>
-                <a href="https://linktr.ee/m7mdtarek22" target="_blank" rel="noopener noreferrer" class="social-link linktree-bg">
-                    <i class="fas fa-link"></i> Visit Linktree
-                </a>
-            </div>
-
-            <!-- Skoon Team -->
-            <div class="social-card" style="animation-delay: 1.6s;">
-                <i class="fas fa-users social-icon" style="color: var(--primary-color);"></i>
-                <h3>Skoon Team</h3>
-                <p>Check out our team's projects and collaborations</p>
-                <a href="https://linktr.ee/skoon_team" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <i class="fas fa-users"></i> Visit Team
-                </a>
-            </div>
+        
+        <div class="footer-column fade-in delay-1">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Mohamed - Personal Information.html">About</a></li>
+            <li><a href="Mohamed - Services.html">Services</a></li>
+            <li><a href="Mohamed - Project.html">Projects</a></li>
+            <li><a href="Mohamed - Certificates.html">Certificates</a></li>
+          </ul>
         </div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-bottom">
-            &copy; 2024 Mohamed Tarek Portfolio. All Rights Reserved. &copy;M.T.A.
+        
+        <div class="footer-column fade-in delay-2">
+          <h3>Services</h3>
+          <ul class="footer-links">
+            <li><a href="Mohamed - Services.html">Web Development</a></li>
+            <li><a href="Mohamed - Services.html">Arduino Projects</a></li>
+            <li><a href="Mohamed - Services.html">PCB Design</a></li>
+            <li><a href="Mohamed - Services.html">Embedded Systems</a></li>
+            <li><a href="Mohamed - Services.html">IoT Solutions</a></li>
+          </ul>
         </div>
-    </footer>
+      </div>
+      
+      <div class="footer-bottom fade-in delay-3">
+        <p>&copy; <span id="current-year">2025</span> Mohamed Tarek. All Rights Reserved.</p>
+        <p>Designed & Developed with <i class="fas fa-heart" style="color: #ff4757;"></i> by Mohamed Tarek</p>
+      </div>
+    </div>
+  </footer>
 
-    <!-- Back to Top Button -->
-    <button id="back-to-top" title="Go to top" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+  <!-- Back to Top Button -->
+  <div class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
 
-    <!-- JavaScript -->
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navList = document.getElementById('nav-list');
+  <!-- Dark Mode Toggle -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <i class="fas fa-moon"></i>
+  </button>
 
-        mobileMenu.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            navList.classList.toggle('active');
-            
-            // Toggle body scroll when menu is open
-            if (navList.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-list a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navList.classList.contains('active')) {
-                    mobileMenu.classList.remove('active');
-                    navList.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-        });
-
-        // Back to Top Button
-        const backToTopButton = document.getElementById('back-to-top');
-
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.style.display = 'flex';
-                backToTopButton.style.alignItems = 'center';
-                backToTopButton.style.justifyContent = 'center';
-            } else {
-                backToTopButton.style.display = 'none';
-            }
-        });
-
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // Smooth scrolling for all links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Animation on scroll
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.profile, .social-card');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if (elementPosition < screenPosition) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }
-            });
-        };
-
-        // Initialize animations
-        window.addEventListener('load', () => {
-            const animatedElements = document.querySelectorAll('.profile, .social-card');
-            animatedElements.forEach(element => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(20px)';
-            });
-            
-            // Trigger initial animation
-            animateOnScroll();
-        });
-
-        window.addEventListener('scroll', animateOnScroll);
-    </script>
+  <!-- JavaScript -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navMenu = document.getElementById('nav-menu');
+    
+    mobileMenu.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      
+      // Toggle body scroll when menu is open
+      if (navMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.navigation a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+    
+    // Sticky Header
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Active link highlighting
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.navigation a');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (pageYOffset >= sectionTop - 300) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+    
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopBtn.classList.add('active');
+      } else {
+        backToTopBtn.classList.remove('active');
+      }
+    });
+    
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // Dark/Light Mode Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Check for saved theme preference or use preferred color scheme
+    const currentTheme = localStorage.getItem('theme') || 
+                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    if (currentTheme === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    } else {
+      document.body.setAttribute('data-theme', 'light');
+      themeIcon.classList.replace('fa-sun', 'fa-moon');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      if (document.body.getAttribute('data-theme') === 'light') {
+        document.body.setAttribute('data-theme', 'dark');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.body.setAttribute('data-theme', 'light');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+    
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Animate elements on scroll
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.fade-in, .slide-up, .slide-left, .slide-right');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (elementPosition < screenPosition) {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+          element.style.visibility = 'visible';
+        }
+      });
+    };
+    
+    // Initialize animations
+    window.addEventListener('load', () => {
+      const animatedElements = document.querySelectorAll('.fade-in, .slide-up, .slide-left, .slide-right');
+      animatedElements.forEach(element => {
+        element.style.opacity = '0';
+        if (element.classList.contains('slide-up')) {
+          element.style.transform = 'translateY(50px)';
+        } else if (element.classList.contains('slide-left')) {
+          element.style.transform = 'translateX(50px)';
+        } else if (element.classList.contains('slide-right')) {
+          element.style.transform = 'translateX(-50px)';
+        }
+        element.style.visibility = 'hidden';
+      });
+      
+      // Trigger initial animation
+      animateOnScroll();
+    });
+    
+    window.addEventListener('scroll', animateOnScroll);
+  </script>
 </body>
 </html>
