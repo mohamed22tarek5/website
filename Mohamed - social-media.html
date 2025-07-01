@@ -61,6 +61,10 @@
       scroll-behavior: smooth;
     }
 
+    html, body {
+      height: 100%;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       background-color: var(--background-dark);
@@ -68,6 +72,9 @@
       line-height: 1.6;
       overflow-x: hidden;
       transition: background-color 0.5s ease;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     /* Typography */
@@ -230,6 +237,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
+      margin-bottom: 60px;
     }
 
     .social-card {
@@ -292,6 +300,7 @@
     .instagram { 
       background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); 
       -webkit-background-clip: text; 
+      background-clip: text;
       -webkit-text-fill-color: transparent; 
     }
     .instagram-bg { 
@@ -325,6 +334,7 @@
       background-color: var(--background-secondary);
       padding: 60px 0 30px;
       color: var(--text-light);
+      margin-top: auto;
     }
 
     .footer-content {
