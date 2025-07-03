@@ -11,16 +11,59 @@
             margin: 20px auto;
             padding: 20px;
             background-color: #f5f5f5;
+            color: #333;
+            transition: all 0.3s ease;
         }
+        
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        
         h1 {
             color: #2c3e50;
             text-align: center;
         }
+        
+        body.dark-mode h1 {
+            color: #f0f0f0;
+        }
+        
         .tabs {
             margin-bottom: 20px;
             display: flex;
             border-bottom: 1px solid #ddd;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #e74c3c #f5f5f5;
         }
+        
+        body.dark-mode .tabs {
+            border-bottom-color: #555;
+            scrollbar-color: #c0392b #1a1a1a;
+        }
+        
+        .tabs::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .tabs::-webkit-scrollbar-track {
+            background: #f5f5f5;
+        }
+        
+        body.dark-mode .tabs::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        
+        .tabs::-webkit-scrollbar-thumb {
+            background-color: #e74c3c;
+            border-radius: 3px;
+        }
+        
+        body.dark-mode .tabs::-webkit-scrollbar-thumb {
+            background-color: #c0392b;
+        }
+        
         .tab-button {
             padding: 10px 20px;
             margin-right: 10px;
@@ -29,12 +72,25 @@
             cursor: pointer;
             border-radius: 4px 4px 0 0;
             border: 1px solid transparent;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
+        
+        body.dark-mode .tab-button {
+            background: #333;
+            color: #f0f0f0;
+        }
+        
         .tab-button.active {
             background: #e74c3c;
             color: white;
             border-bottom-color: transparent;
         }
+        
+        body.dark-mode .tab-button.active {
+            background: #c0392b;
+        }
+        
         .tab-content {
             display: none;
             background-color: white;
@@ -42,6 +98,12 @@
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        
+        body.dark-mode .tab-content {
+            background-color: #2d2d2d;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
         .tab-content.active {
             display: block;
         }
@@ -51,7 +113,16 @@
             margin: 10px 0;
             padding: 8px;
             width: 150px;
+            background-color: white;
+            border: 1px solid #ddd;
         }
+        
+        body.dark-mode .band-select {
+            background-color: #333;
+            border-color: #555;
+            color: #f0f0f0;
+        }
+        
         .resistor-display {
             width: 300px;
             height: 60px;
@@ -60,12 +131,18 @@
             background: #d4a373;
             border-radius: 30px;
         }
+        
+        body.dark-mode .resistor-display {
+            background: #8b5a2b;
+        }
+        
         .band {
             width: 20px;
             height: 60px;
             position: absolute;
             top: 0;
         }
+        
         .result {
             margin-top: 20px;
             padding: 15px;
@@ -74,10 +151,20 @@
             border-left: 4px solid #e74c3c;
             font-size: 18px;
         }
+        
+        body.dark-mode .result {
+            background-color: #3a2a2a;
+            border-left-color: #c0392b;
+        }
+        
         .temp-coeff {
             margin-top: 10px;
             font-style: italic;
             color: #666;
+        }
+        
+        body.dark-mode .temp-coeff {
+            color: #aaa;
         }
         
         /* SMD Calculator Styles */
@@ -90,16 +177,25 @@
             font-size: 16px;
         }
         
+        body.dark-mode .smd-input {
+            background-color: #333;
+            border-color: #555;
+            color: #f0f0f0;
+        }
+        
         /* Series & Parallel Resistor Calculator Styles */
         .container {
             margin-bottom: 20px;
         }
+        
         .input-group {
             margin-bottom: 20px;
         }
+        
         .resistors-container {
             margin-top: 15px;
         }
+        
         button {
             background-color: #e74c3c;
             color: white;
@@ -110,9 +206,19 @@
             margin-right: 10px;
             margin-bottom: 10px;
         }
+        
         button:hover {
             background-color: #c0392b;
         }
+        
+        body.dark-mode button {
+            background-color: #c0392b;
+        }
+        
+        body.dark-mode button:hover {
+            background-color: #a5281b;
+        }
+        
         input {
             padding: 8px;
             border: 1px solid #ddd;
@@ -120,33 +226,102 @@
             margin-bottom: 10px;
             width: 100px;
         }
+        
+        body.dark-mode input {
+            background-color: #333;
+            border-color: #555;
+            color: #f0f0f0;
+        }
+        
         label {
             display: inline-block;
             margin-right: 10px;
         }
+        
         .resistor-input {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
         }
+        
         .unit-selector {
             margin-left: 10px;
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+        
+        body.dark-mode .unit-selector {
+            background-color: #333;
+            border-color: #555;
+            color: #f0f0f0;
+        }
+        
         .circuit-diagram {
             margin: 20px 0;
             text-align: center;
         }
+        
         select {
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+        
+        body.dark-mode select {
+            background-color: #333;
+            border-color: #555;
+            color: #f0f0f0;
+        }
+        
+        /* Dark mode toggle button */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 100;
+        }
+        
+        body.dark-mode .dark-mode-toggle {
+            background: #c0392b;
+        }
+        
+        .dark-mode-toggle:hover {
+            background: #c0392b;
+        }
+        
+        body.dark-mode .dark-mode-toggle:hover {
+            background: #a5281b;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                margin: 10px;
+            }
+            
+            .tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .resistor-display {
+                width: 250px;
+            }
+        }
     </style>
 </head>
 <body>
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    
     <h1>Resistor Calculator</h1>
     
     <div class="tabs">
@@ -367,6 +542,28 @@
             
             document.getElementById(tabId).classList.add('active');
             document.querySelector(`button[onclick="switchTab('${tabId}')"]`).classList.add('active');
+            
+            // Smooth scroll to the top of the tab content
+            document.getElementById(tabId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Dark mode toggle function
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const button = document.querySelector('.dark-mode-toggle');
+            if (document.body.classList.contains('dark-mode')) {
+                button.textContent = '☀️ Light Mode';
+                localStorage.setItem('darkMode', 'true');
+            } else {
+                button.textContent = '🌙 Dark Mode';
+                localStorage.setItem('darkMode', 'false');
+            }
+        }
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+            document.querySelector('.dark-mode-toggle').textContent = '☀️ Light Mode';
         }
         
         // Color Code Calculator Functions
