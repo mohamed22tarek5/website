@@ -1,158 +1,310 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced Unit Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --primary-light: #5dade2;
+            --background-dark: #121212;
+            --background-darker: #0a0a0a;
+            --background-secondary: #1a1a1a;
+            --card-dark: #1e1e1e;
+            --card-light: #252525;
+            --text-light: #ffffff;
+            --text-muted: #aaaaaa;
+            --success-color: #4caf50;
+            --error-color: #f44336;
+            --transition-speed: 0.3s;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Light mode variables */
+        [data-theme="light"] {
+            --background-dark: #f5f7fa;
+            --background-darker: #e8ebf0;
+            --background-secondary: #ffffff;
+            --card-dark: #ffffff;
+            --card-light: #f9f9f9;
+            --text-light: #333333;
+            --text-muted: #666666;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 1000px;
-            margin: 0 auto;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            transition: background-color var(--transition-speed) ease;
             padding: 20px;
-            background-color: #f5f5f5;
+            min-height: 100vh;
         }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
         }
+
         .converter-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             gap: 20px;
         }
+        
         .main-section {
             flex: 2;
             min-width: 600px;
         }
+        
         .angle-section {
             flex: 1;
             min-width: 300px;
         }
+        
         .panel {
-            background-color: white;
+            background-color: var(--card-dark);
             padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
             margin-bottom: 20px;
+            border: 1px solid var(--background-secondary);
         }
+        
         .unit-group {
             margin-bottom: 20px;
-            background-color: #f9f9f9;
+            background-color: var(--background-secondary);
             padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #007bff;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
         }
+        
         .unit-group h3 {
             margin-top: 0;
             margin-bottom: 15px;
-            color: #007bff;
+            color: var(--primary-color);
             font-size: 18px;
         }
+        
         .unit-list {
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
+        
         .unit-item {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
             padding: 8px;
-            background-color: white;
+            background-color: var(--card-dark);
             border-radius: 5px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: background-color var(--transition-speed) ease;
         }
+        
         .unit-item:hover {
-            background-color: #f0f7ff;
+            background-color: var(--background-secondary);
         }
+        
         .unit-label {
             display: flex;
             align-items: center;
             width: 150px;
             font-size: 14px;
         }
+        
         .unit-symbol {
             margin-left: 5px;
-            color: #666;
+            color: var(--text-muted);
             font-weight: bold;
         }
+        
         .unit-input {
             flex: 1;
             padding: 8px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--background-secondary);
             border-radius: 4px;
             font-size: 14px;
             text-align: right;
+            background-color: var(--background-secondary);
+            color: var(--text-light);
+            transition: all var(--transition-speed) ease;
         }
+        
         .unit-input:focus {
             outline: none;
-            border-color: #007bff;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
         }
+        
         .scientific {
             font-size: 12px;
-            color: #666;
+            color: var(--text-muted);
             margin-left: 10px;
             white-space: nowrap;
             min-width: 120px;
         }
+        
         .controls {
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
             gap: 10px;
         }
+        
         .button {
             padding: 8px 15px;
-            background-color: #007bff;
+            background-color: var(--primary-color);
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 14px;
-            transition: background-color 0.3s;
+            transition: background-color var(--transition-speed) ease;
         }
+        
         .button:hover {
-            background-color: #0056b3;
+            background-color: var(--primary-dark);
         }
+        
         .button.secondary {
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: var(--background-secondary);
+            color: var(--text-light);
         }
+        
         .button.secondary:hover {
-            background-color: #e0e0e0;
+            background-color: var(--card-light);
         }
+        
         .angle-converter {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
+        
         .angle-input-group {
             display: flex;
             align-items: center;
         }
+        
         .angle-input {
             flex: 1;
             padding: 8px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--background-secondary);
             border-radius: 4px;
             font-size: 14px;
+            background-color: var(--background-secondary);
+            color: var(--text-light);
+            transition: all var(--transition-speed) ease;
         }
+        
+        .angle-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
         .angle-label {
             width: 100px;
             font-size: 14px;
         }
+        
         .note {
             margin-top: 20px;
             font-size: 13px;
-            color: #666;
+            color: var(--text-muted);
             text-align: center;
             font-style: italic;
         }
+        
         sup {
             font-size: 0.8em;
             vertical-align: super;
         }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--card-dark);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            box-shadow: var(--box-shadow);
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            z-index: 999;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-section, .angle-section {
+                min-width: 100%;
+            }
+            
+            .unit-label {
+                width: 120px;
+            }
+        }
+         footer {
+    background-color: var(--card-dark);
+    color: var(--text-light);
+    text-align: center;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+
+  .social-footer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .social-footer a {
+    color: var(--text-light);
+    font-size: 1.5em;
+    margin: 0 15px;
+    transition: all var(--transition-speed) ease;
+    display: inline-block;
+  }
+
+  .social-footer a:hover {
+    color: var(--primary-color);
+    transform: translateY(-5px);
+  }
+
+  .footer-bottom {
+    margin-top: 20px;
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
     </style>
 </head>
 <body>
@@ -383,6 +535,25 @@
         Note: All conversions are based on standard conversion factors. Scientific notation shows the value in base units (meters for length, radians for angles).
     </div>
 
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+    </button>
+<!-- Footer HTML -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="social-footer">
+      <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <div class="footer-bottom">
+      &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+      &copy; M.T.A.
+    </div>
+  </div>
+</footer>
     <script>
         /**
          * Constants Module - Stores all conversion factors and constants
@@ -629,11 +800,41 @@
             }
         };
 
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or use preferred color scheme
+        const currentTheme = localStorage.getItem('theme') || 
+                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        if (currentTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            document.body.setAttribute('data-theme', 'light');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (document.body.getAttribute('data-theme') === 'light') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
         // Initialize any event listeners or setup required
         document.addEventListener('DOMContentLoaded', function() {
             // Any initialization code can go here
             console.log('Unit Converter initialized');
         });
+        // Set current year in footer
+  document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>

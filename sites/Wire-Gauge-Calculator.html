@@ -301,6 +301,40 @@
                 font-size: 14px;
             }
         }
+         footer {
+    background-color: var(--card-dark);
+    color: var(--text-light);
+    text-align: center;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+
+  .social-footer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .social-footer a {
+    color: var(--text-light);
+    font-size: 1.5em;
+    margin: 0 15px;
+    transition: all var(--transition-speed) ease;
+    display: inline-block;
+  }
+
+  .social-footer a:hover {
+    color: var(--primary-color);
+    transform: translateY(-5px);
+  }
+
+  .footer-bottom {
+    margin-top: 20px;
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
     </style>
 </head>
 <body>
@@ -474,7 +508,21 @@
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
         <i class="fas fa-moon"></i>
     </button>
-
+<!-- Footer HTML -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="social-footer">
+      <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <div class="footer-bottom">
+      &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+      &copy; M.T.A.
+    </div>
+  </div>
+</footer>
     <script>
         // AWG to mm² conversion table with additional data
         const awgData = [
@@ -646,6 +694,8 @@
         // Initialize
         populateAWGTable();
         calculateWireGauge(); // Initial calculation
+        // Set current year in footer
+  document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>

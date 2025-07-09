@@ -1,94 +1,398 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Power Factor Correction Calculator</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class'
-    }
-  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary-color: #4e9eff;
+      --primary-dark: #3a6cf4;
+      --primary-light: #6ab1ff;
+      --background-dark: #121212;
+      --background-darker: #0a0a0a;
+      --background-secondary: #1a1a1a;
+      --card-dark: #1e1e1e;
+      --card-light: #252525;
+      --text-light: #ffffff;
+      --text-muted: #aaaaaa;
+      --success-color: #4caf50;
+      --error-color: #f44336;
+      --warning-color: #f1c40f;
+      --transition-speed: 0.3s;
+      --border-radius: 12px;
+      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Light mode variables */
+    [data-theme="light"] {
+      --background-dark: #f5f7fa;
+      --background-darker: #e8ebf0;
+      --background-secondary: #ffffff;
+      --card-dark: #ffffff;
+      --card-light: #f9f9f9;
+      --text-light: #333333;
+      --text-muted: #666666;
+      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: var(--background-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      transition: background-color var(--transition-speed) ease;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    h1, h2, h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .calculator {
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--box-shadow);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .calculator:hover {
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text-muted);
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--background-secondary);
+      border-radius: var(--border-radius);
+      background-color: var(--background-secondary);
+      color: var(--text-light);
+      font-size: 1em;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9em;
+      transition: all var(--transition-speed) ease;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(78, 158, 255, 0.6);
+    }
+
+    .result-box {
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: var(--border-radius);
+      background-color: var(--background-secondary);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .result-box:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .result-label {
+      font-size: 0.9em;
+      color: var(--text-muted);
+    }
+
+    .result-value {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .info-box {
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: var(--border-radius);
+      background-color: rgba(241, 196, 15, 0.1);
+      border-left: 4px solid var(--warning-color);
+      color: var(--text-light);
+    }
+
+    .info-box h3 {
+      color: var(--warning-color);
+    }
+
+    .info-box ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .info-box li {
+      margin-bottom: 5px;
+    }
+
+    .power-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .power-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .power-box {
+      background-color: var(--card-light);
+      padding: 15px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .power-box h3 {
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid var(--background-secondary);
+    }
+
+    .power-box p {
+      margin: 8px 0;
+    }
+
+    .power-box strong {
+      color: var(--primary-color);
+    }
+
+    .cap-bank {
+      background-color: rgba(78, 158, 255, 0.1);
+      padding: 20px;
+      border-radius: var(--border-radius);
+      border-left: 4px solid var(--primary-color);
+      margin: 20px 0;
+    }
+
+    .cap-bank h3 {
+      margin-bottom: 15px;
+    }
+
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    @media (min-width: 768px) {
+      .cap-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .cap-item {
+      text-align: center;
+    }
+
+    .cap-item p:first-child {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    /* Theme Toggle */
     .theme-toggle {
       position: fixed;
-      bottom: 20px;
-      left: 20px;
-      width: 40px;
-      height: 40px;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      background-color: #1f2937;
-      color: #fbbf24;
+      background-color: var(--card-dark);
+      color: var(--primary-color);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 1.2em;
+      box-shadow: var(--box-shadow);
       cursor: pointer;
+      transition: all var(--transition-speed) ease;
       z-index: 999;
     }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+      
+      .theme-toggle {
+        bottom: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
+      }
+    }
+     footer {
+    background-color: var(--card-dark);
+    color: var(--text-light);
+    text-align: center;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+
+  .social-footer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .social-footer a {
+    color: var(--text-light);
+    font-size: 1.5em;
+    margin: 0 15px;
+    transition: all var(--transition-speed) ease;
+    display: inline-block;
+  }
+
+  .social-footer a:hover {
+    color: var(--primary-color);
+    transform: translateY(-5px);
+  }
+
+  .footer-bottom {
+    margin-top: 20px;
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
   </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white p-6">
-  <div class="max-w-6xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md">
-    <h1 class="text-3xl font-bold text-center mb-2">Power Factor Correction Calculator</h1>
-    <p class="text-center text-gray-600 dark:text-gray-300 mb-8">Calculate required capacitor bank size and analyze power factor improvement</p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-      <div>
-        <h2 class="text-xl font-semibold mb-3">Input Parameters</h2>
-        <input id="loadPower" type="number" placeholder="Load Power (kW)" class="w-full mb-2 p-2 border rounded dark:bg-gray-700 dark:border-gray-600" value="100">
-        <input id="existingPF" type="number" step="0.01" placeholder="Existing Power Factor" class="w-full mb-2 p-2 border rounded dark:bg-gray-700 dark:border-gray-600" value="0.8">
-        <input id="targetPF" type="number" step="0.01" placeholder="Target Power Factor" class="w-full mb-2 p-2 border rounded dark:bg-gray-700 dark:border-gray-600" value="0.95">
-        <input id="voltage" type="number" placeholder="System Voltage (V)" class="w-full mb-2 p-2 border rounded dark:bg-gray-700 dark:border-gray-600" value="400">
-        <input id="frequency" type="number" placeholder="Frequency (Hz)" class="w-full mb-4 p-2 border rounded dark:bg-gray-700 dark:border-gray-600" value="50">
-        <button onclick="calculateCorrection()" class="w-full bg-blue-600 text-white py-2 rounded">Calculate</button>
+<body>
+  <div class="container">
+    <h1 class="text-center">Power Factor Correction Calculator</h1>
+    <p class="text-center" style="color: var(--text-muted); margin-bottom: 30px;">Calculate required capacitor bank size and analyze power factor improvement</p>
+    
+    <div class="calculator">
+      <h2>Input Parameters</h2>
+      <div class="input-group">
+        <label class="input-label">Load Power (kW)</label>
+        <input id="loadPower" type="number" class="input-field" value="100">
       </div>
+      <div class="input-group">
+        <label class="input-label">Existing Power Factor</label>
+        <input id="existingPF" type="number" step="0.01" class="input-field" value="0.8">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Target Power Factor</label>
+        <input id="targetPF" type="number" step="0.01" class="input-field" value="0.95">
+      </div>
+      <div class="input-group">
+        <label class="input-label">System Voltage (V)</label>
+        <input id="voltage" type="number" class="input-field" value="400">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Frequency (Hz)</label>
+        <input id="frequency" type="number" class="input-field" value="50">
+      </div>
+      <button class="btn btn-primary" onclick="calculateCorrection()">Calculate</button>
+    </div>
 
-      <div class="grid grid-cols-2 gap-6">
-        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded shadow">
-          <h3 class="font-bold mb-2">Before Correction</h3>
-          <p><strong>Real Power:</strong> <span id="beforeReal">-</span></p>
-          <p><strong>Reactive Power:</strong> <span id="beforeReactive">-</span></p>
-          <p><strong>Apparent Power:</strong> <span id="beforeApparent">-</span></p>
-          <p><strong>Power Factor:</strong> <span id="beforePF">-</span></p>
-          <p><strong>Angle:</strong> <span id="beforeAngle">-</span></p>
+    <div class="power-grid">
+      <div class="power-box">
+        <h3>Before Correction</h3>
+        <p><strong>Real Power:</strong> <span id="beforeReal">-</span></p>
+        <p><strong>Reactive Power:</strong> <span id="beforeReactive">-</span></p>
+        <p><strong>Apparent Power:</strong> <span id="beforeApparent">-</span></p>
+        <p><strong>Power Factor:</strong> <span id="beforePF">-</span></p>
+        <p><strong>Angle:</strong> <span id="beforeAngle">-</span></p>
+      </div>
+      <div class="power-box">
+        <h3>After Correction</h3>
+        <p><strong>Real Power:</strong> <span id="afterReal">-</span></p>
+        <p><strong>Reactive Power:</strong> <span id="afterReactive">-</span></p>
+        <p><strong>Apparent Power:</strong> <span id="afterApparent">-</span></p>
+        <p><strong>Power Factor:</strong> <span id="afterPF">-</span></p>
+        <p><strong>Angle:</strong> <span id="afterAngle">-</span></p>
+      </div>
+    </div>
+
+    <div class="cap-bank">
+      <h3>Required Capacitor Bank</h3>
+      <div class="cap-grid">
+        <div class="cap-item">
+          <p>Capacitor Size</p>
+          <p id="capSize" class="result-value">-</p>
         </div>
-        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded shadow">
-          <h3 class="font-bold mb-2">After Correction</h3>
-          <p><strong>Real Power:</strong> <span id="afterReal">-</span></p>
-          <p><strong>Reactive Power:</strong> <span id="afterReactive">-</span></p>
-          <p><strong>Apparent Power:</strong> <span id="afterApparent">-</span></p>
-          <p><strong>Power Factor:</strong> <span id="afterPF">-</span></p>
-          <p><strong>Angle:</strong> <span id="afterAngle">-</span></p>
+        <div class="cap-item">
+          <p>Capacitance</p>
+          <p id="capacitance" class="result-value">-</p>
+        </div>
+        <div class="cap-item">
+          <p>Power Factor Improvement</p>
+          <p id="pfImprovement" class="result-value">-</p>
+        </div>
+        <div class="cap-item">
+          <p>kVA Reduction</p>
+          <p id="kvaReduction" class="result-value">-</p>
         </div>
       </div>
     </div>
 
-    <div class="bg-blue-50 dark:bg-blue-900 p-6 rounded-lg shadow mb-6">
-      <h3 class="text-xl font-semibold mb-3">Required Capacitor Bank</h3>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-        <div>
-          <p class="font-bold">Capacitor Size</p>
-          <p id="capSize" class="text-blue-800 dark:text-blue-200">-</p>
-        </div>
-        <div>
-          <p class="font-bold">Capacitance</p>
-          <p id="capacitance" class="text-blue-800 dark:text-blue-200">-</p>
-        </div>
-        <div>
-          <p class="font-bold">Power Factor Improvement</p>
-          <p id="pfImprovement" class="text-blue-800 dark:text-blue-200">-</p>
-        </div>
-        <div>
-          <p class="font-bold">kVA Reduction</p>
-          <p id="kvaReduction" class="text-blue-800 dark:text-blue-200">-</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="text-sm text-gray-600 dark:text-gray-300 bg-yellow-50 dark:bg-yellow-900 border-l-4 border-yellow-400 dark:border-yellow-600 p-4 rounded shadow">
-      <strong>Important Notes:</strong>
-      <ul class="list-disc list-inside mt-2 space-y-1">
+    <div class="info-box">
+      <h3>Important Notes:</h3>
+      <ul>
         <li>Ensure capacitor banks are properly rated for the system voltage.</li>
         <li>Choose only film/metalized capacitors resistant to harmonics.</li>
         <li>Use protective devices like contactors or timed switching.</li>
@@ -96,8 +400,25 @@
       </ul>
     </div>
   </div>
-
-  <button class="theme-toggle" onclick="document.documentElement.classList.toggle('dark')">🌓</button>
+<!-- Footer HTML -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="social-footer">
+      <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <div class="footer-bottom">
+      &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+      &copy; M.T.A.
+    </div>
+  </div>
+</footer>
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <i class="fas fa-moon"></i>
+  </button>
 
   <script>
     function calculateCorrection() {
@@ -107,6 +428,25 @@
       const voltage = parseFloat(document.getElementById('voltage').value);
       const frequency = parseFloat(document.getElementById('frequency').value);
 
+      // Validate inputs
+      if (isNaN(loadPower)) {
+        alert("Please enter a valid Load Power value");
+        return;
+      }
+      if (existingPF <= 0 || existingPF >= 1 || isNaN(existingPF)) {
+        alert("Existing Power Factor must be between 0 and 1");
+        return;
+      }
+      if (targetPF <= 0 || targetPF >= 1 || isNaN(targetPF)) {
+        alert("Target Power Factor must be between 0 and 1");
+        return;
+      }
+      if (targetPF <= existingPF) {
+        alert("Target Power Factor must be greater than Existing Power Factor");
+        return;
+      }
+
+      // Calculations
       const apparentBefore = loadPower / existingPF;
       const reactiveBefore = Math.sqrt(Math.pow(apparentBefore, 2) - Math.pow(loadPower, 2));
 
@@ -121,6 +461,7 @@
       const pfImprovement = ((targetPF - existingPF) / existingPF) * 100;
       const kvaReduction = apparentBefore - apparentAfter;
 
+      // Update results
       document.getElementById('capSize').textContent = capacitorSize.toFixed(2) + " kVAR";
       document.getElementById('capacitance').textContent = capacitance.toFixed(2) + " µF";
       document.getElementById('pfImprovement').textContent = pfImprovement.toFixed(1) + "%";
@@ -129,15 +470,48 @@
       document.getElementById('beforeReal').textContent = loadPower.toFixed(2) + " kW";
       document.getElementById('beforeReactive').textContent = reactiveBefore.toFixed(2) + " kVAR";
       document.getElementById('beforeApparent').textContent = apparentBefore.toFixed(2) + " kVA";
-      document.getElementById('beforePF').textContent = existingPF;
+      document.getElementById('beforePF').textContent = existingPF.toFixed(3);
       document.getElementById('beforeAngle').textContent = angleBefore.toFixed(2) + "°";
 
       document.getElementById('afterReal').textContent = loadPower.toFixed(2) + " kW";
       document.getElementById('afterReactive').textContent = reactiveAfter.toFixed(2) + " kVAR";
       document.getElementById('afterApparent').textContent = apparentAfter.toFixed(2) + " kVA";
-      document.getElementById('afterPF').textContent = targetPF;
+      document.getElementById('afterPF').textContent = targetPF.toFixed(3);
       document.getElementById('afterAngle').textContent = angleAfter.toFixed(2) + "°";
     }
+
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Check for saved theme preference or use preferred color scheme
+    const currentTheme = localStorage.getItem('theme') || 
+                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    if (currentTheme === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    } else {
+      document.body.setAttribute('data-theme', 'light');
+      themeIcon.classList.replace('fa-sun', 'fa-moon');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      if (document.body.getAttribute('data-theme') === 'light') {
+        document.body.setAttribute('data-theme', 'dark');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.body.setAttribute('data-theme', 'light');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // Initialize with default values
+    calculateCorrection();
+    // Set current year in footer
+  document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>

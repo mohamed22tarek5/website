@@ -1,30 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inductance Calculators</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #3498db;
+            --primary-dark: #2980b9;
+            --primary-light: #5dade2;
+            --background-dark: #121212;
+            --background-darker: #0a0a0a;
+            --background-secondary: #1a1a1a;
+            --card-dark: #1e1e1e;
+            --card-light: #252525;
+            --text-light: #ffffff;
+            --text-muted: #aaaaaa;
+            --success-color: #4caf50;
+            --error-color: #f44336;
+            --transition-speed: 0.3s;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Light mode variables */
+        [data-theme="light"] {
+            --background-dark: #f5f7fa;
+            --background-darker: #e8ebf0;
+            --background-secondary: #ffffff;
+            --card-dark: #ffffff;
+            --card-light: #f9f9f9;
+            --text-light: #333333;
+            --text-muted: #666666;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            transition: background-color var(--transition-speed) ease;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* Calculator Styles */
+        .calculator-container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
         }
         
         /* Tab styles */
         .main-tabs {
             overflow: hidden;
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
-            border-radius: 4px 4px 0 0;
+            border: 1px solid var(--background-secondary);
+            background-color: var(--card-light);
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
             margin-bottom: 0;
         }
+        
         .main-tab-button {
             background-color: inherit;
             float: left;
@@ -33,38 +82,43 @@
             cursor: pointer;
             padding: 14px 16px;
             transition: 0.3s;
-            color: #333;
+            color: var(--text-light);
             font-weight: bold;
         }
+        
         .main-tab-button:hover {
-            background-color: #ddd;
+            background-color: var(--background-secondary);
         }
+        
         .main-tab-button.active {
-            background-color: #3498db;
+            background-color: var(--primary-color);
             color: white;
         }
+        
         .main-tabcontent {
             display: none;
             padding: 20px;
-            border: 1px solid #ccc;
+            border: 1px solid var(--background-secondary);
             border-top: none;
-            border-radius: 0 0 4px 4px;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            background-color: var(--card-dark);
+            box-shadow: var(--box-shadow);
         }
         
         /* Color code calculator styles */
         .calculator {
-            border: 1px solid #ddd;
+            border: 1px solid var(--background-secondary);
             padding: 20px;
-            border-radius: 8px;
+            border-radius: var(--border-radius);
             margin-bottom: 20px;
         }
+        
         .band-container {
             display: flex;
             justify-content: center;
             margin: 20px 0;
         }
+        
         .band {
             width: 40px;
             height: 100px;
@@ -73,348 +127,590 @@
             cursor: pointer;
             position: relative;
         }
+        
         .band-label {
             position: absolute;
             bottom: -25px;
             width: 100%;
             text-align: center;
             font-size: 12px;
+            color: var(--text-light);
         }
+        
         .result {
             font-size: 1.2em;
             margin: 20px 0;
-            padding: 10px;
-            background: #f5f5f5;
-            border-radius: 4px;
+            padding: 15px;
+            background: var(--background-secondary);
+            border-radius: var(--border-radius);
+            color: var(--text-light);
+            border-left: 4px solid var(--primary-color);
         }
+        
         .tabs {
             margin-bottom: 20px;
         }
+        
         .tab-button {
             padding: 10px 20px;
             margin-right: 10px;
             border: none;
-            background: #f0f0f0;
+            background: var(--background-secondary);
+            color: var(--text-light);
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: var(--border-radius);
+            transition: all var(--transition-speed) ease;
         }
+        
         .tab-button.active {
-            background: #007bff;
+            background: var(--primary-color);
             color: white;
         }
+        
         .tab-content {
             display: none;
         }
+        
         .tab-content.active {
             display: block;
         }
+        
         .info-box {
             margin-top: 20px;
-            padding: 15px;
-            background: #f0f8ff;
-            border-radius: 5px;
-            border-left: 4px solid #007bff;
+            padding: 20px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+            color: var(--text-light);
         }
         
         /* Series/parallel calculator styles */
         .inductors-container {
             margin-top: 15px;
         }
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all var(--transition-speed) ease;
             cursor: pointer;
+            border: none;
+            outline: none;
             margin-right: 10px;
             margin-bottom: 10px;
         }
-        button:hover {
-            background-color: #2980b9;
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
         }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.6);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
         input {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 12px 15px;
+            border: 1px solid var(--background-secondary);
+            border-radius: var(--border-radius);
             margin-bottom: 10px;
-            width: 100px;
+            width: 120px;
+            background-color: var(--background-secondary);
+            color: var(--text-light);
+            transition: all var(--transition-speed) ease;
         }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
         label {
             display: inline-block;
             margin-right: 10px;
+            color: var(--text-light);
         }
-        .result-box {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f1f9f9;
-            border-radius: 4px;
-            border-left: 4px solid #3498db;
-        }
+        
         .inductor-input {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
+        
         .inductor-input span {
             margin-left: 5px;
+            color: var(--text-light);
         }
+        
         .unit-selector {
             margin-left: 10px;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 12px 15px;
+            border: 1px solid var(--background-secondary);
+            border-radius: var(--border-radius);
+            background-color: var(--background-secondary);
+            color: var(--text-light);
+            transition: all var(--transition-speed) ease;
         }
+        
+        .unit-selector:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
         .explanation {
             margin-top: 30px;
-            padding: 15px;
-            background-color: #f9f9f1;
-            border-radius: 4px;
+            padding: 20px;
+            background-color: rgba(241, 196, 15, 0.1);
+            border-radius: var(--border-radius);
             border-left: 4px solid #f1c40f;
+            color: var(--text-light);
         }
+
         .color-legend {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin: 20px 0;
         }
+        
         .color-item {
             display: flex;
             align-items: center;
             margin-right: 15px;
         }
+        
         .color-swatch {
             width: 20px;
             height: 20px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--background-secondary);
             margin-right: 5px;
         }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--card-dark);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            box-shadow: var(--box-shadow);
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            z-index: 999;
+        }
         
-        /* Responsive adjustments */
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .main-tab-button {
-                padding: 10px 12px;
+            .input-field {
+                width: 100%;
+            }
+            
+            .tab-button {
+                padding: 8px 12px;
                 font-size: 14px;
             }
+            
             .band {
                 width: 30px;
                 height: 80px;
             }
         }
+         footer {
+    background-color: var(--card-dark);
+    color: var(--text-light);
+    text-align: center;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+
+  .social-footer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .social-footer a {
+    color: var(--text-light);
+    font-size: 1.5em;
+    margin: 0 15px;
+    transition: all var(--transition-speed) ease;
+    display: inline-block;
+  }
+
+  .social-footer a:hover {
+    color: var(--primary-color);
+    transform: translateY(-5px);
+  }
+
+  .footer-bottom {
+    margin-top: 20px;
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
     </style>
 </head>
 <body>
-    <h1>Inductance Calculators</h1>
-    
-    <!-- Main tabs to switch between calculators -->
-    <div class="main-tabs">
-        <button class="main-tab-button active" onclick="openMainTab(event, 'ColorCode')">Color Code</button>
-        <button class="main-tab-button" onclick="openMainTab(event, 'SeriesParallel')">Series/Parallel</button>
-    </div>
-    
-    <!-- Color Code Calculator Tab -->
-    <div id="ColorCode" class="main-tabcontent" style="display: block;">
-        <div class="tabs">
-            <button class="tab-button active" onclick="switchTab('4band')">4-Band</button>
-            <button class="tab-button" onclick="switchTab('5band')">5-Band</button>
-            <button class="tab-button" onclick="switchTab('info')">Info</button>
+    <div class="calculator-container">
+        <h1>Inductance Calculators</h1>
+        <p class="section-subtitle">Tools for electronics engineers and hobbyists</p>
+        
+        <div class="main-tabs">
+            <button class="main-tab-button active" onclick="openMainTab(event, 'ColorCode')">Color Code</button>
+            <button class="main-tab-button" onclick="openMainTab(event, 'SeriesParallel')">Series/Parallel</button>
+            <button class="main-tab-button" onclick="openMainTab(event, 'Info')">Info</button>
         </div>
+        
+        <!-- Color Code Calculator Tab -->
+        <div id="ColorCode" class="main-tabcontent" style="display: block;">
+            <div class="tabs">
+                <button class="tab-button active" onclick="switchTab('4band')">4-Band</button>
+                <button class="tab-button" onclick="switchTab('5band')">5-Band</button>
+            </div>
 
-        <div id="4band" class="tab-content active calculator">
-            <h2>4-Band Inductor Color Code Calculator</h2>
-            <p>Click on each band to select its color:</p>
-            
-            <div class="band-container">
-                <div class="band" id="band1" style="background-color: #966f33;" onclick="selectBand(1)"></div>
-                <div class="band" id="band2" style="background-color: #000000;" onclick="selectBand(2)"></div>
-                <div class="band" id="band3" style="background-color: #c0c0c0;" onclick="selectBand(3)"></div>
-                <div class="band" id="band4" style="background-color: #d4af37;" onclick="selectBand(4)"></div>
+            <div id="4band" class="tab-content active calculator">
+                <h2>4-Band Inductor Color Code Calculator</h2>
+                <p>Click on each band to select its color:</p>
+                
+                <div class="band-container">
+                    <div class="band" id="band1" style="background-color: #966f33;" onclick="selectBand(1)"></div>
+                    <div class="band" id="band2" style="background-color: #000000;" onclick="selectBand(2)"></div>
+                    <div class="band" id="band3" style="background-color: #c0c0c0;" onclick="selectBand(3)"></div>
+                    <div class="band" id="band4" style="background-color: #d4af37;" onclick="selectBand(4)"></div>
+                </div>
+                <div class="band-container">
+                    <span class="band-label">1st Digit</span>
+                    <span class="band-label">2nd Digit</span>
+                    <span class="band-label">Multiplier</span>
+                    <span class="band-label">Tolerance</span>
+                </div>
+                
+                <div class="result" id="colorCodeResult">Inductance: 10μH ±5%</div>
+                
+                <div class="color-legend">
+                    <div class="color-item"><div class="color-swatch" style="background-color: #000000;"></div>Black (0)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #966f33;"></div>Brown (1)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #ff0000;"></div>Red (2)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #ffa500;"></div>Orange (3)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #ffff00;"></div>Yellow (4)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #008000;"></div>Green (5)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #0000ff;"></div>Blue (6)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #800080;"></div>Violet (7)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #808080;"></div>Gray (8)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #ffffff;"></div>White (9)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #d4af37;"></div>Gold (±5%)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #c0c0c0;"></div>Silver (±10%)</div>
+                </div>
             </div>
-            <div class="band-container">
-                <span class="band-label">1st Digit</span>
-                <span class="band-label">2nd Digit</span>
-                <span class="band-label">Multiplier</span>
-                <span class="band-label">Tolerance</span>
-            </div>
-            
-            <div class="result" id="colorCodeResult">Inductance: 10μH ±5%</div>
-            
-            <div class="color-legend">
-                <div class="color-item"><div class="color-swatch" style="background-color: #000000;"></div>Black (0)</div>
-                <div class="color-item"><div class="color-swatch" style="background-color: #966f33;"></div>Brown (1)</div>
-                <div class="color-item"><div class="color-swatch" style="background-color: #ff0000;"></div>Red (2)</div>
-                <div class="color-item"><div class="color-swatch" style="background-color: #ffa500;"></div>Orange (3)</div>
-                <div class="color-item"><div class="color-swatch" style="background-color: #ffff00;"></div>Yellow (4)</div>
-                <div class="color-item"><div class="color-swatch" style="background-color: #008000;"></div>Green (5)</div>
-                <div class="color-item"><div class="color-swatch" style="background-color: #0000ff;"></div>Blue (6)</div>
-                <div class="color-item"><div class="color-swatch" style="background-color: #800080;"></div>Violet (7)</div>
-                <div class="color-item"><div class="color-swatch" style="background-color: #808080;"></div>Gray (8)</div>
-                <div class="color-item"><div class="color-swatch" style="background-color: #ffffff;"></div>White (9)</div>
-                <div class="color-item"><div class="color-swatch" style="background-color: #d4af37;"></div>Gold (±5%)</div>
-                <div class="color-item"><div class="color-swatch" style="background-color: #c0c0c0;"></div>Silver (±10%)</div>
+
+            <div id="5band" class="tab-content calculator">
+                <h2>5-Band Inductor Color Code Calculator</h2>
+                <p>Click on each band to select its color:</p>
+                
+                <div class="band-container">
+                    <div class="band" id="band1-5" style="background-color: #966f33;" onclick="selectBand5(1)"></div>
+                    <div class="band" id="band2-5" style="background-color: #000000;" onclick="selectBand5(2)"></div>
+                    <div class="band" id="band3-5" style="background-color: #ff0000;" onclick="selectBand5(3)"></div>
+                    <div class="band" id="band4-5" style="background-color: #c0c0c0;" onclick="selectBand5(4)"></div>
+                    <div class="band" id="band5-5" style="background-color: #d4af37;" onclick="selectBand5(5)"></div>
+                </div>
+                <div class="band-container">
+                    <span class="band-label">1st Digit</span>
+                    <span class="band-label">2nd Digit</span>
+                    <span class="band-label">3rd Digit</span>
+                    <span class="band-label">Multiplier</span>
+                    <span class="band-label">Tolerance</span>
+                </div>
+                
+                <div class="result" id="colorCodeResult5">Inductance: 100μH ±5%</div>
             </div>
         </div>
-
-        <div id="5band" class="tab-content calculator">
-            <h2>5-Band Inductor Color Code Calculator</h2>
-            <p>Click on each band to select its color:</p>
-            
-            <div class="band-container">
-                <div class="band" id="band1-5" style="background-color: #966f33;" onclick="selectBand5(1)"></div>
-                <div class="band" id="band2-5" style="background-color: #000000;" onclick="selectBand5(2)"></div>
-                <div class="band" id="band3-5" style="background-color: #ff0000;" onclick="selectBand5(3)"></div>
-                <div class="band" id="band4-5" style="background-color: #c0c0c0;" onclick="selectBand5(4)"></div>
-                <div class="band" id="band5-5" style="background-color: #d4af37;" onclick="selectBand5(5)"></div>
-            </div>
-            <div class="band-container">
-                <span class="band-label">1st Digit</span>
-                <span class="band-label">2nd Digit</span>
-                <span class="band-label">3rd Digit</span>
-                <span class="band-label">Multiplier</span>
-                <span class="band-label">Tolerance</span>
+        
+        <!-- Series/Parallel Calculator Tab -->
+        <div id="SeriesParallel" class="main-tabcontent">
+            <div class="tabs">
+                <button class="tab-button active" onclick="switchCalcTab('SeriesTab')">Series Connection</button>
+                <button class="tab-button" onclick="switchCalcTab('ParallelTab')">Parallel Connection</button>
+                <button class="tab-button" onclick="switchCalcTab('ExplanationTab')">Theory</button>
             </div>
             
-            <div class="result" id="colorCodeResult5">Inductance: 100μH ±5%</div>
+            <!-- Series Tab -->
+            <div id="SeriesTab" class="tab-content active calculator">
+                <h2>Series Inductors Calculator</h2>
+                <p>Enter inductor values to calculate the equivalent inductance in series.</p>
+                
+                <div id="series-inductors" class="inductors-container">
+                    <div class="inductor-input">
+                        <label>L1:</label>
+                        <input type="number" min="0" step="0.01" value="10">
+                        <select class="unit-selector">
+                            <option value="1e-6">μH</option>
+                            <option value="1e-3" selected>mH</option>
+                            <option value="1">H</option>
+                        </select>
+                    </div>
+                    <div class="inductor-input">
+                        <label>L2:</label>
+                        <input type="number" min="0" step="0.01" value="22">
+                        <select class="unit-selector">
+                            <option value="1e-6">μH</option>
+                            <option value="1e-3" selected>mH</option>
+                            <option value="1">H</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="addInductor('series')">Add Inductor</button>
+                <button class="btn btn-outline" onclick="removeInductor('series')">Remove Inductor</button>
+                <button class="btn btn-primary" onclick="calculateInductance('series')">Calculate</button>
+                
+                <div id="series-result" class="result">
+                    <p>The equivalent inductance will be shown here.</p>
+                </div>
+            </div>
+            
+            <!-- Parallel Tab -->
+            <div id="ParallelTab" class="tab-content calculator">
+                <h2>Parallel Inductors Calculator</h2>
+                <p>Enter inductor values to calculate the equivalent inductance in parallel.</p>
+                
+                <div id="parallel-inductors" class="inductors-container">
+                    <div class="inductor-input">
+                        <label>L1:</label>
+                        <input type="number" min="0" step="0.01" value="10">
+                        <select class="unit-selector">
+                            <option value="1e-6">μH</option>
+                            <option value="1e-3" selected>mH</option>
+                            <option value="1">H</option>
+                        </select>
+                    </div>
+                    <div class="inductor-input">
+                        <label>L2:</label>
+                        <input type="number" min="0" step="0.01" value="22">
+                        <select class="unit-selector">
+                            <option value="1e-6">μH</option>
+                            <option value="1e-3" selected>mH</option>
+                            <option value="1">H</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="addInductor('parallel')">Add Inductor</button>
+                <button class="btn btn-outline" onclick="removeInductor('parallel')">Remove Inductor</button>
+                <button class="btn btn-primary" onclick="calculateInductance('parallel')">Calculate</button>
+                
+                <div id="parallel-result" class="result">
+                    <p>The equivalent inductance will be shown here.</p>
+                </div>
+            </div>
+            
+            <!-- Explanation Tab -->
+            <div id="ExplanationTab" class="tab-content calculator">
+                <h2>Theory of Inductors in Series and Parallel</h2>
+                
+                <div class="explanation">
+                    <h3>Inductors in Series</h3>
+                    <p>When inductors are connected in series, the equivalent inductance is calculated by adding the individual inductances:</p>
+                    <p style="text-align: center; font-size: 18px;">
+                        L<sub>eq</sub> = L<sub>1</sub> + L<sub>2</sub> + L<sub>3</sub> + ... + L<sub>n</sub>
+                    </p>
+                    <p>This means the equivalent inductance is always larger than the largest individual inductor in the series.</p>
+                    
+                    <h3>Inductors in Parallel</h3>
+                    <p>When inductors are connected in parallel, the equivalent inductance is calculated using:</p>
+                    <p style="text-align: center; font-size: 18px;">
+                        1/L<sub>eq</sub> = 1/L<sub>1</sub> + 1/L<sub>2</sub> + 1/L<sub>3</sub> + ... + 1/L<sub>n</sub>
+                    </p>
+                    <p>This means the equivalent inductance is always smaller than the smallest individual inductor in the parallel connection.</p>
+                    
+                    <h3>Physical Explanation</h3>
+                    <p><strong>Series connection:</strong> In series, the same current flows through each inductor, and the voltage drops add up. The total inductance is the sum of individual inductances because the magnetic fields add constructively.</p>
+                    <p><strong>Parallel connection:</strong> In parallel, the voltage across each inductor is the same, but the currents divide. The total inductance is less than any individual inductance because the magnetic fields interact to reduce the overall inductance.</p>
+                </div>
+            </div>
         </div>
-
-        <div id="info" class="tab-content calculator">
-            <h2>Inductor Color Code Information</h2>
+        
+        <!-- Info Tab -->
+        <div id="Info" class="main-tabcontent">
+            <h2>Inductor Information</h2>
             
             <div class="info-box">
-                <h3>4-Band Inductor Codes:</h3>
+                <h3>Inductor Color Code Chart</h3>
+                <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--background-secondary);">
+                    <thead>
+                        <tr style="background-color: var(--background-secondary);">
+                            <th style="border: 1px solid var(--background-secondary); padding: 8px;">Color</th>
+                            <th style="border: 1px solid var(--background-secondary); padding: 8px;">1st Digit</th>
+                            <th style="border: 1px solid var(--background-secondary); padding: 8px;">2nd Digit</th>
+                            <th style="border: 1px solid var(--background-secondary); padding: 8px;">Multiplier</th>
+                            <th style="border: 1px solid var(--background-secondary); padding: 8px;">Tolerance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: black; color: white;">Black</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">0</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">0</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">1μH</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">-</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: #966f33; color: white;">Brown</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">1</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">1</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">10μH</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±1%</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: red; color: white;">Red</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">2</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">2</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">100μH</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±2%</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: orange; color: black;">Orange</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">3</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">3</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">1mH</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±3%</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: yellow; color: black;">Yellow</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">4</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">4</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">10mH</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±4%</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: green; color: white;">Green</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">5</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">5</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">100mH</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±0.5%</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: blue; color: white;">Blue</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">6</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">6</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">1H</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±0.25%</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: violet; color: white;">Violet</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">7</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">7</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">10H</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±0.1%</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: gray; color: white;">Gray</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">8</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">8</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">100H</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±0.05%</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: white; color: black;">White</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">9</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">9</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">1000H</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">-</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: gold; color: black;">Gold</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">-</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">-</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">0.1μH</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±5%</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: silver; color: black;">Silver</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">-</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">-</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">0.01μH</td>
+                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±10%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="info-box">
+                <h3>Common Inductor Types</h3>
                 <ul>
-                    <li><strong>First two bands</strong>: Significant digits</li>
-                    <li><strong>Third band</strong>: Multiplier (power of 10)</li>
-                    <li><strong>Fourth band</strong>: Tolerance (Gold = ±5%, Silver = ±10%)</li>
-                    <li><strong>Result is in microhenries (μH)</strong></li>
+                    <li><strong>Air Core Inductors:</strong> No magnetic core, lowest inductance values, high frequency operation</li>
+                    <li><strong>Ferrite Core Inductors:</strong> Medium inductance values, good for RF applications</li>
+                    <li><strong>Iron Core Inductors:</strong> High inductance values, used in power applications</li>
+                    <li><strong>Toroidal Inductors:</strong> Donut-shaped cores with minimal electromagnetic interference</li>
+                    <li><strong>Multilayer Chip Inductors:</strong> Surface mount components for compact circuits</li>
                 </ul>
-                <p><strong>Example:</strong> Brown-Black-Silver-Gold = 10 × 0.01 = 0.1μH ±5%</p>
             </div>
             
             <div class="info-box">
-                <h3>5-Band Inductor Codes:</h3>
+                <h3>Unit Conversions</h3>
                 <ul>
-                    <li><strong>First three bands</strong>: Significant digits</li>
-                    <li><strong>Fourth band</strong>: Multiplier (power of 10)</li>
-                    <li><strong>Fifth band</strong>: Tolerance</li>
-                </ul>
-                <p><strong>Example:</strong> Brown-Black-Black-Silver-Gold = 100 × 0.01 = 1μH ±5%</p>
-            </div>
-            
-            <div class="info-box">
-                <h3>Unit Conversions:</h3>
-                <ul>
-                    <li>1 Henry (H) = 1,000,000 microhenries (μH)</li>
+                    <li>1 Henry (H) = 1,000 millihenries (mH)</li>
                     <li>1 millihenry (mH) = 1,000 microhenries (μH)</li>
+                    <li>1 microhenry (μH) = 1,000 nanohenries (nH)</li>
+                    <li>1 nanohenry (nH) = 1,000 picohenries (pH)</li>
                 </ul>
             </div>
         </div>
     </div>
-    
-    <!-- Series/Parallel Calculator Tab -->
-    <div id="SeriesParallel" class="main-tabcontent">
-        <div class="tabs">
-            <button class="tab-button active" onclick="switchCalcTab('SeriesTab')">Series Connection</button>
-            <button class="tab-button" onclick="switchCalcTab('ParallelTab')">Parallel Connection</button>
-            <button class="tab-button" onclick="switchCalcTab('ExplanationTab')">Theory</button>
-        </div>
-        
-        <!-- Series Tab -->
-        <div id="SeriesTab" class="tab-content active calculator">
-            <h2>Series Inductors Calculator</h2>
-            <p>Enter inductor values to calculate the equivalent inductance in series.</p>
-            
-            <div id="series-inductors" class="inductors-container">
-                <div class="inductor-input">
-                    <label>L1:</label>
-                    <input type="number" min="0" step="0.01" value="10">
-                    <select class="unit-selector">
-                        <option value="1e-6">μH</option>
-                        <option value="1e-3" selected>mH</option>
-                        <option value="1">H</option>
-                    </select>
-                </div>
-                <div class="inductor-input">
-                    <label>L2:</label>
-                    <input type="number" min="0" step="0.01" value="22">
-                    <select class="unit-selector">
-                        <option value="1e-6">μH</option>
-                        <option value="1e-3" selected>mH</option>
-                        <option value="1">H</option>
-                    </select>
-                </div>
-            </div>
-            
-            <button onclick="addInductor('series')">Add Inductor</button>
-            <button onclick="removeInductor('series')">Remove Inductor</button>
-            <button onclick="calculateInductance('series')">Calculate</button>
-            
-            <div id="series-result" class="result-box">
-                <p>The equivalent inductance will be shown here.</p>
-            </div>
-        </div>
-        
-        <!-- Parallel Tab -->
-        <div id="ParallelTab" class="tab-content calculator">
-            <h2>Parallel Inductors Calculator</h2>
-            <p>Enter inductor values to calculate the equivalent inductance in parallel.</p>
-            
-            <div id="parallel-inductors" class="inductors-container">
-                <div class="inductor-input">
-                    <label>L1:</label>
-                    <input type="number" min="0" step="0.01" value="10">
-                    <select class="unit-selector">
-                        <option value="1e-6">μH</option>
-                        <option value="1e-3" selected>mH</option>
-                        <option value="1">H</option>
-                    </select>
-                </div>
-                <div class="inductor-input">
-                    <label>L2:</label>
-                    <input type="number" min="0" step="0.01" value="22">
-                    <select class="unit-selector">
-                        <option value="1e-6">μH</option>
-                        <option value="1e-3" selected>mH</option>
-                        <option value="1">H</option>
-                    </select>
-                </div>
-            </div>
-            
-            <button onclick="addInductor('parallel')">Add Inductor</button>
-            <button onclick="removeInductor('parallel')">Remove Inductor</button>
-            <button onclick="calculateInductance('parallel')">Calculate</button>
-            
-            <div id="parallel-result" class="result-box">
-                <p>The equivalent inductance will be shown here.</p>
-            </div>
-        </div>
-        
-        <!-- Explanation Tab -->
-        <div id="ExplanationTab" class="tab-content calculator">
-            <h2>Theory of Inductors in Series and Parallel</h2>
-            
-            <div class="explanation">
-                <h3>Inductors in Series</h3>
-                <p>When inductors are connected in series, the equivalent inductance is calculated by adding the individual inductances:</p>
-                <p style="text-align: center; font-size: 18px;">
-                    L<sub>eq</sub> = L<sub>1</sub> + L<sub>2</sub> + L<sub>3</sub> + ... + L<sub>n</sub>
-                </p>
-                <p>This means the equivalent inductance is always larger than the largest individual inductor in the series.</p>
-                
-                <h3>Inductors in Parallel</h3>
-                <p>When inductors are connected in parallel, the equivalent inductance is calculated using:</p>
-                <p style="text-align: center; font-size: 18px;">
-                    1/L<sub>eq</sub> = 1/L<sub>1</sub> + 1/L<sub>2</sub> + 1/L<sub>3</sub> + ... + 1/L<sub>n</sub>
-                </p>
-                <p>This means the equivalent inductance is always smaller than the smallest individual inductor in the parallel connection.</p>
-                
-                <h3>Physical Explanation</h3>
-                <p><strong>Series connection:</strong> In series, the same current flows through each inductor, and the voltage drops add up. The total inductance is the sum of individual inductances because the magnetic fields add constructively.</p>
-                <p><strong>Parallel connection:</strong> In parallel, the voltage across each inductor is the same, but the currents divide. The total inductance is less than any individual inductance because the magnetic fields interact to reduce the overall inductance.</p>
-            </div>
-        </div>
-    </div>
 
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+    </button>
+<!-- Footer HTML -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="social-footer">
+      <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <div class="footer-bottom">
+      &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+      &copy; M.T.A.
+    </div>
+  </div>
+</footer>
     <script>
         // Color definitions for bands
         const colors = [
@@ -483,6 +779,34 @@
             document.getElementById(tabId).classList.add('active');
             document.querySelector(`#SeriesParallel button[onclick="switchCalcTab('${tabId}')"]`).classList.add('active');
         }
+
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or use preferred color scheme
+        const currentTheme = localStorage.getItem('theme') || 
+                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        if (currentTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            document.body.setAttribute('data-theme', 'light');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (document.body.getAttribute('data-theme') === 'light') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
 
         // Band selection for 4-band
         function selectBand(bandNum) {
@@ -618,7 +942,7 @@
                 const unit = parseFloat(units[i].value);
                 
                 if (isNaN(value) || value <= 0) {
-                    resultDiv.innerHTML = '<p style="color: red;">Error: All inductor values must be positive numbers.</p>';
+                    resultDiv.innerHTML = '<p style="color: var(--error-color);">Error: All inductor values must be positive numbers.</p>';
                     return;
                 }
                 

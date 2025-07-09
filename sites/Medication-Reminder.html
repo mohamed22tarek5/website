@@ -1,59 +1,306 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Medication Reminder</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class'
-    }
-  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary-color: #4e9eff;
+      --primary-dark: #3a6cf4;
+      --primary-light: #6ab1ff;
+      --background-dark: #121212;
+      --background-darker: #0a0a0a;
+      --background-secondary: #1a1a1a;
+      --card-dark: #1e1e1e;
+      --card-light: #252525;
+      --text-light: #ffffff;
+      --text-muted: #aaaaaa;
+      --success-color: #4caf50;
+      --error-color: #f44336;
+      --warning-color: #f1c40f;
+      --transition-speed: 0.3s;
+      --border-radius: 12px;
+      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Light mode variables */
+    [data-theme="light"] {
+      --background-dark: #f5f7fa;
+      --background-darker: #e8ebf0;
+      --background-secondary: #ffffff;
+      --card-dark: #ffffff;
+      --card-light: #f9f9f9;
+      --text-light: #333333;
+      --text-muted: #666666;
+      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: var(--background-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      transition: background-color var(--transition-speed) ease;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    h1, h2, h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .calculator {
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--box-shadow);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .calculator:hover {
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text-muted);
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--background-secondary);
+      border-radius: var(--border-radius);
+      background-color: var(--background-secondary);
+      color: var(--text-light);
+      font-size: 1em;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9em;
+      transition: all var(--transition-speed) ease;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(78, 158, 255, 0.6);
+    }
+
+    .btn-danger {
+      background-color: var(--error-color);
+      color: white;
+      box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+    }
+
+    .btn-danger:hover {
+      background-color: #d32f2f;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(244, 67, 54, 0.6);
+    }
+
+    .reminder-item {
+      background-color: var(--card-light);
+      padding: 15px;
+      border-radius: var(--border-radius);
+      margin-bottom: 15px;
+      box-shadow: var(--box-shadow);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .reminder-item:hover {
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .reminder-time {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    .remaining-time {
+      color: var(--warning-color);
+      font-weight: bold;
+    }
+
+    .social-footer {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .social-footer a {
+      color: var(--text-light);
+      font-size: 1.5em;
+      margin: 0 15px;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .social-footer a:hover {
+      color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+
+    /* Theme Toggle */
     .theme-toggle {
       position: fixed;
-      bottom: 20px;
-      left: 20px;
-      width: 40px;
-      height: 40px;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      background-color: #1f2937;
-      color: #fbbf24;
+      background-color: var(--card-dark);
+      color: var(--primary-color);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 1.2em;
+      box-shadow: var(--box-shadow);
       cursor: pointer;
+      transition: all var(--transition-speed) ease;
       z-index: 999;
     }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+      
+      .theme-toggle {
+        bottom: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
+      }
+    }
+     footer {
+    background-color: var(--card-dark);
+    color: var(--text-light);
+    text-align: center;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+  }
+
+  .social-footer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .social-footer a {
+    color: var(--text-light);
+    font-size: 1.5em;
+    margin: 0 15px;
+    transition: all var(--transition-speed) ease;
+    display: inline-block;
+  }
+
+  .social-footer a:hover {
+    color: var(--primary-color);
+    transform: translateY(-5px);
+  }
+
+  .footer-bottom {
+    margin-top: 20px;
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
   </style>
 </head>
+<body>
+  <div class="container">
+    <h1 class="text-center">Medication Reminder</h1>
+    <p class="text-center" style="color: var(--text-muted); margin-bottom: 30px;">Never miss your important medications</p>
+    
+    <div class="calculator">
+      <h2>Add New Medication</h2>
+      <div class="input-group">
+        <label class="input-label">Medication Name</label>
+        <input type="text" id="medicationName" class="input-field" placeholder="Enter medication name">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Time</label>
+        <input type="time" id="time" class="input-field">
+      </div>
+      <button class="btn btn-primary" onclick="addMedication()">Add Medication</button>
+    </div>
 
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white p-6">
-  <div class="max-w-xl mx-auto">
-    <h1 class="text-3xl font-bold text-center text-blue-600 dark:text-blue-400 mb-6">Medication Reminder</h1>
+    <h2 class="text-center" style="color: var(--error-color); margin: 30px 0 15px;">Next Doses</h2>
+    <div id="remindersContainer" class="space-y-4"></div>
 
-    <label for="medicationName" class="block font-semibold mb-1">Medication Name</label>
-    <input type="text" id="medicationName" placeholder="Enter medication name" class="w-full mb-4 p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
-
-    <label for="time" class="block font-semibold mb-1">Time</label>
-    <input type="time" id="time" class="w-full mb-4 p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
-
-    <button onclick="addMedication()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">Add Medication</button>
-
-    <h2 class="text-2xl text-red-500 dark:text-red-400 mt-8 mb-4">Next Doses:</h2>
-    <div id="remindersContainer" class="space-y-3"></div>
-
-    <div class="flex justify-center space-x-4 mt-8 text-gray-600 dark:text-gray-300">
-      <a href="#"><i class="fab fa-linkedin"></i></a>
-      <a href="#"><i class="fab fa-twitter"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-facebook"></i></a>
+    <!-- Footer HTML -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="social-footer">
+      <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <div class="footer-bottom">
+      &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+      &copy; M.T.A.
     </div>
   </div>
+</footer>
+ 
 
-  <button class="theme-toggle" onclick="document.documentElement.classList.toggle('dark')">🌓</button>
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <i class="fas fa-moon"></i>
+  </button>
 
   <script>
     var remindersInterval;
@@ -62,15 +309,19 @@
     function addMedication() {
       var medicationName = document.getElementById("medicationName").value;
       var time = document.getElementById("time").value;
+      
       if (medicationName.trim() === "" || time.trim() === "") {
-        alert("Please enter the medication name and time.");
+        alert("Please enter both the medication name and time.");
         return;
       }
+      
       var medications = JSON.parse(localStorage.getItem("medications")) || [];
       medications.push({ name: medicationName, time: time });
       localStorage.setItem("medications", JSON.stringify(medications));
+      
       document.getElementById("medicationName").value = "";
       document.getElementById("time").value = "";
+      
       displayReminders();
     }
 
@@ -86,46 +337,71 @@
       var remindersContainer = document.getElementById("remindersContainer");
       remindersContainer.innerHTML = "";
 
+      // Clear all existing timeouts
+      reminderTimeouts.forEach(timeout => clearTimeout(timeout));
+      reminderTimeouts = [];
+
+      if (medications.length === 0) {
+        remindersContainer.innerHTML = '<p style="text-align: center; color: var(--text-muted);">No medications scheduled</p>';
+        return;
+      }
+
       medications.forEach(function(medication, index) {
         var reminderTime = new Date(new Date().toDateString() + " " + medication.time);
         var remainingTime = reminderTime.getTime() - Date.now();
+        
+        // If time has passed today, schedule for tomorrow
         if (remainingTime <= 0) {
           reminderTime.setDate(reminderTime.getDate() + 1);
           remainingTime = reminderTime.getTime() - Date.now();
         }
 
         var reminderItem = document.createElement("div");
-        reminderItem.className = "p-4 bg-white dark:bg-gray-700 rounded shadow";
-        reminderItem.innerHTML = `<strong>${medication.name}</strong> - ${medication.time} - Remaining Time: <span id='remainingTime${index}'>${formatRemainingTime(remainingTime)}</span>`;
+        reminderItem.className = "reminder-item";
+        
+        reminderItem.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>${medication.name}</strong>
+              <div class="reminder-time">${medication.time}</div>
+              <div>Next dose in: <span class="remaining-time" id='remainingTime${index}'>${formatRemainingTime(remainingTime)}</span></div>
+            </div>
+            <button onclick="removeMedication(${index})" class="btn btn-danger" style="padding: 8px 16px;">Remove</button>
+          </div>
+        `;
 
-        var removeButton = document.createElement("button");
-        removeButton.innerHTML = "Remove";
-        removeButton.className = "block mt-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded";
-        removeButton.onclick = function() { removeMedication(index); };
-
-        reminderItem.appendChild(removeButton);
         remindersContainer.appendChild(reminderItem);
 
+        // Set timeout for this reminder
         var timeout = setTimeout(function() {
-          alert("Time to take your medication: " + medication.name);
+          alert(`Time to take your medication: ${medication.name}`);
+          displayReminders(); // Refresh the display after alert
         }, remainingTime);
+        
         reminderTimeouts.push(timeout);
       });
 
+      // Update remaining times every second
       clearInterval(remindersInterval);
       remindersInterval = setInterval(updateRemainingTimes, 1000);
     }
 
     function updateRemainingTimes() {
       var medications = JSON.parse(localStorage.getItem("medications")) || [];
+      
       medications.forEach(function(medication, index) {
         var reminderTime = new Date(new Date().toDateString() + " " + medication.time);
         var remainingTime = reminderTime.getTime() - Date.now();
+        
         if (remainingTime <= 0) {
           reminderTime.setDate(reminderTime.getDate() + 1);
           remainingTime = reminderTime.getTime() - Date.now();
         }
-        document.getElementById("remainingTime" + index).innerHTML = formatRemainingTime(remainingTime);
+        
+        var remainingElement = document.getElementById("remainingTime" + index);
+        if (remainingElement) {
+          remainingElement.innerHTML = formatRemainingTime(remainingTime);
+        }
       });
     }
 
@@ -136,9 +412,38 @@
       return hours + "h " + minutes + "m " + seconds + "s";
     }
 
-    window.onload = displayReminders;
-  </script>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-</body>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Check for saved theme preference or use preferred color scheme
+    const currentTheme = localStorage.getItem('theme') || 
+                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    if (currentTheme === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    } else {
+      document.body.setAttribute('data-theme', 'light');
+      themeIcon.classList.replace('fa-sun', 'fa-moon');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      if (document.body.getAttribute('data-theme') === 'light') {
+        document.body.setAttribute('data-theme', 'dark');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.body.setAttribute('data-theme', 'light');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    });
 
+    // Initialize on load
+    window.onload = displayReminders;
+    // Set current year in footer
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>

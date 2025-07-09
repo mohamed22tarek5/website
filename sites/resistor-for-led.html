@@ -1,123 +1,291 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LED Resistor Calculator</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    // Tailwind CSS dark mode setup
-    tailwind.config = {
-      darkMode: 'class'
-    }
-  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root {
+      --primary-color: #4e9eff;
+      --primary-dark: #3a6cf4;
+      --primary-light: #6ab1ff;
+      --background-dark: #121212;
+      --background-darker: #0a0a0a;
+      --background-secondary: #1a1a1a;
+      --card-dark: #1e1e1e;
+      --card-light: #252525;
+      --text-light: #ffffff;
+      --text-muted: #aaaaaa;
+      --success-color: #4caf50;
+      --error-color: #f44336;
+      --warning-color: #f1c40f;
+      --transition-speed: 0.3s;
+      --border-radius: 12px;
+      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Light mode variables */
+    [data-theme="light"] {
+      --background-dark: #f5f7fa;
+      --background-darker: #e8ebf0;
+      --background-secondary: #ffffff;
+      --card-dark: #ffffff;
+      --card-light: #f9f9f9;
+      --text-light: #333333;
+      --text-muted: #666666;
+      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: var(--background-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      transition: background-color var(--transition-speed) ease;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    h1, h2, h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .calculator {
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--box-shadow);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .calculator:hover {
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border: 1px solid var(--background-secondary);
+      border-radius: var(--border-radius);
+      background-color: var(--background-secondary);
+      color: var(--text-light);
+      font-size: 1em;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9em;
+      transition: all var(--transition-speed) ease;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(78, 158, 255, 0.6);
+    }
+
     .result-box {
-      transition: all 0.3s ease;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: var(--border-radius);
+      background-color: var(--background-secondary);
+      transition: all var(--transition-speed) ease;
     }
+
     .result-box:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transform: translateY(-3px);
+      box-shadow: var(--box-shadow-hover);
     }
+
+    .result-label {
+      font-size: 0.9em;
+      color: var(--text-muted);
+    }
+
+    .result-value {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .info-box {
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: var(--border-radius);
+      background-color: rgba(241, 196, 15, 0.1);
+      border-left: 4px solid var(--warning-color);
+      color: var(--text-light);
+    }
+
+    .info-box h3 {
+      color: var(--warning-color);
+    }
+
+    .info-box ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .info-box li {
+      margin-bottom: 5px;
+    }
+
+    /* Theme Toggle */
     .theme-toggle {
       position: fixed;
-      bottom: 20px;
-      left: 20px;
-      width: 40px;
-      height: 40px;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      background-color: #1f2937;
-      color: #fbbf24;
+      background-color: var(--card-dark);
+      color: var(--primary-color);
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 1.2em;
+      box-shadow: var(--box-shadow);
       cursor: pointer;
+      transition: all var(--transition-speed) ease;
       z-index: 999;
     }
-    
-footer {
-  background-color: var(--card-dark);
-  color: var(--text-light);
-  text-align: center;
-  padding: 30px;
-  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
-}
 
-.social-footer {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-}
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
 
-.social-footer a {
-  color: var(--text-light);
-  font-size: 1.5em;
-  margin: 0 15px;
-  transition: all var(--transition-speed) ease;
-  display: inline-block;
-}
+    /* Footer */
+    footer {
+      background-color: var(--card-dark);
+      color: var(--text-light);
+      text-align: center;
+      padding: 30px;
+      margin-top: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
 
-.social-footer a:hover {
-  color: var(--primary-color);
-  transform: translateY(-5px);
-}
+    .social-footer {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
 
-.footer-bottom {
-  margin-top: 20px;
-  font-size: 0.9em;
-  opacity: 0.8;
-}
+    .social-footer a {
+      color: var(--text-light);
+      font-size: 1.5em;
+      margin: 0 15px;
+      transition: all var(--transition-speed) ease;
+      display: inline-block;
+    }
+
+    .social-footer a:hover {
+      color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      margin-top: 20px;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+      
+      .theme-toggle {
+        bottom: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
+      }
+    }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white">
-  <div class="container mx-auto px-4 py-8 max-w-md">
-    <div class="text-center mb-6">
-      <h1 class="text-2xl font-bold">LED Resistor Calculator</h1>
-      <p class="text-gray-600 dark:text-gray-300">Find the right resistor for your LED circuit</p>
+<body>
+  <div class="container">
+    <h1 class="text-center">LED Resistor Calculator</h1>
+    <p class="text-center" style="color: var(--text-muted); margin-bottom: 30px;">Find the right resistor for your LED circuit</p>
+    
+    <div class="calculator">
+      <h2>Input Parameters</h2>
+      <div class="input-group">
+        <label for="supplyVoltage">Power Supply Voltage (V)</label>
+        <input type="number" id="supplyVoltage" class="input-field" placeholder="e.g., 12" step="0.1" min="0" value="12">
+      </div>
+      <div class="input-group">
+        <label for="ledVoltage">LED Forward Voltage (V)</label>
+        <input type="number" id="ledVoltage" class="input-field" placeholder="e.g., 2.0" step="0.1" min="0" max="5" value="2.0">
+      </div>
+      <div class="input-group">
+        <label for="ledCurrent">LED Current (mA)</label>
+        <input type="number" id="ledCurrent" class="input-field" placeholder="e.g., 20" step="1" min="1" max="50" value="20">
+      </div>
+      <button class="btn btn-primary" onclick="calculateResistor()">Calculate Resistor</button>
     </div>
 
-    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-6">
-      <h2 class="text-xl font-semibold mb-4">Input Parameters</h2>
-      <div class="space-y-4">
-        <div>
-          <label for="supplyVoltage" class="block text-sm font-medium mb-1">Power Supply Voltage (V)</label>
-          <input type="number" id="supplyVoltage" class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600" placeholder="e.g., 12" step="0.1" min="0" value="12">
-        </div>
-        <div>
-          <label for="ledVoltage" class="block text-sm font-medium mb-1">LED Forward Voltage (V)</label>
-          <input type="number" id="ledVoltage" class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600" placeholder="e.g., 2.0" step="0.1" min="0" max="5" value="2.0">
-        </div>
-        <div>
-          <label for="ledCurrent" class="block text-sm font-medium mb-1">LED Current (mA)</label>
-          <input type="number" id="ledCurrent" class="w-full px-3 py-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600" placeholder="e.g., 20" step="1" min="1" max="50" value="20">
-        </div>
-        <button onclick="calculateResistor()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition duration-200">
-          Calculate Resistor
-        </button>
+    <div class="calculator">
+      <h2>Results</h2>
+      <div class="result-box">
+        <div class="result-label">Required Resistor Value</div>
+        <div id="resistorValue" class="result-value">-- Ω</div>
+      </div>
+      <div class="result-box">
+        <div class="result-label">Nearest Standard Resistor</div>
+        <div id="standardResistor" class="result-value">-- Ω</div>
+      </div>
+      <div class="result-box">
+        <div class="result-label">Resistor Power (W)</div>
+        <div id="resistorPower" class="result-value">-- W</div>
       </div>
     </div>
 
-    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-      <h2 class="text-xl font-semibold mb-4">Results</h2>
-      <div class="space-y-3">
-        <div class="result-box bg-blue-50 dark:bg-blue-900 p-4 rounded border border-blue-100 dark:border-blue-700">
-          <p class="text-sm text-blue-600 dark:text-blue-300">Required Resistor Value</p>
-          <p id="resistorValue" class="text-xl font-bold text-blue-800 dark:text-blue-200">-- Ω</p>
-        </div>
-        <div class="result-box bg-green-50 dark:bg-green-900 p-4 rounded border border-green-100 dark:border-green-700">
-          <p class="text-sm text-green-600 dark:text-green-300">Nearest Standard Resistor</p>
-          <p id="standardResistor" class="text-xl font-bold text-green-800 dark:text-green-200">-- Ω</p>
-        </div>
-        <div class="result-box bg-yellow-50 dark:bg-yellow-900 p-4 rounded border border-yellow-100 dark:border-yellow-700">
-          <p class="text-sm text-yellow-600 dark:text-yellow-300">Resistor Power (W)</p>
-          <p id="resistorPower" class="text-xl font-bold text-yellow-800 dark:text-yellow-200">-- W</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900 border-l-4 border-yellow-400 dark:border-yellow-600 rounded">
-      <h3 class="font-semibold text-yellow-800 dark:text-yellow-200">Important Notes:</h3>
-      <ul class="list-disc pl-5 text-sm text-yellow-700 dark:text-yellow-300 mt-2 space-y-1">
+    <div class="info-box">
+      <h3>Important Notes:</h3>
+      <ul>
         <li>Standard resistors: E12/E24 series (10%, 5% tolerance)</li>
         <li>Use a higher wattage resistor for safety (e.g., 0.25W or 0.5W)</li>
         <li>For multiple LEDs, calculate resistors separately or use a series/parallel configuration</li>
@@ -126,24 +294,47 @@ footer {
     </div>
   </div>
 
-  <!-- Toggle Theme Button -->
-  <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="social-footer">
+        <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+      &copy; M.T.A.
+    </div>
+  </footer>
 
   <script>
-    const standardResistors = [10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82, 100, 120, 150, 180, 220, 270, 330, 390, 470, 560, 680, 820];
+    // Standard resistor values (E12 series)
+    const standardResistors = [10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82, 
+                              100, 120, 150, 180, 220, 270, 330, 390, 470, 560, 680, 820];
 
     function calculateResistor() {
       const supplyVoltage = parseFloat(document.getElementById('supplyVoltage').value);
       const ledVoltage = parseFloat(document.getElementById('ledVoltage').value);
       const ledCurrent = parseFloat(document.getElementById('ledCurrent').value);
 
-      if (isNaN(supplyVoltage) || supplyVoltage <= 0 || isNaN(ledVoltage) || ledVoltage <= 0 || ledVoltage >= supplyVoltage || isNaN(ledCurrent) || ledCurrent <= 0) {
-        alert("Please enter valid values.");
+      if (isNaN(supplyVoltage) || supplyVoltage <= 0 || 
+          isNaN(ledVoltage) || ledVoltage <= 0 || ledVoltage >= supplyVoltage || 
+          isNaN(ledCurrent) || ledCurrent <= 0) {
+        alert("Please enter valid values.\n\n- All values must be positive numbers\n- LED voltage must be less than supply voltage");
         return;
       }
 
+      // Calculate resistor value (Ohm's Law: R = (Vs - Vf) / I)
       const resistorValue = (supplyVoltage - ledVoltage) / (ledCurrent / 1000);
 
+      // Find nearest standard resistor value
       let nearestResistor = standardResistors[0];
       let minDifference = Math.abs(resistorValue - nearestResistor);
 
@@ -155,31 +346,45 @@ footer {
         }
       }
 
+      // Calculate power dissipation (P = I²R)
       const resistorPower = Math.pow(ledCurrent / 1000, 2) * nearestResistor;
 
+      // Display results
       document.getElementById('resistorValue').textContent = resistorValue.toFixed(0) + " Ω";
       document.getElementById('standardResistor').textContent = nearestResistor + " Ω";
       document.getElementById('resistorPower').textContent = resistorPower.toFixed(3) + " W";
     }
 
-    function toggleTheme() {
-      document.documentElement.classList.toggle('dark');
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Check for saved theme preference or use preferred color scheme
+    const currentTheme = localStorage.getItem('theme') || 
+                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    if (currentTheme === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    } else {
+      document.body.setAttribute('data-theme', 'light');
+      themeIcon.classList.replace('fa-sun', 'fa-moon');
     }
+    
+    themeToggle.addEventListener('click', () => {
+      if (document.body.getAttribute('data-theme') === 'light') {
+        document.body.setAttribute('data-theme', 'dark');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.body.setAttribute('data-theme', 'light');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
 </body>
-<footer class="footer">
-  <div class="footer-content">
-    <div class="social-footer">
-      <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-      <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-      <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
-    &copy; M.T.A.
-  </div>
-</footer>
-
 </html>
