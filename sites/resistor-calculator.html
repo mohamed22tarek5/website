@@ -4,125 +4,182 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resistor Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #e74c3c;
+            --primary-dark: #c0392b;
+            --primary-light: #ff6b5b;
+            --background-dark: #121212;
+            --background-darker: #0a0a0a;
+            --background-secondary: #1a1a1a;
+            --card-dark: #1e1e1e;
+            --card-light: #252525;
+            --text-light: #ffffff;
+            --text-muted: #aaaaaa;
+            --success-color: #4caf50;
+            --error-color: #f44336;
+            --transition-speed: 0.3s;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Light mode variables */
+        [data-theme="light"] {
+            --background-dark: #f5f7fa;
+            --background-darker: #e8ebf0;
+            --background-secondary: #ffffff;
+            --card-dark: #ffffff;
+            --card-light: #f9f9f9;
+            --text-light: #333333;
+            --text-muted: #666666;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 20px auto;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            transition: background-color var(--transition-speed) ease;
             padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
-            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* Calculator Styles */
+        .calculator-container {
+            max-width: 1000px;
+            margin: 0 auto;
         }
         
-        body.dark-mode {
-            background-color: #1a1a1a;
-            color: #f0f0f0;
+        /* Tab styles */
+        .main-tabs {
+            overflow: hidden;
+            border: 1px solid var(--background-secondary);
+            background-color: var(--card-light);
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            margin-bottom: 0;
         }
         
-        h1 {
-            color: #2c3e50;
-            text-align: center;
+        .main-tab-button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            color: var(--text-light);
+            font-weight: bold;
         }
         
-        body.dark-mode h1 {
-            color: #f0f0f0;
+        .main-tab-button:hover {
+            background-color: var(--background-secondary);
+        }
+        
+        .main-tab-button.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .main-tabcontent {
+            display: none;
+            padding: 20px;
+            border: 1px solid var(--background-secondary);
+            border-top: none;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            background-color: var(--card-dark);
+            box-shadow: var(--box-shadow);
+        }
+        
+        /* Color code calculator styles */
+        .calculator {
+            border: 1px solid var(--background-secondary);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+        }
+        
+        .input-field {
+            margin: 10px 0;
+            padding: 12px 15px;
+            width: 200px;
+            border: 1px solid var(--background-secondary);
+            border-radius: var(--border-radius);
+            background-color: var(--background-secondary);
+            color: var(--text-light);
+            font-family: inherit;
+            font-size: 1em;
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+        }
+        
+        .result {
+            font-size: 1.2em;
+            margin: 20px 0;
+            padding: 15px;
+            background: var(--background-secondary);
+            border-radius: var(--border-radius);
+            color: var(--text-light);
+            border-left: 4px solid var(--primary-color);
         }
         
         .tabs {
             margin-bottom: 20px;
-            display: flex;
-            border-bottom: 1px solid #ddd;
-            overflow-x: auto;
-            scrollbar-width: thin;
-            scrollbar-color: #e74c3c #f5f5f5;
-        }
-        
-        body.dark-mode .tabs {
-            border-bottom-color: #555;
-            scrollbar-color: #c0392b #1a1a1a;
-        }
-        
-        .tabs::-webkit-scrollbar {
-            height: 6px;
-        }
-        
-        .tabs::-webkit-scrollbar-track {
-            background: #f5f5f5;
-        }
-        
-        body.dark-mode .tabs::-webkit-scrollbar-track {
-            background: #1a1a1a;
-        }
-        
-        .tabs::-webkit-scrollbar-thumb {
-            background-color: #e74c3c;
-            border-radius: 3px;
-        }
-        
-        body.dark-mode .tabs::-webkit-scrollbar-thumb {
-            background-color: #c0392b;
         }
         
         .tab-button {
             padding: 10px 20px;
             margin-right: 10px;
             border: none;
-            background: #f0f0f0;
+            background: var(--background-secondary);
+            color: var(--text-light);
             cursor: pointer;
-            border-radius: 4px 4px 0 0;
-            border: 1px solid transparent;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        
-        body.dark-mode .tab-button {
-            background: #333;
-            color: #f0f0f0;
+            border-radius: var(--border-radius);
+            transition: all var(--transition-speed) ease;
         }
         
         .tab-button.active {
-            background: #e74c3c;
+            background: var(--primary-color);
             color: white;
-            border-bottom-color: transparent;
-        }
-        
-        body.dark-mode .tab-button.active {
-            background: #c0392b;
         }
         
         .tab-content {
             display: none;
-            background-color: white;
-            border-radius: 0 0 8px 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        body.dark-mode .tab-content {
-            background-color: #2d2d2d;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
         .tab-content.active {
             display: block;
         }
         
-        /* Color Code Calculator Styles */
-        .band-select {
-            margin: 10px 0;
-            padding: 8px;
-            width: 150px;
-            background-color: white;
-            border: 1px solid #ddd;
+        .info-box {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+            color: var(--text-light);
         }
         
-        body.dark-mode .band-select {
-            background-color: #333;
-            border-color: #555;
-            color: #f0f0f0;
-        }
-        
+        /* Resistor display styles */
         .resistor-display {
             width: 300px;
             height: 60px;
@@ -132,7 +189,11 @@
             border-radius: 30px;
         }
         
-        body.dark-mode .resistor-display {
+        [data-theme="light"] .resistor-display {
+            background: #d4a373;
+        }
+        
+        [data-theme="dark"] .resistor-display {
             background: #8b5a2b;
         }
         
@@ -143,174 +204,154 @@
             top: 0;
         }
         
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f9f1f1;
-            border-radius: 4px;
-            border-left: 4px solid #e74c3c;
-            font-size: 18px;
-        }
-        
-        body.dark-mode .result {
-            background-color: #3a2a2a;
-            border-left-color: #c0392b;
-        }
-        
-        .temp-coeff {
-            margin-top: 10px;
-            font-style: italic;
-            color: #666;
-        }
-        
-        body.dark-mode .temp-coeff {
-            color: #aaa;
-        }
-        
-        /* SMD Calculator Styles */
-        .smd-input {
-            padding: 10px;
-            width: 200px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        
-        body.dark-mode .smd-input {
-            background-color: #333;
-            border-color: #555;
-            color: #f0f0f0;
-        }
-        
-        /* Series & Parallel Resistor Calculator Styles */
-        .container {
-            margin-bottom: 20px;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-        }
-        
+        /* Series/parallel calculator styles */
         .resistors-container {
             margin-top: 15px;
         }
         
-        button {
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all var(--transition-speed) ease;
             cursor: pointer;
+            border: none;
+            outline: none;
             margin-right: 10px;
             margin-bottom: 10px;
         }
         
-        button:hover {
-            background-color: #c0392b;
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
         }
         
-        body.dark-mode button {
-            background-color: #c0392b;
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6);
         }
         
-        body.dark-mode button:hover {
-            background-color: #a5281b;
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
         }
         
         input {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 12px 15px;
+            border: 1px solid var(--background-secondary);
+            border-radius: var(--border-radius);
             margin-bottom: 10px;
-            width: 100px;
+            width: 120px;
+            background-color: var(--background-secondary);
+            color: var(--text-light);
+            transition: all var(--transition-speed) ease;
         }
         
-        body.dark-mode input {
-            background-color: #333;
-            border-color: #555;
-            color: #f0f0f0;
+        input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
         }
         
         label {
             display: inline-block;
             margin-right: 10px;
+            color: var(--text-light);
         }
         
         .resistor-input {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .resistor-input span {
+            margin-left: 5px;
+            color: var(--text-light);
         }
         
         .unit-selector {
             margin-left: 10px;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 12px 15px;
+            border: 1px solid var(--background-secondary);
+            border-radius: var(--border-radius);
+            background-color: var(--background-secondary);
+            color: var(--text-light);
+            transition: all var(--transition-speed) ease;
         }
         
-        body.dark-mode .unit-selector {
-            background-color: #333;
-            border-color: #555;
-            color: #f0f0f0;
+        .unit-selector:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
         }
         
+        .explanation {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(241, 196, 15, 0.1);
+            border-radius: var(--border-radius);
+            border-left: 4px solid #f1c40f;
+            color: var(--text-light);
+        }
+
         .circuit-diagram {
             margin: 20px 0;
             text-align: center;
         }
         
-        select {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+        .temp-coeff {
+            margin-top: 10px;
+            font-style: italic;
+            color: var(--text-muted);
         }
         
-        body.dark-mode select {
-            background-color: #333;
-            border-color: #555;
-            color: #f0f0f0;
-        }
-        
-        /* Dark mode toggle button */
-        .dark-mode-toggle {
+        /* Dark Mode Toggle */
+        .theme-toggle {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--card-dark);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            box-shadow: var(--box-shadow);
             cursor: pointer;
-            z-index: 100;
+            transition: all var(--transition-speed) ease;
+            z-index: 999;
         }
         
-        body.dark-mode .dark-mode-toggle {
-            background: #c0392b;
+        .theme-toggle:hover {
+            transform: scale(1.1);
         }
-        
-        .dark-mode-toggle:hover {
-            background: #c0392b;
-        }
-        
-        body.dark-mode .dark-mode-toggle:hover {
-            background: #a5281b;
-        }
-        
-        /* Responsive adjustments */
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-                margin: 10px;
+            .input-field {
+                width: 100%;
             }
             
-            .tabs {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
+            .tab-button {
+                padding: 8px 12px;
+                font-size: 14px;
             }
             
             .resistor-display {
@@ -320,199 +361,412 @@
     </style>
 </head>
 <body>
-    <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
-    
-    <h1>Resistor Calculator</h1>
-    
-    <div class="tabs">
-        <button class="tab-button active" onclick="switchTab('color-code')">Color Code Calculator</button>
-        <button class="tab-button" onclick="switchTab('smd')">SMD Calculator</button>
-        <button class="tab-button" onclick="switchTab('series')">Series Connection</button>
-        <button class="tab-button" onclick="switchTab('parallel')">Parallel Connection</button>
-    </div>
-    
-    <!-- Color Code Calculator Tab -->
-    <div id="color-code" class="tab-content active">
-        <h2>Color Code Resistor Calculator</h2>
-        <div>
-            <select id="bandCount" onchange="updateBands()">
-                <option value="4">4 Band Resistor</option>
-                <option value="5">5 Band Resistor</option>
-                <option value="6">6 Band Resistor</option>
-            </select>
+    <div class="calculator-container">
+        <h1>Resistor Calculators</h1>
+        <p class="section-subtitle">Tools for electronics engineers and hobbyists</p>
+        
+        <div class="main-tabs">
+            <button class="main-tab-button active" onclick="openMainTab(event, 'ColorCode')">Color Code</button>
+            <button class="main-tab-button" onclick="openMainTab(event, 'SMD')">SMD Code</button>
+            <button class="main-tab-button" onclick="openMainTab(event, 'SeriesParallel')">Series/Parallel</button>
+            <button class="main-tab-button" onclick="openMainTab(event, 'Info')">Info</button>
         </div>
         
-        <div class="resistor-display" id="resistorDisplay"></div>
-        
-        <div id="bandSelectors"></div>
-        
-        <div class="result" id="colorResult">Resistance: 0Ω ±0%</div>
-        <div class="temp-coeff" id="tempCoeff"></div>
-    </div>
-    
-    <!-- SMD Calculator Tab -->
-    <div id="smd" class="tab-content">
-        <h2>SMD Resistor Calculator</h2>
-        <p>Enter SMD code (e.g., 103, 1002, 4R7)</p>
-        <input type="text" class="smd-input" id="smdCode" placeholder="Enter SMD code" oninput="calculateSMD()">
-        <div class="result" id="smdResult">Resistance: 0Ω</div>
-    </div>
-    
-    <!-- Series Calculator Tab -->
-    <div id="series" class="tab-content">
-        <h2>Series Resistors Calculator</h2>
-        <p>Enter resistor values to calculate the equivalent resistance in series.</p>
-        
-        <div class="circuit-diagram">
-            <svg width="400" height="100" viewBox="0 0 400 100">
-                <!-- Power Source -->
-                <circle cx="30" cy="50" r="10" stroke="black" stroke-width="2" fill="white" />
-                <line x1="30" y1="30" x2="30" y2="70" stroke="black" stroke-width="2" />
-                <line x1="20" y1="40" x2="20" y2="60" stroke="black" stroke-width="2" />
-                
-                <!-- Wire to First Resistor -->
-                <line x1="40" y1="50" x2="80" y2="50" stroke="black" stroke-width="2" />
-                
-                <!-- First Resistor -->
-                <rect x="80" y="40" width="40" height="20" stroke="black" stroke-width="2" fill="#f9d5d1" />
-                <text x="100" y="55" text-anchor="middle" font-size="12">R₁</text>
-                
-                <!-- Wire between Resistors -->
-                <line x1="120" y1="50" x2="160" y2="50" stroke="black" stroke-width="2" />
-                
-                <!-- Second Resistor -->
-                <rect x="160" y="40" width="40" height="20" stroke="black" stroke-width="2" fill="#f9d5d1" />
-                <text x="180" y="55" text-anchor="middle" font-size="12">R₂</text>
-                
-                <!-- Wire after Second Resistor -->
-                <line x1="200" y1="50" x2="240" y2="50" stroke="black" stroke-width="2" />
-                
-                <!-- Third Resistor (with dots to indicate more) -->
-                <rect x="240" y="40" width="40" height="20" stroke="black" stroke-width="2" fill="#f9d5d1" />
-                <text x="260" y="55" text-anchor="middle" font-size="12">R₃</text>
-                
-                <!-- Dots to indicate more resistors -->
-                <circle cx="300" cy="50" r="2" fill="black" />
-                <circle cx="310" cy="50" r="2" fill="black" />
-                <circle cx="320" cy="50" r="2" fill="black" />
-                
-                <!-- Wire back to source -->
-                <line x1="340" y1="50" x2="370" y2="50" stroke="black" stroke-width="2" />
-                <line x1="370" y1="50" x2="370" y2="70" stroke="black" stroke-width="2" />
-                <line x1="370" y1="70" x2="30" y2="70" stroke="black" stroke-width="2" />
-            </svg>
-        </div>
-        
-        <div id="series-resistors" class="resistors-container">
-            <div class="resistor-input">
-                <label>R1:</label>
-                <input type="number" min="0" step="0.01" value="100">
-                <select class="unit-selector">
-                    <option value="1">Ω</option>
-                    <option value="1000" selected>kΩ</option>
-                    <option value="1000000">MΩ</option>
+        <!-- Color Code Calculator Tab -->
+        <div id="ColorCode" class="main-tabcontent" style="display: block;">
+            <h2>Resistor Color Code Calculator</h2>
+            <p>Select the number of bands and colors to calculate the resistance value.</p>
+            
+            <div>
+                <select class="input-field" id="bandCount" onchange="updateBands()">
+                    <option value="4">4 Band Resistor</option>
+                    <option value="5">5 Band Resistor</option>
+                    <option value="6">6 Band Resistor</option>
                 </select>
             </div>
-            <div class="resistor-input">
-                <label>R2:</label>
-                <input type="number" min="0" step="0.01" value="220">
-                <select class="unit-selector">
-                    <option value="1">Ω</option>
-                    <option value="1000" selected>kΩ</option>
-                    <option value="1000000">MΩ</option>
-                </select>
+            
+            <div class="resistor-display" id="resistorDisplay"></div>
+            
+            <div id="bandSelectors"></div>
+            
+            <div class="result" id="colorResult">Resistance: 0Ω ±0%</div>
+            <div class="temp-coeff" id="tempCoeff"></div>
+        </div>
+        
+        <!-- SMD Calculator Tab -->
+        <div id="SMD" class="main-tabcontent">
+            <h2>SMD Resistor Calculator</h2>
+            <p>Enter SMD code (e.g., 103, 1002, 4R7):</p>
+            <input type="text" class="input-field" id="smdCode" placeholder="Enter SMD code" oninput="calculateSMD()">
+            <div class="result" id="smdResult">Resistance: 0Ω</div>
+            
+            <div class="info-box">
+                <h3>SMD Resistor Code Examples:</h3>
+                <ul>
+                    <li><strong>103</strong> = 10 × 10³ = 10,000Ω (10kΩ)</li>
+                    <li><strong>1002</strong> = 100 × 10² = 10,000Ω (10kΩ)</li>
+                    <li><strong>4R7</strong> = 4.7Ω</li>
+                    <li><strong>0R1</strong> = 0.1Ω</li>
+                    <li><strong>R10</strong> = 0.10Ω</li>
+                </ul>
             </div>
         </div>
         
-        <button onclick="addResistor('series')">Add Resistor</button>
-        <button onclick="removeResistor('series')">Remove Resistor</button>
-        <button onclick="calculate('series')">Calculate</button>
+        <!-- Series/Parallel Calculator Tab -->
+        <div id="SeriesParallel" class="main-tabcontent">
+            <div class="tabs">
+                <button class="tab-button active" onclick="switchCalcTab('SeriesTab')">Series Connection</button>
+                <button class="tab-button" onclick="switchCalcTab('ParallelTab')">Parallel Connection</button>
+                <button class="tab-button" onclick="switchCalcTab('ExplanationTab')">Theory</button>
+            </div>
+            
+            <!-- Series Tab -->
+            <div id="SeriesTab" class="tab-content active calculator">
+                <h2>Series Resistors Calculator</h2>
+                <p>Enter resistor values to calculate the equivalent resistance in series.</p>
+                
+                <div class="circuit-diagram">
+                    <svg width="400" height="100" viewBox="0 0 400 100">
+                        <!-- Power Source -->
+                        <circle cx="30" cy="50" r="10" stroke="var(--text-light)" stroke-width="2" fill="var(--background-secondary)" />
+                        <line x1="30" y1="30" x2="30" y2="70" stroke="var(--text-light)" stroke-width="2" />
+                        <line x1="20" y1="40" x2="20" y2="60" stroke="var(--text-light)" stroke-width="2" />
+                        
+                        <!-- Wire to First Resistor -->
+                        <line x1="40" y1="50" x2="80" y2="50" stroke="var(--text-light)" stroke-width="2" />
+                        
+                        <!-- First Resistor -->
+                        <rect x="80" y="40" width="40" height="20" stroke="var(--text-light)" stroke-width="2" fill="var(--background-secondary)" />
+                        <text x="100" y="55" text-anchor="middle" font-size="12" fill="var(--text-light)">R₁</text>
+                        
+                        <!-- Wire between Resistors -->
+                        <line x1="120" y1="50" x2="160" y2="50" stroke="var(--text-light)" stroke-width="2" />
+                        
+                        <!-- Second Resistor -->
+                        <rect x="160" y="40" width="40" height="20" stroke="var(--text-light)" stroke-width="2" fill="var(--background-secondary)" />
+                        <text x="180" y="55" text-anchor="middle" font-size="12" fill="var(--text-light)">R₂</text>
+                        
+                        <!-- Wire after Second Resistor -->
+                        <line x1="200" y1="50" x2="240" y2="50" stroke="var(--text-light)" stroke-width="2" />
+                        
+                        <!-- Third Resistor (with dots to indicate more) -->
+                        <rect x="240" y="40" width="40" height="20" stroke="var(--text-light)" stroke-width="2" fill="var(--background-secondary)" />
+                        <text x="260" y="55" text-anchor="middle" font-size="12" fill="var(--text-light)">R₃</text>
+                        
+                        <!-- Dots to indicate more resistors -->
+                        <circle cx="300" cy="50" r="2" fill="var(--text-light)" />
+                        <circle cx="310" cy="50" r="2" fill="var(--text-light)" />
+                        <circle cx="320" cy="50" r="2" fill="var(--text-light)" />
+                        
+                        <!-- Wire back to source -->
+                        <line x1="340" y1="50" x2="370" y2="50" stroke="var(--text-light)" stroke-width="2" />
+                        <line x1="370" y1="50" x2="370" y2="70" stroke="var(--text-light)" stroke-width="2" />
+                        <line x1="370" y1="70" x2="30" y2="70" stroke="var(--text-light)" stroke-width="2" />
+                    </svg>
+                </div>
+                
+                <div id="series-resistors" class="resistors-container">
+                    <div class="resistor-input">
+                        <label>R1:</label>
+                        <input type="number" min="0" step="0.01" value="100">
+                        <select class="unit-selector">
+                            <option value="1">Ω</option>
+                            <option value="1000" selected>kΩ</option>
+                            <option value="1000000">MΩ</option>
+                        </select>
+                    </div>
+                    <div class="resistor-input">
+                        <label>R2:</label>
+                        <input type="number" min="0" step="0.01" value="220">
+                        <select class="unit-selector">
+                            <option value="1">Ω</option>
+                            <option value="1000" selected>kΩ</option>
+                            <option value="1000000">MΩ</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="addResistor('series')">Add Resistor</button>
+                <button class="btn btn-outline" onclick="removeResistor('series')">Remove Resistor</button>
+                <button class="btn btn-primary" onclick="calculate('series')">Calculate</button>
+                
+                <div id="series-result" class="result">
+                    <p>The equivalent resistance will be shown here.</p>
+                </div>
+            </div>
+            
+            <!-- Parallel Tab -->
+            <div id="ParallelTab" class="tab-content calculator">
+                <h2>Parallel Resistors Calculator</h2>
+                <p>Enter resistor values to calculate the equivalent resistance in parallel.</p>
+                
+                <div class="circuit-diagram">
+                    <svg width="400" height="160" viewBox="0 0 400 160">
+                        <!-- Power Source -->
+                        <circle cx="30" cy="80" r="10" stroke="var(--text-light)" stroke-width="2" fill="var(--background-secondary)" />
+                        <line x1="30" y1="60" x2="30" y2="100" stroke="var(--text-light)" stroke-width="2" />
+                        <line x1="20" y1="70" x2="20" y2="90" stroke="var(--text-light)" stroke-width="2" />
+                        
+                        <!-- Main wire left -->
+                        <line x1="40" y1="80" x2="80" y2="80" stroke="var(--text-light)" stroke-width="2" />
+                        
+                        <!-- Vertical junction left -->
+                        <line x1="80" y1="30" x2="80" y2="130" stroke="var(--text-light)" stroke-width="2" />
+                        
+                        <!-- First Resistor -->
+                        <line x1="80" y1="40" x2="320" y2="40" stroke="var(--text-light)" stroke-width="2" />
+                        <rect x="180" y="30" width="40" height="20" stroke="var(--text-light)" stroke-width="2" fill="var(--background-secondary)" />
+                        <text x="200" y="45" text-anchor="middle" font-size="12" fill="var(--text-light)">R₁</text>
+                        
+                        <!-- Second Resistor -->
+                        <line x1="80" y1="80" x2="320" y2="80" stroke="var(--text-light)" stroke-width="2" />
+                        <rect x="180" y="70" width="40" height="20" stroke="var(--text-light)" stroke-width="2" fill="var(--background-secondary)" />
+                        <text x="200" y="85" text-anchor="middle" font-size="12" fill="var(--text-light)">R₂</text>
+                        
+                        <!-- Third Resistor -->
+                        <line x1="80" y1="120" x2="320" y2="120" stroke="var(--text-light)" stroke-width="2" />
+                        <rect x="180" y="110" width="40" height="20" stroke="var(--text-light)" stroke-width="2" fill="var(--background-secondary)" />
+                        <text x="200" y="125" text-anchor="middle" font-size="12" fill="var(--text-light)">R₃</text>
+                        
+                        <!-- Dots to indicate more resistors -->
+                        <circle cx="200" cy="140" r="2" fill="var(--text-light)" />
+                        <circle cx="200" cy="145" r="2" fill="var(--text-light)" />
+                        <circle cx="200" cy="150" r="2" fill="var(--text-light)" />
+                        
+                        <!-- Vertical junction right -->
+                        <line x1="320" y1="30" x2="320" y2="130" stroke="var(--text-light)" stroke-width="2" />
+                        
+                        <!-- Main wire right -->
+                        <line x1="320" y1="80" x2="360" y2="80" stroke="var(--text-light)" stroke-width="2" />
+                        
+                        <!-- Wire back to source -->
+                        <line x1="360" y1="80" x2="370" y2="80" stroke="var(--text-light)" stroke-width="2" />
+                        <line x1="370" y1="80" x2="370" y2="100" stroke="var(--text-light)" stroke-width="2" />
+                        <line x1="370" y1="100" x2="30" y2="100" stroke="var(--text-light)" stroke-width="2" />
+                    </svg>
+                </div>
+                
+                <div id="parallel-resistors" class="resistors-container">
+                    <div class="resistor-input">
+                        <label>R1:</label>
+                        <input type="number" min="0" step="0.01" value="100">
+                        <select class="unit-selector">
+                            <option value="1">Ω</option>
+                            <option value="1000" selected>kΩ</option>
+                            <option value="1000000">MΩ</option>
+                        </select>
+                    </div>
+                    <div class="resistor-input">
+                        <label>R2:</label>
+                        <input type="number" min="0" step="0.01" value="220">
+                        <select class="unit-selector">
+                            <option value="1">Ω</option>
+                            <option value="1000" selected>kΩ</option>
+                            <option value="1000000">MΩ</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="addResistor('parallel')">Add Resistor</button>
+                <button class="btn btn-outline" onclick="removeResistor('parallel')">Remove Resistor</button>
+                <button class="btn btn-primary" onclick="calculate('parallel')">Calculate</button>
+                
+                <div id="parallel-result" class="result">
+                    <p>The equivalent resistance will be shown here.</p>
+                </div>
+            </div>
+            
+            <!-- Explanation Tab -->
+            <div id="ExplanationTab" class="tab-content calculator">
+                <h2>Theory of Resistors in Series and Parallel</h2>
+                
+                <div class="explanation">
+                    <h3>Resistors in Series</h3>
+                    <p>When resistors are connected in series, the equivalent resistance is calculated by adding the individual resistances:</p>
+                    <p style="text-align: center; font-size: 18px;">
+                        R<sub>eq</sub> = R<sub>1</sub> + R<sub>2</sub> + R<sub>3</sub> + ... + R<sub>n</sub>
+                    </p>
+                    <p>This means the equivalent resistance is always larger than the largest individual resistor in the series.</p>
+                    
+                    <h3>Resistors in Parallel</h3>
+                    <p>When resistors are connected in parallel, the equivalent resistance is calculated using:</p>
+                    <p style="text-align: center; font-size: 18px;">
+                        1/R<sub>eq</sub> = 1/R<sub>1</sub> + 1/R<sub>2</sub> + 1/R<sub>3</sub> + ... + 1/R<sub>n</sub>
+                    </p>
+                    <p>This means the equivalent resistance is always smaller than the smallest individual resistor in the parallel connection.</p>
+                    
+                    <h3>Special Case for Two Parallel Resistors</h3>
+                    <p>For two resistors in parallel, you can use the product-over-sum formula:</p>
+                    <p style="text-align: center; font-size: 18px;">
+                        R<sub>eq</sub> = (R<sub>1</sub> × R<sub>2</sub>) / (R<sub>1</sub> + R<sub>2</sub>)
+                    </p>
+                    
+                    <h3>Physical Explanation</h3>
+                    <p><strong>Series connection:</strong> Current has to flow through each resistor one after another, increasing the total resistance.</p>
+                    <p><strong>Parallel connection:</strong> Current can flow through multiple paths, decreasing the total resistance.</p>
+                </div>
+            </div>
+        </div>
         
-        <div id="series-result" class="result">
-            <p>The equivalent resistance will be shown here.</p>
+        <!-- Info Tab -->
+        <div id="Info" class="main-tabcontent">
+            <h2>Resistor Information</h2>
+            
+            <div class="info-box">
+                <h3>Color Code Chart</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1px solid var(--text-muted); padding: 8px;">Color</th>
+                            <th style="border: 1px solid var(--text-muted); padding: 8px;">1st Band</th>
+                            <th style="border: 1px solid var(--text-muted); padding: 8px;">2nd Band</th>
+                            <th style="border: 1px solid var(--text-muted); padding: 8px;">3rd Band</th>
+                            <th style="border: 1px solid var(--text-muted); padding: 8px;">Multiplier</th>
+                            <th style="border: 1px solid var(--text-muted); padding: 8px;">Tolerance</th>
+                            <th style="border: 1px solid var(--text-muted); padding: 8px;">Temp. Coeff.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px; background-color: black; color: white;">Black</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">0</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">0</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">0</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">1Ω</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">-</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">-</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px; background-color: brown; color: white;">Brown</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">1</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">1</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">1</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">10Ω</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">±1%</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">100ppm</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px; background-color: red; color: white;">Red</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">2</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">2</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">2</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">100Ω</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">±2%</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">50ppm</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px; background-color: orange; color: black;">Orange</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">3</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">3</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">3</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">1kΩ</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">±0.05%</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">15ppm</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px; background-color: yellow; color: black;">Yellow</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">4</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">4</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">4</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">10kΩ</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">±0.02%</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">25ppm</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px; background-color: green; color: white;">Green</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">5</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">5</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">5</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">100kΩ</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">±0.5%</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">20ppm</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px; background-color: blue; color: white;">Blue</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">6</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">6</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">6</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">1MΩ</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">±0.25%</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">10ppm</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px; background-color: violet; color: white;">Violet</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">7</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">7</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">7</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">10MΩ</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">±0.1%</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">5ppm</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px; background-color: gray; color: white;">Gray</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">8</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">8</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">8</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">100MΩ</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">±0.01%</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">-</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px; background-color: white; color: black;">White</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">9</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">9</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">9</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">1GΩ</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">-</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">-</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px; background-color: gold; color: black;">Gold</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">-</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">-</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">-</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">0.1Ω</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">±5%</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">-</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px; background-color: silver; color: black;">Silver</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">-</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">-</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">-</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">0.01Ω</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">±10%</td>
+                            <td style="border: 1px solid var(--text-muted); padding: 8px;">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="info-box">
+                <h3>Common Resistor Values (E12 Series)</h3>
+                <p>The E12 series includes resistors with 10% tolerance with these standard values:</p>
+                <p>10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82</p>
+                <p>These values repeat for each decade (e.g., 100, 120, 150, etc.)</p>
+                
+                <h3>Other Standard Series</h3>
+                <p><strong>E6 (20% tolerance):</strong> 10, 15, 22, 33, 47, 68</p>
+                <p><strong>E24 (5% tolerance):</strong> Adds intermediate values between E12 values</p>
+                <p><strong>E96 (1% tolerance):</strong> Even more precise values for high-precision applications</p>
+            </div>
+            
+            <div class="info-box">
+                <h3>Unit Conversions</h3>
+                <ul>
+                    <li>1 Ohm (Ω) = 1 Volt per Ampere (V/A)</li>
+                    <li>1 kiloOhm (kΩ) = 1,000 Ohms</li>
+                    <li>1 megaOhm (MΩ) = 1,000,000 Ohms</li>
+                    <li>1 gigaOhm (GΩ) = 1,000,000,000 Ohms</li>
+                </ul>
+            </div>
         </div>
     </div>
-    
-    <!-- Parallel Calculator Tab -->
-    <div id="parallel" class="tab-content">
-        <h2>Parallel Resistors Calculator</h2>
-        <p>Enter resistor values to calculate the equivalent resistance in parallel.</p>
-        
-        <div class="circuit-diagram">
-            <svg width="400" height="160" viewBox="0 0 400 160">
-                <!-- Power Source -->
-                <circle cx="30" cy="80" r="10" stroke="black" stroke-width="2" fill="white" />
-                <line x1="30" y1="60" x2="30" y2="100" stroke="black" stroke-width="2" />
-                <line x1="20" y1="70" x2="20" y2="90" stroke="black" stroke-width="2" />
-                
-                <!-- Main wire left -->
-                <line x1="40" y1="80" x2="80" y2="80" stroke="black" stroke-width="2" />
-                
-                <!-- Vertical junction left -->
-                <line x1="80" y1="30" x2="80" y2="130" stroke="black" stroke-width="2" />
-                
-                <!-- First Resistor -->
-                <line x1="80" y1="40" x2="320" y2="40" stroke="black" stroke-width="2" />
-                <rect x="180" y="30" width="40" height="20" stroke="black" stroke-width="2" fill="#f9d5d1" />
-                <text x="200" y="45" text-anchor="middle" font-size="12">R₁</text>
-                
-                <!-- Second Resistor -->
-                <line x1="80" y1="80" x2="320" y2="80" stroke="black" stroke-width="2" />
-                <rect x="180" y="70" width="40" height="20" stroke="black" stroke-width="2" fill="#f9d5d1" />
-                <text x="200" y="85" text-anchor="middle" font-size="12">R₂</text>
-                
-                <!-- Third Resistor -->
-                <line x1="80" y1="120" x2="320" y2="120" stroke="black" stroke-width="2" />
-                <rect x="180" y="110" width="40" height="20" stroke="black" stroke-width="2" fill="#f9d5d1" />
-                <text x="200" y="125" text-anchor="middle" font-size="12">R₃</text>
-                
-                <!-- Dots to indicate more resistors -->
-                <circle cx="200" cy="140" r="2" fill="black" />
-                <circle cx="200" cy="145" r="2" fill="black" />
-                <circle cx="200" cy="150" r="2" fill="black" />
-                
-                <!-- Vertical junction right -->
-                <line x1="320" y1="30" x2="320" y2="130" stroke="black" stroke-width="2" />
-                
-                <!-- Main wire right -->
-                <line x1="320" y1="80" x2="360" y2="80" stroke="black" stroke-width="2" />
-                
-                <!-- Wire back to source -->
-                <line x1="360" y1="80" x2="370" y2="80" stroke="black" stroke-width="2" />
-                <line x1="370" y1="80" x2="370" y2="100" stroke="black" stroke-width="2" />
-                <line x1="370" y1="100" x2="30" y2="100" stroke="black" stroke-width="2" />
-            </svg>
-        </div>
-        
-        <div id="parallel-resistors" class="resistors-container">
-            <div class="resistor-input">
-                <label>R1:</label>
-                <input type="number" min="0" step="0.01" value="100">
-                <select class="unit-selector">
-                    <option value="1">Ω</option>
-                    <option value="1000" selected>kΩ</option>
-                    <option value="1000000">MΩ</option>
-                </select>
-            </div>
-            <div class="resistor-input">
-                <label>R2:</label>
-                <input type="number" min="0" step="0.01" value="220">
-                <select class="unit-selector">
-                    <option value="1">Ω</option>
-                    <option value="1000" selected>kΩ</option>
-                    <option value="1000000">MΩ</option>
-                </select>
-            </div>
-        </div>
-        
-        <button onclick="addResistor('parallel')">Add Resistor</button>
-        <button onclick="removeResistor('parallel')">Remove Resistor</button>
-        <button onclick="calculate('parallel')">Calculate</button>
-        
-        <div id="parallel-result" class="result">
-            <p>The equivalent resistance will be shown here.</p>
-        </div>
-    </div>
+
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+    </button>
 
     <script>
         // Color code calculator variables
@@ -531,41 +785,62 @@
             'silver': [null, null, '0.01', '10%', null]
         };
         
-        // Function to switch between tabs
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
+        // Main tab switching
+        function openMainTab(evt, tabName) {
+            var i, tabcontent, tabbuttons;
+            tabcontent = document.getElementsByClassName("main-tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tabbuttons = document.getElementsByClassName("main-tab-button");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        
+        // Series/parallel calculator tab switching
+        function switchCalcTab(tabId) {
+            document.querySelectorAll('#SeriesParallel .tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
-            document.querySelectorAll('.tab-button').forEach(button => {
+            document.querySelectorAll('#SeriesParallel .tab-button').forEach(button => {
                 button.classList.remove('active');
             });
             
             document.getElementById(tabId).classList.add('active');
-            document.querySelector(`button[onclick="switchTab('${tabId}')"]`).classList.add('active');
-            
-            // Smooth scroll to the top of the tab content
-            document.getElementById(tabId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.querySelector(`#SeriesParallel button[onclick="switchCalcTab('${tabId}')"]`).classList.add('active');
+        }
+
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or use preferred color scheme
+        const currentTheme = localStorage.getItem('theme') || 
+                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        if (currentTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            document.body.setAttribute('data-theme', 'light');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
         }
         
-        // Dark mode toggle function
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            const button = document.querySelector('.dark-mode-toggle');
-            if (document.body.classList.contains('dark-mode')) {
-                button.textContent = '☀️ Light Mode';
-                localStorage.setItem('darkMode', 'true');
+        themeToggle.addEventListener('click', () => {
+            if (document.body.getAttribute('data-theme') === 'light') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
             } else {
-                button.textContent = '🌙 Dark Mode';
-                localStorage.setItem('darkMode', 'false');
+                document.body.setAttribute('data-theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
             }
-        }
-        
-        // Check for saved dark mode preference
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
-            document.querySelector('.dark-mode-toggle').textContent = '☀️ Light Mode';
-        }
-        
+        });
+
         // Color Code Calculator Functions
         function updateBands() {
             const bandCount = parseInt(document.getElementById('bandCount').value);
@@ -575,7 +850,7 @@
             // Create band selectors
             for (let i = 0; i < bandCount; i++) {
                 const select = document.createElement('select');
-                select.className = 'band-select';
+                select.className = 'input-field';
                 select.id = `band${i}`;
                 select.onchange = calculateResistance;
                 
@@ -745,7 +1020,7 @@
                 const unit = parseFloat(units[i].value);
                 
                 if (isNaN(value) || value <= 0) {
-                    resultDiv.innerHTML = '<p style="color: red;">Error: All resistor values must be positive numbers.</p>';
+                    resultDiv.innerHTML = '<p style="color: var(--error-color);">Error: All resistor values must be positive numbers.</p>';
                     return;
                 }
                 
