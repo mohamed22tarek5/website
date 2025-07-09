@@ -1,213 +1,144 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-    <title>Medication Reminder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medication Reminder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
   <style>
-    body {
-        background-color: #f4f4f4;
-        color: #333;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-    }
-
-    h1 {
-        color: #4285F4;
-        text-align: center;
-    }
-
-    h2 {
-        color: #EA4335;
-    }
-
-    label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 7px;
-    }
-
-    input[type="text"],
-    input[type="time"],
-    button {
-        padding: 8px;
-        margin-bottom: 10px;
-        width: 200px;
-    }
-
-    button {
-        background-color: #4285F4;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #3367D6;
-    }
-
-    .reminderItem {
-        background-color: #fff;
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-
-    .reminderItem button {
-        background-color: #EA4335;
-    }
-
-    .reminderItem button:hover {
-        background-color: #C5221F;
+    .theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #1f2937;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 999;
     }
   </style>
-  
-    <script>
-        var remindersInterval;
-        var reminderTimeouts = [];
-
-        function addMedication() {
-            var medicationName = document.getElementById("medicationName").value;
-            var time = document.getElementById("time").value;
-
-            // Check if medication name or time is empty
-            if (medicationName.trim() === "" || time.trim() === "") {
-                alert("Please enter the medication name and time.");
-                return;
-            }
-
-            // Retrieve the existing medications from localStorage
-            var medications = JSON.parse(localStorage.getItem("medications")) || [];
-
-            // Add the new medication to the array
-            medications.push({ name: medicationName, time: time });
-
-            // Store the updated medications array in localStorage
-            localStorage.setItem("medications", JSON.stringify(medications));
-
-            // Clear the input fields
-            document.getElementById("medicationName").value = "";
-            document.getElementById("time").value = "";
-
-            // Refresh the reminders display
-            displayReminders();
-        }
-
-        function removeMedication(index) {
-            // Retrieve the existing medications from localStorage
-            var medications = JSON.parse(localStorage.getItem("medications")) || [];
-
-            // Remove the medication at the specified index
-            medications.splice(index, 1);
-
-            // Store the updated medications array in localStorage
-            localStorage.setItem("medications", JSON.stringify(medications));
-
-            // Refresh the reminders display
-            displayReminders();
-        }
-
-        function displayReminders() {
-            var medications = JSON.parse(localStorage.getItem("medications")) || [];
-
-            var remindersContainer = document.getElementById("remindersContainer");
-            remindersContainer.innerHTML = "";
-
-            medications.forEach(function(medication, index) {
-                var reminderTime = new Date(new Date().toDateString() + " " + medication.time);
-                var remainingTime = reminderTime.getTime() - Date.now();
-
-                // Handle cases where the reminder time has passed for the day
-                if (remainingTime <= 0) {
-                    reminderTime.setDate(reminderTime.getDate() + 1);
-                    remainingTime = reminderTime.getTime() - Date.now();
-                }
-
-                var reminderItem = document.createElement("div");
-                reminderItem.className = "reminderItem";
-                reminderItem.innerHTML = medication.name + " - " + medication.time + " - Remaining Time: <span id='remainingTime" + index + "'>" + formatRemainingTime(remainingTime) + "</span>";
-
-                var removeButton = document.createElement("button");
-                removeButton.innerHTML = "Remove";
-                removeButton.onclick = function() {
-                    removeMedication(index);
-                };
-
-                reminderItem.appendChild(removeButton);
-                remindersContainer.appendChild(reminderItem);
-
-                // Schedule the reminder alert
-                var timeout = setTimeout(function() {
-                    alert("Time to take your medication: " + medication.name);
-                }, remainingTime);
-                reminderTimeouts.push(timeout);
-            });
-
-            // Clear any existing interval
-            clearInterval(remindersInterval);
-
-            // Start the interval to update remaining times every second
-            remindersInterval = setInterval(updateRemainingTimes, 1000);
-        }
-
-        function updateRemainingTimes() {
-            var medications = JSON.parse(localStorage.getItem("medications")) || [];
-
-            medications.forEach(function(medication, index) {
-                var reminderTime = new Date(new Date().toDateString() + " " + medication.time);
-                var remainingTime = reminderTime.getTime() - Date.now();
-
-                // Handle cases where the reminder time has passed for the day
-                if (remainingTime <= 0) {
-                    reminderTime.setDate(reminderTime.getDate() + 1);
-                    remainingTime = reminderTime.getTime() - Date.now();
-                }
-
-                document.getElementById("remainingTime" + index).innerHTML = formatRemainingTime(remainingTime);
-            });
-        }
-
-        function formatRemainingTime(remainingTime) {
-            var hours = Math.floor(remainingTime / (1000 * 60 * 60));
-            var minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-
-            return hours + "h " + minutes + "m " + seconds + "s";
-        }
-
-        // Refresh the reminders display on page load
-        window.onload = displayReminders;
-    </script>
 </head>
-<body>
-    <h1>Medication Reminder</h1>
-    <label for="medicationName">Medication Name</label>
-    <input type="text" id="medicationName" placeholder="Enter medication name">
-    <br><br>
-    <label for="time">Time</label>
-    <input type="time" id="time">
-    <br><br>
-    <button onclick="addMedication()">Add Medication</button>
-    <br><br>
-    <h2>Next Doses:</h2>
-    <div id="remindersContainer"></div>
 
-  
-  <section class="main">
-  
-  <div>
-  <a href="#"> <i class="fab fa-linkedin"></i> </a> 
-   
-<a href="#"> <i class="fab fa-twitter"></i> </a>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white p-6">
+  <div class="max-w-xl mx-auto">
+    <h1 class="text-3xl font-bold text-center text-blue-600 dark:text-blue-400 mb-6">Medication Reminder</h1>
 
-<a href="#"> <i class="fab fa-instagram"></i></a> 
-<a href="#"> <i class="fab fa-facebook"></i> </a>
+    <label for="medicationName" class="block font-semibold mb-1">Medication Name</label>
+    <input type="text" id="medicationName" placeholder="Enter medication name" class="w-full mb-4 p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
 
-</div>
-  
-</section>
+    <label for="time" class="block font-semibold mb-1">Time</label>
+    <input type="time" id="time" class="w-full mb-4 p-2 border rounded dark:bg-gray-700 dark:border-gray-600">
 
-  
+    <button onclick="addMedication()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">Add Medication</button>
+
+    <h2 class="text-2xl text-red-500 dark:text-red-400 mt-8 mb-4">Next Doses:</h2>
+    <div id="remindersContainer" class="space-y-3"></div>
+
+    <div class="flex justify-center space-x-4 mt-8 text-gray-600 dark:text-gray-300">
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+    </div>
+  </div>
+
+  <button class="theme-toggle" onclick="document.documentElement.classList.toggle('dark')">🌓</button>
+
+  <script>
+    var remindersInterval;
+    var reminderTimeouts = [];
+
+    function addMedication() {
+      var medicationName = document.getElementById("medicationName").value;
+      var time = document.getElementById("time").value;
+      if (medicationName.trim() === "" || time.trim() === "") {
+        alert("Please enter the medication name and time.");
+        return;
+      }
+      var medications = JSON.parse(localStorage.getItem("medications")) || [];
+      medications.push({ name: medicationName, time: time });
+      localStorage.setItem("medications", JSON.stringify(medications));
+      document.getElementById("medicationName").value = "";
+      document.getElementById("time").value = "";
+      displayReminders();
+    }
+
+    function removeMedication(index) {
+      var medications = JSON.parse(localStorage.getItem("medications")) || [];
+      medications.splice(index, 1);
+      localStorage.setItem("medications", JSON.stringify(medications));
+      displayReminders();
+    }
+
+    function displayReminders() {
+      var medications = JSON.parse(localStorage.getItem("medications")) || [];
+      var remindersContainer = document.getElementById("remindersContainer");
+      remindersContainer.innerHTML = "";
+
+      medications.forEach(function(medication, index) {
+        var reminderTime = new Date(new Date().toDateString() + " " + medication.time);
+        var remainingTime = reminderTime.getTime() - Date.now();
+        if (remainingTime <= 0) {
+          reminderTime.setDate(reminderTime.getDate() + 1);
+          remainingTime = reminderTime.getTime() - Date.now();
+        }
+
+        var reminderItem = document.createElement("div");
+        reminderItem.className = "p-4 bg-white dark:bg-gray-700 rounded shadow";
+        reminderItem.innerHTML = `<strong>${medication.name}</strong> - ${medication.time} - Remaining Time: <span id='remainingTime${index}'>${formatRemainingTime(remainingTime)}</span>`;
+
+        var removeButton = document.createElement("button");
+        removeButton.innerHTML = "Remove";
+        removeButton.className = "block mt-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded";
+        removeButton.onclick = function() { removeMedication(index); };
+
+        reminderItem.appendChild(removeButton);
+        remindersContainer.appendChild(reminderItem);
+
+        var timeout = setTimeout(function() {
+          alert("Time to take your medication: " + medication.name);
+        }, remainingTime);
+        reminderTimeouts.push(timeout);
+      });
+
+      clearInterval(remindersInterval);
+      remindersInterval = setInterval(updateRemainingTimes, 1000);
+    }
+
+    function updateRemainingTimes() {
+      var medications = JSON.parse(localStorage.getItem("medications")) || [];
+      medications.forEach(function(medication, index) {
+        var reminderTime = new Date(new Date().toDateString() + " " + medication.time);
+        var remainingTime = reminderTime.getTime() - Date.now();
+        if (remainingTime <= 0) {
+          reminderTime.setDate(reminderTime.getDate() + 1);
+          remainingTime = reminderTime.getTime() - Date.now();
+        }
+        document.getElementById("remainingTime" + index).innerHTML = formatRemainingTime(remainingTime);
+      });
+    }
+
+    function formatRemainingTime(remainingTime) {
+      var hours = Math.floor(remainingTime / (1000 * 60 * 60));
+      var minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+      return hours + "h " + minutes + "m " + seconds + "s";
+    }
+
+    window.onload = displayReminders;
+  </script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
+
 </html>

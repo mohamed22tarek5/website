@@ -1,10 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Power Factor Correction Calculator</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+  <style>
+    .theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #1f2937;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 999;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white p-6">
+  <div class="max-w-6xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md">
+    <h1 class="text-3xl font-bold text-center mb-2">Power Factor Correction Calculator</h1>
+    <p class="text-center text-gray-600 dark:text-gray-300 mb-8">Calculate required capacitor bank size and analyze power factor improvement</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div>
+        <h2 class="text-xl font-semibold mb-3">Input Parameters</h2>
+        <input id="loadPower" type="number" placeholder="Load Power (kW)" class="w-full mb-2 p-2 border rounded dark:bg-gray-700 dark:border-gray-600" value="100">
+        <input id="existingPF" type="number" step="0.01" placeholder="Existing Power Factor" class="w-full mb-2 p-2 border rounded dark:bg-gray-700 dark:border-gray-600" value="0.8">
+        <input id="targetPF" type="number" step="0.01" placeholder="Target Power Factor" class="w-full mb-2 p-2 border rounded dark:bg-gray-700 dark:border-gray-600" value="0.95">
+        <input id="voltage" type="number" placeholder="System Voltage (V)" class="w-full mb-2 p-2 border rounded dark:bg-gray-700 dark:border-gray-600" value="400">
+        <input id="frequency" type="number" placeholder="Frequency (Hz)" class="w-full mb-4 p-2 border rounded dark:bg-gray-700 dark:border-gray-600" value="50">
+        <button onclick="calculateCorrection()" class="w-full bg-blue-600 text-white py-2 rounded">Calculate</button>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded shadow">
+          <h3 class="font-bold mb-2">Before Correction</h3>
+          <p><strong>Real Power:</strong> <span id="beforeReal">-</span></p>
+          <p><strong>Reactive Power:</strong> <span id="beforeReactive">-</span></p>
+          <p><strong>Apparent Power:</strong> <span id="beforeApparent">-</span></p>
+          <p><strong>Power Factor:</strong> <span id="beforePF">-</span></p>
+          <p><strong>Angle:</strong> <span id="beforeAngle">-</span></p>
+        </div>
+        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded shadow">
+          <h3 class="font-bold mb-2">After Correction</h3>
+          <p><strong>Real Power:</strong> <span id="afterReal">-</span></p>
+          <p><strong>Reactive Power:</strong> <span id="afterReactive">-</span></p>
+          <p><strong>Apparent Power:</strong> <span id="afterApparent">-</span></p>
+          <p><strong>Power Factor:</strong> <span id="afterPF">-</span></p>
+          <p><strong>Angle:</strong> <span id="afterAngle">-</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-blue-50 dark:bg-blue-900 p-6 rounded-lg shadow mb-6">
+      <h3 class="text-xl font-semibold mb-3">Required Capacitor Bank</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div>
+          <p class="font-bold">Capacitor Size</p>
+          <p id="capSize" class="text-blue-800 dark:text-blue-200">-</p>
+        </div>
+        <div>
+          <p class="font-bold">Capacitance</p>
+          <p id="capacitance" class="text-blue-800 dark:text-blue-200">-</p>
+        </div>
+        <div>
+          <p class="font-bold">Power Factor Improvement</p>
+          <p id="pfImprovement" class="text-blue-800 dark:text-blue-200">-</p>
+        </div>
+        <div>
+          <p class="font-bold">kVA Reduction</p>
+          <p id="kvaReduction" class="text-blue-800 dark:text-blue-200">-</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-sm text-gray-600 dark:text-gray-300 bg-yellow-50 dark:bg-yellow-900 border-l-4 border-yellow-400 dark:border-yellow-600 p-4 rounded shadow">
+      <strong>Important Notes:</strong>
+      <ul class="list-disc list-inside mt-2 space-y-1">
+        <li>Ensure capacitor banks are properly rated for the system voltage.</li>
+        <li>Choose only film/metalized capacitors resistant to harmonics.</li>
+        <li>Use protective devices like contactors or timed switching.</li>
+        <li>Real capacitance may vary based on tolerances.</li>
+      </ul>
+    </div>
+  </div>
+
+  <button class="theme-toggle" onclick="document.documentElement.classList.toggle('dark')">🌓</button>
+
   <script>
     function calculateCorrection() {
       const loadPower = parseFloat(document.getElementById('loadPower').value);
@@ -32,14 +126,12 @@
       document.getElementById('pfImprovement').textContent = pfImprovement.toFixed(1) + "%";
       document.getElementById('kvaReduction').textContent = kvaReduction.toFixed(2) + " kVA";
 
-      // Before Correction Info
       document.getElementById('beforeReal').textContent = loadPower.toFixed(2) + " kW";
       document.getElementById('beforeReactive').textContent = reactiveBefore.toFixed(2) + " kVAR";
       document.getElementById('beforeApparent').textContent = apparentBefore.toFixed(2) + " kVA";
       document.getElementById('beforePF').textContent = existingPF;
       document.getElementById('beforeAngle').textContent = angleBefore.toFixed(2) + "°";
 
-      // After Correction Info
       document.getElementById('afterReal').textContent = loadPower.toFixed(2) + " kW";
       document.getElementById('afterReactive').textContent = reactiveAfter.toFixed(2) + " kVAR";
       document.getElementById('afterApparent').textContent = apparentAfter.toFixed(2) + " kVA";
@@ -47,79 +139,5 @@
       document.getElementById('afterAngle').textContent = angleAfter.toFixed(2) + "°";
     }
   </script>
-</head>
-<body class="bg-gray-100 p-6">
-  <div class="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-md">
-    <!-- Title and Description -->
-    <h1 class="text-3xl font-bold text-center mb-2">Power Factor Correction Calculator</h1>
-    <p class="text-center text-gray-600 mb-8">Calculate required capacitor bank size and analyze power factor improvement</p>
-
-    <!-- Input Section -->
-    <div class="grid grid-cols-2 gap-6 mb-6">
-      <div>
-        <h2 class="text-xl font-semibold mb-3">Input Parameters</h2>
-        <input id="loadPower" type="number" placeholder="Load Power (kW)" class="w-full mb-2 p-2 border rounded" value="100">
-        <input id="existingPF" type="number" step="0.01" placeholder="Existing Power Factor" class="w-full mb-2 p-2 border rounded" value="0.8">
-        <input id="targetPF" type="number" step="0.01" placeholder="Target Power Factor" class="w-full mb-2 p-2 border rounded" value="0.95">
-        <input id="voltage" type="number" placeholder="System Voltage (V)" class="w-full mb-2 p-2 border rounded" value="400">
-        <input id="frequency" type="number" placeholder="Frequency (Hz)" class="w-full mb-4 p-2 border rounded" value="50">
-        <button onclick="calculateCorrection()" class="w-full bg-blue-600 text-white py-2 rounded">Calculate</button>
-      </div>
-
-      <!-- Before & After Comparison -->
-      <div class="grid grid-cols-2 gap-6">
-        <div class="bg-gray-50 p-4 rounded shadow">
-          <h3 class="font-bold mb-2">Before Correction</h3>
-          <p><strong>Real Power:</strong> <span id="beforeReal">-</span></p>
-          <p><strong>Reactive Power:</strong> <span id="beforeReactive">-</span></p>
-          <p><strong>Apparent Power:</strong> <span id="beforeApparent">-</span></p>
-          <p><strong>Power Factor:</strong> <span id="beforePF">-</span></p>
-          <p><strong>Angle:</strong> <span id="beforeAngle">-</span></p>
-        </div>
-        <div class="bg-gray-50 p-4 rounded shadow">
-          <h3 class="font-bold mb-2">After Correction</h3>
-          <p><strong>Real Power:</strong> <span id="afterReal">-</span></p>
-          <p><strong>Reactive Power:</strong> <span id="afterReactive">-</span></p>
-          <p><strong>Apparent Power:</strong> <span id="afterApparent">-</span></p>
-          <p><strong>Power Factor:</strong> <span id="afterPF">-</span></p>
-          <p><strong>Angle:</strong> <span id="afterAngle">-</span></p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Output Section -->
-    <div class="bg-blue-50 p-6 rounded-lg shadow mb-6">
-      <h3 class="text-xl font-semibold mb-3">Required Capacitor Bank</h3>
-      <div class="grid grid-cols-4 gap-4 text-center">
-        <div>
-          <p class="font-bold">Capacitor Size</p>
-          <p id="capSize" class="text-blue-800">-</p>
-        </div>
-        <div>
-          <p class="font-bold">Capacitance</p>
-          <p id="capacitance" class="text-blue-800">-</p>
-        </div>
-        <div>
-          <p class="font-bold">Power Factor Improvement</p>
-          <p id="pfImprovement" class="text-blue-800">-</p>
-        </div>
-        <div>
-          <p class="font-bold">kVA Reduction</p>
-          <p id="kvaReduction" class="text-blue-800">-</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Notes Section -->
-    <div class="text-sm text-gray-600 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded shadow">
-      <strong>Important Notes:</strong>
-      <ul class="list-disc list-inside mt-2 space-y-1">
-        <li>Ensure capacitor banks are properly rated for the system voltage.</li>
-        <li>Choose only film/metalized capacitors resistant to harmonics.</li>
-        <li>Use protective devices like contactors or timed switching.</li>
-        <li>Real capacitance may vary based on tolerances.</li>
-      </ul>
-    </div>
-  </div>
 </body>
 </html>
