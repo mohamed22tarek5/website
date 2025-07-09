@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mohamed Tarek - Communications Engineer, Web Developer, and Arduino Project Maker">
-  <meta name="keywords" content="portfolio, engineer, web developer, arduino, electronics, PCB design">
+  <meta name="description" content="Professional services offered by Mohamed Tarek - Web Development, Arduino Programming, PCB Design, and more">
+  <meta name="keywords" content="web development, arduino programming, PCB design, smart home automation, embedded systems, electronics services">
   <meta name="author" content="Mohamed Tarek">
-  <meta property="og:title" content="Mohamed Tarek - Projects">
-  <meta property="og:description" content="Professional projects of Mohamed Tarek showcasing engineering and development work">
+  <meta property="og:title" content="Mohamed Tarek - Services">
+  <meta property="og:description" content="Professional services in web development, Arduino programming, PCB design and more">
   <meta property="og:image" content="https://example.com/photo.jpg">
   <meta property="og:url" content="https://example.com">
   <meta name="theme-color" content="#4e9eff">
+  <title>Professional Services | Mohamed Tarek</title>
   <link rel="icon" href="icon.png" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-  <title>Mohamed Tarek | Projects</title>
   <style>
     :root {
       --primary-color: #4e9eff;
@@ -237,121 +237,90 @@
       margin: 0 auto;
     }
 
-    /* Projects Section */
-    .projects {
+    /* Services Section */
+    .services {
       background-color: var(--background-secondary);
+      padding: 120px 0;
     }
 
-    .projects .grid {
+    .services .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
       gap: 30px;
     }
 
-    .project-card {
+    .service-card {
       border-radius: var(--border-radius);
       overflow: hidden;
       box-shadow: var(--box-shadow);
       transition: all var(--transition-speed) ease;
       position: relative;
       background-color: var(--card-dark);
+      padding: 30px;
+      text-align: center;
     }
 
-    .project-card:hover {
+    .service-card:hover {
       transform: translateY(-10px);
       box-shadow: var(--box-shadow-hover);
     }
 
-    .project-image {
-      height: 250px;
-      overflow: hidden;
-      position: relative;
+    .service-icon {
+      font-size: 3em;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      transition: var(--transition-speed);
     }
 
-    .project-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .project-card:hover .project-image img {
+    .service-card:hover .service-icon {
       transform: scale(1.1);
     }
 
-    .project-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 50%);
-      opacity: 0;
-      transition: opacity var(--transition-speed) ease;
-      display: flex;
-      align-items: flex-end;
-      padding: 20px;
-    }
-
-    .project-card:hover .project-overlay {
-      opacity: 1;
-    }
-
-    .project-info {
-      padding: 25px;
-    }
-
-    .project-category {
-      color: var(--primary-color);
-      font-weight: 600;
-      font-size: 0.9em;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-    }
-
-    .project-title {
-      font-size: 1.3em;
+    .service-title {
+      font-size: 1.4em;
       margin-bottom: 15px;
+      color: var(--primary-color);
     }
 
-    .project-description {
+    .service-description {
       color: var(--text-muted);
       margin-bottom: 20px;
     }
 
-    .project-links {
-      display: flex;
-      gap: 15px;
+    .service-features {
+      text-align: left;
+      margin: 20px 0;
+      padding-left: 20px;
     }
 
-    .project-link {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 20px;
-      border-radius: 50px;
-      font-size: 0.9em;
-      font-weight: 500;
-      transition: all var(--transition-speed) ease;
+    .service-features li {
+      margin-bottom: 8px;
+      position: relative;
+      list-style-type: none;
+      color: var(--text-muted);
     }
 
-    .project-link-primary {
-      background-color: var(--primary-color);
-      color: white;
-    }
-
-    .project-link-primary:hover {
-      background-color: var(--primary-dark);
-    }
-
-    .project-link-secondary {
-      border: 1px solid var(--primary-color);
+    .service-features li::before {
+      content: '▹';
+      position: absolute;
+      left: -20px;
       color: var(--primary-color);
     }
 
-    .project-link-secondary:hover {
+    .service-cta {
+      display: inline-block;
+      padding: 10px 25px;
       background-color: var(--primary-color);
       color: white;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all var(--transition-speed) ease;
+      margin-top: 15px;
+    }
+
+    .service-cta:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
     }
 
     /* Footer */
@@ -498,42 +467,12 @@
       }
     }
 
-    @keyframes slideLeft {
-      from {
-        opacity: 0;
-        transform: translateX(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes slideRight {
-      from {
-        opacity: 0;
-        transform: translateX(-50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
     .fade-in {
       animation: fadeIn 1s ease forwards;
     }
 
     .slide-up {
       animation: slideUp 0.8s ease forwards;
-    }
-
-    .slide-left {
-      animation: slideLeft 0.8s ease forwards;
-    }
-
-    .slide-right {
-      animation: slideRight 0.8s ease forwards;
     }
 
     .delay-1 {
@@ -592,7 +531,7 @@
         display: flex;
       }
       
-      .projects .grid {
+      .services .grid {
         grid-template-columns: 1fr;
       }
     }
@@ -632,275 +571,164 @@
     <nav class="navigation" id="nav-menu">
       <a href="index.html">Home</a>
       <a href="Mohamed - Personal Information.html">About</a>
-      <a href="Mohamed - Services.html">Services</a>
-      <a href="Mohamed - Project.html" class="active">Projects</a>
+      <a href="Mohamed - Services.html" class="active">Services</a>
+      <a href="Mohamed - Project.html">Projects</a>
       <a href="Mohamed - Certificates.html">Certificates</a>
       <a href="Mohamed - CV.html" class="btn btn-outline" style="margin-left: 20px;">My CV</a>
     </nav>
   </header>
 
-  <!-- Projects Section -->
-  <section class="projects" id="projects">
+  <!-- Services Section -->
+  <section class="services" id="services">
     <div class="container">
       <div class="section-title fade-in">
-        <h2>My Projects</h2>
-        <p class="section-subtitle">Explore my collection of innovative Arduino, PCB, and software projects</p>
+        <h2>Professional Services</h2>
+        <p class="section-subtitle">Comprehensive solutions tailored to meet your technical needs with quality and precision</p>
       </div>
       
       <div class="grid">
-        <!-- Blind Glasses -->
-        <div class="project-card fade-in">
-          <div class="project-image">
-            <img src="Project/5.png" alt="Blind Glasses Project" loading="lazy">
-            <div class="project-overlay">
-              <div>
-                <span class="project-category">Arduino Project</span>
-                <h3 class="project-title">Blind Assistance Glasses</h3>
-              </div>
-            </div>
+        <!-- Web Development -->
+        <div class="service-card fade-in">
+          <div class="service-icon">
+            <i class="fas fa-laptop-code"></i>
           </div>
-          <div class="project-info">
-            <p class="project-description">Innovative wearable device using ultrasonic sensors to detect obstacles and provide audio feedback for visually impaired users.</p>
-            <div class="project-links">
-              <a href="https://fb.watch/ipRaFH0KIr/" class="project-link project-link-primary" target="_blank">View Demo</a>
-            </div>
-          </div>
+          <h3 class="service-title">Web Development</h3>
+          <p class="service-description">Custom website development using modern technologies to create responsive, user-friendly interfaces.</p>
+          <ul class="service-features">
+            <li>HTML5 & CSS3 implementation</li>
+            <li>Responsive design for all devices</li>
+            <li>Clean, semantic code structure</li>
+            <li>Performance optimization</li>
+          </ul>
+          <a href="#contact" class="service-cta">Get Started</a>
         </div>
         
-        <!-- Portfolio Website -->
-        <div class="project-card fade-in delay-1">
-          <div class="project-image">
-            <img src="Project/2.png" alt="Portfolio Website" loading="lazy">
-            <div class="project-overlay">
-              <div>
-                <span class="project-category">Web Development</span>
-                <h3 class="project-title">Portfolio Website</h3>
-              </div>
-            </div>
+        <!-- Arduino Programming -->
+        <div class="service-card fade-in delay-1">
+          <div class="service-icon">
+            <i class="fas fa-microchip"></i>
           </div>
-          <div class="project-info">
-            <p class="project-description">Responsive personal portfolio website built with HTML5, CSS3, and JavaScript.</p>
-            <div class="project-links">
-              <a href="Project/2.png" class="project-link project-link-primary">Preview</a>
-              <a href="https://github.com/mohamed22tarek5/website" class="project-link project-link-secondary" target="_blank">Code</a>
-            </div>
+          <h3 class="service-title">Arduino Programming</h3>
+          <p class="service-description">Expert coding solutions for Arduino, ESP, and PIC microcontrollers to bring your electronic projects to life.</p>
+          <ul class="service-features">
+            <li>Custom firmware development</li>
+            <li>Sensor integration</li>
+            <li>Wireless communication (WiFi/BT)</li>
+            <li>Power optimization</li>
+          </ul>
+          <a href="#contact" class="service-cta">Discuss Project</a>
+        </div>
+        
+        <!-- Simulation Projects -->
+        <div class="service-card fade-in delay-2">
+          <div class="service-icon">
+            <i class="fas fa-project-diagram"></i>
           </div>
+          <h3 class="service-title">Circuit Simulation</h3>
+          <p class="service-description">Professional circuit simulation and analysis using industry-standard tools before physical implementation.</p>
+          <ul class="service-features">
+            <li>Multisim circuit analysis</li>
+            <li>Proteus simulation</li>
+            <li>TinkerCAD prototyping</li>
+            <li>Performance validation</li>
+          </ul>
+          <a href="#contact" class="service-cta">Request Simulation</a>
         </div>
         
         <!-- PCB Design -->
-        <div class="project-card fade-in delay-2">
-          <div class="project-image">
-            <img src="Project/3.png" alt="PCB Design Project" loading="lazy">
-            <div class="project-overlay">
-              <div>
-                <span class="project-category">PCB Design</span>
-                <h3 class="project-title">20-Line Relay Module PCB</h3>
-              </div>
-            </div>
+        <div class="service-card fade-in delay-3">
+          <div class="service-icon">
+            <i class="fas fa-vector-square"></i>
           </div>
-          <div class="project-info">
-            <p class="project-description">Professional PCB design for a 20-line relay module with optimized routing and component placement for industrial applications.</p>
-            <div class="project-links">
-              <a href="Project/3.1.png" class="project-link project-link-primary">View Design</a>
+          <h3 class="service-title">PCB Design</h3>
+          <p class="service-description">Professional PCB layout and design services for reliable and efficient electronic circuits.</p>
+          <ul class="service-features">
+            <li>Schematic capture</li>
+            <li>Board layout optimization</li>
+            <li>Design rule checking</li>
+            <li>Gerber file generation</li>
+          </ul>
+          <a href="#contact" class="service-cta">Design Inquiry</a>
+        </div>
+      
+        <div class="service-card fade-in delay-1">
+           <div class="service-icon">
+             <i class="fas fa-wifi"></i>
             </div>
+             <h3 class="service-title">IoT Solutions</h3>
+             <p class="service-description">Complete IoT solutions including hardware, firmware, and cloud integration for smart devices and automation.</p>
+               <a href="Mohamed - Services.html" class="service-cta">Learn More</a>
+           </div>
+          
+        <!-- Smart Home -->
+        <div class="service-card fade-in">
+          <div class="service-icon">
+            <i class="fas fa-home"></i>
           </div>
+          <h3 class="service-title">Smart Home Solutions</h3>
+          <p class="service-description">Custom smart home automation systems tailored to your specific needs and requirements.</p>
+          <ul class="service-features">
+            <li>Home automation design</li>
+            <li>IoT device integration</li>
+            <li>Remote control systems</li>
+            <li>Energy monitoring</li>
+          </ul>
+          <a href="#contact" class="service-cta">Automate Your Home</a>
         </div>
         
-        <!-- Smart Home V1 -->
-        <div class="project-card fade-in delay-3">
-          <div class="project-image">
-            <img src="Project/1.png" alt="Smart Home V1" loading="lazy">
-            <div class="project-overlay">
-              <div>
-                <span class="project-category">Arduino Project</span>
-                <h3 class="project-title">Smart Home Control Board V1</h3>
-              </div>
-            </div>
+        <!-- Embedded Systems -->
+        <div class="service-card fade-in delay-1">
+          <div class="service-icon">
+            <i class="fas fa-robot"></i>
           </div>
-          <div class="project-info">
-            <p class="project-description">First iteration of a smart home control system with basic automation features and remote control capabilities.</p>
-            <div class="project-links">
-              <a href="Project/1.png" class="project-link project-link-primary">View Schematic</a>
-            </div>
-          </div>
+          <h3 class="service-title">Embedded Systems</h3>
+          <p class="service-description">Development of microcontroller-based applications for various embedded solutions.</p>
+          <ul class="service-features">
+            <li>Custom firmware development</li>
+            <li>RTOS implementation</li>
+            <li>Peripheral interfacing</li>
+            <li>Low-power design</li>
+          </ul>
+          <a href="#contact" class="service-cta">Build Your System</a>
         </div>
         
-        <!-- Smart Home V2 -->
-        <div class="project-card fade-in">
-          <div class="project-image">
-            <img src="Project/6.png" alt="Smart Home V2" loading="lazy">
-            <div class="project-overlay">
-              <div>
-                <span class="project-category">Arduino Project</span>
-                <h3 class="project-title">Smart Home Control Board V2</h3>
-              </div>
-            </div>
+        <!-- Graduation Projects -->
+        <div class="service-card fade-in delay-2">
+          <div class="service-icon">
+            <i class="fas fa-graduation-cap"></i>
           </div>
-          <div class="project-info">
-            <p class="project-description">Enhanced version with improved functionality and user interface for more sophisticated home automation scenarios.</p>
-            <div class="project-links">
-              <a href="Project/6.png" class="project-link project-link-primary">View Design</a>
-            </div>
-          </div>
+          <h3 class="service-title">Graduation Projects</h3>
+          <p class="service-description">Comprehensive support for engineering graduation projects from concept to completion.</p>
+          <ul class="service-features">
+            <li>Project conceptualization</li>
+            <li>Technical documentation</li>
+            <li>Hardware/software integration</li>
+            <li>Presentation preparation</li>
+          </ul>
+          <a href="#contact" class="service-cta">Start Your Project</a>
         </div>
         
-        <!-- Flasher and Charger -->
-        <div class="project-card fade-in delay-1">
-          <div class="project-image">
-            <img src="Project/7.png" alt="Flasher and Charger Circuit" loading="lazy">
-            <div class="project-overlay">
-              <div>
-                <span class="project-category">Electronics</span>
-                <h3 class="project-title">Flasher & Charger Circuit</h3>
-              </div>
-            </div>
+        <!-- Simple Projects -->
+        <div class="service-card fade-in delay-3">
+          <div class="service-icon">
+            <i class="fas fa-lightbulb"></i>
           </div>
-          <div class="project-info">
-            <p class="project-description">Dual-purpose circuit designed for both battery charging and LED flashing applications with adjustable parameters.</p>
-            <div class="project-links">
-              <a href="Project/7.png" class="project-link project-link-primary">View Circuit</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Smart Home V3 -->
-        <div class="project-card fade-in delay-2">
-          <div class="project-image">
-            <img src="Project/8.png" alt="Smart Home V3" loading="lazy">
-            <div class="project-overlay">
-              <div>
-                <span class="project-category">Arduino Project</span>
-                <h3 class="project-title">Smart Home Control Board V3</h3>
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <p class="project-description">Advanced 2-line control system with enhanced features and improved reliability for residential automation.</p>
-            <div class="project-links">
-              <a href="Project/8.png" class="project-link project-link-primary">View Design</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Gas Detector -->
-        <div class="project-card fade-in delay-3">
-          <div class="project-image">
-            <img src="Project/9.png" alt="Gas Detector Project" loading="lazy">
-            <div class="project-overlay">
-              <div>
-                <span class="project-category">Arduino Project</span>
-                <h3 class="project-title">Gas Detection System</h3>
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <p class="project-description">Safety device that detects hazardous gas levels and triggers alarms with sensor calibration and threshold adjustment.</p>
-            <div class="project-links">
-              <a href="Project/9.png" class="project-link project-link-primary">View System</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- RFID & Person Counter -->
-        <div class="project-card fade-in">
-          <div class="project-image">
-            <img src="Project/10.png" alt="RFID & Person Counter" loading="lazy">
-            <div class="project-overlay">
-              <div>
-                <span class="project-category">Arduino Project</span>
-                <h3 class="project-title">RFID & Occupancy Tracker</h3>
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <p class="project-description">Integrated system for monitoring room occupancy and RFID-based access control with data logging capabilities.</p>
-            <div class="project-links">
-              <a href="Project/10.png" class="project-link project-link-primary">View Project</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Smart Home V4 -->
-        <div class="project-card fade-in delay-1">
-          <div class="project-image">
-            <img src="Project/11.png" alt="Smart Home V4" loading="lazy">
-            <div class="project-overlay">
-              <div>
-                <span class="project-category">Arduino Project</span>
-                <h3 class="project-title">Smart Home Control Board V4</h3>
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <p class="project-description">4-line control system with Bluetooth connectivity for wireless home automation and remote monitoring.</p>
-            <div class="project-links">
-              <a href="Project/11.png" class="project-link project-link-primary">View Design</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Talking Gloves -->
-        <div class="project-card fade-in delay-2">
-          <div class="project-image">
-            <img src="Project/12.png" alt="Talking Gloves Project" loading="lazy">
-            <div class="project-overlay">
-              <div>
-                <span class="project-category">Arduino Project</span>
-                <h3 class="project-title">Sign Language Translator Gloves</h3>
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <p class="project-description">Innovative device that translates sign language gestures into audible speech using flex sensors and motion detection.</p>
-            <div class="project-links">
-              <a href="Project/12.png" class="project-link project-link-primary">View Prototype</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Healthcare System -->
-        <div class="project-card fade-in delay-3">
-          <div class="project-image">
-            <img src="Project/13.png" alt="Healthcare System" loading="lazy">
-            <div class="project-overlay">
-              <div>
-                <span class="project-category">Arduino Project</span>
-                <h3 class="project-title">Patient Monitoring System</h3>
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <p class="project-description">Comprehensive healthcare device measuring vital signs including heart rate and blood pressure with alert system.</p>
-            <div class="project-links">
-              <a href="Project/13.png" class="project-link project-link-primary">View System</a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Fire Car -->
-        <div class="project-card fade-in">
-          <div class="project-image">
-            <img src="Project/4.png" alt="Fire Car Project" loading="lazy">
-            <div class="project-overlay">
-              <div>
-                <span class="project-category">Arduino Project</span>
-                <h3 class="project-title">Autonomous Firefighting Vehicle</h3>
-              </div>
-            </div>
-          </div>
-          <div class="project-info">
-            <p class="project-description">Self-navigating vehicle that detects and extinguishes fires with flame sensors, water pump, and obstacle avoidance.</p>
-            <div class="project-links">
-              <a href="Project/4.png" class="project-link project-link-primary">View Vehicle</a>
-            </div>
-          </div>
+          <h3 class="service-title">Electronics Prototyping</h3>
+          <p class="service-description">Guidance and implementation for small-scale electronics projects and prototypes.</p>
+          <ul class="service-features">
+            <li>Circuit design assistance</li>
+            <li>Component selection</li>
+            <li>Prototype development</li>
+            <li>Testing and debugging</li>
+          </ul>
+          <a href="#contact" class="service-cta">Build Your Idea</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer>
+  <footer id="contact">
     <div class="container">
       <div class="footer-content">
         <div class="footer-column fade-in">
@@ -929,11 +757,11 @@
         <div class="footer-column fade-in delay-2">
           <h3>Services</h3>
           <ul class="footer-links">
-            <li><a href="Mohamed - Services.html">Web Development</a></li>
-            <li><a href="Mohamed - Services.html">Arduino Projects</a></li>
-            <li><a href="Mohamed - Services.html">PCB Design</a></li>
-            <li><a href="Mohamed - Services.html">Embedded Systems</a></li>
-            <li><a href="Mohamed - Services.html">IoT Solutions</a></li>
+            <li><a href="#services">Web Development</a></li>
+            <li><a href="#services">Arduino Projects</a></li>
+            <li><a href="#services">PCB Design</a></li>
+            <li><a href="#services">Embedded Systems</a></li>
+            <li><a href="#services">IoT Solutions</a></li>
           </ul>
         </div>
       </div>
@@ -1056,139 +884,17 @@
         themeIcon.classList.replace('fa-moon', 'fa-sun');
         localStorage.setItem('theme', 'dark');
       } else {
-            document.body.setAttribute('data-theme', 'light');
+        document.body.setAttribute('data-theme', 'light');
         themeIcon.classList.replace('fa-sun', 'fa-moon');
         localStorage.setItem('theme', 'light');
       }
     });
 
-    // Typewriter Effect
-    const typewriterElement = document.getElementById('typewriter');
-    const professions = [
-      "Web Developer",
-      "Arduino Expert",
-      "PCB Designer",
-      "Embedded Engineer",
-      "IoT Specialist"
-    ];
-    
-    let professionIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 100;
-    
-    function typeWriter() {
-      const currentProfession = professions[professionIndex];
-      
-      if (isDeleting) {
-        typewriterElement.textContent = currentProfession.substring(0, charIndex - 1);
-        charIndex--;
-        typingSpeed = 50;
-      } else {
-        typewriterElement.textContent = currentProfession.substring(0, charIndex + 1);
-        charIndex++;
-        typingSpeed = 100;
-      }
-      
-      if (!isDeleting && charIndex === currentProfession.length) {
-        isDeleting = true;
-        typingSpeed = 1500; // Pause at end
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        professionIndex = (professionIndex + 1) % professions.length;
-        typingSpeed = 500; // Pause before typing next
-      }
-      
-      setTimeout(typeWriter, typingSpeed);
-    }
-    
-    // Start the typewriter effect
-    setTimeout(typeWriter, 1000);
-    
-    // Form Submission
-    const contactForm = document.getElementById('contactForm');
-    const formSpinner = document.getElementById('form-spinner');
-    const formMessage = document.getElementById('form-message');
-    
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      // Show loading spinner
-      formSpinner.style.display = 'block';
-      formMessage.textContent = '';
-      
-      // Simulate form submission (replace with actual AJAX call)
-      setTimeout(() => {
-        formSpinner.style.display = 'none';
-        formMessage.textContent = 'Your message has been sent successfully!';
-        formMessage.style.color = 'var(--success-color)';
-        contactForm.reset();
-        
-        // Hide message after 5 seconds
-        setTimeout(() => {
-          formMessage.textContent = '';
-        }, 5000);
-      }, 1500);
-    });
-    
-    // Animate statistics on scroll
-    function animateStatistics() {
-      const projectsCount = document.getElementById('projects-count');
-      const clientsCount = document.getElementById('clients-count');
-      const experienceYears = document.getElementById('experience-years');
-      const certificates = document.getElementById('certificates');
-      
-      animateValue(projectsCount, 0, 200, 2000);
-      animateValue(clientsCount, 0, 50, 2000);
-      animateValue(experienceYears, 0, 5, 2000);
-      animateValue(certificates, 0, 15, 2000);
-    }
-    
-    function animateValue(element, start, end, duration) {
-      let startTimestamp = null;
-      const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        element.innerHTML = Math.floor(progress * (end - start) + start) + (progress === 1 ? '+' : '');
-        if (progress < 1) {
-          window.requestAnimationFrame(step);
-        }
-      };
-      window.requestAnimationFrame(step);
-    }
-    
-    // Intersection Observer for animations
-    const observerOptions = {
-      threshold: 0.1
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          if (entry.target.id === 'projects-count') {
-            animateStatistics();
-          }
-          entry.target.classList.add('animated');
-        }
-      });
-    }, observerOptions);
-    
-    document.querySelectorAll('.fade-in, .slide-up, .slide-left, .slide-right').forEach(element => {
-      observer.observe(element);
-    });
-    
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
-    
-    // Skill bar animations
-    const skillBars = document.querySelectorAll('.skill-progress');
-    skillBars.forEach(bar => {
-      const width = bar.style.width;
-      bar.style.width = '0';
-      setTimeout(() => {
-        bar.style.width = width;
-      }, 500);
-    });
+
+    // Ensure smooth transitions for the theme change
+    document.body.style.transition = "background-color 0.5s ease, color 0.5s ease";
   </script>
 </body>
 </html>
