@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools Directory - M.T.A Technical</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4e9eff;
+            --primary-dark: #3a6cf4;
+            --primary-light: #6ab1ff;
+            --background-dark: #121212;
+            --background-darker: #0a0a0a;
+            --background-secondary: #1a1a1a;
+            --card-dark: #1e1e1e;
+            --card-light: #252525;
+            --text-light: #ffffff;
+            --text-muted: #aaaaaa;
+            --success-color: #4caf50;
+            --error-color: #f44336;
+            --warning-color: #ff9800;
+            --transition-speed: 0.3s;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Light mode variables */
+        [data-theme="light"] {
+            --background-dark: #f5f7fa;
+            --background-darker: #e8ebf0;
+            --background-secondary: #ffffff;
+            --card-dark: #ffffff;
+            --card-light: #f9f9f9;
+            --text-light: #333333;
+            --text-muted: #666666;
+            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--background-dark);
+            min-height: 100vh;
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--card-dark);
+            box-shadow: var(--box-shadow);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .logo:hover {
+            color: var(--primary-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: color var(--transition-speed) ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-dark);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-dark);
+            transition: width var(--transition-speed) ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            margin-top: 100px;
+            padding: 2rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: rgba(78, 158, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            margin-bottom: 3rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            background: var(--card-dark);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+            border-radius: 2px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tool-card {
+            background: var(--card-light);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: all var(--transition-speed) ease;
+            border: 2px solid transparent;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-hover);
+            border-color: var(--primary-color);
+        }
+
+        .tool-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .tool-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .tool-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+        }
+
+        footer {
+            background: var(--card-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--card-dark);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            box-shadow: var(--box-shadow);
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            z-index: 999;
+            border: none;
+            outline: none;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--card-dark);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            box-shadow: var(--box-shadow);
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            z-index: 999;
+            border: none;
+            outline: none;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        /* Category title styles */
+        .category-title {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+    <main>
+        <div class="container">
+            <section class="hero" id="home">
+                <h1>Welcome to AI Tools Directory</h1>
+                <p>Discover the best AI-powered websites and tools to enhance your productivity and creativity</p>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Main AI Platforms</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-robot"></i></div>
+                        <h3 class="tool-name">ChatGPT</h3>
+                        <p class="tool-description">Smart conversational AI assistant</p>
+                        <a href="https://chat.openai.com/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-search"></i></div>
+                        <h3 class="tool-name">Bing AI</h3>
+                        <p class="tool-description">AI-powered search engine</p>
+                        <a href="https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fab fa-google"></i></div>
+                        <h3 class="tool-name">Google Bard</h3>
+                        <p class="tool-description">Google's AI assistant</p>
+                        <a href="https://bard.google.com/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-comments"></i></div>
+                        <h3 class="tool-name">Poe</h3>
+                        <p class="tool-description">Platform for multiple AI models</p>
+                        <a href="https://poe.com/" class="tool-link">Visit Site</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Writing & Paraphrasing Tools</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-edit"></i></div>
+                        <h3 class="tool-name">QuillBot</h3>
+                        <p class="tool-description">AI-powered paraphrasing tool</p>
+                        <a href="https://try.quillbot.com/mlsfkwnf9euj" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-pen-alt"></i></div>
+                        <h3 class="tool-name">Wordtune</h3>
+                        <p class="tool-description">AI writing assistant</p>
+                        <a href="https://www.wordtune.com/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-keyboard"></i></div>
+                        <h3 class="tool-name">Rytr</h3>
+                        <p class="tool-description">AI writing assistant</p>
+                        <a href="https://rytr.me/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-feather"></i></div>
+                        <h3 class="tool-name">TxtMuse</h3>
+                        <p class="tool-description">Creative writing tool</p>
+                        <a href="https://www.txtmuse.com/" class="tool-link">Visit Site</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Image Generation & Enhancement</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-palette"></i></div>
+                        <h3 class="tool-name">Leonardo AI</h3>
+                        <p class="tool-description">AI image generation</p>
+                        <a href="https://leonardo.ai/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-magic"></i></div>
+                        <h3 class="tool-name">BlueWillow</h3>
+                        <p class="tool-description">AI art generation</p>
+                        <a href="https://www.bluewillow.ai/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-vector-square"></i></div>
+                        <h3 class="tool-name">Vectorizer</h3>
+                        <p class="tool-description">Convert images to vector</p>
+                        <a href="https://vectorizer.ai/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                        <h3 class="tool-name">Upscale Media</h3>
+                        <p class="tool-description">Image quality enhancement</p>
+                        <a href="https://www.upscale.media/" class="tool-link">Visit Site</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">PDF Tools</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-file-pdf"></i></div>
+                        <h3 class="tool-name">ChatPDF</h3>
+                        <p class="tool-description">Chat with PDF files</p>
+                        <a href="https://www.chatpdf.com/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-tools"></i></div>
+                        <h3 class="tool-name">HiPDF</h3>
+                        <p class="tool-description">Various PDF tools</p>
+                        <a href="https://www.hipdf.com/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-question-circle"></i></div>
+                        <h3 class="tool-name">AskYourPDF</h3>
+                        <p class="tool-description">Ask questions about PDFs</p>
+                        <a href="https://auth.askyourpdf.com/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-heart"></i></div>
+                        <h3 class="tool-name">ILovePDF</h3>
+                        <p class="tool-description">Comprehensive PDF tools</p>
+                        <a href="https://www.ilovepdf.com/" class="tool-link">Visit Site</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Audio Tools</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-microphone"></i></div>
+                        <h3 class="tool-name">Adobe Podcast</h3>
+                        <p class="tool-description">Audio quality enhancement</p>
+                        <a href="https://podcast.adobe.com/enhance" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-photo-video"></i></div>
+                        <h3 class="tool-name">Media.io</h3>
+                        <p class="tool-description">Multimedia tools</p>
+                        <a href="https://www.media.io/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-volume-up"></i></div>
+                        <h3 class="tool-name">Narakeet</h3>
+                        <p class="tool-description">Text to speech</p>
+                        <a href="https://www.narakeet.com/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-play"></i></div>
+                        <h3 class="tool-name">Play.ht</h3>
+                        <p class="tool-description">AI voice generator</p>
+                        <a href="https://play.ht/" class="tool-link">Visit Site</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Video Tools</h2>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-user-circle"></i></div>
+                        <h3 class="tool-name">D-ID</h3>
+                        <p class="tool-description">AI video generation</p>
+                        <a href="https://www.d-id.com/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-brain"></i></div>
+                        <h3 class="tool-name">DeepBrain</h3>
+                        <p class="tool-description">AI presenters</p>
+                        <a href="https://www.deepbrain.io/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-cut"></i></div>
+                        <h3 class="tool-name">Unscreen</h3>
+                        <p class="tool-description">Video background removal</p>
+                        <a href="https://www.unscreen.com/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-video"></i></div>
+                        <h3 class="tool-name">Synthesia</h3>
+                        <p class="tool-description">AI video generation</p>
+                        <a href="https://www.synthesia.io/" class="tool-link">Visit Site</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Additional Useful Tools</h2>
+                
+                <h3 class="category-title">Text & Language Tools</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-keyboard"></i></div>
+                        <h3 class="tool-name">EssayBot</h3>
+                        <p class="tool-description">AI essay generator</p>
+                        <a href="https://essaybot.com" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-paragraph"></i></div>
+                        <h3 class="tool-name">Paraphraz</h3>
+                        <p class="tool-description">Text summarization and paraphrasing</p>
+                        <a href="https://paraphraz.it/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-language"></i></div>
+                        <h3 class="tool-name">Document Translator</h3>
+                        <p class="tool-description">File translation</p>
+                        <a href="https://www.onlinedoctranslator.com/en/" class="tool-link">Visit Site</a>
+                    </div>
+                </div>
+
+                <h3 class="category-title">Audio & Image Tools</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-volume-off"></i></div>
+                        <h3 class="tool-name">Audo</h3>
+                        <p class="tool-description">Noise removal from audio</p>
+                        <a href="https://audo.ai/noise-removal" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-comment-dots"></i></div>
+                        <h3 class="tool-name">Transkriptor</h3>
+                        <p class="tool-description">Speech to text</p>
+                        <a href="https://app.transkriptor.com/uploader" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-eraser"></i></div>
+                        <h3 class="tool-name">Magic Eraser</h3>
+                        <p class="tool-description">Image background removal</p>
+                        <a href="https://magicstudio.com/magiceraser/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-image"></i></div>
+                        <h3 class="tool-name">Vance AI</h3>
+                        <p class="tool-description">8x image quality enhancement</p>
+                        <a href="https://vance.ai/" class="tool-link">Visit Site</a>
+                    </div>
+                </div>
+
+                <h3 class="category-title">Productivity Tools</h3>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-tools"></i></div>
+                        <h3 class="tool-name">TinyWOW</h3>
+                        <p class="tool-description">Various file tools</p>
+                        <a href="https://tinywow.com/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-robot"></i></div>
+                        <h3 class="tool-name">Eleven Labs</h3>
+                        <p class="tool-description">Advanced text to speech</p>
+                        <a href="https://beta.elevenlabs.io/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-code"></i></div>
+                        <h3 class="tool-name">Denigma</h3>
+                        <p class="tool-description">Code explanation</p>
+                        <a href="https://denigma.app/#demo" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-pen-fancy"></i></div>
+                        <h3 class="tool-name">Jenni AI</h3>
+                        <p class="tool-description">Writing and research assistant</p>
+                        <a href="https://jenni.ai/" class="tool-link">Visit Site</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon"><i class="fas fa-camera"></i></div>
+                        <h3 class="tool-name">ScanToSolve</h3>
+                        <p class="tool-description">Solve problems from images</p>
+                        <a href="https://scantosolve.com" class="tool-link">Visit Site</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/medo-tarek-b5ba24246" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <div>
+                    &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme') || 
+                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        if (currentTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            document.body.setAttribute('data-theme', 'light');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            if (document.body.getAttribute('data-theme') === 'light') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Scroll to Top Button
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
