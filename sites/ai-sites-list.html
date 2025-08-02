@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Tools Directory - M.T.A Technical</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #4e9eff;
@@ -151,102 +151,122 @@
             margin: 0 auto;
         }
 
-        .section {
-            margin-bottom: 4rem;
+        /* Accordion Styles */
+        .accordion-container {
+            margin-bottom: 2rem;
             background: var(--card-dark);
             border-radius: var(--border-radius);
-            padding: 2rem;
             box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .accordion-header:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+        }
+
+        .accordion-header i {
             transition: transform var(--transition-speed) ease;
         }
 
-        .section:hover {
-            transform: translateY(-5px);
+        .accordion-header.active i {
+            transform: rotate(180deg);
         }
 
-        .section-title {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 2rem;
-            text-align: center;
-            position: relative;
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-speed) ease;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
-            border-radius: 2px;
+        .accordion-content-inner {
+            padding: 2rem;
         }
 
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
         .tool-card {
             background: var(--card-light);
             border-radius: var(--border-radius);
             padding: 1.5rem;
-            text-align: center;
             box-shadow: var(--box-shadow);
             transition: all var(--transition-speed) ease;
-            border: 2px solid transparent;
+            border-left: 4px solid var(--primary-color);
+            display: flex;
+            flex-direction: column;
         }
 
         .tool-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             box-shadow: var(--box-shadow-hover);
-            border-color: var(--primary-color);
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
         }
 
         .tool-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1rem;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: white;
+            margin-right: 1rem;
+            flex-shrink: 0;
         }
 
         .tool-name {
             font-size: 1.2rem;
             font-weight: 600;
             color: var(--text-light);
-            margin-bottom: 0.5rem;
         }
 
         .tool-description {
             color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
         }
 
         .tool-link {
             display: inline-block;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: white;
+            background: var(--card-dark);
+            color: var(--primary-color);
             text-decoration: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
             font-weight: 500;
             transition: all var(--transition-speed) ease;
+            border: 1px solid var(--primary-color);
+            text-align: center;
         }
 
         .tool-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            transform: translateY(-2px);
         }
 
         footer {
@@ -280,25 +300,6 @@
         .social-links a:hover {
             color: var(--primary-color);
             transform: translateY(-3px);
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
         }
 
         /* Dark Mode Toggle */
@@ -360,295 +361,1273 @@
             transform: scale(1.1);
         }
 
-        /* Category title styles */
-        .category-title {
-            color: var(--primary-color);
-            margin: 2rem 0 1rem;
-            font-size: 1.5rem;
-            text-align: center;
+        /* Search Bar */
+        .search-container {
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            background: var(--card-light);
+            color: var(--text-light);
+            font-size: 1rem;
+            box-shadow: var(--box-shadow);
+            transition: all var(--transition-speed) ease;
+            padding-left: 3rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .accordion-header {
+                padding: 1.2rem;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    
+   
+
     <main>
         <div class="container">
             <section class="hero" id="home">
-                <h1>Welcome to AI Tools Directory</h1>
+                <h1>AI Tools Directory</h1>
                 <p>Discover the best AI-powered websites and tools to enhance your productivity and creativity</p>
             </section>
 
-            <section class="section">
-                <h2 class="section-title">Main AI Platforms</h2>
-                <div class="tools-grid">
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-robot"></i></div>
-                        <h3 class="tool-name">ChatGPT</h3>
-                        <p class="tool-description">Smart conversational AI assistant</p>
-                        <a href="https://chat.openai.com/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-search"></i></div>
-                        <h3 class="tool-name">Bing AI</h3>
-                        <p class="tool-description">AI-powered search engine</p>
-                        <a href="https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fab fa-google"></i></div>
-                        <h3 class="tool-name">Google Bard</h3>
-                        <p class="tool-description">Google's AI assistant</p>
-                        <a href="https://bard.google.com/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-comments"></i></div>
-                        <h3 class="tool-name">Poe</h3>
-                        <p class="tool-description">Platform for multiple AI models</p>
-                        <a href="https://poe.com/" class="tool-link">Visit Site</a>
-                    </div>
-                </div>
-            </section>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search AI tools..." id="search-input">
+            </div>
 
-            <section class="section">
-                <h2 class="section-title">Writing & Paraphrasing Tools</h2>
-                <div class="tools-grid">
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-edit"></i></div>
-                        <h3 class="tool-name">QuillBot</h3>
-                        <p class="tool-description">AI-powered paraphrasing tool</p>
-                        <a href="https://try.quillbot.com/mlsfkwnf9euj" class="tool-link">Visit Site</a>
+            <div id="categories">
+                <!-- Main AI Platforms -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Main AI Platforms</span>
+                        <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-pen-alt"></i></div>
-                        <h3 class="tool-name">Wordtune</h3>
-                        <p class="tool-description">AI writing assistant</p>
-                        <a href="https://www.wordtune.com/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-keyboard"></i></div>
-                        <h3 class="tool-name">Rytr</h3>
-                        <p class="tool-description">AI writing assistant</p>
-                        <a href="https://rytr.me/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-feather"></i></div>
-                        <h3 class="tool-name">TxtMuse</h3>
-                        <p class="tool-description">Creative writing tool</p>
-                        <a href="https://www.txtmuse.com/" class="tool-link">Visit Site</a>
-                    </div>
-                </div>
-            </section>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-robot"></i></div>
+                                        <h3 class="tool-name">ChatGPT</h3>
+                                    </div>
+                                    <p class="tool-description">Smart conversational AI assistant by OpenAI</p>
+                                    <a href="https://chat.openai.com/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-search"></i></div>
+                                        <h3 class="tool-name">Bing AI</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered search engine by Microsoft</p>
+                                    <a href="https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fab fa-google"></i></div>
+                                        <h3 class="tool-name">Google Bard</h3>
+                                    </div>
+                                    <p class="tool-description">Google's AI assistant with advanced capabilities</p>
+                                    <a href="https://bard.google.com/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-comments"></i></div>
+                                        <h3 class="tool-name">Poe</h3>
+                                    </div>
+                                    <p class="tool-description">Platform for multiple AI models in one place</p>
+                                    <a href="https://poe.com/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-brain"></i></div>
+                                        <h3 class="tool-name">Claude AI</h3>
+                                    </div>
+                                    <p class="tool-description">Anthropic's conversational AI assistant focused on helpful, honest dialogue</p>
+                                    <a href="https://claude.ai/" class="tool-link">Visit Site</a>
+                                </div>
 
-            <section class="section">
-                <h2 class="section-title">Image Generation & Enhancement</h2>
-                <div class="tools-grid">
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-palette"></i></div>
-                        <h3 class="tool-name">Leonardo AI</h3>
-                        <p class="tool-description">AI image generation</p>
-                        <a href="https://leonardo.ai/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-magic"></i></div>
-                        <h3 class="tool-name">BlueWillow</h3>
-                        <p class="tool-description">AI art generation</p>
-                        <a href="https://www.bluewillow.ai/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-vector-square"></i></div>
-                        <h3 class="tool-name">Vectorizer</h3>
-                        <p class="tool-description">Convert images to vector</p>
-                        <a href="https://vectorizer.ai/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-expand-arrows-alt"></i></div>
-                        <h3 class="tool-name">Upscale Media</h3>
-                        <p class="tool-description">Image quality enhancement</p>
-                        <a href="https://www.upscale.media/" class="tool-link">Visit Site</a>
-                    </div>
-                </div>
-            </section>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-robot"></i></div>
+                                        <h3 class="tool-name">DeepSeek Chat</h3>
+                                    </div>
+                                    <p class="tool-description">Advanced AI chat powered by DeepSeek's language models</p>
+                                    <a href="https://chat.deepseek.com/" class="tool-link">Visit Site</a>
+                                </div>
 
-            <section class="section">
-                <h2 class="section-title">PDF Tools</h2>
-                <div class="tools-grid">
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-file-pdf"></i></div>
-                        <h3 class="tool-name">ChatPDF</h3>
-                        <p class="tool-description">Chat with PDF files</p>
-                        <a href="https://www.chatpdf.com/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-tools"></i></div>
-                        <h3 class="tool-name">HiPDF</h3>
-                        <p class="tool-description">Various PDF tools</p>
-                        <a href="https://www.hipdf.com/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-question-circle"></i></div>
-                        <h3 class="tool-name">AskYourPDF</h3>
-                        <p class="tool-description">Ask questions about PDFs</p>
-                        <a href="https://auth.askyourpdf.com/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-heart"></i></div>
-                        <h3 class="tool-name">ILovePDF</h3>
-                        <p class="tool-description">Comprehensive PDF tools</p>
-                        <a href="https://www.ilovepdf.com/" class="tool-link">Visit Site</a>
-                    </div>
-                </div>
-            </section>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-bolt"></i></div>
+                                        <h3 class="tool-name">Grok</h3>
+                                    </div>
+                                    <p class="tool-description">xAI's AI assistant with real-time knowledge access</p>
+                                    <a href="https://grok.com/" class="tool-link">Visit Site</a>
+                                </div>
 
-            <section class="section">
-                <h2 class="section-title">Audio Tools</h2>
-                <div class="tools-grid">
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-microphone"></i></div>
-                        <h3 class="tool-name">Adobe Podcast</h3>
-                        <p class="tool-description">Audio quality enhancement</p>
-                        <a href="https://podcast.adobe.com/enhance" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-photo-video"></i></div>
-                        <h3 class="tool-name">Media.io</h3>
-                        <p class="tool-description">Multimedia tools</p>
-                        <a href="https://www.media.io/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-volume-up"></i></div>
-                        <h3 class="tool-name">Narakeet</h3>
-                        <p class="tool-description">Text to speech</p>
-                        <a href="https://www.narakeet.com/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-play"></i></div>
-                        <h3 class="tool-name">Play.ht</h3>
-                        <p class="tool-description">AI voice generator</p>
-                        <a href="https://play.ht/" class="tool-link">Visit Site</a>
-                    </div>
-                </div>
-            </section>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-mobile-alt"></i></div>
+                                        <h3 class="tool-name">Manus</h3>
+                                    </div>
+                                    <p class="tool-description">Mobile-first AI assistant for productivity and communication</p>
+                                    <a href="https://manus.im/app" class="tool-link">Visit Site</a>
+                                </div>
 
-            <section class="section">
-                <h2 class="section-title">Video Tools</h2>
-                <div class="tools-grid">
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-user-circle"></i></div>
-                        <h3 class="tool-name">D-ID</h3>
-                        <p class="tool-description">AI video generation</p>
-                        <a href="https://www.d-id.com/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-brain"></i></div>
-                        <h3 class="tool-name">DeepBrain</h3>
-                        <p class="tool-description">AI presenters</p>
-                        <a href="https://www.deepbrain.io/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-cut"></i></div>
-                        <h3 class="tool-name">Unscreen</h3>
-                        <p class="tool-description">Video background removal</p>
-                        <a href="https://www.unscreen.com/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-video"></i></div>
-                        <h3 class="tool-name">Synthesia</h3>
-                        <p class="tool-description">AI video generation</p>
-                        <a href="https://www.synthesia.io/" class="tool-link">Visit Site</a>
-                    </div>
-                </div>
-            </section>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-comment-dots"></i></div>
+                                        <h3 class="tool-name">Qwen Chat</h3>
+                                    </div>
+                                    <p class="tool-description">Alibaba's large language model chat interface</p>
+                                    <a href="https://chat.qwen.ai/" class="tool-link">Visit Site</a>
+                                </div>
 
-            <section class="section">
-                <h2 class="section-title">Additional Useful Tools</h2>
-                
-                <h3 class="category-title">Text & Language Tools</h3>
-                <div class="tools-grid">
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-keyboard"></i></div>
-                        <h3 class="tool-name">EssayBot</h3>
-                        <p class="tool-description">AI essay generator</p>
-                        <a href="https://essaybot.com" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-paragraph"></i></div>
-                        <h3 class="tool-name">Paraphraz</h3>
-                        <p class="tool-description">Text summarization and paraphrasing</p>
-                        <a href="https://paraphraz.it/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-language"></i></div>
-                        <h3 class="tool-name">Document Translator</h3>
-                        <p class="tool-description">File translation</p>
-                        <a href="https://www.onlinedoctranslator.com/en/" class="tool-link">Visit Site</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <h3 class="category-title">Audio & Image Tools</h3>
-                <div class="tools-grid">
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-volume-off"></i></div>
-                        <h3 class="tool-name">Audo</h3>
-                        <p class="tool-description">Noise removal from audio</p>
-                        <a href="https://audo.ai/noise-removal" class="tool-link">Visit Site</a>
+                <!-- Writing & Paraphrasing Tools -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Writing & Content Tools</span>
+                        <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-comment-dots"></i></div>
-                        <h3 class="tool-name">Transkriptor</h3>
-                        <p class="tool-description">Speech to text</p>
-                        <a href="https://app.transkriptor.com/uploader" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-eraser"></i></div>
-                        <h3 class="tool-name">Magic Eraser</h3>
-                        <p class="tool-description">Image background removal</p>
-                        <a href="https://magicstudio.com/magiceraser/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-image"></i></div>
-                        <h3 class="tool-name">Vance AI</h3>
-                        <p class="tool-description">8x image quality enhancement</p>
-                        <a href="https://vance.ai/" class="tool-link">Visit Site</a>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-edit"></i></div>
+                                        <h3 class="tool-name">QuillBot</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered paraphrasing and grammar tool</p>
+                                    <a href="https://try.quillbot.com/mlsfkwnf9euj" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-pen-alt"></i></div>
+                                        <h3 class="tool-name">Wordtune</h3>
+                                    </div>
+                                    <p class="tool-description">AI writing assistant for better phrasing</p>
+                                    <a href="https://www.wordtune.com/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-keyboard"></i></div>
+                                        <h3 class="tool-name">Rytr</h3>
+                                    </div>
+                                    <p class="tool-description">AI writing assistant for various content types</p>
+                                    <a href="https://rytr.me/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-feather"></i></div>
+                                        <h3 class="tool-name">TxtMuse</h3>
+                                    </div>
+                                    <p class="tool-description">Creative writing tool with AI assistance</p>
+                                    <a href="https://www.txtmuse.com/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-language"></i></div>
+                                        <h3 class="tool-name">Araby AI</h3>
+                                    </div>
+                                    <p class="tool-description">Arabic content creation tool</p>
+                                    <a href="https://araby.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-graduation-cap"></i></div>
+                                        <h3 class="tool-name">HyperWrite</h3>
+                                    </div>
+                                    <p class="tool-description">Academic writing assistant</p>
+                                    <a href="https://www.hyperwriteai.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-pen-fancy"></i></div>
+                                        <h3 class="tool-name">Bearly AI</h3>
+                                    </div>
+                                    <p class="tool-description">Advanced AI writing assistant for content creation</p>
+                                    <a href="https://bearly.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-book-open"></i></div>
+                                        <h3 class="tool-name">Katteb AI</h3>
+                                    </div>
+                                    <p class="tool-description">Arabic article and research writing assistant</p>
+                                    <a href="https://bit.ly/KattebAi" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-gavel"></i></div>
+                                        <h3 class="tool-name">Lisan AI</h3>
+                                    </div>
+                                    <p class="tool-description">Arabic grammar checker and writing assistant</p>
+                                    <a href="https://lisan.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-spell-check"></i></div>
+                                        <h3 class="tool-name">Qalam AI</h3>
+                                    </div>
+                                    <p class="tool-description">Arabic grammar and spelling correction tool</p>
+                                    <a href="https://qalam.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-book"></i></div>
+                                        <h3 class="tool-name">AI Book Generator</h3>
+                                    </div>
+                                    <p class="tool-description">Generates complete books based on your input</p>
+                                    <a href="https://www.aibookgenerator.net" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-project-diagram"></i></div>
+                                        <h3 class="tool-name">Switchboard AI</h3>
+                                    </div>
+                                    <p class="tool-description">Content automation with workflow tracking and image generation</p>
+                                    <a href="https://www.switchboard.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-blog"></i></div>
+                                        <h3 class="tool-name">BlogTweet</h3>
+                                    </div>
+                                    <p class="tool-description">Convert blogs to tweets</p>
+                                    <a href="https://blogtweet.xyz" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-paragraph"></i></div>
+                                        <h3 class="tool-name">Smodin</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered paraphrasing tool</p>
+                                    <a href="https://smodin.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-lightbulb"></i></div>
+                                        <h3 class="tool-name">Copy AI</h3>
+                                    </div>
+                                    <p class="tool-description">Generates creative content ideas</p>
+                                    <a href="https://www.copy.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-keyboard"></i></div>
+                                        <h3 class="tool-name">Compose AI</h3>
+                                    </div>
+                                    <p class="tool-description">AI writing companion</p>
+                                    <a href="https://www.compose.ai" class="tool-link">Visit Site</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <h3 class="category-title">Productivity Tools</h3>
-                <div class="tools-grid">
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-tools"></i></div>
-                        <h3 class="tool-name">TinyWOW</h3>
-                        <p class="tool-description">Various file tools</p>
-                        <a href="https://tinywow.com/" class="tool-link">Visit Site</a>
+                <!-- Image Generation & Enhancement -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Image Generation & Enhancement</span>
+                        <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-robot"></i></div>
-                        <h3 class="tool-name">Eleven Labs</h3>
-                        <p class="tool-description">Advanced text to speech</p>
-                        <a href="https://beta.elevenlabs.io/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-code"></i></div>
-                        <h3 class="tool-name">Denigma</h3>
-                        <p class="tool-description">Code explanation</p>
-                        <a href="https://denigma.app/#demo" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-pen-fancy"></i></div>
-                        <h3 class="tool-name">Jenni AI</h3>
-                        <p class="tool-description">Writing and research assistant</p>
-                        <a href="https://jenni.ai/" class="tool-link">Visit Site</a>
-                    </div>
-                    <div class="tool-card">
-                        <div class="tool-icon"><i class="fas fa-camera"></i></div>
-                        <h3 class="tool-name">ScanToSolve</h3>
-                        <p class="tool-description">Solve problems from images</p>
-                        <a href="https://scantosolve.com" class="tool-link">Visit Site</a>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-palette"></i></div>
+                                        <h3 class="tool-name">Leonardo AI</h3>
+                                    </div>
+                                    <p class="tool-description">High-quality AI image generation</p>
+                                    <a href="https://leonardo.ai/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-magic"></i></div>
+                                        <h3 class="tool-name">BlueWillow</h3>
+                                    </div>
+                                    <p class="tool-description">AI art generation platform</p>
+                                    <a href="https://www.bluewillow.ai/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-expand"></i></div>
+                                        <h3 class="tool-name">DALL-E 2</h3>
+                                    </div>
+                                    <p class="tool-description">AI image generation by OpenAI</p>
+                                    <a href="https://openai.com/dall-e-2" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-image"></i></div>
+                                        <h3 class="tool-name">Midjourney</h3>
+                                    </div>
+                                    <p class="tool-description">Advanced AI art generation</p>
+                                    <a href="https://www.midjourney.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-search-plus"></i></div>
+                                        <h3 class="tool-name">ImgUpscaler</h3>
+                                    </div>
+                                    <p class="tool-description">Enhance image quality with AI</p>
+                                    <a href="https://imgupscaler.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-eraser"></i></div>
+                                        <h3 class="tool-name">Magic Eraser</h3>
+                                    </div>
+                                    <p class="tool-description">Remove backgrounds from images</p>
+                                    <a href="https://magicstudio.com/magiceraser/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-image"></i></div>
+                                        <h3 class="tool-name">ZMO.AI</h3>
+                                    </div>
+                                    <p class="tool-description">Convert images to animation and generate images from text</p>
+                                    <a href="https://www.zmo.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-search-plus"></i></div>
+                                        <h3 class="tool-name">Vectorizer AI</h3>
+                                    </div>
+                                    <p class="tool-description">Improves image quality of any picture regardless of original quality</p>
+                                    <a href="https://vectorizer.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-camera-retro"></i></div>
+                                        <h3 class="tool-name">RestorePhotos</h3>
+                                    </div>
+                                    <p class="tool-description">Enhances blurry or low-quality personal photos</p>
+                                    <a href="https://www.restorephotos.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-cut"></i></div>
+                                        <h3 class="tool-name">Cutout Pro</h3>
+                                    </div>
+                                    <p class="tool-description">Advanced AI for image and video editing including background removal</p>
+                                    <a href="https://www.cutout.pro" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-film"></i></div>
+                                        <h3 class="tool-name">Topaz Labs</h3>
+                                    </div>
+                                    <p class="tool-description">Industry-leading image and video quality enhancement</p>
+                                    <a href="https://www.topazlabs.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-magic"></i></div>
+                                        <h3 class="tool-name">PicWish</h3>
+                                    </div>
+                                    <p class="tool-description">Remove backgrounds, clarify images, and colorize old photos</p>
+                                    <a href="https://picwish.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fab fa-microsoft"></i></div>
+                                        <h3 class="tool-name">Microsoft Designer</h3>
+                                    </div>
+                                    <p class="tool-description">Generates images from text prompts</p>
+                                    <a href="https://designer.microsoft.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-paint-brush"></i></div>
+                                        <h3 class="tool-name">DeepAI</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered image generation and design services</p>
+                                    <a href="https://deepai.org" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-paint-brush"></i></div>
+                                        <h3 class="tool-name">Eluna AI</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered image generation services</p>
+                                    <a href="https://www.eluna.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-palette"></i></div>
+                                        <h3 class="tool-name">OpenArt AI</h3>
+                                    </div>
+                                    <p class="tool-description">AI-based design and image generation tools</p>
+                                    <a href="https://openart.ai" class="tool-link">Visit Site</a>
+                                </div> 
+                            </div> 
+                       </div>      
                     </div>
                 </div>
-            </section>
+
+                <!-- PDF Tools -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>PDF Tools</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-file-pdf"></i></div>
+                                        <h3 class="tool-name">ChatPDF</h3>
+                                    </div>
+                                    <p class="tool-description">Chat with your PDF files using AI</p>
+                                    <a href="https://www.chatpdf.com/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-tools"></i></div>
+                                        <h3 class="tool-name">HiPDF</h3>
+                                    </div>
+                                    <p class="tool-description">Comprehensive PDF editing tools</p>
+                                    <a href="https://www.hipdf.com/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-question-circle"></i></div>
+                                        <h3 class="tool-name">AskYourPDF</h3>
+                                    </div>
+                                    <p class="tool-description">Ask questions about PDF content</p>
+                                    <a href="https://auth.askyourpdf.com/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-heart"></i></div>
+                                        <h3 class="tool-name">ILovePDF</h3>
+                                    </div>
+                                    <p class="tool-description">All-in-one PDF solution</p>
+                                    <a href="https://www.ilovepdf.com/" class="tool-link">Visit Site</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audio Tools -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Audio Tools</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-microphone"></i></div>
+                                        <h3 class="tool-name">Adobe Podcast</h3>
+                                    </div>
+                                    <p class="tool-description">Enhance audio quality with AI</p>
+                                    <a href="https://podcast.adobe.com/enhance" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-headphones"></i></div>
+                                        <h3 class="tool-name">LOVO AI</h3>
+                                    </div>
+                                    <p class="tool-description">Text to speech with 500+ voices</p>
+                                    <a href="https://lovo.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-comment-dots"></i></div>
+                                        <h3 class="tool-name">TTS Maker</h3>
+                                    </div>
+                                    <p class="tool-description">Free text to speech converter</p>
+                                    <a href="https://ttsmaker.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-keyboard"></i></div>
+                                        <h3 class="tool-name">Dictation.io</h3>
+                                    </div>
+                                    <p class="tool-description">Real-time speech-to-text transcription service</p>
+                                    <a href="https://dictation.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-microphone-alt"></i></div>
+                                        <h3 class="tool-name">Murf AI</h3>
+                                    </div>
+                                    <p class="tool-description">Professional text-to-speech with celebrity-like voices</p>
+                                    <a href="https://murf.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-robot"></i></div>
+                                        <h3 class="tool-name">ElevenLabs</h3>
+                                    </div>
+                                    <p class="tool-description">Advanced AI voice cloning and text-to-speech</p>
+                                    <a href="https://beta.elevenlabs.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-user-circle"></i></div>
+                                        <h3 class="tool-name">Resemble AI</h3>
+                                    </div>
+                                    <p class="tool-description">Clones your voice for AI-generated speech</p>
+                                    <a href="https://www.resemble.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-volume-mute"></i></div>
+                                        <h3 class="tool-name">Krisp</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered noise cancellation</p>
+                                    <a href="https://krisp.ai/" class="tool-link">Visit Site</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Tools -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Video Tools</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-user-circle"></i></div>
+                                        <h3 class="tool-name">D-ID</h3>
+                                    </div>
+                                    <p class="tool-description">Create talking head videos with AI</p>
+                                    <a href="https://www.d-id.com/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-film"></i></div>
+                                        <h3 class="tool-name">Fliki</h3>
+                                    </div>
+                                    <p class="tool-description">Text to video creation</p>
+                                    <a href="https://fliki.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-cut"></i></div>
+                                        <h3 class="tool-name">Runway ML</h3>
+                                    </div>
+                                    <p class="tool-description">Advanced video editing with AI</p>
+                                    <a href="https://app.runwayml.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-film"></i></div>
+                                        <h3 class="tool-name">Moovly</h3>
+                                    </div>
+                                    <p class="tool-description">Creates professional motion graphics videos</p>
+                                    <a href="https://www.moovly.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-closed-captioning"></i></div>
+                                        <h3 class="tool-name">VEED.io</h3>
+                                    </div>
+                                    <p class="tool-description">Advanced video editing with AI text overlay capabilities</p>
+                                    <a href="https://www.veed.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-compress"></i></div>
+                                        <h3 class="tool-name">Opus Pro</h3>
+                                    </div>
+                                    <p class="tool-description">Extracts key moments from videos for short-form content</p>
+                                    <a href="https://www.opus.pro" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-scissors"></i></div>
+                                        <h3 class="tool-name">2Short AI</h3>
+                                    </div>
+                                    <p class="tool-description">Converts long videos into short-form content (Reels/Shorts)</p>
+                                    <a href="https://2short.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-language"></i></div>
+                                        <h3 class="tool-name">Papercup</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered video dubbing and translation service</p>
+                                    <a href="https://www.papercup.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-video"></i></div>
+                                        <h3 class="tool-name">Kreado AI</h3>
+                                    </div>
+                                    <p class="tool-description">Converts text into human-presented videos</p>
+                                    <a href="https://kreadoal.com/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-video"></i></div>
+                                        <h3 class="tool-name">Synthesia</h3>
+                                    </div>
+                                    <p class="tool-description">Create AI avatar videos</p>
+                                    <a href="https://www.synthesia.io/" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-shopping-cart"></i></div>
+                                        <h3 class="tool-name">Oxolo</h3>
+                                    </div>
+                                    <p class="tool-description">Create product marketing videos from Amazon links</p>
+                                    <a href="https://www.oxolo.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-video"></i></div>
+                                        <h3 class="tool-name">Steve AI</h3>
+                                    </div>
+                                    <p class="tool-description">Converts text to professional videos</p>
+                                    <a href="https://www.steve.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-closed-captioning"></i></div>
+                                        <h3 class="tool-name">Bith TV</h3>
+                                    </div>
+                                    <p class="tool-description">Adds subtitles to videos</p>
+                                    <a href="https://bith.tv" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-eraser"></i></div>
+                                        <h3 class="tool-name">Unscreen</h3>
+                                    </div>
+                                    <p class="tool-description">Remove video backgrounds without green screen</p>
+                                    <a href="https://www.unscreen.com" class="tool-link">Visit Site</a>
+                                </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Branding & Logo Design -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Branding & Logo Design</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-trademark"></i></div>
+                                        <h3 class="tool-name">Looka</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered logo and brand design</p>
+                                    <a href="https://looka.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-signature"></i></div>
+                                        <h3 class="tool-name">Brandmark</h3>
+                                    </div>
+                                    <p class="tool-description">Professional branding toolkit</p>
+                                    <a href="https://brandmark.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-portrait"></i></div>
+                                        <h3 class="tool-name">Avaturn</h3>
+                                    </div>
+                                    <p class="tool-description">Converts photos/videos into anime-style drawings</p>
+                                    <a href="https://avaturn.me" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-tshirt"></i></div>
+                                        <h3 class="tool-name">Flair AI</h3>
+                                    </div>
+                                    <p class="tool-description">Generates realistic product mockups with different backgrounds</p>
+                                    <a href="https://flair.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-cube"></i></div>
+                                        <h3 class="tool-name">Pebblely</h3>
+                                    </div>
+                                    <p class="tool-description">Creates professional product mockups in various settings</p>
+                                    <a href="https://pebblely.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-tag"></i></div>
+                                        <h3 class="tool-name">Namy AI</h3>
+                                    </div>
+                                    <p class="tool-description">Generates business names with available domain suggestions</p>
+                                    <a href="https://namy.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-palette"></i></div>
+                                        <h3 class="tool-name">Khroma</h3>
+                                    </div>
+                                    <p class="tool-description">AI color scheme generator</p>
+                                    <a href="https://www.khroma.co" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-draw-polygon"></i></div>
+                                        <h3 class="tool-name">AutoDraw</h3>
+                                    </div>
+                                    <p class="tool-description">Converts simple sketches into professional icons</p>
+                                    <a href="https://www.autodraw.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-lightbulb"></i></div>
+                                        <h3 class="tool-name">Namelix</h3>
+                                    </div>
+                                    <p class="tool-description">Generates business names and logos</p>
+                                    <a href="https://namelix.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-icons"></i></div>
+                                        <h3 class="tool-name">LogoMaster</h3>
+                                    </div>
+                                    <p class="tool-description">AI logo creation tool</p>
+                                    <a href="https://logomaster.ai/" class="tool-link">Visit Site</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Social Media Tools - Add a new section -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Social Media Tools</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-chart-bar"></i></div>
+                                        <h3 class="tool-name">SocialStatus</h3>
+                                    </div>
+                                    <p class="tool-description">Analyzes competitors on social media</p>
+                                    <a href="https://www.socialstatus.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-robot"></i></div>
+                                        <h3 class="tool-name">CrawlQ AI</h3>
+                                    </div>
+                                    <p class="tool-description">Social media automation tool</p>
+                                    <a href="https://crawlq.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-ad"></i></div>
+                                        <h3 class="tool-name">Scrip AI</h3>
+                                    </div>
+                                    <p class="tool-description">Marketing and SEO content generator</p>
+                                    <a href="https://scrip.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fab fa-whatsapp"></i></div>
+                                        <h3 class="tool-name">Shmooz AI</h3>
+                                    </div>
+                                    <p class="tool-description">Integrates ChatGPT with WhatsApp</p>
+                                    <a href="https://shmooz.ai" class="tool-link">Visit Site</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coding & Development -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Coding & Development</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-code"></i></div>
+                                        <h3 class="tool-name">Kodezi</h3>
+                                    </div>
+                                    <p class="tool-description">AI coding assistant with debugging</p>
+                                    <a href="https://kodezi.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-laptop-code"></i></div>
+                                        <h3 class="tool-name">Tabnine</h3>
+                                    </div>
+                                    <p class="tool-description">AI code completion for developers</p>
+                                    <a href="https://www.tabnine.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-terminal"></i></div>
+                                        <h3 class="tool-name">CodeGPT</h3>
+                                    </div>
+                                    <p class="tool-description">AI coding companion in your editor</p>
+                                    <a href="https://codegpt.co" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-laptop-code"></i></div>
+                                        <h3 class="tool-name">Galileo AI</h3>
+                                    </div>
+                                    <p class="tool-description">Generates UI designs from text</p>
+                                    <a href="https://www.usegalileo.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-mobile-alt"></i></div>
+                                        <h3 class="tool-name">Uizard</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered mobile app design</p>
+                                    <a href="https://uizard.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-mobile-alt"></i></div>
+                                        <h3 class="tool-name">FlutterFlow</h3>
+                                    </div>
+                                    <p class="tool-description">Build apps with AI assistance</p>
+                                    <a href="https://flutterflow.io" class="tool-link">Visit Site</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Miscellaneous Tools -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Miscellaneous Tools</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-image"></i></div>
+                                        <h3 class="tool-name">Stockimg AI</h3>
+                                    </div>
+                                    <p class="tool-description">Generates images from text descriptions</p>
+                                    <a href="https://stockimg.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-paint-brush"></i></div>
+                                        <h3 class="tool-name">Designs AI</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered design inspiration tool</p>
+                                    <a href="https://designs.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-home"></i></div>
+                                        <h3 class="tool-name">Aitwo</h3>
+                                    </div>
+                                    <p class="tool-description">AI interior design tool</p>
+                                    <a href="https://aitwo.co" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-globe"></i></div>
+                                        <h3 class="tool-name">Mixo</h3>
+                                    </div>
+                                    <p class="tool-description">AI website builder</p>
+                                    <a href="https://www.mixo.io" class="tool-link">Visit Site</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business & Productivity -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Business & Productivity</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-briefcase"></i></div>
+                                        <h3 class="tool-name">Kickresume</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered resume builder</p>
+                                    <a href="https://www.kickresume.com/en" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-users"></i></div>
+                                        <h3 class="tool-name">Fireflies</h3>
+                                    </div>
+                                    <p class="tool-description">AI meeting transcription and notes</p>
+                                    <a href="https://fireflies.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-file-pdf"></i></div>
+                                        <h3 class="tool-name">Humata AI</h3>
+                                    </div>
+                                    <p class="tool-description">Explains and answers questions about PDFs</p>
+                                    <a href="https://www.humata.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-chart-line"></i></div>
+                                        <h3 class="tool-name">Aiter</h3>
+                                    </div>
+                                    <p class="tool-description">Analyzes websites for SEO and content ideas</p>
+                                    <a href="https://aiter.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-file-excel"></i></div>
+                                        <h3 class="tool-name">Formulabot</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered Excel data analysis and recommendations</p>
+                                    <a href="https://formulabot.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-envelope"></i></div>
+                                        <h3 class="tool-name">Hunter</h3>
+                                    </div>
+                                    <p class="tool-description">Finds and verifies professional email addresses</p>
+                                    <a href="https://hunter.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-headset"></i></div>
+                                        <h3 class="tool-name">TIDV</h3>
+                                    </div>
+                                    <p class="tool-description">AI meeting recorder for Zoom/Google Meet with summaries</p>
+                                    <a href="https://tidv.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-book-reader"></i></div>
+                                        <h3 class="tool-name">Wiseone</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered reading and research assistant</p>
+                                    <a href="https://wiseone.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-file-alt"></i></div>
+                                        <h3 class="tool-name">GPTZero</h3>
+                                    </div>
+                                    <p class="tool-description">Detects AI-generated text</p>
+                                    <a href="https://gptzero.me" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-users"></i></div>
+                                        <h3 class="tool-name">Beulr</h3>
+                                    </div>
+                                    <p class="tool-description">AI meeting recorder</p>
+                                    <a href="https://www.beulr.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-otter"></i></div>
+                                        <h3 class="tool-name">Otter AI</h3>
+                                    </div>
+                                    <p class="tool-description">Meeting assistant with transcription</p>
+                                    <a href="https://otter.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-rocket"></i></div>
+                                        <h3 class="tool-name">Durable</h3>
+                                    </div>
+                                    <p class="tool-description">AI business builder</p>
+                                    <a href="https://durable.co" class="tool-link">Visit Site</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Education & Learning - Add a new section for these tools -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Education & Learning</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-graduation-cap"></i></div>
+                                        <h3 class="tool-name">Tutoral Me</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered learning platform</p>
+                                    <a href="https://www.tutoral.me" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-language"></i></div>
+                                        <h3 class="tool-name">Elsa Speak</h3>
+                                    </div>
+                                    <p class="tool-description">English pronunciation training</p>
+                                    <a href="https://elsaspeak.com/en" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-calculator"></i></div>
+                                        <h3 class="tool-name">Symbolab</h3>
+                                    </div>
+                                    <p class="tool-description">Solves math problems step-by-step</p>
+                                    <a href="https://ar.symbolab.com" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-book-quran"></i></div>
+                                        <h3 class="tool-name">Tarteel AI</h3>
+                                    </div>
+                                    <p class="tool-description">Helps memorize the Quran</p>
+                                    <a href="https://www.tarteel.ai" class="tool-link">Visit Site</a>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+                <!-- Presentation Tools -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Presentation Tools</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-sliders-h"></i></div>
+                                        <h3 class="tool-name">Beautiful AI</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered presentation templates for professional slides</p>
+                                    <a href="https://www.beautiful.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-slideshare"></i></div>
+                                        <h3 class="tool-name">SlidesAI</h3>
+                                    </div>
+                                    <p class="tool-description">Automatically generates slides from your text</p>
+                                    <a href="https://www.slidesai.io/ar" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-chalkboard"></i></div>
+                                        <h3 class="tool-name">Tome</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered storytelling and presentation creation</p>
+                                    <a href="https://tome.app" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-project-diagram"></i></div>
+                                        <h3 class="tool-name">Gamma</h3>
+                                    </div>
+                                    <p class="tool-description">Instantly generates professional presentations</p>
+                                    <a href="https://gamma.app" class="tool-link">Visit Site</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Business & Legal Tools -->
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Business & Legal Tools</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-file-signature"></i></div>
+                                        <h3 class="tool-name">Yameen.AI</h3>
+                                    </div>
+                                    <p class="tool-description">AI legal contract assistant for Arabic</p>
+                                    <a href="https://yameen.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-chart-line"></i></div>
+                                        <h3 class="tool-name">Finchat.io</h3>
+                                    </div>
+                                    <p class="tool-description">AI economic data analysis tool</p>
+                                    <a href="https://finchat.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-envelope"></i></div>
+                                        <h3 class="tool-name">Domore.AI</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered email response assistant</p>
+                                    <a href="https://domore.ai" class="tool-link">Visit Site</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>Specialized AI Tools</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-home"></i></div>
+                                        <h3 class="tool-name">RoomGPT</h3>
+                                    </div>
+                                    <p class="tool-description">AI interior design from room photos</p>
+                                    <a href="https://www.roomgpt.io" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-plane"></i></div>
+                                        <h3 class="tool-name">Wonderplan</h3>
+                                    </div>
+                                    <p class="tool-description">AI-powered travel itinerary planner</p>
+                                    <a href="https://wonderplan.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-gift"></i></div>
+                                        <h3 class="tool-name">GiftGenie</h3>
+                                    </div>
+                                    <p class="tool-description">AI gift recommendation engine</p>
+                                    <a href="https://www.giftgenie.ai" class="tool-link">Visit Site</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-container">
+                    <div class="accordion-header">
+                        <span>ChatGPT Alternatives</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-comment-alt"></i></div>
+                                        <h3 class="tool-name">Pi AI</h3>
+                                    </div>
+                                    <p class="tool-description">Personal AI assistant</p>
+                                    <a href="https://heypi.com/talk" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-robot"></i></div>
+                                        <h3 class="tool-name">Forefront AI</h3>
+                                    </div>
+                                    <p class="tool-description">Enhanced ChatGPT interface</p>
+                                    <a href="http://Forefront.ai" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-language"></i></div>
+                                        <h3 class="tool-name">Uktob AI</h3>
+                                    </div>
+                                    <p class="tool-description">Arabic ChatGPT alternative</p>
+                                    <a href="https://uktob.ai/faheem" class="tool-link">Visit Site</a>
+                                </div>
+                                <div class="tool-card">
+                                    <div class="tool-header">
+                                        <div class="tool-icon"><i class="fas fa-search"></i></div>
+                                        <h3 class="tool-name">GPTGO</h3>
+                                    </div>
+                                    <p class="tool-description">Combines ChatGPT and Google</p>
+                                    <a href="https://gptgo.ai" class="tool-link">Visit Site</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
-    <footer>
+    <footer id="contact">
         <div class="container">
             <div class="footer-content">
                 <div class="social-links">
@@ -723,6 +1702,73 @@
 
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Accordion functionality
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+        
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const accordionContainer = header.parentElement;
+                const accordionContent = header.nextElementSibling;
+                const icon = header.querySelector('i');
+                
+                if (header.classList.contains('active')) {
+                    header.classList.remove('active');
+                    accordionContent.style.maxHeight = null;
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    // Close all other accordions
+                    document.querySelectorAll('.accordion-header.active').forEach(activeHeader => {
+                        activeHeader.classList.remove('active');
+                        activeHeader.nextElementSibling.style.maxHeight = null;
+                        activeHeader.querySelector('i').classList.remove('fa-chevron-up');
+                        activeHeader.querySelector('i').classList.add('fa-chevron-down');
+                    });
+                    
+                    header.classList.add('active');
+                    accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+
+        // Open first accordion by default
+        if (accordionHeaders.length > 0) {
+            accordionHeaders[0].click();
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            if (searchTerm.length < 2) {
+                // Show all tools if search term is too short
+                document.querySelectorAll('.tool-card').forEach(card => {
+                    card.style.display = 'flex';
+                });
+                return;
+            }
+            
+            document.querySelectorAll('.tool-card').forEach(card => {
+                const toolName = card.querySelector('.tool-name').textContent.toLowerCase();
+                const toolDesc = card.querySelector('.tool-description').textContent.toLowerCase();
+                
+                if (toolName.includes(searchTerm) || toolDesc.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                    // Open the parent accordion
+                    const accordionHeader = card.closest('.accordion-container').querySelector('.accordion-header');
+                    if (!accordionHeader.classList.contains('active')) {
+                        accordionHeader.click();
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
     </script>
 </body>
 </html>
