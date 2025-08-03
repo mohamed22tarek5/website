@@ -1588,6 +1588,7 @@
           </div>
           <div class="info-content">
             <h3>Email</h3>
+            <h6>mohammed.tarek.abdelhady.ali@gmail.com</h6>
           </div>
         </div>
         
@@ -1663,6 +1664,7 @@
   </button>
 
   <!-- JavaScript -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
     // Initialize particles.js
     particlesJS("particles-js", {
@@ -1931,19 +1933,10 @@
       formSpinner.style.display = 'block';
       formMessage.textContent = '';
       
-      // Save message to localStorage
-      const messageData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
-      };
-      localStorage.setItem('contactMessage', JSON.stringify(messageData));
-      
-      // Simulate form submission
+      // Simulate form submission (replace with actual AJAX call)
       setTimeout(() => {
         formSpinner.style.display = 'none';
-        formMessage.textContent = 'Your message has been saved successfully!';
+        formMessage.textContent = 'Your message has been sent successfully!';
         formMessage.style.color = 'var(--success-color)';
         contactForm.reset();
         
