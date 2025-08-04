@@ -13,8 +13,10 @@
   <meta name="theme-color" content="#4e9eff">
   <link rel="icon" href="icon.png" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
   <title>Mohamed Tarek | Engineer & Developer</title>
   <style>
     :root {
@@ -37,6 +39,31 @@
       --glass-effect: rgba(30, 30, 30, 0.7);
       --glass-border: rgba(255, 255, 255, 0.1);
       --glass-blur: blur(10px);
+    }
+
+    /* RTL Support */
+    [dir="rtl"] {
+      direction: rtl;
+    }
+
+    [dir="rtl"] .navigation {
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .hero-content {
+      text-align: right;
+    }
+
+    [dir="rtl"] .section-title {
+      text-align: right;
+    }
+
+    [dir="rtl"] .contact-info {
+      direction: rtl;
+    }
+
+    [dir="rtl"] .footer-content {
+      direction: rtl;
     }
 
     /* Light mode variables */
@@ -926,6 +953,13 @@
       transform: scale(1.1);
     }
 
+    /* Enhanced transitions for theme changes */
+    * {
+      transition: background-color var(--transition-speed) ease, 
+                  color var(--transition-speed) ease,
+                  border-color var(--transition-speed) ease;
+    }
+
     /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; }
@@ -1157,6 +1191,20 @@
         bottom: 20px;
         right: 20px;
       }
+
+      .language-switcher {
+        margin-left: 10px;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .qr-generator {
+        padding: 20px;
+        margin: 0 20px;
+      }
     }
   </style>
 </head>
@@ -1173,32 +1221,39 @@
       <span class="bar"></span>
     </div>
     <nav class="navigation" id="nav-menu">
-      <a href="#home" class="active">Home</a>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-      <a href="Mohamed - Certificates.html">Certificates</a>
-      <a href="Mohamed - CV.html" class="btn btn-outline" style="margin-left: 20px;">My CV</a>
+      <a href="#home" class="active" data-en="Home" data-ar="الرئيسية">Home</a>
+      <a href="#about" data-en="About" data-ar="نبذة">About</a>
+      <a href="#services" data-en="Services" data-ar="الخدمات">Services</a>
+      <a href="#projects" data-en="Projects" data-ar="المشاريع">Projects</a>
+      <a href="#blog" data-en="Blog" data-ar="المدونة">Blog</a>
+      <a href="#contact" data-en="Contact" data-ar="اتصل">Contact</a>
+      <a href="Mohamed - Certificates.html" data-en="Certificates" data-ar="الشهادات">Certificates</a>
+      <a href="Mohamed - CV.html" class="btn btn-outline" style="margin-left: 20px;" data-en="My CV" data-ar="سيرتي الذاتية">My CV</a>
+      <div class="language-switcher">
+        <button class="language-btn" id="language-toggle">
+          <i class="fas fa-globe"></i>
+          <span id="current-lang">EN</span>
+        </button>
+      </div>
     </nav>
   </header>
 
   <!-- Hero Section -->
   <section class="hero" id="home">
     <div class="hero-content">
-      <img src="photo.jpg" alt="Mohamed Tarek" class="profile-image slide-up">
-      <h1 class="slide-up delay-1">Mohamed Tarek</h1>
-      <h2 class="slide-up delay-2">Communications & Electronics Engineer</h2>
+      <img src="photo.jpg" alt="Mohamed Tarek" class="profile-image slide-up" loading="lazy">
+      <h1 class="slide-up delay-1" data-en="Mohamed Tarek" data-ar="محمد طارق">Mohamed Tarek</h1>
+      <h2 class="slide-up delay-2" data-en="Communications & Electronics Engineer" data-ar="مهندس اتصالات وإلكترونيات">Communications & Electronics Engineer</h2>
       <div class="typewriter slide-up delay-2" id="typewriter"></div>
       
       <div class="title-container slide-up delay-3">
         <div class="title-row">
-          <span class="title-item">Web Developer</span>
-          <span class="title-item">Arduino Expert</span>
+          <span class="title-item" data-en="Web Developer" data-ar="مطور ويب">Web Developer</span>
+          <span class="title-item" data-en="Arduino Expert" data-ar="خبير أردوينو">Arduino Expert</span>
         </div>
         <div class="title-row">
-          <span class="title-item">PCB Designer</span>
-          <span class="title-item">Embedded Systems</span>
+          <span class="title-item" data-en="PCB Designer" data-ar="مصمم دوائر مطبوعة">PCB Designer</span>
+          <span class="title-item" data-en="Embedded Systems" data-ar="الأنظمة المدمجة">Embedded Systems</span>
         </div>
       </div>
       
@@ -1228,7 +1283,7 @@
   <section class="about" id="about">
     <div class="container">
       <div class="section-title fade-in">
-        <h2>About Me</h2>
+        <h2 data-en="About Me" data-ar="نبذة عني">About Me</h2>
       </div>
       
       <div class="grid" style="grid-template-columns: 1fr 2fr; gap: 50px; align-items: center;">
@@ -1302,8 +1357,8 @@
   <section class="services" id="services">
     <div class="container">
       <div class="section-title fade-in">
-        <h2>My Services</h2>
-        <p class="section-subtitle">What I can do for you</p>
+        <h2 data-en="My Services" data-ar="خدماتي">My Services</h2>
+        <p class="section-subtitle" data-en="What I can do for you" data-ar="ما يمكنني فعله لك">What I can do for you</p>
       </div>
       
       <div class="grid">
@@ -1378,8 +1433,8 @@
   <section class="projects" id="projects">
     <div class="container">
       <div class="section-title fade-in">
-        <h2>Featured Projects</h2>
-        <p class="section-subtitle">Some of my recent work</p>
+        <h2 data-en="Featured Projects" data-ar="المشاريع المميزة">Featured Projects</h2>
+        <p class="section-subtitle" data-en="Some of my recent work" data-ar="بعض من أعمالي الحديثة">Some of my recent work</p>
       </div>
       
       <div class="grid">
@@ -1537,36 +1592,91 @@
     </div>
   </section>
 
+  <!-- Blog Section -->
+  <section class="blog" id="blog">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2 data-en="Latest Blog Posts" data-ar="أحدث مقالات المدونة">Latest Blog Posts</h2>
+        <p class="section-subtitle" data-en="Insights and tutorials from my engineering journey" data-ar="رؤى ودروس من رحلتي الهندسية">Insights and tutorials from my engineering journey</p>
+      </div>
+      
+      <div class="blog-grid">
+        <article class="blog-card fade-in">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=200&fit=crop" alt="Arduino Tutorial" class="blog-image" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-category" data-en="Tutorial" data-ar="درس">Tutorial</span>
+              <span class="blog-date">Jan 15, 2025</span>
+            </div>
+            <h3 class="blog-title" data-en="Getting Started with Arduino: A Complete Guide" data-ar="البدء مع الأردوينو: دليل شامل">Getting Started with Arduino: A Complete Guide</h3>
+            <p class="blog-excerpt" data-en="Learn the fundamentals of Arduino programming and circuit design. This comprehensive guide covers everything from basic setup to advanced projects." data-ar="تعلم أساسيات برمجة الأردوينو وتصميم الدوائر. يغطي هذا الدليل الشامل كل شيء من الإعداد الأساسي إلى المشاريع المتقدمة.">Learn the fundamentals of Arduino programming and circuit design. This comprehensive guide covers everything from basic setup to advanced projects.</p>
+            <a href="#" class="blog-read-more" data-en="Read More" data-ar="اقرأ المزيد">Read More</a>
+          </div>
+        </article>
+        
+        <article class="blog-card fade-in delay-1">
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=200&fit=crop" alt="Web Development" class="blog-image" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-category" data-en="Web Dev" data-ar="تطوير ويب">Web Dev</span>
+              <span class="blog-date">Jan 10, 2025</span>
+            </div>
+            <h3 class="blog-title" data-en="Modern Web Development Trends in 2025" data-ar="اتجاهات تطوير الويب الحديثة في 2025">Modern Web Development Trends in 2025</h3>
+            <p class="blog-excerpt" data-en="Explore the latest trends in web development including AI integration, progressive web apps, and modern JavaScript frameworks." data-ar="استكشف أحدث الاتجاهات في تطوير الويب بما في ذلك تكامل الذكاء الاصطناعي وتطبيقات الويب التقدمية وأطر عمل JavaScript الحديثة.">Explore the latest trends in web development including AI integration, progressive web apps, and modern JavaScript frameworks.</p>
+            <a href="#" class="blog-read-more" data-en="Read More" data-ar="اقرأ المزيد">Read More</a>
+          </div>
+        </article>
+        
+        <article class="blog-card fade-in delay-2">
+          <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=200&fit=crop" alt="PCB Design" class="blog-image" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span class="blog-category" data-en="Electronics" data-ar="إلكترونيات">Electronics</span>
+              <span class="blog-date">Jan 5, 2025</span>
+            </div>
+            <h3 class="blog-title" data-en="PCB Design Best Practices for Beginners" data-ar="أفضل ممارسات تصميم الدوائر المطبوعة للمبتدئين">PCB Design Best Practices for Beginners</h3>
+            <p class="blog-excerpt" data-en="Master the art of PCB design with these essential tips and techniques. Learn about layout optimization, component placement, and routing strategies." data-ar="أتقن فن تصميم الدوائر المطبوعة مع هذه النصائح والتقنيات الأساسية. تعلم عن تحسين التخطيط ووضع المكونات واستراتيجيات التوجيه.">Master the art of PCB design with these essential tips and techniques. Learn about layout optimization, component placement, and routing strategies.</p>
+            <a href="#" class="blog-read-more" data-en="Read More" data-ar="اقرأ المزيد">Read More</a>
+          </div>
+        </article>
+      </div>
+      
+      <div class="text-center fade-in delay-3">
+        <a href="#" class="view-all-btn" data-en="View All Posts" data-ar="عرض جميع المقالات">View All Posts</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Contact Section -->
   <section class="contact" id="contact">
     <div class="container">
       <div class="section-title fade-in">
-        <h2>Get In Touch</h2>
-        <p class="section-subtitle">Let's work together</p>
+        <h2 data-en="Get In Touch" data-ar="تواصل معي">Get In Touch</h2>
+        <p class="section-subtitle" data-en="Let's work together" data-ar="دعنا نعمل معاً">Let's work together</p>
       </div>
       
       <form class="contact-form fade-in" id="contactForm">
         <div class="form-group">
-          <label for="name" class="form-label">Your Name</label>
-          <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+          <label for="name" class="form-label" data-en="Your Name" data-ar="اسمك">Your Name</label>
+          <input type="text" id="name" class="form-control" placeholder="Enter your name" data-placeholder-en="Enter your name" data-placeholder-ar="أدخل اسمك" required>
         </div>
         
         <div class="form-group">
-          <label for="email" class="form-label">Your Email</label>
-          <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+          <label for="email" class="form-label" data-en="Your Email" data-ar="بريدك الإلكتروني">Your Email</label>
+          <input type="email" id="email" class="form-control" placeholder="Enter your email" data-placeholder-en="Enter your email" data-placeholder-ar="أدخل بريدك الإلكتروني" required>
         </div>
         
         <div class="form-group">
-          <label for="subject" class="form-label">Subject</label>
-          <input type="text" id="subject" class="form-control" placeholder="Enter subject">
+          <label for="subject" class="form-label" data-en="Subject" data-ar="الموضوع">Subject</label>
+          <input type="text" id="subject" class="form-control" placeholder="Enter subject" data-placeholder-en="Enter subject" data-placeholder-ar="أدخل الموضوع">
         </div>
         
         <div class="form-group">
-          <label for="message" class="form-label">Your Message</label>
-          <textarea id="message" class="form-control" placeholder="Enter your message" required></textarea>
+          <label for="message" class="form-label" data-en="Your Message" data-ar="رسالتك">Your Message</label>
+          <textarea id="message" class="form-control" placeholder="Enter your message" data-placeholder-en="Enter your message" data-placeholder-ar="أدخل رسالتك" required></textarea>
         </div>
         
-        <button type="submit" class="submit-btn">Send Message</button>
+        <button type="submit" class="submit-btn" data-en="Send Message" data-ar="إرسال الرسالة">Send Message</button>
         <div class="loading-spinner" id="form-spinner"></div>
         <div id="form-message" style="margin-top: 20px; text-align: center;"></div>
       </form>
@@ -1577,7 +1687,7 @@
             <i class="fas fa-phone-alt"></i>
           </div>
           <div class="info-content">
-            <h3>Phone</h3>
+            <h3 data-en="Phone" data-ar="الهاتف">Phone</h3>
             <p>+201090637406</p>
           </div>
         </div>
@@ -1587,7 +1697,7 @@
             <i class="fas fa-envelope"></i>
           </div>
           <div class="info-content">
-            <h3>Email</h3>
+            <h3 data-en="Email" data-ar="البريد الإلكتروني">Email</h3>
             <h6>mohammed.tarek.abdelhady.ali@gmail.com</h6>
           </div>
         </div>
@@ -1597,9 +1707,20 @@
             <i class="fas fa-map-marker-alt"></i>
           </div>
           <div class="info-content">
-            <h3>Location</h3>
+            <h3 data-en="Location" data-ar="الموقع">Location</h3>
             <p>Kafr el sheikh, Egypt</p>
           </div>
+        </div>
+      </div>
+      
+      <div class="qr-section fade-in delay-3">
+        <div class="qr-generator">
+          <h3 data-en="QR Code Generator" data-ar="مولد رمز الاستجابة السريعة">QR Code Generator</h3>
+          <div class="qr-input-group">
+            <input type="text" id="qr-input" class="qr-input" placeholder="Enter text or URL" data-placeholder-en="Enter text or URL" data-placeholder-ar="أدخل النص أو الرابط">
+            <button id="generate-qr" class="qr-btn" data-en="Generate QR Code" data-ar="إنشاء رمز الاستجابة">Generate QR Code</button>
+          </div>
+          <div id="qr-display" class="qr-display"></div>
         </div>
       </div>
     </div>
@@ -1850,7 +1971,73 @@
       });
     });
     
-    // Dark/Light Mode Toggle
+    // Language Switcher
+    const languageToggle = document.getElementById('language-toggle');
+    const currentLangSpan = document.getElementById('current-lang');
+    
+    // Check for saved language preference
+    const currentLanguage = localStorage.getItem('language') || 'en';
+    
+    function updateLanguage(lang) {
+      const elements = document.querySelectorAll('[data-en][data-ar]');
+      elements.forEach(element => {
+        if (lang === 'ar') {
+          element.textContent = element.getAttribute('data-ar');
+          if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+            element.placeholder = element.getAttribute('data-placeholder-ar') || element.getAttribute('data-ar');
+          }
+        } else {
+          element.textContent = element.getAttribute('data-en');
+          if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+            element.placeholder = element.getAttribute('data-placeholder-en') || element.getAttribute('data-en');
+          }
+        }
+      });
+      
+      document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+      document.documentElement.setAttribute('lang', lang);
+      currentLangSpan.textContent = lang === 'ar' ? 'AR' : 'EN';
+      localStorage.setItem('language', lang);
+    }
+    
+    // Initialize language
+    updateLanguage(currentLanguage);
+    
+    languageToggle.addEventListener('click', () => {
+      const newLang = currentLanguage === 'en' ? 'ar' : 'en';
+      updateLanguage(newLang);
+      currentLanguage = newLang;
+    });
+
+    // QR Code Generator
+    const qrInput = document.getElementById('qr-input');
+    const generateQrBtn = document.getElementById('generate-qr');
+    const qrDisplay = document.getElementById('qr-display');
+    
+    // Set default value to current page URL
+    qrInput.value = window.location.href;
+    
+    generateQrBtn.addEventListener('click', () => {
+      const text = qrInput.value.trim();
+      if (!text) {
+        alert('Please enter text or URL');
+        return;
+      }
+      
+      qrDisplay.innerHTML = '';
+      qrDisplay.style.display = 'block';
+      
+      QRCode.toCanvas(text, { width: 200, height: 200 }, (error, canvas) => {
+        if (error) {
+          console.error(error);
+          qrDisplay.innerHTML = '<p style="color: red;">Error generating QR code</p>';
+        } else {
+          qrDisplay.appendChild(canvas);
+        }
+      });
+    });
+
+    // Dark/Light Mode Toggle with Enhanced Transitions
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = themeToggle.querySelector('i');
     
@@ -1858,24 +2045,22 @@
     const currentTheme = localStorage.getItem('theme') || 
                        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     
-    if (currentTheme === 'dark') {
-      document.body.setAttribute('data-theme', 'dark');
-      themeIcon.classList.replace('fa-moon', 'fa-sun');
-    } else {
-      document.body.setAttribute('data-theme', 'light');
-      themeIcon.classList.replace('fa-sun', 'fa-moon');
+    function updateTheme(theme) {
+      document.body.setAttribute('data-theme', theme);
+      if (theme === 'dark') {
+        themeIcon.className = 'fas fa-sun';
+      } else {
+        themeIcon.className = 'fas fa-moon';
+      }
+      localStorage.setItem('theme', theme);
     }
     
+    // Initialize theme
+    updateTheme(currentTheme);
+    
     themeToggle.addEventListener('click', () => {
-      if (document.body.getAttribute('data-theme') === 'light') {
-        document.body.setAttribute('data-theme', 'dark');
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.body.setAttribute('data-theme', 'light');
-        themeIcon.classList.replace('fa-sun', 'fa-moon');
-        localStorage.setItem('theme', 'light');
-      }
+      const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      updateTheme(newTheme);
     });
     
     // Typewriter Effect
@@ -1995,6 +2180,19 @@
     
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('SW registered: ', registration);
+          })
+          .catch((registrationError) => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
     
     // Skill bar animations
     const skillBars = document.querySelectorAll('.skill-progress');
