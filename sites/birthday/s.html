@@ -106,7 +106,7 @@ canvas#fireworks{ position:absolute; inset:0; z-index:2; pointer-events:none; }
   transform: scale(1.05) rotate(2deg);
   box-shadow:0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(255,215,0,0.4);
 }
-.profile img{ width:100%;height:100%;object-fit:cover;display:block; }
+.profile img{ margin-top: 120px; width:100%;height:100%;object-fit:cover;display:block; }
 .message{
   background: rgba(255,215,0,0.12);
   padding:1rem 1.5rem;border-radius:20px;max-width:90%;line-height:1.5;
@@ -316,7 +316,7 @@ canvas#fireworks{ position:absolute; inset:0; z-index:2; pointer-events:none; }
   <canvas id="fireworks"></canvas>
   <div class="content">
     <div class="profile hidden" id="profile">
-      <img id="profileImg" src="https://images.unsplash.com/photo-1494790108755-2616b2c06ce6?w=150&h=150&fit=crop&crop=face" alt="Birthday profile picture" />
+      <img id="profileImg" src="image.png" alt="Birthday profile picture" />
     </div>
     <h1 class="greeting hidden" id="greeting"></h1>
     <div class="message hidden" id="message"></div>
@@ -335,18 +335,17 @@ canvas#fireworks{ position:absolute; inset:0; z-index:2; pointer-events:none; }
     </div>
     <div class="controls hidden" id="controls">
       <button class="btn" id="music-btn">🎵 Play Music</button>
-      <button class="btn" id="surprise-btn">✨ Surprise</button>
-      <button class="btn" id="confetti-btn">🎊 Confetti</button>
+      <button class="btn" id="surprise-btn">✨</button>
+      <button class="btn" id="confetti-btn">🎊</button>
       <button class="btn" id="reset-btn">🔄 Reset</button>
     </div>
   </div>
   <div class="instruction">
-    Tap anywhere for celebration fireworks<br>
-    Click the cake to blow out candles and make a wish
+    Tap anywhere for celebration fireworks
   </div>
   <div class="wish-granted" id="wishGranted">
-    <h3>🎂 Wish Granted! 🎂</h3>
-    <p>Your candles have been blown out!<br>May all your dreams come true!</p>
+    <h3>🎂 Wish🎂</h3>
+    <p>May all your dreams come true!</p>
   </div>
 </div>
 
@@ -600,8 +599,8 @@ const messageEl = document.getElementById('message');
 const countdownEl = document.getElementById('countdown');
 const controlsEl = document.getElementById('controls');
 
-greetingEl.textContent = 'Happy 21st Birthday Cupcake!';
-messageEl.textContent = 'Wishing you a year filled with success, joy, and wonderful memories! May this milestone birthday be the start of your most amazing chapter yet! 🎉';
+greetingEl.textContent = 'Happy Birthday Cupcake!';
+messageEl.textContent = 'Wishing you a year filled with success! 🎉';
 
 function show(el, delay = 0){
   setTimeout(() => {
