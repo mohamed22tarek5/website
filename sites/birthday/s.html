@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy 21st Birthday — Celebration Card with Sound</title>
+<style>
+:root{
+  --bg-1: #0a0a1a;
+  --bg-2: #1b2735;
+  --accent: #ff0000;
+  --gold: #ffffff;
+  --text: #f5f5f5;
+  --soft: rgba(255,255,255,0.06);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  background: radial-gradient(ellipse at bottom, var(--bg-2) 0%, var(--bg-1) 100%);
+  color:var(--text);
+  overflow:hidden;
+}
+
+.scene{
+  position:relative;
+  width:100%;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+
+.stars{position:absolute;inset:0;z-index:0;pointer-events:none}
+.star{
+  position:absolute;border-radius:50%;background:rgba(255,255,255,0.95);
+  animation:twinkle 4s infinite ease-in-out;
+}
+@keyframes twinkle{0%,100%{opacity:0}50%{opacity:1}}
+
+.flying { position:absolute; inset:0; z-index:1; pointer-events:none; }
+
+.float-item{
+  position:absolute;
+  bottom:-80px;
+  will-change:transform, opacity;
+  pointer-events:none;
+  opacity:0;
+  transform:translate3d(0,0,0);
+  animation: floatUp linear forwards;
+}
+
+.balloon{
+  width:48px;height:64px;border-radius:50% 50% 45% 45%;
+  display:flex;align-items:flex-end;justify-content:center;
+  box-shadow:0 6px 18px rgba(0,0,0,0.25), inset 0 -6px 18px rgba(255,255,255,0.06);
+}
+.balloon::after{
+  content:""; width:2px; height:20px; background:rgba(0,0,0,0.15);
+  display:block; transform:translateY(4px);
+}
+
+.flower{
+  width:36px;height:36px;border-radius:50%;
+  box-shadow:0 6px 14px rgba(0,0,0,0.22), inset 0 2px 6px rgba(255,255,255,0.05);
+  display:flex;align-items:center;justify-content:center;font-weight:700;
+}
+
+@keyframes floatUp {
+  0%{ transform: translateY(0) translateX(0) rotate(0deg); opacity:0 }
+  10%{ opacity:1 }
+  100%{ transform: translateY(-120vh) translateX(var(--sway, 40px)) rotate(var(--rot, 20deg)); opacity:0.95 }
+}
+
+canvas#fireworks{ position:absolute; inset:0; z-index:2; pointer-events:none; }
+
+.content{
+  position:relative; z-index:3; display:flex;flex-direction:column;align-items:center;gap:1rem;
+  text-align:center; padding:1rem;
+}
+
+.hidden{ opacity:0; transform:scale(0.95) translateY(6px); pointer-events:none; transition: transform 450ms cubic-bezier(.2,.9,.3,1), opacity 450ms ease; }
+.visible{ opacity:1; transform:scale(1) translateY(0); pointer-events:auto; }
+
+.greeting{
+  font-size:2.0rem; font-weight:700; letter-spacing:0.6px;
+  background:linear-gradient(135deg,var(--accent),#9c27b0);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+
+.profile{
+  width:140px;height:140px;border-radius:50%;overflow:hidden;
+  border:3px solid rgba(233,30,99,0.35); background:linear-gradient(135deg,#2c3e50,#1a1a2e);
+  box-shadow:0 12px 30px rgba(0,0,0,0.45);
+}
+.profile img{ width:100%;height:100%;object-fit:cover;display:block; }
+
+.message{
+  background: rgba(233,30,99,0.09);
+  padding:0.75rem 1.2rem;border-radius:18px;max-width:86%;line-height:1.4;
+  backdrop-filter: blur(4px);
+  font-weight:600;
+}
+
+.cake-container{ width:260px;height:220px; position:relative; margin-top:0.5rem; }
+.cake{ width:100%; height:160px; position:relative; cursor:pointer; }
+.layer{ border-radius:16px; box-shadow: 0 8px 32px rgba(0,0,0,0.28); position:absolute; left:50%; transform:translateX(-50%); }
+.layer.bottom{ bottom:0; width:95%; height:90px; background:linear-gradient(135deg,#8b4513,#a0522d); }
+.layer.top{ bottom:70px; width:85%; height:70px; background:linear-gradient(135deg,#ffe4e1,#ffb6c1); display:flex;align-items:center;justify-content:center; box-shadow: 0 8px 32px rgba(0,0,0,0.28), 0 -4px 12px rgba(255,182,193,0.2); }
+.cake-topper{ font-size:32px;font-weight:800;color:var(--gold); animation: goldGlow 2s infinite alternate; }
+@keyframes goldGlow{ from{ text-shadow:0 0 6px rgb(255, 98, 0) } to { text-shadow:0 0 18px rgba(252, 5, 5, 0.95) } }
+
+.candles{ position:absolute; top:-6px; left:50%; transform:translateX(-50%); display:flex; gap:0.5rem; }
+.candle{ width:8px;height:28px;background:linear-gradient(to bottom,#fff,#dcdcdc); border-radius:4px; position:relative; }
+.flame{ position:absolute; top:-10px; left:50%; transform:translateX(-50%); width:8px;height:14px; background:radial-gradient(circle at 50% 30%, #ffee58,#ff6b35); border-radius:50% 50% 40% 40%; animation: flameFlicker 0.28s infinite alternate; }
+@keyframes flameFlicker{ 0%{ transform:translateX(-50%) scale(1) rotate(-2deg) }100%{ transform:translateX(-50%) scale(1.06) rotate(2deg) } }
+
+.plate{ position:absolute; bottom:-30px; left:50%; transform:translateX(-50%); width:320px;height:28px;background:var(--soft); border-radius:20px; }
+
+.instruction{ position:absolute; bottom:0.9rem; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.65); font-size:0.8rem; z-index:4; }
+
+#music-btn {
+  margin-top: 10px;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid white;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width:480px){
+  .greeting{ font-size:1.4rem }
+  .cake-container{ width:200px; height:180px }
+  .profile{ width:110px; height:110px }
+}
+
+.countdown {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--gold);
+  text-shadow: 0 0 10px rgba(255,255,255,0.8);
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+</style>
+</head>
+<body>
+<div class="scene" id="scene">
+  <div class="stars" id="stars"></div>
+  <div class="flying" id="flying"></div>
+  <canvas id="fireworks"></canvas>
+
+  <div class="content">
+    <div class="profile hidden" id="profile">
+      <img id="profileImg" src="image.png" alt="Profile picture" />
+    </div>
+    <h1 class="greeting hidden" id="greeting">Happy 21st Birthday!</h1>
+    <div class="message hidden" id="message"></div>
+    <div id="countdown" class="countdown"></div>
+
+    <div class="cake-container hidden" id="cakeWrap">
+      <div class="plate"></div>
+      <div class="cake" id="cake">
+        <div class="layer bottom"></div>
+        <div class="layer top"><div class="cake-topper">21</div></div>
+        <div class="candles">
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+        </div>
+      </div>
+    </div>
+    <button id="music-btn">Play Music</button>
+  </div>
+
+  <div class="instruction">Tap anywhere for celebration fireworks</div>
+</div>
+
+<!-- Audio Elements -->
+<audio id="bg-music" src="music.mp3" loop></audio>
+<audio id="firework-sound" src="firework.mp3"></audio>
+<audio id="balloon-pop-sound" src="pop.mp3"></audio>
+<audio id="blow-sound" src="blow.mp3"></audio>
+
+<script>
+const rand = (a,b) => Math.random()*(b-a)+a;
+const randInt = (a,b) => Math.floor(rand(a,b));
+
+// Stars
+(function createStars(){
+  const container = document.getElementById('stars');
+  const count = Math.max(40, Math.floor(window.innerWidth * window.innerHeight / 12000));
+  for(let i=0;i<count;i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = rand(0,100) + '%';
+    s.style.top = rand(0,100) + '%';
+    const size = rand(0.6,1.8);
+    s.style.width = s.style.height = size + 'px';
+    s.style.animationDelay = `${rand(0,4)}s`;
+    s.style.opacity = rand(0.25,0.9);
+    container.appendChild(s);
+  }
+})();
+
+// Balloons & Flowers
+const flyingRoot = document.getElementById('flying');
+let flyingCount = 0;
+function spawnFloatItem(type){
+  if(flyingCount > 40) return;
+  flyingCount++;
+  const el = document.createElement('div');
+  el.className = 'float-item';
+  el.style.left = `${rand(5,95)}%`;
+  el.style.setProperty('--sway', `${rand(-80,80)}px`);
+  el.style.setProperty('--rot', `${rand(-30,30)}deg`);
+  const dur = rand(6,14);
+  el.style.animationDuration = dur + 's';
+
+  if(type === 'balloon'){
+    const b = document.createElement('div');
+    b.className = 'balloon';
+    const color = randomBalloonColor();
+    b.style.background = `linear-gradient(135deg, ${color}, ${shadeColor(color,-18)})`;
+    el.appendChild(b);
+    document.getElementById('balloon-pop-sound').play(); // play sound when balloon appears
+  } else {
+    const f = document.createElement('div');
+    f.className = 'flower';
+    const c = randomFlowerColor();
+    f.style.background = `radial-gradient(circle at 40% 30%, #fff, ${c})`;
+    f.textContent = '✿';
+    el.appendChild(f);
+  }
+  flyingRoot.appendChild(el);
+
+  el.addEventListener('animationend', () => {
+    flyingRoot.removeChild(el);
+    flyingCount--;
+  }, { once:true });
+}
+function randomBalloonColor(){
+  const arr = ['#ff7675','#74b9ff','#55efc4','#ffeaa7','#a29bfe','#ff9ff3'];
+  return arr[randInt(0,arr.length)];
+}
+function randomFlowerColor(){
+  const arr = ['#ff6b6b','#feca57','#ff9ff3','#ff6b6b','#48dbfb','#00d2d3'];
+  return arr[randInt(0,arr.length)];
+}
+function shadeColor(hex, percent) {
+  const c = hex.replace('#','');
+  const num = parseInt(c,16);
+  let r = (num >> 16) + percent;
+  let g = (num >> 8 & 0x00FF) + percent;
+  let b = (num & 0x0000FF) + percent;
+  r = Math.max(Math.min(255,r),0);
+  g = Math.max(Math.min(255,g),0);
+  b = Math.max(Math.min(255,b),0);
+  return '#' + ( (1<<24) + (r<<16) + (g<<8) + b ).toString(16).slice(1);
+}
+setInterval(() => {
+  spawnFloatItem(Math.random() > 0.6 ? 'flower' : 'balloon');
+}, 700);
+for(let i=0;i<6;i++){
+  setTimeout(()=> spawnFloatItem(Math.random() > 0.6 ? 'flower' : 'balloon'), i*400);
+}
+
+// Reveal sequence
+const greetingEl = document.getElementById('greeting');
+const cakeWrap = document.getElementById('cakeWrap');
+const profileEl = document.getElementById('profile');
+const messageEl = document.getElementById('message');
+
+greetingEl.textContent = 'Happy Birthday ya Cup Cake';
+messageEl.textContent = 'Wishing you a year filled with success and wonderful memories.';
+
+function show(el){
+  el.classList.remove('hidden');
+  el.classList.add('visible');
+}
+setTimeout(()=>{ show(greetingEl); show(cakeWrap); }, 5000);
+setTimeout(()=> startFireworksEngine(), 6000);
+setTimeout(()=>{ show(profileEl); show(messageEl); }, 6000);
+
+// Fireworks engine
+let fireworksStarted = false;
+function startFireworksEngine(){
+  if(fireworksStarted) return;
+  fireworksStarted = true;
+
+  const canvas = document.getElementById('fireworks');
+  const ctx = canvas.getContext('2d');
+  const particles = [];
+  function resize(){
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); particles.length = 0; });
+
+  function launch(x, y, color){
+    document.getElementById('firework-sound').play(); // play sound
+    const count = randInt(18, 28);
+    for(let i=0;i<count;i++){
+      particles.push({
+        x, y,
+        vx: Math.cos(Math.random()*Math.PI*2) * rand(0.8,4),
+        vy: Math.sin(Math.random()*Math.PI*2) * rand(0.8,4),
+        life: randInt(40,80),
+        age: 0,
+        color: color || `hsl(${randInt(0,360)}, 100%, ${randInt(45,70)}%)`,
+        size: rand(1.2,2.6)
+      });
+    }
+  }
+
+  function tick(){
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = 'rgba(10,10,26,0.25)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.globalCompositeOperation = 'lighter';
+
+    for(let i=particles.length-1;i>=0;i--){
+      const p = particles[i];
+      p.age++;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.03;
+      const lifeRatio = 1 - p.age / p.life;
+      if(lifeRatio <= 0){ particles.splice(i,1); continue; }
+      ctx.beginPath();
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = Math.max(0, lifeRatio * 0.9);
+      ctx.arc(p.x, p.y, p.size * lifeRatio * 1.6, 0, Math.PI*2);
+      ctx.fill();
+    }
+    requestAnimationFrame(tick);
+  }
+
+  let lastLaunch = 0;
+  function autoLaunchLoop(){
+    if(Date.now() - lastLaunch > rand(700,1600)){
+      lastLaunch = Date.now();
+      launch(rand(60, canvas.width - 60), rand(60, canvas.height/2), `hsl(${randInt(0,360)},100%,${randInt(40,70)}%)`);
+    }
+    requestAnimationFrame(autoLaunchLoop);
+  }
+
+  window.addEventListener('pointerdown', (ev) => {
+    launch(ev.clientX, ev.clientY, `hsl(${randInt(320,360)},100%,${randInt(45,70)}%)`);
+  });
+
+  for(let i=0;i<6;i++){
+    setTimeout(()=> launch(rand(80, canvas.width-80), rand(60, canvas.height/3), `hsl(${randInt(0,360)},100%,${randInt(45,70)}%)`), i*300);
+  }
+
+  tick();
+  autoLaunchLoop();
+}
+
+// Music controls
+const musicBtn = document.getElementById('music-btn');
+const bgMusic = document.getElementById('bg-music');
+musicBtn.addEventListener('click', () => {
+  if (bgMusic.paused) {
+    bgMusic.play();
+    musicBtn.textContent = 'Pause Music';
+  } else {
+    bgMusic.pause();
+    musicBtn.textContent = 'Play Music';
+  }
+});
+const countdownEl = document.getElementById('countdown');
+let countdownValue = 3;
+
+function startCountdown() {
+  countdownEl.textContent = countdownValue;
+
+  const timer = setInterval(() => {
+    countdownValue--;
+    if (countdownValue > 0) {
+      countdownEl.textContent = countdownValue;
+    } else {
+      clearInterval(timer);
+      countdownEl.remove(); // Remove countdown from DOM
+      // Now show greeting & cake after countdown
+      show(greetingEl);
+      show(cakeWrap);
+    }
+  }, 1000);
+}
+
+// Start countdown immediately
+startCountdown();
+
+// Cake blow sound
+document.getElementById('cake').addEventListener('click', () => {
+  document.getElementById('blow-sound').play();
+});
+
+window.addEventListener('beforeunload', () => {
+  clearInterval(floatTimer);
+});
+</script>
+</body>
+</html>
