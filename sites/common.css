@@ -1,0 +1,630 @@
+/*
+ * Common CSS for all calculators and utilities
+ *
+ * This stylesheet consolidates the individual styles from each of the
+ * original HTML files in this project into a single file.  Keeping
+ * everything in one place makes it easier to maintain a consistent
+ * look and feel across all tools, while still preserving the
+ * distinctive layouts defined in the original documents.  Each
+ * section below is annotated with the name of the source page from
+ * which it was taken.  Global variables and resets are grouped at
+ * the top.  Light‑mode overrides are provided immediately after the
+ * variables so that they apply uniformly across all pages.
+ */
+
+/* ------------------------------------------------------------------ */
+/* Global variables and reset styles (common to all pages)             */
+/* ------------------------------------------------------------------ */
+
+:root {
+    /* Primary palette used across most tools */
+    --primary-color: #4e9eff;
+    --primary-dark: #3a6cf4;
+    --primary-light: #6ab1ff;
+    --background-dark: #121212;
+    --background-darker: #0a0a0a;
+    --background-secondary: #1a1a1a;
+    --card-dark: #1e1e1e;
+    --card-light: #252525;
+    --text-light: #ffffff;
+    --text-muted: #aaaaaa;
+    --success-color: #4caf50;
+    --error-color: #f44336;
+    --warning-color: #ff9800;
+    --transition-speed: 0.3s;
+    --border-radius: 12px;
+    --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Light mode variables override the dark defaults above.  The
+ * [data-theme="light"] selector makes it easy to switch the entire
+ * colour palette when the user toggles between dark and light
+ * themes.  Individual pages don’t need to redefine these values.
+ */
+[data-theme="light"] {
+    --background-dark: #f5f7fa;
+    --background-darker: #e8ebf0;
+    --background-secondary: #ffffff;
+    --card-dark: #ffffff;
+    --card-light: #f9f9f9;
+    --text-light: #333333;
+    --text-muted: #666666;
+    --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* CSS reset and base element styling */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+    transition: background-color var(--transition-speed) ease;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+/* Buttons.  Generic button class sets up basic appearance and
+ * transition.  The modifier classes (primary, success, warning,
+ * danger) adjust colours and provide hover effects.
+ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 0.9em;
+    transition: all var(--transition-speed) ease;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    gap: 8px;
+    white-space: nowrap;
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+}
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(78, 158, 255, 0.6);
+}
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+.btn-success:hover {
+    background-color: #45a049;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
+}
+.btn-danger {
+    background-color: var(--error-color);
+    color: white;
+    box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+}
+.btn-danger:hover {
+    background-color: #d32f2f;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(244, 67, 54, 0.6);
+}
+.btn-warning {
+    background-color: var(--warning-color);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+}
+.btn-warning:hover {
+    background-color: #e69500;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.6);
+}
+
+/* Form controls */
+input, select, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border: 1px solid var(--background-secondary);
+    border-radius: var(--border-radius);
+    background-color: var(--background-secondary);
+    color: var(--text-light);
+    font-family: inherit;
+    font-size: 1em;
+    transition: all var(--transition-speed) ease;
+}
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
+}
+
+/* Simple container for pages that centre their content */
+.container, .calculator-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Generic panel used by many calculators */
+.calculator, .panel {
+    background-color: var(--card-dark);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--box-shadow);
+    transition: all var(--transition-speed) ease;
+}
+.calculator:hover, .panel:hover {
+    box-shadow: var(--box-shadow-hover);
+}
+
+/* Tabbed interface used by several calculators */
+.main-tabs {
+    overflow: hidden;
+    border: 1px solid var(--background-secondary);
+    background-color: var(--card-light);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    margin-bottom: 0;
+}
+.main-tab-button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    color: var(--text-light);
+    font-weight: bold;
+}
+.main-tab-button:hover {
+    background-color: var(--background-secondary);
+}
+.main-tab-button.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+.main-tabcontent {
+    display: none;
+    padding: 20px;
+    border: 1px solid var(--background-secondary);
+    border-top: none;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    background-color: var(--card-dark);
+    box-shadow: var(--box-shadow);
+}
+
+/* ------------------------------------------------------------------ */
+/* Form controls                                                         */
+/*
+ * Many calculators use text inputs and select boxes for entering
+ * numeric values, codes or units.  These styles harmonise their
+ * appearance across all pages and provide focus effects to aid
+ * accessibility.  The `.input-field` class is applied to
+ * `<input>` elements and the `.unit-selector` class to
+ * `<select>` elements used for unit choices.  Additional
+ * width is left to the element itself so that specialized layouts
+ * (e.g., AWG tables) can override as necessary.
+ */
+.input-field,
+.unit-selector {
+    margin: 10px 0;
+    padding: 12px 15px;
+    border: 1px solid var(--background-secondary);
+    border-radius: var(--border-radius);
+    background-color: var(--background-secondary);
+    color: var(--text-light);
+    font-family: inherit;
+    font-size: 1em;
+    transition: all var(--transition-speed) ease;
+}
+.input-field:focus,
+.unit-selector:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
+}
+
+/* Result boxes used by several calculators */
+.result-box {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: var(--border-radius);
+    background-color: var(--background-secondary);
+    transition: all var(--transition-speed) ease;
+}
+.result-box:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow-hover);
+}
+.result-box.success {
+    background-color: rgba(76, 175, 80, 0.1);
+    border-left: 4px solid var(--success-color);
+}
+.result-box.error {
+    background-color: rgba(244, 67, 54, 0.1);
+    border-left: 4px solid var(--error-color);
+}
+.result-box.warning {
+    background-color: rgba(255, 152, 0, 0.1);
+    border-left: 4px solid var(--warning-color);
+}
+.result-label {
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+.result-value {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Info boxes used for explanatory sections */
+.info-box {
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: var(--border-radius);
+    background-color: rgba(241, 196, 15, 0.1);
+    border-left: 4px solid var(--warning-color);
+    color: var(--text-light);
+}
+.info-box h3 {
+    color: var(--warning-color);
+}
+
+/* Utility classes for lists (mostly used in the unit converter) */
+.unit-group {
+    margin-bottom: 20px;
+    background-color: var(--background-secondary);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--primary-color);
+}
+.unit-group h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    font-size: 18px;
+}
+.unit-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.unit-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: var(--card-dark);
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background-color var(--transition-speed) ease;
+}
+
+/* To‑do list specific styles */
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--card-light);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: background-color var(--transition-speed) ease;
+}
+.task-item.completed .task-content {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+    position: relative;
+}
+.checkbox.checked::after {
+    content: '\2713';
+    position: absolute;
+    top: -4px;
+    left: 2px;
+    color: var(--primary-color);
+    font-size: 20px;
+}
+.task-actions button {
+    margin-left: 5px;
+}
+.empty-state {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 20px;
+}
+
+/* Medication reminder specific styles */
+.reminder-item {
+    background-color: var(--card-light);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: background-color var(--transition-speed) ease;
+}
+.reminder-time {
+    color: var(--text-muted);
+}
+
+/* Wire gauge table formatting */
+table.awg-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+table.awg-table th, table.awg-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--background-secondary);
+    text-align: left;
+}
+table.awg-table tr:nth-child(even) {
+    background-color: var(--background-secondary);
+}
+
+/* Colour bands display for resistor and inductance calculators */
+.band {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 60px;
+}
+.resistor-display, .inductor-display {
+    position: relative;
+    height: 60px;
+    background-color: var(--background-secondary);
+    border-radius: var(--border-radius);
+    margin: 10px 0;
+}
+
+/* Responsive grid used by power factor and other tools */
+.power-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+@media (min-width: 768px) {
+    .power-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Utility classes for hide/show */
+.hidden {
+    display: none !important;
+}
+
+/* Scroll-to-Top button styles */
+/* Some pages include a floating button that scrolls the page back to the top.  Since the
+   original styles were defined inline within individual pages, they are now
+   consolidated here to ensure consistent appearance across the site. The
+   button remains hidden until the user scrolls down the page. */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--card-dark);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    z-index: 999;
+    border: none;
+    outline: none;
+    opacity: 0;
+    visibility: hidden;
+}
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Theme toggle button styles */
+/* Many calculators include a circular theme toggle button that floats at the
+   bottom-left of the viewport.  Define its appearance here so each page
+   inherits a consistent look without the need for inline styles. */
+.theme-toggle {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--card-dark);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    z-index: 999;
+    border: none;
+    outline: none;
+}
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Accordion styles (AI Tools Directory) */
+/* These styles support the collapsible category sections on the AI Tools
+   Directory page. Defining them here ensures the accordion layout
+   remains functional after the original inline styles were removed. */
+.accordion-container {
+    margin-bottom: 2rem;
+    background: var(--card-dark);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+.accordion-header {
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all var(--transition-speed) ease;
+}
+.accordion-header:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+}
+.accordion-header i {
+    transition: transform var(--transition-speed) ease;
+}
+.accordion-header.active i {
+    transform: rotate(180deg);
+}
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-speed) ease;
+}
+.accordion-content-inner {
+    padding: 2rem;
+}
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+.tool-card {
+    background: var(--card-light);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+    transition: all var(--transition-speed) ease;
+    border-left: 4px solid var(--primary-color);
+    display: flex;
+    flex-direction: column;
+}
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+}
+.tool-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.tool-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+.tool-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-light);
+}
+.tool-description {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+.tool-link {
+    display: inline-block;
+    background: var(--card-dark);
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+    border: 1px solid var(--primary-color);
+    text-align: center;
+}
+.tool-link:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Nested tab interface (used by capacitor and other code calculators) */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--background-secondary);
+    margin-bottom: 15px;
+}
+.tab-button {
+    background-color: var(--card-light);
+    color: var(--text-light);
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    margin-right: 5px;
+    transition: background-color var(--transition-speed) ease;
+}
+.tab-button:hover {
+    background-color: var(--background-secondary);
+}
+.tab-button.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+
+/* Footer styling - all pages include a year in the footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    color: var(--text-muted);
+    font-size: 0.9em;
+}
