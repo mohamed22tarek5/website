@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mastering Linux Commands: A Comprehensive Guide</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #121831;
+      --ink: #e7ecf6;
+      --muted: #a8b1c7;
+      --accent: #7cc0ff;
+      --accent-2: #9be2b1;
+      --border: #233056;
+      --code-bg: #0f1630;
+      --kbd-bg: #1a2347;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--ink);
+      background: radial-gradient(1200px 600px at 100% -20%, #1a2347 0%, rgba(26,35,71,0) 60%),
+                  radial-gradient(1200px 600px at -20% 100%, #1c2b5e 0%, rgba(28,43,94,0) 60%),
+                  var(--bg);
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    header { position: sticky; top: 0; backdrop-filter: blur(6px); background: rgba(11,16,32,0.6); border-bottom: 1px solid var(--border); z-index: 10; }
+    header .wrap { display: flex; align-items: center; gap: 16px; padding-block: 12px; }
+    h1 { font-size: 2rem; margin: 0; letter-spacing: .2px; }
+    .subtitle { color: var(--muted); font-size: .95rem; }
+    .grid { display: grid; grid-template-columns: 290px 1fr; gap: 24px; align-items: start; }
+    @media (max-width: 960px) { .grid { grid-template-columns: 1fr; } nav { position: static; } }
+
+    nav { position: sticky; top: 64px; max-height: calc(100dvh - 96px); overflow: auto; padding: 16px; border: 1px solid var(--border); background: var(--card); border-radius: 14px; }
+    nav h2 { margin-top: 0; font-size: 1.05rem; }
+    nav a { display: block; color: var(--ink); text-decoration: none; padding: 6px 8px; border-radius: 8px; }
+    nav a:hover { background: #1a2347; }
+    nav .toc-section { margin-bottom: 12px; }
+    nav .toc-section > a { font-weight: 600; color: var(--accent); }
+    nav .toc-sub a { color: var(--muted); font-size: .92rem; padding-left: 14px; }
+
+    main { border: 1px solid var(--border); background: var(--card); border-radius: 14px; padding: 24px; }
+    section { scroll-margin-top: 96px; }
+    h2 { margin-top: 32px; border-bottom: 1px dashed var(--border); padding-bottom: 8px; }
+    h3 { color: var(--accent); margin-top: 20px; }
+    p { margin: 8px 0 14px; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    pre { position: relative; background: var(--code-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 14px 16px; overflow: auto; }
+    pre code { color: #d7e1ff; }
+    .copy { position: absolute; right: 10px; top: 10px; background: #0c142b; color: var(--ink); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; font-size: .85rem; cursor: pointer; }
+    .tip, .note, .warn { border: 1px solid var(--border); padding: 10px 12px; border-radius: 10px; margin: 10px 0 16px; }
+    .tip { background: rgba(155,226,177,.06); }
+    .note { background: rgba(124,192,255,.06); }
+    .warn { background: rgba(255,137,124,.06); }
+    kbd { background: var(--kbd-bg); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 6px; padding: 2px 6px; font-size: .9em; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; }
+    th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+    th { background: #18224a; }
+    .footer { color: var(--muted); font-size: .9rem; margin-top: 32px; }
+    .chap-tag { display:inline-block; font-size:.78rem; letter-spacing:.3px; color:#0b1020; background: linear-gradient(90deg, var(--accent), var(--accent-2)); padding:2px 8px; border-radius:999px; margin-left:6px; }
+    .cmd { color: var(--accent-2); font-weight: 600; }
+      .explain { border: 1px solid var(--border); background: rgba(124,192,255,.06); padding: 12px 14px; border-radius: 10px; margin: 10px 0 18px; }
+    .explain h4 { margin: 0 0 6px; font-size: 1rem; color: var(--accent); }
+    .explain ul { margin: 6px 0 0 18px; }
+    .explain li { margin: 4px 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div>
+        <h1>Mastering Linux Commands <span class="chap-tag">Reference</span></h1>
+        <div class="subtitle">Concise, example-driven, beginner ↔ pro</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap grid">
+    <!-- TOC / Sidebar -->
+    <nav aria-label="Table of contents">
+      <h2>Contents</h2>
+      <div id="toc"></div>
+    </nav>
+
+    <!-- Main content -->
+    <main id="content">
+      
+      <section id="ch1">
+        <h2>Chapter 1: Navigating the Filesystem</h2>
+        <h3 id="pwd"><span class="cmd">pwd</span> — Print Working Directory</h3>
+        <p>Show the absolute path of the current directory.</p>
+        <pre><button class="copy" data-clipboard>Copy</button><code>pwd
+# /home/user</code></pre>
+        <div class="note">Displays the full path from the root to your current location.</div>
+
+        <h3 id="cd"><span class="cmd">cd [directory]</span> — Change Directory</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>cd /home/user/Documents</code></pre>
+        <div class="tip">Use <code>cd ..</code> to go up one level.</div>
+
+        <h3 id="ls"><span class="cmd">ls</span> — List Directory Contents</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>ls
+ls -la   # long format incl. hidden files</code></pre>
+      </section>
+
+      <section id="ch2">
+        <h2>Chapter 2: Getting Help and Finding Commands</h2>
+        <h3 id="man"><span class="cmd">man [command]</span> — Manual Pages</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>man ls</code></pre>
+        
+        <h3 id="which"><span class="cmd">which [command]</span> — Locate Executable</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>which python
+# /usr/bin/python</code></pre>
+      </section>
+
+      <section id="ch3">
+        <h2>Chapter 3: Managing Directories and Files</h2>
+        <h3 id="mkdir"><span class="cmd">mkdir [directory]</span> — Create Directory</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>mkdir new_folder</code></pre>
+        
+        <h3 id="rmdir"><span class="cmd">rmdir [directory]</span> — Remove Empty Directory</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>rmdir old_folder
+# Use rm -r for non-empty directories</code></pre>
+        
+        <h3 id="rm"><span class="cmd">rm [file]</span> — Remove File</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>rm file.txt
+rm -i file.txt   # interactive</code></pre>
+        
+        <h3 id="cp"><span class="cmd">cp [src] [dest]</span> — Copy</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>cp file.txt /home/user/backup/
+cp -r dir/ /backup/   # recursive</code></pre>
+        
+        <h3 id="mv"><span class="cmd">mv [src] [dest]</span> — Move/Rename</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>mv file.txt ~/Documents/
+mv oldname.txt newname.txt</code></pre>
+        
+        <h3 id="touch"><span class="cmd">touch [file]</span> — Create/Modify Timestamp</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>touch newfile.txt</code></pre>
+      </section>
+
+      <section id="ch4">
+        <h2>Chapter 4: Viewing and Editing File Content</h2>
+        <h3 id="cat"><span class="cmd">cat [file]</span> — Concatenate/Display</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>cat file.txt
+cat file1.txt file2.txt</code></pre>
+        
+        <h3 id="echo"><span class="cmd">echo [text]</span> — Output Text</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>echo "Hello, World!"
+echo $VARIABLE</code></pre>
+        
+        <h3 id="file"><span class="cmd">file [file]</span> — Determine File Type</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>file image.png
+# image.png: PNG image data</code></pre>
+        
+        <h3 id="io"><span class="cmd">stdin / stdout / stderr</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>cat file.txt > output.txt    # redirect
+cat file.txt >> output.txt   # append
+command 2> errors.log         # stderr
+command > out 2>&1            # merge</code></pre>
+        
+        <h3 id="pipe"><span class="cmd">Pipes</span> — Connect Commands</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>ls | grep 'pattern'</code></pre>
+      </section>
+
+      <section id="ch5">
+        <h2>Chapter 5: Searching for Files</h2>
+        <h3 id="locate"><span class="cmd">locate</span> — Quick DB Search</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>locate filename.txt
+sudo updatedb   # refresh DB</code></pre>
+        
+        <h3 id="find"><span class="cmd">find</span> — Criteria Search</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>find /home/user -name "filename.txt"
+find / -name "linux.txt" 2>/dev/null</code></pre>
+        
+        <h3 id="grep"><span class="cmd">grep</span> — Pattern Matching</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>grep "search_term" file.txt
+grep -r "search_term" /path/to/dir</code></pre>
+      </section>
+
+      <section id="ch6">
+        <h2>Chapter 6: Viewing File Content</h2>
+        <h3 id="head"><span class="cmd">head</span> — Beginning of File</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>head task
+head -n 20 task</code></pre>
+        
+        <h3 id="tail"><span class="cmd">tail</span> — End of File</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>tail task
+tail -f file.txt   # follow</code></pre>
+        
+        <h3 id="wc"><span class="cmd">wc</span> — Count</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>cat task | wc -l   # lines
+wc -w file.txt     # words</code></pre>
+        
+        <h3 id="more-less"><span class="cmd">more / less</span> — Paged Viewers</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>more task
+less task   # use /term to search</code></pre>
+      </section>
+
+      <section id="ch7">
+        <h2>Chapter 7: Text Editors</h2>
+        <h3 id="nano"><span class="cmd">nano</span> — Simple Editor</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>nano filename.txt
+# Ctrl+O save, Ctrl+X exit, Ctrl+K cut, Ctrl+U paste</code></pre>
+        
+        <h3 id="vim"><span class="cmd">vi / vim</span> — Powerful Editor</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>vim filename.txt
+# i/a insert • :wq save+quit • :q! quit without saving
+# Move: h j k l</code></pre>
+      </section>
+
+      <section id="ch8">
+        <h2>Chapter 8: Archiving Tools</h2>
+        <h3 id="tar"><span class="cmd">tar</span> — Create/Extract Archives</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code># create
+tar -cvf archive.tar file1 file2 directory/
+# extract
+tar -xvf archive.tar
+# create + gzip
+tar -czvf archive.tar.gz file1 file2 directory/</code></pre>
+        
+        <h3 id="gzip-bzip2"><span class="cmd">gzip / bzip2</span> — Compress Files</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>gzip file.txt     # -> file.txt.gz
+gunzip file.txt.gz
+bzip2 file.txt    # -> file.txt.bz2
+bunzip2 file.txt.bz2</code></pre>
+      </section>
+
+      <section id="ch9">
+        <h2>Chapter 9: System Information and Management</h2>
+        <h3 id="df-free-uname"><span class="cmd">df / free / uname</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>df -h          # disk usage (human)
+free -h        # memory usage
+uname -a       # system info</code></pre>
+        
+        <h3 id="top-kill"><span class="cmd">top / htop / kill</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>top            # realtime processes
+kill 1234      # terminate PID
+kill -9 1234   # force</code></pre>
+        
+        <h3 id="ps-killall-jobs"><span class="cmd">ps / killall / jobs</span> — Process Helpers</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>ps aux | grep apache
+killall firefox
+jobs; fg %1</code></pre>
+        
+        <h3 id="chmod-chown-chgrp"><span class="cmd">chmod / chown / chgrp</span> — Permissions & Ownership</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>chmod 755 script.sh   # rwxr-xr-x
+chown user file.txt
+chown user:group file.txt
+chgrp group file.txt</code></pre>
+        <div class="note">
+          <strong>Permission cheat sheet</strong>
+          <table>
+            <thead><tr><th>Symbol</th><th>Numeric</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td>r</td><td>4</td><td>Read</td></tr>
+              <tr><td>w</td><td>2</td><td>Write</td></tr>
+              <tr><td>x</td><td>1</td><td>Execute</td></tr>
+              <tr><td>rw-</td><td>6</td><td>Read + Write</td></tr>
+              <tr><td>rwx</td><td>7</td><td>All permissions</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="ch10">
+        <h2>Chapter 10: Networking</h2>
+        <h3 id="ifconfig-ip"><span class="cmd">ifconfig / ip</span> — Network Interfaces</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>ifconfig
+ip a   # modern alternative</code></pre>
+        
+        <h3 id="ping-wget-scp-netstat"><span class="cmd">ping / wget / scp / netstat</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>ping google.com
+wget https://example.com/file.zip
+scp file.txt user@remotehost:/path/
+netstat -tuln</code></pre>
+        
+        <h3 id="ssh-telnet-nc"><span class="cmd">ssh / telnet / nc</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>ssh user@remotehost
+nc -l -p 5555 -v
+# telnet (legacy)
+telnet example.com 80</code></pre>
+      </section>
+
+      <section id="ch11">
+        <h2>Chapter 11: System Administration</h2>
+        <h3 id="apt"><span class="cmd">apt</span> — Debian/Ubuntu Package Manager</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>sudo apt update
+sudo apt upgrade
+sudo apt install vim
+sudo apt remove vim
+sudo apt purge vim    # remove incl. config</code></pre>
+        
+        <h3 id="logs-edit"><span class="cmd">Logs & Config</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>tail /var/log/syslog
+sudo nano /etc/hosts</code></pre>
+        
+        <h3 id="systemctl"><span class="cmd">systemctl</span> — systemd Services</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>sudo systemctl status ssh
+sudo systemctl start nginx
+sudo systemctl enable apache2</code></pre>
+      </section>
+
+      <section id="ch12">
+        <h2>Chapter 12: Archiving and Backup</h2>
+        <h3 id="backup-restore"><span class="cmd">Backup & Restore</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code># backup
+tar -czvf backup.tar.gz /path/to/files
+# restore
+tar -xzvf backup.tar.gz</code></pre>
+      </section>
+
+      <section id="ch13">
+        <h2>Chapter 13: Shell Scripting</h2>
+        <h3 id="script-basic"><span class="cmd">Create a Script</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>nano script.sh
+# add:
+#!/bin/bash
+echo "Hello, World!"
+chmod +x script.sh
+./script.sh</code></pre>
+        
+        <h3 id="script-vars"><span class="cmd">Variables</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>#!/bin/bash
+NAME="World"
+echo "Hello, $NAME!"</code></pre>
+        
+        <h3 id="script-if"><span class="cmd">Conditionals</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>#!/bin/bash
+if [ -f "file.txt" ]; then
+  echo "File exists."
+else
+  echo "File does not exist."
+fi</code></pre>
+      </section>
+
+      <section id="ch14">
+        <h2>Chapter 14: Cron Jobs</h2>
+        <h3 id="cron"><span class="cmd">crontab</span> — Schedule Tasks</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>crontab -e
+# run every day at 5 AM
+0 5 * * * /path/to/script.sh</code></pre>
+      </section>
+
+      <section id="ch15">
+        <h2>Chapter 15: Package Management</h2>
+        <h3 id="apt-search-show"><span class="cmd">apt search / apt show</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>apt search nginx
+apt show nginx</code></pre>
+      </section>
+
+      <section id="ch16">
+        <h2>Chapter 16: User Management</h2>
+        <h3 id="add-del-user"><span class="cmd">adduser / deluser</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>sudo adduser newuser
+sudo deluser olduser</code></pre>
+        <h3 id="useradd-del-passwd-su"><span class="cmd">useradd / userdel / passwd / su</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>useradd newuser
+userdel olduser
+passwd username
+su - username</code></pre>
+        <h3 id="sudo"><span class="cmd">sudo</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>sudo ls /root</code></pre>
+      </section>
+
+      <section id="ch17">
+        <h2>Chapter 17: File Compression & Decompression</h2>
+        <h3 id="zip-unzip"><span class="cmd">zip / unzip</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>zip archive.zip file1 file2
+unzip archive.zip</code></pre>
+        
+        <h3 id="targz"><span class="cmd">tar -czvf / -xzvf</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>tar -czvf archive.tar.gz file1 file2
+# decompress
+tar -xzvf archive.tar.gz</code></pre>
+      </section>
+
+      <section id="ch18">
+        <h2>Chapter 18: Command Aliases</h2>
+        <h3 id="alias"><span class="cmd">alias</span> — Create Shortcuts</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>alias ll='ls -lh'
+alias       # list aliases
+unalias ll  # remove</code></pre>
+        <div class="tip">To persist, add to <code>~/.bashrc</code> or <code>~/.zshrc</code>:
+        <pre><button class="copy" data-clipboard>Copy</button><code>echo "alias ll='ls -lh'" >> ~/.bashrc
+source ~/.bashrc</code></pre></div>
+      </section>
+
+      <section id="ch19">
+        <h2>Chapter 19: Network Utilities (Extended)</h2>
+        <h3 id="ssh-scp-ex"><span class="cmd">ssh / scp</span> — Examples</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>sudo service ssh start
+ssh kali@192.168.56.101
+scp jeso kali@192.168.56.101:/home/kali/Desktop</code></pre>
+      </section>
+
+      <section id="ch20">
+        <h2>Chapter 20: File & Text Processing</h2>
+        <h3 id="awk-sed-tr-sort-cut"><span class="cmd">awk / sed / tr / sort / cut</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>awk '{print $1}' file.txt
+sed 's/old/new/g' file.txt
+echo "hello" | tr 'a-z' 'A-Z'
+sort file.txt
+cut -d':' -f1 /etc/passwd</code></pre>
+      </section>
+
+      <section id="ch21">
+        <h2>Chapter 21: Shell Scripting (Control Flow)</h2>
+        <h3 id="if-loops"><span class="cmd">if / for / while</span></h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code># if
+if [ 4 -gt 2 ]; then echo "Yes"; fi
+# if-else
+if [ 4 -lt 2 ]; then echo "Yes"; else echo "no"; fi
+# for (brace)
+for i in {1..100..1}; do echo $i; done
+# for (C-style)
+for (( i=1; i<101; i++ )); do echo $i; done
+# while
+x=0; while [ $x -lt 9 ]; do echo hi; x=$((x+1)); done</code></pre>
+      </section>
+
+      <section id="ch22">
+        <h2>Chapter 22: Extras (Pro Tools)</h2>
+        <h3 id="du"><span class="cmd">du</span> — Disk Usage (per-dir/file)</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>du -sh *           # sizes of items in cwd
+sudo du -xh / | sort -h | tail -n 20   # largest paths</code></pre>
+
+        <h3 id="ss"><span class="cmd">ss</span> — Socket Statistics (modern netstat)</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>ss -tulpn          # listening TCP/UDP with PIDs
+ss -s              # summary</code></pre>
+
+        <h3 id="curl"><span class="cmd">curl</span> — Transfer Data</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>curl -I https://example.com         # headers only
+curl -o file.zip https://host/file.zip
+curl -X POST -d 'a=1&b=2' https://httpbin.org/post</code></pre>
+
+        <h3 id="journalctl"><span class="cmd">journalctl</span> — systemd Logs</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>journalctl -u ssh --since "today"   # unit logs today
+journalctl -f                        # follow logs</code></pre>
+
+        <h3 id="rsync"><span class="cmd">rsync</span> — Fast Copy/Sync</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>rsync -avh --progress src/ dest/
+rsync -az --delete user@host:/data/ /backup/</code></pre>
+
+        <h3 id="ln"><span class="cmd">ln</span> — Links</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>ln -s /opt/app/bin/app /usr/local/bin/app   # symlink
+ln file copy-hardlink                       # hard link</code></pre>
+
+        <h3 id="umask"><span class="cmd">umask</span> — Default Permissions</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>umask          # show current mask (e.g., 0022)
+umask 002      # new files default group-writable</code></pre>
+
+        <h3 id="ssh-keygen"><span class="cmd">ssh-keygen</span> — SSH Keys</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>ssh-keygen -t ed25519 -C "you@example.com"
+ssh-copy-id user@remotehost</code></pre>
+      </section>
+
+      <p class="footer">Tip: Use this as an in-terminal companion with <code>tldr</code> pages (<code>sudo apt install tldr</code> then <code>tldr tar</code>).</p>
+    </main>
+  </div>
+
+  <script>
+    // Build TOC automatically from h2/h3
+    (function buildTOC(){
+      const content = document.getElementById('content');
+      const toc = document.getElementById('toc');
+      const sections = content.querySelectorAll('section');
+      const frag = document.createDocumentFragment();
+      sections.forEach(sec => {
+        const h2 = sec.querySelector('h2');
+        if(!h2) return;
+        const secLink = document.createElement('a');
+        const secId = sec.id || h2.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-');
+        sec.id = secId;
+        secLink.href = '#' + secId;
+        secLink.textContent = h2.textContent;
+        const secWrap = document.createElement('div');
+        secWrap.className = 'toc-section';
+        secWrap.appendChild(secLink);
+
+        const h3s = sec.querySelectorAll('h3');
+        if(h3s.length){
+          const sub = document.createElement('div');
+          sub.className = 'toc-sub';
+          h3s.forEach(h3 => {
+            const id = h3.id || h3.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-');
+            h3.id = id;
+            const a = document.createElement('a');
+            a.href = '#' + id;
+            a.textContent = h3.textContent.replace(/\s+—.*/, '');
+            sub.appendChild(a);
+          });
+          secWrap.appendChild(sub);
+        }
+        frag.appendChild(secWrap);
+      });
+      toc.appendChild(frag);
+    })();
+
+    // Copy-to-clipboard for code blocks
+    document.querySelectorAll('[data-clipboard]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.nextElementSibling.innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          const old = btn.textContent; btn.textContent = 'Copied!';
+          setTimeout(()=> btn.textContent = old, 1200);
+        });
+      });
+    });
+      // Explanations per command block
+    (function injectExplanations(){
+      const EXPLAINS = {
+        pwd: {
+          what: 'Prints the absolute path to your current working directory.',
+          when: ['You got lost in the tree and need to confirm where you are.', 'Scripting: emit current dir for logs.'],
+          pitfalls: ['In scripts, rely on $(pwd) rather than $PWD when portability is required.']
+        },
+        cd: {
+          what: 'Changes the current directory to the path you provide.',
+          when: ['Navigate to project folders quickly.', 'Use cd - to jump back to the previous directory.'],
+          pitfalls: ['cd .. moves one level up; watch for spaces in paths—quote them.']
+        },
+        ls: {
+          what: 'Lists files and directories in the current (or given) path.',
+          when: ['Quick overview of contents.', 'Use -la to include hidden files and metadata.'],
+          pitfalls: ['Color/format may differ by distro; use -h with -l for human sizes.']
+        },
+        man: { what: 'Opens the manual page for a command.', when: ['Learn flags, env vars, and examples.'], pitfalls: ['Use /term to search and n/N to navigate.'] },
+        which: { what: 'Shows the full path to an executable resolved in your $PATH.', when: ['Confirm which python/node is used.'], pitfalls: ['Aliases/functions won’t appear; use type -a cmd to see all.'] },
+        mkdir: { what: 'Creates a new directory.', when: ['Scaffold folders.'], pitfalls: ['Use -p to create parent directories if missing.'] },
+        rmdir: { what: 'Removes an empty directory.', when: ['Clean up empty dirs.'], pitfalls: ['For non-empty, use rm -r with care.'] },
+        rm: { what: 'Removes files (and with -r, directories).', when: ['Delete unwanted files.'], pitfalls: ['Irreversible. Consider -i or a trash utility.'] },
+        cp: { what: 'Copies files; -r for directories.', when: ['Backups, duplicate configs.'], pitfalls: ['Overwrites silently unless -i; preserve attrs with -a.'] },
+        mv: { what: 'Moves or renames files/directories.', when: ['Rename or relocate files.'], pitfalls: ['Overwrites silently unless -i.'] },
+        touch: { what: 'Creates empty file or updates its timestamp.', when: ['Create placeholder files.', 'Trigger build systems watching mtimes.'], pitfalls: [] },
+        cat: { what: 'Concatenates and prints file content.', when: ['Quickly view small files.', 'Combine files to stdout.'], pitfalls: ['Prefer less for large files.'] },
+        echo: { what: 'Prints text or variable values.', when: ['Debug env vars.', 'Write lines to files with redirection.'], pitfalls: ['Quote strings to avoid globbing/expansion.'] },
+        file: { what: 'Detects file type by inspecting content (magic), not extension.', when: ['Confirm binary vs text.', 'Check encodings.'], pitfalls: [] },
+        io: { what: 'Redirection of standard streams (stdin/stdout/stderr).', when: ['Save output to files.', 'Split logs/errors.'], pitfalls: ['Remember 2> for stderr and >> for append.'] },
+        pipe: { what: 'Connects output of one command to input of another.', when: ['Chain filters like ls | grep.', 'Compose powerful pipelines.'], pitfalls: ['Pipes pass only stdout by default (not stderr).'] },
+        locate: { what: 'Searches filenames via a prebuilt database.', when: ['Very fast file name lookups.'], pitfalls: ['May be stale until updatedb runs.'] },
+        find: { what: 'Searches the filesystem by name, size, type, time, etc.', when: ['Precise searches across directories.'], pitfalls: ['Quote patterns to avoid shell globbing.'] },
+        grep: { what: 'Searches text for patterns (regex).', when: ['Find lines matching a term.', 'Use -r to search directories.'], pitfalls: ['Escape special regex characters as needed.'] },
+        head: { what: 'Shows the first N lines (default 10).', when: ['Peek at file start.'], pitfalls: [] },
+        tail: { what: 'Shows the last N lines (default 10).', when: ['Watch live logs with -f.'], pitfalls: [] },
+        wc: { what: 'Counts lines, words, bytes.', when: ['Quick metrics on files.'], pitfalls: ['Avoid UUOC: use wc -l < file for speed.'] },
+        'more-less': { what: 'Paged viewers for large outputs.', when: ['Scroll through long files.'], pitfalls: ['less is more: prefer less for search and arrows.'] },
+        nano: { what: 'Simple terminal editor with on-screen shortcuts.', when: ['Quick edits on servers.'], pitfalls: ['Check write permissions when saving.'] },
+        vim: { what: 'Powerful modal editor.', when: ['Advanced editing, macros, plugins.'], pitfalls: ['Remember :q! to quit without saving.'] },
+        tar: { what: 'Create/extract archive files; combine with gzip/bzip2.', when: ['Backups, packaging directories.'], pitfalls: ['Order matters: flags usually before archive name.'] },
+        'gzip-bzip2': { what: 'Compress/decompress single files.', when: ['Reduce size for transfer/storage.'], pitfalls: ['gzip is faster; bzip2 compresses smaller but slower.'] },
+        'df-free-uname': { what: 'Disk, memory, and kernel/system info.', when: ['Check capacity and RAM quickly.'], pitfalls: [] },
+        'top-kill': { what: 'Monitor processes and terminate misbehaving ones.', when: ['Investigate high CPU/RAM.', 'End stuck tasks.'], pitfalls: ['kill -9 skips cleanup; use as last resort.'] },
+        'ps-killall-jobs': { what: 'Process listing, mass-kill by name, and job control.', when: ['Find PIDs, bring background jobs to foreground.'], pitfalls: [] },
+        'chmod-chown-chgrp': { what: 'Manage permissions and ownership.', when: ['Secure scripts, set exec bits.'], pitfalls: ['Be careful with recursive changes on /.'] },
+        'ifconfig-ip': { what: 'Show/assign IPs; ip is the modern suite.', when: ['Debug networking.'], pitfalls: ['ifconfig may be absent; use ip on modern distros.'] },
+        'ping-wget-scp-netstat': { what: 'Connectivity checks, downloads, remote copy, and socket stats.', when: ['Test reachability, fetch files, move data securely.'], pitfalls: ['Prefer ss over netstat on systemd distros.'] },
+        'ssh-telnet-nc': { what: 'Secure remote shell, legacy telnet, and raw TCP/UDP with nc.', when: ['Admin servers, test ports.'], pitfalls: ['Telnet is insecure; avoid on public networks.'] },
+        apt: { what: 'Update, upgrade, install, remove packages on Debian/Ubuntu.', when: ['Manage software.'], pitfalls: ['Run update before install to refresh indexes.'] },
+        'logs-edit': { what: 'View logs and edit critical configs.', when: ['Troubleshooting and hosts mapping.'], pitfalls: ['Use sudo and take backups before edits.'] },
+        systemctl: { what: 'Control systemd services.', when: ['Start/stop/status and enable at boot.'], pitfalls: ['Check unit name; journalctl -u name for logs.'] },
+        'backup-restore': { what: 'Create and restore compressed archives for backups.', when: ['Periodic backups or migrations.'], pitfalls: ['Verify with tar -tvf to list before restoring.'] },
+        'script-basic': { what: 'Minimal Bash script lifecycle: write → chmod +x → run.', when: ['Automate repetitive commands.'], pitfalls: ['Ensure correct shebang (#!/bin/bash).'] },
+        'script-vars': { what: 'Use variables and interpolate with $VAR.', when: ['Parameterize scripts.'], pitfalls: ['Quote "$VAR" to preserve spaces.'] },
+        'script-if': { what: 'Branch logic with test [ ].', when: ['Guard actions if files/dirs exist.'], pitfalls: ['Spaces around [ and ] are mandatory.'] },
+        cron: { what: 'Schedule jobs with crontab.', when: ['Nightly backups, periodic tasks.'], pitfalls: ['Use absolute paths; environment is minimal.'] },
+        'apt-search-show': { what: 'Discover and inspect packages.', when: ['Compare versions and deps.'], pitfalls: [] },
+        'add-del-user': { what: 'High-level add/remove user with prompts (Debian/Ubuntu).', when: ['Create accounts quickly.'], pitfalls: [] },
+        'useradd-del-passwd-su': { what: 'Low-level user mgmt, set passwords, switch user.', when: ['Scripted account provisioning.'], pitfalls: ['useradd often needs additional flags (-m, -s).'] },
+        sudo: { what: 'Execute commands as root or another user.', when: ['Administrative tasks.'], pitfalls: ['Avoid sudo with redirection unless you sudo the whole command: sudo sh -c "echo ... > file".'] },
+        'zip-unzip': { what: 'Create/extract Zip archives, common cross-platform format.', when: ['Share with Windows/macOS users.'], pitfalls: [] },
+        targz: { what: 'Create/extract .tar.gz archives.', when: ['Package directories efficiently.'], pitfalls: ['Mind directory depth; extract into a safe path.'] },
+        alias: { what: 'Create short names for long commands.', when: ['Speed up frequent tasks.'], pitfalls: ['Persist by adding to shell rc files.'] },
+        'ssh-scp-ex': { what: 'Start SSH service, connect, and copy files over SSH.', when: ['Remote admin and transfers.'], pitfalls: ['Ensure sshd is running and ports/firewall allow it.'] },
+        'awk-sed-tr-sort-cut': { what: 'Classic UNIX filters to reshape text.', when: ['Extract columns, transform, uppercase, sort.'], pitfalls: ['Locale affects sort; set LC_ALL=C for byte-order.'] },
+        'if-loops': { what: 'Control flow primitives for Bash.', when: ['Loop counters, conditionals, and watchers.'], pitfalls: ['Brace expansion runs in shell; C-style needs arithmetic contexts.'] },
+        du: { what: 'Measure disk usage per path.', when: ['Find what eats space.'], pitfalls: ['Use -x to stay on one filesystem.'] },
+        ss: { what: 'Inspect sockets (replacement for netstat).', when: ['List listening ports with owning PIDs.'], pitfalls: [] },
+        curl: { what: 'HTTP(S) client for APIs and downloads.', when: ['Test endpoints, download files.'], pitfalls: ['Use -L to follow redirects when needed.'] },
+        journalctl: { what: 'Query systemd journal logs.', when: ['Debug services and boot issues.'], pitfalls: ['Add -b to see logs since last boot.'] },
+        rsync: { what: 'Fast incremental copy/sync with compression and deletion.', when: ['Backups and mirroring.'], pitfalls: ['Be careful with --delete; test with -n (dry-run).'] },
+        ln: { what: 'Create hard or symbolic links.', when: ['Expose tools in PATH; alias file locations.'], pitfalls: ['Use -s for symlink; relative targets survive moves better.'] },
+        umask: { what: 'Sets default permission mask for new files/dirs.', when: ['Harden multi-user systems.'], pitfalls: ['Remember: umask subtracts from 666/777.'] },
+        'ssh-keygen': { what: 'Generate and install SSH keys for passwordless auth.', when: ['Secure, convenient logins.'], pitfalls: ['Protect private keys with proper permissions (600).'] }
+      };
+
+      // For each h3, attach an explanation box after the first following <pre>
+      document.querySelectorAll('h3').forEach(h3 => {
+        const id = h3.id;
+        const info = EXPLAINS[id];
+        const pre = h3.nextElementSibling && h3.nextElementSibling.tagName === 'PRE' ? h3.nextElementSibling : null;
+        if (!pre) return;
+        const box = document.createElement('div');
+        box.className = 'explain';
+        const what = info?.what || 'Explanation: This block demonstrates typical usage of the command above.';
+        const when = info?.when || ['Use the shown flags as a starting point.'];
+        const pitfalls = info?.pitfalls || [];
+        box.innerHTML = `<h4>Explanation</h4><p>${what}</p>` +
+          (when.length ? `<h4>Useful when</h4><ul>${when.map(x=>`<li>${x}</li>`).join('')}</ul>` : '') +
+          (pitfalls.length ? `<h4>Common pitfalls</h4><ul>${pitfalls.map(x=>`<li>${x}</li>`).join('')}</ul>` : '');
+        pre.insertAdjacentElement('afterend', box);
+      });
+    })();
+  </script>
+</body>
+</html>

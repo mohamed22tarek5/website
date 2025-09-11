@@ -11,6 +11,11 @@
   <meta property="og:image" content="https://example.com/photo.jpg">
   <meta property="og:url" content="https://example.com">
   <meta name="theme-color" content="#4e9eff">
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
   <link rel="icon" href="icon.png" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -1538,7 +1543,7 @@
   </section>
 
   <!-- Contact Section -->
-  <section class="contact" id="contact">
+  <!-- section class="contact" id="contact">
     <div class="container">
       <div class="section-title fade-in">
         <h2>Get In Touch</h2>
@@ -1569,7 +1574,7 @@
         <button type="submit" class="submit-btn">Send Message</button>
         <div class="loading-spinner" id="form-spinner"></div>
         <div id="form-message" style="margin-top: 20px; text-align: center;"></div>
-      </form>
+      </form-->
       
       <div class="contact-info">
         <div class="info-card fade-in">
@@ -2005,6 +2010,16 @@
         bar.style.width = width;
       }, 500);
     });
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(() => console.log('[PWA] Service Worker registered'))
+          .catch(err => console.error('[PWA] Registration failed:', err));
+      });
+    }
   </script>
 </body>
 </html>
