@@ -499,18 +499,48 @@
         right: 20px;
       }
     }
+  
+/* === Responsive Enhancements (non-breaking) === */
+img { max-width: 100%; height: auto; } /* prevent overflow on small screens */
+html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
+
+/* Make grids adapt a bit earlier on medium screens */
+@media (max-width: 992px) and (min-width: 769px) {
+  .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* On very small phones, keep comfortable padding and smaller buttons */
+@media (max-width: 360px) {
+  .container { padding: 100px 14px; }
+  .app-link, .download-btn { padding: 8px 14px; font-size: 0.85em; }
+}
+
+/* Slightly shrink logo and hamburger bars on narrow screens to avoid wrapping */
+@media (max-width: 420px) {
+  .logo { font-size: 1.4em; }
+  .bar { width: 22px; }
+}
+
+/* Improve focus visibility without altering theme */
+:focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
+
+/* Reduce motion if user prefers */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
   </style>
 </head>
 <body>
   <!-- Header -->
   <header id="header">
     <a href="index.html" class="logo"><i class="fas fa-code"></i> Mohamed Tarek</a>
-    <div class="menu-toggle" id="mobile-menu">
+    <div class="menu-toggle" id="mobile-menu" role="button" tabindex="0" aria-label="Toggle menu" aria-expanded="false">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
     </div>
-    <nav class="navigation" id="nav-menu">
+    <nav class="navigation" id="nav-menu" aria-hidden="true">
       <a href="index.html">Home</a>
       <a href="Mohamed - Personal Information.html">About</a>
       <a href="Mohamed - Services.html">Services</a>
@@ -727,6 +757,9 @@
     const navMenu = document.getElementById('nav-menu');
     
     mobileMenu.addEventListener('click', () => {
+      const expanded = mobileMenu.getAttribute('aria-expanded') === 'true';
+      mobileMenu.setAttribute('aria-expanded', String(!expanded));
+      navMenu.setAttribute('aria-hidden', String(expanded));
       mobileMenu.classList.toggle('active');
       navMenu.classList.toggle('active');
       
@@ -822,6 +855,15 @@
     document.querySelectorAll('.fade-in').forEach(element => {
       observer.observe(element);
     });
+  
+// Keyboard support for mobile menu toggle
+mobileMenu.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    mobileMenu.click();
+  }
+});
+
   </script>
 </body>
 </html>

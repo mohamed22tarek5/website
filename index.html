@@ -1163,6 +1163,66 @@
         right: 20px;
       }
     }
+  
+    /* === Responsive Enhancements (non-breaking) === */
+    /* Global image responsiveness */
+    img { max-width: 100%; height: auto; }
+
+    /* Constrain container padding on very small screens */
+    @media (max-width: 360px) {
+      .container { padding: 0 12px; }
+    }
+
+    /* About grid: move inline styles to CSS for responsiveness */
+    .about-grid {
+      grid-template-columns: 1fr 2fr;
+      gap: 50px;
+      align-items: center;
+    }
+    @media (max-width: 992px) {
+      .about-grid { grid-template-columns: 1fr; gap: 30px; }
+    }
+
+    /* About section image responsiveness */
+    .about .grid img {
+      max-width: min(420px, 90%);
+      width: 100%;
+      height: auto;
+    }
+
+    /* Profile image: keep circle but adapt size */
+    .profile-image {
+      width: min(200px, 45vw);
+      height: auto;
+      aspect-ratio: 1 / 1;
+    }
+
+    /* Projects: use aspect-ratio instead of hard height to avoid crop issues */
+    .project-image { aspect-ratio: 16 / 9; height: auto; }
+    .project-image img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Projects grid: allow 2 columns on medium screens before stacking to 1 */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .projects .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    /* Header: prevent overlap and ensure space for menu button */
+    @media (max-width: 420px) {
+      header .logo { font-size: 1.4em; }
+      .menu-toggle .bar { width: 22px; }
+    }
+
+    /* Buttons wrap more gracefully */
+    .btn-container { row-gap: 12px; }
+
+    /* Avoid excessive animation for users who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+
+    /* Fix potential horizontal scrolling from particle canvas on small screens */
+    #particles-js { max-width: 100vw; overflow: hidden; }
+
   </style>
 </head>
 <body>
@@ -1172,12 +1232,12 @@
   <!-- Header -->
   <header id="header">
     <a href="#" class="logo"><i class="fas fa-code"></i> Mohamed Tarek</a>
-    <div class="menu-toggle" id="mobile-menu">
+    <div class="menu-toggle" id="mobile-menu" role="button" tabindex="0" aria-label="Toggle menu" aria-expanded="false">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
     </div>
-    <nav class="navigation" id="nav-menu">
+    <nav class="navigation" id="nav-menu" aria-hidden="true">
       <a href="#home" class="active">Home</a>
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -1236,15 +1296,11 @@
         <h2>About Me</h2>
       </div>
       
-      <div class="grid" style="grid-template-columns: 1fr 2fr; gap: 50px; align-items: center;">
+      <div class="grid about-grid">
         <div class="fade-in">
          <img src="photo.jpg" 
      alt="Mohamed Tarek working" 
-     style="width: 10%; 
-            display: block; 
-            margin: auto; 
-            border-radius: var(--border-radius); 
-            box-shadow: var(--box-shadow);">
+     style="display:block;margin:auto;border-radius:var(--border-radius);box-shadow:var(--box-shadow);">
 
         </div>
         
@@ -1783,6 +1839,9 @@
     const navMenu = document.getElementById('nav-menu');
     
     mobileMenu.addEventListener('click', () => {
+      const expanded = mobileMenu.getAttribute('aria-expanded') === 'true';
+      mobileMenu.setAttribute('aria-expanded', String(!expanded));
+      navMenu.setAttribute('aria-hidden', String(expanded));
       mobileMenu.classList.toggle('active');
       navMenu.classList.toggle('active');
       
