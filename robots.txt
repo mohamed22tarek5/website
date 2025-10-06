@@ -1,0 +1,166 @@
+# السماح للبوتات الشهيرة للذكاء الاصطناعي
+User-agent: ChatGPT-User
+Disallow:
+
+User-agent: GPTBot
+Disallow:
+
+User-agent: OAI-SearchBot
+Disallow:
+
+User-agent: ClaudeBot
+Disallow:
+
+User-agent: Claude-SearchBot
+Disallow:
+
+User-agent: PerplexityBot
+Disallow:
+
+User-agent: Anthropic-Bot
+Disallow:
+
+User-agent: Google-Extended
+Disallow:
+
+User-agent: Googlebot
+Disallow:
+
+User-agent: Bingbot
+Disallow:
+
+User-agent: GoogleOther
+Disallow:
+
+User-agent: Bard
+Disallow:
+
+User-agent: Gemini
+Disallow:
+
+User-agent: Claude
+Disallow:
+
+User-agent: Poe
+Disallow:
+
+User-agent: DeepSeekBot
+Disallow:
+
+User-agent: GrokBot
+Disallow:
+
+User-agent: QwenBot
+Disallow:
+
+User-agent: ForefrontBot
+Disallow:
+
+User-agent: ArabyBot
+Disallow:
+
+User-agent: KattebBot
+Disallow:
+
+User-agent: LisanBot
+Disallow:
+
+User-agent: QuillBot
+Disallow:
+
+User-agent: WordtuneBot
+Disallow:
+
+User-agent: RytrBot
+Disallow:
+
+User-agent: CopyAI
+Disallow:
+
+User-agent: BearlyBot
+Disallow:
+
+User-agent: ChatPDFBot
+Disallow:
+
+User-agent: AskYourPDFBot
+Disallow:
+
+User-agent: HiPDFBot
+Disallow:
+
+User-agent: ChatDocBot
+Disallow:
+
+User-agent: TTSMakerBot
+Disallow:
+
+User-agent: MurfAI
+Disallow:
+
+User-agent: LovoAI
+Disallow:
+
+User-agent: ElevenLabsBot
+Disallow:
+
+User-agent: TranskriptorBot
+Disallow:
+
+User-agent: ResembleBot
+Disallow:
+
+User-agent: KrispBot
+Disallow:
+
+User-agent: D-IDBot
+Disallow:
+
+User-agent: FlikiBot
+Disallow:
+
+User-agent: VideoAIBot
+Disallow:
+
+User-agent: RunwayMLBot
+Disallow:
+
+User-agent: SynthesiaBot
+Disallow:
+
+User-agent: SteveAIBot
+Disallow:
+
+User-agent: MoovlyBot
+Disallow:
+
+User-agent: VEEDBot
+Disallow:
+
+User-agent: PapercupBot
+Disallow:
+
+User-agent: KickresumeBot
+Disallow:
+
+User-agent: FirefliesBot
+Disallow:
+
+User-agent: HumataBot
+Disallow:
+
+User-agent: AiterBot
+Disallow:
+
+User-agent: BeulrBot
+Disallow:
+
+User-agent: CVLoginBot
+Disallow:
+
+User-agent: GPTZeroBot
+Disallow:
+
+# منع باقي البوتات غير المذكورة
+User-agent: *
+Disallow: /
