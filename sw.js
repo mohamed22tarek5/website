@@ -1,10 +1,10 @@
 // ===============================
 //  Service Worker - sw.js
 //  Author: Mohamed Tarek
-//  Version: v1.0.1
+//  Version: v1.0.2
 // ===============================
 
-const VERSION = 'v1.0.1';
+const VERSION = 'v1.0.2';
 const STATIC_CACHE = `static-${VERSION}`;
 const HTML_CACHE = `html-${VERSION}`;
 const OFFLINE_URL = './offline.html';
@@ -13,12 +13,12 @@ const OFFLINE_URL = './offline.html';
 //  STATIC ASSETS TO PRE-CACHE
 // ===============================
 const STATIC_ASSETS = [
+  // Main Pages
   './',
   './index.html',
   './offline.html',
-  './manifest.webmanifest',
-  './icon-192.png',
-  './icon-512.png',
+  
+  // Portfolio Pages
   './Mohamed - CV.html',
   './Mohamed - Certificates.html',
   './Mohamed - Project.html',
@@ -26,6 +26,34 @@ const STATIC_ASSETS = [
   './Mohamed - social-media.html',
   './Mohamed - my-sites.html',
   './Mohamed - Personal Information.html',
+  
+  // Utility Sites
+  './3d-car-game.html',
+  './ai-sites-list.html',
+  './capacitor-calculator.html',
+  './dino-game.html',
+  './electrical-calculation.html',
+  './Indactance-calculator.html',
+  './Length-Converter.html',
+  './Mastering Linux Commands.html',
+  './Medication-Reminder.html',
+  './Power-Factor-Calculator.html',
+  './Race-Game.html',
+  './resistor-calculator.html',
+  './resistor-for-led.html',
+  './to-do-list.html',
+  './Wire-Gauge-Calculator.html',
+  
+  // Assets and Resources
+  './manifest.webmanifest',
+  './icon-192.png',
+  './icon-512.png',
+  './common.css',
+  './common.js',
+  './responsive.css',
+  './robots.txt',
+  
+  // External Dependencies
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap',
   'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'
@@ -39,7 +67,9 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(STATIC_CACHE).then(cache => {
       console.log('Service Worker: Caching static assets');
-      return cache.addAll(STATIC_ASSETS);
+      return cache.addAll(STATIC_ASSETS).catch(error => {
+        console.log('Cache addAll error:', error);
+      });
     })
   );
   self.skipWaiting();
@@ -158,6 +188,15 @@ async function cacheFirst(req) {
 }
 
 // ===============================
+//  MESSAGE HANDLER
+// ===============================
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.action === 'skipWaiting') {
+    self.skipWaiting();
+  }
+});
+
+// ===============================
 //  BACKGROUND SYNC
 // ===============================
 self.addEventListener('sync', (event) => {
@@ -171,4 +210,5 @@ async function doBackgroundSync() {
   // Handle background sync tasks here
   // For example: sync form submissions when back online
   console.log('Performing background sync...');
+  return Promise.resolve();
 }
