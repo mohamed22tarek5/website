@@ -164,3 +164,25 @@ Allow:
 # منع باقي البوتات غير المذكورة
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /test/
+Disallow: /private/
+Disallow: /backup/
+
+User-agent: *
+Disallow: /secret.html
+Disallow: /config.js
+Disallow: /api-key.txt
+
+User-agent: *
+Disallow: /tools/
+Allow: /tools/electrical-calculation.html
+
+
+Sitemap: https://your-domain.com/sitemap.xml
+
+
+# Block temporary tools
+Disallow: /Medication-Reminder.html
+Disallow: /to-do-list.html
+
