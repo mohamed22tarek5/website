@@ -2,12 +2,15 @@
   "name": "Mohamed Tarek Portfolio",
   "short_name": "M.T.A. Portfolio",
   "description": "Professional portfolio of Mohamed Tarek showcasing engineering and development projects.",
+
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
+
   "background_color": "#7cb1f2",
   "theme_color": "#7cb1f2",
+
   "icons": [
     {
       "src": "assets/icon-192.png",
@@ -32,6 +35,7 @@
       "purpose": "maskable"
     }
   ],
+
   "screenshots": [
     {
       "src": "assets/screenshot1.png",
@@ -40,6 +44,7 @@
       "label": "Main projects dashboard"
     }
   ],
+
   "lang": "en",
   "dir": "ltr",
   "prefer_related_applications": false
