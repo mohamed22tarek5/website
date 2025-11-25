@@ -214,6 +214,7 @@
     .profile {
       text-align: center;
       margin-bottom: 60px;
+      padding-top: 80px;
     }
 
     .profile-pic {
@@ -247,6 +248,27 @@
       text-align: center;
       box-shadow: var(--box-shadow);
       transition: all var(--transition-speed) ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--primary-color);
+      transform: scaleX(0);
+      transition: transform var(--transition-speed) ease;
+    }
+
+    .social-card:hover::before {
+      transform: scaleX(1);
     }
 
     .social-card:hover {
@@ -261,7 +283,7 @@
     }
 
     .social-card:hover .social-icon {
-      transform: scale(1.2);
+      transform: scale(1.2) rotate(5deg);
     }
 
     .social-card h3 {
@@ -273,23 +295,46 @@
     .social-card p {
       color: var(--text-muted);
       margin-bottom: 20px;
+      flex-grow: 1;
     }
 
     .social-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 10px 25px;
+      padding: 12px 25px;
       border-radius: 50px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 1px;
       font-size: 0.9em;
       transition: all var(--transition-speed) ease;
+      position: relative;
+      overflow: hidden;
     }
 
     .social-link i {
       margin-right: 10px;
+      transition: transform var(--transition-speed) ease;
+    }
+
+    .social-link:hover i {
+      transform: translateX(5px);
+    }
+
+    .social-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .social-link:hover::before {
+      left: 100%;
     }
 
     /* Platform Specific Colors */
@@ -328,6 +373,91 @@
     .linktree { color: #39e09b; }
     .linktree-bg { background-color: #39e09b; color: white; }
     .linktree-bg:hover { background-color: #2ec887; }
+
+    .skoon { color: #ff6b6b; }
+    .skoon-bg { background-color: #ff6b6b; color: white; }
+    .skoon-bg:hover { background-color: #ff5252; }
+
+    /* QR Code Section */
+    .qr-section {
+      background-color: var(--background-secondary);
+      padding: 60px 0;
+      margin-top: 40px;
+      border-radius: var(--border-radius);
+    }
+
+    .qr-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .qr-code {
+      background: white;
+      padding: 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+
+    .qr-code img {
+      width: 200px;
+      height: 200px;
+      border-radius: 8px;
+    }
+
+    .qr-info {
+      max-width: 400px;
+    }
+
+    .qr-info h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    /* Statistics Section */
+    .stats-section {
+      background-color: var(--background-secondary);
+      padding: 60px 0;
+      margin-top: 40px;
+      border-radius: var(--border-radius);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+
+    .stat-card {
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      text-align: center;
+      box-shadow: var(--box-shadow);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .stat-number {
+      font-size: 2.5em;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.9em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
 
     /* Footer */
     footer {
@@ -571,6 +701,11 @@
       .social-grid {
         grid-template-columns: 1fr;
       }
+      
+      .qr-container {
+        flex-direction: column;
+        text-align: center;
+      }
     }
 
     @media (max-width: 480px) {
@@ -593,6 +728,11 @@
       .back-to-top {
         bottom: 20px;
         right: 20px;
+      }
+      
+      .qr-code img {
+        width: 150px;
+        height: 150px;
       }
     }
   </style>
@@ -631,7 +771,7 @@
       <div class="social-card fade-in">
         <i class="fab fa-facebook-f social-icon facebook"></i>
         <h3>Facebook</h3>
-        <p>Connect with me personally and see my casual updates</p>
+        <p>Connect with me personally and see my casual updates, life moments, and personal projects. I share insights about my engineering journey and occasional tech tips.</p>
         <a href="https://www.facebook.com/mohammed.tarek.5249349" target="_blank" rel="noopener noreferrer" class="social-link facebook-bg">
           <i class="fab fa-facebook-f"></i> Visit Profile
         </a>
@@ -641,7 +781,7 @@
       <div class="social-card fade-in delay-1">
         <i class="fab fa-instagram social-icon instagram"></i>
         <h3>Instagram</h3>
-        <p>Follow my daily life and creative projects</p>
+        <p>Follow my daily life, creative projects, and behind-the-scenes content. I share visual stories of my electronics projects and tech experiments.</p>
         <a href="https://instagram.com/_m7md_tarek_?igshid=YmMyMTA2M2Y=" target="_blank" rel="noopener noreferrer" class="social-link instagram-bg">
           <i class="fab fa-instagram"></i> Follow Me
         </a>
@@ -651,7 +791,7 @@
       <div class="social-card fade-in delay-2">
         <i class="fab fa-whatsapp social-icon whatsapp"></i>
         <h3>WhatsApp</h3>
-        <p>Message me directly for quick conversations</p>
+        <p>Message me directly for quick conversations, project discussions, or technical queries. I'm always happy to help with electronics and programming questions.</p>
         <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" class="social-link whatsapp-bg">
           <i class="fab fa-whatsapp"></i> Chat Now
         </a>
@@ -661,7 +801,7 @@
       <div class="social-card fade-in delay-3">
         <i class="fab fa-linkedin-in social-icon linkedin"></i>
         <h3>LinkedIn</h3>
-        <p>Connect professionally and view my career journey</p>
+        <p>Connect professionally and view my career journey, technical skills, and professional achievements. Let's network and explore collaboration opportunities.</p>
         <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" class="social-link linkedin-bg">
           <i class="fab fa-linkedin-in"></i> Connect
         </a>
@@ -671,7 +811,7 @@
       <div class="social-card fade-in">
         <i class="fab fa-twitter social-icon twitter"></i>
         <h3>Twitter</h3>
-        <p>Follow my thoughts and quick updates</p>
+        <p>Follow my thoughts, quick tech updates, and industry insights. I share bite-sized content about electronics, programming, and emerging technologies.</p>
         <a href="https://twitter.com/m7mdtarek225?t=_Sw1B7eTRoajvKqqM3BsNA&s=09" target="_blank" rel="noopener noreferrer" class="social-link twitter-bg">
           <i class="fab fa-twitter"></i> Follow
         </a>
@@ -681,7 +821,7 @@
       <div class="social-card fade-in delay-1">
         <i class="fab fa-github social-icon github"></i>
         <h3>GitHub</h3>
-        <p>Explore my coding projects and contributions</p>
+        <p>Explore my coding projects, open-source contributions, and technical repositories. From Arduino sketches to web applications, see my code in action.</p>
         <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" class="social-link github-bg">
           <i class="fab fa-github"></i> View Profile
         </a>
@@ -691,7 +831,7 @@
       <div class="social-card fade-in delay-2">
         <i class="fas fa-link social-icon linktree"></i>
         <h3>All My Accounts</h3>
-        <p>One link to access all my social media profiles</p>
+        <p>One convenient link to access all my social media profiles. Perfect for quick access to all my platforms from one place.</p>
         <a href="https://linktr.ee/m7mdtarek22" target="_blank" rel="noopener noreferrer" class="social-link linktree-bg">
           <i class="fas fa-link"></i> Visit Linktree
         </a>
@@ -699,14 +839,55 @@
 
       <!-- Skoon Team -->
       <div class="social-card fade-in delay-3">
-        <i class="fas fa-users social-icon" style="color: var(--primary-color);"></i>
+        <i class="fas fa-users social-icon skoon"></i>
         <h3>Skoon Team</h3>
-        <p>Check out our team's projects and collaborations</p>
-        <a href="https://linktr.ee/skoon_team" target="_blank" rel="noopener noreferrer" class="social-link">
+        <p>Check out our team's projects, collaborations, and innovative solutions. We work together on exciting electronics and engineering challenges.</p>
+        <a href="https://linktr.ee/skoon_team" target="_blank" rel="noopener noreferrer" class="social-link skoon-bg">
           <i class="fas fa-users"></i> Visit Team
         </a>
       </div>
     </div>
+
+    <!-- QR Code Section -->
+    <section class="qr-section fade-in">
+      <div class="qr-container">
+        <div class="qr-code">
+          <!-- Replace with actual QR code image -->
+          <div style="width: 200px; height: 200px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold;">
+            QR Code Image
+          </div>
+          <p style="margin-top: 15px; color: var(--text-muted);">Scan to connect</p>
+        </div>
+        <div class="qr-info">
+          <h3>Quick Mobile Access</h3>
+          <p>Scan this QR code with your smartphone camera to quickly access all my social media profiles. This makes it easy to connect with me while on the go.</p>
+          <p>You can save this page to your phone's home screen for instant access to my social media hub anytime.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section fade-in">
+      <h2 style="text-align: center; margin-bottom: 40px; color: var(--primary-color);">Social Media Presence</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Connections</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">8</div>
+          <div class="stat-label">Platforms</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Projects Shared</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Response Rate</div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
