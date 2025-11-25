@@ -237,6 +237,33 @@
       margin: 0 auto;
     }
 
+    /* Project Filter */
+    .project-filter {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      padding: 10px 20px;
+      background-color: var(--card-dark);
+      color: var(--text-light);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+      font-weight: 500;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background-color: var(--primary-color);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+    }
+
     /* Projects Section */
     .projects {
       background-color: var(--background-secondary);
@@ -352,6 +379,114 @@
     .project-link-secondary:hover {
       background-color: var(--primary-color);
       color: white;
+    }
+
+    /* Project Modal */
+    .project-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .project-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
+      max-width: 900px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.5em;
+      cursor: pointer;
+      z-index: 10;
+      transition: color var(--transition-speed) ease;
+    }
+
+    .modal-close:hover {
+      color: var(--primary-color);
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .modal-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-body {
+      padding: 30px;
+    }
+
+    .modal-title {
+      font-size: 2em;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+
+    .modal-category {
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: inline-block;
+      background: rgba(78, 158, 255, 0.1);
+      padding: 5px 15px;
+      border-radius: 50px;
+    }
+
+    .modal-description {
+      margin-bottom: 25px;
+      line-height: 1.7;
+    }
+
+    .modal-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .tech-tag {
+      background: rgba(78, 158, 255, 0.1);
+      color: var(--primary-color);
+      padding: 5px 15px;
+      border-radius: 50px;
+      font-size: 0.9em;
+      border: 1px solid rgba(78, 158, 255, 0.3);
+    }
+
+    .modal-links {
+      display: flex;
+      gap: 15px;
     }
 
     /* Footer */
@@ -595,6 +730,14 @@
       .projects .grid {
         grid-template-columns: 1fr;
       }
+      
+      .modal-content {
+        width: 95%;
+      }
+      
+      .modal-image {
+        height: 250px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -617,31 +760,40 @@
         bottom: 20px;
         right: 20px;
       }
+      
+      .project-filter {
+        gap: 10px;
+      }
+      
+      .filter-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+      }
     }
   
-/* === Responsive Enhancements (non-breaking) === */
-/* Make images fluid to prevent overflow on small screens */
-img { max-width: 100%; height: auto; }
-/* Avoid horizontal scroll from off-canvas nav or wide elements */
-html, body { overflow-x: hidden; }
-/* Project card image: use aspect-ratio so it scales nicely instead of fixed height */
-.projects .project-image { aspect-ratio: 16 / 9; height: auto; }
-.projects .project-image img { width: 100%; height: 100%; object-fit: cover; }
-/* Let the projects grid fit on tiny screens with smaller min column width */
-@media (max-width: 420px) {
-  .projects .grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-}
-/* Slightly shrink logo and hamburger bars on very narrow screens */
-@media (max-width: 420px) {
-  .logo { font-size: 1.4em; }
-  .bar { width: 22px; }
-}
-/* Improve focus visibility without altering theme */
-:focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
-/* Respect reduced-motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
-}
+    /* === Responsive Enhancements (non-breaking) === */
+    /* Make images fluid to prevent overflow on small screens */
+    img { max-width: 100%; height: auto; }
+    /* Avoid horizontal scroll from off-canvas nav or wide elements */
+    html, body { overflow-x: hidden; }
+    /* Project card image: use aspect-ratio so it scales nicely instead of fixed height */
+    .projects .project-image { aspect-ratio: 16 / 9; height: auto; }
+    .projects .project-image img { width: 100%; height: 100%; object-fit: cover; }
+    /* Let the projects grid fit on tiny screens with smaller min column width */
+    @media (max-width: 420px) {
+      .projects .grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+    }
+    /* Slightly shrink logo and hamburger bars on very narrow screens */
+    @media (max-width: 420px) {
+      .logo { font-size: 1.4em; }
+      .bar { width: 22px; }
+    }
+    /* Improve focus visibility without altering theme */
+    :focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
+    /* Respect reduced-motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
 
   </style>
 </head>
@@ -672,9 +824,19 @@ html, body { overflow-x: hidden; }
         <p class="section-subtitle">Explore my collection of innovative Arduino, PCB, and software projects</p>
       </div>
       
+      <!-- Project Filter -->
+      <div class="project-filter fade-in">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="arduino">Arduino</button>
+        <button class="filter-btn" data-filter="web">Web Development</button>
+        <button class="filter-btn" data-filter="pcb">PCB Design</button>
+        <button class="filter-btn" data-filter="electronics">Electronics</button>
+        <button class="filter-btn" data-filter="iot">IoT</button>
+      </div>
+      
       <div class="grid">
         <!-- Blind Glasses -->
-        <div class="project-card fade-in">
+        <div class="project-card fade-in delay-1" data-category="arduino iot">
           <div class="project-image">
             <img src="Project/5.jpg" alt="Blind Glasses Project" loading="lazy">
             <div class="project-overlay">
@@ -688,12 +850,13 @@ html, body { overflow-x: hidden; }
             <p class="project-description">Innovative wearable device using ultrasonic sensors to detect obstacles and provide audio feedback for visually impaired users.</p>
             <div class="project-links">
               <a href="https://fb.watch/ipRaFH0KIr/" class="project-link project-link-primary" target="_blank">View Demo</a>
+              <button class="project-link project-link-secondary view-details" data-project="blind-glasses">Details</button>
             </div>
           </div>
         </div>
         
         <!-- Portfolio Website -->
-        <div class="project-card fade-in delay-1">
+        <div class="project-card fade-in delay-2" data-category="web">
           <div class="project-image">
             <img src="Project/2.png" alt="Portfolio Website" loading="lazy">
             <div class="project-overlay">
@@ -704,7 +867,7 @@ html, body { overflow-x: hidden; }
             </div>
           </div>
           <div class="project-info">
-            <p class="project-description">Responsive personal portfolio website built with HTML5, CSS3, and JavaScript.</p>
+            <p class="project-description">Responsive personal portfolio website built with HTML5, CSS3, and JavaScript featuring modern design and smooth animations.</p>
             <div class="project-links">
               <a href="Project/2.png" class="project-link project-link-primary">Preview</a>
               <a href="https://github.com/mohamed22tarek5/website" class="project-link project-link-secondary" target="_blank">Code</a>
@@ -713,7 +876,7 @@ html, body { overflow-x: hidden; }
         </div>
         
         <!-- PCB Design -->
-        <div class="project-card fade-in delay-2">
+        <div class="project-card fade-in delay-3" data-category="pcb electronics">
           <div class="project-image">
             <img src="Project/3.png" alt="PCB Design Project" loading="lazy">
             <div class="project-overlay">
@@ -727,12 +890,13 @@ html, body { overflow-x: hidden; }
             <p class="project-description">Professional PCB design for a 20-line relay module with optimized routing and component placement for industrial applications.</p>
             <div class="project-links">
               <a href="Project/3.1.jpg" class="project-link project-link-primary">View Design</a>
+              <button class="project-link project-link-secondary view-details" data-project="relay-pcb">Details</button>
             </div>
           </div>
         </div>
         
         <!-- Smart Home V1 -->
-        <div class="project-card fade-in delay-3">
+        <div class="project-card fade-in delay-1" data-category="arduino iot">
           <div class="project-image">
             <img src="Project/1.jpg" alt="Smart Home V1" loading="lazy">
             <div class="project-overlay">
@@ -746,12 +910,13 @@ html, body { overflow-x: hidden; }
             <p class="project-description">First iteration of a smart home control system with basic automation features and remote control capabilities.</p>
             <div class="project-links">
               <a href="Project/1.jpg" class="project-link project-link-primary">View Schematic</a>
+              <button class="project-link project-link-secondary view-details" data-project="smart-home-v1">Details</button>
             </div>
           </div>
         </div>
         
         <!-- Smart Home V2 -->
-        <div class="project-card fade-in">
+        <div class="project-card fade-in delay-2" data-category="arduino iot">
           <div class="project-image">
             <img src="Project/6.jpg" alt="Smart Home V2" loading="lazy">
             <div class="project-overlay">
@@ -765,12 +930,13 @@ html, body { overflow-x: hidden; }
             <p class="project-description">Enhanced version with improved functionality and user interface for more sophisticated home automation scenarios.</p>
             <div class="project-links">
               <a href="Project/6.jpg" class="project-link project-link-primary">View Design</a>
+              <button class="project-link project-link-secondary view-details" data-project="smart-home-v2">Details</button>
             </div>
           </div>
         </div>
         
         <!-- Flasher and Charger -->
-        <div class="project-card fade-in delay-1">
+        <div class="project-card fade-in delay-3" data-category="electronics">
           <div class="project-image">
             <img src="Project/7.jpg" alt="Flasher and Charger Circuit" loading="lazy">
             <div class="project-overlay">
@@ -784,12 +950,13 @@ html, body { overflow-x: hidden; }
             <p class="project-description">Dual-purpose circuit designed for both battery charging and LED flashing applications with adjustable parameters.</p>
             <div class="project-links">
               <a href="Project/7.jpg" class="project-link project-link-primary">View Circuit</a>
+              <button class="project-link project-link-secondary view-details" data-project="flasher-charger">Details</button>
             </div>
           </div>
         </div>
         
         <!-- Smart Home V3 -->
-        <div class="project-card fade-in delay-2">
+        <div class="project-card fade-in delay-1" data-category="arduino iot">
           <div class="project-image">
             <img src="Project/8.jpg" alt="Smart Home V3" loading="lazy">
             <div class="project-overlay">
@@ -803,12 +970,13 @@ html, body { overflow-x: hidden; }
             <p class="project-description">Advanced 2-line control system with enhanced features and improved reliability for residential automation.</p>
             <div class="project-links">
               <a href="Project/8.jpg" class="project-link project-link-primary">View Design</a>
+              <button class="project-link project-link-secondary view-details" data-project="smart-home-v3">Details</button>
             </div>
           </div>
         </div>
         
         <!-- Gas Detector -->
-        <div class="project-card fade-in delay-3">
+        <div class="project-card fade-in delay-2" data-category="arduino iot">
           <div class="project-image">
             <img src="Project/9.jpg" alt="Gas Detector Project" loading="lazy">
             <div class="project-overlay">
@@ -822,12 +990,13 @@ html, body { overflow-x: hidden; }
             <p class="project-description">Safety device that detects hazardous gas levels and triggers alarms with sensor calibration and threshold adjustment.</p>
             <div class="project-links">
               <a href="Project/9.jpg" class="project-link project-link-primary">View System</a>
+              <button class="project-link project-link-secondary view-details" data-project="gas-detector">Details</button>
             </div>
           </div>
         </div>
         
         <!-- RFID & Person Counter -->
-        <div class="project-card fade-in">
+        <div class="project-card fade-in delay-3" data-category="arduino iot">
           <div class="project-image">
             <img src="Project/10.jpg" alt="RFID & Person Counter" loading="lazy">
             <div class="project-overlay">
@@ -841,12 +1010,13 @@ html, body { overflow-x: hidden; }
             <p class="project-description">Integrated system for monitoring room occupancy and RFID-based access control with data logging capabilities.</p>
             <div class="project-links">
               <a href="Project/10.jpg" class="project-link project-link-primary">View Project</a>
+              <button class="project-link project-link-secondary view-details" data-project="rfid-tracker">Details</button>
             </div>
           </div>
         </div>
         
         <!-- Smart Home V4 -->
-        <div class="project-card fade-in delay-1">
+        <div class="project-card fade-in delay-1" data-category="arduino iot">
           <div class="project-image">
             <img src="Project/11.jpg" alt="Smart Home V4" loading="lazy">
             <div class="project-overlay">
@@ -860,12 +1030,13 @@ html, body { overflow-x: hidden; }
             <p class="project-description">4-line control system with Bluetooth connectivity for wireless home automation and remote monitoring.</p>
             <div class="project-links">
               <a href="Project/11.jpg" class="project-link project-link-primary">View Design</a>
+              <button class="project-link project-link-secondary view-details" data-project="smart-home-v4">Details</button>
             </div>
           </div>
         </div>
         
         <!-- Talking Gloves -->
-        <div class="project-card fade-in delay-2">
+        <div class="project-card fade-in delay-2" data-category="arduino iot">
           <div class="project-image">
             <img src="Project/12.jpg" alt="Talking Gloves Project" loading="lazy">
             <div class="project-overlay">
@@ -879,12 +1050,13 @@ html, body { overflow-x: hidden; }
             <p class="project-description">Innovative device that translates sign language gestures into audible speech using flex sensors and motion detection.</p>
             <div class="project-links">
               <a href="Project/12.jpg" class="project-link project-link-primary">View Prototype</a>
+              <button class="project-link project-link-secondary view-details" data-project="talking-gloves">Details</button>
             </div>
           </div>
         </div>
         
         <!-- Healthcare System -->
-        <div class="project-card fade-in delay-3">
+        <div class="project-card fade-in delay-3" data-category="arduino iot">
           <div class="project-image">
             <img src="Project/13.jpg" alt="Healthcare System" loading="lazy">
             <div class="project-overlay">
@@ -898,12 +1070,13 @@ html, body { overflow-x: hidden; }
             <p class="project-description">Comprehensive healthcare device measuring vital signs including heart rate and blood pressure with alert system.</p>
             <div class="project-links">
               <a href="Project/13.jpg" class="project-link project-link-primary">View System</a>
+              <button class="project-link project-link-secondary view-details" data-project="healthcare-system">Details</button>
             </div>
           </div>
         </div>
         
         <!-- Fire Car -->
-        <div class="project-card fade-in">
+        <div class="project-card fade-in delay-1" data-category="arduino iot">
           <div class="project-image">
             <img src="Project/4.png" alt="Fire Car Project" loading="lazy">
             <div class="project-overlay">
@@ -917,13 +1090,15 @@ html, body { overflow-x: hidden; }
             <p class="project-description">Self-navigating vehicle that detects and extinguishes fires with flame sensors, water pump, and obstacle avoidance.</p>
             <div class="project-links">
               <a href="Project/4.png" class="project-link project-link-primary">View Vehicle</a>
+              <button class="project-link project-link-secondary view-details" data-project="fire-car">Details</button>
             </div>
           </div>
         </div>
 
-<div class="project-card fade-in delay-1">
+        <!-- Smart Home V5 -->
+        <div class="project-card fade-in delay-2" data-category="arduino iot">
           <div class="project-image">
-            <img src="Project/14.png" alt="Smart Home V4" loading="lazy">
+            <img src="Project/14.png" alt="Smart Home V5" loading="lazy">
             <div class="project-overlay">
               <div>
                 <span class="project-category">ESP8266 Project</span>
@@ -932,17 +1107,34 @@ html, body { overflow-x: hidden; }
             </div>
           </div>
           <div class="project-info">
-            <p class="project-description">2-line control system with -webkit-text-fill-color connectivity for wireless home automation and remote monitoring.</p>
+            <p class="project-description">2-line control system with Wi-Fi connectivity for wireless home automation and remote monitoring via web interface.</p>
             <div class="project-links">
               <a href="Project/14.png" class="project-link project-link-primary">View Design</a>
+              <button class="project-link project-link-secondary view-details" data-project="smart-home-v5">Details</button>
             </div>
           </div>
         </div>
 
-
       </div>
     </div>
   </section>
+
+  <!-- Project Modal -->
+  <div class="project-modal" id="project-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close">&times;</button>
+      <div class="modal-image">
+        <img id="modal-img" src="" alt="">
+      </div>
+      <div class="modal-body">
+        <span class="modal-category" id="modal-category"></span>
+        <h2 class="modal-title" id="modal-title"></h2>
+        <p class="modal-description" id="modal-description"></p>
+        <div class="modal-tech" id="modal-tech"></div>
+        <div class="modal-links" id="modal-links"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer>
@@ -1001,9 +1193,54 @@ html, body { overflow-x: hidden; }
   </button>
 
   <!-- JavaScript -->
-  
-  <!-- JavaScript -->
   <script>
+    // Project data for modal details
+    const projectData = {
+      'blind-glasses': {
+        title: 'Blind Assistance Glasses',
+        category: 'Arduino Project',
+        image: 'Project/5.jpg',
+        description: 'An innovative wearable device designed to assist visually impaired individuals in navigating their environment safely. The glasses use ultrasonic sensors to detect obstacles within a 2-meter range and provide real-time audio feedback through a small speaker. The system includes adjustable sensitivity settings and multiple detection modes for different environments.',
+        tech: ['Arduino Nano', 'Ultrasonic Sensors', 'Audio Module', '3D Printed Frame', 'Lithium Battery'],
+        links: [
+          { text: 'View Demo', url: 'https://fb.watch/ipRaFH0KIr/', external: true },
+          { text: 'View Schematic', url: 'Project/5-schematic.jpg' }
+        ]
+      },
+      'relay-pcb': {
+        title: '20-Line Relay Module PCB',
+        category: 'PCB Design',
+        image: 'Project/3.png',
+        description: 'Professional-grade PCB design for industrial automation applications. This 20-line relay module features optimized power distribution, noise reduction circuits, and thermal management. The board supports both AC and DC loads with individual status indicators and failsafe protection mechanisms.',
+        tech: ['Altium Designer', 'Relay Drivers', 'Power Regulation', 'Signal Isolation', 'Thermal Management'],
+        links: [
+          { text: 'View Design', url: 'Project/3.1.jpg' },
+          { text: 'Schematic PDF', url: 'Project/3-schematic.pdf' }
+        ]
+      },
+      'smart-home-v1': {
+        title: 'Smart Home Control Board V1',
+        category: 'Arduino Project',
+        image: 'Project/1.jpg',
+        description: 'The first iteration of a comprehensive smart home automation system. This control board integrates lighting control, temperature monitoring, and basic security features. It serves as the foundation for more advanced versions with modular expansion capabilities.',
+        tech: ['Arduino Uno', 'Relay Modules', 'Temperature Sensors', 'LCD Display', 'IR Remote'],
+        links: [
+          { text: 'View Schematic', url: 'Project/1.jpg' }
+        ]
+      },
+      // Add more project data as needed
+      'fire-car': {
+        title: 'Autonomous Firefighting Vehicle',
+        category: 'Arduino Project',
+        image: 'Project/4.png',
+        description: 'An autonomous robotic vehicle designed to detect and extinguish fires in hazardous environments. The system uses flame sensors for fire detection, ultrasonic sensors for navigation, and a water pump for fire suppression. The vehicle can operate in both autonomous and manual control modes.',
+        tech: ['Arduino Mega', 'Flame Sensors', 'Ultrasonic Sensors', 'DC Motors', 'Water Pump', 'Bluetooth Module'],
+        links: [
+          { text: 'View Vehicle', url: 'Project/4.png' }
+        ]
+      }
+    };
+
     // Mobile Menu Toggle
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
@@ -1115,14 +1352,120 @@ html, body { overflow-x: hidden; }
     // Ensure smooth transitions for the theme change
     document.body.style.transition = "background-color 0.5s ease, color 0.5s ease";
   
-// Keyboard support for mobile menu toggle
-mobileMenu.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    mobileMenu.click();
-  }
-});
+    // Keyboard support for mobile menu toggle
+    mobileMenu.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        mobileMenu.click();
+      }
+    });
 
-</script>
+    // Project Filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        button.classList.add('active');
+        
+        const filterValue = button.getAttribute('data-filter');
+        
+        projectCards.forEach(card => {
+          if (filterValue === 'all' || card.getAttribute('data-category').includes(filterValue)) {
+            card.style.display = 'block';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 100);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+              card.style.display = 'none';
+            }, 300);
+          }
+        });
+      });
+    });
+
+    // Project Modal
+    const projectModal = document.getElementById('project-modal');
+    const modalClose = document.getElementById('modal-close');
+    const modalImg = document.getElementById('modal-img');
+    const modalCategory = document.getElementById('modal-category');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const modalTech = document.getElementById('modal-tech');
+    const modalLinks = document.getElementById('modal-links');
+    
+    // View Details buttons
+    document.querySelectorAll('.view-details').forEach(button => {
+      button.addEventListener('click', () => {
+        const projectId = button.getAttribute('data-project');
+        const project = projectData[projectId];
+        
+        if (project) {
+          modalImg.src = project.image;
+          modalCategory.textContent = project.category;
+          modalTitle.textContent = project.title;
+          modalDescription.textContent = project.description;
+          
+          // Clear and populate tech tags
+          modalTech.innerHTML = '';
+          project.tech.forEach(tech => {
+            const techTag = document.createElement('span');
+            techTag.className = 'tech-tag';
+            techTag.textContent = tech;
+            modalTech.appendChild(techTag);
+          });
+          
+          // Clear and populate links
+          modalLinks.innerHTML = '';
+          project.links.forEach(link => {
+            const linkElement = document.createElement('a');
+            linkElement.className = 'project-link project-link-primary';
+            linkElement.textContent = link.text;
+            linkElement.href = link.url;
+            if (link.external) {
+              linkElement.target = '_blank';
+            }
+            modalLinks.appendChild(linkElement);
+          });
+          
+          // Show modal
+          projectModal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+    
+    // Close modal
+    modalClose.addEventListener('click', () => {
+      projectModal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    
+    // Close modal when clicking outside content
+    projectModal.addEventListener('click', (e) => {
+      if (e.target === projectModal) {
+        projectModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && projectModal.classList.contains('active')) {
+        projectModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>

@@ -253,13 +253,14 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
+            transition: all 0.3s ease;
         }
 
         .certificate-card {
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--box-shadow);
-            transition: all var(--transition-speed) ease;
+            transition: all 0.4s ease;
             position: relative;
             background-color: var(--card-dark);
         }
@@ -275,11 +276,28 @@
             position: relative;
         }
 
+        .certificate-image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary-color) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity var(--transition-speed) ease;
+            z-index: 1;
+        }
+
+        .certificate-card:hover .certificate-image-container::before {
+            opacity: 0.1;
+        }
+
         .certificate-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s ease, opacity 0.3s ease;
         }
 
         .certificate-card:hover .certificate-image {
@@ -334,6 +352,75 @@
 
         .download-btn:hover {
             background-color: #3e8e41;
+        }
+
+        /* Certificate categories filter */
+        .certificate-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--card-dark);
+            color: var(--text-light);
+            border: 1px solid var(--glass-border);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Search functionality */
+        .certificate-search {
+            max-width: 400px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            background: var(--card-dark);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        /* No results message */
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            grid-column: 1 / -1;
+        }
+
+        .no-results.hidden {
+            display: none;
         }
 
         /* Footer */
@@ -500,6 +587,22 @@
             animation-delay: 0.6s;
         }
 
+        /* Print styles */
+        @media print {
+            .theme-toggle,
+            .back-to-top,
+            .navigation,
+            .footer {
+                display: none !important;
+            }
+            
+            .certificate-card {
+                break-inside: avoid;
+                box-shadow: none !important;
+                border: 1px solid #ddd;
+            }
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .section-title h2 {
@@ -547,6 +650,15 @@
             .certificates-grid {
                 grid-template-columns: 1fr;
             }
+
+            .certificate-filters {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
         }
 
         @media (max-width: 480px) {
@@ -569,37 +681,40 @@
                 bottom: 20px;
                 right: 20px;
             }
+
+            .certificate-search {
+                max-width: 100%;
+            }
         }
-    
-/* === Responsive Enhancements (preserve original style) === */
-img { max-width: 100%; height: auto; }
 
-/* Prevent horizontal scrolling on very small screens */
-html, body { overflow-x: hidden; }
+        /* === Responsive Enhancements === */
+        img { max-width: 100%; height: auto; }
 
-/* Container padding tweak on extra-small screens */
-@media (max-width: 360px) {
-  .container { padding: 0 14px; }
-}
+        /* Prevent horizontal scrolling on very small screens */
+        html, body { overflow-x: hidden; }
 
-/* Certificates grid: allow smaller card min width on tiny devices */
-@media (max-width: 420px) {
-  .certificates-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-}
+        /* Container padding tweak on extra-small screens */
+        @media (max-width: 360px) {
+            .container { padding: 0 14px; }
+        }
 
-/* Keep card image nicely proportioned with aspect-ratio while using existing height as fallback */
-.certificate-image-container { aspect-ratio: 16 / 9; height: auto; }
-.certificate-image { width: 100%; height: 100%; object-fit: cover; }
+        /* Certificates grid: allow smaller card min width on tiny devices */
+        @media (max-width: 420px) {
+            .certificates-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+        }
 
-/* Header/logo sizing on narrow screens to avoid wrapping */
-@media (max-width: 420px) {
-  .logo { font-size: 1.4em; }
-  .navigation a { margin-left: 22px; }
-}
+        /* Keep card image nicely proportioned with aspect-ratio while using existing height as fallback */
+        .certificate-image-container { aspect-ratio: 16 / 9; height: auto; }
+        .certificate-image { width: 100%; height: 100%; object-fit: cover; }
 
-/* Improve focus outlines for accessibility (no visual change in normal usage) */
-:focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
+        /* Header/logo sizing on narrow screens to avoid wrapping */
+        @media (max-width: 420px) {
+            .logo { font-size: 1.4em; }
+            .navigation a { margin-left: 22px; }
+        }
 
+        /* Improve focus outlines for accessibility */
+        :focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
     </style>
 </head>
 <body>
@@ -621,204 +736,226 @@ html, body { overflow-x: hidden; }
         </nav>
     </header>
 
-<section class="certificates" id="certificates">
-    <div class="container">
-        <div class="section-title fade-in">
-            <h2>My Certificates</h2>
-            <p class="section-subtitle">Professional certifications and achievements</p>
+    <!-- Certificates Section -->
+    <section class="certificates" id="certificates">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>My Certificates</h2>
+                <p class="section-subtitle">Professional certifications and achievements</p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="certificate-search fade-in">
+                <input type="text" class="search-input" placeholder="Search certificates..." id="certificateSearch">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="certificate-filters fade-in delay-1">
+                <button class="filter-btn active" data-filter="all">All Certificates</button>
+                <button class="filter-btn" data-filter="internship">Internships</button>
+                <button class="filter-btn" data-filter="training">Training</button>
+                <button class="filter-btn" data-filter="technical">Technical</button>
+            </div>
+
+            <!-- Certificates Grid -->
+            <div class="certificates-grid">
+                <!-- No Results Message -->
+                <div class="no-results hidden" id="noResults">
+                    <i class="fas fa-search" style="font-size: 3em; margin-bottom: 20px;"></i>
+                    <h3>No certificates found</h3>
+                    <p>Try adjusting your search or filter criteria</p>
+                </div>
+
+                <!-- Certificate 8 -->
+                <div class="certificate-card fade-in delay-2" data-category="internship">
+                    <div class="certificate-image-container">
+                        <img src="Certificates/8.jpg" loading="lazy" alt="classic control Internship Certificate" class="certificate-image">
+                    </div>
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Classic Control</h3>
+                        <p class="certificate-info">Summer Internship</p>
+                        <div class="certificate-actions">
+                            <a href="Certificates/8.jpg" class="view-btn" target="_blank">View</a>
+                            <a href="Certificates/8.jpg" download="Mohamed_classic-control_Internship_Certificate.jpg" class="download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 9 -->
+                <div class="certificate-card fade-in delay-2" data-category="internship">
+                    <div class="certificate-image-container">
+                        <img src="Certificates/9.jpg" loading="lazy" alt="PLC Internship Certificate" class="certificate-image">
+                    </div>
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">PLC</h3>
+                        <p class="certificate-info">Summer Internship</p>
+                        <div class="certificate-actions">
+                            <a href="Certificates/9.jpg" class="view-btn" target="_blank">View</a>
+                            <a href="Certificates/9.jpg" download="Mohamed_PLC_Internship_Certificate.jpg" class="download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 10 -->
+                <div class="certificate-card fade-in delay-2" data-category="internship">
+                    <div class="certificate-image-container">
+                        <img src="Certificates/10.jpg" loading="lazy" alt="Motor Drive Internship Certificate" class="certificate-image">
+                    </div>
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Motor Drive</h3>
+                        <p class="certificate-info">Summer Internship</p>
+                        <div class="certificate-actions">
+                            <a href="Certificates/10.jpg" class="view-btn" target="_blank">View</a>
+                            <a href="Certificates/10.jpg" download="Mohamed_Motor_Drive_Internship_Certificate.jpg" class="download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 7 -->
+                <div class="certificate-card fade-in delay-2" data-category="internship">
+                    <div class="certificate-image-container">
+                        <img src="Certificates/7.jpg" loading="lazy" alt="PETROBEL Internship Certificate" class="certificate-image">
+                    </div>
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">PETROBEL</h3>
+                        <p class="certificate-info">Summer Internship</p>
+                        <div class="certificate-actions">
+                            <a href="Certificates/7.jpg" class="view-btn" target="_blank">View</a>
+                            <a href="Certificates/7.jpg" download="Mohamed_PETROBEL_Internship_Certificate.jpg" class="download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 11 -->
+                <div class="certificate-card fade-in delay-2" data-category="internship">
+                    <div class="certificate-image-container">
+                        <img src="Certificates/11.jpg" loading="lazy" alt="Webinar Internship Certificate" class="certificate-image">
+                    </div>
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Webinar</h3>
+                        <p class="certificate-info">Summer Internship</p>
+                        <div class="certificate-actions">
+                            <a href="Certificates/11.jpg" class="view-btn" target="_blank">View</a>
+                            <a href="Certificates/11.jpg" download="Mohamed_Webinar_Internship_Certificate.jpg" class="download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 1 -->
+                <div class="certificate-card fade-in" data-category="technical">
+                    <div class="certificate-image-container">
+                        <img src="Certificates/1.jpg" loading="lazy" alt="CCNA Certificate" class="certificate-image">
+                    </div>
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">CCNA</h3>
+                        <p class="certificate-info">Issued by: Summer Training</p>
+                        <div class="certificate-actions">
+                            <a href="Certificates/1.jpg" class="view-btn" target="_blank">View</a>
+                            <a href="Certificates/1.jpg" download="Mohamed_CCNA_Certificate.jpg" class="download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 2 -->
+                <div class="certificate-card fade-in delay-1" data-category="training">
+                    <div class="certificate-image-container">
+                        <img src="Certificates/2.jpg" loading="lazy" alt="Network Fundamental+ Web Development Certificate" class="certificate-image">
+                    </div>
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Network Fundamental+ Web Development</h3>
+                        <p class="certificate-info">Issued by: Summer Training Online</p>
+                        <div class="certificate-actions">
+                            <a href="Certificates/2.jpg" class="view-btn" target="_blank">View</a>
+                            <a href="Certificates/2.jpg" download="Mohamed_Network_WebDev_Certificate.jpg" class="download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 3 -->
+                <div class="certificate-card fade-in delay-2" data-category="training">
+                    <div class="certificate-image-container">
+                        <img src="Certificates/3.jpg" loading="lazy" alt="Linux Course Certificate" class="certificate-image">
+                    </div>
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Linux Course for Beginners</h3>
+                        <p class="certificate-info">Issued by: Training Online</p>
+                        <div class="certificate-actions">
+                            <a href="Certificates/3.jpg" class="view-btn" target="_blank">View</a>
+                            <a href="Certificates/3.jpg" download="Mohamed_Linux_Certificate.jpg" class="download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 4 -->
+                <div class="certificate-card fade-in delay-3" data-category="training">
+                    <div class="certificate-image-container">
+                        <img src="Certificates/4.jpg" loading="lazy" alt="Home Automation Certificate" class="certificate-image">
+                    </div>
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Home Automation</h3>
+                        <p class="certificate-info">Issued by: Training Online</p>
+                        <div class="certificate-actions">
+                            <a href="Certificates/4.jpg" class="view-btn" target="_blank">View</a>
+                            <a href="Certificates/4.jpg" download="Mohamed_Home_Automation_Certificate.jpg" class="download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 5 -->
+                <div class="certificate-card fade-in" data-category="training">
+                    <div class="certificate-image-container">
+                        <img src="Certificates/5.jpg" loading="lazy" alt="System Protection Certificate" class="certificate-image">
+                    </div>
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Protect Systems from Penetrations</h3>
+                        <p class="certificate-info">Issued by: Training Online</p>
+                        <div class="certificate-actions">
+                            <a href="Certificates/5.jpg" class="view-btn" target="_blank">View</a>
+                            <a href="Certificates/5.jpg" download="Mohamed_System_Protection_Certificate.jpg" class="download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 6 -->
+                <div class="certificate-card fade-in delay-1" data-category="training">
+                    <div class="certificate-image-container">
+                        <img src="Certificates/6.jpg" loading="lazy" alt="Digital Marketing Certificate" class="certificate-image">
+                    </div>
+                    <div class="certificate-details">
+                        <h3 class="certificate-title">Digital Marketing</h3>
+                        <p class="certificate-info">Issued by: Training Online</p>
+                        <div class="certificate-actions">
+                            <a href="Certificates/6.jpg" class="view-btn" target="_blank">View</a>
+                            <a href="Certificates/6.jpg" download="Mohamed_Digital_Marketing_Certificate.jpg" class="download-btn">
+                                <i class="fas fa-download"></i> Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="certificates-grid">
-<!-- Certificate 8 -->
-            <div class="certificate-card fade-in delay-2">
-                <div class="certificate-image-container">
-                    <img src="Certificates/8.jpg" loading="lazy" alt="classic control Internship Certificate" class="certificate-image">
-                </div>
-                <div class="certificate-details">
-                    <h3 class="certificate-title">classic control</h3>
-                    <p class="certificate-info">Summer Internship</p>
-                    <div class="certificate-actions">
-                        <a href="Certificates/8.jpg" class="view-btn" target="_blank">View</a>
-                        <a href="Certificates/8.jpg" download="Mohamed_classic-controlL_Internship_Certificate.jpg" class="download-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Certificate 9 -->
-            <div class="certificate-card fade-in delay-2">
-                <div class="certificate-image-container">
-                    <img src="Certificates/9.jpg" loading="lazy" alt="plc Internship Certificate" class="certificate-image">
-                </div>
-                <div class="certificate-details">
-                    <h3 class="certificate-title">plc</h3>
-                    <p class="certificate-info">Summer Internship</p>
-                    <div class="certificate-actions">
-                        <a href="Certificates/9.jpg" class="view-btn" target="_blank">View</a>
-                        <a href="Certificates/9.jpg" download="Mohamed_plc_Internship_Certificate.jpg" class="download-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Certificate 10 -->
-            <div class="certificate-card fade-in delay-2">
-                <div class="certificate-image-container">
-                    <img src="Certificates/10.jpg" loading="lazy" alt="motor drive Internship Certificate" class="certificate-image">
-                </div>
-                <div class="certificate-details">
-                    <h3 class="certificate-title">motor drive</h3>
-                    <p class="certificate-info">Summer Internship</p>
-                    <div class="certificate-actions">
-                        <a href="Certificates/10.jpg" class="view-btn" target="_blank">View</a>
-                        <a href="Certificates/10.jpg" download="Mohamed_drive_Internship_Certificate.jpg" class="download-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-  <!-- Certificate 7 -->
-            <div class="certificate-card fade-in delay-2">
-                <div class="certificate-image-container">
-                    <img src="Certificates/7.jpg" loading="lazy" alt="PETROBEL Internship Certificate" class="certificate-image">
-                </div>
-                <div class="certificate-details">
-                    <h3 class="certificate-title">PETROBEL</h3>
-                    <p class="certificate-info">Summer Internship</p>
-                    <div class="certificate-actions">
-                        <a href="Certificates/7.jpg" class="view-btn" target="_blank">View</a>
-                        <a href="Certificates/7.jpg" download="Mohamed_PETROBEL_Internship_Certificate.jpg" class="download-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Certificate 11 -->
-            <div class="certificate-card fade-in delay-2">
-                <div class="certificate-image-container">
-                    <img src="Certificates/11.jpg" loading="lazy" alt="webinar Internship Certificate" class="certificate-image">
-                </div>
-                <div class="certificate-details">
-                    <h3 class="certificate-title">webinar</h3>
-                    <p class="certificate-info">Summer Internship</p>
-                    <div class="certificate-actions">
-                        <a href="Certificates/11.jpg" class="view-btn" target="_blank">View</a>
-                        <a href="Certificates/11.jpg" download="Mohamed_webinar_Internship_Certificate.jpg" class="download-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-          
-            <!-- Certificate 1 -->
-            <div class="certificate-card fade-in">
-                <div class="certificate-image-container">
-                    <img src="Certificates/1.jpg" loading="lazy" alt="CCNA Certificate" class="certificate-image">
-                </div>
-                <div class="certificate-details">
-                    <h3 class="certificate-title">CCNA</h3>
-                    <p class="certificate-info">Issued by: Summer Training</p>
-                    <div class="certificate-actions">
-                        <a href="Certificates/1.jpg" class="view-btn" target="_blank">View</a>
-                        <a href="Certificates/1.jpg" download="Mohamed_CCNA_Certificate.jpg" class="download-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- Certificate 2 -->
-            <div class="certificate-card fade-in delay-1">
-                <div class="certificate-image-container">
-                    <img src="Certificates/2.jpg" loading="lazy" alt="Network Fundamental+ Web Development Certificate" class="certificate-image">
-                </div>
-                <div class="certificate-details">
-                    <h3 class="certificate-title">Network Fundamental+ Web Development</h3>
-                    <p class="certificate-info">Issued by: Summer Training Online</p>
-                    <div class="certificate-actions">
-                        <a href="Certificates/2.jpg" class="view-btn" target="_blank">View</a>
-                        <a href="Certificates/2.jpg" download="Mohamed_Network_WebDev_Certificate.jpg" class="download-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- Certificate 3 -->
-            <div class="certificate-card fade-in delay-2">
-                <div class="certificate-image-container">
-                    <img src="Certificates/3.jpg" loading="lazy" alt="Linux Course Certificate" class="certificate-image">
-                </div>
-                <div class="certificate-details">
-                    <h3 class="certificate-title">Linux Course for Beginners</h3>
-                    <p class="certificate-info">Issued by: Training Online</p>
-                    <div class="certificate-actions">
-                        <a href="Certificates/3.jpg" class="view-btn" target="_blank">View</a>
-                        <a href="Certificates/3.jpg" download="Mohamed_Linux_Certificate.jpg" class="download-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- Certificate 4 -->
-            <div class="certificate-card fade-in delay-3">
-                <div class="certificate-image-container">
-                    <img src="Certificates/4.jpg" loading="lazy" alt="Home Automation Certificate" class="certificate-image">
-                </div>
-                <div class="certificate-details">
-                    <h3 class="certificate-title">Home Automation</h3>
-                    <p class="certificate-info">Issued by: Training Online</p>
-                    <div class="certificate-actions">
-                        <a href="Certificates/4.jpg" class="view-btn" target="_blank">View</a>
-                        <a href="Certificates/4.jpg" download="Mohamed_Home_Automation_Certificate.jpg" class="download-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- Certificate 5 -->
-            <div class="certificate-card fade-in">
-                <div class="certificate-image-container">
-                    <img src="Certificates/5.jpg" loading="lazy" alt="System Protection Certificate" class="certificate-image">
-                </div>
-                <div class="certificate-details">
-                    <h3 class="certificate-title">Protect Systems from Penetrations</h3>
-                    <p class="certificate-info">Issued by: Training Online</p>
-                    <div class="certificate-actions">
-                        <a href="Certificates/5.jpg" class="view-btn" target="_blank">View</a>
-                        <a href="Certificates/5.jpg" download="Mohamed_System_Protection_Certificate.jpg" class="download-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- Certificate 6 -->
-            <div class="certificate-card fade-in delay-1">
-                <div class="certificate-image-container">
-                    <img src="Certificates/6.jpg" loading="lazy" alt="Digital Marketing Certificate" class="certificate-image">
-                </div>
-                <div class="certificate-details">
-                    <h3 class="certificate-title">Digital Marketing</h3>
-                    <p class="certificate-info">Issued by: Training Online</p>
-                    <div class="certificate-actions">
-                        <a href="Certificates/6.jpg" class="view-btn" target="_blank">View</a>
-                        <a href="Certificates/6.jpg" download="Mohamed_Digital_Marketing_Certificate.jpg" class="download-btn">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -981,15 +1118,218 @@ html, body { overflow-x: hidden; }
         document.querySelectorAll('.fade-in, .slide-up').forEach(element => {
             observer.observe(element);
         });
-    
-// Keyboard support for menu toggle
-mobileMenu.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        mobileMenu.click();
-    }
-});
+        
+        // Keyboard support for menu toggle
+        mobileMenu.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                mobileMenu.click();
+            }
+        });
 
+        // Enhanced JavaScript for certificates page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Certificate modal functionality
+            const certificateCards = document.querySelectorAll('.certificate-card');
+            
+            certificateCards.forEach(card => {
+                const viewBtn = card.querySelector('.view-btn');
+                const image = card.querySelector('.certificate-image');
+                
+                viewBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openCertificateModal(image.src, card.querySelector('.certificate-title').textContent);
+                });
+            });
+
+            // Download tracking
+            const downloadButtons = document.querySelectorAll('.download-btn');
+            downloadButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const certificateName = this.parentElement.parentElement.querySelector('.certificate-title').textContent;
+                    console.log(`Downloaded certificate: ${certificateName}`);
+                    // You can add analytics tracking here
+                });
+            });
+
+            // Search and filter functionality
+            const searchInput = document.getElementById('certificateSearch');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const certificateCardsAll = document.querySelectorAll('.certificate-card');
+            const noResults = document.getElementById('noResults');
+            
+            // Search functionality
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    applyFilters(searchTerm);
+                });
+            }
+            
+            // Filter functionality
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const filter = this.dataset.filter;
+                    
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    applyFilters(searchInput ? searchInput.value.toLowerCase() : '', filter);
+                });
+            });
+            
+            function applyFilters(searchTerm = '', filter = 'all') {
+                let visibleCount = 0;
+                
+                certificateCardsAll.forEach(card => {
+                    const title = card.querySelector('.certificate-title').textContent.toLowerCase();
+                    const info = card.querySelector('.certificate-info').textContent.toLowerCase();
+                    const category = card.dataset.category || 'training';
+                    
+                    const matchesSearch = !searchTerm || title.includes(searchTerm) || info.includes(searchTerm);
+                    const matchesFilter = filter === 'all' || category === filter;
+                    
+                    if (matchesSearch && matchesFilter) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                        // Add slight delay for smooth animation
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+                
+                // Show/hide no results message
+                if (visibleCount === 0) {
+                    noResults.classList.remove('hidden');
+                } else {
+                    noResults.classList.add('hidden');
+                }
+            }
+        });
+
+        // Certificate Modal Function
+        function openCertificateModal(imageSrc, title) {
+            // Create modal elements
+            const modal = document.createElement('div');
+            modal.className = 'certificate-modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>${title}</h3>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="${imageSrc}" alt="${title}" class="modal-image">
+                    </div>
+                    <div class="modal-footer">
+                        <a href="${imageSrc}" download="${title.replace(/\s+/g, '_')}.jpg" class="download-btn">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Add modal styles if not already added
+            if (!document.querySelector('#modal-styles')) {
+                const modalStyles = `
+                    .certificate-modal {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.9);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 10000;
+                        animation: fadeIn 0.3s ease;
+                    }
+                    .modal-content {
+                        background: var(--card-dark);
+                        border-radius: var(--border-radius);
+                        max-width: 90vw;
+                        max-height: 90vh;
+                        overflow: auto;
+                        box-shadow: var(--box-shadow-hover);
+                    }
+                    .modal-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 20px;
+                        border-bottom: 1px solid var(--glass-border);
+                    }
+                    .modal-header h3 {
+                        color: var(--primary-color);
+                        margin: 0;
+                    }
+                    .close-modal {
+                        background: none;
+                        border: none;
+                        color: var(--text-light);
+                        font-size: 1.5em;
+                        cursor: pointer;
+                        padding: 5px 10px;
+                        border-radius: 50%;
+                        transition: all var(--transition-speed) ease;
+                    }
+                    .close-modal:hover {
+                        background: rgba(255, 255, 255, 0.1);
+                        transform: scale(1.1);
+                    }
+                    .modal-body {
+                        padding: 20px;
+                    }
+                    .modal-image {
+                        max-width: 100%;
+                        height: auto;
+                        border-radius: 8px;
+                    }
+                    .modal-footer {
+                        padding: 20px;
+                        text-align: center;
+                        border-top: 1px solid var(--glass-border);
+                    }
+                `;
+                
+                const styleSheet = document.createElement('style');
+                styleSheet.id = 'modal-styles';
+                styleSheet.textContent = modalStyles;
+                document.head.appendChild(styleSheet);
+            }
+            
+            // Close modal functionality
+            const closeModal = modal.querySelector('.close-modal');
+            closeModal.addEventListener('click', () => {
+                modal.remove();
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+            
+            // Close on Escape key
+            document.addEventListener('keydown', function closeOnEscape(e) {
+                if (e.key === 'Escape') {
+                    modal.remove();
+                    document.removeEventListener('keydown', closeOnEscape);
+                }
+            });
+        }
     </script>
 </body>
 </html>

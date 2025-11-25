@@ -211,6 +211,63 @@
       box-shadow: var(--box-shadow-hover);
     }
 
+    /* Search and Filter */
+    .tools-search {
+      max-width: 500px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 45px 12px 20px;
+      background: var(--card-dark);
+      border: 1px solid var(--glass-border);
+      border-radius: 25px;
+      color: var(--text-light);
+      font-family: 'Poppins', sans-serif;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .tools-filters {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--card-dark);
+      color: var(--text-light);
+      border: 1px solid var(--glass-border);
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
     /* App Categories */
     .app-category {
       margin-bottom: 60px;
@@ -255,6 +312,25 @@
       height: 100%;
       display: flex;
       flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, var(--primary-color) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity var(--transition-speed) ease;
+      z-index: 1;
+    }
+
+    .app-card:hover::before {
+      opacity: 0.1;
     }
 
     .app-card:hover {
@@ -268,6 +344,8 @@
       color: var(--primary-color);
       display: flex;
       align-items: center;
+      position: relative;
+      z-index: 2;
     }
 
     .app-title i {
@@ -279,6 +357,8 @@
       color: var(--text-muted);
       margin-bottom: 20px;
       flex-grow: 1;
+      position: relative;
+      z-index: 2;
     }
 
     .app-link {
@@ -294,6 +374,8 @@
       background-color: var(--primary-color);
       color: white;
       margin-top: auto;
+      position: relative;
+      z-index: 2;
     }
 
     .app-link:hover {
@@ -307,6 +389,8 @@
       display: flex;
       gap: 10px;
       margin-top: 15px;
+      position: relative;
+      z-index: 2;
     }
     
     .download-btn {
@@ -331,6 +415,18 @@
     
     .download-btn i {
       margin-right: 5px;
+    }
+
+    /* No results message */
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+      grid-column: 1 / -1;
+    }
+
+    .no-results.hidden {
+      display: none;
     }
 
     /* Footer */
@@ -475,6 +571,15 @@
       .download-options {
         flex-direction: column;
       }
+
+      .tools-filters {
+        gap: 10px;
+      }
+
+      .filter-btn {
+        padding: 8px 16px;
+        font-size: 0.9em;
+      }
     }
 
     @media (max-width: 480px) {
@@ -498,36 +603,35 @@
         bottom: 20px;
         right: 20px;
       }
+
+      .tools-search {
+        max-width: 100%;
+      }
     }
   
-/* === Responsive Enhancements (non-breaking) === */
-img { max-width: 100%; height: auto; } /* prevent overflow on small screens */
-html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
+    /* === Responsive Enhancements === */
+    img { max-width: 100%; height: auto; }
+    html, body { overflow-x: hidden; }
 
-/* Make grids adapt a bit earlier on medium screens */
-@media (max-width: 992px) and (min-width: 769px) {
-  .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+    @media (max-width: 992px) and (min-width: 769px) {
+      .app-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
 
-/* On very small phones, keep comfortable padding and smaller buttons */
-@media (max-width: 360px) {
-  .container { padding: 100px 14px; }
-  .app-link, .download-btn { padding: 8px 14px; font-size: 0.85em; }
-}
+    @media (max-width: 360px) {
+      .container { padding: 100px 14px; }
+      .app-link, .download-btn { padding: 8px 14px; font-size: 0.85em; }
+    }
 
-/* Slightly shrink logo and hamburger bars on narrow screens to avoid wrapping */
-@media (max-width: 420px) {
-  .logo { font-size: 1.4em; }
-  .bar { width: 22px; }
-}
+    @media (max-width: 420px) {
+      .logo { font-size: 1.4em; }
+      .bar { width: 22px; }
+    }
 
-/* Improve focus visibility without altering theme */
-:focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
+    :focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
 
-/* Reduce motion if user prefers */
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
-}
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
 
   </style>
 </head>
@@ -559,8 +663,30 @@ html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
       <p>Explore my collection of useful engineering tools and applications</p>
     </div>
 
+    <!-- Search and Filter -->
+    <div class="tools-search fade-in delay-1">
+      <input type="text" class="search-input" placeholder="Search tools and apps..." id="toolsSearch">
+      <i class="fas fa-search search-icon"></i>
+    </div>
+
+    <div class="tools-filters fade-in delay-1">
+      <button class="filter-btn active" data-filter="all">All Tools</button>
+      <button class="filter-btn" data-filter="projects">My Projects</button>
+      <button class="filter-btn" data-filter="engineering">Engineering</button>
+      <button class="filter-btn" data-filter="productivity">Productivity</button>
+      <button class="filter-btn" data-filter="learning">Learning</button>
+      <button class="filter-btn" data-filter="games">Games</button>
+    </div>
+
+    <!-- No Results Message -->
+    <div class="no-results hidden" id="noResults">
+      <i class="fas fa-search" style="font-size: 3em; margin-bottom: 20px;"></i>
+      <h3>No tools found</h3>
+      <p>Try adjusting your search or filter criteria</p>
+    </div>
+
     <!-- My Projects Section -->
-    <div class="app-category fade-in delay-1">
+    <div class="app-category fade-in delay-1" data-category="projects">
       <h2><i class="fas fa-download"></i> My Projects</h2>
       <div class="app-grid">
         <div class="app-card">
@@ -577,7 +703,7 @@ html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
         </div>
         
         <div class="app-card">
-          <h3 class="app-title"><i class="fas fa-tools"></i>M.T.A. Win11 Defender Tool</h3>
+          <h3 class="app-title"><i class="fas fa-tools"></i> M.T.A. Win11 Defender Tool</h3>
           <p class="app-description">A comprehensive security and optimization utility for Windows 11 that protects against threats while enhancing system performance.</p>
           <div class="download-options">
             <a href="tools\M.T.A. Win11 Defender Tool.zip" class="download-btn" download>
@@ -589,9 +715,8 @@ html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
           </div>
         </div>
 
-      <div class="app-grid">
         <div class="app-card">
-          <h3 class="app-title"><i class="fas fa-broom"></i> Code M.T.A. Tweaking</h3>
+          <h3 class="app-title"><i class="fas fa-cogs"></i> Code M.T.A. Tweaking</h3>
           <p class="app-description">A Windows system optimization tool that safely tweaks hidden settings to improve performance and customize the user experience.</p>
           <div class="download-options">
             <a href="tools\Code M.T.A. Tweaking.zip" class="download-btn" download>
@@ -602,11 +727,9 @@ html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
             </a>
           </div>
         </div>
-      </div>
 
-      <div class="app-grid">
         <div class="app-card">
-          <h3 class="app-title"><i class="fas fa-broom"></i> info pc</h3>
+          <h3 class="app-title"><i class="fas fa-desktop"></i> Info PC</h3>
           <p class="app-description">A Windows batch file that displays essential system information including hardware specs, disk space, and network configuration.</p>
           <div class="download-options">
             <a href="tools\info pc.zip" class="download-btn" download>
@@ -617,16 +740,11 @@ html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
             </a>
           </div>
         </div>
-       </div>
-
-      
-
-
       </div>
     </div>
 
     <!-- Engineer Apps -->
-    <div class="app-category fade-in delay-2">
+    <div class="app-category fade-in delay-2" data-category="engineering">
       <h2><i class="fas fa-calculator"></i> Engineering Tools</h2>
       <div class="app-grid">
         <div class="app-card">
@@ -680,7 +798,7 @@ html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
     </div>
 
     <!-- Useful Apps -->
-    <div class="app-category fade-in delay-3">
+    <div class="app-category fade-in delay-3" data-category="productivity">
       <h2><i class="fas fa-tools"></i> Productivity Tools</h2>
       <div class="app-grid">
         <div class="app-card">
@@ -696,29 +814,27 @@ html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
         </div>
 
         <div class="app-card">
-          <h3 class="app-title"><i class="fas fa-tasks"></i> AI sites list</h3>
-          <p class="app-description">Discover useful AI tools and resources.</p>
+          <h3 class="app-title"><i class="fas fa-robot"></i> AI Sites List</h3>
+          <p class="app-description">Discover useful AI tools and resources for various applications.</p>
           <a href="sites/ai-sites-list.html" target="_blank" class="app-link">Open Tool</a>
         </div>
-
       </div>
     </div>
 
-
-<div class="app-category fade-in delay-4">
-      <h2><i class="fas fa-gamepad"></i> learn</h2>
+    <!-- Learning Section -->
+    <div class="app-category fade-in delay-4" data-category="learning">
+      <h2><i class="fas fa-graduation-cap"></i> Learning Resources</h2>
       <div class="app-grid">
         <div class="app-card">
-          <h3 class="app-title"><i class="fas fa-car"></i> linux command</h3>
-          <p class="app-description">learning linux commands</p>
+          <h3 class="app-title"><i class="fas fa-terminal"></i> Linux Commands</h3>
+          <p class="app-description">Comprehensive guide to essential Linux commands and terminal usage.</p>
           <a href="sites\Mastering Linux Commands.html" target="_blank" class="app-link">Open Tool</a>
         </div>
-           
-  </div>
- </div>
+      </div>
+    </div>
 
     <!-- Games -->
-    <div class="app-category fade-in delay-4">
+    <div class="app-category fade-in delay-4" data-category="games">
       <h2><i class="fas fa-gamepad"></i> Games</h2>
       <div class="app-grid">
         <div class="app-card">
@@ -734,11 +850,10 @@ html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
         </div>
 
         <div class="app-card">
-          <h3 class="app-title"><i class="fas fa-running"></i> Race Game</h3>
-          <p class="app-description">Enjoy this exciting 3D car racing game in your browser.</p>
+          <h3 class="app-title"><i class="fas fa-flag-checkered"></i> Race Game</h3>
+          <p class="app-description">Exciting racing game with multiple tracks and challenges.</p>
           <a href="sites/Race-Game.html" target="_blank" class="app-link">Play Game</a>
         </div>
-
       </div>
     </div>
   </div>
@@ -869,13 +984,83 @@ html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
       observer.observe(element);
     });
   
-// Keyboard support for mobile menu toggle
-mobileMenu.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    mobileMenu.click();
-  }
-});
+    // Keyboard support for mobile menu toggle
+    mobileMenu.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        mobileMenu.click();
+      }
+    });
+
+    // Enhanced Search and Filter Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('toolsSearch');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const appCategories = document.querySelectorAll('.app-category');
+      const appCards = document.querySelectorAll('.app-card');
+      const noResults = document.getElementById('noResults');
+
+      // Search functionality
+      if (searchInput) {
+        searchInput.addEventListener('input', function() {
+          const searchTerm = this.value.toLowerCase();
+          applyFilters(searchTerm);
+        });
+      }
+
+      // Filter functionality
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const filter = this.dataset.filter;
+          
+          // Update active button
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          
+          applyFilters(searchInput ? searchInput.value.toLowerCase() : '', filter);
+        });
+      });
+
+      function applyFilters(searchTerm = '', filter = 'all') {
+        let visibleCount = 0;
+        
+        appCategories.forEach(category => {
+          const categoryType = category.dataset.category;
+          let categoryVisible = false;
+          
+          const categoryCards = category.querySelectorAll('.app-card');
+          categoryCards.forEach(card => {
+            const title = card.querySelector('.app-title').textContent.toLowerCase();
+            const description = card.querySelector('.app-description').textContent.toLowerCase();
+            
+            const matchesSearch = !searchTerm || title.includes(searchTerm) || description.includes(searchTerm);
+            const matchesFilter = filter === 'all' || categoryType === filter;
+            
+            if (matchesSearch && matchesFilter) {
+              card.style.display = 'flex';
+              categoryVisible = true;
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+          
+          // Show/hide category based on visible cards
+          if (categoryVisible) {
+            category.style.display = 'block';
+          } else {
+            category.style.display = 'none';
+          }
+        });
+        
+        // Show/hide no results message
+        if (visibleCount === 0) {
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
+        }
+      }
+    });
 
   </script>
 </body>

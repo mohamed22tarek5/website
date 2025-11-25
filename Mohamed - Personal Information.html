@@ -203,6 +203,48 @@
       transition: all var(--transition-speed) ease;
     }
 
+    /* Quick Navigation */
+    .quick-nav {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 998;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--text-muted);
+      transition: all var(--transition-speed) ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .nav-dot.active {
+      background-color: var(--primary-color);
+      transform: scale(1.3);
+    }
+
+    .nav-dot:hover::after {
+      content: attr(data-section);
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--card-dark);
+      color: var(--text-light);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      white-space: nowrap;
+      box-shadow: var(--box-shadow);
+    }
+
     /* Profile Header */
     .profile-header {
       background-color: var(--card-dark);
@@ -212,6 +254,20 @@
       margin-bottom: 40px;
       box-shadow: var(--box-shadow);
       transition: all var(--transition-speed) ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, var(--primary-color) 0%, transparent 50%);
+      opacity: 0.1;
+      z-index: 1;
     }
 
     .profile-header:hover {
@@ -227,6 +283,8 @@
       box-shadow: var(--box-shadow);
       margin-bottom: 30px;
       transition: all var(--transition-speed) ease;
+      position: relative;
+      z-index: 2;
     }
 
     .profile-image:hover {
@@ -240,6 +298,8 @@
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 20px;
+      position: relative;
+      z-index: 2;
     }
 
     .title-tag {
@@ -266,6 +326,25 @@
       margin-bottom: 30px;
       box-shadow: var(--box-shadow);
       transition: all var(--transition-speed) ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-section::before, .cv-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, var(--primary-color) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity var(--transition-speed) ease;
+      z-index: 1;
+    }
+
+    .info-section:hover::before, .cv-section:hover::before {
+      opacity: 0.05;
     }
 
     .info-section:hover, .cv-section:hover {
@@ -281,6 +360,7 @@
       align-items: center;
       position: relative;
       padding-bottom: 10px;
+      z-index: 2;
     }
 
     .info-section h2::after, .cv-section h2::after {
@@ -301,12 +381,16 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
+      position: relative;
+      z-index: 2;
     }
 
     .contact-info {
       display: flex;
       align-items: center;
       margin-bottom: 15px;
+      position: relative;
+      z-index: 2;
     }
 
     .contact-info i {
@@ -316,11 +400,13 @@
       min-width: 20px;
     }
 
-    /* Skills */
+    /* Skills with Progress Bars */
     .skills-container {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      position: relative;
+      z-index: 2;
     }
 
     .skill-tag {
@@ -339,11 +425,50 @@
       transform: translateY(-3px);
     }
 
+    /* Enhanced Skill Items */
+    .skill-item {
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .skill-name {
+      font-weight: 500;
+    }
+
+    .skill-percentage {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .skill-bar-container {
+      height: 8px;
+      background-color: var(--background-secondary);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skill-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+      border-radius: 4px;
+      transition: width 1.5s ease;
+      width: 0;
+    }
+
     /* Items */
     .item {
       margin-bottom: 20px;
       padding-bottom: 20px;
       border-bottom: 1px dashed rgba(78, 158, 255, 0.3);
+      position: relative;
+      z-index: 2;
     }
 
     .item:last-child {
@@ -355,6 +480,36 @@
     .item h3 {
       color: var(--text-light);
       margin-bottom: 8px;
+      font-size: 1.2em;
+    }
+
+    /* Achievement Badges */
+    .achievement-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      background: rgba(78, 158, 255, 0.1);
+      padding: 10px 15px;
+      border-radius: var(--border-radius);
+      border: 1px solid rgba(78, 158, 255, 0.3);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .badge:hover {
+      transform: translateY(-3px);
+      background: rgba(78, 158, 255, 0.2);
+      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.2);
+    }
+
+    .badge i {
+      color: var(--primary-color);
+      margin-right: 10px;
       font-size: 1.2em;
     }
 
@@ -379,6 +534,23 @@
       background-color: var(--primary-color);
       color: white;
       box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .download-btn:hover::before {
+      left: 100%;
     }
 
     .download-btn:hover {
@@ -394,6 +566,71 @@
 
     .download-btn:hover i {
       transform: translateY(-3px);
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      box-shadow: var(--box-shadow);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .contact-form:hover {
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--primary-color);
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius);
+      background-color: var(--background-secondary);
+      color: var(--text-light);
+      font-family: 'Poppins', sans-serif;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
+    }
+
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
     }
 
     /* Footer */
@@ -545,6 +782,10 @@
       .profile-header h1 {
         font-size: 2.2em;
       }
+      
+      .quick-nav {
+        display: none;
+      }
     }
 
     @media (max-width: 768px) {
@@ -625,33 +866,92 @@
       }
     }
   
-/* === Responsive Enhancements (non-breaking) === */
-/* Images scale fluidly on small screens */
-img { max-width: 100%; height: auto; }
-/* Avoid horizontal scroll from off-canvas nav or wide elements */
-html, body { overflow-x: hidden; }
-/* Slightly smaller logo and hamburger bars on very narrow screens */
-@media (max-width: 420px) {
-  .logo { font-size: 1.4em; }
-  .bar { width: 22px; }
-}
-/* Profile image scales down on small screens but keeps circle */
-.profile-image {
-  width: min(200px, 45vw);
-  height: auto;
-  aspect-ratio: 1 / 1;
-}
-/* Info grid: allow tighter columns on tiny devices */
-@media (max-width: 360px) {
-  .container { padding: 100px 14px; }
-  .info-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-}
-/* Improve focus visibility without altering theme */
-:focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
-/* Respect reduced-motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
-}
+    /* === Responsive Enhancements === */
+    img { max-width: 100%; height: auto; }
+    html, body { overflow-x: hidden; }
+
+    @media (max-width: 420px) {
+      .logo { font-size: 1.4em; }
+      .bar { width: 22px; }
+    }
+
+    .profile-image {
+      width: min(200px, 45vw);
+      height: auto;
+      aspect-ratio: 1 / 1;
+    }
+
+    @media (max-width: 360px) {
+      .container { padding: 100px 14px; }
+      .info-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    }
+
+    :focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+
+    /* Skill Progress Visualization */
+    .skill-progress-container {
+      margin-bottom: 25px;
+    }
+
+    .skill-progress-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .skill-progress-name {
+      font-weight: 500;
+    }
+
+    .skill-progress-percentage {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .skill-progress-bar {
+      height: 8px;
+      background-color: var(--background-secondary);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skill-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+      border-radius: 4px;
+      transition: width 1.5s ease;
+      width: 0;
+    }
+
+    /* Skill Categories Layout */
+    .skill-categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .skill-category {
+      background: rgba(78, 158, 255, 0.05);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      border: 1px solid rgba(78, 158, 255, 0.1);
+    }
+
+    .skill-category h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .skill-category h3 i {
+      margin-right: 10px;
+    }
 
   </style>
 </head>
@@ -674,10 +974,19 @@ html, body { overflow-x: hidden; }
     </nav>
   </header>
 
+  <!-- Quick Navigation -->
+  <div class="quick-nav">
+    <div class="nav-dot active" data-section="Profile" onclick="scrollToSection('profile-header')"></div>
+    <div class="nav-dot" data-section="Personal Info" onclick="scrollToSection('personal-info')"></div>
+    <div class="nav-dot" data-section="Skills" onclick="scrollToSection('technical-skills')"></div>
+    <div class="nav-dot" data-section="Experience" onclick="scrollToSection('professional-exp')"></div>
+    <div class="nav-dot" data-section="Contact" onclick="scrollToSection('contact-section')"></div>
+  </div>
+
   <!-- Main Content -->
   <div class="container">
     <!-- Profile Header -->
-    <div class="profile-header fade-in">
+    <div class="profile-header fade-in" id="profile-header">
       <img src="photo.jpg" alt="Mohamed Tarek" class="profile-image">
       <h1>Mohamed Tarek Abdelhady Ali</h1>
       <p>Electronic & Communications Engineer | Web Developer | Arduino Specialist | PCB Designer</p>
@@ -685,11 +994,12 @@ html, body { overflow-x: hidden; }
         <span class="title-tag">IEEE Member</span>
         <span class="title-tag">GDSC Technical Team</span>
         <span class="title-tag">Skoon Team Leader</span>
+        <span class="title-tag">Full Stack Developer</span>
       </div>
     </div>
 
     <!-- Personal Information -->
-    <div class="info-section fade-in delay-1">
+    <div class="info-section fade-in delay-1" id="personal-info">
       <h2><i class="fas fa-user-circle"></i> Personal Information</h2>
       <div class="info-grid">
         <div>
@@ -728,51 +1038,195 @@ html, body { overflow-x: hidden; }
       <h2><i class="fas fa-briefcase"></i> Professional Summary</h2>
       <p>A passionate third-year Communications Engineering student at the Higher Institute of Engineering and Technology in Manzala with extensive experience in developing advanced electronics and Arduino projects. Proven technical leadership skills with successful team collaborations in various academic and extracurricular projects.</p>
       <p>Active member of professional organizations including IEEE (Institute of Electrical and Electronics Engineers), GDSC Manzala Technical Team, and Skoon Team where I serve as both member and team leader.</p>
+      
+      <div class="achievement-badges">
+        <div class="badge">
+          <i class="fas fa-medal"></i>
+          <span>200+ Projects Completed</span>
+        </div>
+        <div class="badge">
+          <i class="fas fa-certificate"></i>
+          <span>13+ Certificates Earned</span>
+        </div>
+        <div class="badge">
+          <i class="fas fa-users"></i>
+          <span>50+ Happy Clients</span>
+        </div>
+      </div>
     </div>
 
     <!-- Technical Skills -->
-    <div class="cv-section fade-in delay-3">
+    <div class="cv-section fade-in delay-3" id="technical-skills">
       <h2><i class="fas fa-code"></i> Technical Skills</h2>
-      <div class="item">
-        <h3>Programming Languages</h3>
-        <div class="skills-container">
-          <span class="skill-tag">C</span>
-          <span class="skill-tag">C++</span>
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">HTML/CSS</span>
+      
+      <div class="skill-categories">
+        <div class="skill-category">
+          <h3><i class="fas fa-laptop-code"></i> Programming Languages</h3>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">C</span>
+              <span class="skill-progress-percentage">90%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="90"></div>
+            </div>
+          </div>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">C++</span>
+              <span class="skill-progress-percentage">85%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="85"></div>
+            </div>
+          </div>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">Python</span>
+              <span class="skill-progress-percentage">80%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="80"></div>
+            </div>
+          </div>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">HTML/CSS</span>
+              <span class="skill-progress-percentage">95%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="95"></div>
+            </div>
+          </div>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">JavaScript</span>
+              <span class="skill-progress-percentage">90%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="90"></div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="item">
-        <h3>Development Tools</h3>
-        <div class="skills-container">
-          <span class="skill-tag">Git</span>
-          <span class="skill-tag">GitHub</span>
-          <span class="skill-tag">Visual Studio</span> 
-          <span class="skill-tag">Arduino IDE</span>
+        
+        <div class="skill-category">
+          <h3><i class="fas fa-tools"></i> Development Tools & Platforms</h3>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">Git/GitHub</span>
+              <span class="skill-progress-percentage">88%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="88"></div>
+            </div>
+          </div>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">Visual Studio</span>
+              <span class="skill-progress-percentage">92%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="92"></div>
+            </div>
+          </div>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">Arduino IDE</span>
+              <span class="skill-progress-percentage">95%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="95"></div>
+            </div>
+          </div>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">VS Code</span>
+              <span class="skill-progress-percentage">90%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="90"></div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="item">
-        <h3>Simulation Software</h3>
-        <div class="skills-container">
-          <span class="skill-tag">Multisim</span>
-          <span class="skill-tag">Proteus</span>
-          <span class="skill-tag">Fritzing</span>
-          <span class="skill-tag">TinkerCAD</span>
+        
+        <div class="skill-category">
+          <h3><i class="fas fa-microchip"></i> Simulation & Design Software</h3>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">Multisim</span>
+              <span class="skill-progress-percentage">85%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="85"></div>
+            </div>
+          </div>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">Proteus</span>
+              <span class="skill-progress-percentage">90%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="90"></div>
+            </div>
+          </div>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">Fritzing</span>
+              <span class="skill-progress-percentage">88%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="88"></div>
+            </div>
+          </div>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">TinkerCAD</span>
+              <span class="skill-progress-percentage">92%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="92"></div>
+            </div>
+          </div>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">Altium Designer</span>
+              <span class="skill-progress-percentage">80%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="80"></div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="item">
-        <h3>Operating Systems</h3>
-        <div class="skills-container">
-          <span class="skill-tag">Windows</span>
-          <span class="skill-tag">Linux</span>
-          <span class="skill-tag">Ubuntu</span>
-        </div>
-      </div>
-      <div class="item">
-        <h3>PCB Design</h3>
-        <div class="skills-container">
-          <span class="skill-tag">Altium Designer</span>
-          <span class="skill-tag">Proteus</span>
+        
+        <div class="skill-category">
+          <h3><i class="fas fa-desktop"></i> Operating Systems</h3>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">Windows</span>
+              <span class="skill-progress-percentage">95%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="95"></div>
+            </div>
+          </div>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">Linux</span>
+              <span class="skill-progress-percentage">85%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="85"></div>
+            </div>
+          </div>
+          <div class="skill-progress-container">
+            <div class="skill-progress-header">
+              <span class="skill-progress-name">Ubuntu</span>
+              <span class="skill-progress-percentage">88%</span>
+            </div>
+            <div class="skill-progress-bar">
+              <div class="skill-progress-fill" data-percentage="88"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -794,12 +1248,18 @@ html, body { overflow-x: hidden; }
     </div>
 
     <!-- Professional Experience -->
-    <div class="cv-section fade-in delay-5">
+    <div class="cv-section fade-in delay-5" id="professional-exp">
       <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
       <div class="item">
         <h3>Undergraduate Student</h3>
         <p>Higher Institute of Engineering and Technology (HIE), Manzala</p>
         <p>Currently pursuing a degree in Communications Engineering with a focus on practical applications and project-based learning.</p>
+      </div>
+      
+      <div class="item">
+        <h3>Freelance Developer & Engineer</h3>
+        <p>Self-Employed | 2022 - Present</p>
+        <p>Developed numerous Arduino projects, PCB designs, and web applications for clients worldwide. Specialized in IoT solutions and embedded systems.</p>
       </div>
     </div>
 
@@ -817,6 +1277,43 @@ html, body { overflow-x: hidden; }
       <div class="item">
         <h3>Skoon Team</h3>
         <p>Team Member and Leader working on innovative engineering solutions</p>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="info-section fade-in delay-6" id="contact-section">
+      <h2><i class="fas fa-envelope"></i> Get In Touch</h2>
+      <p>Feel free to reach out for collaborations, project inquiries, or just to say hello!</p>
+      
+      <div class="info-grid">
+        <div>
+          <div class="contact-info">
+            <i class="fas fa-envelope"></i>
+            <span>mohammed.tarek.abdelhady.ali@gmail.com</span>
+          </div>
+          <div class="contact-info">
+            <i class="fas fa-phone"></i>
+            <span>+20 109 063 7406</span>
+          </div>
+          <div class="contact-info">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Kafr El-Sheikh, Biyala, Egypt</span>
+          </div>
+        </div>
+        <div>
+          <div class="contact-info">
+            <i class="fab fa-linkedin"></i>
+            <span>linkedin.com/in/mohamedtarek225</span>
+          </div>
+          <div class="contact-info">
+            <i class="fab fa-github"></i>
+            <span>github.com/mohamed22tarek5</span>
+          </div>
+          <div class="contact-info">
+            <i class="fab fa-whatsapp"></i>
+            <span>WhatsApp: +20 109 063 7406</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -958,6 +1455,13 @@ html, body { overflow-x: hidden; }
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('animated');
+          
+          // Animate skill bars when they come into view
+          if (entry.target.id === 'technical-skills') {
+            setTimeout(() => {
+              animateSkillBars();
+            }, 300);
+          }
         }
       });
     }, observerOptions);
@@ -965,15 +1469,58 @@ html, body { overflow-x: hidden; }
     document.querySelectorAll('.fade-in').forEach(element => {
       observer.observe(element);
     });
-  
-// Keyboard support for mobile menu toggle
-mobileMenu.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    mobileMenu.click();
-  }
-});
-
-</script>
+    
+    // Animate skill bars
+    function animateSkillBars() {
+      const skillBars = document.querySelectorAll('.skill-progress-fill');
+      skillBars.forEach(bar => {
+        const percentage = bar.getAttribute('data-percentage');
+        bar.style.width = `${percentage}%`;
+      });
+    }
+    
+    // Quick navigation functionality
+    function scrollToSection(sectionId) {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        window.scrollTo({
+          top: element.offsetTop - 100,
+          behavior: 'smooth'
+        });
+      }
+    }
+    
+    // Update active navigation dot on scroll
+    const sections = document.querySelectorAll('.info-section, .cv-section, .profile-header');
+    const navDots = document.querySelectorAll('.nav-dot');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (pageYOffset >= sectionTop - 150) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navDots.forEach(dot => {
+        dot.classList.remove('active');
+        if (dot.getAttribute('data-section').toLowerCase() === current.replace('-', ' ')) {
+          dot.classList.add('active');
+        }
+      });
+    });
+    
+    // Keyboard support for mobile menu toggle
+    mobileMenu.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        mobileMenu.click();
+      }
+    });
+  </script>
 </body>
 </html>

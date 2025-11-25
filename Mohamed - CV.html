@@ -261,6 +261,7 @@
             height: calc(100vh - 300px);
             min-height: 600px;
             transition: all var(--transition-speed) ease;
+            position: relative;
         }
 
         .pdf-container:hover {
@@ -273,9 +274,54 @@
             border: none;
         }
 
+        /* PDF Controls */
+        .pdf-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--glass-effect);
+            backdrop-filter: var(--glass-blur);
+            border-radius: 25px;
+            padding: 10px 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            border: 1px solid var(--glass-border);
+            opacity: 0;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .pdf-container:hover .pdf-controls {
+            opacity: 1;
+        }
+
+        .pdf-control-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.2em;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .pdf-control-btn:hover {
+            background: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .pdf-page-info {
+            color: var(--text-light);
+            font-size: 0.9em;
+            margin: 0 10px;
+        }
+
         /* Download Buttons */
         .download-section {
             text-align: center;
+            margin-bottom: 60px;
         }
 
         .btn {
@@ -324,6 +370,104 @@
             gap: 15px;
             margin-top: 20px;
             flex-wrap: wrap;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            background-color: var(--background-secondary);
+            padding: 80px 0;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-category {
+            background-color: var(--card-dark);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .skill-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-category h3 i {
+            margin-right: 10px;
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background-color: var(--background-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+            border-radius: 4px;
+            transition: width 1.5s ease;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .info-card {
+            display: flex;
+            align-items: center;
+            background-color: var(--card-dark);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-hover);
+        }
+
+        .info-icon {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-right: 20px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .info-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
 
         /* Footer */
@@ -550,6 +694,16 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+            .pdf-controls {
+                bottom: 10px;
+                padding: 8px 15px;
+            }
+
+            .pdf-control-btn {
+                font-size: 1em;
+                padding: 6px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -576,29 +730,26 @@
                 bottom: 20px;
                 right: 20px;
             }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
         }
     
-/* === Responsive Enhancements (non-breaking) === */
-img { max-width: 100%; height: auto; } /* prevent overflow on small screens */
-html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
+        /* === Responsive Enhancements === */
+        img { max-width: 100%; height: auto; }
+        html, body { overflow-x: hidden; }
 
-/* Container breathing room on very small phones */
-@media (max-width: 360px) {
-  .container { padding: 0 14px; }
-}
+        @media (max-width: 360px) {
+            .container { padding: 0 14px; }
+            .pdf-container { height: 360px; min-height: 340px; }
+        }
 
-/* PDF container: ensure it's usable on all heights */
-@media (max-width: 360px) {
-  .pdf-container { height: 360px; min-height: 340px; }
-}
+        :focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
 
-/* Improve focus visibility without altering theme */
-:focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
-
-/* Respect users who prefer reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
-}
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; }
+        }
 
     </style>
 </head>
@@ -635,12 +786,33 @@ html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
                 frameborder="0"
                 allowfullscreen
                 title="Mohamed's CV PDF Viewer"
+                id="pdfViewer"
             ></iframe>
+            
+            <!-- PDF Controls -->
+            <div class="pdf-controls">
+                <button class="pdf-control-btn" id="pdfPrev" title="Previous Page">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <span class="pdf-page-info" id="pdfPageInfo">Page 1 of 1</span>
+                <button class="pdf-control-btn" id="pdfNext" title="Next Page">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="pdf-control-btn" id="pdfZoomOut" title="Zoom Out">
+                    <i class="fas fa-search-minus"></i>
+                </button>
+                <button class="pdf-control-btn" id="pdfZoomIn" title="Zoom In">
+                    <i class="fas fa-search-plus"></i>
+                </button>
+                <button class="pdf-control-btn" id="pdfFullscreen" title="Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
         </div>
 
         <div class="download-section fade-in delay-2">
-            <a href="CV.pdf" download="Mohamed_Professional_CV.pdf" class="btn btn-primary">
-                <i class="fas fa-download"></i> Download Full CV
+            <a href="CV.pdf" download="Mohamed_Tarek_Professional_CV.pdf" class="btn btn-primary">
+                <i class="fas fa-download"></i> Download Full CV (PDF)
             </a>
             
             <div class="download-options">
@@ -650,9 +822,159 @@ html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
                 <a href="#" id="print-cv" class="btn btn-outline">
                     <i class="fas fa-print"></i> Print CV
                 </a>
+                <a href="CV.docx" download="Mohamed_Tarek_Professional_CV.docx" class="btn btn-outline">
+                    <i class="fas fa-file-word"></i> Download DOCX
+                </a>
             </div>
         </div>
     </div>
+
+    <!-- Skills Section -->
+    <section class="skills-section" id="skills">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Technical Skills</h2>
+                <p class="section-subtitle">My core competencies and technical expertise</p>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skill-category fade-in">
+                    <h3><i class="fas fa-code"></i> Web Development</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>HTML5/CSS3</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>JavaScript</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>React.js</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category fade-in delay-1">
+                    <h3><i class="fas fa-microchip"></i> Embedded Systems</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Arduino Programming</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>PCB Design</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Embedded C</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category fade-in delay-2">
+                    <h3><i class="fas fa-network-wired"></i> Networking & IoT</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>CCNA Networking</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>IoT Solutions</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Linux Administration</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Contact Information</h2>
+                <p class="section-subtitle">Get in touch for opportunities and collaborations</p>
+            </div>
+            
+            <div class="contact-info">
+                <div class="info-card fade-in">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Email</h3>
+                        <p>mohammed.tarek.abdelhady.ali@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="info-card fade-in delay-1">
+                    <div class="info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Phone</h3>
+                        <p>+201090637406</p>
+                    </div>
+                </div>
+                
+                <div class="info-card fade-in delay-2">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Location</h3>
+                        <p>Kafr el sheikh, Egypt</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -822,13 +1144,80 @@ html, body { overflow-x: hidden; }      /* avoid accidental horizontal scroll */
             observer.observe(element);
         });
     
-// Keyboard support for mobile menu toggle
-mobileMenu.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        mobileMenu.click();
-    }
-});
+        // Keyboard support for mobile menu toggle
+        mobileMenu.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                mobileMenu.click();
+            }
+        });
+
+        // Enhanced PDF Controls
+        document.addEventListener('DOMContentLoaded', function() {
+            const pdfViewer = document.getElementById('pdfViewer');
+            const pdfPrev = document.getElementById('pdfPrev');
+            const pdfNext = document.getElementById('pdfNext');
+            const pdfZoomIn = document.getElementById('pdfZoomIn');
+            const pdfZoomOut = document.getElementById('pdfZoomOut');
+            const pdfFullscreen = document.getElementById('pdfFullscreen');
+            const pdfPageInfo = document.getElementById('pdfPageInfo');
+
+            // Simulate PDF navigation (in a real implementation, you'd use PDF.js)
+            let currentPage = 1;
+            const totalPages = 2; // Adjust based on your actual PDF
+
+            function updatePageInfo() {
+                pdfPageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+            }
+
+            pdfPrev.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updatePageInfo();
+                }
+            });
+
+            pdfNext.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    updatePageInfo();
+                }
+            });
+
+            pdfZoomIn.addEventListener('click', () => {
+                // In a real implementation, this would adjust PDF zoom
+                console.log('Zoom in clicked');
+            });
+
+            pdfZoomOut.addEventListener('click', () => {
+                // In a real implementation, this would adjust PDF zoom
+                console.log('Zoom out clicked');
+            });
+
+            pdfFullscreen.addEventListener('click', () => {
+                if (pdfViewer.requestFullscreen) {
+                    pdfViewer.requestFullscreen();
+                } else if (pdfViewer.webkitRequestFullscreen) {
+                    pdfViewer.webkitRequestFullscreen();
+                } else if (pdfViewer.msRequestFullscreen) {
+                    pdfViewer.msRequestFullscreen();
+                }
+            });
+
+            updatePageInfo();
+        });
+
+        // Skill bar animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
 
     </script>
 </body>

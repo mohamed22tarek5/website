@@ -258,6 +258,9 @@
       background-color: var(--card-dark);
       padding: 30px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
     .service-card:hover {
@@ -285,6 +288,7 @@
     .service-description {
       color: var(--text-muted);
       margin-bottom: 20px;
+      flex-grow: 1;
     }
 
     .service-features {
@@ -321,6 +325,228 @@
     .service-cta:hover {
       background-color: var(--primary-dark);
       transform: translateY(-3px);
+    }
+
+    /* Service Modal */
+    .service-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .service-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
+      max-width: 800px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1.5em;
+      cursor: pointer;
+      z-index: 10;
+      transition: color var(--transition-speed) ease;
+    }
+
+    .modal-close:hover {
+      color: var(--primary-color);
+    }
+
+    .modal-body {
+      padding: 40px;
+    }
+
+    .modal-title {
+      font-size: 2em;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+    }
+
+    .modal-description {
+      margin-bottom: 25px;
+      line-height: 1.7;
+    }
+
+    .modal-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .feature-column h4 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      font-size: 1.2em;
+    }
+
+    .feature-column ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .feature-column li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 20px;
+      color: var(--text-muted);
+    }
+
+    .feature-column li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--primary-color);
+    }
+
+    .modal-cta {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
+      padding: 40px;
+      box-shadow: var(--box-shadow);
+      margin-top: 50px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--primary-color);
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius);
+      background-color: var(--background-secondary);
+      color: var(--text-light);
+      font-family: 'Poppins', sans-serif;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
+    }
+
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+    }
+
+    /* Testimonials Section */
+    .testimonials {
+      background-color: var(--background-dark);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .testimonial-card {
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
+      padding: 30px;
+      box-shadow: var(--box-shadow);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 20px;
+      color: var(--text-muted);
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+
+    .author-info h4 {
+      color: var(--text-light);
+      margin-bottom: 5px;
+    }
+
+    .author-info p {
+      color: var(--text-muted);
+      font-size: 0.9em;
+      margin-bottom: 0;
     }
 
     /* Footer */
@@ -534,6 +760,14 @@
       .services .grid {
         grid-template-columns: 1fr;
       }
+      
+      .modal-content {
+        width: 95%;
+      }
+      
+      .modal-features {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 480px) {
@@ -556,25 +790,29 @@
         bottom: 20px;
         right: 20px;
       }
+      
+      .contact-form {
+        padding: 25px;
+      }
     }
   
-/* === Responsive Enhancements (non-breaking) === */
-/* Make images fluid to prevent overflow on small screens */
-img { max-width: 100%; height: auto; }
-/* Avoid horizontal scroll from off-canvas nav or wide elements */
-html, body { overflow-x: hidden; }
-/* Services grid: allow smaller min column width on very small devices */
-@media (max-width: 420px) {
-  .services .grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-  .logo { font-size: 1.4em; }
-  .bar { width: 22px; }
-}
-/* Improve focus visibility without altering theme */
-:focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
-/* Respect reduced-motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
-}
+    /* === Responsive Enhancements (non-breaking) === */
+    /* Make images fluid to prevent overflow on small screens */
+    img { max-width: 100%; height: auto; }
+    /* Avoid horizontal scroll from off-canvas nav or wide elements */
+    html, body { overflow-x: hidden; }
+    /* Services grid: allow smaller min column width on very small devices */
+    @media (max-width: 420px) {
+      .services .grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+      .logo { font-size: 1.4em; }
+      .bar { width: 22px; }
+    }
+    /* Improve focus visibility without altering theme */
+    :focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
+    /* Respect reduced-motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
 
   </style>
 </head>
@@ -619,7 +857,7 @@ html, body { overflow-x: hidden; }
             <li>Clean, semantic code structure</li>
             <li>Performance optimization</li>
           </ul>
-          <a href="#contact" class="service-cta">Get Started</a>
+          <button class="service-cta view-service-details" data-service="web-development">Get Started</button>
         </div>
         
         <!-- Arduino Programming -->
@@ -635,7 +873,7 @@ html, body { overflow-x: hidden; }
             <li>Wireless communication (WiFi/BT)</li>
             <li>Power optimization</li>
           </ul>
-          <a href="#contact" class="service-cta">Discuss Project</a>
+          <button class="service-cta view-service-details" data-service="arduino-programming">Discuss Project</button>
         </div>
         
         <!-- Simulation Projects -->
@@ -651,7 +889,7 @@ html, body { overflow-x: hidden; }
             <li>TinkerCAD prototyping</li>
             <li>Performance validation</li>
           </ul>
-          <a href="#contact" class="service-cta">Request Simulation</a>
+          <button class="service-cta view-service-details" data-service="circuit-simulation">Request Simulation</button>
         </div>
         
         <!-- PCB Design -->
@@ -667,17 +905,24 @@ html, body { overflow-x: hidden; }
             <li>Design rule checking</li>
             <li>Gerber file generation</li>
           </ul>
-          <a href="#contact" class="service-cta">Design Inquiry</a>
+          <button class="service-cta view-service-details" data-service="pcb-design">Design Inquiry</button>
         </div>
       
+        <!-- IoT Solutions -->
         <div class="service-card fade-in delay-1">
-           <div class="service-icon">
-             <i class="fas fa-wifi"></i>
-            </div>
-             <h3 class="service-title">IoT Solutions</h3>
-             <p class="service-description">Complete IoT solutions including hardware, firmware, and cloud integration for smart devices and automation.</p>
-               <a href="Mohamed - Services.html" class="service-cta">Learn More</a>
-           </div>
+          <div class="service-icon">
+            <i class="fas fa-wifi"></i>
+          </div>
+          <h3 class="service-title">IoT Solutions</h3>
+          <p class="service-description">Complete IoT solutions including hardware, firmware, and cloud integration for smart devices and automation.</p>
+          <ul class="service-features">
+            <li>IoT device development</li>
+            <li>Cloud platform integration</li>
+            <li>Data analytics & visualization</li>
+            <li>Remote monitoring systems</li>
+          </ul>
+          <button class="service-cta view-service-details" data-service="iot-solutions">Learn More</button>
+        </div>
           
         <!-- Smart Home -->
         <div class="service-card fade-in">
@@ -692,7 +937,7 @@ html, body { overflow-x: hidden; }
             <li>Remote control systems</li>
             <li>Energy monitoring</li>
           </ul>
-          <a href="#contact" class="service-cta">Automate Your Home</a>
+          <button class="service-cta view-service-details" data-service="smart-home">Automate Your Home</button>
         </div>
         
         <!-- Embedded Systems -->
@@ -708,7 +953,7 @@ html, body { overflow-x: hidden; }
             <li>Peripheral interfacing</li>
             <li>Low-power design</li>
           </ul>
-          <a href="#contact" class="service-cta">Build Your System</a>
+          <button class="service-cta view-service-details" data-service="embedded-systems">Build Your System</button>
         </div>
         
         <!-- Graduation Projects -->
@@ -724,10 +969,10 @@ html, body { overflow-x: hidden; }
             <li>Hardware/software integration</li>
             <li>Presentation preparation</li>
           </ul>
-          <a href="#contact" class="service-cta">Start Your Project</a>
+          <button class="service-cta view-service-details" data-service="graduation-projects">Start Your Project</button>
         </div>
         
-        <!-- Simple Projects -->
+        <!-- Electronics Prototyping -->
         <div class="service-card fade-in delay-3">
           <div class="service-icon">
             <i class="fas fa-lightbulb"></i>
@@ -740,14 +985,125 @@ html, body { overflow-x: hidden; }
             <li>Prototype development</li>
             <li>Testing and debugging</li>
           </ul>
-          <a href="#contact" class="service-cta">Build Your Idea</a>
+          <button class="service-cta view-service-details" data-service="electronics-prototyping">Build Your Idea</button>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2>Client Testimonials</h2>
+        <p class="section-subtitle">What my clients say about working with me</p>
+      </div>
+      
+      <div class="testimonial-grid">
+        <div class="testimonial-card fade-in">
+          <p class="testimonial-text">"Mohamed delivered an exceptional Arduino-based automation system for our laboratory. His attention to detail and technical expertise exceeded our expectations."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">AS</div>
+            <div class="author-info">
+              <h4>Ahmed Samir</h4>
+              <p>Research Lab Manager</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card fade-in delay-1">
+          <p class="testimonial-text">"The PCB design service was professional and efficient. Mohamed provided multiple design iterations and accommodated all our specific requirements."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">MK</div>
+            <div class="author-info">
+              <h4>Mona Khalil</h4>
+              <p>Electronics Startup Founder</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-card fade-in delay-2">
+          <p class="testimonial-text">"Working with Mohamed on our graduation project was a great experience. He guided us through complex embedded systems concepts and helped us achieve excellent results."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">OS</div>
+            <div class="author-info">
+              <h4>Omar Sayed</h4>
+              <p>Engineering Student</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-title fade-in">
+        <h2>Get In Touch</h2>
+        <p class="section-subtitle">Ready to start your project? Let's discuss how I can help bring your ideas to life</p>
+      </div>
+      
+      <div class="contact-form fade-in">
+        <form id="service-inquiry-form">
+          <div class="form-group">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email" class="form-label">Your Email</label>
+            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="service" class="form-label">Service Interested In</label>
+            <select id="service" class="form-control" required>
+              <option value="">Select a service</option>
+              <option value="web-development">Web Development</option>
+              <option value="arduino-programming">Arduino Programming</option>
+              <option value="circuit-simulation">Circuit Simulation</option>
+              <option value="pcb-design">PCB Design</option>
+              <option value="iot-solutions">IoT Solutions</option>
+              <option value="smart-home">Smart Home Solutions</option>
+              <option value="embedded-systems">Embedded Systems</option>
+              <option value="graduation-projects">Graduation Projects</option>
+              <option value="electronics-prototyping">Electronics Prototyping</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="message" class="form-label">Project Details</label>
+            <textarea id="message" class="form-control" placeholder="Describe your project requirements, timeline, and any specific details..." required></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">Send Inquiry</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Modal -->
+  <div class="service-modal" id="service-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close">&times;</button>
+      <div class="modal-body">
+        <h2 class="modal-title" id="modal-title"></h2>
+        <p class="modal-description" id="modal-description"></p>
+        
+        <div class="modal-features" id="modal-features">
+          <!-- Features will be populated by JavaScript -->
+        </div>
+        
+        <div class="modal-cta">
+          <a href="#contact" class="service-cta" id="modal-cta">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
-  <footer id="contact">
+  <footer>
     <div class="container">
       <div class="footer-content">
         <div class="footer-column fade-in">
@@ -804,6 +1160,92 @@ html, body { overflow-x: hidden; }
 
   <!-- JavaScript -->
   <script>
+    // Service data for modal details
+    const serviceData = {
+      'web-development': {
+        title: 'Web Development',
+        description: 'Professional web development services creating modern, responsive websites and web applications. I specialize in building user-friendly interfaces with clean code and optimal performance.',
+        features: {
+          'Frontend Development': [
+            'HTML5, CSS3, JavaScript',
+            'Responsive design for all devices',
+            'Modern frameworks (React, Vue)',
+            'Cross-browser compatibility',
+            'Performance optimization'
+          ],
+          'Backend Development': [
+            'Node.js, Python, PHP',
+            'Database design & integration',
+            'RESTful API development',
+            'Server configuration',
+            'Security implementation'
+          ],
+          'Additional Services': [
+            'Website maintenance',
+            'SEO optimization',
+            'Performance monitoring',
+            'Technical documentation',
+            'Training & support'
+          ]
+        }
+      },
+      'arduino-programming': {
+        title: 'Arduino Programming',
+        description: 'Expert Arduino programming services for custom microcontroller projects. From simple automation to complex IoT systems, I deliver reliable and efficient code solutions.',
+        features: {
+          'Microcontroller Programming': [
+            'Arduino Uno/Nano/Mega',
+            'ESP8266/ESP32',
+            'PIC Microcontrollers',
+            'Custom firmware development',
+            'Library creation'
+          ],
+          'Sensor Integration': [
+            'Temperature & humidity',
+            'Motion & proximity',
+            'Light & sound sensors',
+            'GPS modules',
+            'Camera integration'
+          ],
+          'Communication Protocols': [
+            'WiFi & Bluetooth',
+            'RF communication',
+            'I2C, SPI, UART',
+            'MQTT for IoT',
+            'Custom protocols'
+          ]
+        }
+      },
+      // Add more service data as needed
+      'pcb-design': {
+        title: 'PCB Design',
+        description: 'Professional PCB design services creating reliable and efficient circuit boards for your electronic projects. From schematic capture to final manufacturing files.',
+        features: {
+          'Design Process': [
+            'Schematic capture',
+            'Component selection',
+            'Board layout optimization',
+            'Design rule checking',
+            'Signal integrity analysis'
+          ],
+          'Manufacturing Support': [
+            'Gerber file generation',
+            'BOM preparation',
+            'Assembly instructions',
+            'Quality control checks',
+            'Testing procedures'
+          ],
+          'Specializations': [
+            'Single & double-sided boards',
+            'Multi-layer designs',
+            'High-frequency circuits',
+            'Power electronics',
+            'Mixed-signal designs'
+          ]
+        }
+      }
+    };
+
     // Mobile Menu Toggle
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
@@ -912,20 +1354,109 @@ html, body { overflow-x: hidden; }
       }
     });
 
-    // Set current year in footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-
     // Ensure smooth transitions for the theme change
     document.body.style.transition = "background-color 0.5s ease, color 0.5s ease";
   
-// Keyboard support for mobile menu toggle
-mobileMenu.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    mobileMenu.click();
-  }
-});
+    // Keyboard support for mobile menu toggle
+    mobileMenu.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        mobileMenu.click();
+      }
+    });
 
-</script>
+    // Service Modal
+    const serviceModal = document.getElementById('service-modal');
+    const modalClose = document.getElementById('modal-close');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const modalFeatures = document.getElementById('modal-features');
+    const modalCta = document.getElementById('modal-cta');
+    
+    // View Details buttons
+    document.querySelectorAll('.view-service-details').forEach(button => {
+      button.addEventListener('click', () => {
+        const serviceId = button.getAttribute('data-service');
+        const service = serviceData[serviceId];
+        
+        if (service) {
+          modalTitle.textContent = service.title;
+          modalDescription.textContent = service.description;
+          
+          // Clear and populate features
+          modalFeatures.innerHTML = '';
+          for (const [category, items] of Object.entries(service.features)) {
+            const featureColumn = document.createElement('div');
+            featureColumn.className = 'feature-column';
+            
+            const categoryTitle = document.createElement('h4');
+            categoryTitle.textContent = category;
+            featureColumn.appendChild(categoryTitle);
+            
+            const featureList = document.createElement('ul');
+            items.forEach(item => {
+              const listItem = document.createElement('li');
+              listItem.textContent = item;
+              featureList.appendChild(listItem);
+            });
+            
+            featureColumn.appendChild(featureList);
+            modalFeatures.appendChild(featureColumn);
+          }
+          
+          // Update CTA button
+          modalCta.textContent = `Inquire About ${service.title}`;
+          
+          // Show modal
+          serviceModal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+    
+    // Close modal
+    modalClose.addEventListener('click', () => {
+      serviceModal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    
+    // Close modal when clicking outside content
+    serviceModal.addEventListener('click', (e) => {
+      if (e.target === serviceModal) {
+        serviceModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && serviceModal.classList.contains('active')) {
+        serviceModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Form submission
+    const inquiryForm = document.getElementById('service-inquiry-form');
+    inquiryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        service: document.getElementById('service').value,
+        message: document.getElementById('message').value
+      };
+      
+      // In a real application, you would send this data to a server
+      // For now, we'll just show a success message
+      alert(`Thank you for your inquiry, ${formData.name}! I'll get back to you soon about ${formData.service}.`);
+      inquiryForm.reset();
+    });
+
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
