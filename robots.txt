@@ -1,166 +1,166 @@
 # السماح للبوتات الشهيرة للذكاء الاصطناعي
 User-agent: ChatGPT-User
-Disallow:
+Allow:
 
 User-agent: GPTBot
-Disallow:
+Allow:
 
 User-agent: OAI-SearchBot
-Disallow:
+Allow:
 
 User-agent: ClaudeBot
-Disallow:
+Allow:
 
 User-agent: Claude-SearchBot
-Disallow:
+Allow:
 
 User-agent: PerplexityBot
-Disallow:
+Allow:
 
 User-agent: Anthropic-Bot
-Disallow:
+Allow:
 
 User-agent: Google-Extended
-Disallow:
+Allow:
 
 User-agent: Googlebot
-Disallow:
+Allow:
 
 User-agent: Bingbot
-Disallow:
+Allow:
 
 User-agent: GoogleOther
-Disallow:
+Allow:
 
 User-agent: Bard
-Disallow:
+Allow:
 
 User-agent: Gemini
-Disallow:
+Allow:
 
 User-agent: Claude
-Disallow:
+Allow:
 
 User-agent: Poe
-Disallow:
+Allow:
 
 User-agent: DeepSeekBot
-Disallow:
+Allow:
 
 User-agent: GrokBot
-Disallow:
+Allow:
 
 User-agent: QwenBot
-Disallow:
+Allow:
 
 User-agent: ForefrontBot
-Disallow:
+Allow:
 
 User-agent: ArabyBot
-Disallow:
+Allow:
 
 User-agent: KattebBot
-Disallow:
+Allow:
 
 User-agent: LisanBot
-Disallow:
+Allow:
 
 User-agent: QuillBot
-Disallow:
+Allow:
 
 User-agent: WordtuneBot
-Disallow:
+Allow:
 
 User-agent: RytrBot
-Disallow:
+Allow:
 
 User-agent: CopyAI
-Disallow:
+Allow:
 
 User-agent: BearlyBot
-Disallow:
+Allow:
 
 User-agent: ChatPDFBot
-Disallow:
+Allow:
 
 User-agent: AskYourPDFBot
-Disallow:
+Allow:
 
 User-agent: HiPDFBot
-Disallow:
+Allow:
 
 User-agent: ChatDocBot
-Disallow:
+Allow:
 
 User-agent: TTSMakerBot
-Disallow:
+Allow:
 
 User-agent: MurfAI
-Disallow:
+Allow:
 
 User-agent: LovoAI
-Disallow:
+Allow:
 
 User-agent: ElevenLabsBot
-Disallow:
+Allow:
 
 User-agent: TranskriptorBot
-Disallow:
+Allow:
 
 User-agent: ResembleBot
-Disallow:
+Allow:
 
 User-agent: KrispBot
-Disallow:
+Allow:
 
 User-agent: D-IDBot
-Disallow:
+Allow:
 
 User-agent: FlikiBot
-Disallow:
+Allow:
 
 User-agent: VideoAIBot
 Disallow:
 
 User-agent: RunwayMLBot
-Disallow:
+Allow:
 
 User-agent: SynthesiaBot
-Disallow:
+Allow:
 
 User-agent: SteveAIBot
-Disallow:
+Allow:
 
 User-agent: MoovlyBot
-Disallow:
+Allow:
 
 User-agent: VEEDBot
-Disallow:
+Allow:
 
 User-agent: PapercupBot
-Disallow:
+Allow:
 
 User-agent: KickresumeBot
-Disallow:
+Allow:
 
 User-agent: FirefliesBot
-Disallow:
+Allow:
 
 User-agent: HumataBot
-Disallow:
+Allow:
 
 User-agent: AiterBot
-Disallow:
+Allow:
 
 User-agent: BeulrBot
-Disallow:
+Allow:
 
 User-agent: CVLoginBot
-Disallow:
+Allow:
 
 User-agent: GPTZeroBot
-Disallow:
+Allow:
 
 # منع باقي البوتات غير المذكورة
 User-agent: *
-Disallow: /
+Allow: /
