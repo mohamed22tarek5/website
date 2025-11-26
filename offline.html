@@ -3,105 +3,483 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mohamed Tarek - Offline Page">
+  <meta name="theme-color" content="#4e9eff">
   <title>Offline - Mohamed Tarek</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
   <style>
+    :root {
+      --primary-color: #4e9eff;
+      --primary-dark: #3a6cf4;
+      --primary-light: #6ab1ff;
+      --background-dark: #121212;
+      --background-secondary: #1a1a1a;
+      --card-dark: #1e1e1e;
+      --text-light: #ffffff;
+      --text-muted: #aaaaaa;
+      --success-color: #4caf50;
+      --warning-color: #ff9800;
+      --error-color: #f44336;
+      --transition-speed: 0.3s;
+      --border-radius: 12px;
+      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: var(--text-light);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       margin: 0;
       padding: 20px;
-    }
-    .offline-container {
-      background: rgba(255,255,255,0.1);
-      padding: 40px;
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-      max-width: 500px;
-      text-align: center;
-    }
-    h1 {
-      font-size: 2em;
-      margin-bottom: 20px;
-    }
-    p {
-      margin-bottom: 20px;
       line-height: 1.6;
     }
+
+    .offline-container {
+      background: rgba(30, 30, 30, 0.85);
+      padding: 40px;
+      border-radius: var(--border-radius);
+      backdrop-filter: blur(10px);
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--box-shadow);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      font-size: 1.8em;
+      font-weight: 700;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .logo i {
+      margin-right: 10px;
+    }
+
     .icon {
       font-size: 4em;
       margin-bottom: 20px;
+      color: var(--warning-color);
+      animation: pulse 2s infinite;
     }
-    .available-content {
-      background: rgba(255,255,255,0.2);
-      padding: 20px;
-      border-radius: 10px;
-      margin: 20px 0;
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
     }
-    .available-content h3 {
+
+    h1 {
+      font-size: 2.2em;
       margin-bottom: 15px;
+      color: var(--text-light);
     }
-    .content-list {
+
+    p {
+      margin-bottom: 20px;
+      color: var(--text-muted);
+    }
+
+    .connection-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      padding: 10px 20px;
+      background: rgba(255, 152, 0, 0.1);
+      border-radius: 50px;
+      border: 1px solid rgba(255, 152, 0, 0.3);
+    }
+
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--warning-color);
+      margin-right: 10px;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .available-content {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 25px;
+      border-radius: var(--border-radius);
+      margin: 25px 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .available-content h3 {
+      margin-bottom: 20px;
+      color: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .available-content h3 i {
+      margin-right: 10px;
+    }
+
+    .content-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
-      text-align: left;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
     }
-    .content-list a {
-      color: white;
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px 10px;
+      border-radius: 8px;
+      transition: all var(--transition-speed) ease;
+      border: 1px solid transparent;
+    }
+
+    .content-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+      border-color: rgba(78, 158, 255, 0.3);
+    }
+
+    .content-card a {
+      color: var(--text-light);
       text-decoration: none;
-      padding: 8px;
-      border-radius: 5px;
-      transition: background 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.9em;
     }
-    .content-list a:hover {
-      background: rgba(255,255,255,0.2);
+
+    .content-card i {
+      font-size: 1.5em;
+      margin-bottom: 8px;
+      color: var(--primary-light);
     }
-    button {
-      background: white;
-      color: #667eea;
-      border: none;
-      padding: 12px 30px;
-      border-radius: 25px;
-      font-size: 1em;
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 25px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95em;
       cursor: pointer;
-      transition: transform 0.3s ease;
-      margin: 5px;
+      transition: all var(--transition-speed) ease;
+      display: inline-flex;
+      align-items: center;
+      border: none;
+      outline: none;
     }
-    button:hover {
-      transform: translateY(-2px);
+
+    .btn i {
+      margin-right: 8px;
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-light);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .offline-features {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .offline-features h3 {
+      margin-bottom: 15px;
+      color: var(--text-light);
+      font-size: 1.1em;
+    }
+
+    .features-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px 15px;
+      border-radius: 50px;
+      font-size: 0.85em;
+    }
+
+    .feature i {
+      margin-right: 8px;
+      color: var(--primary-light);
+      font-size: 0.9em;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .offline-container {
+        padding: 30px 20px;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+      }
+      
+      .content-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .offline-container {
+        padding: 25px 15px;
+      }
+      
+      .icon {
+        font-size: 3em;
+      }
+      
+      h1 {
+        font-size: 1.6em;
+      }
+      
+      .content-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   </style>
 </head>
 <body>
   <div class="offline-container">
-    <div class="icon">📶</div>
+    <div class="logo">
+      <i class="fas fa-code"></i> Mohamed Tarek
+    </div>
+    
+    <div class="icon">
+      <i class="fas fa-wifi-slash"></i>
+    </div>
+    
     <h1>You're Offline</h1>
-    <p>It seems you've lost your internet connection. Some features may not be available.</p>
+    
+    <div class="connection-status">
+      <div class="status-dot"></div>
+      <span>No internet connection detected</span>
+    </div>
+    
+    <p>It seems you've lost your internet connection. Don't worry - you can still access cached content and tools while offline.</p>
     
     <div class="available-content">
-      <h3>Available Offline Content:</h3>
-      <div class="content-list">
-        <a href="./index.html">Portfolio</a>
-        <a href="./Mohamed - CV.html">My CV</a>
-        <a href="./Mohamed - Project.html">Projects</a>
-        <a href="./electrical-calculation.html">Electrical Calc</a>
-        <a href="./resistor-calculator.html">Resistor Calc</a>
-        <a href="./to-do-list.html">To-Do List</a>
-        <a href="./3d-car-game.html">3D Car Game</a>
-        <a href="./dino-game.html">Dino Game</a>
+      <h3><i class="fas fa-download"></i> Available Offline Content</h3>
+      <div class="content-grid">
+        <div class="content-card">
+          <a href="./index.html">
+            <i class="fas fa-home"></i>
+            <span>Portfolio</span>
+          </a>
+        </div>
+        <div class="content-card">
+          <a href="./Mohamed - CV.html">
+            <i class="fas fa-file-alt"></i>
+            <span>My CV</span>
+          </a>
+        </div>
+        <div class="content-card">
+          <a href="./Mohamed - Project.html">
+            <i class="fas fa-project-diagram"></i>
+            <span>Projects</span>
+          </a>
+        </div>
+        <div class="content-card">
+          <a href="./Mohamed - Personal Information.html">
+            <i class="fas fa-user"></i>
+            <span>About Me</span>
+          </a>
+        </div>
+        <div class="content-card">
+          <a href="./Mohamed - Services.html">
+            <i class="fas fa-cogs"></i>
+            <span>Services</span>
+          </a>
+        </div>
+        <div class="content-card">
+          <a href="./electrical-calculation.html">
+            <i class="fas fa-bolt"></i>
+            <span>Electrical Calc</span>
+          </a>
+        </div>
+        <div class="content-card">
+          <a href="./resistor-calculator.html">
+            <i class="fas fa-resistor"></i>
+            <span>Resistor Calc</span>
+          </a>
+        </div>
+        <div class="content-card">
+          <a href="./to-do-list.html">
+            <i class="fas fa-tasks"></i>
+            <span>To-Do List</span>
+          </a>
+        </div>
+        <div class="content-card">
+          <a href="./3d-car-game.html">
+            <i class="fas fa-gamepad"></i>
+            <span>3D Car Game</span>
+          </a>
+        </div>
+        <div class="content-card">
+          <a href="./dino-game.html">
+            <i class="fas fa-running"></i>
+            <span>Dino Game</span>
+          </a>
+        </div>
       </div>
     </div>
     
-    <p>Don't worry - you can still access cached content and tools.</p>
-    <div>
-      <button onclick="window.location.reload()">Try Again</button>
-      <button onclick="window.location.href='./index.html'">Go Home</button>
+    <div class="action-buttons">
+      <button class="btn btn-primary" onclick="checkConnection()">
+        <i class="fas fa-sync-alt"></i> Check Connection
+      </button>
+      <button class="btn btn-secondary" onclick="window.location.href='./index.html'">
+        <i class="fas fa-home"></i> Go to Homepage
+      </button>
+    </div>
+    
+    <div class="offline-features">
+      <h3>Offline Features</h3>
+      <div class="features-list">
+        <div class="feature">
+          <i class="fas fa-check-circle"></i>
+          <span>Cached Pages</span>
+        </div>
+        <div class="feature">
+          <i class="fas fa-check-circle"></i>
+          <span>Tools & Calculators</span>
+        </div>
+        <div class="feature">
+          <i class="fas fa-check-circle"></i>
+          <span>Portfolio Content</span>
+        </div>
+        <div class="feature">
+          <i class="fas fa-check-circle"></i>
+          <span>Entertainment</span>
+        </div>
+      </div>
     </div>
   </div>
+
+  <script>
+    // Connection status detection
+    function checkConnection() {
+      const statusDot = document.querySelector('.status-dot');
+      const statusText = document.querySelector('.connection-status span');
+      
+      if (navigator.onLine) {
+        statusDot.style.backgroundColor = '#4caf50';
+        statusDot.style.animation = 'none';
+        statusText.textContent = 'Connection restored!';
+        
+        // Redirect to homepage after a brief delay
+        setTimeout(() => {
+          window.location.href = './index.html';
+        }, 1500);
+      } else {
+        statusDot.style.backgroundColor = '#ff9800';
+        statusDot.style.animation = 'blink 1.5s infinite';
+        statusText.textContent = 'Still offline - checking again...';
+        
+        // Try again after 3 seconds
+        setTimeout(checkConnection, 3000);
+      }
+    }
+    
+    // Listen for online/offline events
+    window.addEventListener('online', () => {
+      checkConnection();
+    });
+    
+    window.addEventListener('offline', () => {
+      const statusDot = document.querySelector('.status-dot');
+      const statusText = document.querySelector('.connection-status span');
+      
+      statusDot.style.backgroundColor = '#ff9800';
+      statusDot.style.animation = 'blink 1.5s infinite';
+      statusText.textContent = 'Connection lost';
+    });
+    
+    // Service Worker Registration (if supported)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('SW registered: ', registration);
+          })
+          .catch(registrationError => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+    
+    // Initialize connection status
+    document.addEventListener('DOMContentLoaded', () => {
+      checkConnection();
+    });
+  </script>
 </body>
 </html>
