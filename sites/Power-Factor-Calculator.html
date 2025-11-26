@@ -22,6 +22,7 @@
       --success-color: #4caf50;
       --error-color: #f44336;
       --warning-color: #f1c40f;
+      --info-color: #3498db;
       --transition-speed: 0.3s;
       --border-radius: 12px;
       --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
@@ -63,14 +64,18 @@
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto;
+    }
+
+    .text-center {
+      text-align: center;
     }
 
     .calculator {
       background-color: var(--card-dark);
       border-radius: var(--border-radius);
-      padding: 20px;
+      padding: 25px;
       margin-bottom: 20px;
       box-shadow: var(--box-shadow);
       transition: all var(--transition-speed) ease;
@@ -88,6 +93,7 @@
       display: block;
       margin-bottom: 5px;
       color: var(--text-muted);
+      font-weight: 500;
     }
 
     .input-field {
@@ -107,6 +113,17 @@
       box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
     }
 
+    .form-row {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .form-row .input-group {
+      flex: 1;
+      min-width: 150px;
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -119,7 +136,7 @@
       cursor: pointer;
       border: none;
       outline: none;
-      width: 100%;
+      gap: 8px;
     }
 
     .btn-primary {
@@ -132,6 +149,16 @@
       background-color: var(--primary-dark);
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(78, 158, 255, 0.6);
+    }
+
+    .btn-secondary {
+      background-color: var(--background-secondary);
+      color: var(--text-light);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--card-light);
+      transform: translateY(-3px);
     }
 
     .result-box {
@@ -195,19 +222,24 @@
 
     .power-box {
       background-color: var(--card-light);
-      padding: 15px;
+      padding: 20px;
       border-radius: var(--border-radius);
       box-shadow: var(--box-shadow);
     }
 
     .power-box h3 {
-      margin-bottom: 10px;
-      padding-bottom: 5px;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--background-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .power-box p {
-      margin: 8px 0;
+      margin: 10px 0;
+      display: flex;
+      justify-content: space-between;
     }
 
     .power-box strong {
@@ -224,6 +256,9 @@
 
     .cap-bank h3 {
       margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .cap-grid {
@@ -240,11 +275,110 @@
 
     .cap-item {
       text-align: center;
+      padding: 15px;
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
     }
 
     .cap-item p:first-child {
       font-weight: bold;
       margin-bottom: 5px;
+      color: var(--text-muted);
+    }
+
+    /* Power Triangle Visualization */
+    .triangle-container {
+      background-color: var(--card-dark);
+      padding: 20px;
+      border-radius: var(--border-radius);
+      margin: 20px 0;
+      box-shadow: var(--box-shadow);
+    }
+
+    .triangle-canvas {
+      width: 100%;
+      height: 300px;
+      background-color: var(--background-secondary);
+      border-radius: var(--border-radius);
+      margin: 15px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--background-secondary);
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+      border-bottom: 3px solid transparent;
+    }
+
+    .tab.active {
+      border-bottom-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .tab:hover:not(.active) {
+      background-color: var(--background-secondary);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Savings Calculator */
+    .savings-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .savings-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .savings-box {
+      background-color: var(--card-light);
+      padding: 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .savings-box h3 {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* History */
+    .history-item {
+      background-color: var(--card-light);
+      padding: 15px;
+      border-radius: var(--border-radius);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .history-details {
+      font-size: 0.9em;
+      color: var(--text-muted);
     }
 
     /* Theme Toggle */
@@ -284,146 +418,359 @@
         height: 40px;
         font-size: 1em;
       }
+
+      .form-row {
+        flex-direction: column;
+      }
+
+      .cap-grid {
+        grid-template-columns: 1fr;
+      }
     }
-     footer {
-    background-color: var(--card-dark);
-    color: var(--text-light);
-    text-align: center;
-    padding: 30px;
-    margin-top: 30px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-  }
 
-  .social-footer {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-  }
+    /* Footer */
+    footer {
+      background-color: var(--card-dark);
+      color: var(--text-light);
+      text-align: center;
+      padding: 30px;
+      margin-top: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
 
-  .social-footer a {
-    color: var(--text-light);
-    font-size: 1.5em;
-    margin: 0 15px;
-    transition: all var(--transition-speed) ease;
-    display: inline-block;
-  }
+    .social-footer {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
 
-  .social-footer a:hover {
-    color: var(--primary-color);
-    transform: translateY(-5px);
-  }
+    .social-footer a {
+      color: var(--text-light);
+      font-size: 1.5em;
+      margin: 0 15px;
+      transition: all var(--transition-speed) ease;
+      display: inline-block;
+    }
 
-  .footer-bottom {
-    margin-top: 20px;
-    font-size: 0.9em;
-    opacity: 0.8;
-  }
+    .social-footer a:hover {
+      color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      margin-top: 20px;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 400px;
+      transform: translateX(120%);
+      transition: transform 0.5s ease;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification.success {
+      background-color: var(--success-color);
+      color: white;
+    }
+
+    .notification.error {
+      background-color: var(--error-color);
+      color: white;
+    }
+
+    .close-notification {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-state i {
+      font-size: 3em;
+      margin-bottom: 15px;
+      opacity: 0.5;
+    }
   </style>
-  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
   <div class="container">
     <h1 class="text-center">Power Factor Correction Calculator</h1>
     <p class="text-center" style="color: var(--text-muted); margin-bottom: 30px;">Calculate required capacitor bank size and analyze power factor improvement</p>
     
-    <div class="calculator">
-      <h2>Input Parameters</h2>
-      <div class="input-group">
-        <label class="input-label">Load Power (kW)</label>
-        <input id="loadPower" type="number" class="input-field" value="100">
-      </div>
-      <div class="input-group">
-        <label class="input-label">Existing Power Factor</label>
-        <input id="existingPF" type="number" step="0.01" class="input-field" value="0.8">
-      </div>
-      <div class="input-group">
-        <label class="input-label">Target Power Factor</label>
-        <input id="targetPF" type="number" step="0.01" class="input-field" value="0.95">
-      </div>
-      <div class="input-group">
-        <label class="input-label">System Voltage (V)</label>
-        <input id="voltage" type="number" class="input-field" value="400">
-      </div>
-      <div class="input-group">
-        <label class="input-label">Frequency (Hz)</label>
-        <input id="frequency" type="number" class="input-field" value="50">
-      </div>
-      <button class="btn btn-primary" onclick="calculateCorrection()">Calculate</button>
+    <div class="tabs">
+      <div class="tab active" data-tab="calculator">Calculator</div>
+      <div class="tab" data-tab="savings">Cost Savings</div>
+      <div class="tab" data-tab="history">History</div>
+      <div class="tab" data-tab="info">Information</div>
     </div>
 
-    <div class="power-grid">
-      <div class="power-box">
-        <h3>Before Correction</h3>
-        <p><strong>Real Power:</strong> <span id="beforeReal">-</span></p>
-        <p><strong>Reactive Power:</strong> <span id="beforeReactive">-</span></p>
-        <p><strong>Apparent Power:</strong> <span id="beforeApparent">-</span></p>
-        <p><strong>Power Factor:</strong> <span id="beforePF">-</span></p>
-        <p><strong>Angle:</strong> <span id="beforeAngle">-</span></p>
+    <!-- Calculator Tab -->
+    <div class="tab-content active" id="calculator-tab">
+      <div class="calculator">
+        <h2><i class="fas fa-calculator"></i> Input Parameters</h2>
+        <div class="form-row">
+          <div class="input-group">
+            <label class="input-label">Load Power (kW)</label>
+            <input id="loadPower" type="number" class="input-field" value="100" min="0.1" step="0.1">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Existing Power Factor</label>
+            <input id="existingPF" type="number" step="0.01" class="input-field" value="0.8" min="0.1" max="0.99">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Target Power Factor</label>
+            <input id="targetPF" type="number" step="0.01" class="input-field" value="0.95" min="0.1" max="0.99">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="input-group">
+            <label class="input-label">System Voltage (V)</label>
+            <input id="voltage" type="number" class="input-field" value="400" min="100" step="1">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Frequency (Hz)</label>
+            <input id="frequency" type="number" class="input-field" value="50" min="50" max="60" step="0.1">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Operating Hours/Day</label>
+            <input id="operatingHours" type="number" class="input-field" value="8" min="1" max="24" step="0.5">
+          </div>
+        </div>
+        <div class="form-row">
+          <button class="btn btn-primary" onclick="calculateCorrection()">
+            <i class="fas fa-bolt"></i> Calculate
+          </button>
+          <button class="btn btn-secondary" onclick="saveCalculation()">
+            <i class="fas fa-save"></i> Save
+          </button>
+        </div>
       </div>
-      <div class="power-box">
-        <h3>After Correction</h3>
-        <p><strong>Real Power:</strong> <span id="afterReal">-</span></p>
-        <p><strong>Reactive Power:</strong> <span id="afterReactive">-</span></p>
-        <p><strong>Apparent Power:</strong> <span id="afterApparent">-</span></p>
-        <p><strong>Power Factor:</strong> <span id="afterPF">-</span></p>
-        <p><strong>Angle:</strong> <span id="afterAngle">-</span></p>
+
+      <div class="power-grid">
+        <div class="power-box">
+          <h3><i class="fas fa-bolt"></i> Before Correction</h3>
+          <p><strong>Real Power:</strong> <span id="beforeReal">-</span></p>
+          <p><strong>Reactive Power:</strong> <span id="beforeReactive">-</span></p>
+          <p><strong>Apparent Power:</strong> <span id="beforeApparent">-</span></p>
+          <p><strong>Power Factor:</strong> <span id="beforePF">-</span></p>
+          <p><strong>Phase Angle:</strong> <span id="beforeAngle">-</span></p>
+        </div>
+        <div class="power-box">
+          <h3><i class="fas fa-bolt"></i> After Correction</h3>
+          <p><strong>Real Power:</strong> <span id="afterReal">-</span></p>
+          <p><strong>Reactive Power:</strong> <span id="afterReactive">-</span></p>
+          <p><strong>Apparent Power:</strong> <span id="afterApparent">-</span></p>
+          <p><strong>Power Factor:</strong> <span id="afterPF">-</span></p>
+          <p><strong>Phase Angle:</strong> <span id="afterAngle">-</span></p>
+        </div>
+      </div>
+
+      <div class="triangle-container">
+        <h3><i class="fas fa-chart-pie"></i> Power Triangle Visualization</h3>
+        <div class="triangle-canvas" id="triangleCanvas">
+          <!-- Canvas will be drawn by JavaScript -->
+        </div>
+      </div>
+
+      <div class="cap-bank">
+        <h3><i class="fas fa-cube"></i> Required Capacitor Bank</h3>
+        <div class="cap-grid">
+          <div class="cap-item">
+            <p>Capacitor Size</p>
+            <p id="capSize" class="result-value">-</p>
+          </div>
+          <div class="cap-item">
+            <p>Capacitance</p>
+            <p id="capacitance" class="result-value">-</p>
+          </div>
+          <div class="cap-item">
+            <p>Power Factor Improvement</p>
+            <p id="pfImprovement" class="result-value">-</p>
+          </div>
+          <div class="cap-item">
+            <p>kVA Reduction</p>
+            <p id="kvaReduction" class="result-value">-</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h3><i class="fas fa-exclamation-triangle"></i> Important Notes:</h3>
+        <ul>
+          <li>Ensure capacitor banks are properly rated for the system voltage.</li>
+          <li>Choose only film/metalized capacitors resistant to harmonics.</li>
+          <li>Use protective devices like contactors or timed switching.</li>
+          <li>Real capacitance may vary based on tolerances.</li>
+          <li>Consider harmonic distortion when selecting capacitors.</li>
+        </ul>
       </div>
     </div>
 
-    <div class="cap-bank">
-      <h3>Required Capacitor Bank</h3>
-      <div class="cap-grid">
-        <div class="cap-item">
-          <p>Capacitor Size</p>
-          <p id="capSize" class="result-value">-</p>
+    <!-- Savings Tab -->
+    <div class="tab-content" id="savings-tab">
+      <div class="calculator">
+        <h2><i class="fas fa-money-bill-wave"></i> Cost Savings Analysis</h2>
+        <div class="form-row">
+          <div class="input-group">
+            <label class="input-label">Electricity Rate ($/kWh)</label>
+            <input id="electricityRate" type="number" class="input-field" value="0.12" min="0.01" step="0.01">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Demand Charge ($/kW)</label>
+            <input id="demandCharge" type="number" class="input-field" value="15" min="0" step="0.1">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Power Factor Penalty Threshold</label>
+            <input id="pfPenaltyThreshold" type="number" class="input-field" value="0.9" min="0.5" max="1" step="0.01">
+          </div>
         </div>
-        <div class="cap-item">
-          <p>Capacitance</p>
-          <p id="capacitance" class="result-value">-</p>
+        <button class="btn btn-primary" onclick="calculateSavings()">
+          <i class="fas fa-calculator"></i> Calculate Savings
+        </button>
+      </div>
+
+      <div class="savings-grid">
+        <div class="savings-box">
+          <h3><i class="fas fa-chart-line"></i> Monthly Savings</h3>
+          <p><strong>Energy Cost Savings:</strong> <span id="energySavings">-</span></p>
+          <p><strong>Demand Charge Savings:</strong> <span id="demandSavings">-</span></p>
+          <p><strong>PF Penalty Avoidance:</strong> <span id="penaltySavings">-</span></p>
+          <p><strong>Total Monthly Savings:</strong> <span id="totalMonthlySavings">-</span></p>
         </div>
-        <div class="cap-item">
-          <p>Power Factor Improvement</p>
-          <p id="pfImprovement" class="result-value">-</p>
-        </div>
-        <div class="cap-item">
-          <p>kVA Reduction</p>
-          <p id="kvaReduction" class="result-value">-</p>
+        <div class="savings-box">
+          <h3><i class="fas fa-calendar-alt"></i> Annual Savings</h3>
+          <p><strong>Total Annual Savings:</strong> <span id="totalAnnualSavings">-</span></p>
+          <p><strong>Payback Period (months):</strong> <span id="paybackPeriod">-</span></p>
+          <p><strong>ROI (1 year):</strong> <span id="roi">-</span></p>
+          <p><strong>Simple Payback:</strong> <span id="simplePayback">-</span></p>
         </div>
       </div>
     </div>
 
-    <div class="info-box">
-      <h3>Important Notes:</h3>
-      <ul>
-        <li>Ensure capacitor banks are properly rated for the system voltage.</li>
-        <li>Choose only film/metalized capacitors resistant to harmonics.</li>
-        <li>Use protective devices like contactors or timed switching.</li>
-        <li>Real capacitance may vary based on tolerances.</li>
-      </ul>
+    <!-- History Tab -->
+    <div class="tab-content" id="history-tab">
+      <div class="calculator">
+        <h2><i class="fas fa-history"></i> Calculation History</h2>
+        <div id="historyContainer"></div>
+      </div>
+    </div>
+
+    <!-- Information Tab -->
+    <div class="tab-content" id="info-tab">
+      <div class="calculator">
+        <h2><i class="fas fa-info-circle"></i> About Power Factor Correction</h2>
+        <div class="info-box">
+          <h3>What is Power Factor?</h3>
+          <p>Power factor is the ratio of real power (kW) to apparent power (kVA) in an electrical system. It measures how effectively electrical power is being used.</p>
+        </div>
+        
+        <div class="info-box">
+          <h3>Why Improve Power Factor?</h3>
+          <ul>
+            <li>Reduces electricity bills by eliminating penalty charges</li>
+            <li>Increases system capacity and reduces losses</li>
+            <li>Improves voltage regulation and equipment performance</li>
+            <li>Reduces carbon footprint and energy consumption</li>
+          </ul>
+        </div>
+        
+        <div class="info-box">
+          <h3>How Power Factor Correction Works</h3>
+          <p>Capacitors are added to the electrical system to supply reactive power, which reduces the reactive power drawn from the utility. This improves the power factor and reduces the apparent power demand.</p>
+        </div>
+        
+        <div class="info-box">
+          <h3>Typical Power Factor Values</h3>
+          <ul>
+            <li>Ideal: 1.0 (purely resistive load)</li>
+            <li>Good: 0.95 - 0.99</li>
+            <li>Acceptable: 0.85 - 0.95</li>
+            <li>Poor: Below 0.85 (may incur penalties)</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-<!-- Footer HTML -->
-<footer class="footer">
-  <div class="footer-content">
-    <div class="social-footer">
-      <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-      <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-      <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+
+  <!-- Notification Area -->
+  <div id="notificationArea"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="social-footer">
+        <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <div class="footer-bottom">
+        &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+        &copy; M.T.A.
+      </div>
     </div>
-    <div class="footer-bottom">
-      &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
-      &copy; M.T.A.
-    </div>
-  </div>
-</footer>
+  </footer>
+
   <!-- Theme Toggle Button -->
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
     <i class="fas fa-moon"></i>
   </button>
 
   <script>
+    // Global variables
+    let currentCalculation = null;
+    let calculationHistory = [];
+
+    // Initialize the application
+    function init() {
+      loadHistory();
+      setupTabNavigation();
+      calculateCorrection();
+    }
+
+    // Tab navigation
+    function setupTabNavigation() {
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // Remove active class from all tabs and contents
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+          
+          // Add active class to clicked tab and corresponding content
+          tab.classList.add('active');
+          document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
+        });
+      });
+    }
+
+    // Calculate power factor correction
     function calculateCorrection() {
       const loadPower = parseFloat(document.getElementById('loadPower').value);
       const existingPF = parseFloat(document.getElementById('existingPF').value);
@@ -432,20 +779,20 @@
       const frequency = parseFloat(document.getElementById('frequency').value);
 
       // Validate inputs
-      if (isNaN(loadPower)) {
-        alert("Please enter a valid Load Power value");
+      if (isNaN(loadPower) || loadPower <= 0) {
+        showNotification("Please enter a valid Load Power value", "error");
         return;
       }
       if (existingPF <= 0 || existingPF >= 1 || isNaN(existingPF)) {
-        alert("Existing Power Factor must be between 0 and 1");
+        showNotification("Existing Power Factor must be between 0 and 1", "error");
         return;
       }
       if (targetPF <= 0 || targetPF >= 1 || isNaN(targetPF)) {
-        alert("Target Power Factor must be between 0 and 1");
+        showNotification("Target Power Factor must be between 0 and 1", "error");
         return;
       }
       if (targetPF <= existingPF) {
-        alert("Target Power Factor must be greater than Existing Power Factor");
+        showNotification("Target Power Factor must be greater than Existing Power Factor", "error");
         return;
       }
 
@@ -464,6 +811,20 @@
       const pfImprovement = ((targetPF - existingPF) / existingPF) * 100;
       const kvaReduction = apparentBefore - apparentAfter;
 
+      // Store current calculation
+      currentCalculation = {
+        loadPower,
+        existingPF,
+        targetPF,
+        voltage,
+        frequency,
+        capacitorSize,
+        capacitance,
+        pfImprovement,
+        kvaReduction,
+        timestamp: new Date().toISOString()
+      };
+
       // Update results
       document.getElementById('capSize').textContent = capacitorSize.toFixed(2) + " kVAR";
       document.getElementById('capacitance').textContent = capacitance.toFixed(2) + " µF";
@@ -481,6 +842,247 @@
       document.getElementById('afterApparent').textContent = apparentAfter.toFixed(2) + " kVA";
       document.getElementById('afterPF').textContent = targetPF.toFixed(3);
       document.getElementById('afterAngle').textContent = angleAfter.toFixed(2) + "°";
+
+      // Draw power triangle
+      drawPowerTriangle(reactiveBefore, loadPower, reactiveAfter);
+
+      showNotification("Calculation completed successfully!", "success");
+    }
+
+    // Draw power triangle visualization
+    function drawPowerTriangle(reactiveBefore, realPower, reactiveAfter) {
+      const canvas = document.getElementById('triangleCanvas');
+      const ctx = canvas.getContext('2d');
+      const width = canvas.offsetWidth;
+      const height = canvas.offsetHeight;
+      
+      // Set canvas dimensions
+      canvas.width = width;
+      canvas.height = height;
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, width, height);
+      
+      // Calculate scaling factors
+      const maxPower = Math.max(realPower, reactiveBefore, reactiveAfter);
+      const scale = Math.min(width, height) * 0.8 / maxPower;
+      
+      // Center the drawing
+      const centerX = width / 2;
+      const centerY = height / 2;
+      
+      // Draw before correction triangle
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(centerX + realPower * scale, centerY);
+      ctx.lineTo(centerX + realPower * scale, centerY - reactiveBefore * scale);
+      ctx.closePath();
+      ctx.strokeStyle = 'rgba(244, 67, 54, 0.8)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(244, 67, 54, 0.2)';
+      ctx.fill();
+      
+      // Draw after correction triangle
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(centerX + realPower * scale, centerY);
+      ctx.lineTo(centerX + realPower * scale, centerY - reactiveAfter * scale);
+      ctx.closePath();
+      ctx.strokeStyle = 'rgba(76, 175, 80, 0.8)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(76, 175, 80, 0.2)';
+      ctx.fill();
+      
+      // Add labels
+      ctx.fillStyle = 'white';
+      ctx.font = '12px Arial';
+      ctx.fillText('Real Power (kW)', centerX + realPower * scale / 2, centerY + 15);
+      ctx.fillText('Reactive Power (kVAR)', centerX + realPower * scale + 5, centerY - reactiveBefore * scale / 2);
+      
+      // Add legend
+      ctx.fillStyle = 'rgba(244, 67, 54, 0.8)';
+      ctx.fillRect(centerX - 100, centerY + 40, 15, 15);
+      ctx.fillStyle = 'white';
+      ctx.fillText('Before Correction', centerX - 80, centerY + 52);
+      
+      ctx.fillStyle = 'rgba(76, 175, 80, 0.8)';
+      ctx.fillRect(centerX - 100, centerY + 60, 15, 15);
+      ctx.fillStyle = 'white';
+      ctx.fillText('After Correction', centerX - 80, centerY + 72);
+    }
+
+    // Calculate cost savings
+    function calculateSavings() {
+      if (!currentCalculation) {
+        showNotification("Please calculate power factor correction first", "error");
+        return;
+      }
+
+      const electricityRate = parseFloat(document.getElementById('electricityRate').value);
+      const demandCharge = parseFloat(document.getElementById('demandCharge').value);
+      const pfPenaltyThreshold = parseFloat(document.getElementById('pfPenaltyThreshold').value);
+      const operatingHours = parseFloat(document.getElementById('operatingHours').value);
+
+      const { loadPower, apparentBefore, apparentAfter, kvaReduction, existingPF } = currentCalculation;
+
+      // Energy cost savings (based on reduced losses)
+      const energySavings = kvaReduction * 0.01 * operatingHours * 30 * electricityRate;
+
+      // Demand charge savings
+      const demandSavings = kvaReduction * demandCharge;
+
+      // Power factor penalty avoidance
+      let penaltySavings = 0;
+      if (existingPF < pfPenaltyThreshold) {
+        // Simple penalty calculation (varies by utility)
+        penaltySavings = loadPower * (pfPenaltyThreshold - existingPF) * 10 * demandCharge;
+      }
+
+      const totalMonthlySavings = energySavings + demandSavings + penaltySavings;
+      const totalAnnualSavings = totalMonthlySavings * 12;
+
+      // Payback calculation (assuming capacitor cost of $30/kVAR)
+      const capacitorCost = currentCalculation.capacitorSize * 30;
+      const paybackPeriod = capacitorCost / totalMonthlySavings;
+      const roi = (totalAnnualSavings / capacitorCost) * 100;
+      const simplePayback = capacitorCost / totalAnnualSavings;
+
+      // Update savings display
+      document.getElementById('energySavings').textContent = '$' + energySavings.toFixed(2);
+      document.getElementById('demandSavings').textContent = '$' + demandSavings.toFixed(2);
+      document.getElementById('penaltySavings').textContent = '$' + penaltySavings.toFixed(2);
+      document.getElementById('totalMonthlySavings').textContent = '$' + totalMonthlySavings.toFixed(2);
+      document.getElementById('totalAnnualSavings').textContent = '$' + totalAnnualSavings.toFixed(2);
+      document.getElementById('paybackPeriod').textContent = paybackPeriod.toFixed(1) + ' months';
+      document.getElementById('roi').textContent = roi.toFixed(1) + '%';
+      document.getElementById('simplePayback').textContent = simplePayback.toFixed(1) + ' years';
+
+      showNotification("Savings calculation completed!", "success");
+    }
+
+    // Save calculation to history
+    function saveCalculation() {
+      if (!currentCalculation) {
+        showNotification("No calculation to save", "error");
+        return;
+      }
+
+      calculationHistory.unshift({
+        ...currentCalculation,
+        id: Date.now(),
+        name: `PF ${currentCalculation.existingPF} → ${currentCalculation.targetPF}`
+      });
+
+      // Keep only last 10 calculations
+      if (calculationHistory.length > 10) {
+        calculationHistory = calculationHistory.slice(0, 10);
+      }
+
+      localStorage.setItem('pfCalculationHistory', JSON.stringify(calculationHistory));
+      displayHistory();
+      showNotification("Calculation saved to history!", "success");
+    }
+
+    // Load history from localStorage
+    function loadHistory() {
+      const savedHistory = localStorage.getItem('pfCalculationHistory');
+      if (savedHistory) {
+        calculationHistory = JSON.parse(savedHistory);
+        displayHistory();
+      }
+    }
+
+    // Display calculation history
+    function displayHistory() {
+      const historyContainer = document.getElementById('historyContainer');
+      
+      if (calculationHistory.length === 0) {
+        historyContainer.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-history"></i>
+            <h3>No calculation history</h3>
+            <p>Your saved calculations will appear here</p>
+          </div>
+        `;
+        return;
+      }
+
+      historyContainer.innerHTML = calculationHistory.map(item => `
+        <div class="history-item">
+          <div>
+            <strong>${item.name}</strong>
+            <div class="history-details">
+              Load: ${item.loadPower} kW | PF: ${item.existingPF} → ${item.targetPF} | Cap: ${item.capacitorSize.toFixed(2)} kVAR
+            </div>
+          </div>
+          <button class="btn btn-secondary" onclick="loadCalculation(${item.id})" style="padding: 8px 12px;">
+            <i class="fas fa-undo"></i> Load
+          </button>
+        </div>
+      `).join('');
+    }
+
+    // Load a calculation from history
+    function loadCalculation(id) {
+      const calculation = calculationHistory.find(item => item.id === id);
+      if (calculation) {
+        document.getElementById('loadPower').value = calculation.loadPower;
+        document.getElementById('existingPF').value = calculation.existingPF;
+        document.getElementById('targetPF').value = calculation.targetPF;
+        document.getElementById('voltage').value = calculation.voltage;
+        document.getElementById('frequency').value = calculation.frequency;
+        
+        calculateCorrection();
+        showNotification("Calculation loaded from history!", "success");
+      }
+    }
+
+    // Show notification
+    function showNotification(message, type = 'info') {
+      const notificationArea = document.getElementById('notificationArea');
+      const notificationId = 'notification-' + Date.now();
+      
+      const notification = document.createElement('div');
+      notification.id = notificationId;
+      notification.className = `notification ${type}`;
+      notification.innerHTML = `
+        <i class="fas fa-${getNotificationIcon(type)}"></i>
+        <span>${message}</span>
+        <button class="close-notification" onclick="document.getElementById('${notificationId}').remove()">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
+      
+      notificationArea.appendChild(notification);
+      
+      // Show notification
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+      
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        if (document.getElementById(notificationId)) {
+          notification.classList.remove('show');
+          setTimeout(() => {
+            if (document.getElementById(notificationId)) {
+              document.getElementById(notificationId).remove();
+            }
+          }, 500);
+        }
+      }, 5000);
+    }
+
+    // Get notification icon based on type
+    function getNotificationIcon(type) {
+      switch(type) {
+        case 'success': return 'check-circle';
+        case 'error': return 'exclamation-circle';
+        case 'warning': return 'exclamation-triangle';
+        default: return 'info-circle';
+      }
     }
 
     // Theme toggle functionality
@@ -511,10 +1113,11 @@
       }
     });
 
-    // Initialize with default values
-    calculateCorrection();
+    // Initialize on load
+    window.onload = init;
+    
     // Set current year in footer
-  document.getElementById('current-year').textContent = new Date().getFullYear();
+    document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>

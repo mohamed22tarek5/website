@@ -22,6 +22,7 @@
       --success-color: #4caf50;
       --error-color: #f44336;
       --warning-color: #f1c40f;
+      --info-color: #3498db;
       --transition-speed: 0.3s;
       --border-radius: 12px;
       --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
@@ -63,14 +64,18 @@
     }
 
     .container {
-      max-width: 500px;
+      max-width: 800px;
       margin: 0 auto;
+    }
+
+    .text-center {
+      text-align: center;
     }
 
     .calculator {
       background-color: var(--card-dark);
       border-radius: var(--border-radius);
-      padding: 20px;
+      padding: 25px;
       margin-bottom: 20px;
       box-shadow: var(--box-shadow);
       transition: all var(--transition-speed) ease;
@@ -80,10 +85,20 @@
       box-shadow: var(--box-shadow-hover);
     }
 
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
     .input-field {
       width: 100%;
       padding: 12px 15px;
-      margin: 10px 0;
       border: 1px solid var(--background-secondary);
       border-radius: var(--border-radius);
       background-color: var(--background-secondary);
@@ -98,6 +113,17 @@
       box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
     }
 
+    .form-row {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .form-row .input-group {
+      flex: 1;
+      min-width: 200px;
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -110,7 +136,7 @@
       cursor: pointer;
       border: none;
       outline: none;
-      width: 100%;
+      gap: 8px;
     }
 
     .btn-primary {
@@ -123,6 +149,28 @@
       background-color: var(--primary-dark);
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(78, 158, 255, 0.6);
+    }
+
+    .btn-secondary {
+      background-color: var(--background-secondary);
+      color: var(--text-light);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--card-light);
+      transform: translateY(-3px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary-color);
+      color: white;
+      transform: translateY(-3px);
     }
 
     .result-box {
@@ -169,6 +217,102 @@
 
     .info-box li {
       margin-bottom: 5px;
+    }
+
+    /* Circuit Diagram */
+    .circuit-container {
+      background-color: var(--card-dark);
+      padding: 20px;
+      border-radius: var(--border-radius);
+      margin: 20px 0;
+      box-shadow: var(--box-shadow);
+    }
+
+    .circuit-diagram {
+      width: 100%;
+      height: 200px;
+      background-color: var(--background-secondary);
+      border-radius: var(--border-radius);
+      margin: 15px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--background-secondary);
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+      border-bottom: 3px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab.active {
+      border-bottom-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .tab:hover:not(.active) {
+      background-color: var(--background-secondary);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* LED Configuration */
+    .led-config {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .led-config {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .led-option {
+      background-color: var(--card-light);
+      padding: 15px;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+      border: 2px solid transparent;
+    }
+
+    .led-option:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .led-option.selected {
+      border-color: var(--primary-color);
+      background-color: rgba(78, 158, 255, 0.1);
+    }
+
+    .led-color {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+      display: inline-block;
+      vertical-align: middle;
     }
 
     /* Theme Toggle */
@@ -244,64 +388,359 @@
         height: 40px;
         font-size: 1em;
       }
+
+      .form-row {
+        flex-direction: column;
+      }
+
+      .tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 400px;
+      transform: translateX(120%);
+      transition: transform 0.5s ease;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification.success {
+      background-color: var(--success-color);
+      color: white;
+    }
+
+    .notification.error {
+      background-color: var(--error-color);
+      color: white;
+    }
+
+    .close-notification {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    /* History */
+    .history-item {
+      background-color: var(--card-light);
+      padding: 15px;
+      border-radius: var(--border-radius);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .history-details {
+      font-size: 0.9em;
+      color: var(--text-muted);
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-state i {
+      font-size: 3em;
+      margin-bottom: 15px;
+      opacity: 0.5;
+    }
+
+    /* Results grid */
+    .results-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .results-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .power-warning {
+      color: var(--warning-color);
+      font-weight: bold;
     }
   </style>
-  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
   <div class="container">
     <h1 class="text-center">LED Resistor Calculator</h1>
     <p class="text-center" style="color: var(--text-muted); margin-bottom: 30px;">Find the right resistor for your LED circuit</p>
     
-    <div class="calculator">
-      <h2>Input Parameters</h2>
-      <div class="input-group">
-        <label for="supplyVoltage">Power Supply Voltage (V)</label>
-        <input type="number" id="supplyVoltage" class="input-field" placeholder="e.g., 12" step="0.1" min="0" value="12">
+    <div class="tabs">
+      <div class="tab active" data-tab="single-led">
+        <i class="fas fa-lightbulb"></i> Single LED
       </div>
-      <div class="input-group">
-        <label for="ledVoltage">LED Forward Voltage (V)</label>
-        <input type="number" id="ledVoltage" class="input-field" placeholder="e.g., 2.0" step="0.1" min="0" max="5" value="2.0">
+      <div class="tab" data-tab="multiple-leds">
+        <i class="fas fa-lightbulb"></i> Multiple LEDs
       </div>
-      <div class="input-group">
-        <label for="ledCurrent">LED Current (mA)</label>
-        <input type="number" id="ledCurrent" class="input-field" placeholder="e.g., 20" step="1" min="1" max="50" value="20">
+      <div class="tab" data-tab="history">
+        <i class="fas fa-history"></i> History
       </div>
-      <button class="btn btn-primary" onclick="calculateResistor()">Calculate Resistor</button>
-    </div>
-
-    <div class="calculator">
-      <h2>Results</h2>
-      <div class="result-box">
-        <div class="result-label">Required Resistor Value</div>
-        <div id="resistorValue" class="result-value">-- Ω</div>
-      </div>
-      <div class="result-box">
-        <div class="result-label">Nearest Standard Resistor</div>
-        <div id="standardResistor" class="result-value">-- Ω</div>
-      </div>
-      <div class="result-box">
-        <div class="result-label">Resistor Power (W)</div>
-        <div id="resistorPower" class="result-value">-- W</div>
+      <div class="tab" data-tab="info">
+        <i class="fas fa-info-circle"></i> Information
       </div>
     </div>
 
-    <div class="info-box">
-      <h3>Important Notes:</h3>
-      <ul>
-        <li>Standard resistors: E12/E24 series (10%, 5% tolerance)</li>
-        <li>Use a higher wattage resistor for safety (e.g., 0.25W or 0.5W)</li>
-        <li>For multiple LEDs, calculate resistors separately or use a series/parallel configuration</li>
-        <li>Check LED datasheet for exact forward voltage and current</li>
-      </ul>
+    <!-- Single LED Tab -->
+    <div id="single-led" class="tab-content active">
+      <div class="calculator">
+        <h2><i class="fas fa-calculator"></i> Single LED Configuration</h2>
+        
+        <div class="form-row">
+          <div class="input-group">
+            <label class="input-label">Power Supply Voltage (V)</label>
+            <input type="number" id="supplyVoltage" class="input-field" placeholder="e.g., 12" step="0.1" min="0" value="12">
+          </div>
+          <div class="input-group">
+            <label class="input-label">LED Configuration</label>
+            <select id="ledConfig" class="input-field" onchange="updateLEDValues()">
+              <option value="custom">Custom LED</option>
+              <option value="red">Red LED (1.8-2.2V)</option>
+              <option value="green">Green LED (2.0-2.4V)</option>
+              <option value="blue">Blue/White LED (3.0-3.6V)</option>
+              <option value="yellow">Yellow LED (2.0-2.4V)</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="input-group">
+            <label class="input-label">LED Forward Voltage (V)</label>
+            <input type="number" id="ledVoltage" class="input-field" placeholder="e.g., 2.0" step="0.1" min="0" max="5" value="2.0">
+          </div>
+          <div class="input-group">
+            <label class="input-label">LED Current (mA)</label>
+            <input type="number" id="ledCurrent" class="input-field" placeholder="e.g., 20" step="1" min="1" max="50" value="20">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <button class="btn btn-primary" onclick="calculateResistor()">
+            <i class="fas fa-calculator"></i> Calculate Resistor
+          </button>
+          <button class="btn btn-outline" onclick="saveCalculation()">
+            <i class="fas fa-save"></i> Save Calculation
+          </button>
+        </div>
+      </div>
+
+      <div class="circuit-container">
+        <h3><i class="fas fa-project-diagram"></i> Circuit Diagram</h3>
+        <div class="circuit-diagram" id="circuitDiagram">
+          <!-- Circuit will be drawn by JavaScript -->
+        </div>
+      </div>
+
+      <div class="calculator">
+        <h2><i class="fas fa-chart-bar"></i> Results</h2>
+        <div class="results-grid">
+          <div class="result-box">
+            <div class="result-label">Required Resistor Value</div>
+            <div id="resistorValue" class="result-value">-- Ω</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Nearest Standard Resistor</div>
+            <div id="standardResistor" class="result-value">-- Ω</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Resistor Power (W)</div>
+            <div id="resistorPower" class="result-value">-- W</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Power Supply Current</div>
+            <div id="supplyCurrent" class="result-value">-- mA</div>
+          </div>
+        </div>
+        
+        <div id="powerWarning" class="info-box" style="display: none;">
+          <h3><i class="fas fa-exclamation-triangle"></i> Power Warning</h3>
+          <p>The calculated power dissipation exceeds typical resistor ratings. Consider using a higher wattage resistor (e.g., 0.5W or 1W).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Multiple LEDs Tab -->
+    <div id="multiple-leds" class="tab-content">
+      <div class="calculator">
+        <h2><i class="fas fa-lightbulb"></i> Multiple LEDs Configuration</h2>
+        
+        <div class="form-row">
+          <div class="input-group">
+            <label class="input-label">Power Supply Voltage (V)</label>
+            <input type="number" id="multiSupplyVoltage" class="input-field" placeholder="e.g., 12" step="0.1" min="0" value="12">
+          </div>
+          <div class="input-group">
+            <label class="input-label">LED Configuration</label>
+            <select id="multiLedConfig" class="input-field" onchange="updateMultiLEDValues()">
+              <option value="custom">Custom LED</option>
+              <option value="red">Red LED (1.8-2.2V)</option>
+              <option value="green">Green LED (2.0-2.4V)</option>
+              <option value="blue">Blue/White LED (3.0-3.6V)</option>
+              <option value="yellow">Yellow LED (2.0-2.4V)</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="input-group">
+            <label class="input-label">LED Forward Voltage (V)</label>
+            <input type="number" id="multiLedVoltage" class="input-field" placeholder="e.g., 2.0" step="0.1" min="0" max="5" value="2.0">
+          </div>
+          <div class="input-group">
+            <label class="input-label">LED Current (mA)</label>
+            <input type="number" id="multiLedCurrent" class="input-field" placeholder="e.g., 20" step="1" min="1" max="50" value="20">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="input-group">
+            <label class="input-label">Number of LEDs</label>
+            <input type="number" id="ledCount" class="input-field" placeholder="e.g., 3" step="1" min="1" max="20" value="3">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Connection Type</label>
+            <select id="connectionType" class="input-field">
+              <option value="series">Series</option>
+              <option value="parallel">Parallel</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <button class="btn btn-primary" onclick="calculateMultiLEDResistor()">
+            <i class="fas fa-calculator"></i> Calculate Resistor
+          </button>
+          <button class="btn btn-outline" onclick="saveMultiCalculation()">
+            <i class="fas fa-save"></i> Save Calculation
+          </button>
+        </div>
+      </div>
+
+      <div class="circuit-container">
+        <h3><i class="fas fa-project-diagram"></i> Circuit Diagram</h3>
+        <div class="circuit-diagram" id="multiCircuitDiagram">
+          <!-- Circuit will be drawn by JavaScript -->
+        </div>
+      </div>
+
+      <div class="calculator">
+        <h2><i class="fas fa-chart-bar"></i> Results</h2>
+        <div class="results-grid">
+          <div class="result-box">
+            <div class="result-label">Required Resistor Value</div>
+            <div id="multiResistorValue" class="result-value">-- Ω</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Nearest Standard Resistor</div>
+            <div id="multiStandardResistor" class="result-value">-- Ω</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Resistor Power (W)</div>
+            <div id="multiResistorPower" class="result-value">-- W</div>
+          </div>
+          <div class="result-box">
+            <div class="result-label">Power Supply Current</div>
+            <div id="multiSupplyCurrent" class="result-value">-- mA</div>
+          </div>
+        </div>
+        
+        <div id="multiPowerWarning" class="info-box" style="display: none;">
+          <h3><i class="fas fa-exclamation-triangle"></i> Power Warning</h3>
+          <p>The calculated power dissipation exceeds typical resistor ratings. Consider using a higher wattage resistor (e.g., 0.5W or 1W).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Tab -->
+    <div id="history" class="tab-content">
+      <div class="calculator">
+        <h2><i class="fas fa-history"></i> Calculation History</h2>
+        <div id="historyContainer"></div>
+      </div>
+    </div>
+
+    <!-- Info Tab -->
+    <div id="info" class="tab-content">
+      <div class="calculator">
+        <h2><i class="fas fa-info-circle"></i> LED Resistor Information</h2>
+        
+        <div class="info-box">
+          <h3><i class="fas fa-lightbulb"></i> How to Calculate LED Resistors</h3>
+          <p>The resistor value for an LED is calculated using Ohm's Law:</p>
+          <p style="text-align: center; font-size: 18px;">
+            R = (V<sub>s</sub> - V<sub>f</sub>) / I
+          </p>
+          <p>Where:</p>
+          <ul>
+            <li>R = Resistor value (Ω)</li>
+            <li>V<sub>s</sub> = Supply voltage (V)</li>
+            <li>V<sub>f</sub> = LED forward voltage (V)</li>
+            <li>I = LED current (A)</li>
+          </ul>
+        </div>
+        
+        <div class="info-box">
+          <h3><i class="fas fa-exclamation-triangle"></i> Important Notes:</h3>
+          <ul>
+            <li>Standard resistors: E12/E24 series (10%, 5% tolerance)</li>
+            <li>Use a higher wattage resistor for safety (e.g., 0.25W or 0.5W)</li>
+            <li>For multiple LEDs, calculate resistors separately or use a series/parallel configuration</li>
+            <li>Check LED datasheet for exact forward voltage and current</li>
+            <li>Typical LED currents: 20mA for standard LEDs, 2-5mA for low-power indicators</li>
+          </ul>
+        </div>
+        
+        <div class="info-box">
+          <h3><i class="fas fa-bolt"></i> Typical LED Voltages</h3>
+          <ul>
+            <li><strong>Red LED:</strong> 1.8V - 2.2V</li>
+            <li><strong>Green LED:</strong> 2.0V - 2.4V</li>
+            <li><strong>Yellow LED:</strong> 2.0V - 2.4V</li>
+            <li><strong>Blue LED:</strong> 3.0V - 3.6V</li>
+            <li><strong>White LED:</strong> 3.0V - 3.6V</li>
+          </ul>
+        </div>
+        
+        <div class="info-box">
+          <h3><i class="fas fa-project-diagram"></i> Series vs Parallel Connections</h3>
+          <p><strong>Series Connection:</strong> LEDs connected one after another. The supply voltage must be greater than the sum of all LED forward voltages.</p>
+          <p><strong>Parallel Connection:</strong> LEDs connected side by side. Each LED needs its own current-limiting resistor for proper operation.</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Theme Toggle Button -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-    <i class="fas fa-moon"></i>
-  </button>
+  <!-- Notification Area -->
+  <div id="notificationArea"></div>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
       <div class="social-footer">
@@ -310,18 +749,80 @@
         <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
         <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
       </div>
-    </div>
-    <div class="footer-bottom">
-      &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
-      &copy; M.T.A.
+      <div class="footer-bottom">
+        &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+        &copy; M.T.A.
+      </div>
     </div>
   </footer>
+
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <i class="fas fa-moon"></i>
+  </button>
 
   <script>
     // Standard resistor values (E12 series)
     const standardResistors = [10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82, 
-                              100, 120, 150, 180, 220, 270, 330, 390, 470, 560, 680, 820];
+                              100, 120, 150, 180, 220, 270, 330, 390, 470, 560, 680, 820,
+                              1000, 1200, 1500, 1800, 2200, 2700, 3300, 3900, 4700, 5600, 6800, 8200,
+                              10000, 12000, 15000, 18000, 22000, 27000, 33000, 39000, 47000, 56000, 68000, 82000];
 
+    // LED types with typical forward voltages
+    const ledTypes = {
+      'red': { voltage: 2.0, color: '#ff0000' },
+      'green': { voltage: 2.2, color: '#00ff00' },
+      'blue': { voltage: 3.3, color: '#0000ff' },
+      'yellow': { voltage: 2.1, color: '#ffff00' },
+      'white': { voltage: 3.3, color: '#ffffff' },
+      'custom': { voltage: 2.0, color: '#ff00ff' }
+    };
+
+    // Calculation history
+    let calculationHistory = [];
+
+    // Initialize the application
+    function init() {
+      setupTabNavigation();
+      loadHistory();
+      drawCircuit();
+      drawMultiCircuit();
+    }
+
+    // Tab navigation
+    function setupTabNavigation() {
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // Remove active class from all tabs and contents
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+          
+          // Add active class to clicked tab and corresponding content
+          tab.classList.add('active');
+          document.getElementById(tab.dataset.tab).classList.add('active');
+        });
+      });
+    }
+
+    // Update LED values based on selected type
+    function updateLEDValues() {
+      const ledType = document.getElementById('ledConfig').value;
+      const ledData = ledTypes[ledType];
+      
+      document.getElementById('ledVoltage').value = ledData.voltage;
+      drawCircuit();
+    }
+
+    function updateMultiLEDValues() {
+      const ledType = document.getElementById('multiLedConfig').value;
+      const ledData = ledTypes[ledType];
+      
+      document.getElementById('multiLedVoltage').value = ledData.voltage;
+      drawMultiCircuit();
+    }
+
+    // Calculate resistor for single LED
     function calculateResistor() {
       const supplyVoltage = parseFloat(document.getElementById('supplyVoltage').value);
       const ledVoltage = parseFloat(document.getElementById('ledVoltage').value);
@@ -330,7 +831,7 @@
       if (isNaN(supplyVoltage) || supplyVoltage <= 0 || 
           isNaN(ledVoltage) || ledVoltage <= 0 || ledVoltage >= supplyVoltage || 
           isNaN(ledCurrent) || ledCurrent <= 0) {
-        alert("Please enter valid values.\n\n- All values must be positive numbers\n- LED voltage must be less than supply voltage");
+        showNotification("Please enter valid values.\n\n- All values must be positive numbers\n- LED voltage must be less than supply voltage", "error");
         return;
       }
 
@@ -338,24 +839,611 @@
       const resistorValue = (supplyVoltage - ledVoltage) / (ledCurrent / 1000);
 
       // Find nearest standard resistor value
+      const nearestResistor = findNearestStandardResistor(resistorValue);
+
+      // Calculate power dissipation (P = I²R)
+      const resistorPower = Math.pow(ledCurrent / 1000, 2) * nearestResistor;
+
+      // Calculate supply current
+      const supplyCurrent = ledCurrent;
+
+      // Display results
+      document.getElementById('resistorValue').textContent = resistorValue.toFixed(0) + " Ω";
+      document.getElementById('standardResistor').textContent = nearestResistor + " Ω";
+      document.getElementById('resistorPower').textContent = resistorPower.toFixed(3) + " W";
+      document.getElementById('supplyCurrent').textContent = supplyCurrent.toFixed(0) + " mA";
+
+      // Show power warning if needed
+      const powerWarning = document.getElementById('powerWarning');
+      if (resistorPower > 0.125) {
+        powerWarning.style.display = 'block';
+      } else {
+        powerWarning.style.display = 'none';
+      }
+
+      // Draw updated circuit
+      drawCircuit();
+
+      showNotification("Resistor calculation completed!", "success");
+    }
+
+    // Calculate resistor for multiple LEDs
+    function calculateMultiLEDResistor() {
+      const supplyVoltage = parseFloat(document.getElementById('multiSupplyVoltage').value);
+      const ledVoltage = parseFloat(document.getElementById('multiLedVoltage').value);
+      const ledCurrent = parseFloat(document.getElementById('multiLedCurrent').value);
+      const ledCount = parseInt(document.getElementById('ledCount').value);
+      const connectionType = document.getElementById('connectionType').value;
+
+      if (isNaN(supplyVoltage) || supplyVoltage <= 0 || 
+          isNaN(ledVoltage) || ledVoltage <= 0 || 
+          isNaN(ledCurrent) || ledCurrent <= 0 ||
+          isNaN(ledCount) || ledCount <= 0) {
+        showNotification("Please enter valid values.\n\n- All values must be positive numbers", "error");
+        return;
+      }
+
+      let totalLedVoltage, totalCurrent, resistorValue;
+
+      if (connectionType === 'series') {
+        // Series connection: voltage adds up, current stays the same
+        totalLedVoltage = ledVoltage * ledCount;
+        
+        if (totalLedVoltage >= supplyVoltage) {
+          showNotification("Supply voltage is too low for series connection of " + ledCount + " LEDs.\n\nTotal LED voltage: " + totalLedVoltage.toFixed(1) + "V\nSupply voltage: " + supplyVoltage + "V", "error");
+          return;
+        }
+        
+        totalCurrent = ledCurrent;
+        resistorValue = (supplyVoltage - totalLedVoltage) / (ledCurrent / 1000);
+      } else {
+        // Parallel connection: voltage stays the same, current adds up
+        totalLedVoltage = ledVoltage;
+        
+        if (totalLedVoltage >= supplyVoltage) {
+          showNotification("Supply voltage is too low for the LED forward voltage.", "error");
+          return;
+        }
+        
+        totalCurrent = ledCurrent * ledCount;
+        resistorValue = (supplyVoltage - totalLedVoltage) / (totalCurrent / 1000);
+      }
+
+      // Find nearest standard resistor value
+      const nearestResistor = findNearestStandardResistor(resistorValue);
+
+      // Calculate power dissipation (P = I²R)
+      const resistorPower = Math.pow(totalCurrent / 1000, 2) * nearestResistor;
+
+      // Display results
+      document.getElementById('multiResistorValue').textContent = resistorValue.toFixed(0) + " Ω";
+      document.getElementById('multiStandardResistor').textContent = nearestResistor + " Ω";
+      document.getElementById('multiResistorPower').textContent = resistorPower.toFixed(3) + " W";
+      document.getElementById('multiSupplyCurrent').textContent = totalCurrent.toFixed(0) + " mA";
+
+      // Show power warning if needed
+      const powerWarning = document.getElementById('multiPowerWarning');
+      if (resistorPower > 0.125) {
+        powerWarning.style.display = 'block';
+      } else {
+        powerWarning.style.display = 'none';
+      }
+
+      // Draw updated circuit
+      drawMultiCircuit();
+
+      showNotification("Multiple LED resistor calculation completed!", "success");
+    }
+
+    // Find nearest standard resistor value
+    function findNearestStandardResistor(value) {
       let nearestResistor = standardResistors[0];
-      let minDifference = Math.abs(resistorValue - nearestResistor);
+      let minDifference = Math.abs(value - nearestResistor);
 
       for (const r of standardResistors) {
-        const difference = Math.abs(resistorValue - r);
+        const difference = Math.abs(value - r);
         if (difference < minDifference) {
           minDifference = difference;
           nearestResistor = r;
         }
       }
 
-      // Calculate power dissipation (P = I²R)
-      const resistorPower = Math.pow(ledCurrent / 1000, 2) * nearestResistor;
+      return nearestResistor;
+    }
 
-      // Display results
-      document.getElementById('resistorValue').textContent = resistorValue.toFixed(0) + " Ω";
-      document.getElementById('standardResistor').textContent = nearestResistor + " Ω";
-      document.getElementById('resistorPower').textContent = resistorPower.toFixed(3) + " W";
+    // Draw circuit diagram for single LED
+    function drawCircuit() {
+      const canvas = document.getElementById('circuitDiagram');
+      const ctx = canvas.getContext('2d');
+      const width = canvas.offsetWidth;
+      const height = canvas.offsetHeight;
+      
+      // Set canvas dimensions
+      canvas.width = width;
+      canvas.height = height;
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, width, height);
+      
+      // Draw power source
+      ctx.fillStyle = 'var(--text-light)';
+      ctx.font = '12px Arial';
+      ctx.fillText('Vcc', 30, 30);
+      
+      // Draw resistor
+      ctx.beginPath();
+      ctx.moveTo(50, 50);
+      ctx.lineTo(100, 50);
+      ctx.strokeStyle = 'var(--text-light)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.rect(100, 40, 60, 20);
+      ctx.strokeStyle = 'var(--text-light)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.fillStyle = 'var(--background-secondary)';
+      ctx.fill();
+      ctx.fillStyle = 'var(--text-light)';
+      ctx.fillText('R', 125, 55);
+      
+      // Draw LED
+      const ledType = document.getElementById('ledConfig').value;
+      const ledColor = ledTypes[ledType].color;
+      
+      ctx.beginPath();
+      ctx.moveTo(160, 50);
+      ctx.lineTo(200, 50);
+      ctx.strokeStyle = 'var(--text-light)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      // LED symbol
+      ctx.beginPath();
+      ctx.moveTo(200, 50);
+      ctx.lineTo(220, 30);
+      ctx.lineTo(240, 50);
+      ctx.lineTo(220, 70);
+      ctx.closePath();
+      ctx.strokeStyle = 'var(--text-light)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.fillStyle = ledColor;
+      ctx.fill();
+      
+      // LED arrow
+      ctx.beginPath();
+      ctx.moveTo(230, 50);
+      ctx.lineTo(250, 50);
+      ctx.strokeStyle = 'var(--text-light)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.moveTo(245, 45);
+      ctx.lineTo(250, 50);
+      ctx.lineTo(245, 55);
+      ctx.closePath();
+      ctx.fillStyle = 'var(--text-light)';
+      ctx.fill();
+      
+      // Draw ground
+      ctx.beginPath();
+      ctx.moveTo(250, 50);
+      ctx.lineTo(250, 80);
+      ctx.lineTo(240, 80);
+      ctx.lineTo(260, 80);
+      ctx.lineTo(250, 80);
+      ctx.lineTo(250, 90);
+      ctx.lineTo(245, 90);
+      ctx.lineTo(255, 90);
+      ctx.strokeStyle = 'var(--text-light)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      ctx.fillStyle = 'var(--text-light)';
+      ctx.fillText('GND', 260, 85);
+    }
+
+    // Draw circuit diagram for multiple LEDs
+    function drawMultiCircuit() {
+      const canvas = document.getElementById('multiCircuitDiagram');
+      const ctx = canvas.getContext('2d');
+      const width = canvas.offsetWidth;
+      const height = canvas.offsetHeight;
+      const ledCount = parseInt(document.getElementById('ledCount').value) || 3;
+      const connectionType = document.getElementById('connectionType').value;
+      
+      // Set canvas dimensions
+      canvas.width = width;
+      canvas.height = height;
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, width, height);
+      
+      if (connectionType === 'series') {
+        drawSeriesCircuit(ctx, width, height, ledCount);
+      } else {
+        drawParallelCircuit(ctx, width, height, ledCount);
+      }
+    }
+
+    // Draw series circuit
+    function drawSeriesCircuit(ctx, width, height, ledCount) {
+      // Draw power source
+      ctx.fillStyle = 'var(--text-light)';
+      ctx.font = '12px Arial';
+      ctx.fillText('Vcc', 30, 30);
+      
+      // Draw resistor
+      ctx.beginPath();
+      ctx.moveTo(50, 50);
+      ctx.lineTo(100, 50);
+      ctx.strokeStyle = 'var(--text-light)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.rect(100, 40, 60, 20);
+      ctx.strokeStyle = 'var(--text-light)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.fillStyle = 'var(--background-secondary)';
+      ctx.fill();
+      ctx.fillStyle = 'var(--text-light)';
+      ctx.fillText('R', 125, 55);
+      
+      // Draw LEDs in series
+      const ledSpacing = 40;
+      const startX = 160;
+      
+      for (let i = 0; i < ledCount; i++) {
+        const x = startX + i * ledSpacing;
+        
+        // Wire to LED
+        ctx.beginPath();
+        ctx.moveTo(i === 0 ? 160 : x - ledSpacing + 20, 50);
+        ctx.lineTo(x, 50);
+        ctx.strokeStyle = 'var(--text-light)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // LED symbol
+        const ledType = document.getElementById('multiLedConfig').value;
+        const ledColor = ledTypes[ledType].color;
+        
+        ctx.beginPath();
+        ctx.moveTo(x, 50);
+        ctx.lineTo(x + 10, 30);
+        ctx.lineTo(x + 20, 50);
+        ctx.lineTo(x + 10, 70);
+        ctx.closePath();
+        ctx.strokeStyle = 'var(--text-light)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = ledColor;
+        ctx.fill();
+        
+        // LED label
+        ctx.fillStyle = 'var(--text-light)';
+        ctx.fillText('LED' + (i + 1), x + 5, 85);
+      }
+      
+      // Draw ground
+      const lastLedX = startX + (ledCount - 1) * ledSpacing + 20;
+      ctx.beginPath();
+      ctx.moveTo(lastLedX, 50);
+      ctx.lineTo(lastLedX, 80);
+      ctx.lineTo(lastLedX - 10, 80);
+      ctx.lineTo(lastLedX + 10, 80);
+      ctx.lineTo(lastLedX, 80);
+      ctx.lineTo(lastLedX, 90);
+      ctx.lineTo(lastLedX - 5, 90);
+      ctx.lineTo(lastLedX + 5, 90);
+      ctx.strokeStyle = 'var(--text-light)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      ctx.fillStyle = 'var(--text-light)';
+      ctx.fillText('GND', lastLedX + 15, 85);
+    }
+
+    // Draw parallel circuit
+    function drawParallelCircuit(ctx, width, height, ledCount) {
+      // Draw power source
+      ctx.fillStyle = 'var(--text-light)';
+      ctx.font = '12px Arial';
+      ctx.fillText('Vcc', 30, 30);
+      
+      // Draw main resistor
+      ctx.beginPath();
+      ctx.moveTo(50, 50);
+      ctx.lineTo(100, 50);
+      ctx.strokeStyle = 'var(--text-light)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.rect(100, 40, 60, 20);
+      ctx.strokeStyle = 'var(--text-light)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.fillStyle = 'var(--background-secondary)';
+      ctx.fill();
+      ctx.fillStyle = 'var(--text-light)';
+      ctx.fillText('R', 125, 55);
+      
+      // Draw parallel branches
+      const branchSpacing = 30;
+      const startY = 80;
+      
+      for (let i = 0; i < ledCount; i++) {
+        const y = startY + i * branchSpacing;
+        
+        // Branch wire
+        ctx.beginPath();
+        ctx.moveTo(160, 50);
+        ctx.lineTo(160, y);
+        ctx.lineTo(200, y);
+        ctx.strokeStyle = 'var(--text-light)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // LED symbol
+        const ledType = document.getElementById('multiLedConfig').value;
+        const ledColor = ledTypes[ledType].color;
+        
+        ctx.beginPath();
+        ctx.moveTo(200, y);
+        ctx.lineTo(220, y - 10);
+        ctx.lineTo(240, y);
+        ctx.lineTo(220, y + 10);
+        ctx.closePath();
+        ctx.strokeStyle = 'var(--text-light)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = ledColor;
+        ctx.fill();
+        
+        // LED arrow
+        ctx.beginPath();
+        ctx.moveTo(240, y);
+        ctx.lineTo(260, y);
+        ctx.strokeStyle = 'var(--text-light)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(255, y - 5);
+        ctx.lineTo(260, y);
+        ctx.lineTo(255, y + 5);
+        ctx.closePath();
+        ctx.fillStyle = 'var(--text-light)';
+        ctx.fill();
+        
+        // LED label
+        ctx.fillStyle = 'var(--text-light)';
+        ctx.fillText('LED' + (i + 1), 270, y + 5);
+      }
+      
+      // Draw common ground connection
+      const lastBranchY = startY + (ledCount - 1) * branchSpacing;
+      ctx.beginPath();
+      ctx.moveTo(260, startY);
+      ctx.lineTo(260, lastBranchY);
+      ctx.strokeStyle = 'var(--text-light)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      // Draw ground symbol
+      ctx.beginPath();
+      ctx.moveTo(260, lastBranchY);
+      ctx.lineTo(260, lastBranchY + 20);
+      ctx.lineTo(250, lastBranchY + 20);
+      ctx.lineTo(270, lastBranchY + 20);
+      ctx.lineTo(260, lastBranchY + 20);
+      ctx.lineTo(260, lastBranchY + 30);
+      ctx.lineTo(255, lastBranchY + 30);
+      ctx.lineTo(265, lastBranchY + 30);
+      ctx.strokeStyle = 'var(--text-light)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      ctx.fillStyle = 'var(--text-light)';
+      ctx.fillText('GND', 275, lastBranchY + 25);
+    }
+
+    // Save calculation to history
+    function saveCalculation() {
+      const supplyVoltage = parseFloat(document.getElementById('supplyVoltage').value);
+      const ledVoltage = parseFloat(document.getElementById('ledVoltage').value);
+      const ledCurrent = parseFloat(document.getElementById('ledCurrent').value);
+      const resistorValue = document.getElementById('resistorValue').textContent;
+      const standardResistor = document.getElementById('standardResistor').textContent;
+      
+      if (resistorValue === '-- Ω') {
+        showNotification("Please calculate a resistor value first", "error");
+        return;
+      }
+      
+      const calculation = {
+        id: Date.now(),
+        type: 'single',
+        supplyVoltage,
+        ledVoltage,
+        ledCurrent,
+        resistorValue,
+        standardResistor,
+        timestamp: new Date().toISOString()
+      };
+      
+      calculationHistory.unshift(calculation);
+      
+      // Keep only last 10 calculations
+      if (calculationHistory.length > 10) {
+        calculationHistory = calculationHistory.slice(0, 10);
+      }
+      
+      localStorage.setItem('ledCalculationHistory', JSON.stringify(calculationHistory));
+      displayHistory();
+      showNotification("Calculation saved to history!", "success");
+    }
+
+    function saveMultiCalculation() {
+      const supplyVoltage = parseFloat(document.getElementById('multiSupplyVoltage').value);
+      const ledVoltage = parseFloat(document.getElementById('multiLedVoltage').value);
+      const ledCurrent = parseFloat(document.getElementById('multiLedCurrent').value);
+      const ledCount = parseInt(document.getElementById('ledCount').value);
+      const connectionType = document.getElementById('connectionType').value;
+      const resistorValue = document.getElementById('multiResistorValue').textContent;
+      const standardResistor = document.getElementById('multiStandardResistor').textContent;
+      
+      if (resistorValue === '-- Ω') {
+        showNotification("Please calculate a resistor value first", "error");
+        return;
+      }
+      
+      const calculation = {
+        id: Date.now(),
+        type: 'multiple',
+        supplyVoltage,
+        ledVoltage,
+        ledCurrent,
+        ledCount,
+        connectionType,
+        resistorValue,
+        standardResistor,
+        timestamp: new Date().toISOString()
+      };
+      
+      calculationHistory.unshift(calculation);
+      
+      // Keep only last 10 calculations
+      if (calculationHistory.length > 10) {
+        calculationHistory = calculationHistory.slice(0, 10);
+      }
+      
+      localStorage.setItem('ledCalculationHistory', JSON.stringify(calculationHistory));
+      displayHistory();
+      showNotification("Calculation saved to history!", "success");
+    }
+
+    // Load history from localStorage
+    function loadHistory() {
+      const savedHistory = localStorage.getItem('ledCalculationHistory');
+      if (savedHistory) {
+        calculationHistory = JSON.parse(savedHistory);
+        displayHistory();
+      }
+    }
+
+    // Display calculation history
+    function displayHistory() {
+      const historyContainer = document.getElementById('historyContainer');
+      
+      if (calculationHistory.length === 0) {
+        historyContainer.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-history"></i>
+            <h3>No calculation history</h3>
+            <p>Your saved calculations will appear here</p>
+          </div>
+        `;
+        return;
+      }
+
+      historyContainer.innerHTML = calculationHistory.map(item => `
+        <div class="history-item">
+          <div>
+            <strong>${item.type === 'single' ? 'Single LED' : 'Multiple LEDs'}</strong>
+            <div class="history-details">
+              ${item.supplyVoltage}V → ${item.ledVoltage}V @ ${item.ledCurrent}mA
+              ${item.type === 'multiple' ? ` | ${item.ledCount} LEDs (${item.connectionType})` : ''}
+            </div>
+            <div>Resistor: ${item.standardResistor}</div>
+          </div>
+          <button class="btn btn-secondary" onclick="loadCalculation(${item.id})" style="padding: 8px 12px;">
+            <i class="fas fa-undo"></i> Load
+          </button>
+        </div>
+      `).join('');
+    }
+
+    // Load a calculation from history
+    function loadCalculation(id) {
+      const calculation = calculationHistory.find(item => item.id === id);
+      if (calculation) {
+        if (calculation.type === 'single') {
+          // Switch to single LED tab
+          document.querySelector('.tab[data-tab="single-led"]').click();
+          
+          document.getElementById('supplyVoltage').value = calculation.supplyVoltage;
+          document.getElementById('ledVoltage').value = calculation.ledVoltage;
+          document.getElementById('ledCurrent').value = calculation.ledCurrent;
+          
+          calculateResistor();
+        } else {
+          // Switch to multiple LEDs tab
+          document.querySelector('.tab[data-tab="multiple-leds"]').click();
+          
+          document.getElementById('multiSupplyVoltage').value = calculation.supplyVoltage;
+          document.getElementById('multiLedVoltage').value = calculation.ledVoltage;
+          document.getElementById('multiLedCurrent').value = calculation.ledCurrent;
+          document.getElementById('ledCount').value = calculation.ledCount;
+          document.getElementById('connectionType').value = calculation.connectionType;
+          
+          calculateMultiLEDResistor();
+        }
+        
+        showNotification("Calculation loaded from history!", "success");
+      }
+    }
+
+    // Show notification
+    function showNotification(message, type = 'info') {
+      const notificationArea = document.getElementById('notificationArea');
+      const notificationId = 'notification-' + Date.now();
+      
+      const notification = document.createElement('div');
+      notification.id = notificationId;
+      notification.className = `notification ${type}`;
+      notification.innerHTML = `
+        <i class="fas fa-${getNotificationIcon(type)}"></i>
+        <span>${message}</span>
+        <button class="close-notification" onclick="document.getElementById('${notificationId}').remove()">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
+      
+      notificationArea.appendChild(notification);
+      
+      // Show notification
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+      
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        if (document.getElementById(notificationId)) {
+          notification.classList.remove('show');
+          setTimeout(() => {
+            if (document.getElementById(notificationId)) {
+              document.getElementById(notificationId).remove();
+            }
+          }, 500);
+        }
+      }, 5000);
+    }
+
+    // Get notification icon based on type
+    function getNotificationIcon(type) {
+      switch(type) {
+        case 'success': return 'check-circle';
+        case 'error': return 'exclamation-circle';
+        case 'warning': return 'exclamation-triangle';
+        default: return 'info-circle';
+      }
     }
 
     // Theme toggle functionality
@@ -386,6 +1474,9 @@
       }
     });
 
+    // Initialize on load
+    window.onload = init;
+    
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>

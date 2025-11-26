@@ -453,6 +453,45 @@
             box-shadow: var(--glow-effect);
         }
 
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            padding: 15px 25px;
+            background-color: var(--success-color);
+            color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.error {
+            background-color: var(--error-color);
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            display: none;
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(52, 152, 219, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .input-field {
@@ -642,6 +681,81 @@
             visibility: visible;
             opacity: 1;
         }
+
+        /* New Unit Converter Styles */
+        .converter-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .converter-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .converter-input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .converter-unit {
+            width: 120px;
+        }
+
+        .converter-result {
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--background-secondary);
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--success-color);
+        }
+
+        /* New Inductor Design Styles */
+        .design-input-group {
+            margin-bottom: 20px;
+        }
+
+        .design-input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .design-input-group input {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .design-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .design-result-box {
+            padding: 15px;
+            border-radius: var(--border-radius);
+            background: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .design-result-label {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .design-result-value {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--text-light);
+        }
     </style>
 </head>
 <body>
@@ -657,6 +771,9 @@
             </button>
             <button class="main-tab-button" onclick="openMainTab(event, 'SeriesParallel')">
                 <i class="fas fa-link"></i> Series/Parallel
+            </button>
+            <button class="main-tab-button" onclick="openMainTab(event, 'UnitConverter')">
+                <i class="fas fa-exchange-alt"></i> Unit Converter
             </button>
             <button class="main-tab-button" onclick="openMainTab(event, 'Info')">
                 <i class="fas fa-info-circle"></i> Information
@@ -869,6 +986,64 @@
             </div>
         </div>
         
+        <!-- Unit Converter Tab -->
+        <div id="UnitConverter" class="main-tabcontent">
+            <div class="calculator">
+                <h2><i class="fas fa-exchange-alt"></i> Inductance Unit Converter</h2>
+                <p>Convert between different inductance units quickly and easily.</p>
+                
+                <div class="converter-container">
+                    <div class="converter-row">
+                        <div class="converter-input">
+                            <label for="converterValue">Value:</label>
+                            <input type="number" id="converterValue" value="1" step="0.001" min="0">
+                        </div>
+                        <div class="converter-unit">
+                            <label for="fromUnit">From:</label>
+                            <select id="fromUnit" class="unit-selector">
+                                <option value="1e-12">pH (picohenry)</option>
+                                <option value="1e-9">nH (nanohenry)</option>
+                                <option value="1e-6" selected>μH (microhenry)</option>
+                                <option value="1e-3">mH (millihenry)</option>
+                                <option value="1">H (henry)</option>
+                                <option value="1e3">kH (kilohenry)</option>
+                            </select>
+                        </div>
+                        <div class="converter-unit">
+                            <label for="toUnit">To:</label>
+                            <select id="toUnit" class="unit-selector">
+                                <option value="1e-12">pH (picohenry)</option>
+                                <option value="1e-9">nH (nanohenry)</option>
+                                <option value="1e-6">μH (microhenry)</option>
+                                <option value="1e-3" selected>mH (millihenry)</option>
+                                <option value="1">H (henry)</option>
+                                <option value="1e3">kH (kilohenry)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="convertUnits()">
+                        <i class="fas fa-exchange-alt"></i> Convert
+                    </button>
+                    
+                    <div id="converter-result" class="converter-result">
+                        <p>Conversion result will appear here.</p>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h3><i class="fas fa-info-circle"></i> Unit Conversion Factors</h3>
+                    <ul>
+                        <li>1 Henry (H) = 1,000 millihenries (mH)</li>
+                        <li>1 millihenry (mH) = 1,000 microhenries (μH)</li>
+                        <li>1 microhenry (μH) = 1,000 nanohenries (nH)</li>
+                        <li>1 nanohenry (nH) = 1,000 picohenries (pH)</li>
+                        <li>1 kilohenry (kH) = 1,000 Henry (H)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
         <!-- Info Tab -->
         <div id="Info" class="main-tabcontent">
             <h2><i class="fas fa-info-circle"></i> Inductor Information</h2>
@@ -997,6 +1172,9 @@
         </div>
     </div>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
     <!-- Dark Mode Toggle -->
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
         <i class="fas fa-moon"></i>
@@ -1120,6 +1298,23 @@
                 localStorage.setItem('theme', 'light');
             }
         });
+
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast';
+            
+            if (type === 'error') {
+                toast.classList.add('error');
+            }
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
 
         // Band selection for 4-band
         function selectBand(bandNum) {
@@ -1256,6 +1451,7 @@
                 
                 if (isNaN(value) || value <= 0) {
                     resultDiv.innerHTML = '<p style="color: var(--error-color);">Error: All inductor values must be positive numbers.</p>';
+                    showToast('Please enter valid inductor values!', 'error');
                     return;
                 }
                 
@@ -1315,6 +1511,39 @@
                 <p><strong>Equivalent Inductance:</strong> ${displayValue.toFixed(4)} ${unit}</p>
                 <p><strong>Calculation:</strong><br>${formula}</p>
             `;
+            
+            showToast('Calculation completed successfully!');
+        }
+
+        // Unit converter function
+        function convertUnits() {
+            const value = parseFloat(document.getElementById('converterValue').value);
+            const fromUnit = parseFloat(document.getElementById('fromUnit').value);
+            const toUnit = parseFloat(document.getElementById('toUnit').value);
+            const resultDiv = document.getElementById('converter-result');
+            
+            if (isNaN(value) || value < 0) {
+                resultDiv.innerHTML = '<p style="color: var(--error-color);">Error: Please enter a valid positive number.</p>';
+                showToast('Please enter a valid value!', 'error');
+                return;
+            }
+            
+            // Convert to base unit (Henries) first
+            const valueInHenries = value * fromUnit;
+            
+            // Convert to target unit
+            const convertedValue = valueInHenries / toUnit;
+            
+            // Get unit names for display
+            const fromUnitName = document.getElementById('fromUnit').options[document.getElementById('fromUnit').selectedIndex].text;
+            const toUnitName = document.getElementById('toUnit').options[document.getElementById('toUnit').selectedIndex].text;
+            
+            resultDiv.innerHTML = `
+                <p><strong>Conversion Result:</strong></p>
+                <p>${value} ${fromUnitName} = ${convertedValue.toFixed(6)} ${toUnitName}</p>
+            `;
+            
+            showToast('Conversion completed successfully!');
         }
         
         // Initialize the color code display

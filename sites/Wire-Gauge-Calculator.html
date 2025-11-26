@@ -63,7 +63,7 @@
         }
 
         .calculator-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -142,6 +142,11 @@
             box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
         }
 
+        .input-field.error {
+            border-color: var(--error-color);
+            box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.2);
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -154,7 +159,6 @@
             cursor: pointer;
             border: none;
             outline: none;
-            width: 100%;
             margin-bottom: 10px;
         }
 
@@ -168,6 +172,40 @@
             background-color: var(--primary-dark);
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(78, 158, 255, 0.6);
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-success:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
+        }
+
+        .btn-warning {
+            background-color: var(--warning-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        .btn-warning:hover {
+            background-color: #f57c00;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 152, 0, 0.6);
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         .results-grid {
@@ -292,6 +330,113 @@
             margin-bottom: 30px;
         }
 
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            padding: 15px 25px;
+            background-color: var(--success-color);
+            color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.error {
+            background-color: var(--error-color);
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            display: none;
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(78, 158, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--card-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+
+        .social-footer {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .social-footer a {
+            color: var(--text-light);
+            font-size: 1.5em;
+            margin: 0 15px;
+            transition: all var(--transition-speed) ease;
+            display: inline-block;
+        }
+
+        .social-footer a:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        /* Additional wire material selector */
+        .material-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .material-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid var(--background-secondary);
+            background-color: var(--background-secondary);
+            color: var(--text-light);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            text-align: center;
+        }
+
+        .material-btn.active {
+            border-color: var(--primary-color);
+            background-color: rgba(78, 158, 255, 0.1);
+        }
+
+        .material-btn:hover {
+            border-color: var(--primary-color);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .results-grid {
@@ -302,43 +447,16 @@
                 padding: 10px 12px;
                 font-size: 14px;
             }
+
+            .btn-row {
+                flex-direction: column;
+            }
+
+            .material-selector {
+                flex-direction: column;
+            }
         }
-         footer {
-    background-color: var(--card-dark);
-    color: var(--text-light);
-    text-align: center;
-    padding: 30px;
-    margin-top: 30px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-  }
-
-  .social-footer {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-  }
-
-  .social-footer a {
-    color: var(--text-light);
-    font-size: 1.5em;
-    margin: 0 15px;
-    transition: all var(--transition-speed) ease;
-    display: inline-block;
-  }
-
-  .social-footer a:hover {
-    color: var(--primary-color);
-    transform: translateY(-5px);
-  }
-
-  .footer-bottom {
-    margin-top: 20px;
-    font-size: 0.9em;
-    opacity: 0.8;
-  }
     </style>
-  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
     <div class="calculator-container">
@@ -356,6 +474,15 @@
             <div class="calculator">
                 <h2>Wire Size Calculator</h2>
                 <p>Enter your circuit parameters to calculate the minimum wire gauge required:</p>
+                
+                <div class="material-selector">
+                    <div class="material-btn active" data-material="copper" onclick="selectMaterial('copper')">
+                        <i class="fas fa-bolt"></i> Copper
+                    </div>
+                    <div class="material-btn" data-material="aluminum" onclick="selectMaterial('aluminum')">
+                        <i class="fas fa-bolt"></i> Aluminum
+                    </div>
+                </div>
                 
                 <div class="input-group">
                     <label for="current">Current (Amps)</label>
@@ -377,9 +504,11 @@
                     <input type="number" id="voltage" class="input-field" placeholder="e.g., 12" step="0.1" min="0" value="12">
                 </div>
                 
-                <button class="btn btn-primary" onclick="calculateWireGauge()">
+                <button class="btn btn-primary btn-full" onclick="calculateWireGauge()">
                     <i class="fas fa-calculator"></i>&nbsp;&nbsp;Calculate Wire Size
                 </button>
+                
+                <div class="loading-spinner" id="loadingSpinner"></div>
                 
                 <div class="results-grid">
                     <div class="result-box" id="awgBox">
@@ -402,6 +531,15 @@
                         <div class="result-value" id="powerLoss">-- W</div>
                     </div>
                 </div>
+
+                <div class="btn-row">
+                    <button class="btn btn-success" onclick="saveCalculation()">
+                        <i class="fas fa-save"></i> Save Results
+                    </button>
+                    <button class="btn btn-warning" onclick="resetCalculator()">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
             </div>
             
             <div class="info-box">
@@ -409,7 +547,7 @@
                 <ul>
                     <li>AWG = American Wire Gauge (smaller number = thicker wire)</li>
                     <li>For high-power applications, use thicker wire than calculated</li>
-                    <li>Copper wire resistivity: 1.68×10⁻⁸ Ω·m (at 20°C)</li>
+                    <li id="resistivityInfo">Copper wire resistivity: 1.68×10⁻⁸ Ω·m (at 20°C)</li>
                     <li>For long distances, voltage drop becomes critical</li>
                     <li>Consider current carrying capacity (ampacity) for continuous loads</li>
                 </ul>
@@ -507,26 +645,45 @@
         </div>
     </div>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
     <!-- Dark Mode Toggle -->
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
         <i class="fas fa-moon"></i>
     </button>
-<!-- Footer HTML -->
-<footer class="footer">
-  <div class="footer-content">
-    <div class="social-footer">
-      <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-      <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-      <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
-    </div>
-    <div class="footer-bottom">
-      &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
-      &copy; M.T.A.
-    </div>
-  </div>
-</footer>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-footer">
+            <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="footer-bottom">
+            &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+            &copy; M.T.A.
+        </div>
+    </footer>
+
     <script>
+        // Wire material properties
+        const wireMaterials = {
+            copper: {
+                name: "Copper",
+                resistivity: 1.68e-8,
+                info: "Copper wire resistivity: 1.68×10⁻⁸ Ω·m (at 20°C)"
+            },
+            aluminum: {
+                name: "Aluminum",
+                resistivity: 2.82e-8,
+                info: "Aluminum wire resistivity: 2.82×10⁻⁸ Ω·m (at 20°C)"
+            }
+        };
+
+        let currentMaterial = 'copper';
+
         // AWG to mm² conversion table with additional data
         const awgData = [
             { awg: 0, diameter: 8.25, mm2: 53.5, maxCurrent: 195, resistance: 0.32 },
@@ -600,6 +757,25 @@
             evt.currentTarget.className += " active";
         }
 
+        // Select wire material
+        function selectMaterial(material) {
+            currentMaterial = material;
+            
+            // Update UI
+            document.querySelectorAll('.material-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.material-btn[data-material="${material}"]`).classList.add('active');
+            
+            // Update resistivity info
+            document.getElementById('resistivityInfo').textContent = wireMaterials[material].info;
+            
+            // Recalculate if we have values
+            if (document.getElementById('current').value) {
+                calculateWireGauge();
+            }
+        }
+
         // Populate AWG table
         function populateAWGTable() {
             const tbody = document.getElementById('awgTableBody');
@@ -617,88 +793,208 @@
             });
         }
 
+        // Show toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast';
+            
+            if (type === 'error') {
+                toast.classList.add('error');
+            }
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Validate inputs
+        function validateInputs() {
+            const current = parseFloat(document.getElementById('current').value);
+            const voltageDropPercent = parseFloat(document.getElementById('voltageDrop').value);
+            const length = parseFloat(document.getElementById('length').value);
+            const voltage = parseFloat(document.getElementById('voltage').value);
+            
+            let isValid = true;
+            
+            // Clear previous errors
+            document.querySelectorAll('.input-field').forEach(field => {
+                field.classList.remove('error');
+            });
+            
+            // Validate current
+            if (isNaN(current) || current <= 0) {
+                document.getElementById('current').classList.add('error');
+                isValid = false;
+            }
+            
+            // Validate voltage drop
+            if (isNaN(voltageDropPercent) || voltageDropPercent <= 0 || voltageDropPercent > 10) {
+                document.getElementById('voltageDrop').classList.add('error');
+                isValid = false;
+            }
+            
+            // Validate length
+            if (isNaN(length) || length <= 0) {
+                document.getElementById('length').classList.add('error');
+                isValid = false;
+            }
+            
+            // Validate voltage
+            if (isNaN(voltage) || voltage <= 0) {
+                document.getElementById('voltage').classList.add('error');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
         // Wire gauge calculation
         function calculateWireGauge() {
+            // Show loading spinner
+            document.getElementById('loadingSpinner').style.display = 'block';
+            
+            // Validate inputs
+            if (!validateInputs()) {
+                document.getElementById('loadingSpinner').style.display = 'none';
+                showToast('Please check your input values!', 'error');
+                return;
+            }
+            
             // Get input values
             const current = parseFloat(document.getElementById('current').value);
             const voltageDropPercent = parseFloat(document.getElementById('voltageDrop').value);
             const length = parseFloat(document.getElementById('length').value);
             const voltage = parseFloat(document.getElementById('voltage').value);
 
-            // Validate inputs
-            if (isNaN(current) || current <= 0) {
-                alert("Current must be a positive number");
-                return;
-            }
-            if (isNaN(voltageDropPercent) || voltageDropPercent <= 0 || voltageDropPercent > 10) {
-                alert("Voltage drop must be between 0% and 10%");
-                return;
-            }
-            if (isNaN(length) || length <= 0) {
-                alert("Wire length must be positive");
-                return;
-            }
-            if (isNaN(voltage) || voltage <= 0) {
-                alert("System voltage must be positive");
-                return;
-            }
+            // Use setTimeout to allow UI to update
+            setTimeout(() => {
+                // Calculate max allowed resistance
+                const maxVoltageDrop = (voltageDropPercent / 100) * voltage;
+                const maxResistance = maxVoltageDrop / current;
 
-            // Calculate max allowed resistance
-            const maxVoltageDrop = (voltageDropPercent / 100) * voltage;
-            const maxResistance = maxVoltageDrop / current;
+                // Calculate required cross-sectional area
+                const resistivity = wireMaterials[currentMaterial].resistivity;
+                const areaMm2 = (resistivity * length * 2 / maxResistance) * 1e6; // Convert to mm²
 
-            // Calculate required cross-sectional area
-            const resistivity = 1.68e-8; // Copper resistivity (Ω·m)
-            const areaMm2 = (resistivity * length * 2 / maxResistance) * 1e6; // Convert to mm²
-
-            // Find the smallest AWG that meets the requirement
-            let recommendedWire = awgData[awgData.length - 1]; // Start with smallest wire
-            
-            for (const wire of awgData) {
-                if (wire.mm2 >= areaMm2) {
-                    recommendedWire = wire;
-                    break;
+                // Find the smallest AWG that meets the requirement
+                let recommendedWire = awgData[awgData.length - 1]; // Start with smallest wire
+                
+                for (const wire of awgData) {
+                    if (wire.mm2 >= areaMm2) {
+                        recommendedWire = wire;
+                        break;
+                    }
                 }
-            }
 
-            // Calculate actual values with recommended wire
-            const actualResistance = (resistivity * length * 2) / (recommendedWire.mm2 * 1e-6);
-            const actualVoltageDrop = (actualResistance * current / voltage) * 100;
-            const powerLoss = current * current * actualResistance;
+                // Calculate actual values with recommended wire
+                const actualResistance = (resistivity * length * 2) / (recommendedWire.mm2 * 1e-6);
+                const actualVoltageDrop = (actualResistance * current / voltage) * 100;
+                const powerLoss = current * current * actualResistance;
 
-            // Update result boxes
-            document.getElementById('awgResult').textContent = `AWG ${recommendedWire.awg}`;
-            document.getElementById('mm2Result').textContent = `${recommendedWire.mm2.toFixed(2)} mm²`;
-            document.getElementById('actualDrop').textContent = `${actualVoltageDrop.toFixed(2)}%`;
-            document.getElementById('powerLoss').textContent = `${powerLoss.toFixed(2)} W`;
+                // Update result boxes
+                document.getElementById('awgResult').textContent = `AWG ${recommendedWire.awg}`;
+                document.getElementById('mm2Result').textContent = `${recommendedWire.mm2.toFixed(2)} mm²`;
+                document.getElementById('actualDrop').textContent = `${actualVoltageDrop.toFixed(2)}%`;
+                document.getElementById('powerLoss').textContent = `${powerLoss.toFixed(2)} W`;
 
-            // Update box colors based on results
-            const dropBox = document.getElementById('dropBox');
-            const awgBox = document.getElementById('awgBox');
+                // Update box colors based on results
+                const dropBox = document.getElementById('dropBox');
+                const awgBox = document.getElementById('awgBox');
+                
+                if (actualVoltageDrop <= voltageDropPercent) {
+                    dropBox.className = 'result-box success';
+                    awgBox.className = 'result-box success';
+                } else if (actualVoltageDrop <= voltageDropPercent * 1.2) {
+                    dropBox.className = 'result-box warning';
+                    awgBox.className = 'result-box warning';
+                } else {
+                    dropBox.className = 'result-box error';
+                    awgBox.className = 'result-box error';
+                }
+
+                // Check ampacity
+                if (current > recommendedWire.maxCurrent) {
+                    awgBox.className = 'result-box error';
+                    document.getElementById('awgResult').innerHTML = `AWG ${recommendedWire.awg}<br><small style="color: var(--error-color);">Exceeds ampacity!</small>`;
+                }
+
+                // Hide loading spinner
+                document.getElementById('loadingSpinner').style.display = 'none';
+                
+                // Show success message
+                showToast('Calculation completed successfully!');
+            }, 500);
+        }
+
+        // Save calculation results
+        function saveCalculation() {
+            const awgResult = document.getElementById('awgResult').textContent;
+            const mm2Result = document.getElementById('mm2Result').textContent;
             
-            if (actualVoltageDrop <= voltageDropPercent) {
-                dropBox.className = 'result-box success';
-                awgBox.className = 'result-box success';
-            } else if (actualVoltageDrop <= voltageDropPercent * 1.2) {
-                dropBox.className = 'result-box warning';
-                awgBox.className = 'result-box warning';
-            } else {
-                dropBox.className = 'result-box error';
-                awgBox.className = 'result-box error';
+            if (awgResult === '--' || mm2Result === '--') {
+                showToast('No calculation results to save!', 'error');
+                return;
             }
+            
+            // Create a simple text representation of the results
+            const results = `
+Wire Gauge Calculation Results:
+============================
+Current: ${document.getElementById('current').value} A
+Voltage: ${document.getElementById('voltage').value} V
+Length: ${document.getElementById('length').value} m
+Max Voltage Drop: ${document.getElementById('voltageDrop').value}%
+Wire Material: ${wireMaterials[currentMaterial].name}
 
-            // Check ampacity
-            if (current > recommendedWire.maxCurrent) {
-                awgBox.className = 'result-box error';
-                document.getElementById('awgResult').innerHTML = `AWG ${recommendedWire.awg}<br><small style="color: var(--error-color);">Exceeds ampacity!</small>`;
-            }
+Results:
+- Minimum Wire Size: ${awgResult} (${mm2Result})
+- Actual Voltage Drop: ${document.getElementById('actualDrop').textContent}
+- Power Loss: ${document.getElementById('powerLoss').textContent}
+            `;
+            
+            // Create a blob and download link
+            const blob = new Blob([results], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'wire_gauge_calculation.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showToast('Results saved successfully!');
+        }
+
+        // Reset calculator
+        function resetCalculator() {
+            document.getElementById('current').value = '5';
+            document.getElementById('voltageDrop').value = '3';
+            document.getElementById('length').value = '5';
+            document.getElementById('voltage').value = '12';
+            
+            document.getElementById('awgResult').textContent = '--';
+            document.getElementById('mm2Result').textContent = '--';
+            document.getElementById('actualDrop').textContent = '-- %';
+            document.getElementById('powerLoss').textContent = '-- W';
+            
+            document.getElementById('awgBox').className = 'result-box';
+            document.getElementById('mm2Box').className = 'result-box success';
+            document.getElementById('dropBox').className = 'result-box warning';
+            document.getElementById('powerBox').className = 'result-box';
+            
+            showToast('Calculator reset!');
         }
 
         // Initialize
         populateAWGTable();
         calculateWireGauge(); // Initial calculation
+        
         // Set current year in footer
-  document.getElementById('current-year').textContent = new Date().getFullYear();
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
