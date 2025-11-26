@@ -12,6 +12,7 @@
             --primary-color: #3498db;
             --primary-dark: #2980b9;
             --primary-light: #5dade2;
+            --secondary-color: #9b59b6;
             --background-dark: #121212;
             --background-darker: #0a0a0a;
             --background-secondary: #1a1a1a;
@@ -21,10 +22,12 @@
             --text-muted: #aaaaaa;
             --success-color: #4caf50;
             --error-color: #f44336;
+            --warning-color: #f1c40f;
             --transition-speed: 0.3s;
             --border-radius: 12px;
             --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
             --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+            --glow-effect: 0 0 15px rgba(52, 152, 219, 0.5);
         }
 
         /* Light mode variables */
@@ -47,7 +50,7 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--background-dark);
             color: var(--text-light);
             line-height: 1.6;
@@ -61,6 +64,33 @@
             margin-bottom: 15px;
         }
 
+        p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        /* Header Styles */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: var(--border-radius);
+            color: white;
+            box-shadow: var(--box-shadow);
+        }
+
+        .page-header h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+        }
+
         /* Calculator Styles */
         .calculator-container {
             max-width: 1000px;
@@ -69,6 +99,7 @@
         
         /* Tab styles */
         .main-tabs {
+            display: flex;
             overflow: hidden;
             border: 1px solid var(--background-secondary);
             background-color: var(--card-light);
@@ -78,7 +109,7 @@
         
         .main-tab-button {
             background-color: inherit;
-            float: left;
+            flex: 1;
             border: none;
             outline: none;
             cursor: pointer;
@@ -86,6 +117,8 @@
             transition: 0.3s;
             color: var(--text-light);
             font-weight: bold;
+            position: relative;
+            overflow: hidden;
         }
         
         .main-tab-button:hover {
@@ -97,80 +130,125 @@
             color: white;
         }
         
+        .main-tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: white;
+        }
+        
         .main-tabcontent {
             display: none;
-            padding: 20px;
+            padding: 30px;
             border: 1px solid var(--background-secondary);
             border-top: none;
             border-radius: 0 0 var(--border-radius) var(--border-radius);
             background-color: var(--card-dark);
             box-shadow: var(--box-shadow);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         /* Color code calculator styles */
         .calculator {
             border: 1px solid var(--background-secondary);
-            padding: 20px;
+            padding: 25px;
             border-radius: var(--border-radius);
             margin-bottom: 20px;
+            background-color: var(--card-light);
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .calculator:hover {
+            box-shadow: var(--box-shadow-hover);
         }
         
         .band-container {
             display: flex;
             justify-content: center;
-            margin: 20px 0;
+            margin: 30px 0;
+            flex-wrap: wrap;
         }
         
         .band {
-            width: 40px;
-            height: 100px;
-            margin: 0 5px;
-            border-radius: 4px;
+            width: 50px;
+            height: 120px;
+            margin: 0 8px;
+            border-radius: 6px;
             cursor: pointer;
             position: relative;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .band:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--glow-effect);
         }
         
         .band-label {
             position: absolute;
-            bottom: -25px;
+            bottom: -30px;
             width: 100%;
             text-align: center;
-            font-size: 12px;
+            font-size: 14px;
             color: var(--text-light);
+            font-weight: 600;
         }
         
         .result {
-            font-size: 1.2em;
-            margin: 20px 0;
-            padding: 15px;
+            font-size: 1.3em;
+            margin: 25px 0;
+            padding: 20px;
             background: var(--background-secondary);
             border-radius: var(--border-radius);
             color: var(--text-light);
-            border-left: 4px solid var(--primary-color);
+            border-left: 5px solid var(--primary-color);
+            text-align: center;
+            font-weight: 600;
+            box-shadow: var(--box-shadow);
         }
         
         .tabs {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-wrap: wrap;
         }
         
         .tab-button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             margin-right: 10px;
+            margin-bottom: 10px;
             border: none;
             background: var(--background-secondary);
             color: var(--text-light);
             cursor: pointer;
             border-radius: var(--border-radius);
             transition: all var(--transition-speed) ease;
+            font-weight: 600;
+        }
+        
+        .tab-button:hover {
+            background: var(--primary-light);
+            color: white;
         }
         
         .tab-button.active {
             background: var(--primary-color);
             color: white;
+            box-shadow: var(--glow-effect);
         }
         
         .tab-content {
             display: none;
+            animation: fadeIn 0.5s ease;
         }
         
         .tab-content.active {
@@ -178,27 +256,28 @@
         }
         
         .info-box {
-            margin-top: 20px;
-            padding: 20px;
+            margin-top: 25px;
+            padding: 25px;
             background: rgba(52, 152, 219, 0.1);
             border-radius: var(--border-radius);
-            border-left: 4px solid var(--primary-color);
+            border-left: 5px solid var(--primary-color);
             color: var(--text-light);
+            box-shadow: var(--box-shadow);
         }
         
         /* Series/parallel calculator styles */
         .inductors-container {
-            margin-top: 15px;
+            margin-top: 20px;
         }
         
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 12px 20px;
+            padding: 12px 24px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 0.9em;
+            font-size: 0.95em;
             transition: all var(--transition-speed) ease;
             cursor: pointer;
             border: none;
@@ -231,15 +310,28 @@
             transform: translateY(-3px);
         }
         
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .btn-success:hover {
+            background-color: #3d8b40;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
+        }
+        
         input {
             padding: 12px 15px;
             border: 1px solid var(--background-secondary);
             border-radius: var(--border-radius);
             margin-bottom: 10px;
-            width: 120px;
+            width: 140px;
             background-color: var(--background-secondary);
             color: var(--text-light);
             transition: all var(--transition-speed) ease;
+            font-size: 1rem;
         }
         
         input:focus {
@@ -252,12 +344,22 @@
             display: inline-block;
             margin-right: 10px;
             color: var(--text-light);
+            font-weight: 600;
+            min-width: 40px;
         }
         
         .inductor-input {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .inductor-input:hover {
+            background: rgba(255, 255, 255, 0.08);
         }
         
         .inductor-input span {
@@ -273,6 +375,7 @@
             background-color: var(--background-secondary);
             color: var(--text-light);
             transition: all var(--transition-speed) ease;
+            font-size: 1rem;
         }
         
         .unit-selector:focus {
@@ -283,31 +386,45 @@
         
         .explanation {
             margin-top: 30px;
-            padding: 20px;
+            padding: 25px;
             background-color: rgba(241, 196, 15, 0.1);
             border-radius: var(--border-radius);
-            border-left: 4px solid #f1c40f;
+            border-left: 5px solid var(--warning-color);
             color: var(--text-light);
+            box-shadow: var(--box-shadow);
         }
 
         .color-legend {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
+            gap: 15px;
+            margin: 25px 0;
+            justify-content: center;
         }
         
         .color-item {
             display: flex;
             align-items: center;
             margin-right: 15px;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius);
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .color-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
         }
         
         .color-swatch {
-            width: 20px;
-            height: 20px;
-            border: 1px solid var(--background-secondary);
-            margin-right: 5px;
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--background-secondary);
+            margin-right: 8px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         /* Dark Mode Toggle */
@@ -315,23 +432,25 @@
             position: fixed;
             bottom: 30px;
             left: 30px;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background-color: var(--card-dark);
             color: var(--primary-color);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2em;
+            font-size: 1.4em;
             box-shadow: var(--box-shadow);
             cursor: pointer;
             transition: all var(--transition-speed) ease;
             z-index: 999;
+            border: 2px solid var(--primary-color);
         }
         
         .theme-toggle:hover {
             transform: scale(1.1);
+            box-shadow: var(--glow-effect);
         }
 
         /* Responsive Design */
@@ -341,73 +460,223 @@
             }
             
             .tab-button {
-                padding: 8px 12px;
+                padding: 10px 16px;
                 font-size: 14px;
+                flex: 1;
+                min-width: 120px;
+                text-align: center;
+            }
+            
+            .band {
+                width: 35px;
+                height: 90px;
+                margin: 0 5px;
+            }
+            
+            .band-label {
+                font-size: 12px;
+            }
+            
+            .main-tabs {
+                flex-direction: column;
+            }
+            
+            .main-tab-button {
+                padding: 12px;
+            }
+            
+            .inductor-input {
+                flex-wrap: wrap;
+            }
+            
+            .inductor-input label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
             }
             
             .band {
                 width: 30px;
                 height: 80px;
             }
+            
+            .color-item {
+                margin-right: 8px;
+                padding: 6px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .theme-toggle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2em;
+                bottom: 20px;
+                left: 20px;
+            }
         }
-         footer {
-    background-color: var(--card-dark);
-    color: var(--text-light);
-    text-align: center;
-    padding: 30px;
-    margin-top: 30px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-  }
 
-  .social-footer {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-  }
+        /* Footer Styles */
+        footer {
+            background-color: var(--card-dark);
+            color: var(--text-light);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
 
-  .social-footer a {
-    color: var(--text-light);
-    font-size: 1.5em;
-    margin: 0 15px;
-    transition: all var(--transition-speed) ease;
-    display: inline-block;
-  }
+        .social-footer {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
 
-  .social-footer a:hover {
-    color: var(--primary-color);
-    transform: translateY(-5px);
-  }
+        .social-footer a {
+            color: var(--text-light);
+            font-size: 1.6em;
+            margin: 0 15px;
+            transition: all var(--transition-speed) ease;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+        }
 
-  .footer-bottom {
-    margin-top: 20px;
-    font-size: 0.9em;
-    opacity: 0.8;
-  }
+        .social-footer a:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px);
+            background: rgba(52, 152, 219, 0.2);
+            box-shadow: var(--glow-effect);
+        }
+
+        .footer-bottom {
+            margin-top: 25px;
+            font-size: 0.95em;
+            opacity: 0.8;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid var(--background-secondary);
+            margin: 20px 0;
+            box-shadow: var(--box-shadow);
+        }
+        
+        th, td {
+            border: 1px solid var(--background-secondary);
+            padding: 12px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: var(--background-secondary);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        tr:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        /* Highlight important formulas */
+        .formula {
+            text-align: center;
+            font-size: 1.3rem;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--primary-color);
+            font-weight: 600;
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted var(--primary-color);
+            cursor: help;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--card-dark);
+            color: var(--text-light);
+            text-align: center;
+            border-radius: var(--border-radius);
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--primary-color);
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
-  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
     <div class="calculator-container">
-        <h1>Inductance Calculators</h1>
-        <p class="section-subtitle">Tools for electronics engineers and hobbyists</p>
+        <div class="page-header">
+            <h1><i class="fas fa-calculator"></i> Inductance Calculators</h1>
+            <p>Tools for electronics engineers and hobbyists</p>
+        </div>
         
         <div class="main-tabs">
-            <button class="main-tab-button active" onclick="openMainTab(event, 'ColorCode')">Color Code</button>
-            <button class="main-tab-button" onclick="openMainTab(event, 'SeriesParallel')">Series/Parallel</button>
-            <button class="main-tab-button" onclick="openMainTab(event, 'Info')">Info</button>
+            <button class="main-tab-button active" onclick="openMainTab(event, 'ColorCode')">
+                <i class="fas fa-palette"></i> Color Code
+            </button>
+            <button class="main-tab-button" onclick="openMainTab(event, 'SeriesParallel')">
+                <i class="fas fa-link"></i> Series/Parallel
+            </button>
+            <button class="main-tab-button" onclick="openMainTab(event, 'Info')">
+                <i class="fas fa-info-circle"></i> Information
+            </button>
         </div>
         
         <!-- Color Code Calculator Tab -->
         <div id="ColorCode" class="main-tabcontent" style="display: block;">
             <div class="tabs">
-                <button class="tab-button active" onclick="switchTab('4band')">4-Band</button>
-                <button class="tab-button" onclick="switchTab('5band')">5-Band</button>
+                <button class="tab-button active" onclick="switchTab('4band')">
+                    <i class="fas fa-bars"></i> 4-Band
+                </button>
+                <button class="tab-button" onclick="switchTab('5band')">
+                    <i class="fas fa-bars"></i> 5-Band
+                </button>
             </div>
 
             <div id="4band" class="tab-content active calculator">
-                <h2>4-Band Inductor Color Code Calculator</h2>
-                <p>Click on each band to select its color:</p>
+                <h2><i class="fas fa-indent"></i> 4-Band Inductor Color Code Calculator</h2>
+                <p>Click on each band to select its color. The inductance value will update automatically.</p>
                 
                 <div class="band-container">
                     <div class="band" id="band1" style="background-color: #966f33;" onclick="selectBand(1)"></div>
@@ -441,8 +710,8 @@
             </div>
 
             <div id="5band" class="tab-content calculator">
-                <h2>5-Band Inductor Color Code Calculator</h2>
-                <p>Click on each band to select its color:</p>
+                <h2><i class="fas fa-indent"></i> 5-Band Inductor Color Code Calculator</h2>
+                <p>Click on each band to select its color. The inductance value will update automatically.</p>
                 
                 <div class="band-container">
                     <div class="band" id="band1-5" style="background-color: #966f33;" onclick="selectBand5(1)"></div>
@@ -460,20 +729,41 @@
                 </div>
                 
                 <div class="result" id="colorCodeResult5">Inductance: 100μH ±5%</div>
+                
+                <div class="color-legend">
+                    <div class="color-item"><div class="color-swatch" style="background-color: #000000;"></div>Black (0)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #966f33;"></div>Brown (1)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #ff0000;"></div>Red (2)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #ffa500;"></div>Orange (3)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #ffff00;"></div>Yellow (4)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #008000;"></div>Green (5)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #0000ff;"></div>Blue (6)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #800080;"></div>Violet (7)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #808080;"></div>Gray (8)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #ffffff;"></div>White (9)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #d4af37;"></div>Gold (±5%)</div>
+                    <div class="color-item"><div class="color-swatch" style="background-color: #c0c0c0;"></div>Silver (±10%)</div>
+                </div>
             </div>
         </div>
         
         <!-- Series/Parallel Calculator Tab -->
         <div id="SeriesParallel" class="main-tabcontent">
             <div class="tabs">
-                <button class="tab-button active" onclick="switchCalcTab('SeriesTab')">Series Connection</button>
-                <button class="tab-button" onclick="switchCalcTab('ParallelTab')">Parallel Connection</button>
-                <button class="tab-button" onclick="switchCalcTab('ExplanationTab')">Theory</button>
+                <button class="tab-button active" onclick="switchCalcTab('SeriesTab')">
+                    <i class="fas fa-arrow-right"></i> Series Connection
+                </button>
+                <button class="tab-button" onclick="switchCalcTab('ParallelTab')">
+                    <i class="fas fa-arrows-alt-h"></i> Parallel Connection
+                </button>
+                <button class="tab-button" onclick="switchCalcTab('ExplanationTab')">
+                    <i class="fas fa-book"></i> Theory
+                </button>
             </div>
             
             <!-- Series Tab -->
             <div id="SeriesTab" class="tab-content active calculator">
-                <h2>Series Inductors Calculator</h2>
+                <h2><i class="fas fa-arrow-right"></i> Series Inductors Calculator</h2>
                 <p>Enter inductor values to calculate the equivalent inductance in series.</p>
                 
                 <div id="series-inductors" class="inductors-container">
@@ -497,9 +787,15 @@
                     </div>
                 </div>
                 
-                <button class="btn btn-primary" onclick="addInductor('series')">Add Inductor</button>
-                <button class="btn btn-outline" onclick="removeInductor('series')">Remove Inductor</button>
-                <button class="btn btn-primary" onclick="calculateInductance('series')">Calculate</button>
+                <button class="btn btn-primary" onclick="addInductor('series')">
+                    <i class="fas fa-plus"></i> Add Inductor
+                </button>
+                <button class="btn btn-outline" onclick="removeInductor('series')">
+                    <i class="fas fa-minus"></i> Remove Inductor
+                </button>
+                <button class="btn btn-success" onclick="calculateInductance('series')">
+                    <i class="fas fa-calculator"></i> Calculate
+                </button>
                 
                 <div id="series-result" class="result">
                     <p>The equivalent inductance will be shown here.</p>
@@ -508,7 +804,7 @@
             
             <!-- Parallel Tab -->
             <div id="ParallelTab" class="tab-content calculator">
-                <h2>Parallel Inductors Calculator</h2>
+                <h2><i class="fas fa-arrows-alt-h"></i> Parallel Inductors Calculator</h2>
                 <p>Enter inductor values to calculate the equivalent inductance in parallel.</p>
                 
                 <div id="parallel-inductors" class="inductors-container">
@@ -532,9 +828,15 @@
                     </div>
                 </div>
                 
-                <button class="btn btn-primary" onclick="addInductor('parallel')">Add Inductor</button>
-                <button class="btn btn-outline" onclick="removeInductor('parallel')">Remove Inductor</button>
-                <button class="btn btn-primary" onclick="calculateInductance('parallel')">Calculate</button>
+                <button class="btn btn-primary" onclick="addInductor('parallel')">
+                    <i class="fas fa-plus"></i> Add Inductor
+                </button>
+                <button class="btn btn-outline" onclick="removeInductor('parallel')">
+                    <i class="fas fa-minus"></i> Remove Inductor
+                </button>
+                <button class="btn btn-success" onclick="calculateInductance('parallel')">
+                    <i class="fas fa-calculator"></i> Calculate
+                </button>
                 
                 <div id="parallel-result" class="result">
                     <p>The equivalent inductance will be shown here.</p>
@@ -543,24 +845,24 @@
             
             <!-- Explanation Tab -->
             <div id="ExplanationTab" class="tab-content calculator">
-                <h2>Theory of Inductors in Series and Parallel</h2>
+                <h2><i class="fas fa-book"></i> Theory of Inductors in Series and Parallel</h2>
                 
                 <div class="explanation">
-                    <h3>Inductors in Series</h3>
+                    <h3><i class="fas fa-arrow-right"></i> Inductors in Series</h3>
                     <p>When inductors are connected in series, the equivalent inductance is calculated by adding the individual inductances:</p>
-                    <p style="text-align: center; font-size: 18px;">
+                    <div class="formula">
                         L<sub>eq</sub> = L<sub>1</sub> + L<sub>2</sub> + L<sub>3</sub> + ... + L<sub>n</sub>
-                    </p>
+                    </div>
                     <p>This means the equivalent inductance is always larger than the largest individual inductor in the series.</p>
                     
-                    <h3>Inductors in Parallel</h3>
+                    <h3><i class="fas fa-arrows-alt-h"></i> Inductors in Parallel</h3>
                     <p>When inductors are connected in parallel, the equivalent inductance is calculated using:</p>
-                    <p style="text-align: center; font-size: 18px;">
+                    <div class="formula">
                         1/L<sub>eq</sub> = 1/L<sub>1</sub> + 1/L<sub>2</sub> + 1/L<sub>3</sub> + ... + 1/L<sub>n</sub>
-                    </p>
+                    </div>
                     <p>This means the equivalent inductance is always smaller than the smallest individual inductor in the parallel connection.</p>
                     
-                    <h3>Physical Explanation</h3>
+                    <h3><i class="fas fa-microscope"></i> Physical Explanation</h3>
                     <p><strong>Series connection:</strong> In series, the same current flows through each inductor, and the voltage drops add up. The total inductance is the sum of individual inductances because the magnetic fields add constructively.</p>
                     <p><strong>Parallel connection:</strong> In parallel, the voltage across each inductor is the same, but the currents divide. The total inductance is less than any individual inductance because the magnetic fields interact to reduce the overall inductance.</p>
                 </div>
@@ -569,111 +871,111 @@
         
         <!-- Info Tab -->
         <div id="Info" class="main-tabcontent">
-            <h2>Inductor Information</h2>
+            <h2><i class="fas fa-info-circle"></i> Inductor Information</h2>
             
             <div class="info-box">
-                <h3>Inductor Color Code Chart</h3>
-                <table style="width: 100%; border-collapse: collapse; border: 1px solid var(--background-secondary);">
+                <h3><i class="fas fa-table"></i> Inductor Color Code Chart</h3>
+                <table>
                     <thead>
-                        <tr style="background-color: var(--background-secondary);">
-                            <th style="border: 1px solid var(--background-secondary); padding: 8px;">Color</th>
-                            <th style="border: 1px solid var(--background-secondary); padding: 8px;">1st Digit</th>
-                            <th style="border: 1px solid var(--background-secondary); padding: 8px;">2nd Digit</th>
-                            <th style="border: 1px solid var(--background-secondary); padding: 8px;">Multiplier</th>
-                            <th style="border: 1px solid var(--background-secondary); padding: 8px;">Tolerance</th>
+                        <tr>
+                            <th>Color</th>
+                            <th>1st Digit</th>
+                            <th>2nd Digit</th>
+                            <th>Multiplier</th>
+                            <th>Tolerance</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: black; color: white;">Black</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">0</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">0</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">1μH</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">-</td>
+                            <td style="background-color: black; color: white;">Black</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1μH</td>
+                            <td>-</td>
                         </tr>
                         <tr>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: #966f33; color: white;">Brown</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">1</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">1</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">10μH</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±1%</td>
+                            <td style="background-color: #966f33; color: white;">Brown</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>10μH</td>
+                            <td>±1%</td>
                         </tr>
                         <tr>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: red; color: white;">Red</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">2</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">2</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">100μH</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±2%</td>
+                            <td style="background-color: red; color: white;">Red</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>100μH</td>
+                            <td>±2%</td>
                         </tr>
                         <tr>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: orange; color: black;">Orange</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">3</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">3</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">1mH</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±3%</td>
+                            <td style="background-color: orange; color: black;">Orange</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>1mH</td>
+                            <td>±3%</td>
                         </tr>
                         <tr>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: yellow; color: black;">Yellow</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">4</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">4</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">10mH</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±4%</td>
+                            <td style="background-color: yellow; color: black;">Yellow</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>10mH</td>
+                            <td>±4%</td>
                         </tr>
                         <tr>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: green; color: white;">Green</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">5</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">5</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">100mH</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±0.5%</td>
+                            <td style="background-color: green; color: white;">Green</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>100mH</td>
+                            <td>±0.5%</td>
                         </tr>
                         <tr>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: blue; color: white;">Blue</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">6</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">6</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">1H</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±0.25%</td>
+                            <td style="background-color: blue; color: white;">Blue</td>
+                            <td>6</td>
+                            <td>6</td>
+                            <td>1H</td>
+                            <td>±0.25%</td>
                         </tr>
                         <tr>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: violet; color: white;">Violet</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">7</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">7</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">10H</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±0.1%</td>
+                            <td style="background-color: violet; color: white;">Violet</td>
+                            <td>7</td>
+                            <td>7</td>
+                            <td>10H</td>
+                            <td>±0.1%</td>
                         </tr>
                         <tr>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: gray; color: white;">Gray</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">8</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">8</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">100H</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±0.05%</td>
+                            <td style="background-color: gray; color: white;">Gray</td>
+                            <td>8</td>
+                            <td>8</td>
+                            <td>100H</td>
+                            <td>±0.05%</td>
                         </tr>
                         <tr>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: white; color: black;">White</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">9</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">9</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">1000H</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">-</td>
+                            <td style="background-color: white; color: black;">White</td>
+                            <td>9</td>
+                            <td>9</td>
+                            <td>1000H</td>
+                            <td>-</td>
                         </tr>
                         <tr>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: gold; color: black;">Gold</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">-</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">-</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">0.1μH</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±5%</td>
+                            <td style="background-color: gold; color: black;">Gold</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>0.1μH</td>
+                            <td>±5%</td>
                         </tr>
                         <tr>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px; background-color: silver; color: black;">Silver</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">-</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">-</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">0.01μH</td>
-                            <td style="border: 1px solid var(--background-secondary); padding: 8px;">±10%</td>
+                            <td style="background-color: silver; color: black;">Silver</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>0.01μH</td>
+                            <td>±10%</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             
             <div class="info-box">
-                <h3>Common Inductor Types</h3>
+                <h3><i class="fas fa-microchip"></i> Common Inductor Types</h3>
                 <ul>
                     <li><strong>Air Core Inductors:</strong> No magnetic core, lowest inductance values, high frequency operation</li>
                     <li><strong>Ferrite Core Inductors:</strong> Medium inductance values, good for RF applications</li>
@@ -684,7 +986,7 @@
             </div>
             
             <div class="info-box">
-                <h3>Unit Conversions</h3>
+                <h3><i class="fas fa-exchange-alt"></i> Unit Conversions</h3>
                 <ul>
                     <li>1 Henry (H) = 1,000 millihenries (mH)</li>
                     <li>1 millihenry (mH) = 1,000 microhenries (μH)</li>
@@ -699,21 +1001,29 @@
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
         <i class="fas fa-moon"></i>
     </button>
-<!-- Footer HTML -->
-<footer class="footer">
-  <div class="footer-content">
-    <div class="social-footer">
-      <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-      <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-      <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
-    </div>
-    <div class="footer-bottom">
-      &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
-      &copy; M.T.A.
-    </div>
-  </div>
-</footer>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-footer">
+            <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.</p>
+            <p>&copy; M.T.A.</p>
+        </div>
+    </footer>
+
     <script>
         // Color definitions for bands
         const colors = [
@@ -1010,6 +1320,9 @@
         // Initialize the color code display
         updateColorCodeResult();
         updateColorCodeResult5();
+        
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>

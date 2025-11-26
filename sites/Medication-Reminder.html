@@ -22,6 +22,7 @@
       --success-color: #4caf50;
       --error-color: #f44336;
       --warning-color: #f1c40f;
+      --info-color: #3498db;
       --transition-speed: 0.3s;
       --border-radius: 12px;
       --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
@@ -63,14 +64,18 @@
     }
 
     .container {
-      max-width: 600px;
+      max-width: 800px;
       margin: 0 auto;
+    }
+
+    .text-center {
+      text-align: center;
     }
 
     .calculator {
       background-color: var(--card-dark);
       border-radius: var(--border-radius);
-      padding: 20px;
+      padding: 25px;
       margin-bottom: 20px;
       box-shadow: var(--box-shadow);
       transition: all var(--transition-speed) ease;
@@ -88,6 +93,7 @@
       display: block;
       margin-bottom: 5px;
       color: var(--text-muted);
+      font-weight: 500;
     }
 
     .input-field {
@@ -107,6 +113,34 @@
       box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
     }
 
+    .form-row {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .form-row .input-group {
+      flex: 1;
+      min-width: 150px;
+    }
+
+    .days-selector {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .day-checkbox {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .day-checkbox input {
+      margin-right: 5px;
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -119,7 +153,7 @@
       cursor: pointer;
       border: none;
       outline: none;
-      width: 100%;
+      gap: 8px;
     }
 
     .btn-primary {
@@ -146,22 +180,59 @@
       box-shadow: 0 8px 25px rgba(244, 67, 54, 0.6);
     }
 
+    .btn-success {
+      background-color: var(--success-color);
+      color: white;
+      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+    }
+
+    .btn-success:hover {
+      background-color: #388e3c;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
+    }
+
+    .btn-warning {
+      background-color: var(--warning-color);
+      color: white;
+      box-shadow: 0 5px 15px rgba(241, 196, 15, 0.4);
+    }
+
+    .btn-warning:hover {
+      background-color: #d4ac0d;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(241, 196, 15, 0.6);
+    }
+
     .reminder-item {
       background-color: var(--card-light);
-      padding: 15px;
+      padding: 20px;
       border-radius: var(--border-radius);
       margin-bottom: 15px;
       box-shadow: var(--box-shadow);
       transition: all var(--transition-speed) ease;
+      border-left: 4px solid var(--primary-color);
     }
 
     .reminder-item:hover {
       box-shadow: var(--box-shadow-hover);
     }
 
+    .reminder-item.urgent {
+      border-left-color: var(--error-color);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(244, 67, 54, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); }
+    }
+
     .reminder-time {
       color: var(--primary-color);
       font-weight: bold;
+      font-size: 1.1em;
     }
 
     .remaining-time {
@@ -169,22 +240,118 @@
       font-weight: bold;
     }
 
-    .social-footer {
+    .medication-details {
+      color: var(--text-muted);
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+
+    .medication-actions {
       display: flex;
-      justify-content: center;
-      margin-top: 30px;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
     }
 
-    .social-footer a {
-      color: var(--text-light);
-      font-size: 1.5em;
-      margin: 0 15px;
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--background-secondary);
+    }
+
+    .tab {
+      padding: 12px 20px;
+      cursor: pointer;
       transition: all var(--transition-speed) ease;
+      border-bottom: 3px solid transparent;
     }
 
-    .social-footer a:hover {
+    .tab.active {
+      border-bottom-color: var(--primary-color);
       color: var(--primary-color);
-      transform: translateY(-5px);
+    }
+
+    .tab:hover:not(.active) {
+      background-color: var(--background-secondary);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .history-item {
+      background-color: var(--card-light);
+      padding: 15px;
+      border-radius: var(--border-radius);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .history-item.taken {
+      border-left: 4px solid var(--success-color);
+    }
+
+    .history-item.missed {
+      border-left: 4px solid var(--error-color);
+    }
+
+    .history-item.upcoming {
+      border-left: 4px solid var(--warning-color);
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 400px;
+      transform: translateX(120%);
+      transition: transform 0.5s ease;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification.success {
+      background-color: var(--success-color);
+      color: white;
+    }
+
+    .notification.error {
+      background-color: var(--error-color);
+      color: white;
+    }
+
+    .notification.warning {
+      background-color: var(--warning-color);
+      color: white;
+    }
+
+    .notification.info {
+      background-color: var(--info-color);
+      color: white;
+    }
+
+    .close-notification {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+      margin-left: auto;
     }
 
     /* Theme Toggle */
@@ -224,81 +391,206 @@
         height: 40px;
         font-size: 1em;
       }
+
+      .form-row {
+        flex-direction: column;
+      }
+
+      .medication-actions {
+        flex-direction: column;
+      }
+
+      .medication-actions .btn {
+        width: 100%;
+      }
+
+      .tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+      }
     }
-     footer {
-    background-color: var(--card-dark);
-    color: var(--text-light);
-    text-align: center;
-    padding: 30px;
-    margin-top: 30px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-  }
 
-  .social-footer {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-  }
+    /* Footer */
+    footer {
+      background-color: var(--card-dark);
+      color: var(--text-light);
+      text-align: center;
+      padding: 30px;
+      margin-top: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
 
-  .social-footer a {
-    color: var(--text-light);
-    font-size: 1.5em;
-    margin: 0 15px;
-    transition: all var(--transition-speed) ease;
-    display: inline-block;
-  }
+    .social-footer {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
 
-  .social-footer a:hover {
-    color: var(--primary-color);
-    transform: translateY(-5px);
-  }
+    .social-footer a {
+      color: var(--text-light);
+      font-size: 1.5em;
+      margin: 0 15px;
+      transition: all var(--transition-speed) ease;
+      display: inline-block;
+    }
 
-  .footer-bottom {
-    margin-top: 20px;
-    font-size: 0.9em;
-    opacity: 0.8;
-  }
+    .social-footer a:hover {
+      color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      margin-top: 20px;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-state i {
+      font-size: 3em;
+      margin-bottom: 15px;
+      opacity: 0.5;
+    }
   </style>
-  <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
   <div class="container">
     <h1 class="text-center">Medication Reminder</h1>
     <p class="text-center" style="color: var(--text-muted); margin-bottom: 30px;">Never miss your important medications</p>
     
-    <div class="calculator">
-      <h2>Add New Medication</h2>
-      <div class="input-group">
-        <label class="input-label">Medication Name</label>
-        <input type="text" id="medicationName" class="input-field" placeholder="Enter medication name">
-      </div>
-      <div class="input-group">
-        <label class="input-label">Time</label>
-        <input type="time" id="time" class="input-field">
-      </div>
-      <button class="btn btn-primary" onclick="addMedication()">Add Medication</button>
+    <div class="tabs">
+      <div class="tab active" data-tab="medications">Medications</div>
+      <div class="tab" data-tab="history">History</div>
+      <div class="tab" data-tab="settings">Settings</div>
     </div>
 
-    <h2 class="text-center" style="color: var(--error-color); margin: 30px 0 15px;">Next Doses</h2>
-    <div id="remindersContainer" class="space-y-4"></div>
+    <!-- Medications Tab -->
+    <div class="tab-content active" id="medications-tab">
+      <div class="calculator">
+        <h2><i class="fas fa-pills"></i> Add New Medication</h2>
+        <div class="form-row">
+          <div class="input-group">
+            <label class="input-label">Medication Name</label>
+            <input type="text" id="medicationName" class="input-field" placeholder="Enter medication name">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Dosage</label>
+            <input type="text" id="dosage" class="input-field" placeholder="e.g., 500mg">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="input-group">
+            <label class="input-label">Time</label>
+            <input type="time" id="time" class="input-field">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Frequency</label>
+            <select id="frequency" class="input-field">
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="as_needed">As Needed</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label class="input-label">Days of the Week</label>
+          <div class="days-selector">
+            <label class="day-checkbox"><input type="checkbox" name="days" value="0"> Sun</label>
+            <label class="day-checkbox"><input type="checkbox" name="days" value="1"> Mon</label>
+            <label class="day-checkbox"><input type="checkbox" name="days" value="2"> Tue</label>
+            <label class="day-checkbox"><input type="checkbox" name="days" value="3"> Wed</label>
+            <label class="day-checkbox"><input type="checkbox" name="days" value="4"> Thu</label>
+            <label class="day-checkbox"><input type="checkbox" name="days" value="5"> Fri</label>
+            <label class="day-checkbox"><input type="checkbox" name="days" value="6"> Sat</label>
+          </div>
+        </div>
+        
+        <div class="input-group">
+          <label class="input-label">Instructions (Optional)</label>
+          <textarea id="instructions" class="input-field" placeholder="Special instructions..." rows="3"></textarea>
+        </div>
+        
+        <button class="btn btn-primary" onclick="addMedication()">
+          <i class="fas fa-plus"></i> Add Medication
+        </button>
+      </div>
 
-    <!-- Footer HTML -->
-<footer class="footer">
-  <div class="footer-content">
-    <div class="social-footer">
-      <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-      <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-      <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+      <h2 class="text-center" style="margin: 30px 0 15px;">Next Doses</h2>
+      <div id="remindersContainer"></div>
     </div>
-    <div class="footer-bottom">
-      &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
-      &copy; M.T.A.
+
+    <!-- History Tab -->
+    <div class="tab-content" id="history-tab">
+      <div class="calculator">
+        <h2><i class="fas fa-history"></i> Medication History</h2>
+        <div id="historyContainer"></div>
+      </div>
+    </div>
+
+    <!-- Settings Tab -->
+    <div class="tab-content" id="settings-tab">
+      <div class="calculator">
+        <h2><i class="fas fa-cog"></i> Settings</h2>
+        <div class="input-group">
+          <label class="input-label">Notification Sound</label>
+          <select id="notificationSound" class="input-field">
+            <option value="default">Default</option>
+            <option value="bell">Bell</option>
+            <option value="chime">Chime</option>
+            <option value="beep">Beep</option>
+          </select>
+        </div>
+        
+        <div class="input-group">
+          <label class="input-label">Reminder Before (minutes)</label>
+          <input type="number" id="reminderBefore" class="input-field" value="5" min="0" max="60">
+        </div>
+        
+        <div class="input-group">
+          <label class="input-label">
+            <input type="checkbox" id="enableNotifications" checked> Enable Browser Notifications
+          </label>
+        </div>
+        
+        <div class="input-group">
+          <button class="btn btn-primary" onclick="saveSettings()">
+            <i class="fas fa-save"></i> Save Settings
+          </button>
+          <button class="btn btn-warning" onclick="clearAllData()" style="margin-top: 10px;">
+            <i class="fas fa-trash"></i> Clear All Data
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-</footer>
- 
+
+  <!-- Notification Area -->
+  <div id="notificationArea"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="social-footer">
+        <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <div class="footer-bottom">
+        &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+        &copy; M.T.A.
+      </div>
+    </div>
+  </footer>
 
   <!-- Theme Toggle Button -->
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
@@ -306,82 +598,268 @@
   </button>
 
   <script>
+    // Global variables
     var remindersInterval;
     var reminderTimeouts = [];
+    var settings = {
+      notificationSound: 'default',
+      reminderBefore: 5,
+      enableNotifications: true
+    };
 
-    function addMedication() {
-      var medicationName = document.getElementById("medicationName").value;
-      var time = document.getElementById("time").value;
+    // Initialize the application
+    function init() {
+      loadSettings();
+      displayReminders();
+      displayHistory();
+      setupTabNavigation();
       
-      if (medicationName.trim() === "" || time.trim() === "") {
-        alert("Please enter both the medication name and time.");
+      // Request notification permission
+      if ('Notification' in window && settings.enableNotifications) {
+        Notification.requestPermission();
+      }
+    }
+
+    // Tab navigation
+    function setupTabNavigation() {
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // Remove active class from all tabs and contents
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+          
+          // Add active class to clicked tab and corresponding content
+          tab.classList.add('active');
+          document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
+        });
+      });
+    }
+
+    // Load settings from localStorage
+    function loadSettings() {
+      const savedSettings = localStorage.getItem('medicationSettings');
+      if (savedSettings) {
+        settings = { ...settings, ...JSON.parse(savedSettings) };
+        document.getElementById('notificationSound').value = settings.notificationSound;
+        document.getElementById('reminderBefore').value = settings.reminderBefore;
+        document.getElementById('enableNotifications').checked = settings.enableNotifications;
+      }
+    }
+
+    // Save settings to localStorage
+    function saveSettings() {
+      settings.notificationSound = document.getElementById('notificationSound').value;
+      settings.reminderBefore = parseInt(document.getElementById('reminderBefore').value) || 5;
+      settings.enableNotifications = document.getElementById('enableNotifications').checked;
+      
+      localStorage.setItem('medicationSettings', JSON.stringify(settings));
+      showNotification('Settings saved successfully!', 'success');
+    }
+
+    // Clear all data
+    function clearAllData() {
+      if (confirm('Are you sure you want to clear all medication data? This action cannot be undone.')) {
+        localStorage.removeItem('medications');
+        localStorage.removeItem('medicationHistory');
+        displayReminders();
+        displayHistory();
+        showNotification('All data cleared successfully!', 'success');
+      }
+    }
+
+    // Add new medication
+    function addMedication() {
+      const medicationName = document.getElementById("medicationName").value.trim();
+      const dosage = document.getElementById("dosage").value.trim();
+      const time = document.getElementById("time").value;
+      const frequency = document.getElementById("frequency").value;
+      const instructions = document.getElementById("instructions").value.trim();
+      
+      // Get selected days
+      const dayCheckboxes = document.querySelectorAll('input[name="days"]:checked');
+      const days = Array.from(dayCheckboxes).map(cb => parseInt(cb.value));
+      
+      if (medicationName === "" || time === "") {
+        showNotification("Please enter both the medication name and time.", "error");
         return;
       }
       
-      var medications = JSON.parse(localStorage.getItem("medications")) || [];
-      medications.push({ name: medicationName, time: time });
+      const medications = JSON.parse(localStorage.getItem("medications")) || [];
+      const newMedication = {
+        id: Date.now(),
+        name: medicationName,
+        dosage: dosage,
+        time: time,
+        frequency: frequency,
+        days: days,
+        instructions: instructions,
+        createdAt: new Date().toISOString()
+      };
+      
+      medications.push(newMedication);
       localStorage.setItem("medications", JSON.stringify(medications));
       
+      // Clear form
       document.getElementById("medicationName").value = "";
+      document.getElementById("dosage").value = "";
       document.getElementById("time").value = "";
+      document.getElementById("instructions").value = "";
+      
+      // Uncheck all day checkboxes
+      document.querySelectorAll('input[name="days"]').forEach(cb => cb.checked = false);
       
       displayReminders();
+      showNotification(`"${medicationName}" added successfully!`, "success");
     }
 
-    function removeMedication(index) {
-      var medications = JSON.parse(localStorage.getItem("medications")) || [];
-      medications.splice(index, 1);
-      localStorage.setItem("medications", JSON.stringify(medications));
-      displayReminders();
+    // Remove medication
+    function removeMedication(id) {
+      let medications = JSON.parse(localStorage.getItem("medications")) || [];
+      const medication = medications.find(m => m.id === id);
+      
+      if (medication && confirm(`Are you sure you want to remove "${medication.name}"?`)) {
+        medications = medications.filter(m => m.id !== id);
+        localStorage.setItem("medications", JSON.stringify(medications));
+        displayReminders();
+        showNotification(`"${medication.name}" removed successfully!`, "success");
+      }
     }
 
+    // Mark medication as taken
+    function markAsTaken(id) {
+      const medications = JSON.parse(localStorage.getItem("medications")) || [];
+      const medication = medications.find(m => m.id === id);
+      
+      if (medication) {
+        // Add to history
+        const history = JSON.parse(localStorage.getItem("medicationHistory")) || [];
+        history.push({
+          medicationId: id,
+          medicationName: medication.name,
+          dosage: medication.dosage,
+          time: medication.time,
+          takenAt: new Date().toISOString(),
+          status: 'taken'
+        });
+        localStorage.setItem("medicationHistory", JSON.stringify(history));
+        
+        showNotification(`"${medication.name}" marked as taken!`, "success");
+        displayHistory();
+      }
+    }
+
+    // Display reminders
     function displayReminders() {
-      var medications = JSON.parse(localStorage.getItem("medications")) || [];
-      var remindersContainer = document.getElementById("remindersContainer");
-      remindersContainer.innerHTML = "";
+      const medications = JSON.parse(localStorage.getItem("medications")) || [];
+      const remindersContainer = document.getElementById("remindersContainer");
 
       // Clear all existing timeouts
       reminderTimeouts.forEach(timeout => clearTimeout(timeout));
       reminderTimeouts = [];
 
       if (medications.length === 0) {
-        remindersContainer.innerHTML = '<p style="text-align: center; color: var(--text-muted);">No medications scheduled</p>';
+        remindersContainer.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-pills"></i>
+            <h3>No medications scheduled</h3>
+            <p>Add your first medication to get started!</p>
+          </div>
+        `;
         return;
       }
 
-      medications.forEach(function(medication, index) {
-        var reminderTime = new Date(new Date().toDateString() + " " + medication.time);
-        var remainingTime = reminderTime.getTime() - Date.now();
+      remindersContainer.innerHTML = '';
+      
+      medications.forEach(function(medication) {
+        const reminderTime = new Date(new Date().toDateString() + " " + medication.time);
+        const currentDay = new Date().getDay();
         
-        // If time has passed today, schedule for tomorrow
+        // Check if medication should be taken today
+        const shouldTakeToday = medication.days.length === 0 || medication.days.includes(currentDay);
+        
+        if (!shouldTakeToday) {
+          // Skip if not scheduled for today
+          return;
+        }
+        
+        let remainingTime = reminderTime.getTime() - Date.now();
+        
+        // If time has passed today, schedule for next applicable day
         if (remainingTime <= 0) {
-          reminderTime.setDate(reminderTime.getDate() + 1);
+          // Find next day when medication should be taken
+          let nextDay = currentDay;
+          let daysToAdd = 1;
+          
+          while (daysToAdd <= 7) {
+            nextDay = (currentDay + daysToAdd) % 7;
+            if (medication.days.length === 0 || medication.days.includes(nextDay)) {
+              break;
+            }
+            daysToAdd++;
+          }
+          
+          reminderTime.setDate(reminderTime.getDate() + daysToAdd);
           remainingTime = reminderTime.getTime() - Date.now();
         }
 
-        var reminderItem = document.createElement("div");
-        reminderItem.className = "reminder-item";
+        const isUrgent = remainingTime <= 15 * 60 * 1000; // 15 minutes or less
+        
+        const reminderItem = document.createElement("div");
+        reminderItem.className = `reminder-item ${isUrgent ? 'urgent' : ''}`;
+        
+        // Format days for display
+        const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const dayDisplay = medication.days.length > 0 
+          ? medication.days.map(d => dayNames[d]).join(', ')
+          : 'Every day';
         
         reminderItem.innerHTML = `
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-              <strong>${medication.name}</strong>
-              <div class="reminder-time">${medication.time}</div>
-              <div>Next dose in: <span class="remaining-time" id='remainingTime${index}'>${formatRemainingTime(remainingTime)}</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div style="flex: 1;">
+              <strong style="font-size: 1.1em;">${medication.name}</strong>
+              ${medication.dosage ? `<div class="medication-details">Dosage: ${medication.dosage}</div>` : ''}
+              <div class="reminder-time">
+                <i class="far fa-clock"></i> ${medication.time}
+              </div>
+              <div class="medication-details">Frequency: ${medication.frequency} • ${dayDisplay}</div>
+              ${medication.instructions ? `<div class="medication-details">Instructions: ${medication.instructions}</div>` : ''}
+              <div style="margin-top: 10px;">
+                Next dose in: <span class="remaining-time" id='remainingTime${medication.id}'>${formatRemainingTime(remainingTime)}</span>
+              </div>
             </div>
-            <button onclick="removeMedication(${index})" class="btn btn-danger" style="padding: 8px 16px;">Remove</button>
+          </div>
+          <div class="medication-actions">
+            <button onclick="markAsTaken(${medication.id})" class="btn btn-success">
+              <i class="fas fa-check"></i> Mark as Taken
+            </button>
+            <button onclick="removeMedication(${medication.id})" class="btn btn-danger">
+              <i class="fas fa-trash"></i> Remove
+            </button>
           </div>
         `;
 
         remindersContainer.appendChild(reminderItem);
 
-        // Set timeout for this reminder
-        var timeout = setTimeout(function() {
-          alert(`Time to take your medication: ${medication.name}`);
-          displayReminders(); // Refresh the display after alert
+        // Set timeout for this reminder (with advance notice)
+        const advanceNotice = settings.reminderBefore * 60 * 1000; // Convert to milliseconds
+        
+        if (remainingTime - advanceNotice > 0) {
+          // Set advance reminder
+          const advanceTimeout = setTimeout(function() {
+            showMedicationNotification(medication, true);
+          }, remainingTime - advanceNotice);
+          
+          reminderTimeouts.push(advanceTimeout);
+        }
+        
+        // Set main reminder
+        const mainTimeout = setTimeout(function() {
+          showMedicationNotification(medication, false);
+          displayReminders(); // Refresh the display after notification
         }, remainingTime);
         
-        reminderTimeouts.push(timeout);
+        reminderTimeouts.push(mainTimeout);
       });
 
       // Update remaining times every second
@@ -389,30 +867,193 @@
       remindersInterval = setInterval(updateRemainingTimes, 1000);
     }
 
+    // Update remaining times
     function updateRemainingTimes() {
-      var medications = JSON.parse(localStorage.getItem("medications")) || [];
+      const medications = JSON.parse(localStorage.getItem("medications")) || [];
+      const currentDay = new Date().getDay();
       
-      medications.forEach(function(medication, index) {
-        var reminderTime = new Date(new Date().toDateString() + " " + medication.time);
-        var remainingTime = reminderTime.getTime() - Date.now();
+      medications.forEach(function(medication) {
+        const reminderTime = new Date(new Date().toDateString() + " " + medication.time);
+        const shouldTakeToday = medication.days.length === 0 || medication.days.includes(currentDay);
+        
+        if (!shouldTakeToday) {
+          return;
+        }
+        
+        let remainingTime = reminderTime.getTime() - Date.now();
         
         if (remainingTime <= 0) {
-          reminderTime.setDate(reminderTime.getDate() + 1);
+          // Find next day when medication should be taken
+          let nextDay = currentDay;
+          let daysToAdd = 1;
+          
+          while (daysToAdd <= 7) {
+            nextDay = (currentDay + daysToAdd) % 7;
+            if (medication.days.length === 0 || medication.days.includes(nextDay)) {
+              break;
+            }
+            daysToAdd++;
+          }
+          
+          reminderTime.setDate(reminderTime.getDate() + daysToAdd);
           remainingTime = reminderTime.getTime() - Date.now();
         }
         
-        var remainingElement = document.getElementById("remainingTime" + index);
+        const remainingElement = document.getElementById("remainingTime" + medication.id);
         if (remainingElement) {
           remainingElement.innerHTML = formatRemainingTime(remainingTime);
+          
+          // Update urgency class
+          const reminderItem = remainingElement.closest('.reminder-item');
+          if (reminderItem) {
+            if (remainingTime <= 15 * 60 * 1000) {
+              reminderItem.classList.add('urgent');
+            } else {
+              reminderItem.classList.remove('urgent');
+            }
+          }
         }
       });
     }
 
+    // Format remaining time
     function formatRemainingTime(remainingTime) {
-      var hours = Math.floor(remainingTime / (1000 * 60 * 60));
-      var minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-      return hours + "h " + minutes + "m " + seconds + "s";
+      if (remainingTime <= 0) return "Now";
+      
+      const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+      const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+      
+      if (hours > 0) {
+        return `${hours}h ${minutes}m ${seconds}s`;
+      } else if (minutes > 0) {
+        return `${minutes}m ${seconds}s`;
+      } else {
+        return `${seconds}s`;
+      }
+    }
+
+    // Show medication notification
+    function showMedicationNotification(medication, isAdvance) {
+      const message = isAdvance 
+        ? `Reminder: "${medication.name}" is due in ${settings.reminderBefore} minutes`
+        : `Time to take your medication: ${medication.name}`;
+      
+      showNotification(message, isAdvance ? 'info' : 'warning');
+      
+      // Browser notification
+      if (settings.enableNotifications && 'Notification' in window && Notification.permission === 'granted') {
+        new Notification('Medication Reminder', {
+          body: message,
+          icon: 'icon.png'
+        });
+      }
+      
+      // Play sound if enabled
+      if (settings.notificationSound !== 'none') {
+        playNotificationSound();
+      }
+    }
+
+    // Play notification sound
+    function playNotificationSound() {
+      // In a real app, you would play different sounds based on settings
+      // This is a simple implementation
+      const audio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==');
+      audio.play().catch(e => console.log('Audio play failed:', e));
+    }
+
+    // Display history
+    function displayHistory() {
+      const history = JSON.parse(localStorage.getItem("medicationHistory")) || [];
+      const historyContainer = document.getElementById("historyContainer");
+      
+      if (history.length === 0) {
+        historyContainer.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-history"></i>
+            <h3>No medication history</h3>
+            <p>Your taken medications will appear here</p>
+          </div>
+        `;
+        return;
+      }
+      
+      // Sort by date (newest first)
+      history.sort((a, b) => new Date(b.takenAt) - new Date(a.takenAt));
+      
+      historyContainer.innerHTML = '';
+      
+      history.forEach((item, index) => {
+        const historyItem = document.createElement("div");
+        historyItem.className = `history-item ${item.status}`;
+        
+        const takenDate = new Date(item.takenAt);
+        const formattedDate = takenDate.toLocaleDateString() + ' ' + takenDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        
+        historyItem.innerHTML = `
+          <div>
+            <strong>${item.medicationName}</strong>
+            ${item.dosage ? `<div>${item.dosage}</div>` : ''}
+            <div style="font-size: 0.9em; color: var(--text-muted);">Taken at: ${formattedDate}</div>
+          </div>
+          <div>
+            <span style="padding: 4px 8px; border-radius: 4px; font-size: 0.8em; 
+              background-color: ${item.status === 'taken' ? 'var(--success-color)' : 'var(--error-color)'}; 
+              color: white;">
+              ${item.status === 'taken' ? 'Taken' : 'Missed'}
+            </span>
+          </div>
+        `;
+        
+        historyContainer.appendChild(historyItem);
+      });
+    }
+
+    // Show notification
+    function showNotification(message, type = 'info') {
+      const notificationArea = document.getElementById('notificationArea');
+      const notificationId = 'notification-' + Date.now();
+      
+      const notification = document.createElement('div');
+      notification.id = notificationId;
+      notification.className = `notification ${type}`;
+      notification.innerHTML = `
+        <i class="fas fa-${getNotificationIcon(type)}"></i>
+        <span>${message}</span>
+        <button class="close-notification" onclick="document.getElementById('${notificationId}').remove()">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
+      
+      notificationArea.appendChild(notification);
+      
+      // Show notification
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+      
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        if (document.getElementById(notificationId)) {
+          notification.classList.remove('show');
+          setTimeout(() => {
+            if (document.getElementById(notificationId)) {
+              document.getElementById(notificationId).remove();
+            }
+          }, 500);
+        }
+      }, 5000);
+    }
+
+    // Get notification icon based on type
+    function getNotificationIcon(type) {
+      switch(type) {
+        case 'success': return 'check-circle';
+        case 'error': return 'exclamation-circle';
+        case 'warning': return 'exclamation-triangle';
+        default: return 'info-circle';
+      }
     }
 
     // Theme toggle functionality
@@ -444,9 +1085,10 @@
     });
 
     // Initialize on load
-    window.onload = displayReminders;
+    window.onload = init;
+    
     // Set current year in footer
-  document.getElementById('current-year').textContent = new Date().getFullYear();
+    document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
