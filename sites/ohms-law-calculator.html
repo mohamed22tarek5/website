@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ohm's Law Triangle Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Icons -->
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Font Awesome for theme icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Shared responsive CSS -->
+  <link rel="stylesheet" href="responsive.css">
+
+  <style>
+    :root {
+      --primary-color: #4e9eff;
+      --primary-dark: #3a6cf4;
+      --primary-light: #6ab1ff;
+      --background-dark: #121212;
+      --background-darker: #0a0a0a;
+      --background-secondary: #1a1a1a;
+      --card-dark: #1e1e1e;
+      --card-light: #252525;
+      --text-light: #ffffff;
+      --text-muted: #aaaaaa;
+      --success-color: #4caf50;
+      --error-color: #f44336;
+      --transition-speed: 0.3s;
+      --border-radius: 12px;
+      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Light mode variables */
+    [data-theme="light"] {
+      --background-dark: #f5f7fa;
+      --background-darker: #e8ebf0;
+      --background-secondary: #ffffff;
+      --card-dark: #ffffff;
+      --card-light: #f9f9f9;
+      --text-light: #333333;
+      --text-muted: #666666;
+      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--background-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      transition: background-color var(--transition-speed) ease,
+                  color var(--transition-speed) ease;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    h1, h2, h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+
+    .calculator-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .calculator {
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
+      padding: 25px;
+      box-shadow: var(--box-shadow);
+      margin-bottom: 30px;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .calculator:hover {
+      box-shadow: var(--box-shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--primary-color);
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: var(--border-radius);
+      border: 1px solid var(--background-secondary);
+      background-color: var(--background-secondary);
+      color: var(--text-light);
+      font-size: 1em;
+      font-family: inherit;
+      transition: all var(--transition-speed) ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.25);
+    }
+
+    .unit {
+      font-size: 0.9em;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 1em;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+      background-color: var(--primary-color);
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(78, 158, 255, 0.4);
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(78, 158, 255, 0.6);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-color);
+      color: #fff;
+    }
+
+    .results {
+      margin-top: 25px;
+      padding: 18px;
+      border-radius: var(--border-radius);
+      border-left: 4px solid var(--primary-color);
+      background-color: rgba(78, 158, 255, 0.08);
+      display: none;
+    }
+
+    .results p {
+      margin-bottom: 5px;
+    }
+
+    .results-strong {
+      font-weight: 700;
+      font-size: 1.1em;
+    }
+
+    .results-error {
+      color: var(--error-color);
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .formula {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .triangle-section {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .triangle-card {
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
+      padding: 20px;
+      box-shadow: var(--box-shadow);
+    }
+
+    .triangle-svg {
+      width: 100%;
+      max-width: 220px;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+
+    .info-section {
+      margin-top: 35px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      background-color: var(--card-dark);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px 15px;
+      border-bottom: 1px solid var(--background-secondary);
+      font-size: 0.95em;
+    }
+
+    th {
+      background-color: var(--primary-color);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: var(--background-secondary);
+    }
+
+    /* Dark / Light toggle */
+    .theme-toggle {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--card-dark);
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+      z-index: 999;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.08);
+    }
+
+    footer {
+      background-color: var(--card-dark);
+      color: var(--text-light);
+      text-align: center;
+      padding: 25px;
+      margin-top: 35px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .social-footer {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0;
+      gap: 20px;
+    }
+
+    .social-footer a {
+      color: var(--text-light);
+      font-size: 1.5em;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .social-footer a:hover {
+      color: var(--primary-color);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      margin-top: 10px;
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .calculator {
+        padding: 18px;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator-container">
+    <h1>Ohm's Law Triangle Calculator</h1>
+    <p class="section-subtitle">
+      Enter any <strong>two</strong> values (V, I, R, P) and the calculator will find the other two.
+    </p>
+
+    <div class="calculator">
+      <div class="grid-2">
+        <div>
+          <div class="form-group">
+            <label for="voltage">Voltage (V)</label>
+            <input type="number" id="voltage" placeholder="e.g. 12">
+            <div class="unit">Volts [V]</div>
+          </div>
+
+          <div class="form-group">
+            <label for="current">Current (I)</label>
+            <input type="number" id="current" placeholder="e.g. 2">
+            <div class="unit">Amperes [A]</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="form-group">
+            <label for="resistance">Resistance (R)</label>
+            <input type="number" id="resistance" placeholder="e.g. 6">
+            <div class="unit">Ohms [Ω]</div>
+          </div>
+
+          <div class="form-group">
+            <label for="power">Power (P)</label>
+            <input type="number" id="power" placeholder="e.g. 24">
+            <div class="unit">Watts [W]</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn" id="calculate-btn">
+        <i class="fas fa-calculator" style="margin-right:8px;"></i>Calculate
+      </button>
+      <button class="btn btn-secondary" id="clear-btn">
+        <i class="fas fa-broom" style="margin-right:6px;"></i>Clear
+      </button>
+
+      <div id="results" class="results">
+        <p class="results-strong" id="results-main"></p>
+        <p id="results-extra"></p>
+        <p id="error-msg" class="results-error"></p>
+        <p id="formula-text" class="formula"></p>
+      </div>
+    </div>
+
+    <div class="triangle-section">
+      <div class="triangle-card">
+        <h2>Ohm's Law Triangle (V, I, R)</h2>
+        <svg class="triangle-svg" viewBox="0 0 200 160">
+          <polygon points="100,10 10,150 190,150"
+                   fill="none"
+                   stroke="var(--primary-color)"
+                   stroke-width="3" />
+          <text x="100" y="45" text-anchor="middle" font-size="20" fill="var(--text-light)">V</text>
+          <text x="60" y="125" text-anchor="middle" font-size="20" fill="var(--text-light)">I</text>
+          <text x="140" y="125" text-anchor="middle" font-size="20" fill="var(--text-light)">R</text>
+        </svg>
+        <p>From this triangle:</p>
+        <ul style="margin-left:18px; margin-top:6px;">
+          <li>V = I × R</li>
+          <li>I = V ÷ R</li>
+          <li>R = V ÷ I</li>
+        </ul>
+      </div>
+
+      <div class="triangle-card">
+        <h2>Power Triangle (P, V, I)</h2>
+        <svg class="triangle-svg" viewBox="0 0 200 160">
+          <polygon points="100,10 10,150 190,150"
+                   fill="none"
+                   stroke="var(--primary-color)"
+                   stroke-width="3" />
+          <text x="100" y="45" text-anchor="middle" font-size="20" fill="var(--text-light)">P</text>
+          <text x="60" y="125" text-anchor="middle" font-size="20" fill="var(--text-light)">V</text>
+          <text x="140" y="125" text-anchor="middle" font-size="20" fill="var(--text-light)">I</text>
+        </svg>
+        <p>From this triangle:</p>
+        <ul style="margin-left:18px; margin-top:6px;">
+          <li>P = V × I</li>
+          <li>V = P ÷ I</li>
+          <li>I = P ÷ V</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h2>Formulas Used</h2>
+      <table>
+        <tr>
+          <th>Quantity</th>
+          <th>Formula</th>
+          <th>Notes</th>
+        </tr>
+        <tr>
+          <td>Voltage (V)</td>
+          <td>V = I × R</td>
+          <td>Ohm's law basic form</td>
+        </tr>
+        <tr>
+          <td>Current (I)</td>
+          <td>I = V ÷ R</td>
+          <td>Rearranged from V = I × R</td>
+        </tr>
+        <tr>
+          <td>Resistance (R)</td>
+          <td>R = V ÷ I</td>
+          <td>Rearranged from V = I × R</td>
+        </tr>
+        <tr>
+          <td>Power (P)</td>
+          <td>P = V × I</td>
+          <td>Real power in DC circuits</td>
+        </tr>
+        <tr>
+          <td>Power (P)</td>
+          <td>P = I² × R</td>
+          <td>Useful when V is unknown</td>
+        </tr>
+        <tr>
+          <td>Power (P)</td>
+          <td>P = V² ÷ R</td>
+          <td>Useful when I is unknown</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Dark / Light Mode Toggle -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="social-footer">
+        <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </div>
+      <div class="footer-bottom">
+        &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+        &nbsp;|&nbsp; &copy; M.T.A.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- Theme handling ----------
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
+
+    const savedTheme = localStorage.getItem('theme') ||
+      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+    document.body.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'dark') {
+      themeIcon.classList.remove('fa-moon');
+      themeIcon.classList.add('fa-sun');
+    } else {
+      themeIcon.classList.remove('fa-sun');
+      themeIcon.classList.add('fa-moon');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const current = document.body.getAttribute('data-theme');
+      if (current === 'light') {
+        document.body.setAttribute('data-theme', 'dark');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.body.setAttribute('data-theme', 'light');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // ---------- Helper: format numbers ----------
+    function fmt(value) {
+      if (!isFinite(value)) return '';
+      const absVal = Math.abs(value);
+      if (absVal === 0) return '0';
+      if (absVal >= 1000 || absVal < 0.01) {
+        return value.toExponential(3);
+      }
+      return parseFloat(value.toFixed(3)).toString();
+    }
+
+    // ---------- Ohm's Law Calculator Logic ----------
+    const V_input = document.getElementById('voltage');
+    const I_input = document.getElementById('current');
+    const R_input = document.getElementById('resistance');
+    const P_input = document.getElementById('power');
+
+    const resultsBox = document.getElementById('results');
+    const resultsMain = document.getElementById('results-main');
+    const resultsExtra = document.getElementById('results-extra');
+    const errorMsg = document.getElementById('error-msg');
+    const formulaText = document.getElementById('formula-text');
+
+    document.getElementById('calculate-btn').addEventListener('click', () => {
+      errorMsg.textContent = '';
+      formulaText.textContent = '';
+      resultsExtra.textContent = '';
+
+      let V = V_input.value.trim();
+      let I = I_input.value.trim();
+      let R = R_input.value.trim();
+      let P = P_input.value.trim();
+
+      const known = {};
+      if (V !== '') known.V = parseFloat(V);
+      if (I !== '') known.I = parseFloat(I);
+      if (R !== '') known.R = parseFloat(R);
+      if (P !== '') known.P = parseFloat(P);
+
+      const knownCount = Object.keys(known).length;
+
+      if (knownCount < 2) {
+        resultsBox.style.display = 'block';
+        resultsMain.textContent = 'Please enter at least two values.';
+        errorMsg.textContent = 'Tip: Fill any two of V, I, R, P.';
+        return;
+      }
+
+      let formulasUsed = [];
+
+      // Copy to working variables
+      let v = known.V;
+      let i = known.I;
+      let r = known.R;
+      let p = known.P;
+
+      // Use combinations in priority order
+      try {
+        // V and I known
+        if (v != null && i != null) {
+          r = v / i;
+          p = v * i;
+          formulasUsed.push('R = V ÷ I', 'P = V × I');
+        }
+        // V and R known
+        else if (v != null && r != null) {
+          i = v / r;
+          p = v * i;
+          formulasUsed.push('I = V ÷ R', 'P = V × I');
+        }
+        // I and R known
+        else if (i != null && r != null) {
+          v = i * r;
+          p = v * i;
+          formulasUsed.push('V = I × R', 'P = V × I');
+        }
+        // V and P known
+        else if (v != null && p != null) {
+          i = p / v;
+          r = v / i;
+          formulasUsed.push('I = P ÷ V', 'R = V ÷ I');
+        }
+        // I and P known
+        else if (i != null && p != null) {
+          v = p / i;
+          r = v / i;
+          formulasUsed.push('V = P ÷ I', 'R = V ÷ I');
+        }
+        // R and P known
+        else if (r != null && p != null) {
+          i = Math.sqrt(p / r);
+          v = i * r;
+          formulasUsed.push('I = √(P ÷ R)', 'V = I × R');
+        } else {
+          resultsBox.style.display = 'block';
+          resultsMain.textContent = 'This combination is not supported.';
+          errorMsg.textContent = 'Try different two known values.';
+          return;
+        }
+
+        if (!isFinite(v) || !isFinite(i) || !isFinite(r) || !isFinite(p)) {
+          throw new Error('Invalid numeric result');
+        }
+
+        V_input.value = fmt(v);
+        I_input.value = fmt(i);
+        R_input.value = fmt(r);
+        P_input.value = fmt(p);
+
+        resultsMain.textContent =
+          `V = ${fmt(v)} V,  I = ${fmt(i)} A,  R = ${fmt(r)} Ω,  P = ${fmt(p)} W`;
+
+        resultsExtra.textContent = 'All four quantities were recalculated based on your inputs.';
+        formulaText.textContent = 'Formulas used: ' + formulasUsed.join(' , ');
+        resultsBox.style.display = 'block';
+      } catch (e) {
+        resultsBox.style.display = 'block';
+        resultsMain.textContent = 'Calculation error.';
+        errorMsg.textContent = 'Please check your inputs (no negative resistance or NaN).';
+      }
+    });
+
+    document.getElementById('clear-btn').addEventListener('click', () => {
+      V_input.value = '';
+      I_input.value = '';
+      R_input.value = '';
+      P_input.value = '';
+      resultsBox.style.display = 'none';
+      errorMsg.textContent = '';
+      resultsMain.textContent = '';
+      resultsExtra.textContent = '';
+      formulaText.textContent = '';
+    });
+
+    // Footer year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
