@@ -13,6 +13,7 @@
             --primary-dark: #2980b9;
             --primary-light: #5dade2;
             --secondary-color: #9b59b6;
+            --accent-color: #e74c3c;
             --background-dark: #121212;
             --background-darker: #0a0a0a;
             --background-secondary: #1a1a1a;
@@ -73,27 +74,62 @@
         .page-header {
             text-align: center;
             margin-bottom: 30px;
-            padding: 20px;
+            padding: 30px;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             border-radius: var(--border-radius);
             color: white;
             box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
         }
 
         .page-header h1 {
             color: white;
             font-size: 2.5rem;
             margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
         }
 
         .page-header p {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Quick Stats */
+        .quick-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         /* Calculator Styles */
         .calculator-container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
@@ -105,20 +141,26 @@
             background-color: var(--card-light);
             border-radius: var(--border-radius) var(--border-radius) 0 0;
             margin-bottom: 0;
+            flex-wrap: wrap;
         }
         
         .main-tab-button {
             background-color: inherit;
             flex: 1;
+            min-width: 150px;
             border: none;
             outline: none;
             cursor: pointer;
             padding: 14px 16px;
-            transition: 0.3s;
+            transition: all var(--transition-speed) ease;
             color: var(--text-light);
             font-weight: bold;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
         .main-tab-button:hover {
@@ -164,6 +206,7 @@
             margin-bottom: 20px;
             background-color: var(--card-light);
             transition: all var(--transition-speed) ease;
+            position: relative;
         }
         
         .calculator:hover {
@@ -186,10 +229,17 @@
             position: relative;
             transition: all var(--transition-speed) ease;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 2px solid transparent;
         }
         
         .band:hover {
             transform: translateY(-5px);
+            box-shadow: var(--glow-effect);
+            border-color: var(--primary-color);
+        }
+        
+        .band.active {
+            border-color: var(--warning-color);
             box-shadow: var(--glow-effect);
         }
         
@@ -214,6 +264,36 @@
             text-align: center;
             font-weight: 600;
             box-shadow: var(--box-shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .result-details {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .save-btn {
+            background: var(--success-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9em;
+            transition: all var(--transition-speed) ease;
+        }
+        
+        .save-btn:hover {
+            background: #3d8b40;
+            transform: translateY(-2px);
         }
         
         .tabs {
@@ -233,6 +313,9 @@
             border-radius: var(--border-radius);
             transition: all var(--transition-speed) ease;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .tab-button:hover {
@@ -411,6 +494,7 @@
             background: rgba(255, 255, 255, 0.05);
             border-radius: var(--border-radius);
             transition: all var(--transition-speed) ease;
+            cursor: pointer;
         }
         
         .color-item:hover {
@@ -453,45 +537,62 @@
             box-shadow: var(--glow-effect);
         }
 
-        /* Toast notification */
-        .toast {
+        /* Notification */
+        .notification {
             position: fixed;
-            bottom: 100px;
-            right: 30px;
-            padding: 15px 25px;
-            background-color: var(--success-color);
-            color: white;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             z-index: 1000;
-            transform: translateX(150%);
-            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 400px;
+            transform: translateX(120%);
+            transition: transform 0.5s ease;
         }
-
-        .toast.show {
+        
+        .notification.show {
             transform: translateX(0);
         }
-
-        .toast.error {
+        
+        .notification.success {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .notification.error {
             background-color: var(--error-color);
+            color: white;
         }
-
-        /* Loading spinner */
-        .loading-spinner {
-            display: none;
-            width: 30px;
-            height: 30px;
-            border: 3px solid rgba(52, 152, 219, 0.2);
-            border-radius: 50%;
-            border-top-color: var(--primary-color);
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
+        
+        .close-notification {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-left: auto;
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        
+        /* History */
+        .history-item {
+            background-color: var(--card-light);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-
+        
+        .history-details {
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .input-field {
@@ -535,6 +636,12 @@
             
             .page-header h1 {
                 font-size: 2rem;
+            }
+            
+            .result {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
             }
         }
         
@@ -756,13 +863,98 @@
             font-weight: bold;
             color: var(--text-light);
         }
+        
+        /* New Calculator Types */
+        .inductor-design {
+            margin-top: 30px;
+        }
+        
+        .design-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .design-input {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            border: 3px solid rgba(52, 152, 219, 0.2);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Search and Filter */
+        .search-box {
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            padding-left: 45px;
+            border: 1px solid var(--background-secondary);
+            border-radius: 50px;
+            background-color: var(--background-secondary);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+        
+        .empty-state i {
+            font-size: 3em;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
     </style>
 </head>
 <body>
     <div class="calculator-container">
         <div class="page-header">
             <h1><i class="fas fa-calculator"></i> Inductance Calculators</h1>
-            <p>Tools for electronics engineers and hobbyists</p>
+            <p>Advanced tools for electronics engineers and hobbyists to calculate and design inductors</p>
+            <div class="quick-stats">
+                <div class="stat-item">
+                    <i class="fas fa-bolt"></i>
+                    <span>5 Calculators</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-history"></i>
+                    <span>Real-time Updates</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Mobile Friendly</span>
+                </div>
+            </div>
         </div>
         
         <div class="main-tabs">
@@ -774,6 +966,9 @@
             </button>
             <button class="main-tab-button" onclick="openMainTab(event, 'UnitConverter')">
                 <i class="fas fa-exchange-alt"></i> Unit Converter
+            </button>
+            <button class="main-tab-button" onclick="openMainTab(event, 'InductorDesign')">
+                <i class="fas fa-cogs"></i> Inductor Design
             </button>
             <button class="main-tab-button" onclick="openMainTab(event, 'Info')">
                 <i class="fas fa-info-circle"></i> Information
@@ -808,21 +1003,53 @@
                     <span class="band-label">Tolerance</span>
                 </div>
                 
-                <div class="result" id="colorCodeResult">Inductance: 10μH ±5%</div>
+                <div class="result" id="colorCodeResult">
+                    <div>
+                        <div>Inductance: 10μH ±5%</div>
+                        <div class="result-details">Raw Value: 10 μH | Color Code: Brown-Black-Silver-Gold</div>
+                    </div>
+                    <button class="save-btn" onclick="saveCalculation('color-4band')">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                </div>
                 
                 <div class="color-legend">
-                    <div class="color-item"><div class="color-swatch" style="background-color: #000000;"></div>Black (0)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #966f33;"></div>Brown (1)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #ff0000;"></div>Red (2)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #ffa500;"></div>Orange (3)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #ffff00;"></div>Yellow (4)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #008000;"></div>Green (5)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #0000ff;"></div>Blue (6)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #800080;"></div>Violet (7)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #808080;"></div>Gray (8)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #ffffff;"></div>White (9)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #d4af37;"></div>Gold (±5%)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #c0c0c0;"></div>Silver (±10%)</div>
+                    <div class="color-item" onclick="selectColorFromLegend(0)">
+                        <div class="color-swatch" style="background-color: #000000;"></div>Black (0)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend(1)">
+                        <div class="color-swatch" style="background-color: #966f33;"></div>Brown (1)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend(2)">
+                        <div class="color-swatch" style="background-color: #ff0000;"></div>Red (2)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend(3)">
+                        <div class="color-swatch" style="background-color: #ffa500;"></div>Orange (3)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend(4)">
+                        <div class="color-swatch" style="background-color: #ffff00;"></div>Yellow (4)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend(5)">
+                        <div class="color-swatch" style="background-color: #008000;"></div>Green (5)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend(6)">
+                        <div class="color-swatch" style="background-color: #0000ff;"></div>Blue (6)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend(7)">
+                        <div class="color-swatch" style="background-color: #800080;"></div>Violet (7)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend(8)">
+                        <div class="color-swatch" style="background-color: #808080;"></div>Gray (8)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend(9)">
+                        <div class="color-swatch" style="background-color: #ffffff;"></div>White (9)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend(10)">
+                        <div class="color-swatch" style="background-color: #d4af37;"></div>Gold (±5%)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend(11)">
+                        <div class="color-swatch" style="background-color: #c0c0c0;"></div>Silver (±10%)
+                    </div>
                 </div>
             </div>
 
@@ -845,21 +1072,53 @@
                     <span class="band-label">Tolerance</span>
                 </div>
                 
-                <div class="result" id="colorCodeResult5">Inductance: 100μH ±5%</div>
+                <div class="result" id="colorCodeResult5">
+                    <div>
+                        <div>Inductance: 100μH ±5%</div>
+                        <div class="result-details">Raw Value: 100 μH | Color Code: Brown-Black-Black-Silver-Gold</div>
+                    </div>
+                    <button class="save-btn" onclick="saveCalculation('color-5band')">
+                        <i class="fas fa-save"></i> Save
+                    </button>
+                </div>
                 
                 <div class="color-legend">
-                    <div class="color-item"><div class="color-swatch" style="background-color: #000000;"></div>Black (0)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #966f33;"></div>Brown (1)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #ff0000;"></div>Red (2)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #ffa500;"></div>Orange (3)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #ffff00;"></div>Yellow (4)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #008000;"></div>Green (5)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #0000ff;"></div>Blue (6)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #800080;"></div>Violet (7)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #808080;"></div>Gray (8)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #ffffff;"></div>White (9)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #d4af37;"></div>Gold (±5%)</div>
-                    <div class="color-item"><div class="color-swatch" style="background-color: #c0c0c0;"></div>Silver (±10%)</div>
+                    <div class="color-item" onclick="selectColorFromLegend5(0)">
+                        <div class="color-swatch" style="background-color: #000000;"></div>Black (0)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend5(1)">
+                        <div class="color-swatch" style="background-color: #966f33;"></div>Brown (1)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend5(2)">
+                        <div class="color-swatch" style="background-color: #ff0000;"></div>Red (2)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend5(3)">
+                        <div class="color-swatch" style="background-color: #ffa500;"></div>Orange (3)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend5(4)">
+                        <div class="color-swatch" style="background-color: #ffff00;"></div>Yellow (4)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend5(5)">
+                        <div class="color-swatch" style="background-color: #008000;"></div>Green (5)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend5(6)">
+                        <div class="color-swatch" style="background-color: #0000ff;"></div>Blue (6)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend5(7)">
+                        <div class="color-swatch" style="background-color: #800080;"></div>Violet (7)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend5(8)">
+                        <div class="color-swatch" style="background-color: #808080;"></div>Gray (8)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend5(9)">
+                        <div class="color-swatch" style="background-color: #ffffff;"></div>White (9)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend5(10)">
+                        <div class="color-swatch" style="background-color: #d4af37;"></div>Gold (±5%)
+                    </div>
+                    <div class="color-item" onclick="selectColorFromLegend5(11)">
+                        <div class="color-swatch" style="background-color: #c0c0c0;"></div>Silver (±10%)
+                    </div>
                 </div>
             </div>
         </div>
@@ -886,8 +1145,8 @@
                 <div id="series-inductors" class="inductors-container">
                     <div class="inductor-input">
                         <label>L1:</label>
-                        <input type="number" min="0" step="0.01" value="10">
-                        <select class="unit-selector">
+                        <input type="number" min="0" step="0.01" value="10" onchange="calculateInductance('series')">
+                        <select class="unit-selector" onchange="calculateInductance('series')">
                             <option value="1e-6">μH</option>
                             <option value="1e-3" selected>mH</option>
                             <option value="1">H</option>
@@ -895,8 +1154,8 @@
                     </div>
                     <div class="inductor-input">
                         <label>L2:</label>
-                        <input type="number" min="0" step="0.01" value="22">
-                        <select class="unit-selector">
+                        <input type="number" min="0" step="0.01" value="22" onchange="calculateInductance('series')">
+                        <select class="unit-selector" onchange="calculateInductance('series')">
                             <option value="1e-6">μH</option>
                             <option value="1e-3" selected>mH</option>
                             <option value="1">H</option>
@@ -910,12 +1169,15 @@
                 <button class="btn btn-outline" onclick="removeInductor('series')">
                     <i class="fas fa-minus"></i> Remove Inductor
                 </button>
-                <button class="btn btn-success" onclick="calculateInductance('series')">
-                    <i class="fas fa-calculator"></i> Calculate
+                <button class="btn btn-success" onclick="saveCalculation('series')">
+                    <i class="fas fa-save"></i> Save
                 </button>
                 
                 <div id="series-result" class="result">
-                    <p>The equivalent inductance will be shown here.</p>
+                    <div>
+                        <div>Equivalent Inductance: 32.00 mH</div>
+                        <div class="result-details">Calculation: Leq = L1 + L2 = 10 mH + 22 mH = 32 mH</div>
+                    </div>
                 </div>
             </div>
             
@@ -927,8 +1189,8 @@
                 <div id="parallel-inductors" class="inductors-container">
                     <div class="inductor-input">
                         <label>L1:</label>
-                        <input type="number" min="0" step="0.01" value="10">
-                        <select class="unit-selector">
+                        <input type="number" min="0" step="0.01" value="10" onchange="calculateInductance('parallel')">
+                        <select class="unit-selector" onchange="calculateInductance('parallel')">
                             <option value="1e-6">μH</option>
                             <option value="1e-3" selected>mH</option>
                             <option value="1">H</option>
@@ -936,8 +1198,8 @@
                     </div>
                     <div class="inductor-input">
                         <label>L2:</label>
-                        <input type="number" min="0" step="0.01" value="22">
-                        <select class="unit-selector">
+                        <input type="number" min="0" step="0.01" value="22" onchange="calculateInductance('parallel')">
+                        <select class="unit-selector" onchange="calculateInductance('parallel')">
                             <option value="1e-6">μH</option>
                             <option value="1e-3" selected>mH</option>
                             <option value="1">H</option>
@@ -951,12 +1213,15 @@
                 <button class="btn btn-outline" onclick="removeInductor('parallel')">
                     <i class="fas fa-minus"></i> Remove Inductor
                 </button>
-                <button class="btn btn-success" onclick="calculateInductance('parallel')">
-                    <i class="fas fa-calculator"></i> Calculate
+                <button class="btn btn-success" onclick="saveCalculation('parallel')">
+                    <i class="fas fa-save"></i> Save
                 </button>
                 
                 <div id="parallel-result" class="result">
-                    <p>The equivalent inductance will be shown here.</p>
+                    <div>
+                        <div>Equivalent Inductance: 6.88 mH</div>
+                        <div class="result-details">Calculation: 1/Leq = 1/L1 + 1/L2 = 1/10 + 1/22 = 0.1455 H⁻¹</div>
+                    </div>
                 </div>
             </div>
             
@@ -982,6 +1247,13 @@
                     <h3><i class="fas fa-microscope"></i> Physical Explanation</h3>
                     <p><strong>Series connection:</strong> In series, the same current flows through each inductor, and the voltage drops add up. The total inductance is the sum of individual inductances because the magnetic fields add constructively.</p>
                     <p><strong>Parallel connection:</strong> In parallel, the voltage across each inductor is the same, but the currents divide. The total inductance is less than any individual inductance because the magnetic fields interact to reduce the overall inductance.</p>
+                    
+                    <h3><i class="fas fa-exclamation-triangle"></i> Important Notes</h3>
+                    <ul>
+                        <li>These formulas assume no mutual coupling between inductors</li>
+                        <li>For mutually coupled inductors, calculations are more complex</li>
+                        <li>In real circuits, always consider the inductor's DC resistance and self-resonant frequency</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -1025,9 +1297,14 @@
                     <button class="btn btn-primary" onclick="convertUnits()">
                         <i class="fas fa-exchange-alt"></i> Convert
                     </button>
+                    <button class="btn btn-success" onclick="saveCalculation('converter')">
+                        <i class="fas fa-save"></i> Save
+                    </button>
                     
                     <div id="converter-result" class="converter-result">
-                        <p>Conversion result will appear here.</p>
+                        <p><strong>Conversion Result:</strong></p>
+                        <p>1 μH = 1,000 nH = 1,000,000 pH</p>
+                        <p>1 μH = 0.001 mH = 0.000001 H</p>
                     </div>
                 </div>
                 
@@ -1039,6 +1316,72 @@
                         <li>1 microhenry (μH) = 1,000 nanohenries (nH)</li>
                         <li>1 nanohenry (nH) = 1,000 picohenries (pH)</li>
                         <li>1 kilohenry (kH) = 1,000 Henry (H)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- New Inductor Design Tab -->
+        <div id="InductorDesign" class="main-tabcontent">
+            <div class="calculator">
+                <h2><i class="fas fa-cogs"></i> Inductor Design Calculator</h2>
+                <p>Design air-core inductors by specifying physical parameters.</p>
+                
+                <div class="design-controls">
+                    <div class="design-input">
+                        <label for="wireDiameter">Wire Diameter (mm):</label>
+                        <input type="number" id="wireDiameter" value="0.5" min="0.1" step="0.1" onchange="calculateInductorDesign()">
+                    </div>
+                    <div class="design-input">
+                        <label for="coilDiameter">Coil Diameter (mm):</label>
+                        <input type="number" id="coilDiameter" value="10" min="1" step="0.1" onchange="calculateInductorDesign()">
+                    </div>
+                    <div class="design-input">
+                        <label for="numberTurns">Number of Turns:</label>
+                        <input type="number" id="numberTurns" value="20" min="1" step="1" onchange="calculateInductorDesign()">
+                    </div>
+                    <div class="design-input">
+                        <label for="coilLength">Coil Length (mm):</label>
+                        <input type="number" id="coilLength" value="10" min="1" step="0.1" onchange="calculateInductorDesign()">
+                    </div>
+                </div>
+                
+                <button class="btn btn-success" onclick="saveCalculation('design')">
+                    <i class="fas fa-save"></i> Save Design
+                </button>
+                
+                <div class="design-results">
+                    <div class="design-result-box">
+                        <div class="design-result-label">Calculated Inductance</div>
+                        <div class="design-result-value" id="calculatedInductance">1.26 μH</div>
+                    </div>
+                    <div class="design-result-box">
+                        <div class="design-result-label">Wire Length</div>
+                        <div class="design-result-value" id="wireLength">0.63 m</div>
+                    </div>
+                    <div class="design-result-box">
+                        <div class="design-result-label">DC Resistance</div>
+                        <div class="design-result-value" id="dcResistance">0.32 Ω</div>
+                    </div>
+                    <div class="design-result-box">
+                        <div class="design-result-label">Quality Factor (Q)</div>
+                        <div class="design-result-value" id="qualityFactor">45.6</div>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h3><i class="fas fa-info-circle"></i> Air-Core Inductor Formula</h3>
+                    <p>The inductance of an air-core solenoid is calculated using:</p>
+                    <div class="formula">
+                        L = (μ₀ × N² × A) / l
+                    </div>
+                    <p>Where:</p>
+                    <ul>
+                        <li>L = Inductance in Henries</li>
+                        <li>μ₀ = Permeability of free space (4π × 10⁻⁷ H/m)</li>
+                        <li>N = Number of turns</li>
+                        <li>A = Cross-sectional area of coil (m²)</li>
+                        <li>l = Length of coil (m)</li>
                     </ul>
                 </div>
             </div>
@@ -1151,13 +1494,24 @@
             
             <div class="info-box">
                 <h3><i class="fas fa-microchip"></i> Common Inductor Types</h3>
-                <ul>
-                    <li><strong>Air Core Inductors:</strong> No magnetic core, lowest inductance values, high frequency operation</li>
-                    <li><strong>Ferrite Core Inductors:</strong> Medium inductance values, good for RF applications</li>
-                    <li><strong>Iron Core Inductors:</strong> High inductance values, used in power applications</li>
-                    <li><strong>Toroidal Inductors:</strong> Donut-shaped cores with minimal electromagnetic interference</li>
-                    <li><strong>Multilayer Chip Inductors:</strong> Surface mount components for compact circuits</li>
-                </ul>
+                <div class="design-results">
+                    <div class="design-result-box">
+                        <div class="design-result-label">Air Core</div>
+                        <div class="design-result-value">Low inductance, high frequency</div>
+                    </div>
+                    <div class="design-result-box">
+                        <div class="design-result-label">Ferrite Core</div>
+                        <div class="design-result-value">Medium inductance, RF applications</div>
+                    </div>
+                    <div class="design-result-box">
+                        <div class="design-result-label">Iron Core</div>
+                        <div class="design-result-value">High inductance, power applications</div>
+                    </div>
+                    <div class="design-result-box">
+                        <div class="design-result-label">Toroidal</div>
+                        <div class="design-result-value">Minimal EMI, high efficiency</div>
+                    </div>
+                </div>
             </div>
             
             <div class="info-box">
@@ -1169,11 +1523,21 @@
                     <li>1 nanohenry (nH) = 1,000 picohenries (pH)</li>
                 </ul>
             </div>
+            
+            <div class="info-box">
+                <h3><i class="fas fa-history"></i> Calculation History</h3>
+                <div id="history-container">
+                    <div class="empty-state" id="empty-history">
+                        <i class="fas fa-history"></i>
+                        <p>No calculations saved yet.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast"></div>
+    <!-- Notification Area -->
+    <div id="notificationArea"></div>
 
     <!-- Dark Mode Toggle -->
     <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
@@ -1220,9 +1584,28 @@
         ];
 
         // Current band selections
-        let bandSelections = [0, 0, 2, 10]; // Default: Brown-Black-Silver-Gold
-        let bandSelections5 = [0, 0, 0, 2, 10]; // Default: Brown-Black-Black-Silver-Gold
+        let bandSelections = [1, 0, 11, 10]; // Default: Brown-Black-Silver-Gold
+        let bandSelections5 = [1, 0, 0, 11, 10]; // Default: Brown-Black-Black-Silver-Gold
+        
+        // Calculation history
+        let calculationHistory = [];
+        let activeBand = null;
 
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            init();
+            calculateInductance('series');
+            calculateInductance('parallel');
+            calculateInductorDesign();
+        });
+
+        function init() {
+            loadHistory();
+            updateColorCodeResult();
+            updateColorCodeResult5();
+            highlightActiveBand();
+        }
+        
         // Main tab switching
         function openMainTab(evt, tabName) {
             var i, tabcontent, tabbuttons;
@@ -1299,25 +1682,68 @@
             }
         });
 
-        // Show toast notification
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast';
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notificationArea = document.getElementById('notificationArea');
+            const notificationId = 'notification-' + Date.now();
             
-            if (type === 'error') {
-                toast.classList.add('error');
-            }
+            const notification = document.createElement('div');
+            notification.id = notificationId;
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${getNotificationIcon(type)}"></i>
+                <span>${message}</span>
+                <button class="close-notification" onclick="document.getElementById('${notificationId}').remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
             
-            toast.classList.add('show');
+            notificationArea.appendChild(notification);
             
+            // Show notification
             setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+                notification.classList.add('show');
+            }, 100);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (document.getElementById(notificationId)) {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        if (document.getElementById(notificationId)) {
+                            document.getElementById(notificationId).remove();
+                        }
+                    }, 500);
+                }
+            }, 5000);
+        }
+        
+        function getNotificationIcon(type) {
+            switch(type) {
+                case 'success': return 'check-circle';
+                case 'error': return 'exclamation-circle';
+                case 'warning': return 'exclamation-triangle';
+                default: return 'info-circle';
+            }
+        }
+
+        // Highlight active band
+        function highlightActiveBand() {
+            document.querySelectorAll('.band').forEach(band => {
+                band.classList.remove('active');
+            });
+            
+            if (activeBand) {
+                const bandElement = document.getElementById(`band${activeBand}`);
+                if (bandElement) bandElement.classList.add('active');
+            }
         }
 
         // Band selection for 4-band
         function selectBand(bandNum) {
+            activeBand = bandNum;
+            highlightActiveBand();
+            
             const currentColor = bandSelections[bandNum-1];
             let newIndex = (currentColor + 1) % colors.length;
             
@@ -1339,6 +1765,9 @@
 
         // Band selection for 5-band
         function selectBand5(bandNum) {
+            activeBand = bandNum;
+            highlightActiveBand();
+            
             const currentColor = bandSelections5[bandNum-1];
             let newIndex = (currentColor + 1) % colors.length;
             
@@ -1356,6 +1785,26 @@
             bandSelections5[bandNum-1] = newIndex;
             document.getElementById(`band${bandNum}-5`).style.backgroundColor = colors[newIndex].code;
             updateColorCodeResult5();
+        }
+
+        // Select color from legend for 4-band
+        function selectColorFromLegend(colorIndex) {
+            if (activeBand >= 1 && activeBand <= 4) {
+                bandSelections[activeBand-1] = colorIndex;
+                document.getElementById(`band${activeBand}`).style.backgroundColor = colors[colorIndex].code;
+                updateColorCodeResult();
+                showNotification(`Band ${activeBand} set to ${colors[colorIndex].name}`, 'success');
+            }
+        }
+
+        // Select color from legend for 5-band
+        function selectColorFromLegend5(colorIndex) {
+            if (activeBand >= 1 && activeBand <= 5) {
+                bandSelections5[activeBand-1] = colorIndex;
+                document.getElementById(`band${activeBand}-5`).style.backgroundColor = colors[colorIndex].code;
+                updateColorCodeResult5();
+                showNotification(`Band ${activeBand} set to ${colors[colorIndex].name}`, 'success');
+            }
         }
 
         // Update 4-band result display
@@ -1379,8 +1828,17 @@
                 unit = "μH";
             }
             
-            document.getElementById("colorCodeResult").textContent = 
-                `Inductance: ${displayValue}${unit} ${tolerance}`;
+            const colorNames = bandSelections.map(idx => colors[idx].name).join('-');
+            const resultDiv = document.getElementById("colorCodeResult");
+            resultDiv.innerHTML = `
+                <div>
+                    <div>Inductance: ${displayValue.toFixed(2)}${unit} ${tolerance}</div>
+                    <div class="result-details">Raw Value: ${inductance} μH | Color Code: ${colorNames}</div>
+                </div>
+                <button class="save-btn" onclick="saveCalculation('color-4band')">
+                    <i class="fas fa-save"></i> Save
+                </button>
+            `;
         }
 
         // Update 5-band result display
@@ -1405,8 +1863,17 @@
                 unit = "μH";
             }
             
-            document.getElementById("colorCodeResult5").textContent = 
-                `Inductance: ${displayValue}${unit} ${tolerance}`;
+            const colorNames = bandSelections5.map(idx => colors[idx].name).join('-');
+            const resultDiv = document.getElementById("colorCodeResult5");
+            resultDiv.innerHTML = `
+                <div>
+                    <div>Inductance: ${displayValue.toFixed(2)}${unit} ${tolerance}</div>
+                    <div class="result-details">Raw Value: ${inductance} μH | Color Code: ${colorNames}</div>
+                </div>
+                <button class="save-btn" onclick="saveCalculation('color-5band')">
+                    <i class="fas fa-save"></i> Save
+                </button>
+            `;
         }
 
         // Series/parallel calculator functions
@@ -1419,8 +1886,8 @@
             
             inductorInput.innerHTML = `
                 <label>L${count}:</label>
-                <input type="number" min="0" step="0.01" value="10">
-                <select class="unit-selector">
+                <input type="number" min="0" step="0.01" value="10" onchange="calculateInductance('${type}')">
+                <select class="unit-selector" onchange="calculateInductance('${type}')">
                     <option value="1e-6">μH</option>
                     <option value="1e-3" selected>mH</option>
                     <option value="1">H</option>
@@ -1428,12 +1895,16 @@
             `;
             
             container.appendChild(inductorInput);
+            calculateInductance(type);
+            showNotification(`Added inductor L${count}`, 'success');
         }
         
         function removeInductor(type) {
             const container = document.getElementById(type + '-inductors');
             if (container.children.length > 1) {
                 container.removeChild(container.lastChild);
+                calculateInductance(type);
+                showNotification('Removed last inductor', 'warning');
             }
         }
         
@@ -1450,8 +1921,11 @@
                 const unit = parseFloat(units[i].value);
                 
                 if (isNaN(value) || value <= 0) {
-                    resultDiv.innerHTML = '<p style="color: var(--error-color);">Error: All inductor values must be positive numbers.</p>';
-                    showToast('Please enter valid inductor values!', 'error');
+                    resultDiv.innerHTML = `
+                        <div style="color: var(--error-color);">
+                            <i class="fas fa-exclamation-circle"></i> Error: All inductor values must be positive numbers.
+                        </div>
+                    `;
                     return;
                 }
                 
@@ -1461,6 +1935,7 @@
             
             let equivalentInductance;
             let formula = '';
+            let details = '';
             
             if (type === 'series') {
                 // Calculate L = L1 + L2 + ... + Ln
@@ -1470,12 +1945,15 @@
                 for (let i = 0; i < inductors.length; i++) {
                     equivalentInductance += inductors[i];
                     formula += `L${i+1}`;
+                    details += `${formatInductance(inductors[i])}`;
                     if (i < inductors.length - 1) {
                         formula += ' + ';
+                        details += ' + ';
                     }
                 }
                 
                 formula += ` = ${equivalentInductance.toExponential(6)} H`;
+                details = `Calculation: Leq = ${details} = ${formatInductance(equivalentInductance)}`;
             } else {
                 // Calculate 1/L = 1/L1 + 1/L2 + ... + 1/Ln
                 let sum = 0;
@@ -1490,29 +1968,31 @@
                 }
                 
                 equivalentInductance = 1 / sum;
-                formula += ` = ${sum.toFixed(6)} (H<sup>-1</sup>)<br>Therefore, Leq = 1/${sum.toFixed(6)} = ${equivalentInductance.toExponential(6)} H`;
-            }
-            
-            // Display the result with appropriate unit
-            let displayValue, unit;
-            
-            if (equivalentInductance >= 1) {
-                displayValue = equivalentInductance;
-                unit = 'H';
-            } else if (equivalentInductance >= 1e-3) {
-                displayValue = equivalentInductance * 1e3;
-                unit = 'mH';
-            } else {
-                displayValue = equivalentInductance * 1e6;
-                unit = 'μH';
+                formula += ` = ${sum.toFixed(6)} (H⁻¹)<br>Therefore, Leq = 1/${sum.toFixed(6)} = ${equivalentInductance.toExponential(6)} H`;
+                details = `Calculation: 1/Leq = ${formula.split('=')[1].trim()}`;
             }
             
             resultDiv.innerHTML = `
-                <p><strong>Equivalent Inductance:</strong> ${displayValue.toFixed(4)} ${unit}</p>
-                <p><strong>Calculation:</strong><br>${formula}</p>
+                <div>
+                    <div><strong>Equivalent Inductance:</strong> ${formatInductance(equivalentInductance)}</div>
+                    <div class="result-details">${details}</div>
+                </div>
             `;
-            
-            showToast('Calculation completed successfully!');
+        }
+        
+        // Format inductance value with appropriate unit
+        function formatInductance(value) {
+            if (value >= 1) {
+                return value.toFixed(4) + ' H';
+            } else if (value >= 1e-3) {
+                return (value * 1e3).toFixed(4) + ' mH';
+            } else if (value >= 1e-6) {
+                return (value * 1e6).toFixed(4) + ' μH';
+            } else if (value >= 1e-9) {
+                return (value * 1e9).toFixed(4) + ' nH';
+            } else {
+                return (value * 1e12).toFixed(4) + ' pH';
+            }
         }
 
         // Unit converter function
@@ -1524,7 +2004,7 @@
             
             if (isNaN(value) || value < 0) {
                 resultDiv.innerHTML = '<p style="color: var(--error-color);">Error: Please enter a valid positive number.</p>';
-                showToast('Please enter a valid value!', 'error');
+                showNotification('Please enter a valid value!', 'error');
                 return;
             }
             
@@ -1541,14 +2021,155 @@
             resultDiv.innerHTML = `
                 <p><strong>Conversion Result:</strong></p>
                 <p>${value} ${fromUnitName} = ${convertedValue.toFixed(6)} ${toUnitName}</p>
+                <p><small>In Scientific Notation: ${convertedValue.toExponential(6)} ${toUnitName.split(' ')[0]}</small></p>
             `;
             
-            showToast('Conversion completed successfully!');
+            showNotification('Conversion completed successfully!', 'success');
         }
         
-        // Initialize the color code display
-        updateColorCodeResult();
-        updateColorCodeResult5();
+        // Inductor design calculator
+        function calculateInductorDesign() {
+            const wireDiameter = parseFloat(document.getElementById('wireDiameter').value) / 1000; // Convert to meters
+            const coilDiameter = parseFloat(document.getElementById('coilDiameter').value) / 1000; // Convert to meters
+            const numberTurns = parseInt(document.getElementById('numberTurns').value);
+            const coilLength = parseFloat(document.getElementById('coilLength').value) / 1000; // Convert to meters
+            
+            if (isNaN(wireDiameter) || isNaN(coilDiameter) || isNaN(numberTurns) || isNaN(coilLength) ||
+                wireDiameter <= 0 || coilDiameter <= 0 || numberTurns <= 0 || coilLength <= 0) {
+                showNotification('Please enter valid design parameters!', 'error');
+                return;
+            }
+            
+            // Constants
+            const mu0 = 4 * Math.PI * 1e-7; // Permeability of free space
+            const copperResistivity = 1.68e-8; // Ω·m at 20°C
+            
+            // Calculate inductance using solenoid formula
+            const area = Math.PI * Math.pow(coilDiameter / 2, 2);
+            const inductance = (mu0 * Math.pow(numberTurns, 2) * area) / coilLength;
+            
+            // Calculate wire length
+            const wireLength = numberTurns * Math.PI * coilDiameter;
+            
+            // Calculate DC resistance
+            const wireArea = Math.PI * Math.pow(wireDiameter / 2, 2);
+            const dcResistance = (copperResistivity * wireLength) / wireArea;
+            
+            // Calculate quality factor (estimated at 1 MHz)
+            const frequency = 1e6; // 1 MHz
+            const inductiveReactance = 2 * Math.PI * frequency * inductance;
+            const qualityFactor = inductiveReactance / dcResistance;
+            
+            // Update display
+            document.getElementById('calculatedInductance').textContent = formatInductance(inductance);
+            document.getElementById('wireLength').textContent = wireLength.toFixed(2) + ' m';
+            document.getElementById('dcResistance').textContent = dcResistance.toFixed(2) + ' Ω';
+            document.getElementById('qualityFactor').textContent = qualityFactor.toFixed(1);
+        }
+        
+        // Save calculation to history
+        function saveCalculation(type) {
+            let calculation = {
+                id: Date.now(),
+                type: type,
+                timestamp: new Date().toLocaleString(),
+                details: ''
+            };
+            
+            if (type.includes('color')) {
+                if (type === 'color-4band') {
+                    const inductance = document.getElementById('colorCodeResult').innerText.split('Inductance: ')[1].split(' ')[0];
+                    calculation.details = `4-Band: ${inductance}`;
+                } else if (type === 'color-5band') {
+                    const inductance = document.getElementById('colorCodeResult5').innerText.split('Inductance: ')[1].split(' ')[0];
+                    calculation.details = `5-Band: ${inductance}`;
+                }
+            } else if (type === 'series' || type === 'parallel') {
+                const resultDiv = document.getElementById(`${type}-result`);
+                const resultText = resultDiv.querySelector('div > div').textContent;
+                calculation.details = `${type.charAt(0).toUpperCase() + type.slice(1)}: ${resultText}`;
+            } else if (type === 'converter') {
+                const resultDiv = document.getElementById('converter-result');
+                calculation.details = `Converter: ${resultDiv.querySelector('p:nth-child(2)').textContent}`;
+            } else if (type === 'design') {
+                const inductance = document.getElementById('calculatedInductance').textContent;
+                calculation.details = `Design: ${inductance}`;
+            }
+            
+            calculationHistory.unshift(calculation);
+            
+            // Keep only last 10 calculations
+            if (calculationHistory.length > 10) {
+                calculationHistory = calculationHistory.slice(0, 10);
+            }
+            
+            localStorage.setItem('inductorCalculationHistory', JSON.stringify(calculationHistory));
+            updateHistoryDisplay();
+            showNotification('Calculation saved to history!', 'success');
+        }
+        
+        // Load history from localStorage
+        function loadHistory() {
+            const savedHistory = localStorage.getItem('inductorCalculationHistory');
+            if (savedHistory) {
+                calculationHistory = JSON.parse(savedHistory);
+                updateHistoryDisplay();
+            }
+        }
+        
+        // Update history display
+        function updateHistoryDisplay() {
+            const historyContainer = document.getElementById('history-container');
+            const emptyHistory = document.getElementById('empty-history');
+            
+            if (calculationHistory.length === 0) {
+                if (emptyHistory) emptyHistory.style.display = 'block';
+                return;
+            }
+            
+            if (emptyHistory) emptyHistory.style.display = 'none';
+            
+            historyContainer.innerHTML = '';
+            
+            calculationHistory.forEach(calc => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                
+                const icon = getHistoryIcon(calc.type);
+                const typeName = getTypeName(calc.type);
+                
+                historyItem.innerHTML = `
+                    <div>
+                        <i class="${icon}"></i> ${typeName}
+                        <div class="history-details">${calc.details}</div>
+                    </div>
+                    <div style="font-size: 0.8em; color: var(--text-muted);">
+                        ${calc.timestamp}
+                    </div>
+                `;
+                
+                historyContainer.appendChild(historyItem);
+            });
+        }
+        
+        function getHistoryIcon(type) {
+            if (type.includes('color')) return 'fas fa-palette';
+            if (type === 'series') return 'fas fa-arrow-right';
+            if (type === 'parallel') return 'fas fa-arrows-alt-h';
+            if (type === 'converter') return 'fas fa-exchange-alt';
+            if (type === 'design') return 'fas fa-cogs';
+            return 'fas fa-calculator';
+        }
+        
+        function getTypeName(type) {
+            if (type === 'color-4band') return '4-Band Color Code';
+            if (type === 'color-5band') return '5-Band Color Code';
+            if (type === 'series') return 'Series Calculation';
+            if (type === 'parallel') return 'Parallel Calculation';
+            if (type === 'converter') return 'Unit Converter';
+            if (type === 'design') return 'Inductor Design';
+            return 'Calculation';
+        }
         
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
