@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LCD Custom Character Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Advanced custom character designer for Liquid Crystal Display (LCD) with Arduino code generation">
+  <meta name="keywords" content="lcd, custom character, generator, arduino, i2c, parallel">
+  <meta name="author" content="Mohamed Tarek">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* CSS Variables for Theming */
+    :root {
+      --primary-color: #4e9eff;
+      --primary-dark: #3a6cf4;
+      --primary-light: #6ab1ff;
+      --background-dark: #121212;
+      --background-darker: #0a0a0a;
+      --background-secondary: #1a1a1a;
+      --card-dark: #1e1e1e;
+      --card-light: #252525;
+      --text-light: #ffffff;
+      --text-muted: #aaaaaa;
+      --success-color: #4caf50;
+      --warning-color: #ff9800;
+      --error-color: #f44336;
+      --lcd-green: #4CAF50;
+      --lcd-blue: #2196F3;
+      --lcd-white: #ffffff;
+      --inactive-gray: #444444;
+      --transition-speed: 0.3s;
+      --border-radius: 12px;
+      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    [data-theme="light"] {
+      --background-dark: #f5f7fa;
+      --background-darker: #e8ebf0;
+      --background-secondary: #ffffff;
+      --card-dark: #ffffff;
+      --card-light: #f9f9f9;
+      --text-light: #333333;
+      --text-muted: #666666;
+      --inactive-gray: #cccccc;
+      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+      --lcd-green: #2e7d32;
+      --lcd-blue: #1565c0;
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--background-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      transition: background-color var(--transition-speed) ease;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .content h1 {
+      color: var(--primary-color);
+      font-size: 2.2em;
+      text-align: center;
+      margin-bottom: 10px;
+      padding: 20px;
+      background: var(--card-dark);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .content h1 i {
+      font-size: 1.8rem;
+    }
+
+    .content h2 {
+      color: var(--text-muted);
+      font-size: 1.1em;
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 0 20px 20px;
+    }
+
+    /* Main Container */
+    .main-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 1100px) {
+      .main-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Character Design Area */
+    .design-area {
+      background: var(--card-dark);
+      padding: 25px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .design-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .character-slots {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .char-slot {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--background-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 2px solid transparent;
+    }
+
+    .char-slot:hover {
+      background: var(--primary-light);
+      color: white;
+    }
+
+    .char-slot.active {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-light);
+      box-shadow: 0 0 10px rgba(78, 158, 255, 0.5);
+    }
+
+    .char-name-input {
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: 1px solid var(--background-secondary);
+      background: var(--background-darker);
+      color: var(--text-light);
+      font-size: 1rem;
+      width: 200px;
+    }
+
+    .char-name-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    /* Character Grid */
+    .char-grid-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .char-grid {
+      width: 320px;
+      height: 320px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: 2px;
+      border: 3px solid var(--background-secondary);
+      border-radius: 8px;
+      background: var(--background-darker);
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+
+    .char-grid.green {
+      border-color: var(--lcd-green);
+    }
+
+    .char-grid.blue {
+      border-color: var(--lcd-blue);
+    }
+
+    .char-grid.white {
+      border-color: var(--lcd-white);
+    }
+
+    .pixel {
+      background-color: var(--inactive-gray);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .char-grid.green .pixel.active {
+      background-color: var(--lcd-green);
+      box-shadow: 0 0 8px rgba(76, 175, 80, 0.7);
+    }
+
+    .char-grid.blue .pixel.active {
+      background-color: var(--lcd-blue);
+      box-shadow: 0 0 8px rgba(33, 150, 243, 0.7);
+    }
+
+    .char-grid.white .pixel.active {
+      background-color: var(--lcd-white);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+    }
+
+    .pixel:hover {
+      border-color: var(--primary-color);
+      transform: scale(1.05);
+    }
+
+    .grid-coordinates {
+      display: grid;
+      grid-template-columns: 30px repeat(5, 1fr);
+      grid-template-rows: 30px repeat(8, 1fr);
+      width: 320px;
+      height: 320px;
+      margin-bottom: 15px;
+    }
+
+    .coord-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Button Groups */
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9em;
+      transition: all var(--transition-speed) ease;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(78, 158, 255, 0.6);
+    }
+
+    .btn-secondary {
+      background-color: var(--background-secondary);
+      color: var(--text-light);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--card-light);
+      transform: translateY(-3px);
+    }
+
+    .btn-success {
+      background-color: var(--success-color);
+      color: white;
+      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+    }
+
+    .btn-success:hover {
+      background-color: #388e3c;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
+    }
+
+    .btn-warning {
+      background-color: var(--warning-color);
+      color: white;
+      box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+    }
+
+    .btn-warning:hover {
+      background-color: #f57c00;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(255, 152, 0, 0.6);
+    }
+
+    .btn-danger {
+      background-color: var(--error-color);
+      color: white;
+      box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+    }
+
+    .btn-danger:hover {
+      background-color: #d32f2f;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(244, 67, 54, 0.6);
+    }
+
+    /* Character Preview */
+    .char-preview-container {
+      margin-top: 25px;
+      padding-top: 25px;
+      border-top: 1px solid var(--background-secondary);
+    }
+
+    .char-preview-title {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .char-preview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .preview-char {
+      background: var(--background-darker);
+      border-radius: 8px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .preview-char.active {
+      border-color: var(--primary-color);
+      background: var(--card-light);
+    }
+
+    .preview-char-name {
+      font-weight: bold;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .preview-grid {
+      width: 80px;
+      height: 80px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: 1px;
+    }
+
+    /* Configuration Area */
+    .config-area {
+      background: var(--card-dark);
+      padding: 25px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .config-section {
+      margin-bottom: 10px;
+    }
+
+    .config-title {
+      color: var(--primary-color);
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .config-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .option-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      color: var(--text-light);
+      transition: color var(--transition-speed) ease;
+    }
+
+    .option-label:hover {
+      color: var(--primary-color);
+    }
+
+    .option-label input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    /* Code Box */
+    .code-section {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .code-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .code-box {
+      background: var(--background-darker);
+      padding: 20px;
+      border-radius: var(--border-radius);
+      border: 1px solid var(--background-secondary);
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      overflow-x: auto;
+      white-space: pre;
+      color: var(--text-light);
+      flex-grow: 1;
+      overflow-y: auto;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Code Syntax Highlighting */
+    .token.comment,
+    .token.prolog,
+    .token.doctype,
+    .token.cdata {
+      color: #6a9955;
+    }
+
+    .token.punctuation {
+      color: #d4d4d4;
+    }
+
+    .token.property,
+    .token.tag,
+    .token.constant,
+    .token.symbol,
+    .token.deleted {
+      color: #f44747;
+    }
+
+    .token.boolean,
+    .token.number {
+      color: #b5cea8;
+    }
+
+    .token.selector,
+    .token.attr-name,
+    .token.string,
+    .token.char,
+    .token.builtin,
+    .token.inserted {
+      color: #ce9178;
+    }
+
+    .token.operator,
+    .token.entity,
+    .token.url,
+    .language-css .token.string,
+    .style .token.string {
+      color: #d4d4d4;
+    }
+
+    .token.atrule,
+    .token.attr-value,
+    .token.keyword {
+      color: #569cd6;
+    }
+
+    .token.function,
+    .token.class-name {
+      color: #dcdcaa;
+    }
+
+    .token.regex,
+    .token.important,
+    .token.variable {
+      color: #d16969;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--card-dark);
+      color: var(--text-light);
+      text-align: center;
+      padding: 30px;
+      margin-top: 50px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .social-footer {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+    }
+
+    .social-footer a {
+      color: var(--primary-color);
+      transition: all var(--transition-speed) ease;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--background-secondary);
+    }
+
+    .social-footer a:hover {
+      color: var(--primary-light);
+      background: var(--primary-color);
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--card-dark);
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+      z-index: 999;
+      border: none;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: var(--card-dark);
+      padding: 30px;
+      border-radius: var(--border-radius);
+      width: 90%;
+      max-width: 500px;
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      color: var(--primary-color);
+      font-size: 1.5rem;
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .close-modal:hover {
+      color: var(--error-color);
+    }
+
+    .modal-body {
+      margin-bottom: 20px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .char-grid {
+        width: 250px;
+        height: 250px;
+      }
+      
+      .grid-coordinates {
+        width: 250px;
+        height: 250px;
+      }
+      
+      .button-group {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+      
+      .char-preview {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .theme-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
+        bottom: 20px;
+        left: 20px;
+      }
+      
+      .design-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .char-name-input {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content h1 {
+        font-size: 1.8em;
+      }
+      
+      .char-grid {
+        width: 220px;
+        height: 220px;
+      }
+      
+      .grid-coordinates {
+        width: 220px;
+        height: 220px;
+      }
+      
+      .char-preview {
+        grid-template-columns: 1fr;
+      }
+      
+      .config-options {
+        flex-direction: column;
+      }
+    }
+
+    /* Animation */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .pulse {
+      animation: pulse 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <article class="content">
+    <h1><i class="fas fa-microchip"></i> LCD Custom Character Generator</h1>
+    <h2>Design custom 5x8 characters for LCD displays and generate Arduino code</h2>
+    
+    <div class="main-container">
+      <!-- Design Area -->
+      <div class="design-area">
+        <div class="design-header">
+          <div class="character-slots" id="char-slots">
+            <!-- Character slots will be generated by JavaScript -->
+          </div>
+          <input type="text" class="char-name-input" id="char-name" placeholder="Character name" maxlength="10">
+        </div>
+        
+        <div class="char-grid-container">
+          <div class="grid-coordinates">
+            <!-- Coordinates will be generated by JavaScript -->
+          </div>
+          <div class="char-grid green" id="char-grid">
+            <!-- 8 rows x 5 columns grid (40 pixels) -->
+            <!-- Generated by JavaScript -->
+          </div>
+        </div>
+        
+        <div class="button-group">
+          <button class="btn btn-primary" id="clear-btn">
+            <i class="fas fa-eraser"></i> Clear
+          </button>
+          <button class="btn btn-primary" id="invert-btn">
+            <i class="fas fa-exchange-alt"></i> Invert
+          </button>
+          <button class="btn btn-success" id="save-char-btn">
+            <i class="fas fa-save"></i> Save Character
+          </button>
+          <button class="btn btn-warning" id="load-examples-btn">
+            <i class="fas fa-magic"></i> Load Examples
+          </button>
+        </div>
+        
+        <div class="char-preview-container">
+          <div class="char-preview-title">
+            <i class="fas fa-eye"></i> Character Preview (8 slots)
+          </div>
+          <div class="char-preview" id="char-preview">
+            <!-- Character previews will be generated by JavaScript -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- Configuration Area -->
+      <div class="config-area">
+        <div class="config-section">
+          <div class="config-title">
+            <i class="fas fa-palette"></i> Display Configuration
+          </div>
+          <div class="config-options">
+            <div class="option-group">
+              <strong>LCD Color</strong>
+              <label class="option-label">
+                <input type="radio" name="color" value="green" checked>
+                <span>Green</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="color" value="blue">
+                <span>Blue</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="color" value="white">
+                <span>White</span>
+              </label>
+            </div>
+            
+            <div class="option-group">
+              <strong>Interface</strong>
+              <label class="option-label">
+                <input type="radio" name="interface" value="parallel" checked>
+                <span>Parallel</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="interface" value="i2c">
+                <span>I2C</span>
+              </label>
+            </div>
+            
+            <div class="option-group">
+              <strong>Data Format</strong>
+              <label class="option-label">
+                <input type="radio" name="format" value="binary" checked>
+                <span>Binary</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="format" value="hex">
+                <span>Hexadecimal</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="format" value="decimal">
+                <span>Decimal</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="config-section">
+          <div class="config-title">
+            <i class="fas fa-file-export"></i> Import / Export
+          </div>
+          <div class="button-group">
+            <button class="btn btn-secondary" id="export-json-btn">
+              <i class="fas fa-download"></i> Export as JSON
+            </button>
+            <button class="btn btn-secondary" id="import-json-btn">
+              <i class="fas fa-upload"></i> Import JSON
+            </button>
+            <button class="btn btn-danger" id="reset-all-btn">
+              <i class="fas fa-trash-alt"></i> Reset All
+            </button>
+          </div>
+        </div>
+        
+        <div class="code-section">
+          <div class="code-header">
+            <div class="config-title">
+              <i class="fas fa-code"></i> Arduino Code
+            </div>
+            <div class="code-actions">
+              <button class="btn btn-primary" id="copy-code-btn">
+                <i class="fas fa-copy"></i> Copy
+              </button>
+            </div>
+          </div>
+          <pre class="code-box" id="code-box"></pre>
+        </div>
+      </div>
+    </div>
+  </article>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="social-footer">
+      <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+    <div class="footer-bottom">
+      &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+      <br>&copy; M.T.A.
+    </div>
+  </footer>
+  
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="theme-toggle">
+    <span>🌙</span>
+  </button>
+
+  <!-- Import JSON Modal -->
+  <div class="modal" id="import-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fas fa-upload"></i> Import Characters
+        </div>
+        <button class="close-modal" id="close-import-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Paste your JSON data below to import characters:</p>
+        <textarea id="import-json-text" rows="10" style="width:100%; background:var(--background-darker); color:var(--text-light); border:1px solid var(--background-secondary); border-radius:8px; padding:10px; font-family:monospace;"></textarea>
+        <p style="margin-top:10px; font-size:0.9rem; color:var(--text-muted);">
+          Note: Importing will overwrite your current characters.
+        </p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="cancel-import-btn">Cancel</button>
+        <button class="btn btn-primary" id="confirm-import-btn">Import</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // LCD Custom Character Generator - Enhanced Version
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get current year for footer
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+      
+      // Application State
+      const appState = {
+        currentCharIndex: 0,
+        characters: Array(8).fill().map((_, i) => ({
+          id: i,
+          name: `Char ${i}`,
+          pixels: Array(8).fill().map(() => Array(5).fill(false))
+        })),
+        color: 'green',
+        interface: 'parallel',
+        format: 'binary',
+        exampleSet: 0  // Track which example set is currently loaded
+      };
+      
+      // DOM Elements
+      const charGrid = document.getElementById('char-grid');
+      const charSlotsContainer = document.getElementById('char-slots');
+      const charPreviewContainer = document.getElementById('char-preview');
+      const charNameInput = document.getElementById('char-name');
+      const gridCoordinates = document.querySelector('.grid-coordinates');
+      const codeBox = document.getElementById('code-box');
+      
+      // Initialize the application
+      function initApp() {
+        createCharacterSlots();
+        createGridCoordinates();
+        createCharacterGrid();
+        createCharacterPreviews();
+        updateCharacterDisplay();
+        updateCode();
+        setupEventListeners();
+        
+        // Load saved data from localStorage
+        loadFromLocalStorage();
+        
+        console.log('LCD Custom Character Generator initialized');
+      }
+      
+      // Create character slot buttons
+      function createCharacterSlots() {
+        charSlotsContainer.innerHTML = '';
+        
+        appState.characters.forEach((char, index) => {
+          const slot = document.createElement('div');
+          slot.className = `char-slot ${index === appState.currentCharIndex ? 'active' : ''}`;
+          slot.textContent = index;
+          slot.title = char.name;
+          slot.dataset.index = index;
+          
+          slot.addEventListener('click', () => {
+            switchCharacter(index);
+          });
+          
+          charSlotsContainer.appendChild(slot);
+        });
+      }
+      
+      // Create grid coordinate labels
+      function createGridCoordinates() {
+        gridCoordinates.innerHTML = '';
+        
+        // Empty top-left cell
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'coord-cell';
+        gridCoordinates.appendChild(emptyCell);
+        
+        // Column headers (0-4)
+        for (let x = 0; x < 5; x++) {
+          const colHeader = document.createElement('div');
+          colHeader.className = 'coord-cell';
+          colHeader.textContent = x;
+          gridCoordinates.appendChild(colHeader);
+        }
+        
+        // Row labels (0-7) and empty cells
+        for (let y = 0; y < 8; y++) {
+          // Row label
+          const rowLabel = document.createElement('div');
+          rowLabel.className = 'coord-cell';
+          rowLabel.textContent = y;
+          gridCoordinates.appendChild(rowLabel);
+          
+          // Empty cells for this row
+          for (let x = 0; x < 5; x++) {
+            const emptyCell = document.createElement('div');
+            emptyCell.className = 'coord-cell';
+            emptyCell.textContent = `${x},${y}`;
+            gridCoordinates.appendChild(emptyCell);
+          }
+        }
+      }
+      
+      // Create the 5x8 character grid
+      function createCharacterGrid() {
+        charGrid.innerHTML = '';
+        
+        for (let y = 0; y < 8; y++) {
+          for (let x = 0; x < 5; x++) {
+            const pixel = document.createElement('div');
+            pixel.className = 'pixel';
+            pixel.dataset.x = x;
+            pixel.dataset.y = y;
+            pixel.title = `Pixel (${x}, ${y})`;
+            
+            pixel.addEventListener('click', () => {
+              togglePixel(x, y);
+            });
+            
+            charGrid.appendChild(pixel);
+          }
+        }
+      }
+      
+      // Create character previews
+      function createCharacterPreviews() {
+        charPreviewContainer.innerHTML = '';
+        
+        appState.characters.forEach((char, index) => {
+          const preview = document.createElement('div');
+          preview.className = `preview-char ${index === appState.currentCharIndex ? 'active' : ''}`;
+          preview.dataset.index = index;
+          
+          const name = document.createElement('div');
+          name.className = 'preview-char-name';
+          name.textContent = char.name;
+          
+          const grid = document.createElement('div');
+          grid.className = 'preview-grid';
+          
+          // Create 5x8 grid for preview
+          for (let y = 0; y < 8; y++) {
+            for (let x = 0; x < 5; x++) {
+              const pixel = document.createElement('div');
+              pixel.className = 'pixel';
+              pixel.style.backgroundColor = char.pixels[y][x] ? 
+                (appState.color === 'green' ? 'var(--lcd-green)' : 
+                 appState.color === 'blue' ? 'var(--lcd-blue)' : 'var(--lcd-white)') : 
+                'var(--inactive-gray)';
+              grid.appendChild(pixel);
+            }
+          }
+          
+          preview.appendChild(name);
+          preview.appendChild(grid);
+          
+          preview.addEventListener('click', () => {
+            switchCharacter(index);
+          });
+          
+          charPreviewContainer.appendChild(preview);
+        });
+      }
+      
+      // Switch to a different character
+      function switchCharacter(index) {
+        appState.currentCharIndex = index;
+        
+        // Update active class on slots
+        document.querySelectorAll('.char-slot').forEach((slot, i) => {
+          slot.classList.toggle('active', i === index);
+        });
+        
+        // Update active class on previews
+        document.querySelectorAll('.preview-char').forEach((preview, i) => {
+          preview.classList.toggle('active', i === index);
+        });
+        
+        // Update character name input
+        charNameInput.value = appState.characters[index].name;
+        
+        // Update grid display
+        updateCharacterDisplay();
+        
+        // Save to localStorage
+        saveToLocalStorage();
+      }
+      
+      // Update character grid display
+      function updateCharacterDisplay() {
+        const currentChar = appState.characters[appState.currentCharIndex];
+        const pixels = document.querySelectorAll('#char-grid .pixel');
+        
+        pixels.forEach(pixel => {
+          const x = parseInt(pixel.dataset.x);
+          const y = parseInt(pixel.dataset.y);
+          
+          if (currentChar.pixels[y][x]) {
+            pixel.classList.add('active');
+          } else {
+            pixel.classList.remove('active');
+          }
+        });
+        
+        // Update previews
+        updateCharacterPreviews();
+      }
+      
+      // Update character previews
+      function updateCharacterPreviews() {
+        const previews = document.querySelectorAll('.preview-char');
+        
+        previews.forEach((preview, index) => {
+          const char = appState.characters[index];
+          const grid = preview.querySelector('.preview-grid');
+          const name = preview.querySelector('.preview-char-name');
+          
+          // Update name
+          name.textContent = char.name;
+          
+          // Update pixels
+          const pixels = grid.querySelectorAll('.pixel');
+          pixels.forEach((pixel, i) => {
+            const y = Math.floor(i / 5);
+            const x = i % 5;
+            
+            pixel.style.backgroundColor = char.pixels[y][x] ? 
+              (appState.color === 'green' ? 'var(--lcd-green)' : 
+               appState.color === 'blue' ? 'var(--lcd-blue)' : 'var(--lcd-white)') : 
+              'var(--inactive-gray)';
+          });
+        });
+      }
+      
+      // Toggle a pixel on/off
+      function togglePixel(x, y) {
+        const currentChar = appState.characters[appState.currentCharIndex];
+        currentChar.pixels[y][x] = !currentChar.pixels[y][x];
+        
+        // Update display
+        updateCharacterDisplay();
+        
+        // Update code
+        updateCode();
+        
+        // Save to localStorage
+        saveToLocalStorage();
+      }
+      
+      // Clear current character
+      function clearCharacter() {
+        const currentChar = appState.characters[appState.currentCharIndex];
+        currentChar.pixels = Array(8).fill().map(() => Array(5).fill(false));
+        
+        updateCharacterDisplay();
+        updateCode();
+        saveToLocalStorage();
+      }
+      
+      // Invert current character
+      function invertCharacter() {
+        const currentChar = appState.characters[appState.currentCharIndex];
+        
+        for (let y = 0; y < 8; y++) {
+          for (let x = 0; x < 5; x++) {
+            currentChar.pixels[y][x] = !currentChar.pixels[y][x];
+          }
+        }
+        
+        updateCharacterDisplay();
+        updateCode();
+        saveToLocalStorage();
+      }
+      
+      // Save current character name
+      function saveCharacterName() {
+        const currentChar = appState.characters[appState.currentCharIndex];
+        currentChar.name = charNameInput.value.trim() || `Char ${appState.currentCharIndex}`;
+        
+        updateCharacterPreviews();
+        updateCode();
+        saveToLocalStorage();
+      }
+      
+      // Define 7 different example sets
+      const exampleSets = [
+        // Set 0: Common Symbols
+        [
+          { name: "Heart", 
+            pixels: [[0,1,0,1,0],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Smiley", 
+            pixels: [[0,1,0,1,0],[0,1,0,1,0],[0,0,0,0,0],[1,0,0,0,1],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Arrow Right", 
+            pixels: [[0,0,1,0,0],[0,0,0,1,0],[1,1,1,1,1],[0,0,0,1,0],[0,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Bell", 
+            pixels: [[0,0,1,0,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[1,1,1,1,1],[0,0,1,0,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Check Mark", 
+            pixels: [[0,0,0,0,0],[0,0,0,0,1],[0,0,0,1,0],[0,0,1,0,0],[1,0,1,0,0],[0,1,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Note", 
+            pixels: [[0,1,1,0,0],[0,1,1,1,0],[0,1,1,0,0],[0,1,1,0,0],[1,1,1,1,0],[1,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Lock", 
+            pixels: [[0,1,1,0,0],[1,0,0,1,0],[1,0,0,1,0],[1,1,1,1,0],[1,1,1,1,0],[1,1,1,1,0],[0,1,1,0,0],[0,0,0,0,0]] },
+          { name: "Battery", 
+            pixels: [[1,1,1,1,1],[1,0,0,0,1],[1,0,0,0,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,0,0,0,0]] }
+        ],
+        
+        // Set 1: Arrows
+        [
+          { name: "Arrow Up", 
+            pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,0,1,0,1],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Arrow Down", 
+            pixels: [[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[1,0,1,0,1],[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Arrow Left", 
+            pixels: [[0,0,1,0,0],[0,1,0,0,0],[1,1,1,1,1],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Arrow Right", 
+            pixels: [[0,0,1,0,0],[0,0,0,1,0],[1,1,1,1,1],[0,0,0,1,0],[0,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Double Arrow", 
+            pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,0,1,0,1],[0,0,1,0,0],[1,0,1,0,1],[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Play", 
+            pixels: [[0,0,0,0,0],[0,0,0,1,0],[0,0,1,1,0],[0,1,1,1,0],[0,0,1,1,0],[0,0,0,1,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Stop", 
+            pixels: [[0,0,0,0,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Pause", 
+            pixels: [[0,0,0,0,0],[0,1,1,0,0],[0,1,1,0,0],[0,1,1,0,0],[0,1,1,0,0],[0,1,1,0,0],[0,0,0,0,0],[0,0,0,0,0]] }
+        ],
+        
+        // Set 2: Numbers (0-7)
+        [
+          { name: "Zero", 
+            pixels: [[0,1,1,0,0],[1,0,0,1,0],[1,0,0,1,0],[1,0,0,1,0],[1,0,0,1,0],[1,0,0,1,0],[0,1,1,0,0],[0,0,0,0,0]] },
+          { name: "One", 
+            pixels: [[0,0,1,0,0],[0,1,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,1,1,1,0],[0,0,0,0,0]] },
+          { name: "Two", 
+            pixels: [[0,1,1,0,0],[1,0,0,1,0],[0,0,0,1,0],[0,0,1,0,0],[0,1,0,0,0],[1,0,0,0,0],[1,1,1,1,0],[0,0,0,0,0]] },
+          { name: "Three", 
+            pixels: [[0,1,1,0,0],[1,0,0,1,0],[0,0,0,1,0],[0,0,1,0,0],[0,0,0,1,0],[1,0,0,1,0],[0,1,1,0,0],[0,0,0,0,0]] },
+          { name: "Four", 
+            pixels: [[0,0,0,1,0],[0,0,1,1,0],[0,1,0,1,0],[1,0,0,1,0],[1,1,1,1,0],[0,0,0,1,0],[0,0,0,1,0],[0,0,0,0,0]] },
+          { name: "Five", 
+            pixels: [[1,1,1,1,0],[1,0,0,0,0],[1,1,1,0,0],[0,0,0,1,0],[0,0,0,1,0],[1,0,0,1,0],[0,1,1,0,0],[0,0,0,0,0]] },
+          { name: "Six", 
+            pixels: [[0,1,1,0,0],[1,0,0,1,0],[1,0,0,0,0],[1,1,1,0,0],[1,0,0,1,0],[1,0,0,1,0],[0,1,1,0,0],[0,0,0,0,0]] },
+          { name: "Seven", 
+            pixels: [[1,1,1,1,0],[0,0,0,1,0],[0,0,1,0,0],[0,0,1,0,0],[0,1,0,0,0],[0,1,0,0,0],[0,1,0,0,0],[0,0,0,0,0]] }
+        ],
+        
+        // Set 3: Weather Symbols
+        [
+          { name: "Sun", 
+            pixels: [[1,0,1,0,1],[0,1,1,1,0],[1,1,1,1,1],[0,1,1,1,0],[1,1,1,1,1],[0,1,1,1,0],[1,0,1,0,1],[0,0,0,0,0]] },
+          { name: "Cloud", 
+            pixels: [[0,0,0,0,0],[0,1,1,0,0],[1,1,1,1,0],[1,1,1,1,1],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Rain", 
+            pixels: [[0,1,0,1,0],[1,0,1,0,1],[0,1,0,1,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Snow", 
+            pixels: [[1,0,1,0,1],[0,1,0,1,0],[1,0,1,0,1],[0,1,0,1,0],[1,0,1,0,1],[0,1,0,1,0],[1,0,1,0,1],[0,0,0,0,0]] },
+          { name: "Thermometer", 
+            pixels: [[0,1,0,0,0],[0,1,0,0,0],[0,1,1,0,0],[0,1,0,1,0],[0,1,1,0,0],[0,1,0,0,0],[0,1,0,0,0],[0,0,0,0,0]] },
+          { name: "Umbrella", 
+            pixels: [[0,1,1,1,0],[1,1,1,1,1],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,1,0,1,0],[0,1,0,1,0],[0,0,0,0,0]] },
+          { name: "Wind", 
+            pixels: [[0,0,0,0,0],[0,0,0,0,0],[0,1,1,1,1],[0,0,0,0,0],[1,1,1,1,0],[0,0,0,0,0],[0,1,1,1,1],[0,0,0,0,0]] },
+          { name: "Lightning", 
+            pixels: [[0,0,1,0,0],[0,0,1,1,0],[0,0,1,0,1],[0,1,1,0,0],[1,0,1,0,0],[0,0,1,1,0],[0,0,0,1,0],[0,0,0,0,0]] }
+        ],
+        
+        // Set 4: Music Symbols
+        [
+          { name: "Note 1", 
+            pixels: [[0,0,1,0,0],[0,0,1,1,0],[0,0,1,0,1],[0,1,1,0,0],[1,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Note 2", 
+            pixels: [[0,0,1,0,0],[0,0,1,1,0],[0,0,1,0,1],[0,1,1,0,0],[1,0,1,0,0],[0,0,0,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Clef", 
+            pixels: [[0,0,1,1,0],[0,1,0,0,1],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,1,0],[0,1,0,0,1],[0,0,1,1,0],[0,0,0,0,0]] },
+          { name: "Speaker", 
+            pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Volume Up", 
+            pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,1,1,1,1],[0,0,0,0,0],[0,0,0,0,0],[0,1,0,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Volume Down", 
+            pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,1,1,1,1],[0,0,0,0,0],[0,0,0,0,0],[0,0,1,0,0],[0,1,0,1,0],[0,0,0,0,0]] },
+          { name: "Play Button", 
+            pixels: [[0,0,0,0,0],[0,0,1,0,0],[0,0,1,1,0],[0,0,1,1,1],[0,0,1,1,0],[0,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Stop Button", 
+            pixels: [[0,0,0,0,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0]] }
+        ],
+        
+        // Set 5: Special Symbols
+        [
+          { name: "Peace", 
+            pixels: [[0,0,1,0,0],[0,1,0,1,0],[0,0,1,0,0],[1,1,1,1,1],[0,0,1,0,0],[0,1,0,1,0],[1,0,0,0,1],[0,0,0,0,0]] },
+          { name: "Yin Yang", 
+            pixels: [[0,1,1,0,0],[1,0,0,1,0],[1,0,0,1,0],[0,1,1,0,1],[1,0,0,1,1],[1,0,0,1,0],[0,1,1,0,0],[0,0,0,0,0]] },
+          { name: "Infinity", 
+            pixels: [[0,0,0,0,0],[0,1,0,1,0],[1,0,1,0,1],[1,0,1,0,1],[1,0,1,0,1],[0,1,0,1,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Diamond", 
+            pixels: [[0,0,1,0,0],[0,1,0,1,0],[1,0,0,0,1],[0,1,0,1,0],[1,0,0,0,1],[0,1,0,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Spade", 
+            pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,1,1,1,1],[1,1,1,1,1],[0,1,1,1,0],[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Club", 
+            pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,1,1,1,1],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Star", 
+            pixels: [[0,0,1,0,0],[0,0,1,0,0],[1,1,1,1,1],[0,1,1,1,0],[1,1,1,1,1],[0,0,1,0,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Target", 
+            pixels: [[0,0,1,0,0],[0,1,0,1,0],[1,0,1,0,1],[0,1,0,1,0],[1,0,1,0,1],[0,1,0,1,0],[0,0,1,0,0],[0,0,0,0,0]] }
+        ],
+        
+        // Set 6: Faces & Emojis
+        [
+          { name: "Happy", 
+            pixels: [[0,1,0,1,0],[0,0,0,0,0],[1,0,0,0,1],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Sad", 
+            pixels: [[0,1,0,1,0],[0,0,0,0,0],[0,1,1,1,0],[1,0,0,0,1],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Angry", 
+            pixels: [[1,0,0,0,1],[0,1,0,1,0],[0,0,0,0,0],[1,1,1,1,1],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Surprised", 
+            pixels: [[0,1,0,1,0],[0,0,0,0,0],[0,1,1,1,0],[0,1,0,1,0],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Wink", 
+            pixels: [[0,1,0,0,0],[0,0,0,0,0],[1,0,0,0,1],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Cool", 
+            pixels: [[1,0,0,0,1],[0,0,0,0,0],[0,1,0,1,0],[0,0,1,0,0],[1,0,0,0,1],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Sleepy", 
+            pixels: [[0,0,0,0,0],[0,1,0,1,0],[0,0,0,0,0],[1,1,1,1,1],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Laughing", 
+            pixels: [[0,1,0,1,0],[0,0,0,0,0],[1,0,0,0,1],[0,1,1,1,0],[1,0,0,0,1],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0]] }
+        ]
+      ];
+      
+      // Load example characters - cycles through 7 different sets
+      function loadExamples() {
+        // Increment example set (0-6, then back to 0)
+        appState.exampleSet = (appState.exampleSet + 1) % 7;
+        const currentSet = exampleSets[appState.exampleSet];
+        
+        // Load all 8 characters from the current set
+        currentSet.forEach((charData, index) => {
+          if (index < 8) {
+            appState.characters[index].name = charData.name;
+            appState.characters[index].pixels = charData.pixels.map(row => [...row]);
+          }
+        });
+        
+        // Update display and code
+        switchCharacter(0);
+        updateCharacterDisplay();
+        updateCode();
+        saveToLocalStorage();
+        
+        // Update button text to show current set
+        const exampleBtn = document.getElementById('load-examples-btn');
+        exampleBtn.innerHTML = `<i class="fas fa-magic"></i> Examples Set ${appState.exampleSet + 1}/7`;
+        
+        // Show notification
+        showNotification(`Loaded Example Set ${appState.exampleSet + 1}/7`);
+      }
+      
+      // Reset all characters
+      function resetAllCharacters() {
+        if (confirm('Are you sure you want to reset all characters? This cannot be undone.')) {
+          appState.characters = Array(8).fill().map((_, i) => ({
+            id: i,
+            name: `Char ${i}`,
+            pixels: Array(8).fill().map(() => Array(5).fill(false))
+          }));
+          
+          // Reset example set
+          appState.exampleSet = 0;
+          
+          // Reset button text
+          const exampleBtn = document.getElementById('load-examples-btn');
+          exampleBtn.innerHTML = `<i class="fas fa-magic"></i> Load Examples`;
+          
+          charNameInput.value = 'Char 0';
+          switchCharacter(0);
+          updateCharacterDisplay();
+          updateCode();
+          saveToLocalStorage();
+          
+          showNotification('All characters have been reset.');
+        }
+      }
+      
+      // Export characters as JSON
+      function exportAsJSON() {
+        const exportData = {
+          version: '1.0',
+          generated: new Date().toISOString(),
+          characters: appState.characters
+        };
+        
+        const dataStr = JSON.stringify(exportData, null, 2);
+        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+        
+        const exportFileDefaultName = `lcd_characters_${new Date().toISOString().slice(0,10)}.json`;
+        
+        const linkElement = document.createElement('a');
+        linkElement.setAttribute('href', dataUri);
+        linkElement.setAttribute('download', exportFileDefaultName);
+        linkElement.click();
+        
+        showNotification('Characters exported successfully!');
+      }
+      
+      // Import characters from JSON
+      function importFromJSON() {
+        document.getElementById('import-modal').style.display = 'flex';
+      }
+      
+      // Process JSON import
+      function processImport() {
+        const jsonText = document.getElementById('import-json-text').value.trim();
+        
+        if (!jsonText) {
+          alert('Please enter JSON data to import.');
+          return;
+        }
+        
+        try {
+          const importData = JSON.parse(jsonText);
+          
+          if (!importData.characters || !Array.isArray(importData.characters)) {
+            throw new Error('Invalid format: Missing characters array');
+          }
+          
+          // Validate each character
+          for (let i = 0; i < Math.min(importData.characters.length, 8); i++) {
+            const char = importData.characters[i];
+            
+            if (char.name) {
+              appState.characters[i].name = char.name;
+            }
+            
+            if (char.pixels && Array.isArray(char.pixels)) {
+              // Validate pixels array
+              for (let y = 0; y < Math.min(char.pixels.length, 8); y++) {
+                if (Array.isArray(char.pixels[y])) {
+                  for (let x = 0; x < Math.min(char.pixels[y].length, 5); x++) {
+                    appState.characters[i].pixels[y][x] = !!char.pixels[y][x];
+                  }
+                }
+              }
+            }
+          }
+          
+          // Update display
+          switchCharacter(0);
+          updateCharacterDisplay();
+          updateCode();
+          saveToLocalStorage();
+          
+          // Close modal
+          document.getElementById('import-modal').style.display = 'none';
+          document.getElementById('import-json-text').value = '';
+          
+          showNotification('Characters imported successfully!');
+        } catch (error) {
+          alert(`Error parsing JSON: ${error.message}`);
+        }
+      }
+      
+      // Update Arduino code
+      function updateCode() {
+        const color = document.querySelector('input[name="color"]:checked').value;
+        const interface = document.querySelector('input[name="interface"]:checked').value;
+        const format = document.querySelector('input[name="format"]:checked').value;
+        
+        // Update app state
+        appState.color = color;
+        appState.interface = interface;
+        appState.format = format;
+        
+        // Update grid color
+        charGrid.className = `char-grid ${color}`;
+        
+        // Generate character data
+        const charData = [];
+        
+        appState.characters.forEach((char, charIndex) => {
+          const rows = [];
+          
+          for (let y = 0; y < 8; y++) {
+            let binaryStr = '';
+            for (let x = 0; x < 5; x++) {
+              binaryStr += char.pixels[y][x] ? '1' : '0';
+            }
+            
+            // Pad to 8 bits (LCD expects 8-bit values)
+            const paddedBinary = binaryStr + '000';
+            
+            let value;
+            if (format === 'binary') {
+              value = 'B' + paddedBinary;
+            } else if (format === 'hex') {
+              const decimal = parseInt(paddedBinary, 2);
+              value = '0x' + decimal.toString(16).toUpperCase().padStart(2, '0');
+            } else {
+              // decimal
+              const decimal = parseInt(paddedBinary, 2);
+              value = decimal.toString();
+            }
+            
+            rows.push(value);
+          }
+          
+          charData.push({
+            name: char.name,
+            rows: rows
+          });
+        });
+        
+        // Generate code based on interface
+        let code;
+        
+        if (interface === 'parallel') {
+          code = `// LCD Custom Character Generator
+// Generated: ${new Date().toLocaleString()}
+// Characters: ${appState.characters.filter(c => c.pixels.some(row => row.includes(true))).length}/8 used
+
+#include <LiquidCrystal.h>
+
+// Initialize LCD (RS, E, D4, D5, D6, D7)
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+// Custom character definitions
+${charData.map((char, index) => `// ${char.name} (Slot ${index})
+byte char${index}[] = {
+  ${char.rows.join(',\n  ')}
+};`).join('\n\n')}
+
+void setup() {
+  // Initialize LCD
+  lcd.begin(16, 2);
+  
+  // Create custom characters
+${charData.map((char, index) => `  lcd.createChar(${index}, char${index});`).join('\n')}
+  
+  // Display characters
+  lcd.home();
+${charData.filter((char, index) => char.rows.some(row => !row.includes('B00000000') && !row.includes('0x00') && row !== '0')).map((char, index) => `  lcd.write(${index}); // ${char.name}`).join('\n')}
+}
+
+void loop() {
+  // Your code here
+}`;
+        } else {
+          // I2C interface
+          code = `// LCD Custom Character Generator
+// Generated: ${new Date().toLocaleString()}
+// Characters: ${appState.characters.filter(c => c.pixels.some(row => row.includes(true))).length}/8 used
+// Interface: I2C (Default address: 0x27)
+
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+// Initialize LCD (address, columns, rows)
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+// Custom character definitions
+${charData.map((char, index) => `// ${char.name} (Slot ${index})
+byte char${index}[] = {
+  ${char.rows.join(',\n  ')}
+};`).join('\n\n')}
+
+void setup() {
+  // Initialize LCD
+  lcd.init();
+  lcd.backlight();
+  
+  // Create custom characters
+${charData.map((char, index) => `  lcd.createChar(${index}, char${index});`).join('\n')}
+  
+  // Display characters
+  lcd.home();
+${charData.filter((char, index) => char.rows.some(row => !row.includes('B00000000') && !row.includes('0x00') && row !== '0')).map((char, index) => `  lcd.write(${index}); // ${char.name}`).join('\n')}
+}
+
+void loop() {
+  // Your code here
+}`;
+        }
+        
+        codeBox.textContent = code;
+        
+        // Update preview colors
+        updateCharacterPreviews();
+      }
+      
+      // Copy code to clipboard
+      function copyCodeToClipboard() {
+        const code = codeBox.textContent;
+        
+        navigator.clipboard.writeText(code).then(() => {
+          showNotification('Code copied to clipboard!');
+        }).catch(err => {
+          console.error('Failed to copy: ', err);
+          alert('Failed to copy code to clipboard. Please select and copy manually.');
+        });
+      }
+      
+      // Show notification
+      function showNotification(message) {
+        // Remove existing notification
+        const existingNotification = document.querySelector('.notification');
+        if (existingNotification) {
+          existingNotification.remove();
+        }
+        
+        // Create notification
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: var(--success-color);
+          color: white;
+          padding: 15px 25px;
+          border-radius: 8px;
+          box-shadow: var(--box-shadow);
+          z-index: 1001;
+          animation: fadeIn 0.3s ease;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+          notification.style.opacity = '0';
+          notification.style.transition = 'opacity 0.5s ease';
+          setTimeout(() => {
+            if (notification.parentNode) {
+              notification.parentNode.removeChild(notification);
+            }
+          }, 500);
+        }, 3000);
+      }
+      
+      // Save to localStorage
+      function saveToLocalStorage() {
+        const saveData = {
+          version: '1.0',
+          characters: appState.characters,
+          currentCharIndex: appState.currentCharIndex,
+          color: appState.color,
+          interface: appState.interface,
+          format: appState.format,
+          exampleSet: appState.exampleSet
+        };
+        
+        localStorage.setItem('lcdCharGen', JSON.stringify(saveData));
+      }
+      
+      // Load from localStorage
+      function loadFromLocalStorage() {
+        const savedData = localStorage.getItem('lcdCharGen');
+        
+        if (savedData) {
+          try {
+            const data = JSON.parse(savedData);
+            
+            if (data.characters && Array.isArray(data.characters)) {
+              // Load characters
+              for (let i = 0; i < Math.min(data.characters.length, 8); i++) {
+                const savedChar = data.characters[i];
+                
+                if (savedChar.name) {
+                  appState.characters[i].name = savedChar.name;
+                }
+                
+                if (savedChar.pixels && Array.isArray(savedChar.pixels)) {
+                  for (let y = 0; y < Math.min(savedChar.pixels.length, 8); y++) {
+                    if (Array.isArray(savedChar.pixels[y])) {
+                      for (let x = 0; x < Math.min(savedChar.pixels[y].length, 5); x++) {
+                        appState.characters[i].pixels[y][x] = !!savedChar.pixels[y][x];
+                      }
+                    }
+                  }
+                }
+              }
+              
+              // Load other settings
+              if (data.currentCharIndex !== undefined) {
+                appState.currentCharIndex = data.currentCharIndex;
+              }
+              
+              if (data.color) {
+                appState.color = data.color;
+                document.querySelector(`input[name="color"][value="${data.color}"]`).checked = true;
+              }
+              
+              if (data.interface) {
+                appState.interface = data.interface;
+                document.querySelector(`input[name="interface"][value="${data.interface}"]`).checked = true;
+              }
+              
+              if (data.format) {
+                appState.format = data.format;
+                document.querySelector(`input[name="format"][value="${data.format}"]`).checked = true;
+              }
+              
+              if (data.exampleSet !== undefined) {
+                appState.exampleSet = data.exampleSet;
+                
+                // Update button text if we have an example set loaded
+                if (appState.exampleSet > 0) {
+                  const exampleBtn = document.getElementById('load-examples-btn');
+                  exampleBtn.innerHTML = `<i class="fas fa-magic"></i> Examples Set ${appState.exampleSet + 1}/7`;
+                }
+              }
+              
+              // Update UI
+              switchCharacter(appState.currentCharIndex);
+              updateCharacterDisplay();
+              updateCode();
+              
+              console.log('Loaded saved data from localStorage');
+            }
+          } catch (error) {
+            console.error('Error loading saved data:', error);
+          }
+        }
+      }
+      
+      // Setup event listeners
+      function setupEventListeners() {
+        // Clear button
+        document.getElementById('clear-btn').addEventListener('click', clearCharacter);
+        
+        // Invert button
+        document.getElementById('invert-btn').addEventListener('click', invertCharacter);
+        
+        // Save character name
+        charNameInput.addEventListener('change', saveCharacterName);
+        charNameInput.addEventListener('blur', saveCharacterName);
+        
+        // Save character button
+        document.getElementById('save-char-btn').addEventListener('click', saveCharacterName);
+        
+        // Load examples button
+        document.getElementById('load-examples-btn').addEventListener('click', loadExamples);
+        
+        // Reset all button
+        document.getElementById('reset-all-btn').addEventListener('click', resetAllCharacters);
+        
+        // Export JSON button
+        document.getElementById('export-json-btn').addEventListener('click', exportAsJSON);
+        
+        // Import JSON button
+        document.getElementById('import-json-btn').addEventListener('click', importFromJSON);
+        
+        // Copy code button
+        document.getElementById('copy-code-btn').addEventListener('click', copyCodeToClipboard);
+        
+        // Configuration radios
+        document.querySelectorAll('input[name="color"]').forEach(radio => {
+          radio.addEventListener('change', updateCode);
+        });
+        
+        document.querySelectorAll('input[name="interface"]').forEach(radio => {
+          radio.addEventListener('change', updateCode);
+        });
+        
+        document.querySelectorAll('input[name="format"]').forEach(radio => {
+          radio.addEventListener('change', updateCode);
+        });
+        
+        // Import modal
+        document.getElementById('close-import-modal').addEventListener('click', () => {
+          document.getElementById('import-modal').style.display = 'none';
+        });
+        
+        document.getElementById('cancel-import-btn').addEventListener('click', () => {
+          document.getElementById('import-modal').style.display = 'none';
+          document.getElementById('import-json-text').value = '';
+        });
+        
+        document.getElementById('confirm-import-btn').addEventListener('click', processImport);
+        
+        // Close modal when clicking outside
+        document.getElementById('import-modal').addEventListener('click', (e) => {
+          if (e.target.id === 'import-modal') {
+            document.getElementById('import-modal').style.display = 'none';
+            document.getElementById('import-json-text').value = '';
+          }
+        });
+        
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('span');
+        
+        // Check for saved theme
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.body.setAttribute('data-theme', currentTheme);
+        themeIcon.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+        
+        themeToggle.addEventListener('click', () => {
+          const current = document.body.getAttribute('data-theme');
+          const newTheme = current === 'dark' ? 'light' : 'dark';
+          
+          document.body.setAttribute('data-theme', newTheme);
+          themeIcon.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+          localStorage.setItem('theme', newTheme);
+        });
+      }
+      
+      // Initialize the application
+      initApp();
+    });
+  </script>
+</body>
+</html>
