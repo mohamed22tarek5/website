@@ -18,7 +18,7 @@ const STATIC_ASSETS = [
   './index.html',
   './offline.html',
   
-  // Portfolio Pages
+  // Portfolio Pages (commented out)
   // './Mohamed - CV.html',
   // './Mohamed - Certificates.html',
   // './Mohamed - Project.html',
@@ -27,7 +27,7 @@ const STATIC_ASSETS = [
   // './Mohamed - my-sites.html',
   // './Mohamed - Personal Information.html',
   
-  // Utility Sites
+  // Utility Sites (commented out)
   // './3d-car-game.html',
   // './ai-sites-list.html',
   // './capacitor-calculator.html',
@@ -144,7 +144,92 @@ async function networkFirst(req) {
     }
     
     // Fallback to offline page
-    return caches.match(OFFLINE_URL);
+    const offlineResponse = await caches.match(OFFLINE_URL);
+    if (offlineResponse) {
+      return offlineResponse;
+    }
+    
+    // If no offline page, create a blue-themed fallback
+    return new Response(
+      `<!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#0d6efd">
+        <title>Offline - Mohamed Tarek</title>
+        <style>
+          * { margin: 0; padding: 0; box-sizing: border-box; }
+          body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+          }
+          .offline-container {
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+          }
+          h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: white;
+          }
+          p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+          }
+          .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: white;
+          }
+          button {
+            background: white;
+            color: #0d6efd;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+          }
+          button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          }
+        </style>
+      </head>
+      <body>
+        <div class="offline-container">
+          <div class="icon">📶</div>
+          <h1>You're Offline</h1>
+          <p>Please check your internet connection and try again.</p>
+          <p>The app will work automatically when you're back online.</p>
+          <button onclick="window.location.reload()">Try Again</button>
+        </div>
+      </body>
+      </html>`,
+      { 
+        headers: { 
+          'Content-Type': 'text/html',
+          'Cache-Control': 'no-cache'
+        } 
+      }
+    );
   }
 }
 
@@ -172,17 +257,49 @@ async function cacheFirst(req) {
   } catch (err) {
     console.log('Cache failed:', err);
     
-    // For images, return a placeholder or empty response
+    // For images, return a blue-themed placeholder
     if (req.headers.get('accept')?.includes('image')) {
       return new Response(
-        '<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#f0f0f0"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" fill="#666">Image not available offline</text></svg>',
+        `<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100%" height="100%" fill="#0d6efd"/>
+          <text x="50%" y="50%" 
+                dominant-baseline="middle" 
+                text-anchor="middle" 
+                font-family="Arial, sans-serif" 
+                font-size="16" 
+                fill="#ffffff">
+            Image not available offline
+          </text>
+          <circle cx="200" cy="120" r="50" fill="#ffffff" opacity="0.2"/>
+          <circle cx="200" cy="180" r="30" fill="#ffffff" opacity="0.3"/>
+        </svg>`,
         { headers: { 'Content-Type': 'image/svg+xml' } }
+      );
+    }
+    
+    // For CSS files, inject blue theme
+    if (req.url.endsWith('.css')) {
+      return new Response(
+        `/* Injected by Service Worker - Original CSS unavailable */
+        body, html {
+          background-color: #f0f8ff !important;
+          color: #333333 !important;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+          body, html {
+            background-color: #f0f8ff !important;
+            color: #333333 !important;
+          }
+        }`,
+        { headers: { 'Content-Type': 'text/css' } }
       );
     }
     
     return new Response('Network error', { 
       status: 408, 
-      statusText: 'Network Request Failed' 
+      statusText: 'Network Request Failed',
+      headers: { 'Content-Type': 'text/plain' }
     });
   }
 }
@@ -193,6 +310,18 @@ async function cacheFirst(req) {
 self.addEventListener('message', (event) => {
   if (event.data && event.data.action === 'skipWaiting') {
     self.skipWaiting();
+  }
+  
+  // ADD: Handle theme change messages
+  if (event.data && event.data.action === 'updateTheme') {
+    self.clients.matchAll().then(clients => {
+      clients.forEach(client => {
+        client.postMessage({
+          action: 'applyBlueTheme',
+          themeColor: '#0d6efd'
+        });
+      });
+    });
   }
 });
 
