@@ -9,17 +9,18 @@
   <link rel="icon" href="icon.png" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-  <!-- Font Awesome for theme icon -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Shared responsive CSS (your existing file) -->
-  <link rel="stylesheet" href="responsive.css">
+  <!-- Chart.js for graphs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
     :root {
       --primary-color: #4e9eff;
       --primary-dark: #3a6cf4;
       --primary-light: #6ab1ff;
+      --secondary-color: #9b59b6;
       --background-dark: #121212;
       --background-darker: #0a0a0a;
       --background-secondary: #1a1a1a;
@@ -29,6 +30,8 @@
       --text-muted: #aaaaaa;
       --success-color: #4caf50;
       --error-color: #f44336;
+      --warning-color: #ff9800;
+      --info-color: #2196f3;
       --transition-speed: 0.3s;
       --border-radius: 12px;
       --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
@@ -55,7 +58,7 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--background-dark);
       color: var(--text-light);
       line-height: 1.6;
@@ -65,9 +68,112 @@
                   color var(--transition-speed) ease;
     }
 
-    h1, h2, h3 {
-      color: var(--primary-color);
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 30px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: var(--border-radius);
+      color: white;
+      box-shadow: var(--box-shadow);
+    }
+
+    .page-header h1 {
+      font-size: 2.8rem;
       margin-bottom: 15px;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background: var(--background-secondary);
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+      background: var(--card-dark);
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+      border-bottom: 3px solid transparent;
+      font-weight: 500;
+    }
+
+    .tab:hover {
+      background: var(--card-light);
+    }
+
+    .tab.active {
+      background: var(--card-dark);
+      border-bottom: 3px solid var(--primary-color);
+      font-weight: bold;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 30px;
+      background: var(--card-dark);
+      border-radius: 0 var(--border-radius) var(--border-radius) var(--border-radius);
+      box-shadow: var(--box-shadow);
+      margin-bottom: 30px;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 992px) {
+      .calculator-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .calculator-box {
+      padding: 25px;
+      background: var(--card-light);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .calculator-box:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    h2, h3 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .section-subtitle {
@@ -75,47 +181,32 @@
       margin-bottom: 20px;
     }
 
-    .calculator-container {
-      max-width: 900px;
-      margin: 0 auto;
+    /* Input Groups */
+    .input-group {
+      margin-bottom: 20px;
     }
 
-    .calculator {
-      background-color: var(--card-dark);
-      border-radius: var(--border-radius);
-      padding: 25px;
-      margin-bottom: 30px;
-      box-shadow: var(--box-shadow);
-      transition: all var(--transition-speed) ease;
-    }
-
-    .calculator:hover {
-      box-shadow: var(--box-shadow-hover);
-      transform: translateY(-2px);
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    label {
+    .input-group label {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       font-weight: 500;
-      color: var(--primary-color);
+      color: var(--text-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .unit-display {
+      color: var(--text-muted);
+      font-size: 0.9em;
+      font-weight: normal;
     }
 
     select, input {
       width: 100%;
-      padding: 10px 14px;
+      padding: 14px;
       border-radius: var(--border-radius);
-      border: 1px solid var(--background-secondary);
+      border: 2px solid var(--background-secondary);
       background-color: var(--background-secondary);
       color: var(--text-light);
       font-size: 1em;
@@ -126,154 +217,268 @@
     select:focus, input:focus {
       outline: none;
       border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.25);
+      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
     }
 
-    .unit {
-      font-size: 0.85em;
-      color: var(--text-muted);
-      margin-top: 3px;
+    .range-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--background-secondary);
+      outline: none;
+      margin: 10px 0;
     }
 
-    .helper-text {
-      font-size: 0.85em;
-      color: var(--text-muted);
+    .range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+    }
+
+    .range-slider::-webkit-slider-thumb:hover {
+      background: var(--primary-dark);
+      transform: scale(1.2);
+    }
+
+    /* Buttons */
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 20px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 11px 22px;
-      border-radius: 999px;
+      padding: 14px 24px;
+      border-radius: 50px;
       font-weight: 600;
       font-size: 1em;
-      border: none;
-      cursor: pointer;
       transition: all var(--transition-speed) ease;
-      background-color: var(--primary-color);
-      color: #fff;
-      box-shadow: 0 6px 18px rgba(78, 158, 255, 0.4);
-      margin-right: 10px;
-      margin-top: 10px;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      gap: 10px;
     }
 
-    .btn:hover {
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+    }
+
+    .btn-primary:hover {
       background-color: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(78, 158, 255, 0.6);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(78, 158, 255, 0.6);
     }
 
     .btn-secondary {
-      background-color: transparent;
-      color: var(--primary-color);
-      border: 2px solid var(--primary-color);
-      box-shadow: none;
+      background-color: var(--background-secondary);
+      color: var(--text-light);
     }
 
     .btn-secondary:hover {
-      background-color: var(--primary-color);
-      color: #fff;
+      background-color: var(--card-light);
+      transform: translateY(-3px);
     }
 
-    .results {
-      margin-top: 22px;
-      padding: 18px;
+    .btn-success {
+      background-color: var(--success-color);
+      color: white;
+    }
+
+    /* Results */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .result-box {
+      padding: 20px;
       border-radius: var(--border-radius);
       border-left: 4px solid var(--primary-color);
-      background-color: rgba(78, 158, 255, 0.08);
-      display: none;
+      transition: all var(--transition-speed) ease;
+      background-color: rgba(78, 158, 255, 0.05);
+      text-align: center;
     }
 
-    .results p {
-      margin-bottom: 6px;
+    .result-box:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--box-shadow-hover);
     }
 
-    .results-title {
-      font-weight: 700;
-      margin-bottom: 8px;
+    .result-box.success {
+      border-left-color: var(--success-color);
+      background-color: rgba(76, 175, 80, 0.05);
     }
 
-    .results-error {
-      color: var(--error-color);
-      font-weight: 600;
-      margin-top: 6px;
+    .result-box.warning {
+      border-left-color: var(--warning-color);
+      background-color: rgba(255, 152, 0, 0.05);
     }
 
-    .formula {
-      margin-top: 10px;
+    .result-box.info {
+      border-left-color: var(--info-color);
+      background-color: rgba(33, 150, 243, 0.05);
+    }
+
+    .result-label {
       font-size: 0.9em;
       color: var(--text-muted);
-      font-style: italic;
+      margin-bottom: 5px;
     }
 
-    .info-section {
-      margin-top: 30px;
+    .result-value {
+      font-size: 1.6em;
+      font-weight: bold;
+      color: var(--text-light);
     }
 
+    .result-unit {
+      font-size: 0.9em;
+      color: var(--text-muted);
+      margin-left: 5px;
+    }
+
+    /* Circuit Visualization */
+    .circuit-container {
+      margin: 30px 0;
+      text-align: center;
+      padding: 20px;
+      background: var(--background-secondary);
+      border-radius: var(--border-radius);
+    }
+
+    .circuit-diagram {
+      position: relative;
+      height: 200px;
+      margin: 20px auto;
+      max-width: 500px;
+    }
+
+    .circuit-element {
+      position: absolute;
+      background: var(--card-dark);
+      padding: 10px;
+      border-radius: 8px;
+      border: 2px solid var(--primary-color);
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-color);
+    }
+
+    /* Charts */
+    .chart-container {
+      height: 300px;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    /* Component Selection */
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .component-card {
+      padding: 20px;
+      background: var(--card-light);
+      border-radius: var(--border-radius);
+      border: 2px solid transparent;
+      transition: all var(--transition-speed) ease;
+      cursor: pointer;
+    }
+
+    .component-card:hover {
+      border-color: var(--primary-color);
+      transform: translateY(-5px);
+    }
+
+    .component-card.active {
+      border-color: var(--primary-color);
+      background: rgba(78, 158, 255, 0.1);
+    }
+
+    .component-name {
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    /* Table */
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 12px;
-      background-color: var(--card-dark);
+      margin-top: 20px;
+      background: var(--card-dark);
       border-radius: var(--border-radius);
       overflow: hidden;
       box-shadow: var(--box-shadow);
     }
 
     th, td {
+      padding: 15px;
       text-align: left;
-      padding: 10px 14px;
       border-bottom: 1px solid var(--background-secondary);
-      font-size: 0.93em;
     }
 
     th {
-      background-color: var(--primary-color);
-      color: #fff;
+      background: var(--primary-color);
+      color: white;
       font-weight: 600;
     }
 
     tr:hover {
-      background-color: var(--background-secondary);
+      background: rgba(78, 158, 255, 0.05);
     }
 
-    .assumptions {
-      margin-top: 10px;
-      font-size: 0.9em;
-      color: var(--text-muted);
-    }
-
-    /* Theme toggle */
+    /* Theme Toggle */
     .theme-toggle {
       position: fixed;
       bottom: 30px;
       left: 30px;
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       background-color: var(--card-dark);
       color: var(--primary-color);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2em;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+      font-size: 1.4em;
+      box-shadow: var(--box-shadow);
       cursor: pointer;
       transition: all var(--transition-speed) ease;
       z-index: 999;
+      border: none;
     }
 
     .theme-toggle:hover {
-      transform: scale(1.08);
+      transform: scale(1.1) rotate(30deg);
+      box-shadow: var(--box-shadow-hover);
     }
 
+    /* Footer */
     footer {
       background-color: var(--card-dark);
       color: var(--text-light);
       text-align: center;
-      padding: 25px;
-      margin-top: 35px;
+      padding: 40px;
+      margin-top: 50px;
       border-radius: var(--border-radius);
       box-shadow: var(--box-shadow);
     }
@@ -281,145 +486,518 @@
     .social-footer {
       display: flex;
       justify-content: center;
-      gap: 20px;
-      margin: 15px 0;
+      margin: 30px 0;
+      gap: 25px;
     }
 
     .social-footer a {
       color: var(--text-light);
-      font-size: 1.5em;
+      font-size: 1.8em;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--background-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: all var(--transition-speed) ease;
     }
 
     .social-footer a:hover {
-      color: var(--primary-color);
-      transform: translateY(-3px);
+      color: white;
+      background: var(--primary-color);
+      transform: translateY(-5px);
     }
 
     .footer-bottom {
-      margin-top: 10px;
-      font-size: 0.9em;
+      margin-top: 20px;
+      font-size: 1em;
       opacity: 0.8;
     }
 
+    /* Responsive */
     @media (max-width: 768px) {
-      .calculator {
-        padding: 18px;
+      .page-header h1 {
+        font-size: 2rem;
       }
-      .grid-2 {
+      
+      .page-header {
+        padding: 20px;
+      }
+      
+      .tabs {
+        flex-direction: column;
+      }
+      
+      .tab {
+        border-bottom: 1px solid var(--background-secondary);
+        border-right: none;
+      }
+      
+      .theme-toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2em;
+        bottom: 20px;
+        left: 20px;
+      }
+      
+      .results-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .component-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .results-grid {
         grid-template-columns: 1fr;
       }
+      
+      .component-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .btn-group {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Error Message */
+    .error-message {
+      color: var(--error-color);
+      font-weight: bold;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: var(--border-radius);
+      background: rgba(244, 67, 54, 0.1);
+      display: none;
+    }
+
+    /* Success Message */
+    .success-message {
+      color: var(--success-color);
+      font-weight: bold;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: var(--border-radius);
+      background: rgba(76, 175, 80, 0.1);
+      display: none;
+    }
+
+    /* Preset Cards */
+    .preset-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .preset-card {
+      padding: 20px;
+      background: var(--card-light);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: all var(--transition-speed) ease;
+      text-align: center;
+      border: 2px solid transparent;
+    }
+
+    .preset-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--box-shadow-hover);
+      border-color: var(--primary-color);
+    }
+
+    .preset-card.active {
+      border-color: var(--primary-color);
+      background: rgba(78, 158, 255, 0.1);
+    }
+
+    .preset-icon {
+      font-size: 2em;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    .preset-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .preset-desc {
+      font-size: 0.9em;
+      color: var(--text-muted);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--background-secondary);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-dark);
     }
   </style>
 </head>
 <body>
-  <div class="calculator-container">
-    <h1>Buck / Boost Converter Calculator</h1>
-    <p class="section-subtitle">
-      Ideal continuous-mode design helper for step-down (buck) and step-up (boost) converters.
-      Inputs: Vin, Vout, Power, switching frequency.
-    </p>
+  <div class="main-container">
+    <div class="page-header">
+      <h1><i class="fas fa-bolt"></i> Buck / Boost Converter Calculator</h1>
+      <p>Complete design tool for DC-DC converters with visualization, component selection, and efficiency analysis</p>
+    </div>
 
-    <div class="calculator">
-      <div class="form-group">
-        <label for="mode">Converter Type</label>
-        <select id="mode">
-          <option value="buck">Buck (Step-Down)</option>
-          <option value="boost">Boost (Step-Up)</option>
-        </select>
-        <p class="helper-text">Buck: Vout &lt; Vin &nbsp;&nbsp;|&nbsp;&nbsp; Boost: Vout &gt; Vin</p>
-      </div>
+    <div class="tabs">
+      <div class="tab active" data-tab="calculator">Calculator</div>
+      <div class="tab" data-tab="design">Design Guide</div>
+      <div class="tab" data-tab="components">Components</div>
+      <div class="tab" data-tab="analysis">Analysis</div>
+    </div>
 
-      <div class="grid-2">
-        <div>
-          <div class="form-group">
-            <label for="vin">Input Voltage Vin</label>
-            <input type="number" id="vin" placeholder="e.g. 24">
-            <div class="unit">Volts [V]</div>
+    <!-- Calculator Tab -->
+    <div class="tab-content active" id="calculator-tab">
+      <div class="calculator-grid">
+        <div class="calculator-box">
+          <h3><i class="fas fa-sliders-h"></i> Converter Parameters</h3>
+          
+          <div class="input-group">
+            <label for="converterType">Converter Type</label>
+            <select id="converterType">
+              <option value="buck">Buck (Step-Down)</option>
+              <option value="boost">Boost (Step-Up)</option>
+              <option value="buck-boost">Buck-Boost</option>
+            </select>
           </div>
 
-          <div class="form-group">
-            <label for="vout">Output Voltage Vout</label>
-            <input type="number" id="vout" placeholder="e.g. 12">
-            <div class="unit">Volts [V]</div>
+          <div class="input-group">
+            <label for="vin">
+              Input Voltage
+              <span class="unit-display">Volts (V)</span>
+            </label>
+            <input type="number" id="vin" placeholder="e.g., 24" min="1" max="500" step="0.1" value="24">
+            <input type="range" class="range-slider" id="vinRange" min="1" max="500" step="1" value="24">
+          </div>
+
+          <div class="input-group">
+            <label for="vout">
+              Output Voltage
+              <span class="unit-display">Volts (V)</span>
+            </label>
+            <input type="number" id="vout" placeholder="e.g., 12" min="1" max="500" step="0.1" value="12">
+            <input type="range" class="range-slider" id="voutRange" min="1" max="500" step="1" value="12">
+          </div>
+
+          <div class="input-group">
+            <label for="power">
+              Output Power
+              <span class="unit-display">Watts (W)</span>
+            </label>
+            <input type="number" id="power" placeholder="e.g., 100" min="1" max="1000" step="1" value="100">
+            <input type="range" class="range-slider" id="powerRange" min="1" max="1000" step="1" value="100">
+          </div>
+
+          <div class="input-group">
+            <label for="frequency">
+              Switching Frequency
+              <span class="unit-display" id="freqValue">100 kHz</span>
+            </label>
+            <input type="range" class="range-slider" id="frequency" min="20" max="1000" value="100">
+            <div style="display: flex; justify-content: space-between; font-size: 0.9em; color: var(--text-muted);">
+              <span>20 kHz</span>
+              <span>500 kHz</span>
+              <span>1000 kHz</span>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="efficiency">
+              Expected Efficiency
+              <span class="unit-display" id="effValue">90%</span>
+            </label>
+            <select id="efficiency">
+              <option value="0.85">85% (Conservative)</option>
+              <option value="0.88">88% (Typical)</option>
+              <option value="0.90" selected>90% (Good)</option>
+              <option value="0.92">92% (Excellent)</option>
+              <option value="0.95">95% (Premium)</option>
+            </select>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-primary" id="calculateBtn">
+              <i class="fas fa-calculator"></i> Calculate
+            </button>
+            <button class="btn btn-secondary" id="resetBtn">
+              <i class="fas fa-redo"></i> Reset
+            </button>
           </div>
         </div>
 
-        <div>
-          <div class="form-group">
-            <label for="power">Output Power Pout</label>
-            <input type="number" id="power" placeholder="e.g. 100">
-            <div class="unit">Watts [W]</div>
+        <div class="calculator-box">
+          <h3><i class="fas fa-chart-bar"></i> Results & Circuit</h3>
+          
+          <div id="circuitDiagram" class="circuit-container">
+            <h4>Circuit Diagram</h4>
+            <div class="circuit-diagram" id="circuitSvg">
+              <!-- Circuit SVG will be inserted here -->
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="freq">Switching Frequency</label>
-            <input type="number" id="freq" placeholder="e.g. 500">
-            <div class="unit">kHz (e.g. 100 → 100 kHz)</div>
+          <div class="results-grid">
+            <div class="result-box info">
+              <div class="result-label">Duty Cycle</div>
+              <div class="result-value" id="resultDuty">--</div>
+              <div class="result-unit">%</div>
+            </div>
+            
+            <div class="result-box success">
+              <div class="result-label">Inductance</div>
+              <div class="result-value" id="resultInductor">--</div>
+              <div class="result-unit">µH</div>
+            </div>
+            
+            <div class="result-box warning">
+              <div class="result-label">Capacitance</div>
+              <div class="result-value" id="resultCapacitor">--</div>
+              <div class="result-unit">µF</div>
+            </div>
+            
+            <div class="result-box">
+              <div class="result-label">Peak Current</div>
+              <div class="result-value" id="resultCurrent">--</div>
+              <div class="result-unit">A</div>
+            </div>
           </div>
+
+          <div class="error-message" id="errorMessage"></div>
+          <div class="success-message" id="successMessage"></div>
         </div>
       </div>
 
-      <button class="btn" id="calc-btn">
-        <i class="fas fa-bolt" style="margin-right:8px;"></i>Calculate
-      </button>
-      <button class="btn btn-secondary" id="clear-btn">
-        <i class="fas fa-broom" style="margin-right:6px;"></i>Clear
-      </button>
-
-      <div class="results" id="results">
-        <p class="results-title">Results</p>
-        <p id="result-duty"></p>
-        <p id="result-inductor"></p>
-        <p id="result-capacitor"></p>
-        <p id="result-currents"></p>
-        <p id="result-eff"></p>
-        <p id="error-msg" class="results-error"></p>
-        <p class="formula" id="formula-text"></p>
-        <p class="assumptions">
-          Assumptions: Continuous conduction mode, inductor ripple ≈ 30% of DC current,
-          output voltage ripple ≈ 1% of Vout, typical efficiency 90% (buck) / 88% (boost).
-        </p>
+      <div class="calculator-box">
+        <h3><i class="fas fa-plug"></i> Common Applications</h3>
+        <div class="preset-cards">
+          <div class="preset-card" onclick="loadPreset('12v-to-5v')">
+            <div class="preset-icon"><i class="fas fa-mobile-alt"></i></div>
+            <div class="preset-name">USB Charger</div>
+            <div class="preset-desc">12V to 5V @ 2.4A</div>
+          </div>
+          
+          <div class="preset-card" onclick="loadPreset('24v-to-12v')">
+            <div class="preset-icon"><i class="fas fa-car"></i></div>
+            <div class="preset-name">Car Audio</div>
+            <div class="preset-desc">24V to 12V @ 100W</div>
+          </div>
+          
+          <div class="preset-card" onclick="loadPreset('5v-to-12v')">
+            <div class="preset-icon"><i class="fas fa-solar-panel"></i></div>
+            <div class="preset-name">Solar Boost</div>
+            <div class="preset-desc">5V to 12V @ 50W</div>
+          </div>
+          
+          <div class="preset-card" onclick="loadPreset('48v-to-24v')">
+            <div class="preset-icon"><i class="fas fa-industry"></i></div>
+            <div class="preset-name">Industrial</div>
+            <div class="preset-desc">48V to 24V @ 200W</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="info-section">
-      <h2>Design Equations (Ideal CCM)</h2>
-      <table>
-        <tr>
-          <th>Quantity</th>
-          <th>Buck Converter</th>
-          <th>Boost Converter</th>
-        </tr>
-        <tr>
-          <td>Duty Cycle D</td>
-          <td>D = Vout / Vin</td>
-          <td>D = 1 − Vin / Vout</td>
-        </tr>
-        <tr>
-          <td>Inductor Current (approx.)</td>
-          <td>I<sub>out</sub> = Pout / Vout</td>
-          <td>I<sub>in</sub> = Pout / (Vin · η)</td>
-        </tr>
-        <tr>
-          <td>Inductor Ripple ΔI<sub>L</sub></td>
-          <td colspan="2">ΔI<sub>L</sub> ≈ 0.3 · I<sub>DC</sub> (30% ripple)</td>
-        </tr>
-        <tr>
-          <td>Inductance L</td>
-          <td>L = (Vin − Vout) · D / (ΔI<sub>L</sub> · f<sub>sw</sub>)</td>
-          <td>L = Vin · D / (ΔI<sub>L</sub> · f<sub>sw</sub>)</td>
-        </tr>
-        <tr>
-          <td>Output Voltage Ripple ΔV</td>
-          <td colspan="2">ΔV ≈ 0.01 · Vout (1% ripple assumed)</td>
-        </tr>
-        <tr>
-          <td>Output Capacitor C</td>
-          <td>C ≈ I<sub>out</sub> · D / (f<sub>sw</sub> · ΔV)</td>
-          <td>C ≈ I<sub>out</sub> · D / (f<sub>sw</sub> · ΔV)</td>
-        </tr>
-      </table>
+    <!-- Design Guide Tab -->
+    <div class="tab-content" id="design-tab">
+      <div class="calculator-grid">
+        <div class="calculator-box">
+          <h3><i class="fas fa-book"></i> Design Equations</h3>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Buck Converter</th>
+                <th>Boost Converter</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Duty Cycle (D)</td>
+                <td>D = Vout / Vin</td>
+                <td>D = 1 - (Vin / Vout)</td>
+              </tr>
+              <tr>
+                <td>Inductor Current</td>
+                <td>IL = Iout</td>
+                <td>IL = Iin = Iout / (1-D)</td>
+              </tr>
+              <tr>
+                <td>Inductor Ripple Current</td>
+                <td colspan="2">ΔIL = 0.3 × IL (30% ripple)</td>
+              </tr>
+              <tr>
+                <td>Inductance (L)</td>
+                <td>L = (Vin - Vout) × D / (fsw × ΔIL)</td>
+                <td>L = Vin × D / (fsw × ΔIL)</td>
+              </tr>
+              <tr>
+                <td>Output Capacitor</td>
+                <td>Cout = ΔIL / (8 × fsw × ΔVout)</td>
+                <td>Cout = Iout × D / (fsw × ΔVout)</td>
+              </tr>
+              <tr>
+                <td>Input Capacitor</td>
+                <td colspan="2">Cin = Iin × D / (fsw × ΔVin)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="info-box" style="margin-top: 20px; padding: 15px; background: rgba(241, 196, 15, 0.1); border-radius: var(--border-radius);">
+            <h4><i class="fas fa-lightbulb"></i> Design Tips</h4>
+            <ul style="padding-left: 20px; margin-top: 10px;">
+              <li>Use 20-40% ripple current for optimal size/efficiency tradeoff</li>
+              <li>Higher switching frequency = smaller components but lower efficiency</li>
+              <li>Add 20% margin to calculated component values</li>
+              <li>Consider ESR (Equivalent Series Resistance) of capacitors</li>
+              <li>Use proper heatsinking for MOSFETs and diodes</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="calculator-box">
+          <h3><i class="fas fa-wave-square"></i> Waveform Analysis</h3>
+          <div class="chart-container">
+            <canvas id="waveformChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Components Tab -->
+    <div class="tab-content" id="components-tab">
+      <div class="calculator-box">
+        <h3><i class="fas fa-microchip"></i> Component Selection</h3>
+        
+        <div class="component-grid">
+          <div class="component-card" onclick="selectComponent('inductor')">
+            <div class="component-name">Inductor</div>
+            <div style="color: var(--text-muted); font-size: 0.9em;">
+              <p><strong>Core Types:</strong> Ferrite, Powdered Iron, Iron Alloy</p>
+              <p><strong>Selection Criteria:</strong> Current rating, Saturation current, DC resistance</p>
+              <p><strong>Recommended:</strong> Shielded drum core for EMC</p>
+            </div>
+          </div>
+          
+          <div class="component-card" onclick="selectComponent('mosfet')">
+            <div class="component-name">MOSFET</div>
+            <div style="color: var(--text-muted); font-size: 0.9em;">
+              <p><strong>Types:</strong> N-channel, P-channel</p>
+              <p><strong>Parameters:</strong> Rds(on), Vds, Qg, Gate charge</p>
+              <p><strong>Recommended:</strong> Low Rds(on) for efficiency</p>
+            </div>
+          </div>
+          
+          <div class="component-card" onclick="selectComponent('diode')">
+            <div class="component-name">Diode</div>
+            <div style="color: var(--text-muted); font-size: 0.9em;">
+              <p><strong>Types:</strong> Schottky, Fast recovery, Ultra-fast</p>
+              <p><strong>Parameters:</strong> Forward voltage, Reverse recovery time</p>
+              <p><strong>Recommended:</strong> Schottky for low Vf</p>
+            </div>
+          </div>
+          
+          <div class="component-card" onclick="selectComponent('capacitor')">
+            <div class="component-name">Capacitor</div>
+            <div style="color: var(--text-muted); font-size: 0.9em;">
+              <p><strong>Types:</strong> Ceramic, Electrolytic, Polymer</p>
+              <p><strong>Parameters:</strong> ESR, Ripple current rating, Voltage rating</p>
+              <p><strong>Recommended:</strong> Low ESR for output filtering</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-container" style="margin-top: 30px;">
+          <canvas id="efficiencyChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analysis Tab -->
+    <div class="tab-content" id="analysis-tab">
+      <div class="calculator-grid">
+        <div class="calculator-box">
+          <h3><i class="fas fa-chart-line"></i> Efficiency Analysis</h3>
+          <div class="chart-container">
+            <canvas id="analysisChart"></canvas>
+          </div>
+          
+          <div class="results-grid" style="margin-top: 20px;">
+            <div class="result-box success">
+              <div class="result-label">Power Loss</div>
+              <div class="result-value" id="powerLoss">--</div>
+              <div class="result-unit">W</div>
+            </div>
+            
+            <div class="result-box warning">
+              <div class="result-label">Heat Dissipation</div>
+              <div class="result-value" id="heatDissipation">--</div>
+              <div class="result-unit">W</div>
+            </div>
+            
+            <div class="result-box info">
+              <div class="result-label">Required Heatsink</div>
+              <div class="result-value" id="heatsink">--</div>
+              <div class="result-unit">°C/W</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="calculator-box">
+          <h3><i class="fas fa-thermometer-half"></i> Thermal Analysis</h3>
+          
+          <div class="input-group">
+            <label for="ambientTemp">Ambient Temperature</label>
+            <input type="number" id="ambientTemp" placeholder="25" min="-40" max="85" value="25">
+            <span class="unit-display">°C</span>
+          </div>
+          
+          <div class="input-group">
+            <label for="maxTemp">Maximum Component Temperature</label>
+            <input type="number" id="maxTemp" placeholder="125" min="50" max="200" value="125">
+            <span class="unit-display">°C</span>
+          </div>
+          
+          <div class="input-group">
+            <label for="mosfetRds">MOSFET Rds(on)</label>
+            <input type="number" id="mosfetRds" placeholder="0.01" min="0.001" max="1" step="0.001" value="0.01">
+            <span class="unit-display">Ω</span>
+          </div>
+          
+          <button class="btn btn-primary" onclick="calculateThermal()" style="width: 100%; margin-top: 20px;">
+            <i class="fas fa-fire"></i> Calculate Thermal Performance
+          </button>
+          
+          <div class="info-box" style="margin-top: 20px; padding: 15px; background: rgba(244, 67, 54, 0.1); border-radius: var(--border-radius);">
+            <h4><i class="fas fa-exclamation-triangle"></i> Thermal Considerations</h4>
+            <ul style="padding-left: 20px; margin-top: 10px;">
+              <li>MOSFET junction temperature should stay below 150°C</li>
+              <li>Inductor core temperature should stay below 100°C</li>
+              <li>Add thermal vias under hot components</li>
+              <li>Consider forced air cooling for high power designs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -429,37 +1007,39 @@
   </button>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="social-footer">
-        <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-      </div>
-      <div class="footer-bottom">
-        &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
-        &nbsp;|&nbsp; &copy; M.T.A.
-      </div>
+  <footer>
+    <div class="social-footer">
+      <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+    <div class="footer-bottom">
+      &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
+      &nbsp;|&nbsp; &copy; M.T.A.
     </div>
   </footer>
 
   <script>
-    // ---------- Theme handling ----------
+    // Initialize variables
+    let waveformChart, efficiencyChart, analysisChart;
+    let currentPreset = null;
+
+    // Dark/Light Mode Toggle
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = themeToggle.querySelector('i');
-
+    
     const savedTheme = localStorage.getItem('theme') ||
       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
+    
     document.body.setAttribute('data-theme', savedTheme);
     if (savedTheme === 'dark') {
       themeIcon.classList.remove('fa-moon');
@@ -468,7 +1048,7 @@
       themeIcon.classList.remove('fa-sun');
       themeIcon.classList.add('fa-moon');
     }
-
+    
     themeToggle.addEventListener('click', () => {
       const current = document.body.getAttribute('data-theme');
       if (current === 'light') {
@@ -482,208 +1062,739 @@
         themeIcon.classList.add('fa-moon');
         localStorage.setItem('theme', 'light');
       }
+      updateChartColors();
     });
 
-    // ---------- Helpers ----------
-    function fmt(val, digits = 3) {
-      if (!isFinite(val)) return '';
-      const absVal = Math.abs(val);
-      if (absVal === 0) return '0';
-      if (absVal >= 1000 || absVal < 0.001) {
-        return val.toExponential(digits);
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabId = tab.getAttribute('data-tab');
+        
+        // Update active tab
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Update active content
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        document.getElementById(`${tabId}-tab`).classList.add('active');
+        
+        // Update charts
+        if (tabId === 'design') {
+          updateWaveformChart();
+        } else if (tabId === 'components') {
+          updateEfficiencyChart();
+        } else if (tabId === 'analysis') {
+          updateAnalysisChart();
+        }
+      });
+    });
+
+    // Range slider synchronization
+    document.getElementById('vinRange').addEventListener('input', function() {
+      document.getElementById('vin').value = this.value;
+    });
+    
+    document.getElementById('vin').addEventListener('input', function() {
+      document.getElementById('vinRange').value = this.value;
+    });
+    
+    document.getElementById('voutRange').addEventListener('input', function() {
+      document.getElementById('vout').value = this.value;
+    });
+    
+    document.getElementById('vout').addEventListener('input', function() {
+      document.getElementById('voutRange').value = this.value;
+    });
+    
+    document.getElementById('powerRange').addEventListener('input', function() {
+      document.getElementById('power').value = this.value;
+    });
+    
+    document.getElementById('power').addEventListener('input', function() {
+      document.getElementById('powerRange').value = this.value;
+    });
+    
+    document.getElementById('frequency').addEventListener('input', function() {
+      document.getElementById('freqValue').textContent = `${this.value} kHz`;
+    });
+
+    // Format number function
+    function formatNumber(num, decimals = 3) {
+      if (!isFinite(num)) return '--';
+      if (num === 0) return '0';
+      
+      const absNum = Math.abs(num);
+      if (absNum >= 1000 || absNum < 0.001) {
+        return num.toExponential(decimals);
       }
-      return parseFloat(val.toFixed(digits)).toString();
+      
+      // Find appropriate unit
+      const units = ['', 'm', 'µ', 'n', 'p'];
+      let unitIndex = 0;
+      let value = num;
+      
+      while (value < 1 && value !== 0 && unitIndex < units.length - 1) {
+        value *= 1000;
+        unitIndex++;
+      }
+      
+      return `${value.toFixed(decimals)} ${units[unitIndex]}`;
     }
 
-    function toNumber(input) {
-      const v = parseFloat(input);
-      return isNaN(v) ? null : v;
-    }
-
-    // ---------- Calculator logic ----------
-    const vinEl = document.getElementById('vin');
-    const voutEl = document.getElementById('vout');
-    const powerEl = document.getElementById('power');
-    const freqEl = document.getElementById('freq');
-    const modeEl = document.getElementById('mode');
-
-    const resultsBox = document.getElementById('results');
-    const dutyEl = document.getElementById('result-duty');
-    const indEl = document.getElementById('result-inductor');
-    const capEl = document.getElementById('result-capacitor');
-    const currentsEl = document.getElementById('result-currents');
-    const effEl = document.getElementById('result-eff');
-    const errEl = document.getElementById('error-msg');
-    const formulaEl = document.getElementById('formula-text');
-
-    document.getElementById('calc-btn').addEventListener('click', () => {
-      errEl.textContent = '';
-      formulaEl.textContent = '';
-      resultsBox.style.display = 'block';
-
-      const mode = modeEl.value;           // "buck" or "boost"
-      const Vin = toNumber(vinEl.value);
-      const Vout = toNumber(voutEl.value);
-      const Pout = toNumber(powerEl.value);
-      const f_kHz = toNumber(freqEl.value);
-
-      if (Vin === null || Vout === null || Pout === null || f_kHz === null ||
-          Vin <= 0 || Vout <= 0 || Pout <= 0 || f_kHz <= 0) {
-        errEl.textContent = 'Please enter positive numeric values for Vin, Vout, Power, and Frequency.';
-        dutyEl.textContent = '';
-        indEl.textContent = '';
-        capEl.textContent = '';
-        currentsEl.textContent = '';
-        effEl.textContent = '';
+    // Main calculation function
+    function calculateConverter() {
+      // Get input values
+      const converterType = document.getElementById('converterType').value;
+      const Vin = parseFloat(document.getElementById('vin').value);
+      const Vout = parseFloat(document.getElementById('vout').value);
+      const Pout = parseFloat(document.getElementById('power').value);
+      const fsw_kHz = parseFloat(document.getElementById('frequency').value);
+      const efficiency = parseFloat(document.getElementById('efficiency').value);
+      
+      // Validate inputs
+      if (!Vin || !Vout || !Pout || !fsw_kHz || 
+          Vin <= 0 || Vout <= 0 || Pout <= 0 || fsw_kHz <= 0) {
+        showError('Please enter valid positive numbers for all fields');
         return;
       }
-
-      const fsw = f_kHz * 1000; // Hz
-
-      // ripple assumptions
-      const ripple_I_ratio = 0.30;   // 30% of DC current
-      const ripple_V_ratio = 0.01;   // 1% of Vout
-
-      let D, Iout, Iin, ILdc, dIL, L, dV, C, etaTyp;
-
-      if (mode === 'buck') {
-        if (Vout >= Vin) {
-          errEl.textContent = 'For buck mode, Vout must be lower than Vin.';
-          dutyEl.textContent = '';
-          indEl.textContent = '';
-          capEl.textContent = '';
-          currentsEl.textContent = '';
-          effEl.textContent = '';
-          return;
-        }
-
-        // Duty cycle
+      
+      if (converterType === 'buck' && Vout >= Vin) {
+        showError('For Buck converter, Vout must be less than Vin');
+        return;
+      }
+      
+      if (converterType === 'boost' && Vout <= Vin) {
+        showError('For Boost converter, Vout must be greater than Vin');
+        return;
+      }
+      
+      const fsw = fsw_kHz * 1000; // Convert to Hz
+      
+      // Calculate based on converter type
+      let D, IL_dc, Iin, Iout, L, C_out;
+      
+      // Output current
+      Iout = Pout / Vout;
+      
+      // Input current (considering efficiency)
+      Iin = Pout / (Vin * efficiency);
+      
+      if (converterType === 'buck') {
+        // Buck converter calculations
         D = Vout / Vin;
-
-        // Output current
-        Iout = Pout / Vout;
-
-        // DC inductor current (buck: equal to output current in ideal CCM)
-        ILdc = Iout;
-
-        // Ripple current
-        dIL = ripple_I_ratio * ILdc;
-
-        // Inductor
-        // L = (Vin - Vout) * D / (ΔIL * fsw)
-        L = (Vin - Vout) * D / (dIL * fsw);
-
-        // Output ripple voltage
-        dV = ripple_V_ratio * Vout;
-
-        // Capacitor (simple approx)
-        // C ≈ Iout * D / (fsw * ΔV)
-        C = Iout * D / (fsw * dV);
-
-        // Typical efficiency assumption
-        etaTyp = 0.90; // 90%
-        Iin = Pout / (Vin * etaTyp);
-
-        formulaEl.textContent =
-          'Buck: D = Vout / Vin;  L = (Vin − Vout)·D / (ΔIL·f_sw);  ' +
-          'C ≈ Iout·D / (f_sw·ΔVout).';
-
-      } else {
-        // boost
-        if (Vout <= Vin) {
-          errEl.textContent = 'For boost mode, Vout must be higher than Vin.';
-          dutyEl.textContent = '';
-          indEl.textContent = '';
-          capEl.textContent = '';
-          currentsEl.textContent = '';
-          effEl.textContent = '';
-          return;
-        }
-
-        // Duty cycle
+        IL_dc = Iout;
+        
+        // Inductor ripple current (30% of DC current)
+        const delta_IL = 0.3 * IL_dc;
+        
+        // Inductor calculation
+        L = (Vin - Vout) * D / (fsw * delta_IL);
+        
+        // Output capacitor (for 1% voltage ripple)
+        const delta_Vout = 0.01 * Vout;
+        C_out = delta_IL / (8 * fsw * delta_Vout);
+        
+      } else if (converterType === 'boost') {
+        // Boost converter calculations
         D = 1 - (Vin / Vout);
-
-        // Efficiency assumption first to get currents
-        etaTyp = 0.88; // 88% typical
-        Iout = Pout / Vout;
-        Iin = Pout / (Vin * etaTyp);
-
-        ILdc = Iin; // inductor current ≈ input current
-
-        // Ripple current
-        dIL = ripple_I_ratio * ILdc;
-
-        // Inductor
-        // L = Vin·D / (ΔIL·fsw)
-        L = Vin * D / (dIL * fsw);
-
-        // Output ripple voltage
-        dV = ripple_V_ratio * Vout;
-
-        // Capacitor
-        // C ≈ Iout·D / (fsw·ΔVout)
-        C = Iout * D / (fsw * dV);
-
-        formulaEl.textContent =
-          'Boost: D = 1 − Vin / Vout;  L = Vin·D / (ΔIL·f_sw);  ' +
-          'C ≈ Iout·D / (f_sw·ΔVout).';
+        IL_dc = Iin;
+        
+        // Inductor ripple current
+        const delta_IL = 0.3 * IL_dc;
+        
+        // Inductor calculation
+        L = Vin * D / (fsw * delta_IL);
+        
+        // Output capacitor
+        const delta_Vout = 0.01 * Vout;
+        C_out = Iout * D / (fsw * delta_Vout);
+        
+      } else {
+        // Buck-Boost converter
+        D = Vout / (Vin + Vout);
+        IL_dc = Iin;
+        
+        const delta_IL = 0.3 * IL_dc;
+        L = Vin * D / (fsw * delta_IL);
+        
+        const delta_Vout = 0.01 * Vout;
+        C_out = Iout / (fsw * delta_Vout);
       }
+      
+      // Peak current (DC + ripple/2)
+      const I_peak = IL_dc + (0.3 * IL_dc / 2);
+      
+      // Update results
+      document.getElementById('resultDuty').textContent = `${(D * 100).toFixed(1)}`;
+      document.getElementById('resultInductor').textContent = formatNumber(L * 1e6, 1); // µH
+      document.getElementById('resultCapacitor').textContent = formatNumber(C_out * 1e6, 1); // µF
+      document.getElementById('resultCurrent').textContent = I_peak.toFixed(2);
+      
+      // Draw circuit diagram
+      drawCircuit(converterType, Vin, Vout);
+      
+      // Clear errors and show success
+      clearMessages();
+      showSuccess('Calculation completed successfully!');
+      
+      // Update charts
+      updateWaveformChart(D, IL_dc);
+      updateEfficiencyChart();
+      updateAnalysisChart();
+    }
 
-      // Safety checks
-      if (!isFinite(D) || !isFinite(L) || !isFinite(C) ||
-          D <= 0 || D >= 1 || L <= 0 || C <= 0) {
-        errEl.textContent = 'The values lead to invalid component sizes. Check Vin, Vout, Pout, and frequency.';
-        dutyEl.textContent = '';
-        indEl.textContent = '';
-        capEl.textContent = '';
-        currentsEl.textContent = '';
-        effEl.textContent = '';
-        return;
+    // Draw circuit diagram
+    function drawCircuit(type, Vin, Vout) {
+      const circuitDiv = document.getElementById('circuitSvg');
+      circuitDiv.innerHTML = '';
+      
+      // Create SVG
+      const svgNS = "http://www.w3.org/2000/svg";
+      const svg = document.createElementNS(svgNS, "svg");
+      svg.setAttribute("width", "100%");
+      svg.setAttribute("height", "200");
+      svg.setAttribute("viewBox", "0 0 400 200");
+      
+      // Colors based on theme
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      const lineColor = isDark ? '#ffffff' : '#333333';
+      const componentColor = isDark ? '#4e9eff' : '#1565c0';
+      
+      // Draw circuit based on type
+      if (type === 'buck') {
+        // Buck converter circuit
+        drawLine(svg, 50, 50, 100, 50, lineColor);
+        drawMosfet(svg, 100, 50, componentColor);
+        drawLine(svg, 150, 50, 200, 50, lineColor);
+        drawInductor(svg, 200, 50, componentColor);
+        drawLine(svg, 250, 50, 300, 50, lineColor);
+        drawCapacitor(svg, 300, 50, componentColor);
+        drawDiode(svg, 150, 50, 150, 100, componentColor);
+        drawGround(svg, 350, 100);
+        
+        // Labels
+        drawText(svg, 25, 45, `Vin\n${Vin}V`, lineColor);
+        drawText(svg, 375, 45, `Vout\n${Vout}V`, lineColor);
+        drawText(svg, 100, 75, "MOSFET", componentColor);
+        drawText(svg, 200, 75, "L", componentColor);
+        drawText(svg, 300, 75, "C", componentColor);
+        drawText(svg, 150, 115, "D", componentColor);
+        
+      } else if (type === 'boost') {
+        // Boost converter circuit
+        drawInductor(svg, 100, 50, componentColor);
+        drawLine(svg, 150, 50, 200, 50, lineColor);
+        drawMosfet(svg, 200, 50, componentColor);
+        drawLine(svg, 250, 50, 300, 50, lineColor);
+        drawDiode(svg, 250, 50, 250, 100, componentColor);
+        drawLine(svg, 250, 100, 350, 100, lineColor);
+        drawCapacitor(svg, 350, 100, componentColor);
+        drawGround(svg, 350, 150);
+        
+        // Labels
+        drawText(svg, 25, 45, `Vin\n${Vin}V`, lineColor);
+        drawText(svg, 375, 95, `Vout\n${Vout}V`, lineColor);
+        drawText(svg, 100, 75, "L", componentColor);
+        drawText(svg, 200, 75, "MOSFET", componentColor);
+        drawText(svg, 350, 125, "C", componentColor);
+        drawText(svg, 250, 115, "D", componentColor);
       }
+      
+      circuitDiv.appendChild(svg);
+    }
 
-      // Present results
-      const D_percent = D * 100;
+    // Helper functions for circuit drawing
+    function drawLine(svg, x1, y1, x2, y2, color) {
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", x1);
+      line.setAttribute("y1", y1);
+      line.setAttribute("x2", x2);
+      line.setAttribute("y2", y2);
+      line.setAttribute("stroke", color);
+      line.setAttribute("stroke-width", "2");
+      svg.appendChild(line);
+    }
 
-      dutyEl.textContent =
-        `Duty cycle D ≈ ${fmt(D, 4)}  (≈ ${fmt(D_percent, 2)} %)`;
+    function drawMosfet(svg, x, y, color) {
+      const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      rect.setAttribute("x", x - 10);
+      rect.setAttribute("y", y - 10);
+      rect.setAttribute("width", 20);
+      rect.setAttribute("height", 20);
+      rect.setAttribute("fill", color);
+      rect.setAttribute("stroke", color);
+      rect.setAttribute("stroke-width", "1");
+      svg.appendChild(rect);
+      
+      // Add gate symbol
+      drawLine(svg, x, y - 10, x, y - 25, color);
+      drawLine(svg, x - 5, y - 20, x + 5, y - 20, color);
+    }
 
-      // Convert L to µH and C to µF for readability
-      const L_uH = L * 1e6;
-      const C_uF = C * 1e6;
+    function drawInductor(svg, x, y, color) {
+      // Draw inductor as a coil
+      for (let i = 0; i < 4; i++) {
+        const arc = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        const startX = x - 20 + i * 10;
+        arc.setAttribute("d", `M ${startX} ${y} Q ${startX + 5} ${y - 10}, ${startX + 10} ${y}`);
+        arc.setAttribute("stroke", color);
+        arc.setAttribute("stroke-width", "2");
+        arc.setAttribute("fill", "none");
+        svg.appendChild(arc);
+      }
+    }
 
-      indEl.textContent =
-        `Required inductance L ≈ ${fmt(L_uH)} µH  (≈ ${fmt(L, 6)} H)`;
+    function drawCapacitor(svg, x, y, color) {
+      // Draw capacitor symbol
+      drawLine(svg, x - 15, y, x + 15, y, color); // Horizontal line
+      drawLine(svg, x - 10, y - 10, x - 10, y + 10, color); // Left plate
+      drawLine(svg, x + 10, y - 10, x + 10, y + 10, color); // Right plate
+    }
 
-      capEl.textContent =
-        `Output capacitor C ≈ ${fmt(C_uF)} µF  (≈ ${fmt(C, 6)} F)`;
+    function drawDiode(svg, x1, y1, x2, y2, color) {
+      // Draw diode symbol
+      drawLine(svg, x1, y1, x2, y2, color);
+      
+      const triangle = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+      const points = `${x1},${y1} ${x1-5},${y1+5} ${x1-5},${y1-5}`;
+      triangle.setAttribute("points", points);
+      triangle.setAttribute("fill", color);
+      svg.appendChild(triangle);
+      
+      drawLine(svg, x1-5, y1-5, x1-5, y1+5, color);
+    }
 
-      currentsEl.textContent =
-        `Approximate currents:  Iout ≈ ${fmt(Iout)} A,  Iin ≈ ${fmt(Iin)} A (with assumed efficiency).`;
+    function drawGround(svg, x, y) {
+      // Draw ground symbol
+      drawLine(svg, x, y, x, y + 10, "#ffffff");
+      drawLine(svg, x - 15, y + 10, x + 15, y + 10, "#ffffff");
+      drawLine(svg, x - 10, y + 15, x + 10, y + 15, "#ffffff");
+      drawLine(svg, x - 5, y + 20, x + 5, y + 20, "#ffffff");
+    }
 
-      effEl.textContent =
-        `Estimated practical efficiency ≈ ${Math.round(etaTyp * 100)} % (rule-of-thumb, not exact).`;
+    function drawText(svg, x, y, text, color) {
+      const textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      textElement.setAttribute("x", x);
+      textElement.setAttribute("y", y);
+      textElement.setAttribute("fill", color);
+      textElement.setAttribute("font-size", "12");
+      textElement.setAttribute("text-anchor", "middle");
+      textElement.textContent = text;
+      svg.appendChild(textElement);
+    }
 
-      errEl.textContent = '';
-    });
+    // Update waveform chart
+    function updateWaveformChart(D = 0.5, IL_dc = 5) {
+      const ctx = document.getElementById('waveformChart').getContext('2d');
+      
+      if (waveformChart) {
+        waveformChart.destroy();
+      }
+      
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+      const textColor = isDark ? '#ffffff' : '#333333';
+      
+      // Generate waveform data
+      const timePoints = [];
+      const inductorCurrent = [];
+      const switchVoltage = [];
+      
+      const period = 10; // 10 time units
+      const delta_IL = 0.3 * IL_dc;
+      
+      for (let t = 0; t <= period; t += 0.1) {
+        timePoints.push(t);
+        
+        // Inductor current waveform
+        const phase = t % 1;
+        if (phase < D) {
+          // Switch ON (charging)
+          inductorCurrent.push(IL_dc - delta_IL/2 + (delta_IL * phase / D));
+          switchVoltage.push(0);
+        } else {
+          // Switch OFF (discharging)
+          inductorCurrent.push(IL_dc + delta_IL/2 - (delta_IL * (phase - D) / (1 - D)));
+          switchVoltage.push(1);
+        }
+      }
+      
+      waveformChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: timePoints,
+          datasets: [
+            {
+              label: 'Inductor Current (A)',
+              data: inductorCurrent,
+              borderColor: '#4e9eff',
+              backgroundColor: 'rgba(78, 158, 255, 0.1)',
+              borderWidth: 2,
+              yAxisID: 'y',
+              fill: true
+            },
+            {
+              label: 'Switch Voltage (norm)',
+              data: switchVoltage,
+              borderColor: '#f44336',
+              backgroundColor: 'rgba(244, 67, 54, 0.1)',
+              borderWidth: 2,
+              yAxisID: 'y1',
+              fill: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Time (normalized)',
+                color: textColor
+              },
+              grid: {
+                color: gridColor
+              },
+              ticks: {
+                color: textColor
+              }
+            },
+            y: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              title: {
+                display: true,
+                text: 'Current (A)',
+                color: textColor
+              },
+              grid: {
+                color: gridColor
+              },
+              ticks: {
+                color: textColor
+              }
+            },
+            y1: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              title: {
+                display: true,
+                text: 'Voltage',
+                color: textColor
+              },
+              grid: {
+                drawOnChartArea: false,
+              },
+              ticks: {
+                color: textColor
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: textColor
+              }
+            }
+          }
+        }
+      });
+    }
 
-    document.getElementById('clear-btn').addEventListener('click', () => {
-      vinEl.value = '';
-      voutEl.value = '';
-      powerEl.value = '';
-      freqEl.value = '';
-      resultsBox.style.display = 'none';
-      dutyEl.textContent = '';
-      indEl.textContent = '';
-      capEl.textContent = '';
-      currentsEl.textContent = '';
-      effEl.textContent = '';
-      errEl.textContent = '';
-      formulaEl.textContent = '';
-    });
+    // Update efficiency chart
+    function updateEfficiencyChart() {
+      const ctx = document.getElementById('efficiencyChart').getContext('2d');
+      
+      if (efficiencyChart) {
+        efficiencyChart.destroy();
+      }
+      
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+      const textColor = isDark ? '#ffffff' : '#333333';
+      
+      // Generate efficiency vs load data
+      const loadPercentage = [];
+      const efficiencies = [];
+      
+      for (let i = 10; i <= 100; i += 10) {
+        loadPercentage.push(i);
+        // Simulated efficiency curve
+        const baseEfficiency = 0.92;
+        const efficiency = baseEfficiency - 0.1 * Math.exp(-i/30) + 0.02 * Math.sin(i/10);
+        efficiencies.push(efficiency * 100);
+      }
+      
+      efficiencyChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: loadPercentage,
+          datasets: [{
+            label: 'Efficiency (%)',
+            data: efficiencies,
+            borderColor: '#4caf50',
+            backgroundColor: 'rgba(76, 175, 80, 0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Load Percentage (%)',
+                color: textColor
+              },
+              grid: {
+                color: gridColor
+              },
+              ticks: {
+                color: textColor
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Efficiency (%)',
+                color: textColor
+              },
+              min: 80,
+              max: 100,
+              grid: {
+                color: gridColor
+              },
+              ticks: {
+                color: textColor
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: textColor
+              }
+            }
+          }
+        }
+      });
+    }
 
-    // Footer year
-    document.getElementById('current-year').textContent =
-      new Date().getFullYear();
+    // Update analysis chart
+    function updateAnalysisChart() {
+      const ctx = document.getElementById('analysisChart').getContext('2d');
+      
+      if (analysisChart) {
+        analysisChart.destroy();
+      }
+      
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+      const textColor = isDark ? '#ffffff' : '#333333';
+      
+      // Power loss breakdown data
+      const lossTypes = ['MOSFET', 'Diode', 'Inductor', 'Capacitor', 'Control'];
+      const losses = [45, 25, 20, 5, 5];
+      
+      analysisChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: lossTypes,
+          datasets: [{
+            data: losses,
+            backgroundColor: [
+              '#4e9eff',
+              '#f44336',
+              '#ff9800',
+              '#9b59b6',
+              '#4caf50'
+            ],
+            borderWidth: 2,
+            borderColor: isDark ? '#1e1e1e' : '#ffffff'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: {
+                color: textColor,
+                padding: 20
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `${context.label}: ${context.raw}% of total loss`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // Update chart colors when theme changes
+    function updateChartColors() {
+      if (waveformChart) updateWaveformChart();
+      if (efficiencyChart) updateEfficiencyChart();
+      if (analysisChart) updateAnalysisChart();
+    }
+
+    // Thermal calculation
+    function calculateThermal() {
+      const ambientTemp = parseFloat(document.getElementById('ambientTemp').value);
+      const maxTemp = parseFloat(document.getElementById('maxTemp').value);
+      const mosfetRds = parseFloat(document.getElementById('mosfetRds').value);
+      
+      // Get current values
+      const Pout = parseFloat(document.getElementById('power').value);
+      const efficiency = parseFloat(document.getElementById('efficiency').value);
+      
+      // Calculate power loss
+      const Pin = Pout / efficiency;
+      const totalLoss = Pin - Pout;
+      
+      // MOSFET loss (simplified)
+      const Iout = Pout / parseFloat(document.getElementById('vout').value);
+      const mosfetLoss = Iout * Iout * mosfetRds * 1.5; // Approximate
+      
+      // Heat dissipation
+      const heatDissipation = totalLoss * 0.8; // 80% of loss becomes heat
+      
+      // Required heatsink thermal resistance
+      const tempRise = maxTemp - ambientTemp;
+      const requiredThermalResistance = tempRise / heatDissipation;
+      
+      // Update results
+      document.getElementById('powerLoss').textContent = totalLoss.toFixed(2);
+      document.getElementById('heatDissipation').textContent = heatDissipation.toFixed(2);
+      document.getElementById('heatsink').textContent = requiredThermalResistance.toFixed(2);
+      
+      showSuccess('Thermal analysis completed!');
+    }
+
+    // Load preset values
+    function loadPreset(preset) {
+      const presets = {
+        '12v-to-5v': { vin: 12, vout: 5, power: 12, freq: 500 },
+        '24v-to-12v': { vin: 24, vout: 12, power: 100, freq: 200 },
+        '5v-to-12v': { vin: 5, vout: 12, power: 50, freq: 300 },
+        '48v-to-24v': { vin: 48, vout: 24, power: 200, freq: 150 }
+      };
+      
+      if (presets[preset]) {
+        const p = presets[preset];
+        document.getElementById('vin').value = p.vin;
+        document.getElementById('vinRange').value = p.vin;
+        document.getElementById('vout').value = p.vout;
+        document.getElementById('voutRange').value = p.vout;
+        document.getElementById('power').value = p.power;
+        document.getElementById('powerRange').value = p.power;
+        document.getElementById('frequency').value = p.freq;
+        document.getElementById('freqValue').textContent = `${p.freq} kHz`;
+        
+        // Set converter type based on voltages
+        if (p.vout < p.vin) {
+          document.getElementById('converterType').value = 'buck';
+        } else {
+          document.getElementById('converterType').value = 'boost';
+        }
+        
+        showSuccess(`Loaded ${preset.replace('-', ' ')} preset`);
+        calculateConverter();
+      }
+    }
+
+    // Component selection
+    function selectComponent(component) {
+      const messages = {
+        'inductor': 'Select inductors with current rating 20% above calculated peak current',
+        'mosfet': 'Choose MOSFET with low Rds(on) and proper gate charge for your driver',
+        'diode': 'Use Schottky diodes for low forward voltage drop',
+        'capacitor': 'Select low-ESR capacitors for better ripple performance'
+      };
+      
+      showSuccess(messages[component] || 'Component selected');
+    }
+
+    // Error and success messages
+    function showError(message) {
+      const errorDiv = document.getElementById('errorMessage');
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
+      
+      const successDiv = document.getElementById('successMessage');
+      successDiv.style.display = 'none';
+    }
+
+    function showSuccess(message) {
+      const successDiv = document.getElementById('successMessage');
+      successDiv.textContent = message;
+      successDiv.style.display = 'block';
+      
+      const errorDiv = document.getElementById('errorMessage');
+      errorDiv.style.display = 'none';
+    }
+
+    function clearMessages() {
+      document.getElementById('errorMessage').style.display = 'none';
+      document.getElementById('successMessage').style.display = 'none';
+    }
+
+    // Reset calculator
+    function resetCalculator() {
+      document.getElementById('vin').value = 24;
+      document.getElementById('vinRange').value = 24;
+      document.getElementById('vout').value = 12;
+      document.getElementById('voutRange').value = 12;
+      document.getElementById('power').value = 100;
+      document.getElementById('powerRange').value = 100;
+      document.getElementById('frequency').value = 100;
+      document.getElementById('freqValue').textContent = '100 kHz';
+      document.getElementById('converterType').value = 'buck';
+      
+      document.getElementById('resultDuty').textContent = '--';
+      document.getElementById('resultInductor').textContent = '--';
+      document.getElementById('resultCapacitor').textContent = '--';
+      document.getElementById('resultCurrent').textContent = '--';
+      
+      document.getElementById('circuitSvg').innerHTML = '';
+      clearMessages();
+      showSuccess('Calculator reset to defaults');
+    }
+
+    // Initialize
+    document.getElementById('calculateBtn').addEventListener('click', calculateConverter);
+    document.getElementById('resetBtn').addEventListener('click', resetCalculator);
+    
+    // Set current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Initialize on load
+    window.onload = function() {
+      calculateConverter();
+      setTimeout(() => {
+        updateWaveformChart();
+        updateEfficiencyChart();
+        updateAnalysisChart();
+      }, 100);
+    };
   </script>
 </body>
 </html>
