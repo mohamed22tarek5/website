@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mastering Linux Commands: A Comprehensive Guide</title>
+  <title>Mastering Linux Commands: Interactive Learning Platform</title>
   <style>
     :root {
       --bg: #0b1020;
@@ -12,10 +12,12 @@
       --muted: #a8b1c7;
       --accent: #7cc0ff;
       --accent-2: #9be2b1;
+      --warning: #ff9b7c;
       --border: #233056;
       --code-bg: #0f1630;
       --kbd-bg: #1a2347;
       --search-bg: #0c142b;
+      --success: #4caf50;
     }
     
     /* Light mode variables */
@@ -26,10 +28,12 @@
       --muted: #718096;
       --accent: #3182ce;
       --accent-2: #38a169;
+      --warning: #e53e3e;
       --border: #e2e8f0;
       --code-bg: #f7fafc;
       --kbd-bg: #edf2f7;
       --search-bg: #ffffff;
+      --success: #48bb78;
     }
 
     * { box-sizing: border-box; }
@@ -90,7 +94,7 @@
     nav .toc-sub a { color: var(--muted); font-size: .92rem; padding-left: 14px; }
 
     main { border: 1px solid var(--border); background: var(--card); border-radius: 14px; padding: 24px; }
-    section { scroll-margin-top: 96px; }
+    section { scroll-margin-top: 96px; margin-bottom: 32px; }
     h2 { margin-top: 32px; border-bottom: 1px dashed var(--border); padding-bottom: 8px; }
     h3 { color: var(--accent); margin-top: 20px; }
     p { margin: 8px 0 14px; }
@@ -283,16 +287,55 @@
       color: #ffd700;
     }
     
-    /* Command execution simulation */
+    /* Terminal simulation */
     .terminal {
       background: #1a1a1a;
-      border-radius: 8px;
-      padding: 15px;
+      border-radius: 12px;
+      padding: 20px;
       margin: 15px 0;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       color: #00ff00;
       position: relative;
       overflow: hidden;
+      border: 1px solid #333;
+    }
+    
+    .terminal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #333;
+    }
+    
+    .terminal-title {
+      color: #ccc;
+      font-weight: 600;
+    }
+    
+    .terminal-controls {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .terminal-btn {
+      background: #333;
+      border: none;
+      color: #ccc;
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .terminal-btn:hover {
+      background: #444;
+    }
+    
+    .terminal-content {
+      min-height: 100px;
     }
     
     .terminal-prompt {
@@ -306,6 +349,7 @@
     .terminal-output {
       color: #cccccc;
       margin-top: 10px;
+      white-space: pre-wrap;
     }
     
     .run-btn {
@@ -348,6 +392,151 @@
       transition: width 0.5s ease;
     }
     
+    /* Quiz component */
+    .quiz-container {
+      background: rgba(124,192,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .quiz-question {
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+    
+    .quiz-options {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .quiz-option:hover {
+      background: var(--kbd-bg);
+    }
+    
+    .quiz-option.correct {
+      background: rgba(76,175,80,0.1);
+      border-color: var(--success);
+    }
+    
+    .quiz-option.incorrect {
+      background: rgba(244,67,54,0.1);
+      border-color: var(--warning);
+    }
+    
+    .quiz-feedback {
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    .quiz-feedback.correct {
+      background: rgba(76,175,80,0.1);
+      border: 1px solid var(--success);
+      color: var(--success);
+    }
+    
+    .quiz-feedback.incorrect {
+      background: rgba(244,67,54,0.1);
+      border: 1px solid var(--warning);
+      color: var(--warning);
+    }
+    
+    /* Practice area */
+    .practice-container {
+      background: rgba(155,226,177,0.06);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .practice-prompt {
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--accent-2);
+    }
+    
+    .practice-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--card);
+      color: var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      margin-bottom: 10px;
+    }
+    
+    .practice-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    
+    .practice-feedback {
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    /* Challenge badges */
+    .challenge-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-left: 10px;
+      font-weight: 600;
+    }
+    
+    /* Command reference table */
+    .ref-table {
+      margin: 20px 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .ref-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+    }
+    
+    .ref-row:last-child {
+      border-bottom: none;
+    }
+    
+    .ref-cmd {
+      font-weight: 600;
+      color: var(--accent-2);
+    }
+    
+    .ref-desc {
+      color: var(--muted);
+    }
+    
     /* Responsive improvements */
     @media (max-width: 768px) {
       .header .wrap {
@@ -363,6 +552,11 @@
       .search-container {
         width: 100%;
       }
+      
+      .ref-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
     }
     
     @media (max-width: 480px) {
@@ -377,6 +571,65 @@
       main {
         padding: 15px;
       }
+      
+      .terminal {
+        padding: 15px;
+      }
+    }
+    
+    /* Section completion indicator */
+    .section-complete {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--success);
+      color: white;
+      text-align: center;
+      line-height: 20px;
+      margin-left: 10px;
+      font-size: 0.75rem;
+    }
+    
+    /* Quick reference cards */
+    .ref-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .ref-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 15px;
+      transition: transform 0.3s ease;
+    }
+    
+    .ref-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .ref-card-title {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .ref-card-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .ref-card-list li {
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .ref-card-list li:last-child {
+      border-bottom: none;
     }
   </style>
 </head>
@@ -384,8 +637,8 @@
   <header>
     <div class="wrap">
       <div>
-        <h1>Mastering Linux Commands <span class="chap-tag">Reference</span></h1>
-        <div class="subtitle">Concise, example-driven, beginner ↔ pro</div>
+        <h1>Mastering Linux Commands <span class="chap-tag">Interactive</span></h1>
+        <div class="subtitle">Learn by doing with interactive exercises and quizzes</div>
       </div>
       <div class="header-actions">
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
@@ -403,9 +656,36 @@
       
       <!-- Progress tracker -->
       <div class="progress-container">
-        <div>Your Progress: <span id="progress-percent">0%</span></div>
+        <div>Learning Progress: <span id="progress-percent">0%</span></div>
         <div class="progress-bar">
           <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+      
+      <!-- Quick Reference -->
+      <div style="margin-top: 20px;">
+        <h3>Quick Reference</h3>
+        <div class="ref-cards">
+          <div class="ref-card">
+            <div class="ref-card-title">Essential Commands</div>
+            <ul class="ref-card-list">
+              <li><strong>ls</strong> - List files</li>
+              <li><strong>cd</strong> - Change directory</li>
+              <li><strong>pwd</strong> - Print working directory</li>
+              <li><strong>cp</strong> - Copy files</li>
+              <li><strong>mv</strong> - Move/rename files</li>
+            </ul>
+          </div>
+          <div class="ref-card">
+            <div class="ref-card-title">File Management</div>
+            <ul class="ref-card-list">
+              <li><strong>find</strong> - Search files</li>
+              <li><strong>grep</strong> - Search text</li>
+              <li><strong>tar</strong> - Archive files</li>
+              <li><strong>chmod</strong> - Change permissions</li>
+              <li><strong>chown</strong> - Change ownership</li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
@@ -414,65 +694,235 @@
     <main id="content">
       <!-- Search functionality -->
       <div class="search-container">
-        <input type="text" id="search-input" class="search-input" placeholder="Search commands (e.g., 'grep', 'find', 'permissions')">
+        <input type="text" id="search-input" class="search-input" placeholder="🔍 Search commands (e.g., 'grep', 'find', 'permissions')">
         <div class="search-results" id="search-results"></div>
       </div>
       
       <section id="ch1">
         <h2>Chapter 1: Navigating the Filesystem</h2>
+        <p>Learn the basics of moving around and understanding your Linux environment.</p>
+        
+        <!-- Terminal Simulation -->
+        <div class="terminal" id="terminal-1">
+          <div class="terminal-header">
+            <div class="terminal-title">Linux Terminal</div>
+            <div class="terminal-controls">
+              <button class="terminal-btn" onclick="runTerminalCommand('terminal-1', 'pwd')">Run pwd</button>
+              <button class="terminal-btn" onclick="runTerminalCommand('terminal-1', 'ls -la')">Run ls -la</button>
+              <button class="terminal-btn" onclick="resetTerminal('terminal-1')">Clear</button>
+            </div>
+          </div>
+          <div class="terminal-content">
+            <div class="terminal-output" id="output-1">
+              user@linux:~$ <span class="terminal-prompt">Type 'pwd' to see current directory</span>
+            </div>
+          </div>
+        </div>
+
         <h3 id="pwd"><span class="cmd">pwd</span> — Print Working Directory</h3>
         <p>Show the absolute path of the current directory.</p>
         <pre><button class="copy" data-clipboard>Copy</button><code>pwd
-# /home/user</code></pre>
+# Output: /home/user</code></pre>
         <div class="note">Displays the full path from the root to your current location.</div>
+        
+        <!-- Practice Exercise -->
+        <div class="practice-container">
+          <div class="practice-prompt">💡 Practice: What command would you use to display your current directory?</div>
+          <input type="text" class="practice-input" id="practice-pwd" placeholder="Type your answer here...">
+          <button class="run-btn" onclick="checkPractice('practice-pwd', 'pwd')">Check Answer</button>
+          <div class="practice-feedback" id="feedback-pwd"></div>
+        </div>
 
         <h3 id="cd"><span class="cmd">cd [directory]</span> — Change Directory</h3>
-        <pre><button class="copy" data-clipboard>Copy</button><code>cd /home/user/Documents</code></pre>
-        <div class="tip">Use <code>cd ..</code> to go up one level.</div>
+        <pre><button class="copy" data-clipboard>Copy</button><code>cd /home/user/Documents
+cd ..    # Go up one level
+cd ~     # Go to home directory
+cd -     # Go to previous directory</code></pre>
+        <div class="tip">Use <code>cd ..</code> to go up one level, <code>cd ~</code> for home directory.</div>
 
         <h3 id="ls"><span class="cmd">ls</span> — List Directory Contents</h3>
         <pre><button class="copy" data-clipboard>Copy</button><code>ls
-ls -la   # long format incl. hidden files</code></pre>
+ls -la   # Long format with hidden files
+ls -lh   # Human readable file sizes
+ls -t    # Sort by modification time</code></pre>
+        
+        <!-- Quiz -->
+        <div class="quiz-container">
+          <div class="quiz-question">Which ls option shows hidden files?</div>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="true" onclick="checkQuiz(this, 'Correct! -a shows hidden files')">
+              <span>A.</span> ls -a
+            </div>
+            <div class="quiz-option" onclick="checkQuiz(this, 'Incorrect. -l shows long format')">
+              <span>B.</span> ls -l
+            </div>
+            <div class="quiz-option" onclick="checkQuiz(this, 'Incorrect. -h shows human-readable sizes')">
+              <span>C.</span> ls -h
+            </div>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
       </section>
 
       <section id="ch2">
-        <h2>Chapter 2: Getting Help and Finding Commands</h2>
-        <h3 id="man"><span class="cmd">man [command]</span> — Manual Pages</h3>
-        <pre><button class="copy" data-clipboard>Copy</button><code>man ls</code></pre>
-        
-        <h3 id="which"><span class="cmd">which [command]</span> — Locate Executable</h3>
-        <pre><button class="copy" data-clipboard>Copy</button><code>which python
-# /usr/bin/python</code></pre>
+        <h2>Chapter 2: File Operations</h2>
+        <p>Learn how to create, copy, move, and delete files and directories.</p>
+
+        <h3 id="mkdir"><span class="cmd">mkdir [directory]</span> — Create Directory</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>mkdir new_folder
+mkdir -p parent/child/grandchild   # Create nested directories
+mkdir dir1 dir2 dir3   # Create multiple directories</code></pre>
+
+        <h3 id="rm"><span class="cmd">rm [file]</span> — Remove Files/Directories</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>rm file.txt
+rm -r directory/      # Remove directory recursively
+rm -f file.txt        # Force remove without confirmation
+rm -i file.txt        # Interactive mode (ask before removing)</code></pre>
+        <div class="warn">⚠️ Be careful with rm -rf! It can delete your entire system if used incorrectly.</div>
+
+        <h3 id="cp"><span class="cmd">cp [src] [dest]</span> — Copy Files</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>cp file.txt backup/
+cp -r source/ destination/   # Copy directories recursively
+cp -i file.txt backup/       # Interactive (ask before overwrite)
+cp -v file.txt backup/       # Verbose (show what's being copied)</code></pre>
+
+        <!-- Challenge Exercise -->
+        <div class="practice-container">
+          <div class="practice-prompt"><span class="challenge-badge">Challenge</span> Create a backup of a directory with all its contents</div>
+          <input type="text" class="practice-input" id="practice-cp" placeholder="Type your command here...">
+          <button class="run-btn" onclick="checkPractice('practice-cp', 'cp -r source backup')">Check Answer</button>
+          <div class="practice-feedback" id="feedback-cp"></div>
+        </div>
       </section>
 
       <section id="ch3">
-        <h2>Chapter 3: Managing Directories and Files</h2>
-        <h3 id="mkdir"><span class="cmd">mkdir [directory]</span> — Create Directory</h3>
-        <pre><button class="copy" data-clipboard>Copy</button><code>mkdir new_folder</code></pre>
-        
-        <h3 id="rmdir"><span class="cmd">rmdir [directory]</span> — Remove Empty Directory</h3>
-        <pre><button class="copy" data-clipboard>Copy</button><code>rmdir old_folder
-# Use rm -r for non-empty directories</code></pre>
-        
-        <h3 id="rm"><span class="cmd">rm [file]</span> — Remove File</h3>
-        <pre><button class="copy" data-clipboard>Copy</button><code>rm file.txt
-rm -i file.txt   # interactive</code></pre>
-        
-        <h3 id="cp"><span class="cmd">cp [src] [dest]</span> — Copy</h3>
-        <pre><button class="copy" data-clipboard>Copy</button><code>cp file.txt /home/user/backup/
-cp -r dir/ /backup/   # recursive</code></pre>
-        
-        <h3 id="mv"><span class="cmd">mv [src] [dest]</span> — Move/Rename</h3>
-        <pre><button class="copy" data-clipboard>Copy</button><code>mv file.txt ~/Documents/
-mv oldname.txt newname.txt</code></pre>
-        
-        <h3 id="touch"><span class="cmd">touch [file]</span> — Create/Modify Timestamp</h3>
-        <pre><button class="copy" data-clipboard>Copy</button><code>touch newfile.txt</code></pre>
+        <h2>Chapter 3: Text Processing</h2>
+        <p>Powerful commands for working with text files.</p>
+
+        <h3 id="cat"><span class="cmd">cat [file]</span> — Concatenate and Display</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>cat file.txt
+cat file1.txt file2.txt > combined.txt   # Combine files
+cat > newfile.txt   # Create new file (Ctrl+D to save)</code></pre>
+
+        <h3 id="grep"><span class="cmd">grep [pattern] [file]</span> — Search Text</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>grep "error" logfile.txt
+grep -r "TODO" ./src/   # Recursive search
+grep -i "warning" log.txt   # Case-insensitive
+grep -v "success" log.txt   # Invert match (show non-matching lines)</code></pre>
+
+        <!-- Terminal Simulation with grep -->
+        <div class="terminal" id="terminal-2">
+          <div class="terminal-header">
+            <div class="terminal-title">Search Practice</div>
+            <div class="terminal-controls">
+              <button class="terminal-btn" onclick="runGrepExample('terminal-2')">Run Example</button>
+              <button class="terminal-btn" onclick="resetTerminal('terminal-2')">Clear</button>
+            </div>
+          </div>
+          <div class="terminal-content">
+            <div class="terminal-output" id="output-2">
+              user@linux:~$ <span class="terminal-prompt">Let's search for errors in a log file</span>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <!-- More sections would continue here... -->
-      
-      <p class="footer">Tip: Use this as an in-terminal companion with <code>tldr</code> pages (<code>sudo apt install tldr</code> then <code>tldr tar</code>).</p>
+      <section id="ch4">
+        <h2>Chapter 4: Permissions and Ownership</h2>
+        <p>Understand Linux file permissions and security.</p>
+
+        <!-- Permissions Reference Table -->
+        <div class="ref-table">
+          <div class="ref-row">
+            <div class="ref-cmd">Permission</div>
+            <div class="ref-desc">Description</div>
+          </div>
+          <div class="ref-row">
+            <div class="ref-cmd">r (4)</div>
+            <div class="ref-desc">Read permission</div>
+          </div>
+          <div class="ref-row">
+            <div class="ref-cmd">w (2)</div>
+            <div class="ref-desc">Write permission</div>
+          </div>
+          <div class="ref-row">
+            <div class="ref-cmd">x (1)</div>
+            <div class="ref-desc">Execute permission</div>
+          </div>
+        </div>
+
+        <h3 id="chmod"><span class="cmd">chmod [permissions] [file]</span> — Change Permissions</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>chmod 755 script.sh
+chmod u+x file.txt    # Add execute for user
+chmod go-w file.txt   # Remove write for group and others
+chmod -R 644 dir/     # Recursive change</code></pre>
+
+        <h3 id="chown"><span class="cmd">chown [user]:[group] [file]</span> — Change Ownership</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>chown user:group file.txt
+chown user file.txt    # Change user only
+chown :group file.txt  # Change group only
+chown -R user:group dir/  # Recursive change</code></pre>
+      </section>
+
+      <section id="ch5">
+        <h2>Chapter 5: Process Management</h2>
+        <p>Control and monitor running processes.</p>
+
+        <h3 id="ps"><span class="cmd">ps</span> — Process Status</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>ps aux          # Show all processes
+ps -ef          # Full format listing
+ps aux | grep nginx  # Find specific process</code></pre>
+
+        <h3 id="kill"><span class="cmd">kill [signal] [pid]</span> — Terminate Processes</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>kill 1234        # Send TERM signal (default)
+kill -9 1234    # Force kill (SIGKILL)
+killall nginx   # Kill all processes named nginx</code></pre>
+        <div class="warn">⚠️ SIGKILL (-9) cannot be caught or ignored by the process. Use as last resort.</div>
+      </section>
+
+      <!-- Comprehensive Quiz -->
+      <section id="final-quiz">
+        <h2>Comprehensive Quiz</h2>
+        <p>Test your knowledge of Linux commands with this interactive quiz.</p>
+        
+        <div class="quiz-container">
+          <div class="quiz-question">1. Which command would you use to find files modified in the last 24 hours?</div>
+          <div class="quiz-options">
+            <div class="quiz-option" onclick="checkFinalQuiz(this, 1, 'Correct! find with -mtime is perfect for this')">
+              <span>A.</span> find . -mtime -1
+            </div>
+            <div class="quiz-option" onclick="checkFinalQuiz(this, 1, 'Incorrect. ls -l shows details but not based on time')">
+              <span>B.</span> ls -l
+            </div>
+            <div class="quiz-option" onclick="checkFinalQuiz(this, 1, 'Incorrect. This searches for text, not files by time')">
+              <span>C.</span> grep "24 hours"
+            </div>
+          </div>
+        </div>
+        
+        <div class="quiz-container">
+          <div class="quiz-question">2. How would you make a script executable for all users?</div>
+          <div class="quiz-options">
+            <div class="quiz-option" onclick="checkFinalQuiz(this, 2, 'Incorrect. This only allows user to execute')">
+              <span>A.</span> chmod u+x script.sh
+            </div>
+            <div class="quiz-option" onclick="checkFinalQuiz(this, 2, 'Correct! a+x adds execute for all (user, group, others)')">
+              <span>B.</span> chmod a+x script.sh
+            </div>
+            <div class="quiz-option" onclick="checkFinalQuiz(this, 2, 'Incorrect. This changes ownership, not permissions')">
+              <span>C.</span> chown user script.sh
+            </div>
+          </div>
+        </div>
+        
+        <button class="btn btn-primary" onclick="calculateQuizScore()" style="width: 100%; padding: 15px; margin: 20px 0;">
+          <i class="fas fa-chart-bar"></i> Calculate My Score
+        </button>
+        
+        <div id="quiz-score" style="text-align: center; font-size: 1.2rem; display: none;"></div>
+      </section>
+
+      <p class="footer">Tip: Practice these commands in a safe environment like a virtual machine or Docker container. Always use caution with system-level commands.</p>
     </main>
   </div>
 
@@ -616,28 +1066,41 @@ mv oldname.txt newname.txt</code></pre>
     // Progress tracking
     function updateProgress() {
       const sections = document.querySelectorAll('section');
-      const readSections = JSON.parse(localStorage.getItem('readSections') || '[]');
-      const progressPercent = Math.round((readSections.length / sections.length) * 100);
+      const completedSections = JSON.parse(localStorage.getItem('completedSections') || '[]');
+      const progressPercent = Math.round((completedSections.length / sections.length) * 100);
       
       document.getElementById('progress-percent').textContent = `${progressPercent}%`;
       document.getElementById('progress-fill').style.width = `${progressPercent}%`;
     }
     
-    // Mark section as read when scrolled into view
+    // Mark section as completed when scrolled into view and quiz taken
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const sectionId = entry.target.id;
-          const readSections = JSON.parse(localStorage.getItem('readSections') || '[]');
-          
-          if (!readSections.includes(sectionId)) {
-            readSections.push(sectionId);
-            localStorage.setItem('readSections', JSON.stringify(readSections));
-            updateProgress();
-          }
+          markSectionVisited(sectionId);
         }
       });
     }, { threshold: 0.5 });
+    
+    function markSectionVisited(sectionId) {
+      const visitedSections = JSON.parse(localStorage.getItem('visitedSections') || '[]');
+      if (!visitedSections.includes(sectionId)) {
+        visitedSections.push(sectionId);
+        localStorage.setItem('visitedSections', JSON.stringify(visitedSections));
+        updateProgress();
+      }
+    }
+    
+    // Mark section as completed when quiz passed
+    function markSectionCompleted(sectionId) {
+      const completedSections = JSON.parse(localStorage.getItem('completedSections') || '[]');
+      if (!completedSections.includes(sectionId)) {
+        completedSections.push(sectionId);
+        localStorage.setItem('completedSections', JSON.stringify(completedSections));
+        updateProgress();
+      }
+    }
     
     // Observe all sections
     document.querySelectorAll('section').forEach(section => {
@@ -646,6 +1109,126 @@ mv oldname.txt newname.txt</code></pre>
     
     // Initialize progress
     updateProgress();
+    
+    // Terminal Simulation Functions
+    function runTerminalCommand(terminalId, command) {
+      const terminal = document.getElementById(terminalId);
+      const output = terminal.querySelector('.terminal-output');
+      const responses = {
+        'pwd': '/home/user/projects',
+        'ls -la': 'total 48\ndrwxr-xr-x 6 user user  4096 Jan 10 10:30 .\ndrwxr-xr-x 3 user user  4096 Jan  5 09:15 ..\n-rw-r--r-- 1 user user   220 Jan  5 09:15 .bash_logout\n-rw-r--r-- 1 user user  3771 Jan  5 09:15 .bashrc\n-rw-r--r-- 1 user user   807 Jan  5 09:15 .profile\ndrwxr-xr-x 2 user user  4096 Jan 10 10:30 Documents\ndrwxr-xr-x 2 user user  4096 Jan 10 10:30 Downloads\ndrwxr-xr-x 2 user user  4096 Jan 10 10:30 Pictures',
+        'cd Documents': 'Changing to Documents directory...',
+        'ls': 'file1.txt  file2.txt  report.pdf'
+      };
+      
+      const response = responses[command] || `Command executed: ${command}`;
+      output.innerHTML = `<span class="terminal-prompt">user@linux:~$</span> <span class="terminal-command">${command}</span>\n<span class="terminal-output">${response}</span>`;
+    }
+    
+    function runGrepExample(terminalId) {
+      const terminal = document.getElementById(terminalId);
+      const output = terminal.querySelector('.terminal-output');
+      output.innerHTML = `<span class="terminal-prompt">user@linux:~$</span> <span class="terminal-command">grep -i "error" /var/log/syslog</span>\n<span class="terminal-output">Jan 10 10:15:32 linux kernel: [ERROR] Disk I/O failure on sda1\nJan 10 10:16:45 linux systemd: [ERROR] Failed to start service</span>`;
+    }
+    
+    function resetTerminal(terminalId) {
+      const terminal = document.getElementById(terminalId);
+      const output = terminal.querySelector('.terminal-output');
+      output.innerHTML = '<span class="terminal-prompt">user@linux:~$</span> <span class="terminal-prompt">Terminal cleared. Ready for commands.</span>';
+    }
+    
+    // Quiz Functions
+    let correctAnswers = 0;
+    
+    function checkQuiz(element, feedback) {
+      const isCorrect = element.getAttribute('data-correct') === 'true';
+      const feedbackDiv = element.parentElement.nextElementSibling;
+      
+      // Clear all selections
+      element.parentElement.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+      });
+      
+      // Mark this option
+      if (isCorrect) {
+        element.classList.add('correct');
+        feedbackDiv.textContent = feedback;
+        feedbackDiv.className = 'quiz-feedback correct';
+        markSectionCompleted('ch1');
+      } else {
+        element.classList.add('incorrect');
+        feedbackDiv.textContent = feedback;
+        feedbackDiv.className = 'quiz-feedback incorrect';
+      }
+      
+      feedbackDiv.style.display = 'block';
+    }
+    
+    function checkFinalQuiz(element, questionNum, feedback) {
+      const isCorrect = element.textContent.includes('find . -mtime -1') || 
+                       element.textContent.includes('chmod a+x script.sh');
+      
+      // Clear other options for this question
+      const container = element.parentElement.parentElement;
+      container.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+      });
+      
+      if (isCorrect) {
+        element.classList.add('correct');
+        correctAnswers++;
+      } else {
+        element.classList.add('incorrect');
+      }
+      
+      // Show feedback
+      const feedbackDiv = container.querySelector('.quiz-feedback');
+      if (feedbackDiv) {
+        feedbackDiv.textContent = feedback;
+        feedbackDiv.className = 'quiz-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+        feedbackDiv.style.display = 'block';
+      }
+    }
+    
+    function calculateQuizScore() {
+      const totalQuestions = 2;
+      const score = Math.round((correctAnswers / totalQuestions) * 100);
+      const scoreDiv = document.getElementById('quiz-score');
+      
+      scoreDiv.innerHTML = `
+        <div style="background: rgba(124,192,255,0.1); padding: 20px; border-radius: 12px; margin: 20px 0;">
+          <h3 style="color: var(--accent); margin-top: 0;">Quiz Result: ${score}%</h3>
+          <p>You got ${correctAnswers} out of ${totalQuestions} correct!</p>
+          ${score >= 70 ? 
+            '<div style="color: var(--success); font-weight: bold;">🎉 Great job! You\'re mastering Linux commands!</div>' :
+            '<div style="color: var(--warning);">📚 Keep practicing! Review the chapters and try again.</div>'
+          }
+        </div>
+      `;
+      scoreDiv.style.display = 'block';
+      markSectionCompleted('final-quiz');
+    }
+    
+    // Practice Exercise Functions
+    function checkPractice(inputId, correctAnswer) {
+      const input = document.getElementById(inputId);
+      const feedback = document.getElementById('feedback-' + inputId.split('-')[1]);
+      const userAnswer = input.value.trim().toLowerCase();
+      
+      if (userAnswer === correctAnswer.toLowerCase()) {
+        feedback.textContent = '✅ Correct! Well done!';
+        feedback.style.backgroundColor = 'rgba(76,175,80,0.1)';
+        feedback.style.color = 'var(--success)';
+        feedback.style.border = '1px solid var(--success)';
+      } else {
+        feedback.textContent = `Try again! Hint: The command is "${correctAnswer}"`;
+        feedback.style.backgroundColor = 'rgba(244,67,54,0.1)';
+        feedback.style.color = 'var(--warning)';
+        feedback.style.border = '1px solid var(--warning)';
+      }
+      
+      feedback.style.display = 'block';
+    }
     
     // Explanations per command block
     (function injectExplanations(){
@@ -665,9 +1248,41 @@ mv oldname.txt newname.txt</code></pre>
           when: ['Quick overview of contents.', 'Use -la to include hidden files and metadata.'],
           pitfalls: ['Color/format may differ by distro; use -h with -l for human sizes.']
         },
-        man: { what: 'Opens the manual page for a command.', when: ['Learn flags, env vars, and examples.'], pitfalls: ['Use /term to search and n/N to navigate.'] },
-        which: { what: 'Shows the full path to an executable resolved in your $PATH.', when: ['Confirm which python/node is used.'], pitfalls: ['Aliases/functions won\'t appear; use type -a cmd to see all.'] },
-        // ... rest of explanations would continue here
+        mkdir: {
+          what: 'Creates new directories in the filesystem.',
+          when: ['Organizing project structure.', 'Creating temporary directories for scripts.'],
+          pitfalls: ['mkdir without -p fails if parent doesn\'t exist.']
+        },
+        rm: {
+          what: 'Removes files and directories permanently.',
+          when: ['Cleaning up temporary files.', 'Removing old backup directories.'],
+          pitfalls: ['rm -rf / will destroy your system! Always double-check paths.']
+        },
+        cp: {
+          what: 'Copies files and directories from source to destination.',
+          when: ['Creating backups.', 'Duplicating configuration files.'],
+          pitfalls: ['cp without -r won\'t copy directories. Use -i to prevent overwrites.']
+        },
+        grep: {
+          what: 'Searches for patterns in text files.',
+          when: ['Finding errors in logs.', 'Searching for specific code patterns.'],
+          pitfalls: ['Use -i for case-insensitive, -v to invert matches.']
+        },
+        chmod: {
+          what: 'Changes file permissions (read, write, execute).',
+          when: ['Making scripts executable.', 'Securing sensitive files.'],
+          pitfalls: ['Numeric mode (755) vs symbolic (u+x). Both are valid.']
+        },
+        ps: {
+          what: 'Displays information about running processes.',
+          when: ['Monitoring system resources.', 'Finding process IDs for termination.'],
+          pitfalls: ['ps aux shows all processes, ps -ef shows full format.']
+        },
+        kill: {
+          what: 'Sends signals to processes (default: TERM to terminate).',
+          when: ['Stopping unresponsive programs.', 'Reloading daemons with HUP signal.'],
+          pitfalls: ['SIGKILL (-9) bypasses cleanup. Try SIGTERM (15) first.']
+        }
       };
 
       // For each h3, attach an explanation box after the first following <pre>
@@ -687,6 +1302,18 @@ mv oldname.txt newname.txt</code></pre>
         pre.insertAdjacentElement('afterend', box);
       });
     })();
+    
+    // Initialize with some visited sections
+    window.onload = function() {
+      // Mark first section as visited by default
+      markSectionVisited('ch1');
+      
+      // Add some completed sections if quizzes were done previously
+      const quizScore = localStorage.getItem('quizScore');
+      if (quizScore && quizScore > 70) {
+        markSectionCompleted('final-quiz');
+      }
+    };
   </script>
   
   <!-- Font Awesome for icons -->
