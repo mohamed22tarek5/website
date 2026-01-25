@@ -160,7 +160,7 @@ Allow: /
 User-agent: GPTZeroBot
 Allow: /
 
-# منع باقي البوتات من الوصول إلى مسارات محددة
+
 User-agent: *
 Disallow: /admin/
 Disallow: /test/
@@ -172,8 +172,7 @@ Disallow: /api-key.txt
 Disallow: /Medication-Reminder.html
 Disallow: /to-do-list.html
 
-# استثناء: السماح بصفحة واحدة داخل /tools/
-Allow: /tools/electrical-calculation.html
-Disallow: /tools/
+Allow: /tools/
+Disallow: /tools/electrical-calculation.html
 
 Sitemap: https://website-mohamed.vercel.app
