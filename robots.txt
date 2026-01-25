@@ -1,188 +1,179 @@
-# السماح للبوتات الشهيرة للذكاء الاصطناعي
 User-agent: ChatGPT-User
-Allow:
+Allow: /
 
 User-agent: GPTBot
-Allow:
+Allow: /
 
 User-agent: OAI-SearchBot
-Allow:
+Allow: /
 
 User-agent: ClaudeBot
-Allow:
+Allow: /
 
 User-agent: Claude-SearchBot
-Allow:
+Allow: /
 
 User-agent: PerplexityBot
-Allow:
+Allow: /
 
 User-agent: Anthropic-Bot
-Allow:
+Allow: /
 
 User-agent: Google-Extended
-Allow:
+Allow: /
 
 User-agent: Googlebot
-Allow:
+Allow: /
 
 User-agent: Bingbot
-Allow:
+Allow: /
 
 User-agent: GoogleOther
-Allow:
+Allow: /
 
 User-agent: Bard
-Allow:
+Allow: /
 
 User-agent: Gemini
-Allow:
+Allow: /
 
 User-agent: Claude
-Allow:
+Allow: /
 
 User-agent: Poe
-Allow:
+Allow: /
 
 User-agent: DeepSeekBot
-Allow:
+Allow: /
 
 User-agent: GrokBot
-Allow:
+Allow: /
 
 User-agent: QwenBot
-Allow:
+Allow: /
 
 User-agent: ForefrontBot
-Allow:
+Allow: /
 
 User-agent: ArabyBot
-Allow:
+Allow: /
 
 User-agent: KattebBot
-Allow:
+Allow: /
 
 User-agent: LisanBot
-Allow:
+Allow: /
 
 User-agent: QuillBot
-Allow:
+Allow: /
 
 User-agent: WordtuneBot
-Allow:
+Allow: /
 
 User-agent: RytrBot
-Allow:
+Allow: /
 
 User-agent: CopyAI
-Allow:
+Allow: /
 
 User-agent: BearlyBot
-Allow:
+Allow: /
 
 User-agent: ChatPDFBot
-Allow:
+Allow: /
 
 User-agent: AskYourPDFBot
-Allow:
+Allow: /
 
 User-agent: HiPDFBot
-Allow:
+Allow: /
 
 User-agent: ChatDocBot
-Allow:
+Allow: /
 
 User-agent: TTSMakerBot
-Allow:
+Allow: /
 
 User-agent: MurfAI
-Allow:
+Allow: /
 
 User-agent: LovoAI
-Allow:
+Allow: /
 
 User-agent: ElevenLabsBot
-Allow:
+Allow: /
 
 User-agent: TranskriptorBot
-Allow:
+Allow: /
 
 User-agent: ResembleBot
-Allow:
+Allow: /
 
 User-agent: KrispBot
-Allow:
+Allow: /
 
 User-agent: D-IDBot
-Allow:
+Allow: /
 
 User-agent: FlikiBot
-Allow:
+Allow: /
 
 User-agent: VideoAIBot
-Disallow:
+Disallow: /
 
 User-agent: RunwayMLBot
-Allow:
+Allow: /
 
 User-agent: SynthesiaBot
-Allow:
+Allow: /
 
 User-agent: SteveAIBot
-Allow:
+Allow: /
 
 User-agent: MoovlyBot
-Allow:
+Allow: /
 
 User-agent: VEEDBot
-Allow:
+Allow: /
 
 User-agent: PapercupBot
-Allow:
+Allow: /
 
 User-agent: KickresumeBot
-Allow:
+Allow: /
 
 User-agent: FirefliesBot
-Allow:
+Allow: /
 
 User-agent: HumataBot
-Allow:
+Allow: /
 
 User-agent: AiterBot
-Allow:
+Allow: /
 
 User-agent: BeulrBot
-Allow:
+Allow: /
 
 User-agent: CVLoginBot
-Allow:
+Allow: /
 
 User-agent: GPTZeroBot
-Allow:
-
-# منع باقي البوتات غير المذكورة
-User-agent: *
 Allow: /
+
+# منع باقي البوتات من الوصول إلى مسارات محددة
+User-agent: *
 Disallow: /admin/
 Disallow: /test/
 Disallow: /private/
 Disallow: /backup/
-
-User-agent: *
 Disallow: /secret.html
 Disallow: /config.js
 Disallow: /api-key.txt
-
-User-agent: *
-Disallow: /tools/
-Allow: /tools/electrical-calculation.html
-
-
-Sitemap: https://your-domain.com/sitemap.xml
-
-
-# Block temporary tools
 Disallow: /Medication-Reminder.html
 Disallow: /to-do-list.html
 
+# استثناء: السماح بصفحة واحدة داخل /tools/
+Allow: /tools/electrical-calculation.html
+Disallow: /tools/
+
+Sitemap: https://website-mohamed.vercel.app
