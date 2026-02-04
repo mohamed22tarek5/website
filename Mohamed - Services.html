@@ -70,6 +70,22 @@
       transition: background-color 0.5s ease;
     }
 
+    /* Skip link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary-color);
+      color: white;
+      padding: 8px;
+      z-index: 1001;
+      text-decoration: none;
+    }
+    
+    .skip-link:focus {
+      top: 0;
+    }
+
     /* Typography */
     h1, h2, h3, h4, h5, h6 {
       font-weight: 600;
@@ -193,6 +209,20 @@
       cursor: pointer;
       z-index: 1001;
       padding: 10px;
+      background: none;
+      border: none;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
     }
 
     .bar {
@@ -261,11 +291,13 @@
       display: flex;
       flex-direction: column;
       height: 100%;
+      border: 1px solid transparent;
     }
 
     .service-card:hover {
       transform: translateY(-10px);
       box-shadow: var(--box-shadow-hover);
+      border-color: var(--primary-color);
     }
 
     .service-icon {
@@ -273,10 +305,11 @@
       color: var(--primary-color);
       margin-bottom: 20px;
       transition: var(--transition-speed);
+      display: inline-block;
     }
 
     .service-card:hover .service-icon {
-      transform: scale(1.1);
+      transform: scale(1.1) rotate(5deg);
     }
 
     .service-title {
@@ -320,11 +353,16 @@
       font-weight: 500;
       transition: all var(--transition-speed) ease;
       margin-top: 15px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
     }
 
     .service-cta:hover {
       background-color: var(--primary-dark);
       transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
     }
 
     /* Service Modal */
@@ -371,10 +409,17 @@
       cursor: pointer;
       z-index: 10;
       transition: color var(--transition-speed) ease;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
     }
 
     .modal-close:hover {
       color: var(--primary-color);
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
     .modal-body {
@@ -429,13 +474,18 @@
       margin-top: 30px;
     }
 
-    /* Contact Form */
+    /* Contact Section */
+    .contact-section {
+      padding: 100px 0;
+    }
+
     .contact-form {
       background-color: var(--card-dark);
       border-radius: var(--border-radius);
       padding: 40px;
       box-shadow: var(--box-shadow);
-      margin-top: 50px;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     .form-group {
@@ -493,6 +543,7 @@
     /* Testimonials Section */
     .testimonials {
       background-color: var(--background-dark);
+      padding: 100px 0;
     }
 
     .testimonial-grid {
@@ -518,6 +569,19 @@
       font-style: italic;
       margin-bottom: 20px;
       color: var(--text-muted);
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .testimonial-text::before {
+      content: '"';
+      position: absolute;
+      left: 0;
+      top: -10px;
+      font-size: 3em;
+      color: var(--primary-color);
+      opacity: 0.3;
+      font-family: serif;
     }
 
     .testimonial-author {
@@ -640,6 +704,7 @@
       visibility: hidden;
       transition: all var(--transition-speed) ease;
       z-index: 999;
+      border: none;
     }
 
     .back-to-top.active {
@@ -670,6 +735,7 @@
       cursor: pointer;
       transition: all var(--transition-speed) ease;
       z-index: 999;
+      border: none;
     }
 
     .theme-toggle:hover {
@@ -768,6 +834,10 @@
       .modal-features {
         grid-template-columns: 1fr;
       }
+      
+      .contact-form {
+        padding: 25px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -790,303 +860,218 @@
         bottom: 20px;
         right: 20px;
       }
-      
-      .contact-form {
-        padding: 25px;
-      }
     }
   
-    /* === Responsive Enhancements (non-breaking) === */
-    /* Make images fluid to prevent overflow on small screens */
+    /* === Responsive Enhancements === */
     img { max-width: 100%; height: auto; }
-    /* Avoid horizontal scroll from off-canvas nav or wide elements */
     html, body { overflow-x: hidden; }
-    /* Services grid: allow smaller min column width on very small devices */
+    
     @media (max-width: 420px) {
       .services .grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
       .logo { font-size: 1.4em; }
       .bar { width: 22px; }
     }
-    /* Improve focus visibility without altering theme */
-    :focus-visible { outline: 2px dashed var(--primary-color); outline-offset: 2px; }
-    /* Respect reduced-motion preferences */
+    
+    :focus-visible { 
+      outline: 2px dashed var(--primary-color); 
+      outline-offset: 2px; 
+    }
+    
     @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; }
+      * { 
+        animation: none !important; 
+        transition: none !important; 
+      }
     }
 
   </style>
 </head>
 <body>
+  <!-- Skip link for keyboard users -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Header -->
   <header id="header">
     <a href="index.html" class="logo"><i class="fas fa-code"></i> Mohamed Tarek</a>
-    <div class="menu-toggle" id="mobile-menu" role="button" tabindex="0" aria-label="Toggle menu" aria-expanded="false">
+    <button class="menu-toggle" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
-    </div>
+    </button>
     <nav class="navigation" id="nav-menu" aria-hidden="true">
       <a href="index.html">Home</a>
       <a href="Mohamed - Personal Information.html">About</a>
       <a href="Mohamed - Services.html" class="active">Services</a>
       <a href="Mohamed - Project.html">Projects</a>
       <a href="Mohamed - Certificates.html">Certificates</a>
-      <a href="Mohamed - CV.html" class="btn btn-outline" style="margin-left: 20px;">My CV</a>
+      <a href="Mohamed - CV.html" style="margin-left: 20px;">My CV</a>
     </nav>
   </header>
 
-  <!-- Services Section -->
-  <section class="services" id="services">
-    <div class="container">
-      <div class="section-title fade-in">
-        <h2>Professional Services</h2>
-        <p class="section-subtitle">Comprehensive solutions tailored to meet your technical needs with quality and precision</p>
-      </div>
-      
-      <div class="grid">
-        <!-- Web Development -->
-        <div class="service-card fade-in">
-          <div class="service-icon">
-            <i class="fas fa-laptop-code"></i>
-          </div>
-          <h3 class="service-title">Web Development</h3>
-          <p class="service-description">Custom website development using modern technologies to create responsive, user-friendly interfaces.</p>
-          <ul class="service-features">
-            <li>HTML5 & CSS3 implementation</li>
-            <li>Responsive design for all devices</li>
-            <li>Clean, semantic code structure</li>
-            <li>Performance optimization</li>
-          </ul>
-          <button class="service-cta view-service-details" data-service="web-development">Get Started</button>
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Services Section -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-title fade-in">
+          <h2>Professional Services</h2>
+          <p class="section-subtitle">Comprehensive solutions tailored to meet your technical needs with quality and precision</p>
         </div>
         
-        <!-- Arduino Programming -->
-        <div class="service-card fade-in delay-1">
-          <div class="service-icon">
-            <i class="fas fa-microchip"></i>
+        <div class="grid">
+          <!-- Web Development -->
+          <div class="service-card fade-in">
+            <div class="service-icon">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3 class="service-title">Web Development</h3>
+            <p class="service-description">Custom website development using modern technologies to create responsive, user-friendly interfaces.</p>
+            <ul class="service-features">
+              <li>HTML5 & CSS3 implementation</li>
+              <li>Responsive design for all devices</li>
+              <li>Clean, semantic code structure</li>
+              <li>Performance optimization</li>
+            </ul>
+            <button class="service-cta view-service-details" data-service="web-development">Get Started</button>
           </div>
-          <h3 class="service-title">Arduino Programming</h3>
-          <p class="service-description">Expert coding solutions for Arduino, ESP, and PIC microcontrollers to bring your electronic projects to life.</p>
-          <ul class="service-features">
-            <li>Custom firmware development</li>
-            <li>Sensor integration</li>
-            <li>Wireless communication (WiFi/BT)</li>
-            <li>Power optimization</li>
-          </ul>
-          <button class="service-cta view-service-details" data-service="arduino-programming">Discuss Project</button>
-        </div>
-        
-        <!-- Simulation Projects -->
-        <div class="service-card fade-in delay-2">
-          <div class="service-icon">
-            <i class="fas fa-project-diagram"></i>
-          </div>
-          <h3 class="service-title">Circuit Simulation</h3>
-          <p class="service-description">Professional circuit simulation and analysis using industry-standard tools before physical implementation.</p>
-          <ul class="service-features">
-            <li>Multisim circuit analysis</li>
-            <li>Proteus simulation</li>
-            <li>TinkerCAD prototyping</li>
-            <li>Performance validation</li>
-          </ul>
-          <button class="service-cta view-service-details" data-service="circuit-simulation">Request Simulation</button>
-        </div>
-        
-        <!-- PCB Design -->
-        <div class="service-card fade-in delay-3">
-          <div class="service-icon">
-            <i class="fas fa-vector-square"></i>
-          </div>
-          <h3 class="service-title">PCB Design</h3>
-          <p class="service-description">Professional PCB layout and design services for reliable and efficient electronic circuits.</p>
-          <ul class="service-features">
-            <li>Schematic capture</li>
-            <li>Board layout optimization</li>
-            <li>Design rule checking</li>
-            <li>Gerber file generation</li>
-          </ul>
-          <button class="service-cta view-service-details" data-service="pcb-design">Design Inquiry</button>
-        </div>
-      
-        <!-- IoT Solutions -->
-        <div class="service-card fade-in delay-1">
-          <div class="service-icon">
-            <i class="fas fa-wifi"></i>
-          </div>
-          <h3 class="service-title">IoT Solutions</h3>
-          <p class="service-description">Complete IoT solutions including hardware, firmware, and cloud integration for smart devices and automation.</p>
-          <ul class="service-features">
-            <li>IoT device development</li>
-            <li>Cloud platform integration</li>
-            <li>Data analytics & visualization</li>
-            <li>Remote monitoring systems</li>
-          </ul>
-          <button class="service-cta view-service-details" data-service="iot-solutions">Learn More</button>
-        </div>
           
-        <!-- Smart Home -->
-        <div class="service-card fade-in">
-          <div class="service-icon">
-            <i class="fas fa-home"></i>
+          <!-- Arduino Programming -->
+          <div class="service-card fade-in delay-1">
+            <div class="service-icon">
+              <i class="fas fa-microchip"></i>
+            </div>
+            <h3 class="service-title">Arduino Programming</h3>
+            <p class="service-description">Expert coding solutions for Arduino, ESP, and PIC microcontrollers to bring your electronic projects to life.</p>
+            <ul class="service-features">
+              <li>Custom firmware development</li>
+              <li>Sensor integration</li>
+              <li>Wireless communication (WiFi/BT)</li>
+              <li>Power optimization</li>
+            </ul>
+            <button class="service-cta view-service-details" data-service="arduino-programming">Discuss Project</button>
           </div>
-          <h3 class="service-title">Smart Home Solutions</h3>
-          <p class="service-description">Custom smart home automation systems tailored to your specific needs and requirements.</p>
-          <ul class="service-features">
-            <li>Home automation design</li>
-            <li>IoT device integration</li>
-            <li>Remote control systems</li>
-            <li>Energy monitoring</li>
-          </ul>
-          <button class="service-cta view-service-details" data-service="smart-home">Automate Your Home</button>
-        </div>
+          
+          <!-- Simulation Projects -->
+          <div class="service-card fade-in delay-2">
+            <div class="service-icon">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <h3 class="service-title">Circuit Simulation</h3>
+            <p class="service-description">Professional circuit simulation and analysis using industry-standard tools before physical implementation.</p>
+            <ul class="service-features">
+              <li>Multisim circuit analysis</li>
+              <li>Proteus simulation</li>
+              <li>TinkerCAD prototyping</li>
+              <li>Performance validation</li>
+            </ul>
+            <button class="service-cta view-service-details" data-service="circuit-simulation">Request Simulation</button>
+          </div>
+          
+          <!-- PCB Design -->
+          <div class="service-card fade-in delay-3">
+            <div class="service-icon">
+              <i class="fas fa-vector-square"></i>
+            </div>
+            <h3 class="service-title">PCB Design</h3>
+            <p class="service-description">Professional PCB layout and design services for reliable and efficient electronic circuits.</p>
+            <ul class="service-features">
+              <li>Schematic capture</li>
+              <li>Board layout optimization</li>
+              <li>Design rule checking</li>
+              <li>Gerber file generation</li>
+            </ul>
+            <button class="service-cta view-service-details" data-service="pcb-design">Design Inquiry</button>
+          </div>
         
-        <!-- Embedded Systems -->
-        <div class="service-card fade-in delay-1">
-          <div class="service-icon">
-            <i class="fas fa-robot"></i>
+          <!-- IoT Solutions -->
+          <div class="service-card fade-in delay-1">
+            <div class="service-icon">
+              <i class="fas fa-wifi"></i>
+            </div>
+            <h3 class="service-title">IoT Solutions</h3>
+            <p class="service-description">Complete IoT solutions including hardware, firmware, and cloud integration for smart devices and automation.</p>
+            <ul class="service-features">
+              <li>IoT device development</li>
+              <li>Cloud platform integration</li>
+              <li>Data analytics & visualization</li>
+              <li>Remote monitoring systems</li>
+            </ul>
+            <button class="service-cta view-service-details" data-service="iot-solutions">Learn More</button>
           </div>
-          <h3 class="service-title">Embedded Systems</h3>
-          <p class="service-description">Development of microcontroller-based applications for various embedded solutions.</p>
-          <ul class="service-features">
-            <li>Custom firmware development</li>
-            <li>RTOS implementation</li>
-            <li>Peripheral interfacing</li>
-            <li>Low-power design</li>
-          </ul>
-          <button class="service-cta view-service-details" data-service="embedded-systems">Build Your System</button>
-        </div>
-        
-        <!-- Graduation Projects -->
-        <div class="service-card fade-in delay-2">
-          <div class="service-icon">
-            <i class="fas fa-graduation-cap"></i>
+            
+          <!-- Smart Home -->
+          <div class="service-card fade-in">
+            <div class="service-icon">
+              <i class="fas fa-home"></i>
+            </div>
+            <h3 class="service-title">Smart Home Solutions</h3>
+            <p class="service-description">Custom smart home automation systems tailored to your specific needs and requirements.</p>
+            <ul class="service-features">
+              <li>Home automation design</li>
+              <li>IoT device integration</li>
+              <li>Remote control systems</li>
+              <li>Energy monitoring</li>
+            </ul>
+            <button class="service-cta view-service-details" data-service="smart-home">Automate Your Home</button>
           </div>
-          <h3 class="service-title">Graduation Projects</h3>
-          <p class="service-description">Comprehensive support for engineering graduation projects from concept to completion.</p>
-          <ul class="service-features">
-            <li>Project conceptualization</li>
-            <li>Technical documentation</li>
-            <li>Hardware/software integration</li>
-            <li>Presentation preparation</li>
-          </ul>
-          <button class="service-cta view-service-details" data-service="graduation-projects">Start Your Project</button>
-        </div>
-        
-        <!-- Electronics Prototyping -->
-        <div class="service-card fade-in delay-3">
-          <div class="service-icon">
-            <i class="fas fa-lightbulb"></i>
+          
+          <!-- Embedded Systems -->
+          <div class="service-card fade-in delay-1">
+            <div class="service-icon">
+              <i class="fas fa-robot"></i>
+            </div>
+            <h3 class="service-title">Embedded Systems</h3>
+            <p class="service-description">Development of microcontroller-based applications for various embedded solutions.</p>
+            <ul class="service-features">
+              <li>Custom firmware development</li>
+              <li>RTOS implementation</li>
+              <li>Peripheral interfacing</li>
+              <li>Low-power design</li>
+            </ul>
+            <button class="service-cta view-service-details" data-service="embedded-systems">Build Your System</button>
           </div>
-          <h3 class="service-title">Electronics Prototyping</h3>
-          <p class="service-description">Guidance and implementation for small-scale electronics projects and prototypes.</p>
-          <ul class="service-features">
-            <li>Circuit design assistance</li>
-            <li>Component selection</li>
-            <li>Prototype development</li>
-            <li>Testing and debugging</li>
-          </ul>
-          <button class="service-cta view-service-details" data-service="electronics-prototyping">Build Your Idea</button>
+          
+          <!-- Graduation Projects -->
+          <div class="service-card fade-in delay-2">
+            <div class="service-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3 class="service-title">Graduation Projects</h3>
+            <p class="service-description">Comprehensive support for engineering graduation projects from concept to completion.</p>
+            <ul class="service-features">
+              <li>Project conceptualization</li>
+              <li>Technical documentation</li>
+              <li>Hardware/software integration</li>
+              <li>Presentation preparation</li>
+            </ul>
+            <button class="service-cta view-service-details" data-service="graduation-projects">Start Your Project</button>
+          </div>
+          
+          <!-- Electronics Prototyping -->
+          <div class="service-card fade-in delay-3">
+            <div class="service-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3 class="service-title">Electronics Prototyping</h3>
+            <p class="service-description">Guidance and implementation for small-scale electronics projects and prototypes.</p>
+            <ul class="service-features">
+              <li>Circuit design assistance</li>
+              <li>Component selection</li>
+              <li>Prototype development</li>
+              <li>Testing and debugging</li>
+            </ul>
+            <button class="service-cta view-service-details" data-service="electronics-prototyping">Build Your Idea</button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Testimonials Section -->
-<!--  <section class="testimonials" id="testimonials">
-    <div class="container">
-      <div class="section-title fade-in">
-        <h2>Client Testimonials</h2>
-        <p class="section-subtitle">What my clients say about working with me</p>
-      </div>
-      
-      <div class="testimonial-grid">
-        <div class="testimonial-card fade-in">
-          <p class="testimonial-text">"Mohamed delivered an exceptional Arduino-based automation system for our laboratory. His attention to detail and technical expertise exceeded our expectations."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">AS</div>
-            <div class="author-info">
-              <h4>Ahmed Samir</h4>
-              <p>Research Lab Manager</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="testimonial-card fade-in delay-1">
-          <p class="testimonial-text">"The PCB design service was professional and efficient. Mohamed provided multiple design iterations and accommodated all our specific requirements."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">MK</div>
-            <div class="author-info">
-              <h4>Mona Khalil</h4>
-              <p>Electronics Startup Founder</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="testimonial-card fade-in delay-2">
-          <p class="testimonial-text">"Working with Mohamed on our graduation project was a great experience. He guided us through complex embedded systems concepts and helped us achieve excellent results."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">OS</div>
-            <div class="author-info">
-              <h4>Omar Sayed</h4>
-              <p>Engineering Student</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>-->
-
-  <!-- Contact Section -->
- <!-- <section class="contact" id="contact">
-    <div class="container">
-      <div class="section-title fade-in">
-        <h2>Get In Touch</h2>
-        <p class="section-subtitle">Ready to start your project? Let's discuss how I can help bring your ideas to life</p>
-      </div>
-      
-      <div class="contact-form fade-in">
-        <form id="service-inquiry-form">
-          <div class="form-group">
-            <label for="name" class="form-label">Your Name</label>
-            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="email" class="form-label">Your Email</label>
-            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="service" class="form-label">Service Interested In</label>
-            <select id="service" class="form-control" required>
-              <option value="">Select a service</option>
-              <option value="web-development">Web Development</option>
-              <option value="arduino-programming">Arduino Programming</option>
-              <option value="circuit-simulation">Circuit Simulation</option>
-              <option value="pcb-design">PCB Design</option>
-              <option value="iot-solutions">IoT Solutions</option>
-              <option value="smart-home">Smart Home Solutions</option>
-              <option value="embedded-systems">Embedded Systems</option>
-              <option value="graduation-projects">Graduation Projects</option>
-              <option value="electronics-prototyping">Electronics Prototyping</option>
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="message" class="form-label">Project Details</label>
-            <textarea id="message" class="form-control" placeholder="Describe your project requirements, timeline, and any specific details..." required></textarea>
-          </div>
-          
-          <button type="submit" class="submit-btn">Send Inquiry</button>
-        </form>
-      </div>
-    </div>
-  </section>-->
+  </main>
 
   <!-- Service Modal -->
-  <div class="service-modal" id="service-modal">
+  <div class="service-modal" id="service-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
     <div class="modal-content">
-      <button class="modal-close" id="modal-close">&times;</button>
+      <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
       <div class="modal-body">
         <h2 class="modal-title" id="modal-title"></h2>
         <p class="modal-description" id="modal-description"></p>
@@ -1132,26 +1117,26 @@
         <div class="footer-column fade-in delay-2">
           <h3>Services</h3>
           <ul class="footer-links">
-            <li><a href="#services">Web Development</a></li>
-            <li><a href="#services">Arduino Projects</a></li>
-            <li><a href="#services">PCB Design</a></li>
-            <li><a href="#services">Embedded Systems</a></li>
-            <li><a href="#services">IoT Solutions</a></li>
+            <li><a href="#services" class="scroll-link">Web Development</a></li>
+            <li><a href="#services" class="scroll-link">Arduino Projects</a></li>
+            <li><a href="#services" class="scroll-link">PCB Design</a></li>
+            <li><a href="#services" class="scroll-link">Embedded Systems</a></li>
+            <li><a href="#services" class="scroll-link">IoT Solutions</a></li>
           </ul>
         </div>
       </div>
       
       <div class="footer-bottom fade-in delay-3">
-        <p>&copy; <span id="current-year">2025</span> Mohamed Tarek. All Rights Reserved.</p>
+        <p>&copy; <span id="current-year">2026</span> Mohamed Tarek. All Rights Reserved.</p>
         <p>Designed & Developed with <i class="fas fa-heart" style="color: #ff4757;"></i> by Mohamed Tarek</p>
       </div>
     </div>
   </footer>
 
   <!-- Back to Top Button -->
-  <div class="back-to-top" id="back-to-top" aria-label="Back to top">
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
     <i class="fas fa-arrow-up"></i>
-  </div>
+  </button>
 
   <!-- Dark Mode Toggle -->
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
@@ -1216,7 +1201,33 @@
           ]
         }
       },
-      // Add more service data as needed
+      'circuit-simulation': {
+        title: 'Circuit Simulation',
+        description: 'Professional circuit simulation services using industry-standard tools to validate designs before physical implementation.',
+        features: {
+          'Simulation Tools': [
+            'Multisim circuit analysis',
+            'Proteus simulation suite',
+            'TinkerCAD online prototyping',
+            'LTspice for analog circuits',
+            'MATLAB/Simulink'
+          ],
+          'Analysis Types': [
+            'DC & AC analysis',
+            'Transient analysis',
+            'Frequency response',
+            'Monte Carlo analysis',
+            'Temperature sweeps'
+          ],
+          'Output Deliverables': [
+            'Simulation reports',
+            'Performance graphs',
+            'Component stress analysis',
+            'Design recommendations',
+            'Bill of Materials (BOM)'
+          ]
+        }
+      },
       'pcb-design': {
         title: 'PCB Design',
         description: 'Professional PCB design services creating reliable and efficient circuit boards for your electronic projects. From schematic capture to final manufacturing files.',
@@ -1243,6 +1254,141 @@
             'Mixed-signal designs'
           ]
         }
+      },
+      'iot-solutions': {
+        title: 'IoT Solutions',
+        description: 'Complete Internet of Things solutions from device development to cloud integration and data visualization.',
+        features: {
+          'Hardware Development': [
+            'Custom IoT device design',
+            'Sensor integration',
+            'Power management',
+            'Wireless connectivity',
+            'Enclosure design'
+          ],
+          'Software & Cloud': [
+            'Firmware development',
+            'Cloud platform integration',
+            'Mobile app development',
+            'Data analytics',
+            'Real-time dashboards'
+          ],
+          'Deployment & Support': [
+            'System integration',
+            'Network configuration',
+            'Security implementation',
+            'Monitoring & maintenance',
+            'Technical documentation'
+          ]
+        }
+      },
+      'smart-home': {
+        title: 'Smart Home Solutions',
+        description: 'Custom smart home automation systems that enhance comfort, security, and energy efficiency.',
+        features: {
+          'Automation Systems': [
+            'Lighting control',
+            'Climate control',
+            'Security systems',
+            'Entertainment systems',
+            'Appliance control'
+          ],
+          'Integration': [
+            'Voice control (Alexa, Google)',
+            'Mobile app control',
+            'Remote access',
+            'Scene programming',
+            'Energy monitoring'
+          ],
+          'Installation & Support': [
+            'System design consultation',
+            'Installation planning',
+            'User training',
+            'Maintenance services',
+            'Upgrade support'
+          ]
+        }
+      },
+      'embedded-systems': {
+        title: 'Embedded Systems',
+        description: 'Development of microcontroller-based embedded systems for various applications and industries.',
+        features: {
+          'Development Services': [
+            'Custom firmware development',
+            'RTOS implementation',
+            'Driver development',
+            'Middleware integration',
+            'Bootloader development'
+          ],
+          'Hardware Integration': [
+            'Peripheral interfacing',
+            'Sensor integration',
+            'Communication protocols',
+            'Power management',
+            'EMI/EMC considerations'
+          ],
+          'Testing & Validation': [
+            'Unit testing',
+            'Integration testing',
+            'Hardware validation',
+            'Performance testing',
+            'Certification support'
+          ]
+        }
+      },
+      'graduation-projects': {
+        title: 'Graduation Projects',
+        description: 'Comprehensive support for engineering graduation projects from initial concept to final presentation.',
+        features: {
+          'Project Support': [
+            'Idea brainstorming',
+            'Literature review',
+            'System architecture',
+            'Component selection',
+            'Budget planning'
+          ],
+          'Implementation': [
+            'Hardware development',
+            'Software programming',
+            'System integration',
+            'Testing & debugging',
+            'Performance optimization'
+          ],
+          'Documentation': [
+            'Technical report writing',
+            'Presentation preparation',
+            'Poster design',
+            'Demo preparation',
+            'Thesis formatting'
+          ]
+        }
+      },
+      'electronics-prototyping': {
+        title: 'Electronics Prototyping',
+        description: 'Guidance and implementation for small-scale electronics projects and rapid prototyping.',
+        features: {
+          'Prototyping Services': [
+            'Circuit design assistance',
+            'Component selection',
+            'Breadboard prototyping',
+            'PCB prototyping',
+            '3D printing for enclosures'
+          ],
+          'Development Support': [
+            'Schematic review',
+            'Layout optimization',
+            'Soldering services',
+            'Testing procedures',
+            'Debugging assistance'
+          ],
+          'Scale-up Support': [
+            'Design for manufacturing',
+            'Cost optimization',
+            'Quality control plans',
+            'Production testing',
+            'Documentation for mass production'
+          ]
+        }
       }
     };
 
@@ -1266,7 +1412,7 @@
     });
     
     // Close mobile menu when clicking on a link
-    document.querySelectorAll('.navigation a').forEach(link => {
+    document.querySelectorAll('.navigation a, .footer-links a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.remove('active');
         navMenu.classList.remove('active');
@@ -1282,30 +1428,6 @@
       } else {
         header.classList.remove('scrolled');
       }
-    });
-    
-    // Active link highlighting
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.navigation a');
-    
-    window.addEventListener('scroll', () => {
-      let current = '';
-      
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (pageYOffset >= sectionTop - 300) {
-          current = section.getAttribute('id');
-        }
-      });
-      
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
-        }
-      });
     });
     
     // Back to Top Button
@@ -1354,17 +1476,6 @@
       }
     });
 
-    // Ensure smooth transitions for the theme change
-    document.body.style.transition = "background-color 0.5s ease, color 0.5s ease";
-  
-    // Keyboard support for mobile menu toggle
-    mobileMenu.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        mobileMenu.click();
-      }
-    });
-
     // Service Modal
     const serviceModal = document.getElementById('service-modal');
     const modalClose = document.getElementById('modal-close');
@@ -1406,9 +1517,11 @@
           
           // Update CTA button
           modalCta.textContent = `Inquire About ${service.title}`;
+          modalCta.href = `#contact?service=${encodeURIComponent(service.title)}`;
           
           // Show modal
           serviceModal.classList.add('active');
+          serviceModal.setAttribute('aria-hidden', 'false');
           document.body.style.overflow = 'hidden';
         }
       });
@@ -1417,6 +1530,7 @@
     // Close modal
     modalClose.addEventListener('click', () => {
       serviceModal.classList.remove('active');
+      serviceModal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     });
     
@@ -1424,6 +1538,7 @@
     serviceModal.addEventListener('click', (e) => {
       if (e.target === serviceModal) {
         serviceModal.classList.remove('active');
+        serviceModal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
       }
     });
@@ -1432,6 +1547,7 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && serviceModal.classList.contains('active')) {
         serviceModal.classList.remove('active');
+        serviceModal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
       }
     });
@@ -1451,12 +1567,55 @@
       
       // In a real application, you would send this data to a server
       // For now, we'll just show a success message
-      alert(`Thank you for your inquiry, ${formData.name}! I'll get back to you soon about ${formData.service}.`);
+      const serviceName = document.getElementById('service').options[document.getElementById('service').selectedIndex].text;
+      alert(`Thank you for your inquiry, ${formData.name}! I'll get back to you soon about ${serviceName}.`);
       inquiryForm.reset();
     });
 
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Keyboard support for mobile menu toggle
+    mobileMenu.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        mobileMenu.click();
+      }
+    });
+
+    // Pre-fill service select if URL has service parameter
+    window.addEventListener('load', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const serviceParam = urlParams.get('service');
+      if (serviceParam) {
+        const serviceSelect = document.getElementById('service');
+        for (let option of serviceSelect.options) {
+          if (option.text === decodeURIComponent(serviceParam)) {
+            serviceSelect.value = option.value;
+            break;
+          }
+        }
+      }
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        if (this.getAttribute('href') === '#') return;
+        
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId.startsWith('#')) {
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
   </script>
 </body>
 </html>

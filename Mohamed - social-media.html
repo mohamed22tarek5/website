@@ -77,6 +77,22 @@
       min-height: 100vh;
     }
 
+    /* Skip link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary-color);
+      color: white;
+      padding: 8px;
+      z-index: 1001;
+      text-decoration: none;
+    }
+    
+    .skip-link:focus {
+      top: 0;
+    }
+
     /* Typography */
     h1, h2, h3, h4, h5, h6 {
       font-weight: 600;
@@ -200,6 +216,20 @@
       cursor: pointer;
       z-index: 1001;
       padding: 10px;
+      background: none;
+      border: none;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
     }
 
     .bar {
@@ -253,27 +283,13 @@
       height: 100%;
       position: relative;
       overflow: hidden;
-    }
-
-    .social-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--primary-color);
-      transform: scaleX(0);
-      transition: transform var(--transition-speed) ease;
-    }
-
-    .social-card:hover::before {
-      transform: scaleX(1);
+      border: 1px solid transparent;
     }
 
     .social-card:hover {
       transform: translateY(-10px);
       box-shadow: var(--box-shadow-hover);
+      border-color: var(--primary-color);
     }
 
     .social-icon {
@@ -287,7 +303,7 @@
     }
 
     .social-card h3 {
-      color: var(--primary-color);
+      color: var(--text-light);
       margin-bottom: 15px;
       font-size: 1.3em;
     }
@@ -311,6 +327,10 @@
       transition: all var(--transition-speed) ease;
       position: relative;
       overflow: hidden;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      text-decoration: none;
     }
 
     .social-link i {
@@ -339,8 +359,16 @@
 
     /* Platform Specific Colors */
     .facebook { color: #1877f2; }
-    .facebook-bg { background-color: #1877f2; color: white; }
-    .facebook-bg:hover { background-color: #166fe5; }
+    .facebook-bg { 
+      background-color: #1877f2; 
+      color: white; 
+      border: 2px solid #1877f2;
+    }
+    .facebook-bg:hover { 
+      background-color: #166fe5; 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(24, 119, 242, 0.3);
+    }
     
     .instagram { 
       background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); 
@@ -351,32 +379,109 @@
     .instagram-bg { 
       background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); 
       color: white; 
+      border: 2px solid transparent;
     }
-    .instagram-bg:hover { opacity: 0.9; }
+    .instagram-bg:hover { 
+      opacity: 0.9; 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(220, 39, 67, 0.3);
+    }
     
     .whatsapp { color: #25d366; }
-    .whatsapp-bg { background-color: #25d366; color: white; }
-    .whatsapp-bg:hover { background-color: #1da851; }
+    .whatsapp-bg { 
+      background-color: #25d366; 
+      color: white; 
+      border: 2px solid #25d366;
+    }
+    .whatsapp-bg:hover { 
+      background-color: #1da851; 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+    }
     
     .linkedin { color: #0a66c2; }
-    .linkedin-bg { background-color: #0a66c2; color: white; }
-    .linkedin-bg:hover { background-color: #0957aa; }
+    .linkedin-bg { 
+      background-color: #0a66c2; 
+      color: white; 
+      border: 2px solid #0a66c2;
+    }
+    .linkedin-bg:hover { 
+      background-color: #0957aa; 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(10, 102, 194, 0.3);
+    }
     
     .twitter { color: #1da1f2; }
-    .twitter-bg { background-color: #1da1f2; color: white; }
-    .twitter-bg:hover { background-color: #1a8cd8; }
+    .twitter-bg { 
+      background-color: #1da1f2; 
+      color: white; 
+      border: 2px solid #1da1f2;
+    }
+    .twitter-bg:hover { 
+      background-color: #1a8cd8; 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(29, 161, 242, 0.3);
+    }
     
     .github { color: #333; }
-    .github-bg { background-color: #333; color: white; }
-    .github-bg:hover { background-color: #222; }
+    .github-bg { 
+      background-color: #333; 
+      color: white; 
+      border: 2px solid #333;
+    }
+    .github-bg:hover { 
+      background-color: #222; 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(51, 51, 51, 0.3);
+    }
     
     .linktree { color: #39e09b; }
-    .linktree-bg { background-color: #39e09b; color: white; }
-    .linktree-bg:hover { background-color: #2ec887; }
+    .linktree-bg { 
+      background-color: #39e09b; 
+      color: white; 
+      border: 2px solid #39e09b;
+    }
+    .linktree-bg:hover { 
+      background-color: #2ec887; 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(57, 224, 155, 0.3);
+    }
 
     .skoon { color: #ff6b6b; }
-    .skoon-bg { background-color: #ff6b6b; color: white; }
-    .skoon-bg:hover { background-color: #ff5252; }
+    .skoon-bg { 
+      background-color: #ff6b6b; 
+      color: white; 
+      border: 2px solid #ff6b6b;
+    }
+    .skoon-bg:hover { 
+      background-color: #ff5252; 
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+    }
+
+    /* Platform stats on cards */
+    .platform-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-count {
+      color: var(--primary-color);
+      font-weight: 600;
+      font-size: 1.1em;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.8em;
+    }
 
     /* QR Code Section */
     .qr-section {
@@ -406,6 +511,7 @@
       width: 200px;
       height: 200px;
       border-radius: 8px;
+      display: block;
     }
 
     .qr-info {
@@ -438,11 +544,13 @@
       text-align: center;
       box-shadow: var(--box-shadow);
       transition: all var(--transition-speed) ease;
+      border: 1px solid transparent;
     }
 
     .stat-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--box-shadow-hover);
+      border-color: var(--primary-color);
     }
 
     .stat-number {
@@ -551,6 +659,7 @@
       visibility: hidden;
       transition: all var(--transition-speed) ease;
       z-index: 999;
+      border: none;
     }
 
     .back-to-top.active {
@@ -581,6 +690,7 @@
       cursor: pointer;
       transition: all var(--transition-speed) ease;
       z-index: 999;
+      border: none;
     }
 
     .theme-toggle:hover {
@@ -627,18 +737,22 @@
     }
 
     .fade-in {
+      opacity: 0;
       animation: fadeIn 1s ease forwards;
     }
 
     .slide-up {
+      opacity: 0;
       animation: slideUp 0.8s ease forwards;
     }
 
     .slide-left {
+      opacity: 0;
       animation: slideLeft 0.8s ease forwards;
     }
 
     .slide-right {
+      opacity: 0;
       animation: slideRight 0.8s ease forwards;
     }
 
@@ -656,6 +770,23 @@
 
     .delay-4 {
       animation-delay: 0.8s;
+    }
+
+    /* Loading placeholder for images */
+    .profile-pic {
+      background: linear-gradient(90deg, var(--background-darker) 25%, var(--card-light) 50%, var(--background-darker) 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .profile-pic.loaded {
+      animation: none;
+      background: none;
     }
 
     /* Responsive Design */
@@ -706,6 +837,11 @@
         flex-direction: column;
         text-align: center;
       }
+      
+      .platform-stats {
+        flex-direction: column;
+        gap: 10px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -734,134 +870,78 @@
         width: 150px;
         height: 150px;
       }
+      
+      .social-card {
+        padding: 20px;
+      }
+    }
+
+    /* Respect reduced motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Focus styles for accessibility */
+    :focus-visible {
+      outline: 2px dashed var(--primary-color);
+      outline-offset: 2px;
     }
   </style>
 </head>
 <body>
+  <!-- Skip link for keyboard users -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Header -->
   <header id="header">
     <a href="index.html" class="logo"><i class="fas fa-code"></i> Mohamed Tarek</a>
-    <div class="menu-toggle" id="mobile-menu">
+    <button class="menu-toggle" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
       <span class="bar"></span>
       <span class="bar"></span>
       <span class="bar"></span>
-    </div>
-    <nav class="navigation" id="nav-menu">
+    </button>
+    <nav class="navigation" id="nav-menu" aria-hidden="true">
       <a href="index.html">Home</a>
       <a href="Mohamed - Personal Information.html">About</a>
       <a href="Mohamed - Services.html">Services</a>
       <a href="Mohamed - Project.html">Projects</a>
       <a href="Mohamed - Certificates.html">Certificates</a>
-      <a href="Mohamed - CV.html" class="btn btn-outline" style="margin-left: 20px;">My CV</a>
+      <a href="Mohamed - CV.html" style="margin-left: 20px;">My CV</a>
     </nav>
   </header>
 
   <!-- Main Content -->
-  <main class="container">
+  <main id="main-content" class="container">
     <!-- Profile Section -->
     <section class="profile fade-in">
-      <img src="photo.jpg" alt="Mohamed Tarek" class="profile-pic slide-up">
+      <img src="photo.jpg" alt="Mohamed Tarek - Communications Engineer and Web Developer" class="profile-pic slide-up" loading="lazy">
       <h1 class="slide-up delay-1">Connect With Me</h1>
       <p class="slide-up delay-2">Welcome to my social media hub! Connect with me across platforms to stay updated with my latest projects, insights, and professional journey. Whether you're interested in my engineering work, web development projects, or just want to say hello, I'd love to hear from you!</p>
     </section>
 
     <!-- Social Media Grid -->
-    <div class="social-grid">
-      <!-- Facebook -->
-      <div class="social-card fade-in">
-        <i class="fab fa-facebook-f social-icon facebook"></i>
-        <h3>Facebook</h3>
-        <p>Connect with me personally and see my casual updates, life moments, and personal projects. I share insights about my engineering journey and occasional tech tips.</p>
-        <a href="https://www.facebook.com/mohammed.tarek.5249349" target="_blank" rel="noopener noreferrer" class="social-link facebook-bg">
-          <i class="fab fa-facebook-f"></i> Visit Profile
-        </a>
-      </div>
-
-      <!-- Instagram -->
-      <div class="social-card fade-in delay-1">
-        <i class="fab fa-instagram social-icon instagram"></i>
-        <h3>Instagram</h3>
-        <p>Follow my daily life, creative projects, and behind-the-scenes content. I share visual stories of my electronics projects and tech experiments.</p>
-        <a href="https://instagram.com/_m7md_tarek_?igshid=YmMyMTA2M2Y=" target="_blank" rel="noopener noreferrer" class="social-link instagram-bg">
-          <i class="fab fa-instagram"></i> Follow Me
-        </a>
-      </div>
-
-      <!-- WhatsApp -->
-      <div class="social-card fade-in delay-2">
-        <i class="fab fa-whatsapp social-icon whatsapp"></i>
-        <h3>WhatsApp</h3>
-        <p>Message me directly for quick conversations, project discussions, or technical queries. I'm always happy to help with electronics and programming questions.</p>
-        <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" class="social-link whatsapp-bg">
-          <i class="fab fa-whatsapp"></i> Chat Now
-        </a>
-      </div>
-
-      <!-- LinkedIn -->
-      <div class="social-card fade-in delay-3">
-        <i class="fab fa-linkedin-in social-icon linkedin"></i>
-        <h3>LinkedIn</h3>
-        <p>Connect professionally and view my career journey, technical skills, and professional achievements. Let's network and explore collaboration opportunities.</p>
-        <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" class="social-link linkedin-bg">
-          <i class="fab fa-linkedin-in"></i> Connect
-        </a>
-      </div>
-
-      <!-- Twitter -->
-      <div class="social-card fade-in">
-        <i class="fab fa-twitter social-icon twitter"></i>
-        <h3>Twitter</h3>
-        <p>Follow my thoughts, quick tech updates, and industry insights. I share bite-sized content about electronics, programming, and emerging technologies.</p>
-        <a href="https://twitter.com/m7mdtarek225?t=_Sw1B7eTRoajvKqqM3BsNA&s=09" target="_blank" rel="noopener noreferrer" class="social-link twitter-bg">
-          <i class="fab fa-twitter"></i> Follow
-        </a>
-      </div>
-
-      <!-- GitHub -->
-      <div class="social-card fade-in delay-1">
-        <i class="fab fa-github social-icon github"></i>
-        <h3>GitHub</h3>
-        <p>Explore my coding projects, open-source contributions, and technical repositories. From Arduino sketches to web applications, see my code in action.</p>
-        <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" class="social-link github-bg">
-          <i class="fab fa-github"></i> View Profile
-        </a>
-      </div>
-
-      <!-- Linktree -->
-      <div class="social-card fade-in delay-2">
-        <i class="fas fa-link social-icon linktree"></i>
-        <h3>All My Accounts</h3>
-        <p>One convenient link to access all my social media profiles. Perfect for quick access to all my platforms from one place.</p>
-        <a href="https://linktr.ee/m7mdtarek22" target="_blank" rel="noopener noreferrer" class="social-link linktree-bg">
-          <i class="fas fa-link"></i> Visit Linktree
-        </a>
-      </div>
-
-      <!-- Skoon Team -->
-      <div class="social-card fade-in delay-3">
-        <i class="fas fa-users social-icon skoon"></i>
-        <h3>Skoon Team</h3>
-        <p>Check out our team's projects, collaborations, and innovative solutions. We work together on exciting electronics and engineering challenges.</p>
-        <a href="https://linktr.ee/skoon_team" target="_blank" rel="noopener noreferrer" class="social-link skoon-bg">
-          <i class="fas fa-users"></i> Visit Team
-        </a>
-      </div>
+    <div class="social-grid" id="social-grid">
+      <!-- Social cards will be populated by JavaScript -->
     </div>
 
     <!-- QR Code Section -->
     <section class="qr-section fade-in">
       <div class="qr-container">
         <div class="qr-code">
-          <!-- Replace with actual QR code image -->
-          <div style="width: 200px; height: 200px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold;">
-            QR Code Image
-          </div>
+          <img id="qrcode-image" src="" alt="QR Code for Mohamed Tarek's Social Media" loading="lazy">
           <p style="margin-top: 15px; color: var(--text-muted);">Scan to connect</p>
         </div>
         <div class="qr-info">
           <h3>Quick Mobile Access</h3>
           <p>Scan this QR code with your smartphone camera to quickly access all my social media profiles. This makes it easy to connect with me while on the go.</p>
           <p>You can save this page to your phone's home screen for instant access to my social media hub anytime.</p>
+          <button id="download-qr" class="social-link facebook-bg" style="margin-top: 20px;">
+            <i class="fas fa-download"></i> Download QR Code
+          </button>
         </div>
       </div>
     </section>
@@ -871,12 +951,12 @@
       <h2 style="text-align: center; margin-bottom: 40px; color: var(--primary-color);">Social Media Presence</h2>
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-number">500+</div>
-          <div class="stat-label">Connections</div>
+          <div class="stat-number" id="connections-count">500+</div>
+          <div class="stat-label">Total Connections</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">8</div>
-          <div class="stat-label">Platforms</div>
+          <div class="stat-label">Active Platforms</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">50+</div>
@@ -898,10 +978,10 @@
           <h3>Mohamed Tarek</h3>
           <p>Communications Engineer and Web Developer creating innovative solutions that bridge hardware and software.</p>
           <div class="footer-social">
-            <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" class="linkedin-bg"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" class="github-bg"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" class="instagram-bg"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" class="whatsapp-bg"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
         
@@ -913,6 +993,7 @@
             <li><a href="Mohamed - Services.html">Services</a></li>
             <li><a href="Mohamed - Project.html">Projects</a></li>
             <li><a href="Mohamed - Certificates.html">Certificates</a></li>
+            <li><a href="Mohamed - CV.html">CV</a></li>
           </ul>
         </div>
         
@@ -936,9 +1017,9 @@
   </footer>
 
   <!-- Back to Top Button -->
-  <div class="back-to-top" id="back-to-top" aria-label="Back to top">
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
     <i class="fas fa-arrow-up"></i>
-  </div>
+  </button>
 
   <!-- Dark Mode Toggle -->
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
@@ -947,11 +1028,130 @@
 
   <!-- JavaScript -->
   <script>
+    // Social media data
+    const socialMediaData = [
+      {
+        id: 'facebook',
+        name: 'Facebook',
+        iconClass: 'fab fa-facebook-f',
+        colorClass: 'facebook',
+        url: 'https://www.facebook.com/mohammed.tarek.5249349',
+        description: 'Connect with me personally and see my casual updates, life moments, and personal projects. I share insights about my engineering journey and occasional tech tips.',
+        stats: {
+          followers: '500+',
+          posts: '100+',
+          engagement: 'High'
+        },
+        order: 1
+      },
+      {
+        id: 'instagram',
+        name: 'Instagram',
+        iconClass: 'fab fa-instagram',
+        colorClass: 'instagram',
+        url: 'https://instagram.com/_m7md_tarek_?igshid=YmMyMTA2M2Y=',
+        description: 'Follow my daily life, creative projects, and behind-the-scenes content. I share visual stories of my electronics projects and tech experiments.',
+        stats: {
+          followers: '300+',
+          posts: '150+',
+          engagement: 'Very High'
+        },
+        order: 2
+      },
+      {
+        id: 'whatsapp',
+        name: 'WhatsApp',
+        iconClass: 'fab fa-whatsapp',
+        colorClass: 'whatsapp',
+        url: 'https://wa.me/+201090637406',
+        description: 'Message me directly for quick conversations, project discussions, or technical queries. I\'m always happy to help with electronics and programming questions.',
+        stats: {
+          connections: 'Direct Chat',
+          response: 'Within hours',
+          availability: 'Available'
+        },
+        order: 3
+      },
+      {
+        id: 'linkedin',
+        name: 'LinkedIn',
+        iconClass: 'fab fa-linkedin-in',
+        colorClass: 'linkedin',
+        url: 'https://www.linkedin.com/in/mohamedtarek225',
+        description: 'Connect professionally and view my career journey, technical skills, and professional achievements. Let\'s network and explore collaboration opportunities.',
+        stats: {
+          connections: '500+',
+          endorsements: '50+',
+          recommendations: '10+'
+        },
+        order: 4
+      },
+      {
+        id: 'twitter',
+        name: 'Twitter',
+        iconClass: 'fab fa-twitter',
+        colorClass: 'twitter',
+        url: 'https://twitter.com/m7mdtarek225?t=_Sw1B7eTRoajvKqqM3BsNA&s=09',
+        description: 'Follow my thoughts, quick tech updates, and industry insights. I share bite-sized content about electronics, programming, and emerging technologies.',
+        stats: {
+          followers: '200+',
+          tweets: '50+',
+          engagement: 'Active'
+        },
+        order: 5
+      },
+      {
+        id: 'github',
+        name: 'GitHub',
+        iconClass: 'fab fa-github',
+        colorClass: 'github',
+        url: 'https://github.com/mohamed22tarek5',
+        description: 'Explore my coding projects, open-source contributions, and technical repositories. From Arduino sketches to web applications, see my code in action.',
+        stats: {
+          repositories: '30+',
+          stars: '50+',
+          contributions: 'Active'
+        },
+        order: 6
+      },
+      {
+        id: 'linktree',
+        name: 'All My Accounts',
+        iconClass: 'fas fa-link',
+        colorClass: 'linktree',
+        url: 'https://linktr.ee/m7mdtarek22',
+        description: 'One convenient link to access all my social media profiles. Perfect for quick access to all my platforms from one place.',
+        stats: {
+          platforms: '8+',
+          visits: '1000+',
+          convenience: 'All-in-One'
+        },
+        order: 7
+      },
+      {
+        id: 'skoon',
+        name: 'Skoon Team',
+        iconClass: 'fas fa-users',
+        colorClass: 'skoon',
+        url: 'https://linktr.ee/skoon_team',
+        description: 'Check out our team\'s projects, collaborations, and innovative solutions. We work together on exciting electronics and engineering challenges.',
+        stats: {
+          members: '5+',
+          projects: '20+',
+          collaborations: 'Active'
+        },
+        order: 8
+      }
+    ];
+
     // Mobile Menu Toggle
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.getElementById('nav-menu');
     
     mobileMenu.addEventListener('click', () => {
+      const expanded = mobileMenu.getAttribute('aria-expanded') === 'true';
+      mobileMenu.setAttribute('aria-expanded', String(!expanded));
+      navMenu.setAttribute('aria-hidden', String(expanded));
       mobileMenu.classList.toggle('active');
       navMenu.classList.toggle('active');
       
@@ -964,7 +1164,7 @@
     });
     
     // Close mobile menu when clicking on a link
-    document.querySelectorAll('.navigation a').forEach(link => {
+    document.querySelectorAll('.navigation a, .footer-links a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenu.classList.remove('active');
         navMenu.classList.remove('active');
@@ -980,30 +1180,6 @@
       } else {
         header.classList.remove('scrolled');
       }
-    });
-    
-    // Active link highlighting
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.navigation a');
-    
-    window.addEventListener('scroll', () => {
-      let current = '';
-      
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (pageYOffset >= sectionTop - 300) {
-          current = section.getAttribute('id');
-        }
-      });
-      
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-          link.classList.add('active');
-        }
-      });
     });
     
     // Back to Top Button
@@ -1051,46 +1227,164 @@
         localStorage.setItem('theme', 'light');
       }
     });
-    
-    // Set current year in footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-    
-    // Animate elements on scroll
-    const animateOnScroll = () => {
-      const elements = document.querySelectorAll('.fade-in, .slide-up, .slide-left, .slide-right');
+
+    // Keyboard support for mobile menu toggle
+    mobileMenu.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        mobileMenu.click();
+      }
+    });
+
+    // Initialize social media page
+    document.addEventListener('DOMContentLoaded', function() {
+      const socialGrid = document.getElementById('social-grid');
       
-      elements.forEach(element => {
-        const elementPosition = element.getBoundingClientRect().top;
-        const screenPosition = window.innerHeight / 1.3;
-        
-        if (elementPosition < screenPosition) {
-          element.style.opacity = '1';
-          element.style.transform = 'translateY(0)';
-          element.style.visibility = 'visible';
-        }
+      // Sort social media by order
+      socialMediaData.sort((a, b) => a.order - b.order);
+      
+      // Render social media cards
+      socialMediaData.forEach((platform, index) => {
+        const card = createSocialCard(platform, index);
+        socialGrid.appendChild(card);
       });
+      
+      // Generate QR code
+      generateQRCode();
+      
+      // Set current year in footer
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+      
+      // Calculate total connections
+      calculateTotalConnections();
+    });
+
+    // Create social media card
+    function createSocialCard(platform, index) {
+      const card = document.createElement('div');
+      card.className = `social-card fade-in delay-${(index % 4)}`;
+      
+      const buttonText = platform.id === 'whatsapp' ? 'Chat Now' : 
+                        platform.id === 'github' ? 'View Profile' : 
+                        platform.id === 'linktree' ? 'Visit Linktree' :
+                        platform.id === 'skoon' ? 'Visit Team' :
+                        platform.id === 'facebook' ? 'Visit Profile' :
+                        platform.id === 'linkedin' ? 'Connect' : 'Follow Me';
+      
+      const iconName = platform.iconClass.split(' ')[1] || 'fa-link';
+      
+      card.innerHTML = `
+        <i class="${platform.iconClass} social-icon ${platform.colorClass}"></i>
+        <h3>${platform.name}</h3>
+        <p>${platform.description}</p>
+        <div class="platform-stats">
+          ${Object.entries(platform.stats).map(([key, value]) => `
+            <div class="stat-item">
+              <div class="stat-count">${value}</div>
+              <div class="stat-label">${key.charAt(0).toUpperCase() + key.slice(1)}</div>
+            </div>
+          `).join('')}
+        </div>
+        <a href="${platform.url}" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="social-link ${platform.colorClass}-bg"
+           aria-label="Visit ${platform.name}">
+          <i class="${platform.iconClass}"></i> ${buttonText}
+        </a>
+      `;
+      
+      return card;
+    }
+
+    // Generate QR code
+    function generateQRCode() {
+      const qrCodeImage = document.getElementById('qrcode-image');
+      const currentUrl = window.location.href;
+      
+      // Using QRCode API from goqr.me
+      qrCodeImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(currentUrl)}`;
+      qrCodeImage.alt = 'QR Code for Mohamed Tarek Social Media Page';
+      
+      // Add loading event
+      qrCodeImage.onload = () => {
+        qrCodeImage.classList.add('loaded');
+      };
+      
+      // Handle download QR code
+      const downloadBtn = document.getElementById('download-qr');
+      if (downloadBtn) {
+        downloadBtn.addEventListener('click', () => {
+          downloadQRCode(qrCodeImage.src, 'mohamed-tarek-social-qr.png');
+        });
+      }
+    }
+
+    // Download QR code function
+    function downloadQRCode(src, filename) {
+      const link = document.createElement('a');
+      link.href = src;
+      link.download = filename;
+      link.click();
+    }
+
+    // Calculate total connections
+    function calculateTotalConnections() {
+      const connectionsCount = document.getElementById('connections-count');
+      if (!connectionsCount) return;
+      
+      // Simulate counting animation
+      let count = 0;
+      const target = 500;
+      const duration = 2000; // 2 seconds
+      const increment = target / (duration / 16); // 60fps
+      
+      const timer = setInterval(() => {
+        count += increment;
+        if (count >= target) {
+          count = target;
+          clearInterval(timer);
+          connectionsCount.textContent = `${target}+`;
+        } else {
+          connectionsCount.textContent = Math.floor(count) + '+';
+        }
+      }, 16);
+    }
+
+    // Image loading handling
+    const profilePic = document.querySelector('.profile-pic');
+    if (profilePic) {
+      profilePic.onload = () => {
+        profilePic.classList.add('loaded');
+      };
+      
+      // Fallback if image fails to load
+      profilePic.onerror = () => {
+        profilePic.src = 'https://via.placeholder.com/200/1e1e1e/4e9eff?text=MT';
+        profilePic.classList.add('loaded');
+      };
+    }
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
     };
     
-    // Initialize animations
-    window.addEventListener('load', () => {
-      const animatedElements = document.querySelectorAll('.fade-in, .slide-up, .slide-left, .slide-right');
-      animatedElements.forEach(element => {
-        element.style.opacity = '0';
-        if (element.classList.contains('slide-up')) {
-          element.style.transform = 'translateY(50px)';
-        } else if (element.classList.contains('slide-left')) {
-          element.style.transform = 'translateX(50px)';
-        } else if (element.classList.contains('slide-right')) {
-          element.style.transform = 'translateX(-50px)';
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
         }
-        element.style.visibility = 'hidden';
       });
-      
-      // Trigger initial animation
-      animateOnScroll();
-    });
+    }, observerOptions);
     
-    window.addEventListener('scroll', animateOnScroll);
+    // Observe elements after DOM is loaded
+    setTimeout(() => {
+      document.querySelectorAll('.fade-in, .slide-up').forEach(element => {
+        observer.observe(element);
+      });
+    }, 100);
   </script>
 </body>
 </html>
