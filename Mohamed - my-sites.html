@@ -64,6 +64,8 @@
       overflow-x: hidden;
       transition: background-color 0.5s ease;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Skip link for accessibility */
@@ -121,8 +123,8 @@
       width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 100px 20px 60px;
-      min-height: 100vh;
+      padding: 100px 20px 40px; /* Reduced bottom padding */
+      flex: 1;
     }
 
     main {
@@ -248,11 +250,15 @@
       border-radius: 2px;
     }
 
-    /* Profile Section */
+    /* Profile Section - CENTERED */
     .profile {
       text-align: center;
-      margin-bottom: 60px;
+      margin: 0 auto 60px;
+      max-width: 800px;
       position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .profile::after {
@@ -273,10 +279,11 @@
       object-fit: cover;
       border: 4px solid var(--primary-color);
       box-shadow: var(--box-shadow);
-      margin-bottom: 30px;
+      margin: 0 auto 30px; /* Centered */
       transition: all var(--transition-speed) ease;
       position: relative;
       overflow: hidden;
+      display: block; /* Ensure it's block level */
     }
 
     .profile-pic::after {
@@ -307,6 +314,11 @@
       background-clip: text;
       color: transparent;
       display: inline-block;
+    }
+
+    .profile p {
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     /* Search and Filter */
@@ -640,14 +652,15 @@
       color: var(--text-light);
     }
 
-    /* Footer */
+    /* SMALLER Footer - Reduced size */
     footer {
       background-color: var(--background-secondary);
-      padding: 60px 0 30px;
+      padding: 40px 0 20px; /* Reduced padding */
       color: var(--text-light);
       text-align: center;
       position: relative;
-      margin-top: 80px;
+      margin-top: 0; /* Removed margin */
+      flex-shrink: 0; /* Prevent footer from shrinking */
     }
 
     footer::before {
@@ -661,13 +674,13 @@
     }
 
     .footer-bottom {
-      font-size: 0.9em;
+      font-size: 0.85em; /* Smaller font */
       color: var(--text-muted);
-      line-height: 1.8;
+      line-height: 1.6;
     }
 
     .footer-bottom p {
-      margin-bottom: 10px;
+      margin-bottom: 8px; /* Smaller spacing */
     }
 
     .footer-bottom i {
@@ -888,7 +901,12 @@
       }
 
       .container {
-        padding: 90px 20px 40px;
+        padding: 90px 20px 30px; /* Further reduced bottom padding for mobile */
+      }
+      
+      /* Smaller footer on mobile */
+      footer {
+        padding: 30px 0 15px;
       }
     }
 
@@ -941,6 +959,10 @@
       .bar {
         width: 22px;
       }
+      
+      .footer-bottom {
+        font-size: 0.8em;
+      }
     }
 
     @media (max-width: 380px) {
@@ -980,7 +1002,7 @@
 
     @media (max-width: 320px) {
       .container { 
-        padding: 90px 12px 30px; 
+        padding: 90px 12px 20px; 
       }
       
       .app-grid {
@@ -994,6 +1016,10 @@
       
       h1 {
         font-size: 1.8em;
+      }
+      
+      footer {
+        padding: 20px 0 10px;
       }
     }
 
@@ -1077,7 +1103,7 @@
   <!-- Main Content -->
   <main id="main-content">
     <div class="container">
-      <!-- Profile Section -->
+      <!-- Profile Section - CENTERED -->
       <div class="profile fade-in">
         <img src="photo.jpg" alt="Mohamed Tarek - Electronic & Communications Engineer" class="profile-pic" loading="lazy">
         <h1>Mohamed Tarek</h1>
@@ -1400,13 +1426,12 @@
     </div>
   </main>
 
-  <!-- Footer -->
+  <!-- SMALLER Footer -->
   <footer>
     <div class="container">
       <div class="footer-bottom fade-in delay-5">
         <p>&copy; <span id="current-year">2026</span> Mohamed Tarek. All Rights Reserved.</p>
         <p>Designed & Developed with <i class="fas fa-heart" style="color: #ff4757;"></i> by Mohamed Tarek</p>
-        <p><small>All tools and applications are provided for educational and personal use.</small></p>
       </div>
     </div>
   </footer>
@@ -1715,51 +1740,6 @@
         }, 1500);
       });
     });
-
-    // Initialize tooltips for better UX
-    function initTooltips() {
-      const tooltips = document.querySelectorAll('[data-tooltip]');
-      tooltips.forEach(el => {
-        el.addEventListener('mouseenter', showTooltip);
-        el.addEventListener('mouseleave', hideTooltip);
-      });
-    }
-
-    function showTooltip(e) {
-      const tooltip = document.createElement('div');
-      tooltip.className = 'tooltip';
-      tooltip.textContent = this.dataset.tooltip;
-      document.body.appendChild(tooltip);
-      
-      const rect = this.getBoundingClientRect();
-      tooltip.style.top = (rect.top - tooltip.offsetHeight - 10) + 'px';
-      tooltip.style.left = (rect.left + rect.width / 2 - tooltip.offsetWidth / 2) + 'px';
-      
-      this.tooltip = tooltip;
-    }
-
-    function hideTooltip() {
-      if (this.tooltip) {
-        this.tooltip.remove();
-        this.tooltip = null;
-      }
-    }
-
-    // Initialize when DOM is loaded
-    document.addEventListener('DOMContentLoaded', initTooltips);
-
-    // Add hover effect to app cards on mobile (touch devices)
-    if ('ontouchstart' in window) {
-      document.querySelectorAll('.app-card').forEach(card => {
-        card.addEventListener('touchstart', function() {
-          this.classList.add('touch-hover');
-        });
-        
-        card.addEventListener('touchend', function() {
-          this.classList.remove('touch-hover');
-        });
-      });
-    }
     
   </script>
 </body>
