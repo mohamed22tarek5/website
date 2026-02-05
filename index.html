@@ -10,28 +10,28 @@
   <meta property="og:description" content="Professional portfolio of Mohamed Tarek showcasing engineering and development projects">
   <meta property="og:image" content="https://example.com/photo.jpg">
   <meta property="og:url" content="https://example.com">
-  <meta name="theme-color" content="#7cb1f2">
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  
+  <!-- PWA Meta Tags -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<!-- PWA Meta Tags -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Mohamed Tarek">
-<link rel="apple-touch-icon" href="./icon-192.png">
-
-<!-- Theme Color -->
-<meta name="theme-color" content="#4e9eff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
-
-<!-- Manifest -->
-<link rel="manifest" href="./manifest.webmanifest">
-
+  <meta name="apple-mobile-web-app-title" content="Mohamed Tarek">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#4e9eff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+  
+  <!-- Manifest -->
+  <link rel="manifest" href="manifest.webmanifest">
+  
+  <!-- Icons -->
   <link rel="icon" href="icon.png" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  
   <title>Mohamed Tarek | Engineer & Developer</title>
   <style>
     :root {
@@ -85,6 +85,48 @@
       line-height: 1.6;
       overflow-x: hidden;
       transition: background-color 0.5s ease;
+    }
+
+    /* PWA Launch Screen */
+    .pwa-launch-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    .pwa-launch-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .pwa-logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      margin-bottom: 30px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .pwa-loader {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+      margin-top: 30px;
     }
 
     /* Typography */
@@ -280,6 +322,10 @@
       0% { transform: translateY(0px); }
       50% { transform: translateY(-20px); }
       100% { transform: translateY(0px); }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     .hero h1 {
@@ -947,6 +993,152 @@
       transform: scale(1.1);
     }
 
+    /* PWA Install Button */
+    .pwa-install-btn {
+      position: fixed;
+      bottom: 100px;
+      left: 30px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: var(--box-shadow);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      transform: translateY(20px);
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pwa-install-btn.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .pwa-install-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--box-shadow-hover);
+    }
+
+    /* Update Notification */
+    .pwa-update-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--primary-color);
+      color: white;
+      padding: 15px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow-hover);
+      z-index: 10000;
+      max-width: 300px;
+      animation: slideInRight 0.3s ease;
+    }
+
+    .update-content p {
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .update-btn, .dismiss-btn {
+      background: white;
+      color: var(--primary-color);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-right: 10px;
+      font-size: 0.9em;
+      transition: all 0.3s ease;
+    }
+
+    .dismiss-btn {
+      background: transparent;
+      color: white;
+      border: 1px solid white;
+    }
+
+    .update-btn:hover, .dismiss-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Network Status */
+    .network-status {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 20px;
+      text-align: center;
+      z-index: 10001;
+      animation: slideDown 0.3s ease;
+      font-weight: 500;
+    }
+
+    .network-status.success {
+      background: var(--success-color);
+      color: white;
+    }
+
+    .network-status.warning {
+      background: var(--error-color);
+      color: white;
+    }
+
+    /* PWA Toast */
+    .pwa-toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--card-dark);
+      color: var(--text-light);
+      padding: 15px 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow-hover);
+      z-index: 10000;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .pwa-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .pwa-toast.success {
+      background: var(--success-color);
+      color: white;
+    }
+
+    /* Offline Indicator */
+    .offline-indicator {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--error-color);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.3s ease;
+      font-size: 0.9em;
+    }
+
+    .offline-indicator.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
     /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; }
@@ -983,6 +1175,26 @@
       to {
         opacity: 1;
         transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+      }
+      to {
+        transform: translateY(0);
       }
     }
 
@@ -1028,10 +1240,6 @@
       border-top-color: var(--primary-color);
       animation: spin 1s linear infinite;
       margin: 20px auto;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
     }
 
     /* Tooltip */
@@ -1083,6 +1291,33 @@
       max-width: 100%;
       border-radius: var(--border-radius);
       box-shadow: var(--box-shadow);
+    }
+
+    /* Standalone Mode Styles */
+    @media all and (display-mode: standalone) {
+      body {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+      }
+      
+      header {
+        padding-top: max(15px, env(safe-area-inset-top));
+      }
+      
+      .theme-toggle,
+      .pwa-install-btn {
+        bottom: calc(30px + env(safe-area-inset-bottom));
+      }
+      
+      .pwa-install-btn {
+        bottom: calc(100px + env(safe-area-inset-bottom));
+      }
+      
+      .back-to-top {
+        bottom: calc(30px + env(safe-area-inset-bottom));
+      }
     }
 
     /* Responsive Design */
@@ -1160,6 +1395,13 @@
       .footer-content {
         grid-template-columns: 1fr;
       }
+      
+      .pwa-install-btn {
+        left: 20px;
+        bottom: 90px;
+        font-size: 0.9em;
+        padding: 10px 16px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1198,6 +1440,13 @@
       .back-to-top {
         bottom: 20px;
         right: 20px;
+      }
+      
+      .pwa-install-btn {
+        left: 15px;
+        bottom: 80px;
+        padding: 8px 14px;
+        font-size: 0.8em;
       }
     }
   
@@ -1249,184 +1498,18 @@
 
     /* Fix potential horizontal scrolling from particle canvas on small screens */
     #particles-js { max-width: 100vw; overflow: hidden; }
-/* PWA Install Button */
-.pwa-install-btn {
-  position: fixed;
-  bottom: 100px;
-  left: 30px;
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: var(--box-shadow);
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  transform: translateY(20px);
-  opacity: 0;
-}
 
-.pwa-install-btn.show {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.pwa-install-btn:hover {
-  background: var(--primary-dark);
-  transform: translateY(-2px);
-  box-shadow: var(--box-shadow-hover);
-}
-
-/* Update Notification */
-.pwa-update-notification {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: var(--primary-color);
-  color: white;
-  padding: 15px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow-hover);
-  z-index: 10000;
-  max-width: 300px;
-  animation: slideInRight 0.3s ease;
-}
-
-.update-content p {
-  margin-bottom: 10px;
-  color: white;
-}
-
-.update-btn, .dismiss-btn {
-  background: white;
-  color: var(--primary-color);
-  border: none;
-  padding: 8px 15px;
-  border-radius: 20px;
-  cursor: pointer;
-  margin-right: 10px;
-  font-size: 0.9em;
-  transition: all 0.3s ease;
-}
-
-.dismiss-btn {
-  background: transparent;
-  color: white;
-  border: 1px solid white;
-}
-
-.update-btn:hover, .dismiss-btn:hover {
-  transform: translateY(-1px);
-}
-
-/* Network Status */
-.network-status {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 12px 20px;
-  text-align: center;
-  z-index: 10001;
-  animation: slideDown 0.3s ease;
-  font-weight: 500;
-}
-
-.network-status.success {
-  background: var(--success-color);
-  color: white;
-}
-
-.network-status.warning {
-  background: var(--error-color);
-  color: white;
-}
-
-/* PWA Toast */
-.pwa-toast {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: var(--card-dark);
-  color: var(--text-light);
-  padding: 15px 20px;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow-hover);
-  z-index: 10000;
-  transform: translateY(20px);
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-
-.pwa-toast.show {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.pwa-toast.success {
-  background: var(--success-color);
-  color: white;
-}
-
-/* Standalone Mode Styles */
-@media all and (display-mode: standalone) {
-  body {
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-  }
-  
-  header {
-    padding-top: max(15px, env(safe-area-inset-top));
-  }
-}
-
-/* Animations */
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideDown {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-/* Launch Screen (optional) */
-.app-launch-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--background-dark);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-}
-
-.app-launch-screen.hidden {
-  display: none;
-}
   </style>
 </head>
 <body>
+  <!-- PWA Launch Screen -->
+  <div class="pwa-launch-screen" id="pwaLaunchScreen">
+    <img src="photo.jpg" alt="Mohamed Tarek" class="pwa-logo">
+    <h1 style="color: white;">Mohamed Tarek</h1>
+    <p style="color: rgba(255, 255, 255, 0.8);">Loading Portfolio...</p>
+    <div class="pwa-loader"></div>
+  </div>
+
   <!-- Particles Background -->
   <div id="particles-js"></div>
   
@@ -1448,6 +1531,17 @@
       <a href="Mohamed - CV.html" class="btn btn-outline" style="margin-left: 20px;">My CV</a>
     </nav>
   </header>
+
+  <!-- PWA Install Button -->
+  <button class="pwa-install-btn" id="pwaInstallBtn" aria-label="Install App">
+    <i class="fas fa-download"></i>
+    <span>Install App</span>
+  </button>
+
+  <!-- Network Status Indicator -->
+  <div class="offline-indicator" id="offlineIndicator">
+    <i class="fas fa-wifi-slash"></i> You are offline
+  </div>
 
   <!-- Hero Section -->
   <section class="hero" id="home">
@@ -1796,47 +1890,53 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <div class="section-title fade-in">
-        <h2>Get In Touch</h2>
-        <p class="section-subtitle">Let's work together</p>
-      </div>
-      
-     
-      
-      <div class="contact-info" id="contact-info">
-        <div class="info-card fade-in">
-          <div class="info-icon">
-            <i class="fas fa-phone-alt"></i>
-          </div>
-          <div class="info-content">
-            <h3>Phone</h3>
-            <p>+201090637406</p>
-          </div>
-        </div>
-        
-        <div class="info-card fade-in delay-1">
-          <div class="info-icon">
-            <i class="fas fa-envelope"></i>
-          </div>
-          <div class="info-content">
-            <h3>Email</h3>
-            <h6>mohammed.tarek.abdelhady.ali@gmail.com</h6>
-          </div>
-        </div>
-        
-        <div class="info-card fade-in delay-2">
-          <div class="info-icon">
-            <i class="fas fa-map-marker-alt"></i>
-          </div>
-          <div class="info-content">
-            <h3>Location</h3>
-            <p>Kafr el sheikh, Egypt</p>
-          </div>
-        </div>
-      </div>
+        <!-- Contact Information -->
+        <section class="contact-section">
+            <div class="container">
+                <div class="section-title fade-in">
+                    <h2>Contact Information</h2>
+                    <p class="section-subtitle">Get in touch for opportunities and collaborations</p>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="info-card fade-in">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Email</h3>
+                            <h6>mohammed.tarek.abdelhady.ali@gmail.com</h6>
+                            <a href="mailto:mohammed.tarek.abdelhady.ali@gmail.com" class="btn btn-outline" style="margin-top: 10px; padding: 5px 15px; font-size: 0.8em;">
+                                Send Email
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card fade-in delay-1">
+                        <div class="info-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Phone</h3>
+                            <p>+201090637406</p>
+                            <a href="tel:+201090637406" class="btn btn-outline" style="margin-top: 10px; padding: 5px 15px; font-size: 0.8em;">
+                                Call Now
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card fade-in delay-2">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Location</h3>
+                            <p>Kafr el sheikh, Egypt</p>
+                            <button class="btn btn-outline" style="margin-top: 10px; padding: 5px 15px; font-size: 0.8em;" onclick="openMaps()">
+                                View on Map
+                            </button>
+                        </div>
+                    </div>
     </div>
   </section>
 
@@ -1901,6 +2001,19 @@
   <!-- JavaScript -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script>
+    // Hide PWA launch screen after page loads
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const launchScreen = document.getElementById('pwaLaunchScreen');
+        if (launchScreen) {
+          launchScreen.classList.add('hidden');
+          setTimeout(() => {
+            launchScreen.style.display = 'none';
+          }, 500);
+        }
+      }, 1000);
+    });
+
     // Initialize particles.js
     particlesJS("particles-js", {
       "particles": {
@@ -2007,6 +2120,112 @@
       },
       "retina_detect": true
     });
+
+    // PWA Functionality
+    let deferredPrompt;
+    const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+    const offlineIndicator = document.getElementById('offlineIndicator');
+
+    // Show install button when PWA can be installed
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      pwaInstallBtn.classList.add('show');
+    });
+
+    // Install button click handler
+    pwaInstallBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      
+      if (outcome === 'accepted') {
+        console.log('PWA installed');
+        pwaInstallBtn.classList.remove('show');
+        showToast('App installed successfully!', 'success');
+      } else {
+        console.log('PWA installation declined');
+      }
+      
+      deferredPrompt = null;
+    });
+
+    // Network status monitoring
+    window.addEventListener('online', () => {
+      offlineIndicator.classList.remove('show');
+      showToast('You are back online', 'success');
+    });
+
+    window.addEventListener('offline', () => {
+      offlineIndicator.classList.add('show');
+    });
+
+    // Toast notification function
+    function showToast(message, type = 'info') {
+      const toast = document.createElement('div');
+      toast.className = `pwa-toast ${type}`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.classList.add('show');
+      }, 100);
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+          document.body.removeChild(toast);
+        }, 300);
+      }, 3000);
+    }
+
+    // Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(registration => {
+            console.log('Service Worker registered:', registration);
+            
+            // Check for updates
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+              
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  showUpdateNotification();
+                }
+              });
+            });
+          })
+          .catch(error => {
+            console.error('Service Worker registration failed:', error);
+          });
+      });
+    }
+
+    // Update notification
+    function showUpdateNotification() {
+      const notification = document.createElement('div');
+      notification.className = 'pwa-update-notification';
+      notification.innerHTML = `
+        <div class="update-content">
+          <p>New update available! Refresh to update.</p>
+          <button class="update-btn" id="updateBtn">Update</button>
+          <button class="dismiss-btn" id="dismissBtn">Later</button>
+        </div>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      document.getElementById('updateBtn').addEventListener('click', () => {
+        window.location.reload();
+      });
+      
+      document.getElementById('dismissBtn').addEventListener('click', () => {
+        document.body.removeChild(notification);
+      });
+    }
 
     // Mobile Menu Toggle
     const mobileMenu = document.getElementById('mobile-menu');
@@ -2159,34 +2378,6 @@
     // Start the typewriter effect
     setTimeout(typeWriter, 1000);
     
-    // Form Submission
-    const contactForm = document.getElementById('contactForm');
-    const formSpinner = document.getElementById('form-spinner');
-    const formMessage = document.getElementById('form-message');
-    
-    if (contactForm) {
-      contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Show loading spinner
-        formSpinner.style.display = 'block';
-        formMessage.textContent = '';
-        
-        // Simulate form submission (replace with actual AJAX call)
-        setTimeout(() => {
-          formSpinner.style.display = 'none';
-          formMessage.textContent = 'Your message has been sent successfully!';
-          formMessage.style.color = 'var(--success-color)';
-          contactForm.reset();
-          
-          // Hide message after 5 seconds
-          setTimeout(() => {
-            formMessage.textContent = '';
-          }, 5000);
-        }, 1500);
-      });
-    }
-    
     // Animate statistics on scroll
     function animateStatistics() {
       const projectsCount = document.getElementById('projects-count');
@@ -2245,16 +2436,6 @@
         bar.style.width = width;
       }, 500);
     });
-  </script>
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-          .then(() => console.log('[PWA] Service Worker registered'))
-          .catch(err => console.error('[PWA] Registration failed:', err));
-      });
-    }
   </script>
 </body>
 </html>
