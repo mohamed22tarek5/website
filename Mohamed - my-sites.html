@@ -1,1746 +1,1397 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mohamed Tarek - Collection of useful engineering tools and applications">
-  <meta name="keywords" content="engineering tools, calculator, resistor, capacitor, electronics">
-  <meta name="author" content="Mohamed Tarek">
-  <title>My Apps & Tools - Mohamed Tarek</title>
-  <link rel="icon" href="icon.png" type="image/png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Mohamed Tarek | Apps & Tools</title>
+  <meta name="description" content="Collection of useful engineering tools, calculators, and productivity apps by Mohamed Tarek. Electronics calculators, Arduino tools, and more.">
+  <meta name="keywords" content="engineering tools, resistor calculator, capacitor calculator, electronics, Arduino, productivity apps">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mohamed Tarek | Apps & Tools">
+  <meta property="og:description" content="Collection of useful engineering tools, calculators, and productivity apps.">
+  <meta property="og:image" content="https://website-mohamed.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://website-mohamed.vercel.app/Mohamed%20-%20my-sites.html">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Mohamed Tarek | Apps & Tools">
+  <meta name="twitter:description" content="Collection of useful engineering tools, calculators, and productivity apps.">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M. Tarek Tools">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <link rel="icon" href="icon.png" type="image/png" sizes="any">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
+    /* ============================================
+       DESIGN SYSTEM
+       ============================================ */
     :root {
-      --primary-color: #4e9eff;
-      --primary-dark: #3a6cf4;
-      --primary-light: #6ab1ff;
-      --background-dark: #121212;
-      --background-darker: #0a0a0a;
-      --background-secondary: #1a1a1a;
-      --card-dark: #1e1e1e;
-      --card-light: #252525;
-      --text-light: #ffffff;
-      --text-muted: #aaaaaa;
-      --success-color: #4caf50;
-      --error-color: #f44336;
-      --transition-speed: 0.3s;
-      --border-radius: 12px;
-      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
-      --glass-effect: rgba(30, 30, 30, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.1);
-      --glass-blur: blur(10px);
+      --color-bg-primary: #0a0e1a;
+      --color-bg-secondary: #0f1322;
+      --color-bg-tertiary: #141829;
+      --color-bg-card: #161b2e;
+      --color-bg-card-hover: #1c2240;
+      --color-accent: #3b82f6;
+      --color-accent-hover: #2563eb;
+      --color-accent-light: #60a5fa;
+      --color-accent-subtle: rgba(59, 130, 246, 0.08);
+      --color-text-primary: #f1f5f9;
+      --color-text-secondary: #94a3b8;
+      --color-text-tertiary: #64748b;
+      --color-border: rgba(255, 255, 255, 0.06);
+      --color-border-hover: rgba(255, 255, 255, 0.12);
+      --color-border-accent: rgba(59, 130, 246, 0.3);
+      --color-success: #22c55e;
+      --color-error: #ef4444;
+      --gradient-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.15);
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --container-max: 1200px;
+      --header-height: 72px;
     }
 
-    /* Light mode variables */
     [data-theme="light"] {
-      --background-dark: #f5f7fa;
-      --background-darker: #e8ebf0;
-      --background-secondary: #ffffff;
-      --card-dark: #ffffff;
-      --card-light: #f9f9f9;
-      --text-light: #333333;
-      --text-muted: #666666;
-      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
-      --glass-effect: rgba(255, 255, 255, 0.7);
-      --glass-border: rgba(0, 0, 0, 0.1);
+      --color-bg-primary: #f8fafc;
+      --color-bg-secondary: #f1f5f9;
+      --color-bg-tertiary: #e2e8f0;
+      --color-bg-card: #ffffff;
+      --color-bg-card-hover: #f8fafc;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      --color-text-tertiary: #94a3b8;
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-border-hover: rgba(0, 0, 0, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
     }
 
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--background-dark);
-      color: var(--text-light);
-      line-height: 1.6;
+      font-family: var(--font-sans);
+      background-color: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      line-height: 1.7;
       overflow-x: hidden;
-      transition: background-color 0.5s ease;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color var(--transition-slow), color var(--transition-slow);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    /* Skip link for accessibility */
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; }
+    ul, ol { list-style: none; }
+    ::selection { background: var(--color-accent); color: white; }
+
+    /* ============================================
+       SKIP LINK
+       ============================================ */
     .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: var(--primary-color);
+      position: fixed;
+      top: -100%;
+      left: 1rem;
+      background: var(--color-accent);
       color: white;
-      padding: 12px 20px;
-      z-index: 1001;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: top 0.3s ease;
-    }
-    
-    .skip-link:focus {
-      top: 10px;
-    }
-
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      z-index: 10000;
       font-weight: 600;
-      line-height: 1.2;
-      margin-bottom: 0.5em;
+      font-size: 0.875rem;
+      transition: top var(--transition-fast);
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* ============================================
+       SCROLL PROGRESS
+       ============================================ */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      width: 0%; height: 3px;
+      background: var(--gradient-accent);
+      z-index: 10001;
+      transition: width 50ms linear;
     }
 
-    h1 { font-size: 2.5em; }
-    h2 { font-size: 2em; }
-    h3 { font-size: 1.5em; }
-
-    @media (max-width: 768px) {
-      h1 { font-size: 2em; }
-      h2 { font-size: 1.8em; }
-      h3 { font-size: 1.3em; }
-    }
-
-    p {
-      margin-bottom: 1em;
-      color: var(--text-muted);
-    }
-
-    a {
-      text-decoration: none;
-      color: var(--primary-color);
-      transition: all var(--transition-speed) ease;
-    }
-
-    a:hover {
-      color: var(--primary-light);
-    }
-
-    /* Layout */
+    /* ============================================
+       LAYOUT
+       ============================================ */
     .container {
       width: 100%;
-      max-width: 1200px;
+      max-width: var(--container-max);
       margin: 0 auto;
-      padding: 100px 20px 40px; /* Reduced bottom padding */
+      padding: 0 2rem;
       flex: 1;
     }
 
-    main {
-      position: relative;
-    }
-
-    /* Header */
-    header {
-      background-color: var(--glass-effect);
-      width: 100%;
+    /* ============================================
+       HEADER
+       ============================================ */
+    .header {
       position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-height);
       z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 5%;
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-      transition: all var(--transition-speed) ease;
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      border-bottom: 1px solid var(--glass-border);
+      transition: all var(--transition-base);
+      background: transparent;
     }
 
-    header.scrolled {
-      padding: 10px 5%;
-      background-color: var(--glass-effect);
+    .header.scrolled {
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    [data-theme="light"] .header.scrolled {
+      background: rgba(248, 250, 252, 0.85);
+    }
+
+    .header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
     }
 
     .logo {
-      font-size: 1.8em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.25rem;
       font-weight: 700;
-      color: var(--primary-color);
+      color: var(--color-text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--gradient-accent);
+      border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 5px 10px;
-      border-radius: 8px;
-      transition: all var(--transition-speed) ease;
+      justify-content: center;
+      color: white;
+      font-size: 0.875rem;
+      font-weight: 800;
     }
 
-    .logo:hover {
-      color: var(--primary-light);
-      background: rgba(78, 158, 255, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .logo i {
-      font-size: 1.2em;
-    }
-
-    /* Navigation */
-    .navigation {
+    .nav {
       display: flex;
       align-items: center;
+      gap: 0.25rem;
     }
 
-    .navigation a {
-      position: relative;
-      margin-left: 30px;
+    .nav-link {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
       font-weight: 500;
-      color: var(--text-light);
-      padding: 8px 0;
-      transition: all var(--transition-speed) ease;
+      color: var(--color-text-secondary);
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
     }
 
-    .navigation a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background-color: var(--primary-color);
-      transition: width var(--transition-speed) ease;
+    .nav-link:hover, .nav-link.active {
+      color: var(--color-text-primary);
+      background: var(--color-accent-subtle);
     }
 
-    .navigation a:hover {
-      color: var(--primary-color);
+    .nav-link.active { color: var(--color-accent); }
+
+    .nav-cta {
+      margin-left: 0.5rem;
+      padding: 0.5rem 1.5rem;
+      background: var(--color-accent);
+      color: white;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all var(--transition-fast);
     }
 
-    .navigation a:hover::after {
-      width: 100%;
+    .nav-cta:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-glow);
     }
 
-    .navigation a.active {
-      color: var(--primary-color);
-    }
-
-    .navigation a.active::after {
-      width: 100%;
-    }
-
-    /* Mobile menu */
     .menu-toggle {
       display: none;
       flex-direction: column;
-      cursor: pointer;
+      gap: 5px;
+      padding: 0.5rem;
       z-index: 1001;
-      padding: 10px;
-      background: transparent;
-      border: none;
-      position: relative;
-    }
-
-    .menu-toggle.active .bar:nth-child(1) {
-      transform: rotate(-45deg) translate(-5px, 6px);
-    }
-
-    .menu-toggle.active .bar:nth-child(2) {
-      opacity: 0;
-    }
-
-    .menu-toggle.active .bar:nth-child(3) {
-      transform: rotate(45deg) translate(-5px, -6px);
-    }
-
-    .bar {
-      height: 3px;
-      width: 25px;
-      background-color: var(--primary-color);
-      margin: 4px 0;
-      transition: all var(--transition-speed) ease;
-      border-radius: 2px;
-    }
-
-    /* Profile Section - CENTERED */
-    .profile {
-      text-align: center;
-      margin: 0 auto 60px;
-      max-width: 800px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
       align-items: center;
+      justify-content: center;
     }
 
-    .profile::after {
+    .menu-toggle .bar {
+      width: 22px; height: 2px;
+      background: var(--color-text-primary);
+      border-radius: 2px;
+      transition: all var(--transition-base);
+      transform-origin: center;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+
+    .mobile-overlay.active { opacity: 1; pointer-events: auto; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .nav {
+        position: fixed;
+        top: 0; right: -100%;
+        width: min(320px, 85vw);
+        height: 100vh;
+        background: var(--color-bg-secondary);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 3rem;
+        gap: 0.25rem;
+        transition: right var(--transition-slow);
+        border-left: 1px solid var(--color-border);
+      }
+      .nav.active { right: 0; }
+      .nav-link { font-size: 1.125rem; width: 100%; padding: 1rem; }
+      .nav-cta { margin-left: 0; margin-top: 1rem; width: 100%; text-align: center; display: block; padding: 1rem; }
+    }
+
+    /* ============================================
+       PAGE HERO
+       ============================================ */
+    .page-hero {
+      padding-top: calc(var(--header-height) + 3rem);
+      padding-bottom: 2rem;
+      text-align: center;
+      background: var(--color-bg-primary);
+      position: relative;
+    }
+
+    .page-hero::before {
       content: '';
       position: absolute;
-      bottom: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
     }
 
-    .profile-pic {
-      width: 180px;
-      height: 180px;
+    .page-hero .container { position: relative; z-index: 1; }
+
+    .profile-image {
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid var(--primary-color);
-      box-shadow: var(--box-shadow);
-      margin: 0 auto 30px; /* Centered */
-      transition: all var(--transition-speed) ease;
-      position: relative;
-      overflow: hidden;
-      display: block; /* Ensure it's block level */
+      border: 3px solid var(--color-border-accent);
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.12);
+      margin: 0 auto 1.5rem;
+      transition: transform var(--transition-base);
     }
 
-    .profile-pic::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, transparent, rgba(78, 158, 255, 0.3), transparent);
-      opacity: 0;
-      transition: opacity var(--transition-speed) ease;
+    .profile-image:hover {
+      transform: scale(1.05);
     }
 
-    .profile-pic:hover {
-      transform: scale(1.05) rotate(2deg);
-      box-shadow: var(--box-shadow-hover);
-    }
-
-    .profile-pic:hover::after {
-      opacity: 1;
-    }
-
-    .profile h1 {
-      margin-bottom: 10px;
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      background: var(--gradient-accent);
       -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       background-clip: text;
-      color: transparent;
-      display: inline-block;
     }
 
-    .profile p {
-      max-width: 600px;
+    .page-hero > .container > p {
+      font-size: 1.0625rem;
+      color: var(--color-text-secondary);
+      max-width: 560px;
       margin: 0 auto;
     }
 
-    /* Search and Filter */
-    .tools-search {
-      max-width: 500px;
-      margin: 0 auto 40px;
+    /* ============================================
+       SEARCH & FILTERS
+       ============================================ */
+    .tools-controls {
+      padding: 2rem 0 0;
+    }
+
+    .search-wrapper {
+      max-width: 480px;
+      margin: 0 auto 1.5rem;
       position: relative;
     }
 
     .search-input {
       width: 100%;
-      padding: 16px 50px 16px 25px;
-      background: var(--card-dark);
-      border: 2px solid var(--glass-border);
-      border-radius: 50px;
-      color: var(--text-light);
-      font-family: 'Poppins', sans-serif;
-      transition: all var(--transition-speed) ease;
-      font-size: 1em;
+      padding: 14px 48px 14px 20px;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      color: var(--color-text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      transition: all var(--transition-fast);
+      outline: none;
     }
 
     .search-input:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 4px rgba(78, 158, 255, 0.2);
-      transform: translateY(-2px);
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-accent-subtle);
     }
 
-    .search-input::placeholder {
-      color: var(--text-muted);
-      opacity: 0.7;
-    }
+    .search-input::placeholder { color: var(--color-text-tertiary); }
 
     .search-icon {
       position: absolute;
-      right: 20px;
+      right: 16px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--primary-color);
-      font-size: 1.2em;
-      transition: all var(--transition-speed) ease;
+      color: var(--color-text-tertiary);
+      font-size: 1rem;
+      pointer-events: none;
+      transition: color var(--transition-fast);
     }
 
-    .search-input:focus + .search-icon {
-      color: var(--primary-light);
-      transform: translateY(-50%) scale(1.1);
-    }
+    .search-input:focus ~ .search-icon { color: var(--color-accent); }
 
-    .tools-filters {
+    .filter-bar {
       display: flex;
       justify-content: center;
-      gap: 15px;
-      margin-bottom: 50px;
+      gap: 0.5rem;
       flex-wrap: wrap;
+      margin-bottom: 2.5rem;
     }
 
     .filter-btn {
-      background: var(--card-dark);
-      color: var(--text-light);
-      border: 2px solid var(--glass-border);
-      padding: 12px 24px;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all var(--transition-speed) ease;
-      font-family: 'Poppins', sans-serif;
+      padding: 8px 18px;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      color: var(--color-text-secondary);
+      font-size: 0.8125rem;
       font-weight: 500;
-      font-size: 0.95em;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .filter-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-      opacity: 0;
-      transition: opacity var(--transition-speed) ease;
-      z-index: 1;
-    }
-
-    .filter-btn span {
-      position: relative;
-      z-index: 2;
+      transition: all var(--transition-fast);
+      cursor: pointer;
     }
 
     .filter-btn:hover {
-      transform: translateY(-3px);
-      border-color: var(--primary-color);
-      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.2);
-    }
-
-    .filter-btn.active,
-    .filter-btn:hover::before {
-      opacity: 1;
+      border-color: var(--color-border-accent);
+      color: var(--color-accent);
+      background: var(--color-accent-subtle);
     }
 
     .filter-btn.active {
-      background: transparent;
+      background: var(--color-accent);
+      border-color: var(--color-accent);
       color: white;
-      border-color: var(--primary-color);
     }
 
-    /* App Categories */
-    .app-category {
-      margin-bottom: 80px;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
+    /* ============================================
+       CATEGORY SECTION
+       ============================================ */
+    .category-section {
+      padding: 2.5rem 0;
     }
 
-    .app-category.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .app-category h2 {
-      color: var(--primary-color);
-      font-size: 2em;
-      margin-bottom: 40px;
-      position: relative;
-      padding-bottom: 15px;
+    .category-header {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
     }
 
-    .app-category h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 60px;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary-color), transparent);
-      border-radius: 2px;
+    .category-icon {
+      width: 44px; height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-accent-subtle);
+      border-radius: var(--radius-md);
+      color: var(--color-accent);
+      font-size: 1.125rem;
     }
 
-    .app-category h2 i {
-      font-size: 1.2em;
-      background: rgba(78, 158, 255, 0.1);
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(78, 158, 255, 0.2);
+    .category-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
     }
 
-    .app-grid {
+    .category-count {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-text-tertiary);
+      background: var(--color-bg-tertiary);
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    /* ============================================
+       APP CARDS GRID
+       ============================================ */
+    .apps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.25rem;
     }
 
-    /* App Cards */
     .app-card {
-      background-color: var(--card-dark);
-      border-radius: var(--border-radius);
-      padding: 30px;
-      box-shadow: var(--box-shadow);
-      transition: all var(--transition-speed) ease;
-      height: 100%;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
       display: flex;
       flex-direction: column;
+      transition: all var(--transition-base);
       position: relative;
-      overflow: hidden;
-      border: 1px solid transparent;
-    }
-
-    .app-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(78, 158, 255, 0.1) 0%, transparent 50%);
-      opacity: 0;
-      transition: opacity var(--transition-speed) ease;
-      z-index: 1;
-    }
-
-    .app-card:hover::before {
-      opacity: 1;
     }
 
     .app-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: var(--box-shadow-hover);
-      border-color: rgba(78, 158, 255, 0.3);
+      border-color: var(--color-border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
     }
 
-    .app-title {
-      font-size: 1.4em;
-      margin-bottom: 15px;
-      color: var(--primary-color);
+    .app-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .app-card-icon {
+      width: 40px; height: 40px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      position: relative;
-      z-index: 2;
+      justify-content: center;
+      background: var(--color-accent-subtle);
+      border-radius: var(--radius-sm);
+      color: var(--color-accent);
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: all var(--transition-fast);
     }
 
-    .app-title i {
-      font-size: 1.2em;
-      background: rgba(78, 158, 255, 0.1);
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid rgba(78, 158, 255, 0.2);
-      transition: all var(--transition-speed) ease;
+    .app-card:hover .app-card-icon {
+      background: var(--color-accent);
+      color: white;
     }
 
-    .app-card:hover .app-title i {
-      transform: scale(1.1) rotate(5deg);
-      background: rgba(78, 158, 255, 0.2);
-      border-color: var(--primary-color);
+    .app-card h3 {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      line-height: 1.3;
     }
 
-    .app-description {
-      color: var(--text-muted);
-      margin-bottom: 25px;
-      flex-grow: 1;
-      position: relative;
-      z-index: 2;
-      line-height: 1.7;
+    .app-card-desc {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      flex: 1;
     }
 
-    .app-link {
+    .app-card-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 12px 30px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.95em;
-      transition: all var(--transition-speed) ease;
-      cursor: pointer;
-      background-color: var(--primary-color);
+      gap: 0.5rem;
+      padding: 10px 20px;
+      background: var(--color-accent);
       color: white;
-      margin-top: auto;
-      position: relative;
-      z-index: 2;
-      border: 2px solid transparent;
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all var(--transition-fast);
       text-decoration: none;
-      min-width: 140px;
+      margin-top: auto;
     }
 
-    .app-link:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 8px 25px rgba(78, 158, 255, 0.4);
-      border-color: var(--primary-light);
+    .app-card-link:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
     }
 
-    .app-link i {
-      transition: transform var(--transition-speed) ease;
+    .app-card-link i {
+      transition: transform var(--transition-fast);
     }
 
-    .app-link:hover i {
-      transform: translateX(5px);
+    .app-card-link:hover i {
+      transform: translateX(3px);
     }
 
     /* Download buttons */
-    .download-options {
+    .download-row {
       display: flex;
-      gap: 12px;
-      margin-top: 20px;
-      position: relative;
-      z-index: 2;
+      gap: 0.625rem;
       flex-wrap: wrap;
+      margin-top: auto;
     }
-    
+
     .download-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 50px;
+      gap: 0.375rem;
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid var(--color-border-accent);
+      color: var(--color-accent);
+      border-radius: var(--radius-md);
+      font-size: 0.8125rem;
       font-weight: 600;
-      font-size: 0.85em;
-      transition: all var(--transition-speed) ease;
-      cursor: pointer;
-      background-color: var(--card-light);
-      color: var(--text-light);
-      border: 2px solid var(--primary-color);
+      transition: all var(--transition-fast);
       text-decoration: none;
       flex: 1;
       min-width: 120px;
     }
-    
+
     .download-btn:hover {
-      background-color: var(--primary-color);
+      background: var(--color-accent);
+      border-color: var(--color-accent);
       color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.3);
-    }
-    
-    .download-btn i {
-      font-size: 1.1em;
+      transform: translateY(-1px);
     }
 
-    /* No results message */
+    /* No results */
     .no-results {
       text-align: center;
-      padding: 60px 40px;
-      color: var(--text-muted);
+      padding: 4rem 2rem;
       grid-column: 1 / -1;
-      background: var(--card-dark);
-      border-radius: var(--border-radius);
-      border: 2px dashed var(--glass-border);
-      margin: 40px 0;
-    }
-
-    .no-results.hidden {
       display: none;
     }
 
-    .no-results i {
-      font-size: 3em;
-      margin-bottom: 20px;
-      color: var(--primary-color);
-      opacity: 0.5;
+    .no-results.visible { display: block; }
+
+    .no-results-icon {
+      width: 64px; height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-accent-subtle);
+      border-radius: 50%;
+      color: var(--color-accent);
+      font-size: 1.5rem;
+      margin: 0 auto 1.25rem;
+      opacity: 0.6;
     }
 
     .no-results h3 {
-      font-size: 1.5em;
-      margin-bottom: 10px;
-      color: var(--text-light);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
     }
 
-    /* SMALLER Footer - Reduced size */
-    footer {
-      background-color: var(--background-secondary);
-      padding: 40px 0 20px; /* Reduced padding */
-      color: var(--text-light);
-      text-align: center;
-      position: relative;
-      margin-top: 0; /* Removed margin */
-      flex-shrink: 0; /* Prevent footer from shrinking */
+    .no-results p {
+      color: var(--color-text-tertiary);
+      font-size: 0.9375rem;
     }
 
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      background: var(--color-bg-primary);
+      border-top: 1px solid var(--color-border);
+      padding: 2rem 0;
+      margin-top: auto;
     }
 
-    .footer-bottom {
-      font-size: 0.85em; /* Smaller font */
-      color: var(--text-muted);
-      line-height: 1.6;
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
-    .footer-bottom p {
-      margin-bottom: 8px; /* Smaller spacing */
+    .footer-inner p {
+      font-size: 0.8125rem;
+      color: var(--color-text-tertiary);
     }
 
-    .footer-bottom i {
-      margin: 0 5px;
-      animation: heartbeat 1.5s ease-in-out infinite;
-    }
+    .footer-inner a { color: var(--color-accent); }
 
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-
-    /* Back to Top Button */
-    .back-to-top {
+    /* ============================================
+       CONTROLS
+       ============================================ */
+    .back-to-top, .theme-toggle {
       position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: var(--primary-color);
-      color: white;
+      bottom: 2rem;
+      width: 48px; height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2em;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+      font-size: 1rem;
+      z-index: 999;
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+
+    .back-to-top { right: 2rem; opacity: 0; visibility: hidden; transform: translateY(12px); }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .theme-toggle { right: 5.5rem; }
+
+    .back-to-top:hover, .theme-toggle:hover {
+      color: var(--color-accent);
+      border-color: var(--color-border-accent);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================
+       SCROLL REVEAL
+       ============================================ */
+    .reveal {
       opacity: 0;
-      visibility: hidden;
-      transition: all var(--transition-speed) ease;
-      z-index: 999;
-      border: none;
-      outline: none;
+      transform: translateY(24px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .back-to-top.active {
-      opacity: 1;
-      visibility: visible;
-    }
+    .reveal.revealed { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
 
-    .back-to-top:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: 0 8px 25px rgba(78, 158, 255, 0.4);
-    }
-
-    /* Dark Mode Toggle */
-    .theme-toggle {
+    /* ============================================
+       LOADING
+       ============================================ */
+    .loader {
       position: fixed;
-      bottom: 30px;
-      left: 30px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: var(--card-dark);
-      color: var(--primary-color);
+      inset: 0;
+      background: var(--color-bg-primary);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 1.2em;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      transition: all var(--transition-speed) ease;
-      z-index: 999;
-      border: none;
-      outline: none;
+      z-index: 99999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
 
-    .theme-toggle:hover {
-      transform: scale(1.1) rotate(15deg);
-      box-shadow: 0 8px 25px rgba(78, 158, 255, 0.3);
-    }
+    .loader.hidden { opacity: 0; visibility: hidden; }
 
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-in {
-      animation: fadeInUp 0.8s ease forwards;
-    }
-
-    .delay-1 {
-      animation-delay: 0.2s;
-    }
-
-    .delay-2 {
-      animation-delay: 0.4s;
-    }
-
-    .delay-3 {
-      animation-delay: 0.6s;
-    }
-    
-    .delay-4 {
-      animation-delay: 0.8s;
-    }
-
-    .delay-5 {
-      animation-delay: 1s;
-    }
-
-    /* Loading Animation */
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
+    .loader-spinner {
+      width: 40px; height: 40px;
+      border: 3px solid var(--color-border);
+      border-top-color: var(--color-accent);
       border-radius: 50%;
-      border-top-color: var(--primary-color);
-      animation: spin 1s ease-in-out infinite;
-      margin-left: 10px;
+      animation: spin 0.8s linear infinite;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .loader-text {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: var(--color-text-tertiary);
+      font-weight: 500;
     }
 
-    /* Badge for New Items */
-    .new-badge {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: linear-gradient(135deg, #ff6b6b, #ff4757);
-      color: white;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 0.7em;
-      font-weight: 600;
-      animation: pulse 2s infinite;
-      z-index: 3;
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    /* Responsive Design */
-    @media (max-width: 1024px) {
-      .app-grid {
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      }
-      
-      .profile-pic {
-        width: 160px;
-        height: 160px;
-      }
-    }
-
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
     @media (max-width: 768px) {
-      header {
-        padding: 15px 20px;
-      }
-      
-      .navigation {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 100%;
-        max-width: 320px;
-        height: 100vh;
-        background-color: var(--card-dark);
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        padding: 80px 30px 30px;
-        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1000;
-        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
-      }
-      
-      .navigation.active {
-        right: 0;
-      }
-      
-      .navigation a {
-        margin: 0 0 20px 0;
-        font-size: 1.2em;
-        width: 100%;
-        padding: 12px 0;
-        border-bottom: 1px solid var(--glass-border);
-      }
-      
-      .navigation a:last-child {
-        margin-bottom: 0;
-        border-bottom: none;
-      }
-      
-      .menu-toggle {
-        display: flex;
-      }
-      
-      .app-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
-      
-      .download-options {
-        flex-direction: column;
-      }
-
-      .tools-filters {
-        gap: 10px;
-      }
-
-      .filter-btn {
-        padding: 10px 20px;
-        font-size: 0.9em;
-      }
-
-      .container {
-        padding: 90px 20px 30px; /* Further reduced bottom padding for mobile */
-      }
-      
-      /* Smaller footer on mobile */
-      footer {
-        padding: 30px 0 15px;
-      }
+      .apps-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 1rem; }
+      .page-hero { padding-top: calc(var(--header-height) + 2rem); }
+      .footer-inner { flex-direction: column; text-align: center; }
     }
 
     @media (max-width: 480px) {
-      .profile-pic {
-        width: 140px;
-        height: 140px;
-      }
-      
-      .theme-toggle, .back-to-top {
-        width: 45px;
-        height: 45px;
-        font-size: 1.1em;
-        bottom: 20px;
-      }
-      
-      .theme-toggle {
-        left: 20px;
-      }
-      
-      .back-to-top {
-        right: 20px;
-      }
-
-      .tools-search {
-        max-width: 100%;
-        margin-bottom: 30px;
-      }
-
-      .search-input {
-        padding: 14px 45px 14px 20px;
-      }
-
-      .app-card {
-        padding: 25px;
-      }
-
-      .app-title {
-        font-size: 1.3em;
-      }
-
-      .app-category h2 {
-        font-size: 1.7em;
-      }
-
-      .logo {
-        font-size: 1.4em;
-      }
-
-      .bar {
-        width: 22px;
-      }
-      
-      .footer-bottom {
-        font-size: 0.8em;
-      }
+      .filter-bar { gap: 0.375rem; }
+      .filter-btn { padding: 6px 14px; font-size: 0.75rem; }
+      .profile-image { width: 120px; height: 120px; }
+      .app-card { padding: 1.25rem; }
+      .download-btn { min-width: 100px; font-size: 0.75rem; padding: 6px 12px; }
     }
 
-    @media (max-width: 380px) {
-      .filter-btn {
-        padding: 8px 16px;
-        font-size: 0.85em;
-      }
-      
-      .download-btn {
-        padding: 8px 16px;
-        font-size: 0.8em;
-      }
-      
-      .app-link {
-        padding: 10px 20px;
-        font-size: 0.9em;
-      }
-    }
-  
-    /* === Responsive Enhancements === */
-    img { 
-      max-width: 100%; 
-      height: auto; 
-      display: block;
-    }
-    
-    html, body { 
-      overflow-x: hidden;
-      scroll-padding-top: 80px;
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .apps-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
-    @media (min-width: 992px) and (max-width: 1200px) {
-      .app-grid { 
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+    /* ============================================
+       PRINT
+       ============================================ */
+    @media print {
+      .theme-toggle, .back-to-top, .filter-bar, .search-wrapper, .header { display: none !important; }
+      .app-card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
     }
 
-    @media (max-width: 320px) {
-      .container { 
-        padding: 90px 12px 20px; 
-      }
-      
-      .app-grid {
-        gap: 20px;
-      }
-      
-      .profile-pic {
-        width: 120px;
-        height: 120px;
-      }
-      
-      h1 {
-        font-size: 1.8em;
-      }
-      
-      footer {
-        padding: 20px 0 10px;
-      }
-    }
-
-    :focus-visible { 
-      outline: 3px solid var(--primary-color); 
-      outline-offset: 3px; 
-      border-radius: 4px;
-    }
-
-    /* Accessibility improvements */
+    /* ============================================
+       REDUCED MOTION
+       ============================================ */
     @media (prefers-reduced-motion: reduce) {
-      * { 
+      *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; }
     }
-
-    /* Print styles */
-    @media print {
-      .theme-toggle,
-      .back-to-top,
-      .tools-filters,
-      .search-input,
-      .no-results {
-        display: none !important;
-      }
-      
-      .app-card {
-        break-inside: avoid;
-        box-shadow: none;
-        border: 1px solid #ddd;
-      }
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--background-dark);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--primary-color);
-      border-radius: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--primary-dark);
-    }
-
   </style>
 </head>
 <body>
-  <!-- Skip link for keyboard users -->
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <!-- Loading Screen -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Loading tools...</p>
+  </div>
+
+  <!-- Skip Link -->
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
 
   <!-- Header -->
-  <header id="header">
-    <a href="index.html" class="logo">
-      <i class="fas fa-code"></i>
-      Mohamed Tarek
-    </a>
-    <button class="menu-toggle" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
-    <nav class="navigation" id="nav-menu" aria-hidden="true">
-      <a href="index.html">Home</a>
-      <a href="Mohamed - Personal Information.html">About</a>
-      <a href="Mohamed - Services.html">Services</a>
-      <a href="Mohamed - Project.html">Projects</a>
-      <a href="Mohamed - Certificates.html">Certificates</a>
-      <a href="Mohamed - CV.html">My CV</a>
-    </nav>
+  <header class="header" id="header" role="banner">
+    <div class="container">
+      <a href="index.html" class="logo" aria-label="Mohamed Tarek - Home">
+        <span class="logo-icon">MT</span>
+        <span>Mohamed Tarek</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="Mohamed - Personal Information.html" class="nav-link">About</a>
+        <a href="Mohamed - Services.html" class="nav-link">Services</a>
+        <a href="Mohamed - Project.html" class="nav-link">Projects</a>
+        <a href="Mohamed - Certificates.html" class="nav-link">Certificates</a>
+        <a href="Mohamed - CV.html" class="nav-link">CV</a>
+        <a href="index.html#contact" class="nav-cta">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <!-- Main Content -->
-  <main id="main-content">
-    <div class="container">
-      <!-- Profile Section - CENTERED -->
-      <div class="profile fade-in">
-        <img src="photo.jpg" alt="Mohamed Tarek - Electronic & Communications Engineer" class="profile-pic" loading="lazy">
-        <h1>Mohamed Tarek</h1>
-        <p>Explore my collection of useful engineering tools and applications. Everything you need for electronics, programming, and productivity.</p>
+  <main id="main">
+    <!-- Hero -->
+    <section class="page-hero">
+      <div class="container">
+        <img src="photo.jpg" alt="Mohamed Tarek" class="profile-image reveal" width="140" height="140" loading="eager">
+        <h1 class="reveal reveal-delay-1">Apps & Tools</h1>
+        <p class="reveal reveal-delay-2">Explore my collection of engineering tools, calculators, and productivity apps. Everything you need for electronics, programming, and daily workflows.</p>
       </div>
+    </section>
 
-      <!-- Search and Filter -->
-      <div class="tools-search fade-in delay-1">
-        <input type="text" class="search-input" placeholder="Search tools and apps..." id="toolsSearch" aria-label="Search tools">
-        <i class="fas fa-search search-icon"></i>
-      </div>
+    <!-- Controls -->
+    <section class="tools-controls" aria-label="Search and filter tools">
+      <div class="container">
+        <div class="search-wrapper reveal">
+          <input type="search" class="search-input" placeholder="Search tools..." id="searchInput" aria-label="Search tools">
+          <i class="fas fa-search search-icon" aria-hidden="true"></i>
+        </div>
 
-      <div class="tools-filters fade-in delay-1">
-        <button class="filter-btn active" data-filter="all">
-          <span>All Tools</span>
-        </button>
-        <button class="filter-btn" data-filter="projects">
-          <span>My Projects</span>
-        </button>
-        <button class="filter-btn" data-filter="engineering">
-          <span>Engineering</span>
-        </button>
-        <button class="filter-btn" data-filter="productivity">
-          <span>Productivity</span>
-        </button>
-        <button class="filter-btn" data-filter="learning">
-          <span>Learning</span>
-        </button>
-        <button class="filter-btn" data-filter="games">
-          <span>Games</span>
-        </button>
-      </div>
+        <div class="filter-bar reveal reveal-delay-1" role="group" aria-label="Filter by category">
+          <button class="filter-btn active" data-filter="all" aria-pressed="true">All Tools</button>
+          <button class="filter-btn" data-filter="engineering" aria-pressed="false">Engineering</button>
+          <button class="filter-btn" data-filter="productivity" aria-pressed="false">Productivity</button>
+          <button class="filter-btn" data-filter="learning" aria-pressed="false">Learning</button>
+          <button class="filter-btn" data-filter="games" aria-pressed="false">Games</button>
+          <button class="filter-btn" data-filter="projects" aria-pressed="false">My Projects</button>
+        </div>
 
-      <!-- No Results Message -->
-      <div class="no-results hidden" id="noResults" role="alert" aria-live="polite">
-        <i class="fas fa-search" aria-hidden="true"></i>
-        <h3>No tools found</h3>
-        <p>Try adjusting your search or filter criteria</p>
-      </div>
-
-      <!-- Engineer Apps -->
-      <div class="app-category fade-in delay-2" data-category="engineering">
-        <h2><i class="fas fa-calculator"></i> Engineering Tools</h2>
-        <div class="app-grid">
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-bolt"></i> Resistor Calculator</h3>
-            <p class="app-description">Calculate resistor values, color codes, and power ratings for your electronic projects.</p>
-            <a href="sites/resistor-calculator.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-          
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-bolt"></i> Resistor for LED</h3>
-            <p class="app-description">Calculate the correct resistor value for LED circuits to ensure proper brightness and longevity.</p>
-            <a href="sites/resistor-for-led.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-capacitor"></i> Capacitor Calculator</h3>
-            <p class="app-description">Calculate capacitance, voltage, and other parameters for capacitor circuits.</p>
-            <a href="sites/capacitor-calculator.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-coil"></i> Inductance Calculator</h3>
-            <p class="app-description">Calculate inductance values and analyze inductor circuits for various applications.</p>
-            <a href="sites/Indactance-calculator.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-wire"></i> Wire Gauge Calculator</h3>
-            <p class="app-description">Calculate the appropriate wire gauge for your electrical projects based on current and distance.</p>
-            <a href="sites/Wire-Gauge-Calculator.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-bolt"></i> Power Factor Calculator</h3>
-            <p class="app-description">Calculate power factor, apparent power, and reactive power for AC circuits.</p>
-            <a href="sites/Power-Factor-Calculator.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-triangle"></i> Power Triangle Calculator</h3>
-            <p class="app-description">Calculate real, reactive, and apparent power relationships in AC circuits.</p>
-            <a href="sites/Power-Triangle-Calculator.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-transformer"></i> Transformer Calculator</h3>
-            <p class="app-description">Calculate transformer turns ratio, voltage, and current conversions for power systems.</p>
-            <a href="sites/Transformer-Turns-Calculator.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-wave-square"></i> Filter & Resonance Calculator</h3>
-            <p class="app-description">Calculate RC filter values and LC resonance frequencies for signal processing circuits.</p>
-            <a href="sites/RC-Filter-&-LC-Resonance-Calculator.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-bolt"></i> Ohm's Law Calculator</h3>
-            <p class="app-description">Calculate voltage, current, resistance, and power relationships using Ohm's Law.</p>
-            <a href="sites/ohms-law-calculator.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-exchange-alt"></i> Buck-Boost Calculator</h3>
-            <p class="app-description">Calculate parameters for DC-DC buck and boost converter circuits for power conversion.</p>
-            <a href="sites/buck-boost-calculator.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-battery-full"></i> Battery Calculator</h3>
-            <p class="app-description">Calculate battery capacity, runtime, and related parameters for power systems.</p>
-            <a href="sites/Battery-Capacity-&-Runtime-Calculator.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-ruler"></i> Length Converter</h3>
-            <p class="app-description">Convert between different units of length measurement for engineering calculations.</p>
-            <a href="sites/Length-Converter.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-calculator"></i> Electrical Calculations</h3>
-            <p class="app-description">Various electrical engineering calculations and conversions for circuit design.</p>
-            <a href="sites/electrical-calculation.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-terminal"></i> LCD Custom Character Generator</h3>
-            <p class="app-description">Create custom characters for LCD displays with this easy-to-use generator.</p>
-            <a href="sites/LCD-Custom-Character-Generator.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
+        <!-- No Results -->
+        <div class="no-results" id="noResults" role="status" aria-live="polite">
+          <div class="no-results-icon"><i class="fas fa-search"></i></div>
+          <h3>No tools found</h3>
+          <p>Try adjusting your search or filter criteria</p>
         </div>
       </div>
+    </section>
 
-      <!-- Useful Apps -->
-      <div class="app-category fade-in delay-3" data-category="productivity">
-        <h2><i class="fas fa-tools"></i> Productivity Tools</h2>
-        <div class="app-grid">
+    <!-- Engineering Tools -->
+    <section class="category-section reveal" data-category="engineering">
+      <div class="container">
+        <div class="category-header">
+          <div class="category-icon"><i class="fas fa-calculator"></i></div>
+          <h2>Engineering Tools</h2>
+          <span class="category-count">15 tools</span>
+        </div>
+        <div class="apps-grid">
+
           <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-pills"></i> Medication Reminder</h3>
-            <p class="app-description">Never miss a dose with this helpful medication reminder and tracking tool.</p>
-            <a href="sites/Medication-Reminder.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-          
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-tasks"></i> To-Do List</h3>
-            <p class="app-description">Organize your tasks, set priorities, and boost your productivity with this simple tool.</p>
-            <a href="sites/to-do-list.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-bolt"></i></div>
+              <h3>Resistor Calculator</h3>
+            </div>
+            <p class="app-card-desc">Calculate resistor values, color codes, and power ratings for electronic projects.</p>
+            <a href="sites/resistor-calculator.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
           </div>
 
           <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-robot"></i> AI Sites List</h3>
-            <p class="app-description">Discover useful AI tools and resources for various applications and industries.</p>
-            <a href="sites/ai-sites-list.html" target="_blank" class="app-link">
-              Open Tool
-              <i class="fas fa-external-link-alt"></i>
-            </a>
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-lightbulb"></i></div>
+              <h3>Resistor for LED</h3>
+            </div>
+            <p class="app-card-desc">Calculate the correct resistor value for LED circuits to ensure proper brightness and longevity.</p>
+            <a href="sites/resistor-for-led.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
           </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-circle-dot"></i></div>
+              <h3>Capacitor Calculator</h3>
+            </div>
+            <p class="app-card-desc">Calculate capacitance, voltage, and other parameters for capacitor circuits.</p>
+            <a href="sites/capacitor-calculator.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-coil"></i></div>
+              <h3>Inductance Calculator</h3>
+            </div>
+            <p class="app-card-desc">Calculate inductance values and analyze inductor circuits for various applications.</p>
+            <a href="sites/Indactance-calculator.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-ruler"></i></div>
+              <h3>Wire Gauge Calculator</h3>
+            </div>
+            <p class="app-card-desc">Calculate the appropriate wire gauge based on current and distance requirements.</p>
+            <a href="sites/Wire-Gauge-Calculator.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-bolt"></i></div>
+              <h3>Power Factor Calculator</h3>
+            </div>
+            <p class="app-card-desc">Calculate power factor, apparent power, and reactive power for AC circuits.</p>
+            <a href="sites/Power-Factor-Calculator.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-shapes"></i></div>
+              <h3>Power Triangle Calculator</h3>
+            </div>
+            <p class="app-card-desc">Calculate real, reactive, and apparent power relationships in AC circuits.</p>
+            <a href="sites/Power-Triangle-Calculator.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-right-left"></i></div>
+              <h3>Transformer Calculator</h3>
+            </div>
+            <p class="app-card-desc">Calculate transformer turns ratio, voltage, and current conversions for power systems.</p>
+            <a href="sites/Transformer-Turns-Calculator.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-wave-square"></i></div>
+              <h3>Filter & Resonance Calculator</h3>
+            </div>
+            <p class="app-card-desc">Calculate RC filter values and LC resonance frequencies for signal processing circuits.</p>
+            <a href="sites/RC-Filter-&-LC-Resonance-Calculator.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-equals"></i></div>
+              <h3>Ohm's Law Calculator</h3>
+            </div>
+            <p class="app-card-desc">Calculate voltage, current, resistance, and power relationships using Ohm's Law.</p>
+            <a href="sites/ohms-law-calculator.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-arrow-down-arrow-up"></i></div>
+              <h3>Buck-Boost Calculator</h3>
+            </div>
+            <p class="app-card-desc">Calculate parameters for DC-DC buck and boost converter circuits for power conversion.</p>
+            <a href="sites/buck-boost-calculator.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-battery-full"></i></div>
+              <h3>Battery Calculator</h3>
+            </div>
+            <p class="app-card-desc">Calculate battery capacity, runtime, and related parameters for power systems.</p>
+            <a href="sites/Battery-Capacity-&-Runtime-Calculator.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-ruler-combined"></i></div>
+              <h3>Length Converter</h3>
+            </div>
+            <p class="app-card-desc">Convert between different units of length measurement for engineering calculations.</p>
+            <a href="sites/Length-Converter.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-calculator"></i></div>
+              <h3>Electrical Calculations</h3>
+            </div>
+            <p class="app-card-desc">Various electrical engineering calculations and conversions for circuit design.</p>
+            <a href="sites/electrical-calculation.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-terminal"></i></div>
+              <h3>LCD Custom Character Generator</h3>
+            </div>
+            <p class="app-card-desc">Create custom characters for LCD displays with this easy-to-use visual generator.</p>
+            <a href="sites/LCD-Custom-Character-Generator.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
         </div>
       </div>
+    </section>
 
-      <!-- Learning Section -->
-      <div class="app-category fade-in delay-4" data-category="learning">
-        <h2><i class="fas fa-graduation-cap"></i> Learning Resources</h2>
-        <div class="app-grid">
+    <!-- Productivity Tools -->
+    <section class="category-section reveal" data-category="productivity">
+      <div class="container">
+        <div class="category-header">
+          <div class="category-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+          <h2>Productivity Tools</h2>
+          <span class="category-count">3 tools</span>
+        </div>
+        <div class="apps-grid">
+
           <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-terminal"></i> Linux Commands</h3>
-            <p class="app-description">Comprehensive guide to essential Linux commands and terminal usage for developers.</p>
-            <a href="sites\Mastering Linux Commands.html" target="_blank" class="app-link">
-              Open Guide
-              <i class="fas fa-external-link-alt"></i>
-            </a>
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-pills"></i></div>
+              <h3>Medication Reminder</h3>
+            </div>
+            <p class="app-card-desc">Never miss a dose with this helpful medication reminder and tracking tool.</p>
+            <a href="sites/Medication-Reminder.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
           </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-list-check"></i></div>
+              <h3>To-Do List</h3>
+            </div>
+            <p class="app-card-desc">Organize your tasks, set priorities, and boost your productivity with this simple tool.</p>
+            <a href="sites/to-do-list.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-robot"></i></div>
+              <h3>AI Sites List</h3>
+            </div>
+            <p class="app-card-desc">Discover useful AI tools and resources for various applications and industries.</p>
+            <a href="sites/ai-sites-list.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Tool <i class="fas fa-arrow-up-right-from-square"></i></a>
+          </div>
+
         </div>
       </div>
+    </section>
 
-      <!-- Games -->
-      <div class="app-category fade-in delay-4" data-category="games">
-        <h2><i class="fas fa-gamepad"></i> Games</h2>
-        <div class="app-grid">
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-car"></i> 3D Car Game</h3>
-            <p class="app-description">Enjoy this exciting 3D car racing game with smooth controls and great graphics.</p>
-            <a href="sites/3d-car-game.html" target="_blank" class="app-link">
-              Play Game
-              <i class="fas fa-gamepad"></i>
-            </a>
-          </div>
-          
-          <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-running"></i> Dino Game</h3>
-            <p class="app-description">The classic Chrome dinosaur game you can play anytime in your browser.</p>
-            <a href="sites/dino-game.html" target="_blank" class="app-link">
-              Play Game
-              <i class="fas fa-gamepad"></i>
-            </a>
-          </div>
+    <!-- Learning Resources -->
+    <section class="category-section reveal" data-category="learning">
+      <div class="container">
+        <div class="category-header">
+          <div class="category-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h2>Learning Resources</h2>
+          <span class="category-count">1 resource</span>
+        </div>
+        <div class="apps-grid">
 
           <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-flag-checkered"></i> Race Game</h3>
-            <p class="app-description">Exciting racing game with multiple tracks, challenges, and competitive gameplay.</p>
-            <a href="sites/Race-Game.html" target="_blank" class="app-link">
-              Play Game
-              <i class="fas fa-gamepad"></i>
-            </a>
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-terminal"></i></div>
+              <h3>Linux Commands</h3>
+            </div>
+            <p class="app-card-desc">Comprehensive guide to essential Linux commands and terminal usage for developers.</p>
+            <a href="sites/Mastering Linux Commands.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Open Guide <i class="fas fa-arrow-up-right-from-square"></i></a>
           </div>
+
         </div>
       </div>
+    </section>
 
-      <!-- My Projects Section -->
-      <div class="app-category fade-in delay-5" data-category="projects">
-        <h2><i class="fas fa-download"></i> My Projects</h2>
-        <div class="app-grid">
+    <!-- Games -->
+    <section class="category-section reveal" data-category="games">
+      <div class="container">
+        <div class="category-header">
+          <div class="category-icon"><i class="fas fa-gamepad"></i></div>
+          <h2>Games</h2>
+          <span class="category-count">3 games</span>
+        </div>
+        <div class="apps-grid">
+
           <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-broom"></i> M.T.A. Cleaner Tool</h3>
-            <p class="app-description">A comprehensive system cleanup tool that removes temporary files, browser caches, system logs, and optimizes Windows performance with administrative privileges.</p>
-            <div class="download-options">
-              <a href="tools\M.T.A. Cleaner Tool.zip" class="download-btn" download>
-                <i class="fas fa-file-archive"></i> Download ZIP
-              </a>
-              <a href="tools\M.T.A. Cleaner Tool.rar" class="download-btn" download>
-                <i class="fas fa-file-archive"></i> Download RAR
-              </a>
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-car"></i></div>
+              <h3>3D Car Game</h3>
+            </div>
+            <p class="app-card-desc">Exciting 3D car racing game with smooth controls and immersive graphics.</p>
+            <a href="sites/3d-car-game.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Play Game <i class="fas fa-gamepad"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-dinosaur"></i></div>
+              <h3>Dino Game</h3>
+            </div>
+            <p class="app-card-desc">The classic Chrome dinosaur game you can play anytime in your browser.</p>
+            <a href="sites/dino-game.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Play Game <i class="fas fa-gamepad"></i></a>
+          </div>
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-flag-checkered"></i></div>
+              <h3>Race Game</h3>
+            </div>
+            <p class="app-card-desc">Racing game with multiple tracks, challenges, and competitive gameplay.</p>
+            <a href="sites/Race-Game.html" target="_blank" rel="noopener noreferrer" class="app-card-link">Play Game <i class="fas fa-gamepad"></i></a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- My Projects -->
+    <section class="category-section reveal" data-category="projects">
+      <div class="container">
+        <div class="category-header">
+          <div class="category-icon"><i class="fas fa-download"></i></div>
+          <h2>My Projects</h2>
+          <span class="category-count">4 projects</span>
+        </div>
+        <div class="apps-grid">
+
+          <div class="app-card">
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-broom"></i></div>
+              <h3>M.T.A. Cleaner Tool</h3>
+            </div>
+            <p class="app-card-desc">Comprehensive system cleanup tool that removes temporary files, caches, and optimizes Windows performance.</p>
+            <div class="download-row">
+              <a href="tools/M.T.A. Cleaner Tool.zip" class="download-btn" download><i class="fas fa-file-zipper"></i> ZIP</a>
+              <a href="tools/M.T.A. Cleaner Tool.rar" class="download-btn" download><i class="fas fa-file-zipper"></i> RAR</a>
             </div>
           </div>
-          
+
           <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-tools"></i> M.T.A. Win11 Defender Tool</h3>
-            <p class="app-description">A comprehensive security and optimization utility for Windows 11 that protects against threats while enhancing system performance and stability.</p>
-            <div class="download-options">
-              <a href="tools\M.T.A. Win11 Defender Tool.zip" class="download-btn" download>
-                <i class="fas fa-file-archive"></i> Download ZIP
-              </a>
-              <a href="tools\M.T.A. Win11 Defender Tool.rar" class="download-btn" download>
-                <i class="fas fa-file-archive"></i> Download RAR
-              </a>
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-shield-halved"></i></div>
+              <h3>M.T.A. Win11 Defender Tool</h3>
+            </div>
+            <p class="app-card-desc">Security and optimization utility for Windows 11 that protects against threats while enhancing performance.</p>
+            <div class="download-row">
+              <a href="tools/M.T.A. Win11 Defender Tool.zip" class="download-btn" download><i class="fas fa-file-zipper"></i> ZIP</a>
+              <a href="tools/M.T.A. Win11 Defender Tool.rar" class="download-btn" download><i class="fas fa-file-zipper"></i> RAR</a>
             </div>
           </div>
 
           <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-cogs"></i> Code M.T.A. Tweaking</h3>
-            <p class="app-description">A Windows system optimization tool that safely tweaks hidden settings to improve performance, security, and customize the user experience.</p>
-            <div class="download-options">
-              <a href="tools\Code M.T.A. Tweaking.zip" class="download-btn" download>
-                <i class="fas fa-file-archive"></i> Download ZIP
-              </a>
-              <a href="tools\Code M.T.A. Tweaking.rar" class="download-btn" download>
-                <i class="fas fa-file-archive"></i> Download RAR
-              </a>
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-sliders"></i></div>
+              <h3>Code M.T.A. Tweaking</h3>
+            </div>
+            <p class="app-card-desc">Windows system optimization tool that safely tweaks hidden settings to improve performance and security.</p>
+            <div class="download-row">
+              <a href="tools/Code M.T.A. Tweaking.zip" class="download-btn" download><i class="fas fa-file-zipper"></i> ZIP</a>
+              <a href="tools/Code M.T.A. Tweaking.rar" class="download-btn" download><i class="fas fa-file-zipper"></i> RAR</a>
             </div>
           </div>
 
           <div class="app-card">
-            <h3 class="app-title"><i class="fas fa-desktop"></i> Info PC</h3>
-            <p class="app-description">A Windows batch file that displays essential system information including hardware specs, disk space, network configuration, and system health.</p>
-            <div class="download-options">
-              <a href="tools\info pc.zip" class="download-btn" download>
-                <i class="fas fa-file-archive"></i> Download ZIP
-              </a>
-              <a href="tools\info pc.rar" class="download-btn" download>
-                <i class="fas fa-file-archive"></i> Download RAR
-              </a>
+            <div class="app-card-header">
+              <div class="app-card-icon"><i class="fas fa-desktop"></i></div>
+              <h3>Info PC</h3>
+            </div>
+            <p class="app-card-desc">Windows batch file that displays essential system information including hardware specs and network configuration.</p>
+            <div class="download-row">
+              <a href="tools/info pc.zip" class="download-btn" download><i class="fas fa-file-zipper"></i> ZIP</a>
+              <a href="tools/info pc.rar" class="download-btn" download><i class="fas fa-file-zipper"></i> RAR</a>
             </div>
           </div>
+
         </div>
       </div>
-    </div>
+    </section>
   </main>
 
-  <!-- SMALLER Footer -->
-  <footer>
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
     <div class="container">
-      <div class="footer-bottom fade-in delay-5">
-        <p>&copy; <span id="current-year">2026</span> Mohamed Tarek. All Rights Reserved.</p>
-        <p>Designed & Developed with <i class="fas fa-heart" style="color: #ff4757;"></i> by Mohamed Tarek</p>
+      <div class="footer-inner">
+        <p>&copy; <span id="currentYear"></span> Mohamed Tarek. All rights reserved.</p>
+        <p>Designed & built with <i class="fas fa-heart" style="color: var(--color-error);"></i> by Mohamed Tarek</p>
       </div>
     </div>
   </footer>
 
-  <!-- Back to Top Button -->
-  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
     <i class="fas fa-arrow-up"></i>
   </button>
 
-  <!-- Dark Mode Toggle -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
     <i class="fas fa-moon"></i>
   </button>
 
-  <!-- JavaScript -->
   <script>
-    // Mobile Menu Toggle
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navMenu = document.getElementById('nav-menu');
-    
-    mobileMenu.addEventListener('click', () => {
-      const expanded = mobileMenu.getAttribute('aria-expanded') === 'true';
-      mobileMenu.setAttribute('aria-expanded', String(!expanded));
-      navMenu.setAttribute('aria-hidden', String(expanded));
-      mobileMenu.classList.toggle('active');
-      navMenu.classList.toggle('active');
-      
-      // Toggle body scroll when menu is open
-      if (navMenu.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
-        document.body.style.paddingRight = '15px';
-      } else {
-        document.body.style.overflow = '';
-        document.body.style.paddingRight = '';
-      }
-    });
-    
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.navigation a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-        navMenu.classList.remove('active');
-        mobileMenu.setAttribute('aria-expanded', 'false');
-        navMenu.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-        document.body.style.paddingRight = '';
+    (() => {
+      'use strict';
+
+      /* ----------------------------------------
+         LOADING SCREEN
+         ---------------------------------------- */
+      const loader = document.getElementById('loader');
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          loader.classList.add('hidden');
+          document.body.style.overflow = '';
+        }, 300);
       });
-    });
-    
-    // Sticky Header
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-    
-    // Back to Top Button
-    const backToTopBtn = document.getElementById('back-to-top');
-    
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopBtn.classList.add('active');
-      } else {
-        backToTopBtn.classList.remove('active');
-      }
-    });
-    
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-      backToTopBtn.blur(); // Remove focus after click
-    });
-    
-    // Dark/Light Mode Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = themeToggle.querySelector('i');
-    
-    // Check for saved theme preference or use preferred color scheme
-    const currentTheme = localStorage.getItem('theme') || 
-                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    
-    if (currentTheme === 'dark') {
-      document.body.setAttribute('data-theme', 'dark');
-      themeIcon.classList.replace('fa-moon', 'fa-sun');
-    } else {
-      document.body.setAttribute('data-theme', 'light');
-      themeIcon.classList.replace('fa-sun', 'fa-moon');
-    }
-    
-    themeToggle.addEventListener('click', () => {
-      if (document.body.getAttribute('data-theme') === 'light') {
-        document.body.setAttribute('data-theme', 'dark');
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.body.setAttribute('data-theme', 'light');
-        themeIcon.classList.replace('fa-sun', 'fa-moon');
-        localStorage.setItem('theme', 'light');
-      }
-      themeToggle.blur(); // Remove focus after click
-    });
-    
-    // Set current year in footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-    
-    // Animate elements on scroll
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+
+      /* ----------------------------------------
+         SCROLL PROGRESS
+         ---------------------------------------- */
+      const scrollProgress = document.getElementById('scrollProgress');
+      const updateScrollProgress = () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        scrollProgress.style.width = docHeight > 0 ? (scrollTop / docHeight) * 100 + '%' : '0%';
+      };
+
+      /* ----------------------------------------
+         HEADER
+         ---------------------------------------- */
+      const header = document.getElementById('header');
+      const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 50);
+
+      /* ----------------------------------------
+         BACK TO TOP
+         ---------------------------------------- */
+      const backToTop = document.getElementById('backToTop');
+      const updateBackToTop = () => backToTop.classList.toggle('visible', window.scrollY > 400);
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      /* ----------------------------------------
+         SCROLL EVENT
+         ---------------------------------------- */
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            updateScrollProgress();
+            updateHeader();
+            updateBackToTop();
+            ticking = false;
+          });
+          ticking = true;
         }
+      }, { passive: true });
+
+      /* ----------------------------------------
+         MOBILE MENU
+         ---------------------------------------- */
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+
+      const toggleMenu = () => {
+        const isActive = navMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', String(isActive));
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = isActive ? 'hidden' : '';
+      };
+
+      menuToggle.addEventListener('click', toggleMenu);
+      mobileOverlay.addEventListener('click', toggleMenu);
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          if (navMenu.classList.contains('active')) toggleMenu();
+        });
       });
-    }, observerOptions);
-    
-    document.querySelectorAll('.app-category').forEach(element => {
-      observer.observe(element);
-    });
-    
-    // Enhanced Search and Filter Functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const searchInput = document.getElementById('toolsSearch');
+
+      /* ----------------------------------------
+         THEME TOGGLE
+         ---------------------------------------- */
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('i');
+      const STORAGE_KEY = 'portfolio-theme';
+
+      const getPreferredTheme = () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      };
+
+      const applyTheme = (theme) => {
+        document.documentElement.setAttribute('data-theme', theme);
+        themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        localStorage.setItem(STORAGE_KEY, theme);
+      };
+
+      applyTheme(getPreferredTheme());
+
+      themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+      });
+
+      /* ----------------------------------------
+         SCROLL REVEAL
+         ---------------------------------------- */
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+      /* ----------------------------------------
+         SEARCH & FILTER
+         ---------------------------------------- */
+      const searchInput = document.getElementById('searchInput');
       const filterButtons = document.querySelectorAll('.filter-btn');
-      const appCategories = document.querySelectorAll('.app-category');
-      const appCards = document.querySelectorAll('.app-card');
+      const categorySections = document.querySelectorAll('.category-section');
       const noResults = document.getElementById('noResults');
 
-      // Debounce function for search
-      function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-          const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-          };
-          clearTimeout(timeout);
-          timeout = setTimeout(later, wait);
-        };
-      }
+      let activeFilter = 'all';
 
-      // Search functionality with debounce
-      if (searchInput) {
-        searchInput.addEventListener('input', debounce(function() {
-          const searchTerm = this.value.toLowerCase().trim();
-          applyFilters(searchTerm);
-        }, 300));
-      }
+      const applyFilters = () => {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        let totalVisible = 0;
 
-      // Filter functionality
-      filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const filter = this.dataset.filter;
-          
-          // Update active button
-          filterButtons.forEach(btn => {
-            btn.classList.remove('active');
-            btn.setAttribute('aria-pressed', 'false');
-          });
-          this.classList.add('active');
-          this.setAttribute('aria-pressed', 'true');
-          
-          applyFilters(searchInput ? searchInput.value.toLowerCase().trim() : '', filter);
-          
-          // Scroll to first visible category
-          const firstVisibleCategory = document.querySelector('.app-category[style*="display: block"]');
-          if (firstVisibleCategory) {
-            window.scrollTo({
-              top: firstVisibleCategory.offsetTop - 100,
-              behavior: 'smooth'
-            });
-          }
-        });
-      });
+        categorySections.forEach(section => {
+          const category = section.getAttribute('data-category');
+          const cards = section.querySelectorAll('.app-card');
+          let sectionVisible = 0;
 
-      function applyFilters(searchTerm = '', filter = 'all') {
-        let visibleCount = 0;
-        
-        appCategories.forEach(category => {
-          const categoryType = category.dataset.category;
-          let categoryVisible = false;
-          
-          const categoryCards = category.querySelectorAll('.app-card');
-          categoryCards.forEach(card => {
-            const title = card.querySelector('.app-title').textContent.toLowerCase();
-            const description = card.querySelector('.app-description').textContent.toLowerCase();
-            
-            const matchesSearch = !searchTerm || title.includes(searchTerm) || description.includes(searchTerm);
-            const matchesFilter = filter === 'all' || categoryType === filter;
-            
+          cards.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const desc = card.querySelector('.app-card-desc').textContent.toLowerCase();
+            const matchesSearch = !searchTerm || title.includes(searchTerm) || desc.includes(searchTerm);
+            const matchesFilter = activeFilter === 'all' || category === activeFilter;
+
             if (matchesSearch && matchesFilter) {
-              card.style.display = 'flex';
-              card.setAttribute('aria-hidden', 'false');
-              categoryVisible = true;
-              visibleCount++;
+              card.style.display = '';
+              sectionVisible++;
+              totalVisible++;
             } else {
               card.style.display = 'none';
-              card.setAttribute('aria-hidden', 'true');
             }
           });
-          
-          // Show/hide category based on visible cards
-          if (categoryVisible) {
-            category.style.display = 'block';
-            category.setAttribute('aria-hidden', 'false');
-          } else {
-            category.style.display = 'none';
-            category.setAttribute('aria-hidden', 'true');
-          }
+
+          section.style.display = sectionVisible > 0 ? '' : 'none';
         });
-        
-        // Show/hide no results message
-        if (visibleCount === 0) {
-          noResults.classList.remove('hidden');
-          noResults.setAttribute('aria-hidden', 'false');
-        } else {
-          noResults.classList.add('hidden');
-          noResults.setAttribute('aria-hidden', 'true');
-        }
-      }
-      
-      // Initialize with all tools visible
-      applyFilters();
-      
-      // Set initial aria attributes
-      filterButtons.forEach((btn, index) => {
-        btn.setAttribute('role', 'button');
-        btn.setAttribute('tabindex', '0');
-        btn.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
+
+        noResults.classList.toggle('visible', totalVisible === 0);
+      };
+
+      /* Search with debounce */
+      let searchTimeout;
+      searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(applyFilters, 200);
       });
-      
-      appCards.forEach(card => {
-        card.setAttribute('aria-hidden', 'false');
-      });
-      
-      appCategories.forEach(category => {
-        category.setAttribute('aria-hidden', 'false');
-      });
-    });
 
-    // Keyboard support for mobile menu toggle
-    mobileMenu.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        mobileMenu.click();
-      }
-    });
-
-    // Add keyboard navigation to filter buttons
-    document.querySelectorAll('.filter-btn').forEach(button => {
-      button.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          button.click();
-        }
-      });
-    });
-
-    // Add focus styles for better accessibility
-    document.addEventListener('keyup', (e) => {
-      if (e.key === 'Tab') {
-        document.documentElement.classList.add('keyboard-navigation');
-      }
-    });
-
-    document.addEventListener('mousedown', () => {
-      document.documentElement.classList.remove('keyboard-navigation');
-    });
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href === '#' || href === '#main-content') return;
-        
-        e.preventDefault();
-        const targetElement = document.querySelector(href);
-        if (targetElement) {
-          const headerHeight = document.querySelector('header').offsetHeight;
-          const targetPosition = targetElement.offsetTop - headerHeight - 20;
-          
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
+      /* Filter buttons */
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
           });
-        }
+          btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
+          activeFilter = btn.getAttribute('data-filter');
+          applyFilters();
+        });
       });
-    });
 
-    // Add loading animation for external links
-    document.querySelectorAll('a[target="_blank"]').forEach(link => {
-      link.addEventListener('click', function() {
-        const originalText = this.innerHTML;
-        this.innerHTML = 'Loading... <span class="loading"></span>';
-        
-        setTimeout(() => {
-          this.innerHTML = originalText;
-        }, 1500);
-      });
-    });
-    
+      /* ----------------------------------------
+         FOOTER YEAR
+         ---------------------------------------- */
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    })();
   </script>
 </body>
 </html>

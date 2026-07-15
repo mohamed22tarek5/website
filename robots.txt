@@ -1,178 +1,39 @@
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: GPTBot
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: Claude-SearchBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Anthropic-Bot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: GoogleOther
-Allow: /
-
-User-agent: Bard
-Allow: /
-
-User-agent: Gemini
-Allow: /
-
-User-agent: Claude
-Allow: /
-
-User-agent: Poe
-Allow: /
-
-User-agent: DeepSeekBot
-Allow: /
-
-User-agent: GrokBot
-Allow: /
-
-User-agent: QwenBot
-Allow: /
-
-User-agent: ForefrontBot
-Allow: /
-
-User-agent: ArabyBot
-Allow: /
-
-User-agent: KattebBot
-Allow: /
-
-User-agent: LisanBot
-Allow: /
-
-User-agent: QuillBot
-Allow: /
-
-User-agent: WordtuneBot
-Allow: /
-
-User-agent: RytrBot
-Allow: /
-
-User-agent: CopyAI
-Allow: /
-
-User-agent: BearlyBot
-Allow: /
-
-User-agent: ChatPDFBot
-Allow: /
-
-User-agent: AskYourPDFBot
-Allow: /
-
-User-agent: HiPDFBot
-Allow: /
-
-User-agent: ChatDocBot
-Allow: /
-
-User-agent: TTSMakerBot
-Allow: /
-
-User-agent: MurfAI
-Allow: /
-
-User-agent: LovoAI
-Allow: /
-
-User-agent: ElevenLabsBot
-Allow: /
-
-User-agent: TranskriptorBot
-Allow: /
-
-User-agent: ResembleBot
-Allow: /
-
-User-agent: KrispBot
-Allow: /
-
-User-agent: D-IDBot
-Allow: /
-
-User-agent: FlikiBot
-Allow: /
-
-User-agent: VideoAIBot
-Disallow: /
-
-User-agent: RunwayMLBot
-Allow: /
-
-User-agent: SynthesiaBot
-Allow: /
-
-User-agent: SteveAIBot
-Allow: /
-
-User-agent: MoovlyBot
-Allow: /
-
-User-agent: VEEDBot
-Allow: /
-
-User-agent: PapercupBot
-Allow: /
-
-User-agent: KickresumeBot
-Allow: /
-
-User-agent: FirefliesBot
-Allow: /
-
-User-agent: HumataBot
-Allow: /
-
-User-agent: AiterBot
-Allow: /
-
-User-agent: BeulrBot
-Allow: /
-
-User-agent: CVLoginBot
-Allow: /
-
-User-agent: GPTZeroBot
-Allow: /
-
+# robots.txt
+# Mohamed Tarek Portfolio
+# Allow all crawlers
 
 User-agent: *
+Allow: /
+
+Sitemap: https://mohamedtarek.vercel.app/sitemap.xml
+
+# Blocked paths
+User-agent: *
+Disallow: /sw.js
+Disallow: /pwa.js
+Disallow: /cache/
 Disallow: /admin/
-Disallow: /test/
-Disallow: /private/
-Disallow: /backup/
-Disallow: /secret.html
-Disallow: /config.js
-Disallow: /api-key.txt
-Disallow: /Medication-Reminder.html
-Disallow: /to-do-list.html
 
-Allow: /tools/
-Disallow: /tools/electrical-calculation.html
+# AI/ML training blocks
+User-agent: GPTBot
+Disallow: /
 
-Sitemap: https://website-mohamed.vercel.app
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+# Image-specific rules
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /admin/

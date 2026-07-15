@@ -1,2109 +1,875 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Professional services offered by Mohamed Tarek - Web Development, Arduino Programming, PCB Design, and more">
-  <meta name="keywords" content="web development, arduino programming, PCB design, smart home automation, embedded systems, electronics services">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Professional Services | Mohamed Tarek</title>
+  <meta name="description" content="Professional services offered by Mohamed Tarek — Web Development, Arduino Programming, PCB Design, IoT Solutions, and more.">
+  <meta name="keywords" content="web development, arduino programming, PCB design, smart home automation, embedded systems, electronics services, IoT solutions">
   <meta name="author" content="Mohamed Tarek">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
   <meta property="og:title" content="Mohamed Tarek - Services">
   <meta property="og:description" content="Professional services in web development, Arduino programming, PCB design and more">
-  <meta property="og:image" content="https://example.com/photo.jpg">
-  <meta property="og:url" content="https://example.com">
-  <meta name="theme-color" content="#4e9eff">
-  <title>Professional Services | Mohamed Tarek</title>
-  <link rel="icon" href="icon.png" type="image/png">
+  <meta property="og:image" content="https://website-mohamed.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://website-mohamed.vercel.app/Mohamed%20-%20Services.html">
+  <link rel="icon" href="icon.png" type="image/png" sizes="any">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     :root {
-      --primary-color: #4e9eff;
-      --primary-dark: #3a6cf4;
-      --primary-light: #6ab1ff;
-      --background-dark: #121212;
-      --background-darker: #0a0a0a;
-      --background-secondary: #1a1a1a;
-      --card-dark: #1e1e1e;
-      --card-light: #252525;
-      --text-light: #ffffff;
-      --text-muted: #aaaaaa;
-      --success-color: #4caf50;
-      --error-color: #f44336;
-      --warning-color: #ff9800;
-      --transition-speed: 0.3s;
-      --border-radius: 12px;
-      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
-      --glass-effect: rgba(30, 30, 30, 0.8);
-      --glass-border: rgba(255, 255, 255, 0.15);
-      --glass-blur: blur(15px);
+      --color-bg-primary: #0a0e1a;
+      --color-bg-secondary: #0f1322;
+      --color-bg-tertiary: #141829;
+      --color-bg-card: #161b2e;
+      --color-bg-card-hover: #1c2240;
+      --color-bg-elevated: #1a2038;
+      --color-accent: #3b82f6;
+      --color-accent-hover: #2563eb;
+      --color-accent-light: #60a5fa;
+      --color-accent-glow: rgba(59, 130, 246, 0.15);
+      --color-accent-subtle: rgba(59, 130, 246, 0.08);
+      --color-text-primary: #f1f5f9;
+      --color-text-secondary: #94a3b8;
+      --color-text-tertiary: #64748b;
+      --color-text-accent: #3b82f6;
+      --color-border: rgba(255, 255, 255, 0.06);
+      --color-border-hover: rgba(255, 255, 255, 0.12);
+      --color-border-accent: rgba(59, 130, 246, 0.3);
+      --color-success: #22c55e;
+      --color-error: #ef4444;
+      --gradient-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --gradient-card: linear-gradient(145deg, rgba(22, 27, 46, 0.8), rgba(15, 19, 34, 0.6));
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 4rem;
+      --space-4xl: 6rem;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.15);
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --container-max: 1200px;
+      --header-height: 72px;
     }
 
-    /* Light mode variables */
     [data-theme="light"] {
-      --background-dark: #f5f7fa;
-      --background-darker: #e8ebf0;
-      --background-secondary: #ffffff;
-      --card-dark: #ffffff;
-      --card-light: #f9f9f9;
-      --text-light: #222222;
-      --text-muted: #666666;
-      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.12);
-      --glass-effect: rgba(255, 255, 255, 0.85);
-      --glass-border: rgba(0, 0, 0, 0.12);
+      --color-bg-primary: #f8fafc;
+      --color-bg-secondary: #f1f5f9;
+      --color-bg-tertiary: #e2e8f0;
+      --color-bg-card: #ffffff;
+      --color-bg-card-hover: #f8fafc;
+      --color-bg-elevated: #ffffff;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      --color-text-tertiary: #94a3b8;
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-border-hover: rgba(0, 0, 0, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+      --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(241, 245, 249, 0.7));
     }
 
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--background-dark);
-      color: var(--text-light);
+      font-family: var(--font-sans);
+      background-color: var(--color-bg-primary);
+      color: var(--color-text-primary);
       line-height: 1.7;
       overflow-x: hidden;
-      transition: background-color 0.5s ease, color 0.5s ease;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color var(--transition-slow), color var(--transition-slow);
     }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; }
+    ul, ol { list-style: none; }
+    ::selection { background: var(--color-accent); color: white; }
 
-    /* Skip link for accessibility */
     .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: var(--primary-color);
-      color: white;
-      padding: 12px 20px;
-      z-index: 1001;
-      text-decoration: none;
-      font-weight: 500;
-      border-radius: 0 0 8px 0;
-      transition: top 0.3s ease;
+      position: fixed; top: -100%; left: var(--space-md);
+      background: var(--color-accent); color: white;
+      padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm);
+      z-index: 10000; font-weight: 600; font-size: 0.875rem;
+      transition: top var(--transition-fast);
     }
-    
-    .skip-link:focus {
-      top: 0;
-      outline: 3px solid var(--primary-light);
-      outline-offset: 2px;
+    .skip-link:focus { top: var(--space-md); }
+
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+      background: var(--gradient-accent); z-index: 10001;
+      transition: width 50ms linear;
     }
 
-    /* Typography improvements */
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 600;
-      line-height: 1.3;
-      margin-bottom: 0.75em;
-      letter-spacing: -0.02em;
-    }
-
-    h2 {
-      font-size: 2.8em;
-    }
-
-    h3 {
-      font-size: 1.6em;
-    }
-
-    p {
-      margin-bottom: 1.2em;
-      color: var(--text-muted);
-      font-size: 1.05em;
-    }
-
-    a {
-      text-decoration: none;
-      color: var(--primary-color);
-      transition: all var(--transition-speed) ease;
-      position: relative;
-    }
-
-    a:hover {
-      color: var(--primary-light);
-    }
-
-    /* Layout improvements */
     .container {
-      width: 100%;
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 0 30px;
+      width: 100%; max-width: var(--container-max);
+      margin: 0 auto; padding: 0 var(--space-xl);
     }
 
-    section {
-      padding: 120px 0;
-      position: relative;
-    }
+    @media (max-width: 768px) { .container { padding: 0 var(--space-md); } }
+    section { padding: var(--space-4xl) 0; position: relative; }
+    @media (max-width: 768px) { section { padding: var(--space-3xl) 0; } }
 
-    /* Enhanced glass effect */
     .glass {
-      background: var(--glass-effect);
-      border-radius: var(--border-radius);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      box-shadow: var(--box-shadow);
+      background: var(--gradient-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
-    /* Header improvements */
-    header {
-      background-color: var(--glass-effect);
-      width: 100%;
-      position: fixed;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 5%;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-      transition: all var(--transition-speed) ease;
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      border-bottom: 1px solid var(--glass-border);
+    .header {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--header-height); z-index: 1000;
+      transition: all var(--transition-base);
+      background: transparent;
     }
-
-    header.scrolled {
-      padding: 12px 5%;
-      background-color: rgba(30, 30, 30, 0.95);
+    .header.scrolled {
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid var(--color-border);
     }
-
-    [data-theme="light"] header.scrolled {
-      background-color: rgba(255, 255, 255, 0.95);
+    [data-theme="light"] .header.scrolled {
+      background: rgba(248, 250, 252, 0.85);
+    }
+    .header .container {
+      display: flex; align-items: center; justify-content: space-between; height: 100%;
     }
 
     .logo {
-      font-size: 1.9em;
-      font-weight: 700;
-      color: var(--primary-color);
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--color-text-primary); letter-spacing: -0.02em;
+    }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--gradient-accent); border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 0.875rem; font-weight: 800;
     }
 
-    .logo i {
-      font-size: 1.3em;
-      transition: transform var(--transition-speed) ease;
+    .nav {
+      display: flex; align-items: center; gap: 0.25rem;
+    }
+    .nav-link {
+      padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500;
+      color: var(--color-text-secondary); border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--color-text-primary); background: var(--color-accent-subtle);
+    }
+    .nav-link.active { color: var(--color-accent); }
+    .nav-cta {
+      margin-left: 0.5rem; padding: 0.5rem 1.5rem;
+      background: var(--color-accent); color: white;
+      border-radius: var(--radius-full); font-size: 0.875rem; font-weight: 600;
+      transition: all var(--transition-fast);
+    }
+    .nav-cta:hover {
+      background: var(--color-accent-hover); transform: translateY(-1px);
+      box-shadow: var(--shadow-glow);
     }
 
-    .logo:hover {
-      color: var(--primary-light);
-    }
-
-    .logo:hover i {
-      transform: rotate(15deg);
-    }
-
-    /* Navigation improvements */
-    .navigation {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .navigation a {
-      position: relative;
-      margin-left: 25px;
-      font-weight: 500;
-      color: var(--text-light);
-      padding: 8px 0;
-      font-size: 1.05em;
-    }
-
-    .navigation a::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 3px;
-      bottom: 0;
-      left: 0;
-      background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
-      transition: width var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
-      border-radius: 2px;
-    }
-
-    .navigation a:hover::after {
-      width: 100%;
-    }
-
-    .navigation a.active {
-      color: var(--primary-color);
-      font-weight: 600;
-    }
-
-    .navigation a.active::after {
-      width: 100%;
-    }
-
-    /* Enhanced mobile menu */
     .menu-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      z-index: 1001;
-      padding: 12px;
-      background: none;
-      border: none;
-      width: 48px;
-      height: 48px;
-      justify-content: center;
-      align-items: center;
-      border-radius: 10px;
-      transition: all var(--transition-speed) ease;
+      display: none; flex-direction: column; gap: 5px;
+      padding: 0.5rem; z-index: 1001;
+      align-items: center; justify-content: center;
     }
-
-    .menu-toggle:hover {
-      background: rgba(78, 158, 255, 0.1);
+    .menu-toggle .bar {
+      width: 22px; height: 2px; background: var(--color-text-primary);
+      border-radius: 2px; transition: all var(--transition-base); transform-origin: center;
     }
+    .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-    .menu-toggle.active .bar:nth-child(1) {
-      transform: rotate(-45deg) translate(-6px, 7px);
+    .mobile-overlay {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
+      z-index: 999; opacity: 0; pointer-events: none;
+      transition: opacity var(--transition-base);
     }
+    .mobile-overlay.active { opacity: 1; pointer-events: auto; }
 
-    .menu-toggle.active .bar:nth-child(2) {
-      opacity: 0;
-      transform: translateX(-20px);
+    .section-header { text-align: center; margin-bottom: var(--space-3xl); }
+    .section-label {
+      display: inline-flex; align-items: center; gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-md);
+      background: var(--color-accent-subtle); border: 1px solid var(--color-border-accent);
+      border-radius: var(--radius-full); font-size: 0.8rem; font-weight: 600;
+      color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: var(--space-lg);
     }
-
-    .menu-toggle.active .bar:nth-child(3) {
-      transform: rotate(45deg) translate(-6px, -7px);
-    }
-
-    .bar {
-      height: 3px;
-      width: 28px;
-      background-color: var(--primary-color);
-      margin: 4px 0;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      border-radius: 2px;
-    }
-
-    /* Enhanced Section Titles */
     .section-title {
-      text-align: center;
-      margin-bottom: 80px;
-      position: relative;
+      font-size: clamp(2rem, 5vw, 3rem); font-weight: 800;
+      color: var(--color-text-primary); letter-spacing: -0.03em;
+      line-height: 1.2; margin-bottom: var(--space-md);
     }
-
-    .section-title h2 {
-      font-size: 3em;
-      color: #3a6cf4;
-      display: inline-block;
-      position: relative;
-      padding-bottom: 20px;
-      margin-bottom: 20px;
-    }
-
-    .section-title h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 5px;
-      background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
-      border-radius: 3px;
-    }
-
+    .section-title .accent { color: var(--color-accent); }
     .section-subtitle {
-      color: var(--text-muted);
-      font-size: 1.2em;
-      max-width: 800px;
-      margin: 20px auto 0;
-      line-height: 1.8;
+      font-size: 1.1rem; color: var(--color-text-secondary);
+      max-width: 600px; margin: 0 auto; line-height: 1.7;
     }
 
-    /* Enhanced Services Section */
-    .services {
-      background-color: var(--background-secondary);
-      padding: 140px 0;
-      position: relative;
-      overflow: hidden;
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
     }
+    @media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .services-grid { grid-template-columns: 1fr; } }
 
-    .services::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-    }
-
-    .services .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-      gap: 35px;
-    }
-
-    /* Enhanced Service Cards */
     .service-card {
-      border-radius: var(--border-radius);
+      position: relative; padding: var(--space-2xl);
+      background: var(--gradient-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      transition: all var(--transition-slow);
       overflow: hidden;
-      box-shadow: var(--box-shadow);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      background-color: var(--card-dark);
-      padding: 35px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      border: 1px solid transparent;
-      transform-style: preserve-3d;
-      perspective: 1000px;
     }
-
     .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(78, 158, 255, 0.1) 0%, transparent 50%);
-      opacity: 0;
-      transition: opacity var(--transition-speed) ease;
-      z-index: 1;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gradient-accent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform var(--transition-slow);
     }
-
     .service-card:hover {
-      transform: translateY(-15px) scale(1.02);
-      box-shadow: var(--box-shadow-hover);
-      border-color: var(--primary-color);
+      transform: translateY(-8px);
+      border-color: var(--color-border-accent);
+      box-shadow: var(--shadow-glow);
     }
-
-    .service-card:hover::before {
-      opacity: 1;
-    }
+    .service-card:hover::before { transform: scaleX(1); }
 
     .service-icon {
-      font-size: 3.5em;
-      color: var(--primary-color);
-      margin-bottom: 25px;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      display: inline-block;
-      position: relative;
-      z-index: 2;
+      width: 56px; height: 56px; border-radius: var(--radius-md);
+      background: var(--color-accent-subtle); border: 1px solid var(--color-border-accent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; color: var(--color-accent);
+      margin-bottom: var(--space-lg);
+      transition: all var(--transition-base);
     }
-
     .service-card:hover .service-icon {
-      transform: scale(1.2) rotate(10deg);
-      color: var(--primary-light);
+      background: var(--gradient-accent); color: white;
+      transform: scale(1.05);
     }
 
-    .service-title {
-      font-size: 1.5em;
-      margin-bottom: 20px;
-      color: var(--text-light);
-      position: relative;
-      z-index: 2;
+    .service-card h3 {
+      font-size: 1.2rem; font-weight: 700; color: var(--color-text-primary);
+      margin-bottom: var(--space-sm); letter-spacing: -0.01em;
     }
-
-    .service-title::after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 3px;
-      background: var(--primary-color);
-      border-radius: 2px;
-      transition: width var(--transition-speed) ease;
-    }
-
-    .service-card:hover .service-title::after {
-      width: 80px;
-    }
-
-    .service-description {
-      color: var(--text-muted);
-      margin-bottom: 25px;
-      flex-grow: 1;
-      font-size: 1.05em;
-      line-height: 1.7;
-      position: relative;
-      z-index: 2;
+    .service-card p {
+      font-size: 0.9rem; color: var(--color-text-secondary);
+      line-height: 1.7; margin-bottom: var(--space-lg);
     }
 
     .service-features {
-      text-align: left;
-      margin: 25px 0;
-      padding-left: 25px;
-      position: relative;
-      z-index: 2;
+      margin-bottom: var(--space-xl);
     }
-
     .service-features li {
-      margin-bottom: 12px;
-      position: relative;
-      list-style-type: none;
-      color: var(--text-muted);
-      font-size: 0.95em;
-      line-height: 1.6;
-      padding-left: 10px;
+      position: relative; padding-left: var(--space-lg);
+      font-size: 0.85rem; color: var(--color-text-secondary);
+      margin-bottom: var(--space-sm); line-height: 1.6;
     }
-
     .service-features li::before {
-      content: '▸';
-      position: absolute;
-      left: -20px;
-      color: var(--primary-color);
-      font-size: 1.1em;
-      transition: transform var(--transition-speed) ease;
+      content: '▸'; position: absolute; left: 0;
+      color: var(--color-accent); font-size: 0.8rem;
     }
 
-    .service-features li:hover::before {
-      transform: translateX(5px);
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-lg);
+      background: var(--gradient-accent); color: white;
+      border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 600;
+      transition: all var(--transition-base);
+      box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
     }
 
-    .service-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 32px;
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-      color: white;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      margin-top: 20px;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 1.05em;
-      letter-spacing: 0.5px;
-      position: relative;
-      z-index: 2;
-      overflow: hidden;
-      box-shadow: 0 5px 20px rgba(78, 158, 255, 0.3);
-    }
-
-    .service-cta::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.6s ease;
-    }
-
-    .service-cta:hover {
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
-      transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(78, 158, 255, 0.5);
-    }
-
-    .service-cta:hover::before {
-      left: 100%;
-    }
-
-    /* Enhanced Service Modal */
     .service-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      backdrop-filter: blur(10px);
+      position: fixed; inset: 0; z-index: 2000;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
+      opacity: 0; visibility: hidden;
+      transition: all var(--transition-slow);
     }
+    .service-modal.active { opacity: 1; visibility: visible; }
 
-    .service-modal.active {
-      opacity: 1;
-      visibility: visible;
+    .modal-panel {
+      width: 92%; max-width: 750px; max-height: 90vh; overflow-y: auto;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      transform: translateY(20px) scale(0.97);
+      transition: transform var(--transition-slow);
     }
+    .service-modal.active .modal-panel { transform: translateY(0) scale(1); }
 
-    .modal-content {
-      background-color: var(--card-dark);
-      border-radius: var(--border-radius);
-      max-width: 850px;
-      width: 92%;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      box-shadow: var(--box-shadow-hover);
-      border: 1px solid var(--glass-border);
-      transform: translateY(30px);
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    .modal-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: var(--space-xl); border-bottom: 1px solid var(--color-border);
     }
-
-    .service-modal.active .modal-content {
-      transform: translateY(0);
-    }
-
+    .modal-header h2 { font-size: 1.5rem; font-weight: 700; color: var(--color-accent); }
     .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      color: var(--text-light);
-      font-size: 1.8em;
-      cursor: pointer;
-      z-index: 10;
-      transition: all var(--transition-speed) ease;
-      width: 45px;
-      height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      backdrop-filter: blur(10px);
+      width: 36px; height: 36px; border-radius: var(--radius-sm);
+      background: var(--color-accent-subtle); color: var(--color-text-secondary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; transition: all var(--transition-fast);
     }
+    .modal-close:hover { background: var(--color-accent); color: white; }
 
-    .modal-close:hover {
-      color: var(--primary-color);
-      background: rgba(78, 158, 255, 0.2);
-      transform: rotate(90deg) scale(1.1);
-    }
-
-    .modal-body {
-      padding: 45px;
-    }
-
-    .modal-title {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      color: var(--primary-color);
-      line-height: 1.3;
-    }
-
-    .modal-description {
-      margin-bottom: 35px;
-      line-height: 1.8;
-      font-size: 1.15em;
-      color: var(--text-muted);
+    .modal-body { padding: var(--space-xl); }
+    .modal-body > p {
+      font-size: 1rem; color: var(--color-text-secondary);
+      line-height: 1.8; margin-bottom: var(--space-xl);
     }
 
     .modal-features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin-bottom: 40px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-xl); margin-bottom: var(--space-xl);
+    }
+    .feature-col h4 {
+      font-size: 0.95rem; font-weight: 700; color: var(--color-text-primary);
+      margin-bottom: var(--space-md); padding-bottom: var(--space-sm);
+      border-bottom: 2px solid var(--color-border-accent);
+    }
+    .feature-col li {
+      position: relative; padding-left: var(--space-lg);
+      font-size: 0.85rem; color: var(--color-text-secondary);
+      margin-bottom: var(--space-sm); line-height: 1.6;
+    }
+    .feature-col li::before {
+      content: '✓'; position: absolute; left: 0;
+      color: var(--color-accent); font-weight: 700;
     }
 
-    .feature-column h4 {
-      color: var(--text-light);
-      margin-bottom: 20px;
-      font-size: 1.3em;
-      padding-bottom: 10px;
-      border-bottom: 2px solid rgba(78, 158, 255, 0.3);
-    }
+    .modal-footer { padding: var(--space-xl); text-align: center; }
 
-    .feature-column ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    .feature-column li {
-      margin-bottom: 14px;
-      position: relative;
-      padding-left: 30px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      font-size: 1.05em;
-    }
-
-    .feature-column li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--primary-color);
-      font-weight: bold;
-      font-size: 1.2em;
-      top: -1px;
-    }
-
-    .modal-cta {
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .modal-cta .service-cta {
-      padding: 16px 45px;
-      font-size: 1.1em;
-    }
-
-    /* Contact Section improvements */
-    .contact-section {
-      padding: 120px 0;
-      background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-darker) 100%);
-    }
-
-    .contact-form {
-      background-color: var(--card-dark);
-      border-radius: var(--border-radius);
-      padding: 50px;
-      box-shadow: var(--box-shadow);
-      max-width: 850px;
-      margin: 0 auto;
-      border: 1px solid var(--glass-border);
-    }
-
-    .form-group {
-      margin-bottom: 30px;
-    }
-
-    .form-label {
-      display: block;
-      margin-bottom: 12px;
-      color: var(--primary-color);
-      font-weight: 600;
-      font-size: 1.1em;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 16px 20px;
-      border: 2px solid var(--glass-border);
-      border-radius: 10px;
-      background-color: var(--background-secondary);
-      color: var(--text-light);
-      font-family: 'Poppins', sans-serif;
-      transition: all var(--transition-speed) ease;
-      font-size: 1.05em;
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 4px rgba(78, 158, 255, 0.15);
-      background-color: var(--card-light);
-    }
-
-    textarea.form-control {
-      min-height: 150px;
-      resize: vertical;
-      line-height: 1.6;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 18px;
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.2em;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      letter-spacing: 0.5px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .submit-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.6s ease;
-    }
-
-    .submit-btn:hover {
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(78, 158, 255, 0.4);
-    }
-
-    .submit-btn:hover::before {
-      left: 100%;
-    }
-
-    /* Testimonials Section improvements */
-    .testimonials {
-      background-color: var(--background-darker);
-      padding: 120px 0;
-      position: relative;
-    }
-
-    .testimonials::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(78, 158, 255, 0.5), transparent);
-    }
-
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 35px;
-    }
-
-    .testimonial-card {
-      background-color: var(--card-dark);
-      border-radius: var(--border-radius);
-      padding: 35px;
-      box-shadow: var(--box-shadow);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 1px solid transparent;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .testimonial-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
-    }
-
-    .testimonial-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--box-shadow-hover);
-      border-color: rgba(78, 158, 255, 0.3);
-    }
-
-    .testimonial-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .testimonial-text {
-      font-style: italic;
-      margin-bottom: 30px;
-      color: var(--text-muted);
-      position: relative;
-      padding-left: 30px;
-      font-size: 1.1em;
-      line-height: 1.8;
-    }
-
-    .testimonial-text::before {
-      content: '"';
-      position: absolute;
-      left: 0;
-      top: -15px;
-      font-size: 4em;
-      color: var(--primary-color);
-      opacity: 0.2;
-      font-family: serif;
-      line-height: 1;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .author-avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: bold;
-      font-size: 1.3em;
-      flex-shrink: 0;
-      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.3);
-    }
-
-    .author-info h4 {
-      color: var(--text-light);
-      margin-bottom: 5px;
-      font-size: 1.2em;
-    }
-
-    .author-info p {
-      color: var(--text-muted);
-      font-size: 0.95em;
-      margin-bottom: 0;
-      opacity: 0.8;
-    }
-
-    /* Enhanced Footer */
     footer {
-      background: linear-gradient(135deg, var(--background-darker) 0%, #0c0c0c 100%);
-      padding: 80px 0 40px;
-      color: var(--text-light);
-      position: relative;
-      overflow: hidden;
+      background: var(--color-bg-secondary); border-top: 1px solid var(--color-border);
+      padding: var(--space-3xl) 0 var(--space-xl);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--space-2xl); margin-bottom: var(--space-2xl);
+    }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
     }
 
-    footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    .footer-brand p {
+      font-size: 0.9rem; color: var(--color-text-secondary);
+      line-height: 1.7; margin-top: var(--space-md);
     }
-
-    .footer-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 50px;
-      margin-bottom: 50px;
-    }
-
-    .footer-column h3 {
-      color: var(--text-light);
-      margin-bottom: 25px;
-      font-size: 1.4em;
-      position: relative;
-      padding-bottom: 15px;
-    }
-
-    .footer-column h3::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 50px;
-      height: 3px;
-      background: var(--primary-color);
-      border-radius: 2px;
-    }
-
-    .footer-column p {
-      font-size: 1.05em;
-      line-height: 1.8;
-      margin-bottom: 25px;
-    }
-
-    .footer-links {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 15px;
-    }
-
-    .footer-links a {
-      color: var(--text-muted);
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.05em;
-    }
-
-    .footer-links a:hover {
-      color: var(--primary-color);
-      transform: translateX(8px);
-    }
-
-    .footer-links a::before {
-      content: '→';
-      opacity: 0;
-      transition: all 0.3s ease;
-    }
-
-    .footer-links a:hover::before {
-      opacity: 1;
-    }
-
     .footer-social {
-      display: flex;
-      gap: 20px;
-      margin-top: 25px;
+      display: flex; gap: var(--space-sm); margin-top: var(--space-lg);
     }
-
     .footer-social a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--card-dark), var(--card-light));
-      color: var(--text-light);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      font-size: 1.2em;
-      box-shadow: var(--box-shadow);
+      width: 40px; height: 40px; border-radius: var(--radius-md);
+      background: var(--color-accent-subtle); border: 1px solid var(--color-border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--color-text-secondary); transition: all var(--transition-base);
+    }
+    .footer-social a:hover {
+      background: var(--gradient-accent); color: white;
+      border-color: var(--color-accent); transform: translateY(-2px);
     }
 
-    .footer-social a:hover {
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-      color: white;
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: 0 10px 25px rgba(78, 158, 255, 0.4);
+    .footer-col h4 {
+      font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--color-text-tertiary);
+      margin-bottom: var(--space-lg);
     }
+    .footer-col a {
+      display: block; padding: var(--space-xs) 0;
+      font-size: 0.9rem; color: var(--color-text-secondary);
+      transition: all var(--transition-fast);
+    }
+    .footer-col a:hover { color: var(--color-accent); transform: translateX(4px); }
 
     .footer-bottom {
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--color-border);
       text-align: center;
-      padding-top: 40px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-muted);
-      font-size: 1em;
-      position: relative;
     }
-
     .footer-bottom p {
-      margin-bottom: 10px;
+      font-size: 0.8rem; color: var(--color-text-tertiary);
     }
 
-    .footer-bottom i.fa-heart {
-      animation: heartbeat 1.5s ease-in-out infinite;
+    .back-to-top, .theme-toggle {
+      position: fixed; z-index: 999; border-radius: var(--radius-full);
+      display: flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; font-size: 1rem;
+      opacity: 0; visibility: hidden;
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
     }
-
-    /* Enhanced Back to Top Button */
     .back-to-top {
-      position: fixed;
-      bottom: 35px;
-      right: 35px;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3em;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-      cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 999;
-      border: none;
-      overflow: hidden;
+      bottom: 24px; right: 24px;
+      background: var(--gradient-accent); color: white;
     }
-
-    .back-to-top::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.6s ease;
-    }
-
-    .back-to-top.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .back-to-top:hover {
-      background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
-      transform: translateY(-8px) scale(1.1);
-      box-shadow: 0 12px 30px rgba(78, 158, 255, 0.5);
-    }
-
-    .back-to-top:hover::before {
-      left: 100%;
-    }
-
-    /* Enhanced Dark Mode Toggle */
     .theme-toggle {
-      position: fixed;
-      bottom: 35px;
-      left: 35px;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--card-dark), var(--card-light));
-      color: var(--primary-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3em;
-      box-shadow: var(--box-shadow);
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 999;
-      border: none;
-      overflow: hidden;
+      bottom: 24px; left: 24px;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      color: var(--color-accent);
     }
+    .back-to-top.active, .theme-toggle.active { opacity: 1; visibility: visible; }
+    .back-to-top:hover { transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+    .theme-toggle:hover { transform: scale(1.1); border-color: var(--color-accent); }
 
-    .theme-toggle::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-      transition: left 0.6s ease;
-    }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+    .reveal.revealed { opacity: 1; transform: translateY(0); }
 
-    .theme-toggle:hover {
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-      color: white;
-      transform: scale(1.15);
-      box-shadow: 0 10px 25px rgba(78, 158, 255, 0.4);
-    }
-
-    .theme-toggle:hover::before {
-      left: 100%;
-    }
-
-    /* Enhanced Animations */
-    @keyframes fadeIn {
-      from { 
-        opacity: 0; 
-        transform: translateY(20px); 
-      }
-      to { 
-        opacity: 1; 
-        transform: translateY(0); 
-      }
-    }
-
-    @keyframes slideUp {
-      from {
-        opacity: 0;
-        transform: translateY(60px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    .slide-up {
-      opacity: 0;
-      animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    .delay-1 {
-      animation-delay: 0.1s;
-    }
-
-    .delay-2 {
-      animation-delay: 0.2s;
-    }
-
-    .delay-3 {
-      animation-delay: 0.3s;
-    }
-
-    .delay-4 {
-      animation-delay: 0.4s;
-    }
-
-    /* Improved Responsive Design */
-    @media (max-width: 1200px) {
-      .container {
-        max-width: 100%;
-        padding: 0 40px;
-      }
-      
-      .services .grid {
-        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      }
-    }
-
-    @media (max-width: 1024px) {
-      h2 {
-        font-size: 2.5em;
-      }
-      
-      .section-title h2 {
-        font-size: 2.8em;
-      }
-      
-      .modal-features {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
-    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--color-bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: var(--radius-full); }
 
     @media (max-width: 768px) {
-      header {
-        padding: 15px 25px;
+      .menu-toggle { display: flex; }
+      .nav {
+        position: fixed; top: 0; right: -100%;
+        width: min(320px, 85vw); height: 100vh;
+        background: var(--color-bg-secondary); flex-direction: column;
+        align-items: flex-start; justify-content: center;
+        padding: 3rem; gap: 0.25rem;
+        transition: right var(--transition-slow);
+        border-left: 1px solid var(--color-border);
       }
-      
-      .navigation {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 85%;
-        max-width: 400px;
-        height: 100vh;
-        background-color: var(--card-dark);
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        padding-top: 100px;
-        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1000;
-        gap: 0;
-      }
-      
-      .navigation.active {
-        right: 0;
-      }
-      
-      .navigation a {
-        margin: 0;
-        margin-bottom: 25px;
-        font-size: 1.3em;
-        padding: 12px 30px;
-        width: 100%;
-        text-align: center;
-      }
-      
-      .menu-toggle {
-        display: flex;
-      }
-      
-      .services .grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      
-      .service-card {
-        padding: 30px;
-      }
-      
-      .modal-content {
-        width: 96%;
-        max-height: 85vh;
-      }
-      
-      .modal-body {
-        padding: 30px;
-      }
-      
-      .contact-form {
-        padding: 35px;
-      }
-      
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        text-align: center;
-      }
-      
-      .footer-column h3::after {
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      
-      .footer-social {
-        justify-content: center;
-      }
+      .nav.active { right: 0; }
+      .nav-link { font-size: 1.125rem; width: 100%; padding: 1rem; }
+      .nav-cta { margin-left: 0; margin-top: 1rem; width: 100%; text-align: center; display: block; padding: 1rem; }
     }
 
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 20px;
-      }
-      
-      .section-title h2 {
-        font-size: 2.2em;
-        padding-bottom: 15px;
-      }
-      
-      .section-subtitle {
-        font-size: 1.1em;
-      }
-      
-      .theme-toggle, .back-to-top {
-        width: 48px;
-        height: 48px;
-        font-size: 1.1em;
-        bottom: 25px;
-      }
-      
-      .theme-toggle {
-        left: 25px;
-      }
-      
-      .back-to-top {
-        right: 25px;
-      }
-      
-      .service-card {
-        padding: 25px;
-      }
-      
-      .service-cta {
-        padding: 12px 25px;
-        font-size: 1em;
-      }
-      
-      .modal-body {
-        padding: 25px;
-      }
-      
-      .modal-title {
-        font-size: 2em;
-      }
-      
-      .contact-form {
-        padding: 25px;
-      }
-    }
-  
-    /* === Enhanced Responsive Improvements === */
-    img { 
-      max-width: 100%; 
-      height: auto; 
-      display: block; 
-    }
-    
-    html, body { 
-      overflow-x: hidden; 
-      -webkit-tap-highlight-color: transparent;
-    }
-    
-    @media (max-width: 420px) {
-      .services .grid { 
-        grid-template-columns: 1fr; 
-      }
-      
-      .logo { 
-        font-size: 1.5em; 
-      }
-      
-      .bar { 
-        width: 24px; 
-      }
-      
-      .service-features {
-        padding-left: 20px;
-      }
-      
-      .service-features li::before {
-        left: -18px;
-      }
-    }
-    
-    /* Improved focus visibility */
-    :focus-visible { 
-      outline: 3px solid var(--primary-color); 
-      outline-offset: 3px; 
-      border-radius: 4px;
-    }
-    
-    /* Respect reduced-motion preferences */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
       }
     }
 
-    /* Loading state improvements */
-    .loading {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(90deg, 
-        var(--background-darker) 25%, 
-        var(--card-light) 50%, 
-        var(--background-darker) 75%);
-      background-size: 200% 100%;
-      animation: loading 1.5s infinite;
-    }
-
-    @keyframes loading {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--background-darker);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-      border-radius: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
-    }
-
-    /* Selection styling */
-    ::selection {
-      background-color: rgba(78, 158, 255, 0.3);
-      color: var(--text-light);
-    }
-
-    /* Smooth transitions for theme change */
-    body * {
-      transition: background-color 0.5s ease, 
-                  border-color 0.5s ease, 
-                  color 0.5s ease,
-                  box-shadow 0.5s ease;
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
     }
   </style>
 </head>
 <body>
-  <!-- Skip link for keyboard users -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="scroll-progress" id="scroll-progress"></div>
 
-  <!-- Header -->
-  <header id="header">
-    <a href="index.html" class="logo"><i class="fas fa-code"></i> Mohamed Tarek</a>
-    <button class="menu-toggle" id="mobile-menu" aria-label="Toggle menu" aria-expanded="false">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
-    <nav class="navigation" id="nav-menu" aria-hidden="true">
-      <a href="index.html">Home</a>
-      <a href="Mohamed - Personal Information.html">About</a>
-      <a href="Mohamed - Services.html" class="active">Services</a>
-      <a href="Mohamed - Project.html">Projects</a>
-      <a href="Mohamed - Certificates.html">Certificates</a>
-      <a href="Mohamed - CV.html" style="margin-left: 20px;">My CV</a>
-    </nav>
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+
+  <header class="header" id="header" role="banner">
+    <div class="container">
+      <a href="index.html" class="logo" aria-label="Mohamed Tarek - Home">
+        <span class="logo-icon">MT</span>
+        <span>Mohamed Tarek</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="Mohamed - Personal Information.html" class="nav-link">About</a>
+        <a href="Mohamed - Services.html" class="nav-link active">Services</a>
+        <a href="Mohamed - Project.html" class="nav-link">Projects</a>
+        <a href="Mohamed - Certificates.html" class="nav-link">Certificates</a>
+        <a href="Mohamed - CV.html" class="nav-link">CV</a>
+        <a href="index.html#contact" class="nav-cta">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <!-- Main Content -->
   <main id="main-content">
-    <!-- Services Section -->
-    <section class="services" id="services">
+    <section style="padding-top: calc(var(--header-height) + var(--space-4xl));">
       <div class="container">
-        <div class="section-title fade-in">
-          <h2>Professional Services</h2>
+        <div class="section-header reveal">
+          <span class="section-label"><i class="fas fa-briefcase"></i> What I Offer</span>
+          <h1 class="section-title">Professional <span class="accent">Services</span></h1>
           <p class="section-subtitle">Comprehensive solutions tailored to meet your technical needs with quality and precision</p>
         </div>
-        
-        <div class="grid">
-          <!-- Web Development -->
-          <div class="service-card fade-in">
-            <div class="service-icon">
-              <i class="fas fa-laptop-code"></i>
-            </div>
-            <h3 class="service-title">Web Development</h3>
-            <p class="service-description">Custom website development using modern technologies to create responsive, user-friendly interfaces.</p>
+
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+            <h3>Web Development</h3>
+            <p>Custom website development using modern technologies to create responsive, user-friendly interfaces.</p>
             <ul class="service-features">
               <li>HTML5 & CSS3 implementation</li>
               <li>Responsive design for all devices</li>
               <li>Clean, semantic code structure</li>
               <li>Performance optimization</li>
             </ul>
-            <button class="service-cta view-service-details" data-service="web-development">Get Started</button>
+            <button class="btn-primary open-service-modal" data-service="web-development">Get Started <i class="fas fa-arrow-right"></i></button>
           </div>
-          
-          <!-- Arduino Programming -->
-          <div class="service-card fade-in delay-1">
-            <div class="service-icon">
-              <i class="fas fa-microchip"></i>
-            </div>
-            <h3 class="service-title">Arduino Programming</h3>
-            <p class="service-description">Expert coding solutions for Arduino, ESP, and PIC microcontrollers to bring your electronic projects to life.</p>
+
+          <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-microchip"></i></div>
+            <h3>Arduino Programming</h3>
+            <p>Expert coding solutions for Arduino, ESP, and PIC microcontrollers to bring your electronic projects to life.</p>
             <ul class="service-features">
               <li>Custom firmware development</li>
               <li>Sensor integration</li>
               <li>Wireless communication (WiFi/BT)</li>
               <li>Power optimization</li>
             </ul>
-            <button class="service-cta view-service-details" data-service="arduino-programming">Discuss Project</button>
+            <button class="btn-primary open-service-modal" data-service="arduino-programming">Discuss Project <i class="fas fa-arrow-right"></i></button>
           </div>
-          
-          <!-- Simulation Projects -->
-          <div class="service-card fade-in delay-2">
-            <div class="service-icon">
-              <i class="fas fa-project-diagram"></i>
-            </div>
-            <h3 class="service-title">Circuit Simulation</h3>
-            <p class="service-description">Professional circuit simulation and analysis using industry-standard tools before physical implementation.</p>
+
+          <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-project-diagram"></i></div>
+            <h3>Circuit Simulation</h3>
+            <p>Professional circuit simulation and analysis using industry-standard tools before physical implementation.</p>
             <ul class="service-features">
               <li>Multisim circuit analysis</li>
               <li>Proteus simulation</li>
               <li>TinkerCAD prototyping</li>
               <li>Performance validation</li>
             </ul>
-            <button class="service-cta view-service-details" data-service="circuit-simulation">Request Simulation</button>
+            <button class="btn-primary open-service-modal" data-service="circuit-simulation">Request Simulation <i class="fas fa-arrow-right"></i></button>
           </div>
-          
-          <!-- PCB Design -->
-          <div class="service-card fade-in delay-3">
-            <div class="service-icon">
-              <i class="fas fa-vector-square"></i>
-            </div>
-            <h3 class="service-title">PCB Design</h3>
-            <p class="service-description">Professional PCB layout and design services for reliable and efficient electronic circuits.</p>
+
+          <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-vector-square"></i></div>
+            <h3>PCB Design</h3>
+            <p>Professional PCB layout and design services for reliable and efficient electronic circuits.</p>
             <ul class="service-features">
               <li>Schematic capture</li>
               <li>Board layout optimization</li>
               <li>Design rule checking</li>
               <li>Gerber file generation</li>
             </ul>
-            <button class="service-cta view-service-details" data-service="pcb-design">Design Inquiry</button>
+            <button class="btn-primary open-service-modal" data-service="pcb-design">Design Inquiry <i class="fas fa-arrow-right"></i></button>
           </div>
-        
-          <!-- IoT Solutions -->
-          <div class="service-card fade-in delay-1">
-            <div class="service-icon">
-              <i class="fas fa-wifi"></i>
-            </div>
-            <h3 class="service-title">IoT Solutions</h3>
-            <p class="service-description">Complete IoT solutions including hardware, firmware, and cloud integration for smart devices and automation.</p>
+
+          <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-wifi"></i></div>
+            <h3>IoT Solutions</h3>
+            <p>Complete IoT solutions including hardware, firmware, and cloud integration for smart devices and automation.</p>
             <ul class="service-features">
               <li>IoT device development</li>
               <li>Cloud platform integration</li>
               <li>Data analytics & visualization</li>
               <li>Remote monitoring systems</li>
             </ul>
-            <button class="service-cta view-service-details" data-service="iot-solutions">Learn More</button>
+            <button class="btn-primary open-service-modal" data-service="iot-solutions">Learn More <i class="fas fa-arrow-right"></i></button>
           </div>
-            
-          <!-- Smart Home -->
-          <div class="service-card fade-in">
-            <div class="service-icon">
-              <i class="fas fa-home"></i>
-            </div>
-            <h3 class="service-title">Smart Home Solutions</h3>
-            <p class="service-description">Custom smart home automation systems tailored to your specific needs and requirements.</p>
+
+          <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-home"></i></div>
+            <h3>Smart Home Solutions</h3>
+            <p>Custom smart home automation systems tailored to your specific needs and requirements.</p>
             <ul class="service-features">
               <li>Home automation design</li>
               <li>IoT device integration</li>
               <li>Remote control systems</li>
               <li>Energy monitoring</li>
             </ul>
-            <button class="service-cta view-service-details" data-service="smart-home">Automate Your Home</button>
+            <button class="btn-primary open-service-modal" data-service="smart-home">Automate Your Home <i class="fas fa-arrow-right"></i></button>
           </div>
-          
-          <!-- Embedded Systems -->
-          <div class="service-card fade-in delay-1">
-            <div class="service-icon">
-              <i class="fas fa-robot"></i>
-            </div>
-            <h3 class="service-title">Embedded Systems</h3>
-            <p class="service-description">Development of microcontroller-based applications for various embedded solutions.</p>
+
+          <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-robot"></i></div>
+            <h3>Embedded Systems</h3>
+            <p>Development of microcontroller-based applications for various embedded solutions.</p>
             <ul class="service-features">
               <li>Custom firmware development</li>
               <li>RTOS implementation</li>
               <li>Peripheral interfacing</li>
               <li>Low-power design</li>
             </ul>
-            <button class="service-cta view-service-details" data-service="embedded-systems">Build Your System</button>
+            <button class="btn-primary open-service-modal" data-service="embedded-systems">Build Your System <i class="fas fa-arrow-right"></i></button>
           </div>
-          
-          <!-- Graduation Projects -->
-          <div class="service-card fade-in delay-2">
-            <div class="service-icon">
-              <i class="fas fa-graduation-cap"></i>
-            </div>
-            <h3 class="service-title">Graduation Projects</h3>
-            <p class="service-description">Comprehensive support for engineering graduation projects from concept to completion.</p>
+
+          <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3>Graduation Projects</h3>
+            <p>Comprehensive support for engineering graduation projects from concept to completion.</p>
             <ul class="service-features">
               <li>Project conceptualization</li>
               <li>Technical documentation</li>
               <li>Hardware/software integration</li>
               <li>Presentation preparation</li>
             </ul>
-            <button class="service-cta view-service-details" data-service="graduation-projects">Start Your Project</button>
+            <button class="btn-primary open-service-modal" data-service="graduation-projects">Start Your Project <i class="fas fa-arrow-right"></i></button>
           </div>
-          
-          <!-- Electronics Prototyping -->
-          <div class="service-card fade-in delay-3">
-            <div class="service-icon">
-              <i class="fas fa-lightbulb"></i>
-            </div>
-            <h3 class="service-title">Electronics Prototyping</h3>
-            <p class="service-description">Guidance and implementation for small-scale electronics projects and prototypes.</p>
+
+          <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+            <h3>Electronics Prototyping</h3>
+            <p>Guidance and implementation for small-scale electronics projects and prototypes.</p>
             <ul class="service-features">
               <li>Circuit design assistance</li>
               <li>Component selection</li>
               <li>Prototype development</li>
               <li>Testing and debugging</li>
             </ul>
-            <button class="service-cta view-service-details" data-service="electronics-prototyping">Build Your Idea</button>
+            <button class="btn-primary open-service-modal" data-service="electronics-prototyping">Build Your Idea <i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- Service Modal -->
-  <div class="service-modal" id="service-modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
-    <div class="modal-content">
-      <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
+  <div class="service-modal" id="service-modal" aria-hidden="true" role="dialog">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h2 id="modal-title"></h2>
+        <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
+      </div>
       <div class="modal-body">
-        <h2 class="modal-title" id="modal-title"></h2>
-        <p class="modal-description" id="modal-description"></p>
-        
-        <div class="modal-features" id="modal-features">
-          <!-- Features will be populated by JavaScript -->
-        </div>
-        
-        <div class="modal-cta">
-          <a href="#contact" class="service-cta" id="modal-cta">Get Started</a>
-        </div>
+        <p id="modal-description"></p>
+        <div class="modal-features" id="modal-features"></div>
+      </div>
+      <div class="modal-footer">
+        <a href="#contact" class="btn-primary" id="modal-cta">Get Started <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-column fade-in">
-          <h3>Mohamed Tarek</h3>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-icon"><i class="fas fa-code"></i></span>
+            <span>Mohamed Tarek</span>
+          </a>
           <p>Communications Engineer and Web Developer creating innovative solutions that bridge hardware and software.</p>
           <div class="footer-social">
-            <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/+201090637406" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
-        
-        <div class="footer-column fade-in delay-1">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="Mohamed - Personal Information.html">About</a></li>
-            <li><a href="Mohamed - Services.html">Services</a></li>
-            <li><a href="Mohamed - Project.html">Projects</a></li>
-            <li><a href="Mohamed - Certificates.html">Certificates</a></li>
-            <li><a href="Mohamed - CV.html">CV</a></li>
-          </ul>
+        <div class="footer-col">
+          <h4>Pages</h4>
+          <a href="index.html">Home</a>
+          <a href="Mohamed - Personal Information.html">About</a>
+          <a href="Mohamed - Services.html">Services</a>
+          <a href="Mohamed - Project.html">Projects</a>
+          <a href="Mohamed - Certificates.html">Certificates</a>
+          <a href="Mohamed - CV.html">CV</a>
         </div>
-        
-        <div class="footer-column fade-in delay-2">
-          <h3>Services</h3>
-          <ul class="footer-links">
-            <li><a href="#services" class="scroll-link">Web Development</a></li>
-            <li><a href="#services" class="scroll-link">Arduino Projects</a></li>
-            <li><a href="#services" class="scroll-link">PCB Design</a></li>
-            <li><a href="#services" class="scroll-link">Embedded Systems</a></li>
-            <li><a href="#services" class="scroll-link">IoT Solutions</a></li>
-          </ul>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="Mohamed - Services.html">Web Development</a>
+          <a href="Mohamed - Services.html">Arduino Projects</a>
+          <a href="Mohamed - Services.html">PCB Design</a>
+          <a href="Mohamed - Services.html">Embedded Systems</a>
+          <a href="Mohamed - Services.html">IoT Solutions</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://wa.me/+201090637406" target="_blank" rel="noopener">WhatsApp</a>
         </div>
       </div>
-      
-      <div class="footer-bottom fade-in delay-3">
+      <div class="footer-bottom">
         <p>&copy; <span id="current-year">2026</span> Mohamed Tarek. All Rights Reserved.</p>
-        <p>Designed & Developed with <i class="fas fa-heart" style="color: #ff4757;"></i> by Mohamed Tarek</p>
       </div>
     </div>
   </footer>
 
-  <!-- Back to Top Button -->
-  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
 
-  <!-- Dark Mode Toggle -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-    <i class="fas fa-moon"></i>
-  </button>
-
-  <!-- JavaScript -->
   <script>
-    // Service data for modal details
     const serviceData = {
       'web-development': {
         title: 'Web Development',
-        description: 'Professional web development services creating modern, responsive websites and web applications. I specialize in building user-friendly interfaces with clean code and optimal performance.',
+        description: 'Professional web development services creating modern, responsive websites and web applications.',
         features: {
-          'Frontend Development': [
-            'HTML5, CSS3, JavaScript',
-            'Responsive design for all devices',
-            'Modern frameworks (React, Vue)',
-            'Cross-browser compatibility',
-            'Performance optimization'
-          ],
-          'Backend Development': [
-            'Node.js, Python, PHP',
-            'Database design & integration',
-            'RESTful API development',
-            'Server configuration',
-            'Security implementation'
-          ],
-          'Additional Services': [
-            'Website maintenance',
-            'SEO optimization',
-            'Performance monitoring',
-            'Technical documentation',
-            'Training & support'
-          ]
+          'Frontend Development': ['HTML5, CSS3, JavaScript','Responsive design for all devices','Modern frameworks (React, Vue)','Cross-browser compatibility','Performance optimization'],
+          'Backend Development': ['Node.js, Python, PHP','Database design & integration','RESTful API development','Server configuration','Security implementation'],
+          'Additional Services': ['Website maintenance','SEO optimization','Performance monitoring','Technical documentation','Training & support']
         }
       },
       'arduino-programming': {
         title: 'Arduino Programming',
-        description: 'Expert Arduino programming services for custom microcontroller projects. From simple automation to complex IoT systems, I deliver reliable and efficient code solutions.',
+        description: 'Expert Arduino programming services for custom microcontroller projects.',
         features: {
-          'Microcontroller Programming': [
-            'Arduino Uno/Nano/Mega',
-            'ESP8266/ESP32',
-            'PIC Microcontrollers',
-            'Custom firmware development',
-            'Library creation'
-          ],
-          'Sensor Integration': [
-            'Temperature & humidity',
-            'Motion & proximity',
-            'Light & sound sensors',
-            'GPS modules',
-            'Camera integration'
-          ],
-          'Communication Protocols': [
-            'WiFi & Bluetooth',
-            'RF communication',
-            'I2C, SPI, UART',
-            'MQTT for IoT',
-            'Custom protocols'
-          ]
+          'Microcontroller Programming': ['Arduino Uno/Nano/Mega','ESP8266/ESP32','PIC Microcontrollers','Custom firmware development','Library creation'],
+          'Sensor Integration': ['Temperature & humidity','Motion & proximity','Light & sound sensors','GPS modules','Camera integration'],
+          'Communication Protocols': ['WiFi & Bluetooth','RF communication','I2C, SPI, UART','MQTT for IoT','Custom protocols']
         }
       },
       'circuit-simulation': {
         title: 'Circuit Simulation',
-        description: 'Professional circuit simulation services using industry-standard tools to validate designs before physical implementation.',
+        description: 'Professional circuit simulation services using industry-standard tools.',
         features: {
-          'Simulation Tools': [
-            'Multisim circuit analysis',
-            'Proteus simulation suite',
-            'TinkerCAD online prototyping',
-            'LTspice for analog circuits',
-            'MATLAB/Simulink'
-          ],
-          'Analysis Types': [
-            'DC & AC analysis',
-            'Transient analysis',
-            'Frequency response',
-            'Monte Carlo analysis',
-            'Temperature sweeps'
-          ],
-          'Output Deliverables': [
-            'Simulation reports',
-            'Performance graphs',
-            'Component stress analysis',
-            'Design recommendations',
-            'Bill of Materials (BOM)'
-          ]
+          'Simulation Tools': ['Multisim circuit analysis','Proteus simulation suite','TinkerCAD online prototyping','LTspice for analog circuits','MATLAB/Simulink'],
+          'Analysis Types': ['DC & AC analysis','Transient analysis','Frequency response','Monte Carlo analysis','Temperature sweeps'],
+          'Output Deliverables': ['Simulation reports','Performance graphs','Component stress analysis','Design recommendations','Bill of Materials (BOM)']
         }
       },
       'pcb-design': {
         title: 'PCB Design',
-        description: 'Professional PCB design services creating reliable and efficient circuit boards for your electronic projects. From schematic capture to final manufacturing files.',
+        description: 'Professional PCB design services creating reliable and efficient circuit boards.',
         features: {
-          'Design Process': [
-            'Schematic capture',
-            'Component selection',
-            'Board layout optimization',
-            'Design rule checking',
-            'Signal integrity analysis'
-          ],
-          'Manufacturing Support': [
-            'Gerber file generation',
-            'BOM preparation',
-            'Assembly instructions',
-            'Quality control checks',
-            'Testing procedures'
-          ],
-          'Specializations': [
-            'Single & double-sided boards',
-            'Multi-layer designs',
-            'High-frequency circuits',
-            'Power electronics',
-            'Mixed-signal designs'
-          ]
+          'Design Process': ['Schematic capture','Component selection','Board layout optimization','Design rule checking','Signal integrity analysis'],
+          'Manufacturing Support': ['Gerber file generation','BOM preparation','Assembly instructions','Quality control checks','Testing procedures'],
+          'Specializations': ['Single & double-sided boards','Multi-layer designs','High-frequency circuits','Power electronics','Mixed-signal designs']
         }
       },
       'iot-solutions': {
         title: 'IoT Solutions',
-        description: 'Complete Internet of Things solutions from device development to cloud integration and data visualization.',
+        description: 'Complete Internet of Things solutions from device development to cloud integration.',
         features: {
-          'Hardware Development': [
-            'Custom IoT device design',
-            'Sensor integration',
-            'Power management',
-            'Wireless connectivity',
-            'Enclosure design'
-          ],
-          'Software & Cloud': [
-            'Firmware development',
-            'Cloud platform integration',
-            'Mobile app development',
-            'Data analytics',
-            'Real-time dashboards'
-          ],
-          'Deployment & Support': [
-            'System integration',
-            'Network configuration',
-            'Security implementation',
-            'Monitoring & maintenance',
-            'Technical documentation'
-          ]
+          'Hardware Development': ['Custom IoT device design','Sensor integration','Power management','Wireless connectivity','Enclosure design'],
+          'Software & Cloud': ['Firmware development','Cloud platform integration','Mobile app development','Data analytics','Real-time dashboards'],
+          'Deployment & Support': ['System integration','Network configuration','Security implementation','Monitoring & maintenance','Technical documentation']
         }
       },
       'smart-home': {
         title: 'Smart Home Solutions',
         description: 'Custom smart home automation systems that enhance comfort, security, and energy efficiency.',
         features: {
-          'Automation Systems': [
-            'Lighting control',
-            'Climate control',
-            'Security systems',
-            'Entertainment systems',
-            'Appliance control'
-          ],
-          'Integration': [
-            'Voice control (Alexa, Google)',
-            'Mobile app control',
-            'Remote access',
-            'Scene programming',
-            'Energy monitoring'
-          ],
-          'Installation & Support': [
-            'System design consultation',
-            'Installation planning',
-            'User training',
-            'Maintenance services',
-            'Upgrade support'
-          ]
+          'Automation Systems': ['Lighting control','Climate control','Security systems','Entertainment systems','Appliance control'],
+          'Integration': ['Voice control (Alexa, Google)','Mobile app control','Remote access','Scene programming','Energy monitoring'],
+          'Installation & Support': ['System design consultation','Installation planning','User training','Maintenance services','Upgrade support']
         }
       },
       'embedded-systems': {
         title: 'Embedded Systems',
-        description: 'Development of microcontroller-based embedded systems for various applications and industries.',
+        description: 'Development of microcontroller-based embedded systems for various applications.',
         features: {
-          'Development Services': [
-            'Custom firmware development',
-            'RTOS implementation',
-            'Driver development',
-            'Middleware integration',
-            'Bootloader development'
-          ],
-          'Hardware Integration': [
-            'Peripheral interfacing',
-            'Sensor integration',
-            'Communication protocols',
-            'Power management',
-            'EMI/EMC considerations'
-          ],
-          'Testing & Validation': [
-            'Unit testing',
-            'Integration testing',
-            'Hardware validation',
-            'Performance testing',
-            'Certification support'
-          ]
+          'Development Services': ['Custom firmware development','RTOS implementation','Driver development','Middleware integration','Bootloader development'],
+          'Hardware Integration': ['Peripheral interfacing','Sensor integration','Communication protocols','Power management','EMI/EMC considerations'],
+          'Testing & Validation': ['Unit testing','Integration testing','Hardware validation','Performance testing','Certification support']
         }
       },
       'graduation-projects': {
         title: 'Graduation Projects',
-        description: 'Comprehensive support for engineering graduation projects from initial concept to final presentation.',
+        description: 'Comprehensive support for engineering graduation projects from concept to completion.',
         features: {
-          'Project Support': [
-            'Idea brainstorming',
-            'Literature review',
-            'System architecture',
-            'Component selection',
-            'Budget planning'
-          ],
-          'Implementation': [
-            'Hardware development',
-            'Software programming',
-            'System integration',
-            'Testing & debugging',
-            'Performance optimization'
-          ],
-          'Documentation': [
-            'Technical report writing',
-            'Presentation preparation',
-            'Poster design',
-            'Demo preparation',
-            'Thesis formatting'
-          ]
+          'Project Support': ['Idea brainstorming','Literature review','System architecture','Component selection','Budget planning'],
+          'Implementation': ['Hardware development','Software programming','System integration','Testing & debugging','Performance optimization'],
+          'Documentation': ['Technical report writing','Poster design','Demo preparation','Thesis formatting','Presentation coaching']
         }
       },
       'electronics-prototyping': {
         title: 'Electronics Prototyping',
         description: 'Guidance and implementation for small-scale electronics projects and rapid prototyping.',
         features: {
-          'Prototyping Services': [
-            'Circuit design assistance',
-            'Component selection',
-            'Breadboard prototyping',
-            'PCB prototyping',
-            '3D printing for enclosures'
-          ],
-          'Development Support': [
-            'Schematic review',
-            'Layout optimization',
-            'Soldering services',
-            'Testing procedures',
-            'Debugging assistance'
-          ],
-          'Scale-up Support': [
-            'Design for manufacturing',
-            'Cost optimization',
-            'Quality control plans',
-            'Production testing',
-            'Documentation for mass production'
-          ]
+          'Prototyping Services': ['Circuit design assistance','Component selection','Breadboard prototyping','PCB prototyping','3D printing for enclosures'],
+          'Development Support': ['Schematic review','Layout optimization','Soldering services','Testing procedures','Debugging assistance'],
+          'Scale-up Support': ['Design for manufacturing','Cost optimization','Quality control plans','Production testing','Documentation for mass production']
         }
       }
     };
 
-    // Mobile Menu Toggle
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navMenu = document.getElementById('nav-menu');
-    
-    mobileMenu.addEventListener('click', () => {
-      const expanded = mobileMenu.getAttribute('aria-expanded') === 'true';
-      mobileMenu.setAttribute('aria-expanded', String(!expanded));
-      navMenu.setAttribute('aria-hidden', String(expanded));
-      mobileMenu.classList.toggle('active');
-      navMenu.classList.toggle('active');
-      
-      // Toggle body scroll when menu is open
-      if (navMenu.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
-    });
-    
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.navigation a, .footer-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-        navMenu.classList.remove('active');
-        document.body.style.overflow = '';
-      });
-    });
-    
-    // Sticky Header
-    const header = document.getElementById('header');
+    // Scroll progress
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
-    
-    // Back to Top Button
-    const backToTopBtn = document.getElementById('back-to-top');
-    
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopBtn.classList.add('active');
-      } else {
-        backToTopBtn.classList.remove('active');
-      }
-    });
-    
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-    
-    // Dark/Light Mode Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = themeToggle.querySelector('i');
-    
-    // Check for saved theme preference or use preferred color scheme
-    const currentTheme = localStorage.getItem('theme') || 
-                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    
-    if (currentTheme === 'dark') {
-      document.body.setAttribute('data-theme', 'dark');
-      themeIcon.classList.replace('fa-moon', 'fa-sun');
-    } else {
-      document.body.setAttribute('data-theme', 'light');
-      themeIcon.classList.replace('fa-sun', 'fa-moon');
-    }
-    
-    themeToggle.addEventListener('click', () => {
-      if (document.body.getAttribute('data-theme') === 'light') {
-        document.body.setAttribute('data-theme', 'dark');
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.body.setAttribute('data-theme', 'light');
-        themeIcon.classList.replace('fa-sun', 'fa-moon');
-        localStorage.setItem('theme', 'light');
-      }
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById('scroll-progress').style.width = (scrollTop / scrollHeight * 100) + '%';
     });
 
-    // Service Modal
+    // Mobile menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const toggleMenu = () => {
+      const isActive = navMenu.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', String(isActive));
+      mobileOverlay.classList.toggle('active');
+      document.body.style.overflow = isActive ? 'hidden' : '';
+    };
+    menuToggle.addEventListener('click', toggleMenu);
+    mobileOverlay.addEventListener('click', toggleMenu);
+
+    // Header scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+      document.getElementById('back-to-top').classList.toggle('active', window.scrollY > 400);
+      document.getElementById('theme-toggle').classList.toggle('active', window.scrollY > 200);
+    });
+
+    document.getElementById('back-to-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      themeIcon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+      localStorage.setItem('theme', next);
+    });
+
+    // Service modal
     const serviceModal = document.getElementById('service-modal');
-    const modalClose = document.getElementById('modal-close');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDescription = document.getElementById('modal-description');
-    const modalFeatures = document.getElementById('modal-features');
-    const modalCta = document.getElementById('modal-cta');
-    
-    // View Details buttons
-    document.querySelectorAll('.view-service-details').forEach(button => {
-      button.addEventListener('click', () => {
-        const serviceId = button.getAttribute('data-service');
-        const service = serviceData[serviceId];
-        
-        if (service) {
-          modalTitle.textContent = service.title;
-          modalDescription.textContent = service.description;
-          
-          // Clear and populate features
-          modalFeatures.innerHTML = '';
-          for (const [category, items] of Object.entries(service.features)) {
-            const featureColumn = document.createElement('div');
-            featureColumn.className = 'feature-column';
-            
-            const categoryTitle = document.createElement('h4');
-            categoryTitle.textContent = category;
-            featureColumn.appendChild(categoryTitle);
-            
-            const featureList = document.createElement('ul');
-            items.forEach(item => {
-              const listItem = document.createElement('li');
-              listItem.textContent = item;
-              featureList.appendChild(listItem);
-            });
-            
-            featureColumn.appendChild(featureList);
-            modalFeatures.appendChild(featureColumn);
-          }
-          
-          // Update CTA button
-          modalCta.textContent = `Inquire About ${service.title}`;
-          modalCta.href = `#contact?service=${encodeURIComponent(service.title)}`;
-          
-          // Show modal
-          serviceModal.classList.add('active');
-          serviceModal.setAttribute('aria-hidden', 'false');
-          document.body.style.overflow = 'hidden';
+    document.querySelectorAll('.open-service-modal').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const service = serviceData[btn.dataset.service];
+        if (!service) return;
+        document.getElementById('modal-title').textContent = service.title;
+        document.getElementById('modal-description').textContent = service.description;
+        const featuresEl = document.getElementById('modal-features');
+        featuresEl.innerHTML = '';
+        for (const [cat, items] of Object.entries(service.features)) {
+          const col = document.createElement('div');
+          col.className = 'feature-col';
+          col.innerHTML = `<h4>${cat}</h4><ul>${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+          featuresEl.appendChild(col);
         }
+        document.getElementById('modal-cta').textContent = `Inquire About ${service.title}`;
+        serviceModal.classList.add('active');
+        serviceModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
       });
     });
-    
-    // Close modal
-    modalClose.addEventListener('click', () => {
+
+    const closeModal = () => {
       serviceModal.classList.remove('active');
       serviceModal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-    });
-    
-    // Close modal when clicking outside content
-    serviceModal.addEventListener('click', (e) => {
-      if (e.target === serviceModal) {
-        serviceModal.classList.remove('active');
-        serviceModal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
-    });
-    
-    // Close modal with Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && serviceModal.classList.contains('active')) {
-        serviceModal.classList.remove('active');
-        serviceModal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
-    });
+    };
+    document.getElementById('modal-close').addEventListener('click', closeModal);
+    serviceModal.addEventListener('click', e => { if (e.target === serviceModal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    // Form submission
-    const inquiryForm = document.getElementById('service-inquiry-form');
-    inquiryForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      // Get form data
-      const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        service: document.getElementById('service').value,
-        message: document.getElementById('message').value
-      };
-      
-      // In a real application, you would send this data to a server
-      // For now, we'll just show a success message
-      const serviceName = document.getElementById('service').options[document.getElementById('service').selectedIndex].text;
-      alert(`Thank you for your inquiry, ${formData.name}! I'll get back to you soon about ${serviceName}.`);
-      inquiryForm.reset();
-    });
+    // Reveal on scroll
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('revealed'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
-
-    // Keyboard support for mobile menu toggle
-    mobileMenu.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        mobileMenu.click();
-      }
-    });
-
-    // Pre-fill service select if URL has service parameter
-    window.addEventListener('load', () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const serviceParam = urlParams.get('service');
-      if (serviceParam) {
-        const serviceSelect = document.getElementById('service');
-        for (let option of serviceSelect.options) {
-          if (option.text === decodeURIComponent(serviceParam)) {
-            serviceSelect.value = option.value;
-            break;
-          }
-        }
-      }
-    });
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        if (this.getAttribute('href') === '#') return;
-        
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId.startsWith('#')) {
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 80,
-              behavior: 'smooth'
-            });
-          }
-        }
-      });
-    });
   </script>
 </body>
 </html>

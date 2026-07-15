@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mohamed Tarek - You are currently offline">
+  <meta name="theme-color" content="#0a0e1a">
+  <title>Offline - Mohamed Tarek</title>
+  <link rel="icon" href="icon.png" type="image/png" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --color-bg-primary: #0a0e1a;
+      --color-bg-secondary: #0f1322;
+      --color-bg-card: #161b2e;
+      --color-accent: #3b82f6;
+      --color-accent-hover: #2563eb;
+      --color-text-primary: #f1f5f9;
+      --color-text-secondary: #94a3b8;
+      --color-text-tertiary: #64748b;
+      --color-border: rgba(255, 255, 255, 0.06);
+      --color-warning: #f59e0b;
+      --color-success: #22c55e;
+      --gradient-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --gradient-card: linear-gradient(145deg, rgba(22, 27, 46, 0.8), rgba(15, 19, 34, 0.6));
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+      --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.15);
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: var(--radius-md);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .offline-container {
+      background: var(--gradient-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 3rem;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--gradient-accent);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.875rem;
+      font-weight: 800;
+    }
+
+    .offline-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--color-warning);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.2); }
+      50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(245, 158, 11, 0.15); }
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      color: var(--color-warning);
+      margin-bottom: 1.5rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-warning);
+      animation: blink 1.5s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .offline-description {
+      color: var(--color-text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .available-section {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .available-section h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-tertiary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .content-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      transition: all var(--transition-base);
+    }
+
+    .content-card:hover {
+      border-color: rgba(59, 130, 246, 0.3);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .content-card a {
+      color: var(--color-text-primary);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .content-card i {
+      font-size: 1.25rem;
+      color: var(--color-accent);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: all var(--transition-base);
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--gradient-accent);
+      color: white;
+      box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--color-bg-card);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-accent);
+      transform: translateY(-2px);
+    }
+
+    .offline-features {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .features-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .feature {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      color: var(--color-success);
+    }
+
+    @media (max-width: 480px) {
+      .offline-container { padding: 2rem 1.5rem; }
+      .offline-icon { width: 64px; height: 64px; font-size: 1.5rem; }
+      h1 { font-size: 1.5rem; }
+      .content-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+      .content-card { padding: 0.75rem; }
+      .content-card a { font-size: 0.8rem; }
+      .action-buttons { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-container">
+    <div class="logo">
+      <span class="logo-icon">MT</span>
+      <span>Mohamed Tarek</span>
+    </div>
+
+    <div class="offline-icon">
+      <i class="fas fa-wifi-slash"></i>
+    </div>
+
+    <h1>You're Offline</h1>
+
+    <div class="status-badge">
+      <span class="status-dot"></span>
+      <span id="status-text">No internet connection detected</span>
+    </div>
+
+    <p class="offline-description">
+      It seems you've lost your internet connection. Don't worry — you can still access cached content and tools while offline.
+    </p>
+
+    <div class="available-section">
+      <h3><i class="fas fa-download"></i> Available Offline</h3>
+      <div class="content-grid">
+        <div class="content-card">
+          <a href="./index.html"><i class="fas fa-home"></i><span>Portfolio</span></a>
+        </div>
+        <div class="content-card">
+          <a href="./Mohamed - CV.html"><i class="fas fa-file-alt"></i><span>My CV</span></a>
+        </div>
+        <div class="content-card">
+          <a href="./Mohamed - Project.html"><i class="fas fa-project-diagram"></i><span>Projects</span></a>
+        </div>
+        <div class="content-card">
+          <a href="./Mohamed - Personal Information.html"><i class="fas fa-user"></i><span>About Me</span></a>
+        </div>
+        <div class="content-card">
+          <a href="./Mohamed - Services.html"><i class="fas fa-cogs"></i><span>Services</span></a>
+        </div>
+        <div class="content-card">
+          <a href="./Mohamed - Certificates.html"><i class="fas fa-certificate"></i><span>Certificates</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn btn-primary" onclick="checkConnection()">
+        <i class="fas fa-sync-alt"></i> Check Connection
+      </button>
+      <a href="./index.html" class="btn btn-secondary">
+        <i class="fas fa-home"></i> Go to Homepage
+      </a>
+    </div>
+
+    <div class="offline-features">
+      <div class="features-list">
+        <div class="feature"><i class="fas fa-check-circle"></i><span>Cached Pages</span></div>
+        <div class="feature"><i class="fas fa-check-circle"></i><span>Portfolio Content</span></div>
+        <div class="feature"><i class="fas fa-check-circle"></i><span>Tools</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function checkConnection() {
+      const statusDot = document.querySelector('.status-dot');
+      const statusText = document.getElementById('status-text');
+      
+      if (navigator.onLine) {
+        statusDot.style.backgroundColor = '#22c55e';
+        statusDot.style.animation = 'none';
+        statusText.textContent = 'Connection restored!';
+        setTimeout(() => { window.location.href = './index.html'; }, 1500);
+      } else {
+        statusDot.style.backgroundColor = '#f59e0b';
+        statusDot.style.animation = 'blink 1.5s ease-in-out infinite';
+        statusText.textContent = 'Still offline — checking again...';
+        setTimeout(checkConnection, 3000);
+      }
+    }
+
+    window.addEventListener('online', checkConnection);
+    window.addEventListener('offline', () => {
+      document.querySelector('.status-dot').style.backgroundColor = '#f59e0b';
+      document.getElementById('status-text').textContent = 'Connection lost';
+    });
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', checkConnection);
+  </script>
+</body>
+</html>
