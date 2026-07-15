@@ -4,7 +4,7 @@
 //  Version: v1.0.3
 // ===============================
 
-const VERSION = 'v1.0.3';
+const VERSION = 'v1.0.4';
 const STATIC_CACHE = `static-${VERSION}`;
 const HTML_CACHE = `html-${VERSION}`;
 const OFFLINE_URL = './offline.html';
@@ -15,11 +15,20 @@ const OFFLINE_URL = './offline.html';
 const STATIC_ASSETS = [
   './',
   './index.html',
+  './Mohamed%20-%20CV.html',
+  './Mohamed%20-%20my-sites.html',
+  './Mohamed%20-%20Project.html',
+  './Mohamed%20-%20Personal%20Information.html',
+  './Mohamed%20-%20Services.html',
+  './Mohamed%20-%20Certificates.html',
+  './Mohamed%20-%20social-media.html',
   './offline.html',
   './manifest.webmanifest',
+  './pwa.js',
   './icon.png',
   './icon-192.png',
   './icon-512.png',
+  './apple-touch-icon.png',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap'
 ];
