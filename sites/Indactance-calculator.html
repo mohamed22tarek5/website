@@ -1,2178 +1,1625 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inductance Calculators</title>
-    <link rel="icon" href="icon.png" type="image/png">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #3498db;
-            --primary-dark: #2980b9;
-            --primary-light: #5dade2;
-            --secondary-color: #9b59b6;
-            --accent-color: #e74c3c;
-            --background-dark: #121212;
-            --background-darker: #0a0a0a;
-            --background-secondary: #1a1a1a;
-            --card-dark: #1e1e1e;
-            --card-light: #252525;
-            --text-light: #ffffff;
-            --text-muted: #aaaaaa;
-            --success-color: #4caf50;
-            --error-color: #f44336;
-            --warning-color: #f1c40f;
-            --transition-speed: 0.3s;
-            --border-radius: 12px;
-            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
-            --glow-effect: 0 0 15px rgba(52, 152, 219, 0.5);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        /* Light mode variables */
-        [data-theme="light"] {
-            --background-dark: #f5f7fa;
-            --background-darker: #e8ebf0;
-            --background-secondary: #ffffff;
-            --card-dark: #ffffff;
-            --card-light: #f9f9f9;
-            --text-light: #333333;
-            --text-muted: #666666;
-            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
+  <title>Inductance Calculators | Mohamed Tarek</title>
+  <meta name="description" content="Advanced inductance calculators for electronics engineers. Color code calculator, series/parallel, unit converter, and inductor design tools.">
+  <meta name="keywords" content="inductance, calculator, inductor, color code, series parallel, unit converter, coil design, electronics">
+  <meta name="author" content="Mohamed Tarek">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
 
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Inductance Calculators | Mohamed Tarek">
+  <meta property="og:description" content="Advanced inductance calculators for electronics engineers with color code, series/parallel, unit converter, and inductor design tools.">
+  <meta property="og:image" content="https://website-mohamed.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://website-mohamed.vercel.app/sites/Indactance-calculator.html">
+  <meta property="og:site_name" content="Mohamed Tarek Portfolio">
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-            transition: background-color var(--transition-speed) ease;
-            padding: 20px;
-            min-height: 100vh;
-        }
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Inductance Calculators | Mohamed Tarek">
+  <meta name="twitter:description" content="Advanced inductance calculators for electronics engineers with color code, series/parallel, unit converter, and inductor design tools.">
+  <meta name="twitter:image" content="https://website-mohamed.vercel.app/photo.jpg">
 
-        h1, h2, h3 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
 
-        p {
-            margin-bottom: 15px;
-            color: var(--text-muted);
-        }
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="../icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 
-        /* Header Styles */
-        .page-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 30px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: var(--border-radius);
-            color: white;
-            box-shadow: var(--box-shadow);
-            position: relative;
-            overflow: hidden;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        .page-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-        }
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Inductance Calculators",
+    "description": "Advanced inductance calculators for electronics engineers with color code, series/parallel, unit converter, and inductor design tools.",
+    "url": "https://website-mohamed.vercel.app/sites/Indactance-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek",
+      "url": "https://website-mohamed.vercel.app"
+    }
+  }
+  </script>
 
-        .page-header h1 {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
+  <style>
+    :root {
+      --color-bg-primary: #0a0e1a;
+      --color-bg-secondary: #0f1322;
+      --color-bg-tertiary: #141829;
+      --color-bg-card: #161b2e;
+      --color-bg-card-hover: #1c2240;
+      --color-bg-elevated: #1a2038;
+      --color-accent: #3b82f6;
+      --color-accent-hover: #2563eb;
+      --color-accent-light: #60a5fa;
+      --color-accent-glow: rgba(59, 130, 246, 0.15);
+      --color-accent-subtle: rgba(59, 130, 246, 0.08);
+      --color-text-primary: #f1f5f9;
+      --color-text-secondary: #94a3b8;
+      --color-text-tertiary: #64748b;
+      --color-border: rgba(255, 255, 255, 0.06);
+      --color-border-hover: rgba(255, 255, 255, 0.12);
+      --color-border-accent: rgba(59, 130, 246, 0.3);
+      --color-success: #22c55e;
+      --color-error: #ef4444;
+      --color-warning: #f59e0b;
+      --color-info: #3b82f6;
+      --gradient-hero: linear-gradient(135deg, #0a0e1a 0%, #111833 50%, #0f1322 100%);
+      --gradient-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 4rem;
+      --space-4xl: 6rem;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.15);
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --container-max: 1200px;
+      --header-height: 72px;
+    }
 
-        .page-header p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.1rem;
-            position: relative;
-            z-index: 1;
-        }
+    [data-theme="light"] {
+      --color-bg-primary: #f8fafc;
+      --color-bg-secondary: #f1f5f9;
+      --color-bg-tertiary: #e2e8f0;
+      --color-bg-card: #ffffff;
+      --color-bg-card-hover: #f8fafc;
+      --color-bg-elevated: #ffffff;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      --color-text-tertiary: #94a3b8;
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-border-hover: rgba(0, 0, 0, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+      --gradient-hero: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 50%, #f1f5f9 100%);
+    }
 
-        /* Quick Stats */
-        .quick-stats {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color var(--transition-slow), color var(--transition-slow);
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; }
+    ul, ol { list-style: none; }
+    ::selection { background: var(--color-accent); color: white; }
 
-        .stat-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: var(--border-radius);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+    .skip-link {
+      position: fixed; top: -100%; left: var(--space-md);
+      background: var(--color-accent); color: white;
+      padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm);
+      z-index: 10000; font-weight: 600; font-size: 0.875rem;
+      transition: top var(--transition-fast);
+    }
+    .skip-link:focus { top: var(--space-md); }
 
-        /* Calculator Styles */
-        .calculator-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        /* Tab styles */
-        .main-tabs {
-            display: flex;
-            overflow: hidden;
-            border: 1px solid var(--background-secondary);
-            background-color: var(--card-light);
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
-            margin-bottom: 0;
-            flex-wrap: wrap;
-        }
-        
-        .main-tab-button {
-            background-color: inherit;
-            flex: 1;
-            min-width: 150px;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: all var(--transition-speed) ease;
-            color: var(--text-light);
-            font-weight: bold;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .main-tab-button:hover {
-            background-color: var(--background-secondary);
-        }
-        
-        .main-tab-button.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .main-tab-button.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: white;
-        }
-        
-        .main-tabcontent {
-            display: none;
-            padding: 30px;
-            border: 1px solid var(--background-secondary);
-            border-top: none;
-            border-radius: 0 0 var(--border-radius) var(--border-radius);
-            background-color: var(--card-dark);
-            box-shadow: var(--box-shadow);
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Color code calculator styles */
-        .calculator {
-            border: 1px solid var(--background-secondary);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            margin-bottom: 20px;
-            background-color: var(--card-light);
-            transition: all var(--transition-speed) ease;
-            position: relative;
-        }
-        
-        .calculator:hover {
-            box-shadow: var(--box-shadow-hover);
-        }
-        
-        .band-container {
-            display: flex;
-            justify-content: center;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-        
-        .band {
-            width: 50px;
-            height: 120px;
-            margin: 0 8px;
-            border-radius: 6px;
-            cursor: pointer;
-            position: relative;
-            transition: all var(--transition-speed) ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border: 2px solid transparent;
-        }
-        
-        .band:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--glow-effect);
-            border-color: var(--primary-color);
-        }
-        
-        .band.active {
-            border-color: var(--warning-color);
-            box-shadow: var(--glow-effect);
-        }
-        
-        .band-label {
-            position: absolute;
-            bottom: -30px;
-            width: 100%;
-            text-align: center;
-            font-size: 14px;
-            color: var(--text-light);
-            font-weight: 600;
-        }
-        
-        .result {
-            font-size: 1.3em;
-            margin: 25px 0;
-            padding: 20px;
-            background: var(--background-secondary);
-            border-radius: var(--border-radius);
-            color: var(--text-light);
-            border-left: 5px solid var(--primary-color);
-            text-align: center;
-            font-weight: 600;
-            box-shadow: var(--box-shadow);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .result-details {
-            font-size: 0.9em;
-            color: var(--text-muted);
-            margin-top: 10px;
-            width: 100%;
-        }
-        
-        .save-btn {
-            background: var(--success-color);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.9em;
-            transition: all var(--transition-speed) ease;
-        }
-        
-        .save-btn:hover {
-            background: #3d8b40;
-            transform: translateY(-2px);
-        }
-        
-        .tabs {
-            margin-bottom: 25px;
-            display: flex;
-            flex-wrap: wrap;
-        }
-        
-        .tab-button {
-            padding: 12px 24px;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            border: none;
-            background: var(--background-secondary);
-            color: var(--text-light);
-            cursor: pointer;
-            border-radius: var(--border-radius);
-            transition: all var(--transition-speed) ease;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .tab-button:hover {
-            background: var(--primary-light);
-            color: white;
-        }
-        
-        .tab-button.active {
-            background: var(--primary-color);
-            color: white;
-            box-shadow: var(--glow-effect);
-        }
-        
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .info-box {
-            margin-top: 25px;
-            padding: 25px;
-            background: rgba(52, 152, 219, 0.1);
-            border-radius: var(--border-radius);
-            border-left: 5px solid var(--primary-color);
-            color: var(--text-light);
-            box-shadow: var(--box-shadow);
-        }
-        
-        /* Series/parallel calculator styles */
-        .inductors-container {
-            margin-top: 20px;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95em;
-            transition: all var(--transition-speed) ease;
-            cursor: pointer;
-            border: none;
-            outline: none;
-            margin-right: 10px;
-            margin-bottom: 10px;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.6);
-        }
-        
-        .btn-outline {
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-        
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: white;
-            transform: translateY(-3px);
-        }
-        
-        .btn-success {
-            background-color: var(--success-color);
-            color: white;
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
-        }
-        
-        .btn-success:hover {
-            background-color: #3d8b40;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
-        }
-        
-        input {
-            padding: 12px 15px;
-            border: 1px solid var(--background-secondary);
-            border-radius: var(--border-radius);
-            margin-bottom: 10px;
-            width: 140px;
-            background-color: var(--background-secondary);
-            color: var(--text-light);
-            transition: all var(--transition-speed) ease;
-            font-size: 1rem;
-        }
-        
-        input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-        
-        label {
-            display: inline-block;
-            margin-right: 10px;
-            color: var(--text-light);
-            font-weight: 600;
-            min-width: 40px;
-        }
-        
-        .inductor-input {
-            display: flex;
-            align-items: center;
-            margin-bottom: 18px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--border-radius);
-            transition: all var(--transition-speed) ease;
-        }
-        
-        .inductor-input:hover {
-            background: rgba(255, 255, 255, 0.08);
-        }
-        
-        .inductor-input span {
-            margin-left: 5px;
-            color: var(--text-light);
-        }
-        
-        .unit-selector {
-            margin-left: 10px;
-            padding: 12px 15px;
-            border: 1px solid var(--background-secondary);
-            border-radius: var(--border-radius);
-            background-color: var(--background-secondary);
-            color: var(--text-light);
-            transition: all var(--transition-speed) ease;
-            font-size: 1rem;
-        }
-        
-        .unit-selector:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-        
-        .explanation {
-            margin-top: 30px;
-            padding: 25px;
-            background-color: rgba(241, 196, 15, 0.1);
-            border-radius: var(--border-radius);
-            border-left: 5px solid var(--warning-color);
-            color: var(--text-light);
-            box-shadow: var(--box-shadow);
-        }
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+      background: var(--gradient-accent); z-index: 10001;
+      transition: width 50ms linear;
+    }
 
-        .color-legend {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 25px 0;
-            justify-content: center;
-        }
-        
-        .color-item {
-            display: flex;
-            align-items: center;
-            margin-right: 15px;
-            margin-bottom: 10px;
-            padding: 8px 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: var(--border-radius);
-            transition: all var(--transition-speed) ease;
-            cursor: pointer;
-        }
-        
-        .color-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-        
-        .color-swatch {
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--background-secondary);
-            margin-right: 8px;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
+    .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-xl); }
+    @media (max-width: 768px) { .container { padding: 0 var(--space-md); } }
 
-        /* Dark Mode Toggle */
-        .theme-toggle {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: var(--card-dark);
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4em;
-            box-shadow: var(--box-shadow);
-            cursor: pointer;
-            transition: all var(--transition-speed) ease;
-            z-index: 999;
-            border: 2px solid var(--primary-color);
-        }
-        
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: var(--glow-effect);
-        }
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--header-height);
+      z-index: 1000; transition: all var(--transition-base); background: transparent;
+    }
+    .header.scrolled {
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid var(--color-border);
+    }
+    [data-theme="light"] .header.scrolled { background: rgba(248, 250, 252, 0.85); }
+    .header .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
 
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            max-width: 400px;
-            transform: translateX(120%);
-            transition: transform 0.5s ease;
-        }
-        
-        .notification.show {
-            transform: translateX(0);
-        }
-        
-        .notification.success {
-            background-color: var(--success-color);
-            color: white;
-        }
-        
-        .notification.error {
-            background-color: var(--error-color);
-            color: white;
-        }
-        
-        .close-notification {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.2em;
-            cursor: pointer;
-            margin-left: auto;
-        }
-        
-        /* History */
-        .history-item {
-            background-color: var(--card-light);
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .history-details {
-            font-size: 0.9em;
-            color: var(--text-muted);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .input-field {
-                width: 100%;
-            }
-            
-            .tab-button {
-                padding: 10px 16px;
-                font-size: 14px;
-                flex: 1;
-                min-width: 120px;
-                text-align: center;
-            }
-            
-            .band {
-                width: 35px;
-                height: 90px;
-                margin: 0 5px;
-            }
-            
-            .band-label {
-                font-size: 12px;
-            }
-            
-            .main-tabs {
-                flex-direction: column;
-            }
-            
-            .main-tab-button {
-                padding: 12px;
-            }
-            
-            .inductor-input {
-                flex-wrap: wrap;
-            }
-            
-            .inductor-input label {
-                width: 100%;
-                margin-bottom: 5px;
-            }
-            
-            .page-header h1 {
-                font-size: 2rem;
-            }
-            
-            .result {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            
-            .band {
-                width: 30px;
-                height: 80px;
-            }
-            
-            .color-item {
-                margin-right: 8px;
-                padding: 6px 10px;
-                font-size: 0.9rem;
-            }
-            
-            .theme-toggle {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2em;
-                bottom: 20px;
-                left: 20px;
-            }
-        }
+    .logo { display: flex; align-items: center; gap: var(--space-sm); font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; }
+    .logo-icon {
+      width: 36px; height: 36px; background: var(--gradient-accent);
+      border-radius: var(--radius-sm); display: flex; align-items: center;
+      justify-content: center; color: white; font-size: 0.875rem; font-weight: 800;
+    }
 
-        /* Footer Styles */
-        footer {
-            background-color: var(--card-dark);
-            color: var(--text-light);
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 50px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
+    .nav { display: flex; align-items: center; gap: var(--space-xs); }
+    .nav-link {
+      position: relative; padding: var(--space-sm) var(--space-md);
+      font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
+      border-radius: var(--radius-sm); transition: all var(--transition-fast);
+    }
+    .nav-link:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
 
-        .social-footer {
-            display: flex;
-            justify-content: center;
-            margin: 25px 0;
-            flex-wrap: wrap;
-        }
+    .menu-toggle {
+      display: none; flex-direction: column; gap: 5px; padding: var(--space-sm);
+      z-index: 1001; align-items: center; justify-content: center;
+    }
+    .menu-toggle .bar {
+      width: 22px; height: 2px; background: var(--color-text-primary);
+      border-radius: 2px; transition: all var(--transition-base); transform-origin: center;
+    }
+    .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-        .social-footer a {
-            color: var(--text-light);
-            font-size: 1.6em;
-            margin: 0 15px;
-            transition: all var(--transition-speed) ease;
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
-        }
+    .mobile-overlay {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
+      z-index: 999; opacity: 0; pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+    .mobile-overlay.active { opacity: 1; pointer-events: auto; }
 
-        .social-footer a:hover {
-            color: var(--primary-color);
-            transform: translateY(-5px);
-            background: rgba(52, 152, 219, 0.2);
-            box-shadow: var(--glow-effect);
-        }
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .nav {
+        position: fixed; top: 0; right: -100%; width: min(320px, 85vw);
+        height: 100vh; background: var(--color-bg-secondary);
+        flex-direction: column; align-items: flex-start; justify-content: center;
+        padding: var(--space-3xl); gap: var(--space-sm);
+        transition: right var(--transition-slow); border-left: 1px solid var(--color-border);
+      }
+      .nav.active { right: 0; }
+      .nav-link { font-size: 1.125rem; width: 100%; padding: var(--space-md); }
+    }
 
-        .footer-bottom {
-            margin-top: 25px;
-            font-size: 0.95em;
-            opacity: 0.8;
-        }
-        
-        /* Table Styles */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid var(--background-secondary);
-            margin: 20px 0;
-            box-shadow: var(--box-shadow);
-        }
-        
-        th, td {
-            border: 1px solid var(--background-secondary);
-            padding: 12px;
-            text-align: center;
-        }
-        
-        th {
-            background-color: var(--background-secondary);
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-        
-        tr:nth-child(even) {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-        
-        tr:hover {
-            background-color: rgba(52, 152, 219, 0.1);
-        }
-        
-        /* Highlight important formulas */
-        .formula {
-            text-align: center;
-            font-size: 1.3rem;
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(52, 152, 219, 0.1);
-            border-radius: var(--border-radius);
-            border-left: 5px solid var(--primary-color);
-            font-weight: 600;
-        }
-        
-        /* Tooltip */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            border-bottom: 1px dotted var(--primary-color);
-            cursor: help;
-        }
-        
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: var(--card-dark);
-            color: var(--text-light);
-            text-align: center;
-            border-radius: var(--border-radius);
-            padding: 10px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            box-shadow: var(--box-shadow);
-            border: 1px solid var(--primary-color);
-        }
-        
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
+    .page-hero {
+      padding-top: calc(var(--header-height) + var(--space-3xl));
+      padding-bottom: var(--space-3xl);
+      background: var(--gradient-hero);
+      position: relative; overflow: hidden;
+    }
+    .page-hero-bg { position: absolute; inset: 0; overflow: hidden; z-index: 0; }
+    .page-hero-orb {
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+    .page-hero-orb:nth-child(1) { width: 400px; height: 400px; background: rgba(59, 130, 246, 0.15); top: -100px; right: -50px; }
+    .page-hero-orb:nth-child(2) { width: 300px; height: 300px; background: rgba(139, 92, 246, 0.12); bottom: -80px; left: -80px; animation-delay: -7s; }
+    .page-hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px; z-index: 1;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(20px, 10px) scale(1.02); }
+    }
+    .page-hero .container { position: relative; z-index: 2; text-align: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-md); background: var(--color-accent-subtle);
+      border: 1px solid var(--color-border-accent); border-radius: var(--radius-full);
+      font-size: 0.8125rem; font-weight: 500; color: var(--color-accent-light);
+      margin-bottom: var(--space-lg);
+    }
+    .hero-badge .dot {
+      width: 8px; height: 8px; background: var(--color-success);
+      border-radius: 50%; animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+    .page-hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.03em; margin-bottom: var(--space-md);
+    }
+    .page-hero h1 .gradient-text {
+      background: var(--gradient-accent); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-hero p {
+      font-size: clamp(1rem, 2vw, 1.125rem); color: var(--color-text-secondary);
+      max-width: 600px; margin: 0 auto;
+    }
+    .hero-stats {
+      display: flex; justify-content: center; gap: var(--space-lg);
+      margin-top: var(--space-xl); flex-wrap: wrap;
+    }
+    .hero-stat {
+      display: flex; align-items: center; gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md); background: var(--color-accent-subtle);
+      border: 1px solid var(--color-border-accent); border-radius: var(--radius-full);
+      font-size: 0.8125rem; font-weight: 500; color: var(--color-accent-light);
+    }
+    .hero-stat i { font-size: 0.875rem; }
 
-        /* New Unit Converter Styles */
-        .converter-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-top: 20px;
-        }
+    .main-content { padding: var(--space-3xl) 0 var(--space-4xl); }
 
-        .converter-row {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+    .main-tabs {
+      display: flex; overflow: hidden;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      flex-wrap: wrap;
+    }
+    .main-tab-btn {
+      flex: 1; min-width: 120px; padding: var(--space-md) var(--space-lg);
+      background: transparent; color: var(--color-text-secondary);
+      font-weight: 600; font-size: 0.875rem; transition: all var(--transition-fast);
+      position: relative; display: flex; align-items: center; justify-content: center; gap: var(--space-sm);
+    }
+    .main-tab-btn:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
+    .main-tab-btn.active {
+      color: white; background: var(--color-accent);
+    }
+    .main-tab-btn.active::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: white;
+    }
 
-        .converter-input {
-            flex: 1;
-            min-width: 200px;
-        }
+    .main-tabcontent {
+      display: none; padding: var(--space-xl);
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-top: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      box-shadow: var(--shadow-md); animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .converter-unit {
-            width: 120px;
-        }
+    .sub-tabs {
+      display: flex; gap: var(--space-sm); margin-bottom: var(--space-lg);
+      flex-wrap: wrap;
+    }
+    .sub-tab-btn {
+      padding: var(--space-sm) var(--space-lg);
+      background: var(--color-bg-tertiary); color: var(--color-text-secondary);
+      font-weight: 600; font-size: 0.8125rem; border-radius: var(--radius-full);
+      transition: all var(--transition-fast); display: flex; align-items: center; gap: var(--space-sm);
+    }
+    .sub-tab-btn:hover { color: var(--color-text-primary); background: var(--color-bg-card-hover); }
+    .sub-tab-btn.active { background: var(--color-accent); color: white; box-shadow: 0 2px 12px rgba(59,130,246,0.3); }
 
-        .converter-result {
-            margin-top: 20px;
-            padding: 20px;
-            background: var(--background-secondary);
-            border-radius: var(--border-radius);
-            border-left: 5px solid var(--success-color);
-        }
+    .sub-tabcontent { display: none; animation: fadeIn 0.4s ease; }
+    .sub-tabcontent.active { display: block; }
 
-        /* New Inductor Design Styles */
-        .design-input-group {
-            margin-bottom: 20px;
-        }
+    .calculator {
+      background: var(--color-bg-secondary); border: 1px solid var(--color-border);
+      padding: var(--space-xl); border-radius: var(--radius-lg);
+      transition: all var(--transition-base);
+    }
+    .calculator:hover { border-color: var(--color-border-hover); }
 
-        .design-input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-light);
-            font-weight: 500;
-        }
+    .calculator h2 {
+      font-size: 1.25rem; font-weight: 700; color: var(--color-accent);
+      margin-bottom: var(--space-sm); display: flex; align-items: center; gap: var(--space-sm);
+    }
+    .calculator p { color: var(--color-text-secondary); font-size: 0.9375rem; margin-bottom: var(--space-lg); }
 
-        .design-input-group input {
-            width: 100%;
-            max-width: 300px;
-        }
+    .band-container {
+      display: flex; justify-content: center; margin: var(--space-xl) 0 var(--space-sm);
+      flex-wrap: wrap; gap: var(--space-xs);
+    }
+    .band {
+      width: 50px; height: 120px; border-radius: var(--radius-md);
+      cursor: pointer; position: relative; transition: all var(--transition-base);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3); border: 2px solid transparent;
+    }
+    .band:hover { transform: translateY(-5px); box-shadow: 0 0 20px rgba(59,130,246,0.3); border-color: var(--color-accent); }
+    .band.active { border-color: var(--color-warning); box-shadow: 0 0 20px rgba(245,158,11,0.3); }
+    .band-labels {
+      display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap;
+    }
+    .band-label-text {
+      width: 50px; text-align: center; font-size: 0.75rem; color: var(--color-text-tertiary); font-weight: 600;
+    }
 
-        .design-results {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
+    .result-box {
+      font-size: 1rem; margin: var(--space-lg) 0;
+      padding: var(--space-lg); background: var(--color-bg-tertiary);
+      border-radius: var(--radius-md); color: var(--color-text-primary);
+      border-left: 4px solid var(--color-accent);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-md);
+      box-shadow: var(--shadow-sm);
+    }
+    .result-details {
+      font-size: 0.8125rem; color: var(--color-text-tertiary); margin-top: var(--space-sm); width: 100%;
+    }
 
-        .design-result-box {
-            padding: 15px;
-            border-radius: var(--border-radius);
-            background: rgba(52, 152, 219, 0.1);
-            border-left: 4px solid var(--primary-color);
-        }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: var(--space-sm); padding: 10px 20px; font-size: 0.875rem;
+      font-weight: 600; border-radius: var(--radius-full);
+      transition: all var(--transition-fast); position: relative; overflow: hidden;
+    }
+    .btn-primary {
+      background: var(--color-accent); color: white;
+      box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
+    }
+    .btn-primary:hover {
+      background: var(--color-accent-hover); transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(59, 130, 246, 0.4);
+    }
+    .btn-secondary {
+      background: var(--color-bg-tertiary); color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
+    .btn-secondary:hover { border-color: var(--color-border-hover); transform: translateY(-2px); }
+    .btn-success {
+      background-color: var(--color-success); color: white;
+      box-shadow: 0 2px 12px rgba(34, 197, 94, 0.3);
+    }
+    .btn-success:hover { background-color: #16a34a; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(34, 197, 94, 0.4); }
+    .btn-warning {
+      background-color: var(--color-warning); color: white;
+      box-shadow: 0 2px 12px rgba(245, 158, 11, 0.3);
+    }
+    .btn-warning:hover { background-color: #d97706; transform: translateY(-2px); }
+    .btn-danger {
+      background-color: var(--color-error); color: white;
+      box-shadow: 0 2px 12px rgba(239, 68, 68, 0.3);
+    }
+    .btn-danger:hover { background-color: #dc2626; transform: translateY(-2px); }
 
-        .design-result-label {
-            font-size: 0.9em;
-            color: var(--text-muted);
-            margin-bottom: 5px;
-        }
+    .color-legend {
+      display: flex; flex-wrap: wrap; gap: var(--space-sm);
+      margin: var(--space-lg) 0; justify-content: center;
+    }
+    .color-item {
+      display: flex; align-items: center; gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--color-bg-tertiary); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); cursor: pointer;
+      transition: all var(--transition-fast); font-size: 0.8125rem; color: var(--color-text-secondary);
+    }
+    .color-item:hover { background: var(--color-bg-card-hover); border-color: var(--color-border-hover); transform: translateY(-2px); }
+    .color-swatch {
+      width: 20px; height: 20px; border-radius: var(--radius-sm);
+      border: 2px solid var(--color-border); box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
 
-        .design-result-value {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: var(--text-light);
-        }
-        
-        /* New Calculator Types */
-        .inductor-design {
-            margin-top: 30px;
-        }
-        
-        .design-controls {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .design-input {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        /* Loading spinner */
-        .spinner {
-            border: 3px solid rgba(52, 152, 219, 0.2);
-            border-top: 3px solid var(--primary-color);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Search and Filter */
-        .search-box {
-            margin: 20px 0;
-            position: relative;
-        }
-        
-        .search-input {
-            width: 100%;
-            padding: 12px 20px;
-            padding-left: 45px;
-            border: 1px solid var(--background-secondary);
-            border-radius: 50px;
-            background-color: var(--background-secondary);
-            color: var(--text-light);
-            font-size: 1rem;
-        }
-        
-        .search-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-        }
-        
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-muted);
-        }
-        
-        .empty-state i {
-            font-size: 3em;
-            margin-bottom: 15px;
-            opacity: 0.5;
-        }
-    </style>
+    .inductor-input {
+      display: flex; align-items: center; gap: var(--space-md);
+      padding: var(--space-md); background: var(--color-bg-tertiary);
+      border-radius: var(--radius-md); border: 1px solid var(--color-border);
+      margin-bottom: var(--space-md); transition: all var(--transition-fast);
+    }
+    .inductor-input:hover { border-color: var(--color-border-hover); }
+    .inductor-input label {
+      font-weight: 600; color: var(--color-text-primary); min-width: 30px; font-size: 0.9375rem;
+    }
+    .inductor-input input {
+      padding: 10px 14px; border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); background: var(--color-bg-primary);
+      color: var(--color-text-primary); font-family: var(--font-mono); font-size: 0.9375rem;
+      width: 120px; transition: all var(--transition-fast); outline: none;
+    }
+    .inductor-input input:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
+    .inductor-input select, .unit-selector {
+      padding: 10px 14px; border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); background: var(--color-bg-primary);
+      color: var(--color-text-primary); font-size: 0.9375rem;
+      transition: all var(--transition-fast); outline: none; cursor: pointer;
+    }
+    .inductor-input select:focus, .unit-selector:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
+
+    .btn-group {
+      display: flex; flex-wrap: wrap; gap: var(--space-sm); margin: var(--space-lg) 0;
+    }
+
+    .converter-container {
+      display: flex; flex-direction: column; gap: var(--space-lg);
+    }
+    .converter-row {
+      display: flex; align-items: flex-end; gap: var(--space-md); flex-wrap: wrap;
+    }
+    .converter-group { display: flex; flex-direction: column; gap: var(--space-sm); flex: 1; min-width: 150px; }
+    .converter-group label {
+      font-size: 0.8125rem; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .converter-group input, .converter-group select {
+      padding: 12px 14px; border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); background: var(--color-bg-primary);
+      color: var(--color-text-primary); font-family: var(--font-mono); font-size: 0.9375rem;
+      transition: all var(--transition-fast); outline: none; width: 100%;
+    }
+    .converter-group input:focus, .converter-group select:focus {
+      border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow);
+    }
+    .converter-result {
+      margin-top: var(--space-lg); padding: var(--space-lg);
+      background: var(--color-bg-tertiary); border-radius: var(--radius-md);
+      border-left: 4px solid var(--color-success); color: var(--color-text-primary);
+      font-family: var(--font-mono);
+    }
+
+    .design-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-lg); margin-bottom: var(--space-xl);
+    }
+    .design-input-group { display: flex; flex-direction: column; gap: var(--space-sm); }
+    .design-input-group label {
+      font-size: 0.8125rem; font-weight: 600; color: var(--color-text-secondary);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .design-input-group input {
+      padding: 12px 14px; border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); background: var(--color-bg-primary);
+      color: var(--color-text-primary); font-family: var(--font-mono); font-size: 0.9375rem;
+      transition: all var(--transition-fast); outline: none;
+    }
+    .design-input-group input:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
+    .design-results {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-md); margin-top: var(--space-xl);
+    }
+    .design-result-box {
+      padding: var(--space-lg); background: var(--color-bg-tertiary);
+      border-radius: var(--radius-md); border-left: 4px solid var(--color-accent);
+      transition: all var(--transition-fast);
+    }
+    .design-result-box:hover { border-color: var(--color-accent-light); }
+    .design-result-label {
+      font-size: 0.8125rem; color: var(--color-text-tertiary); margin-bottom: var(--space-xs);
+      text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;
+    }
+    .design-result-value {
+      font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary);
+      font-family: var(--font-mono);
+    }
+
+    .info-section {
+      margin-bottom: var(--space-xl); padding: var(--space-xl);
+      background: var(--color-bg-secondary); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg); transition: all var(--transition-base);
+    }
+    .info-section:hover { border-color: var(--color-border-hover); }
+    .info-section h3 {
+      font-size: 1.125rem; font-weight: 700; color: var(--color-accent);
+      margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);
+    }
+    .info-section p { color: var(--color-text-secondary); font-size: 0.9375rem; }
+
+    .formula {
+      text-align: center; font-size: 1.125rem; margin: var(--space-lg) 0;
+      padding: var(--space-lg); background: var(--color-accent-subtle);
+      border-radius: var(--radius-md); border-left: 4px solid var(--color-accent);
+      font-family: var(--font-mono); font-weight: 600; color: var(--color-accent-light);
+    }
+
+    .info-box {
+      margin-top: var(--space-lg); padding: var(--space-xl);
+      background: var(--color-bg-secondary); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg); color: var(--color-text-primary);
+    }
+    .info-box h3 {
+      color: var(--color-accent); font-size: 1rem; font-weight: 700;
+      margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);
+    }
+    .info-box p { color: var(--color-text-secondary); font-size: 0.9375rem; }
+    .info-box ul {
+      margin-top: var(--space-sm);
+    }
+    .info-box ul li {
+      color: var(--color-text-secondary); font-size: 0.875rem;
+      padding: var(--space-xs) 0; padding-left: var(--space-lg);
+      position: relative;
+    }
+    .info-box ul li::before {
+      content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+      width: 6px; height: 6px; background: var(--color-accent); border-radius: 50%;
+    }
+
+    table {
+      width: 100%; border-collapse: collapse; margin: var(--space-lg) 0;
+      border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden;
+    }
+    th, td {
+      padding: var(--space-md); text-align: center; border: 1px solid var(--color-border);
+      font-size: 0.875rem;
+    }
+    th {
+      background: var(--color-bg-tertiary); color: var(--color-accent);
+      font-weight: 700; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    tr:nth-child(even) { background: var(--color-bg-secondary); }
+    tr:hover { background: var(--color-accent-subtle); }
+
+    .inductor-types {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-md); margin-top: var(--space-lg);
+    }
+    .inductor-type-card {
+      padding: var(--space-lg); background: var(--color-bg-tertiary);
+      border-radius: var(--radius-md); border: 1px solid var(--color-border);
+      transition: all var(--transition-fast);
+    }
+    .inductor-type-card:hover { border-color: var(--color-border-hover); transform: translateY(-2px); }
+    .inductor-type-card h4 { color: var(--color-accent); font-size: 0.9375rem; margin-bottom: var(--space-xs); }
+    .inductor-type-card p { color: var(--color-text-tertiary); font-size: 0.8125rem; margin: 0; }
+
+    .history-item {
+      padding: var(--space-md); background: var(--color-bg-tertiary);
+      border-radius: var(--radius-md); border: 1px solid var(--color-border);
+      margin-bottom: var(--space-sm); display: flex; justify-content: space-between;
+      align-items: center; transition: all var(--transition-fast);
+    }
+    .history-item:hover { border-color: var(--color-border-hover); }
+    .history-details { font-size: 0.8125rem; color: var(--color-text-tertiary); margin-top: var(--space-xs); }
+    .empty-state { text-align: center; padding: var(--space-2xl); color: var(--color-text-tertiary); }
+    .empty-state i { font-size: 2rem; margin-bottom: var(--space-md); opacity: 0.5; display: block; }
+
+    .footer {
+      background: var(--color-bg-primary); border-top: 1px solid var(--color-border);
+      padding: var(--space-3xl) 0 var(--space-xl);
+    }
+    .footer-content {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: var(--space-md);
+    }
+    .footer-social { display: flex; gap: var(--space-sm); }
+    .footer-social a {
+      width: 40px; height: 40px; display: flex; align-items: center;
+      justify-content: center; border-radius: var(--radius-md);
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      color: var(--color-text-secondary); transition: all var(--transition-fast);
+    }
+    .footer-social a:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+    .footer-bottom { font-size: 0.875rem; color: var(--color-text-tertiary); }
+    .footer-bottom a { color: var(--color-accent); }
+
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-secondary);
+      font-size: 1rem; z-index: 999; opacity: 0; visibility: hidden;
+      transform: translateY(12px); transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+
+    .theme-toggle {
+      position: fixed; bottom: 32px; right: 90px; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-secondary);
+      font-size: 1rem; z-index: 999; transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+    .theme-toggle:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+
+    .toast {
+      position: fixed; bottom: 100px; right: 32px; padding: var(--space-md) var(--space-lg);
+      background: var(--color-success); color: white; border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg); z-index: 10000; font-size: 0.875rem; font-weight: 500;
+      transform: translateX(120%); transition: transform var(--transition-base);
+      max-width: 400px;
+    }
+    .toast.show { transform: translateX(0); }
+    .toast.error { background: var(--color-error); }
+    .toast.warning { background: var(--color-warning); }
+
+    .loader {
+      position: fixed; inset: 0; background: var(--color-bg-primary);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 99999; transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-spinner {
+      width: 40px; height: 40px; border: 3px solid var(--color-border);
+      border-top-color: var(--color-accent); border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .loader-text { margin-top: var(--space-lg); font-size: 0.875rem; color: var(--color-text-tertiary); font-weight: 500; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    @media all and (display-mode: standalone) {
+      body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+    }
+
+    @media (max-width: 768px) {
+      .main-tabs { flex-direction: column; }
+      .main-tab-btn { min-width: unset; }
+      .band { width: 35px; height: 90px; }
+      .band-label-text { width: 35px; font-size: 0.625rem; }
+      .inductor-input { flex-wrap: wrap; }
+      .converter-row { flex-direction: column; }
+      .design-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .band { width: 30px; height: 80px; }
+      .color-item { padding: var(--space-xs) var(--space-sm); font-size: 0.75rem; }
+      .result-box { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
-    <div class="calculator-container">
-        <div class="page-header">
-            <h1><i class="fas fa-calculator"></i> Inductance Calculators</h1>
-            <p>Advanced tools for electronics engineers and hobbyists to calculate and design inductors</p>
-            <div class="quick-stats">
-                <div class="stat-item">
-                    <i class="fas fa-bolt"></i>
-                    <span>5 Calculators</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-history"></i>
-                    <span>Real-time Updates</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-mobile-alt"></i>
-                    <span>Mobile Friendly</span>
-                </div>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Loading calculator...</p>
+  </div>
+
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+
+  <header class="header" id="header" role="banner">
+    <div class="container">
+      <a href="../index.html" class="logo" aria-label="Mohamed Tarek - Home">
+        <span class="logo-icon">MT</span>
+        <span>Mohamed Tarek</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#skills" class="nav-link">Skills</a>
+        <a href="../index.html#projects" class="nav-link">Projects</a>
+        <a href="../index.html#contact" class="nav-link">Contact</a>
+        <a href="../index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero" aria-label="Page header">
+      <div class="page-hero-bg" aria-hidden="true">
+        <div class="page-hero-orb"></div>
+        <div class="page-hero-orb"></div>
+        <div class="page-hero-grid"></div>
+      </div>
+      <div class="container">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Engineering Tool
+        </div>
+        <h1><i class="fas fa-microchip"></i> <span class="gradient-text">Inductance</span> Calculators</h1>
+        <p>Advanced tools for electronics engineers and hobbyists to calculate and design inductors</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><i class="fas fa-bolt"></i> 5 Calculators</div>
+          <div class="hero-stat"><i class="fas fa-history"></i> Real-time Updates</div>
+          <div class="hero-stat"><i class="fas fa-mobile-alt"></i> Mobile Friendly</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="main-content" aria-label="Calculator">
+      <div class="container">
+        <div class="main-tabs" id="mainTabs">
+          <button class="main-tab-btn active" data-tab="ColorCode">
+            <i class="fas fa-palette"></i> Color Code
+          </button>
+          <button class="main-tab-btn" data-tab="SeriesParallel">
+            <i class="fas fa-link"></i> Series/Parallel
+          </button>
+          <button class="main-tab-btn" data-tab="UnitConverter">
+            <i class="fas fa-exchange-alt"></i> Unit Converter
+          </button>
+          <button class="main-tab-btn" data-tab="InductorDesign">
+            <i class="fas fa-cogs"></i> Inductor Design
+          </button>
+          <button class="main-tab-btn" data-tab="Info">
+            <i class="fas fa-info-circle"></i> Information
+          </button>
+        </div>
+
+        <!-- Color Code Tab -->
+        <div id="ColorCode" class="main-tabcontent" style="display:block;">
+          <div class="sub-tabs">
+            <button class="sub-tab-btn active" data-subtab="4band"><i class="fas fa-bars"></i> 4-Band</button>
+            <button class="sub-tab-btn" data-subtab="5band"><i class="fas fa-bars"></i> 5-Band</button>
+          </div>
+
+          <div id="4band" class="sub-tabcontent active calculator">
+            <h2><i class="fas fa-indent"></i> 4-Band Inductor Color Code Calculator</h2>
+            <p>Click on each band to select its color. The inductance value will update automatically.</p>
+
+            <div class="band-container" id="bandContainer4">
+              <div class="band" id="band1" style="background-color: #966f33;" role="button" tabindex="0" aria-label="Band 1 - 1st Digit"></div>
+              <div class="band" id="band2" style="background-color: #000000;" role="button" tabindex="0" aria-label="Band 2 - 2nd Digit"></div>
+              <div class="band" id="band3" style="background-color: #c0c0c0;" role="button" tabindex="0" aria-label="Band 3 - Multiplier"></div>
+              <div class="band" id="band4" style="background-color: #d4af37;" role="button" tabindex="0" aria-label="Band 4 - Tolerance"></div>
             </div>
-        </div>
-        
-        <div class="main-tabs">
-            <button class="main-tab-button active" onclick="openMainTab(event, 'ColorCode')">
-                <i class="fas fa-palette"></i> Color Code
-            </button>
-            <button class="main-tab-button" onclick="openMainTab(event, 'SeriesParallel')">
-                <i class="fas fa-link"></i> Series/Parallel
-            </button>
-            <button class="main-tab-button" onclick="openMainTab(event, 'UnitConverter')">
-                <i class="fas fa-exchange-alt"></i> Unit Converter
-            </button>
-            <button class="main-tab-button" onclick="openMainTab(event, 'InductorDesign')">
-                <i class="fas fa-cogs"></i> Inductor Design
-            </button>
-            <button class="main-tab-button" onclick="openMainTab(event, 'Info')">
-                <i class="fas fa-info-circle"></i> Information
-            </button>
-        </div>
-        
-        <!-- Color Code Calculator Tab -->
-        <div id="ColorCode" class="main-tabcontent" style="display: block;">
-            <div class="tabs">
-                <button class="tab-button active" onclick="switchTab('4band')">
-                    <i class="fas fa-bars"></i> 4-Band
-                </button>
-                <button class="tab-button" onclick="switchTab('5band')">
-                    <i class="fas fa-bars"></i> 5-Band
-                </button>
+            <div class="band-labels">
+              <span class="band-label-text">1st Digit</span>
+              <span class="band-label-text">2nd Digit</span>
+              <span class="band-label-text">Multiplier</span>
+              <span class="band-label-text">Tolerance</span>
             </div>
 
-            <div id="4band" class="tab-content active calculator">
-                <h2><i class="fas fa-indent"></i> 4-Band Inductor Color Code Calculator</h2>
-                <p>Click on each band to select its color. The inductance value will update automatically.</p>
-                
-                <div class="band-container">
-                    <div class="band" id="band1" style="background-color: #966f33;" onclick="selectBand(1)"></div>
-                    <div class="band" id="band2" style="background-color: #000000;" onclick="selectBand(2)"></div>
-                    <div class="band" id="band3" style="background-color: #c0c0c0;" onclick="selectBand(3)"></div>
-                    <div class="band" id="band4" style="background-color: #d4af37;" onclick="selectBand(4)"></div>
-                </div>
-                <div class="band-container">
-                    <span class="band-label">1st Digit</span>
-                    <span class="band-label">2nd Digit</span>
-                    <span class="band-label">Multiplier</span>
-                    <span class="band-label">Tolerance</span>
-                </div>
-                
-                <div class="result" id="colorCodeResult">
-                    <div>
-                        <div>Inductance: 10μH ±5%</div>
-                        <div class="result-details">Raw Value: 10 μH | Color Code: Brown-Black-Silver-Gold</div>
-                    </div>
-                    <button class="save-btn" onclick="saveCalculation('color-4band')">
-                        <i class="fas fa-save"></i> Save
-                    </button>
-                </div>
-                
-                <div class="color-legend">
-                    <div class="color-item" onclick="selectColorFromLegend(0)">
-                        <div class="color-swatch" style="background-color: #000000;"></div>Black (0)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend(1)">
-                        <div class="color-swatch" style="background-color: #966f33;"></div>Brown (1)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend(2)">
-                        <div class="color-swatch" style="background-color: #ff0000;"></div>Red (2)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend(3)">
-                        <div class="color-swatch" style="background-color: #ffa500;"></div>Orange (3)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend(4)">
-                        <div class="color-swatch" style="background-color: #ffff00;"></div>Yellow (4)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend(5)">
-                        <div class="color-swatch" style="background-color: #008000;"></div>Green (5)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend(6)">
-                        <div class="color-swatch" style="background-color: #0000ff;"></div>Blue (6)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend(7)">
-                        <div class="color-swatch" style="background-color: #800080;"></div>Violet (7)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend(8)">
-                        <div class="color-swatch" style="background-color: #808080;"></div>Gray (8)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend(9)">
-                        <div class="color-swatch" style="background-color: #ffffff;"></div>White (9)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend(10)">
-                        <div class="color-swatch" style="background-color: #d4af37;"></div>Gold (±5%)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend(11)">
-                        <div class="color-swatch" style="background-color: #c0c0c0;"></div>Silver (±10%)
-                    </div>
-                </div>
+            <div class="result-box" id="colorCodeResult">
+              <div>
+                <div>Inductance: 10uH &plusmn;5%</div>
+                <div class="result-details">Raw Value: 10 uH | Color Code: Brown-Black-Silver-Gold</div>
+              </div>
             </div>
 
-            <div id="5band" class="tab-content calculator">
-                <h2><i class="fas fa-indent"></i> 5-Band Inductor Color Code Calculator</h2>
-                <p>Click on each band to select its color. The inductance value will update automatically.</p>
-                
-                <div class="band-container">
-                    <div class="band" id="band1-5" style="background-color: #966f33;" onclick="selectBand5(1)"></div>
-                    <div class="band" id="band2-5" style="background-color: #000000;" onclick="selectBand5(2)"></div>
-                    <div class="band" id="band3-5" style="background-color: #ff0000;" onclick="selectBand5(3)"></div>
-                    <div class="band" id="band4-5" style="background-color: #c0c0c0;" onclick="selectBand5(4)"></div>
-                    <div class="band" id="band5-5" style="background-color: #d4af37;" onclick="selectBand5(5)"></div>
-                </div>
-                <div class="band-container">
-                    <span class="band-label">1st Digit</span>
-                    <span class="band-label">2nd Digit</span>
-                    <span class="band-label">3rd Digit</span>
-                    <span class="band-label">Multiplier</span>
-                    <span class="band-label">Tolerance</span>
-                </div>
-                
-                <div class="result" id="colorCodeResult5">
-                    <div>
-                        <div>Inductance: 100μH ±5%</div>
-                        <div class="result-details">Raw Value: 100 μH | Color Code: Brown-Black-Black-Silver-Gold</div>
-                    </div>
-                    <button class="save-btn" onclick="saveCalculation('color-5band')">
-                        <i class="fas fa-save"></i> Save
-                    </button>
-                </div>
-                
-                <div class="color-legend">
-                    <div class="color-item" onclick="selectColorFromLegend5(0)">
-                        <div class="color-swatch" style="background-color: #000000;"></div>Black (0)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend5(1)">
-                        <div class="color-swatch" style="background-color: #966f33;"></div>Brown (1)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend5(2)">
-                        <div class="color-swatch" style="background-color: #ff0000;"></div>Red (2)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend5(3)">
-                        <div class="color-swatch" style="background-color: #ffa500;"></div>Orange (3)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend5(4)">
-                        <div class="color-swatch" style="background-color: #ffff00;"></div>Yellow (4)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend5(5)">
-                        <div class="color-swatch" style="background-color: #008000;"></div>Green (5)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend5(6)">
-                        <div class="color-swatch" style="background-color: #0000ff;"></div>Blue (6)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend5(7)">
-                        <div class="color-swatch" style="background-color: #800080;"></div>Violet (7)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend5(8)">
-                        <div class="color-swatch" style="background-color: #808080;"></div>Gray (8)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend5(9)">
-                        <div class="color-swatch" style="background-color: #ffffff;"></div>White (9)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend5(10)">
-                        <div class="color-swatch" style="background-color: #d4af37;"></div>Gold (±5%)
-                    </div>
-                    <div class="color-item" onclick="selectColorFromLegend5(11)">
-                        <div class="color-swatch" style="background-color: #c0c0c0;"></div>Silver (±10%)
-                    </div>
-                </div>
+            <div class="color-legend" id="colorLegend4"></div>
+          </div>
+
+          <div id="5band" class="sub-tabcontent calculator">
+            <h2><i class="fas fa-indent"></i> 5-Band Inductor Color Code Calculator</h2>
+            <p>Click on each band to select its color. The inductance value will update automatically.</p>
+
+            <div class="band-container" id="bandContainer5">
+              <div class="band" id="band1-5" style="background-color: #966f33;" role="button" tabindex="0" aria-label="Band 1 - 1st Digit"></div>
+              <div class="band" id="band2-5" style="background-color: #000000;" role="button" tabindex="0" aria-label="Band 2 - 2nd Digit"></div>
+              <div class="band" id="band3-5" style="background-color: #000000;" role="button" tabindex="0" aria-label="Band 3 - 3rd Digit"></div>
+              <div class="band" id="band4-5" style="background-color: #c0c0c0;" role="button" tabindex="0" aria-label="Band 4 - Multiplier"></div>
+              <div class="band" id="band5-5" style="background-color: #d4af37;" role="button" tabindex="0" aria-label="Band 5 - Tolerance"></div>
             </div>
+            <div class="band-labels">
+              <span class="band-label-text">1st Digit</span>
+              <span class="band-label-text">2nd Digit</span>
+              <span class="band-label-text">3rd Digit</span>
+              <span class="band-label-text">Multiplier</span>
+              <span class="band-label-text">Tolerance</span>
+            </div>
+
+            <div class="result-box" id="colorCodeResult5">
+              <div>
+                <div>Inductance: 100uH &plusmn;5%</div>
+                <div class="result-details">Raw Value: 100 uH | Color Code: Brown-Black-Black-Silver-Gold</div>
+              </div>
+            </div>
+
+            <div class="color-legend" id="colorLegend5"></div>
+          </div>
         </div>
-        
-        <!-- Series/Parallel Calculator Tab -->
+
+        <!-- Series/Parallel Tab -->
         <div id="SeriesParallel" class="main-tabcontent">
-            <div class="tabs">
-                <button class="tab-button active" onclick="switchCalcTab('SeriesTab')">
-                    <i class="fas fa-arrow-right"></i> Series Connection
-                </button>
-                <button class="tab-button" onclick="switchCalcTab('ParallelTab')">
-                    <i class="fas fa-arrows-alt-h"></i> Parallel Connection
-                </button>
-                <button class="tab-button" onclick="switchCalcTab('ExplanationTab')">
-                    <i class="fas fa-book"></i> Theory
-                </button>
+          <div class="sub-tabs">
+            <button class="sub-tab-btn active" data-subtab="SeriesTab"><i class="fas fa-arrow-right"></i> Series</button>
+            <button class="sub-tab-btn" data-subtab="ParallelTab"><i class="fas fa-arrows-alt-h"></i> Parallel</button>
+            <button class="sub-tab-btn" data-subtab="TheoryTab"><i class="fas fa-book"></i> Theory</button>
+          </div>
+
+          <div id="SeriesTab" class="sub-tabcontent active calculator">
+            <h2><i class="fas fa-arrow-right"></i> Series Inductors Calculator</h2>
+            <p>Enter inductor values to calculate the equivalent inductance in series.</p>
+
+            <div id="series-inductors">
+              <div class="inductor-input">
+                <label>L1:</label>
+                <input type="number" min="0" step="0.01" value="10" onchange="calcCalc.calculateInductance('series')" aria-label="Inductor L1 value">
+                <select class="unit-selector" onchange="calcCalc.calculateInductance('series')" aria-label="Inductor L1 unit">
+                  <option value="1e-6">uH</option>
+                  <option value="1e-3" selected>mH</option>
+                  <option value="1">H</option>
+                </select>
+              </div>
+              <div class="inductor-input">
+                <label>L2:</label>
+                <input type="number" min="0" step="0.01" value="22" onchange="calcCalc.calculateInductance('series')" aria-label="Inductor L2 value">
+                <select class="unit-selector" onchange="calcCalc.calculateInductance('series')" aria-label="Inductor L2 unit">
+                  <option value="1e-6">uH</option>
+                  <option value="1e-3" selected>mH</option>
+                  <option value="1">H</option>
+                </select>
+              </div>
             </div>
-            
-            <!-- Series Tab -->
-            <div id="SeriesTab" class="tab-content active calculator">
-                <h2><i class="fas fa-arrow-right"></i> Series Inductors Calculator</h2>
-                <p>Enter inductor values to calculate the equivalent inductance in series.</p>
-                
-                <div id="series-inductors" class="inductors-container">
-                    <div class="inductor-input">
-                        <label>L1:</label>
-                        <input type="number" min="0" step="0.01" value="10" onchange="calculateInductance('series')">
-                        <select class="unit-selector" onchange="calculateInductance('series')">
-                            <option value="1e-6">μH</option>
-                            <option value="1e-3" selected>mH</option>
-                            <option value="1">H</option>
-                        </select>
-                    </div>
-                    <div class="inductor-input">
-                        <label>L2:</label>
-                        <input type="number" min="0" step="0.01" value="22" onchange="calculateInductance('series')">
-                        <select class="unit-selector" onchange="calculateInductance('series')">
-                            <option value="1e-6">μH</option>
-                            <option value="1e-3" selected>mH</option>
-                            <option value="1">H</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <button class="btn btn-primary" onclick="addInductor('series')">
-                    <i class="fas fa-plus"></i> Add Inductor
-                </button>
-                <button class="btn btn-outline" onclick="removeInductor('series')">
-                    <i class="fas fa-minus"></i> Remove Inductor
-                </button>
-                <button class="btn btn-success" onclick="saveCalculation('series')">
-                    <i class="fas fa-save"></i> Save
-                </button>
-                
-                <div id="series-result" class="result">
-                    <div>
-                        <div>Equivalent Inductance: 32.00 mH</div>
-                        <div class="result-details">Calculation: Leq = L1 + L2 = 10 mH + 22 mH = 32 mH</div>
-                    </div>
-                </div>
+
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="calcCalc.addInductor('series')"><i class="fas fa-plus"></i> Add</button>
+              <button class="btn btn-secondary" onclick="calcCalc.removeInductor('series')"><i class="fas fa-minus"></i> Remove</button>
+              <button class="btn btn-success" onclick="calcCalc.saveCalculation('series')"><i class="fas fa-save"></i> Save</button>
             </div>
-            
-            <!-- Parallel Tab -->
-            <div id="ParallelTab" class="tab-content calculator">
-                <h2><i class="fas fa-arrows-alt-h"></i> Parallel Inductors Calculator</h2>
-                <p>Enter inductor values to calculate the equivalent inductance in parallel.</p>
-                
-                <div id="parallel-inductors" class="inductors-container">
-                    <div class="inductor-input">
-                        <label>L1:</label>
-                        <input type="number" min="0" step="0.01" value="10" onchange="calculateInductance('parallel')">
-                        <select class="unit-selector" onchange="calculateInductance('parallel')">
-                            <option value="1e-6">μH</option>
-                            <option value="1e-3" selected>mH</option>
-                            <option value="1">H</option>
-                        </select>
-                    </div>
-                    <div class="inductor-input">
-                        <label>L2:</label>
-                        <input type="number" min="0" step="0.01" value="22" onchange="calculateInductance('parallel')">
-                        <select class="unit-selector" onchange="calculateInductance('parallel')">
-                            <option value="1e-6">μH</option>
-                            <option value="1e-3" selected>mH</option>
-                            <option value="1">H</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <button class="btn btn-primary" onclick="addInductor('parallel')">
-                    <i class="fas fa-plus"></i> Add Inductor
-                </button>
-                <button class="btn btn-outline" onclick="removeInductor('parallel')">
-                    <i class="fas fa-minus"></i> Remove Inductor
-                </button>
-                <button class="btn btn-success" onclick="saveCalculation('parallel')">
-                    <i class="fas fa-save"></i> Save
-                </button>
-                
-                <div id="parallel-result" class="result">
-                    <div>
-                        <div>Equivalent Inductance: 6.88 mH</div>
-                        <div class="result-details">Calculation: 1/Leq = 1/L1 + 1/L2 = 1/10 + 1/22 = 0.1455 H⁻¹</div>
-                    </div>
-                </div>
+
+            <div id="series-result" class="result-box">
+              <div>
+                <div><strong>Equivalent Inductance:</strong> 32.00 mH</div>
+                <div class="result-details">Calculation: Leq = L1 + L2 = 10 mH + 22 mH = 32 mH</div>
+              </div>
             </div>
-            
-            <!-- Explanation Tab -->
-            <div id="ExplanationTab" class="tab-content calculator">
-                <h2><i class="fas fa-book"></i> Theory of Inductors in Series and Parallel</h2>
-                
-                <div class="explanation">
-                    <h3><i class="fas fa-arrow-right"></i> Inductors in Series</h3>
-                    <p>When inductors are connected in series, the equivalent inductance is calculated by adding the individual inductances:</p>
-                    <div class="formula">
-                        L<sub>eq</sub> = L<sub>1</sub> + L<sub>2</sub> + L<sub>3</sub> + ... + L<sub>n</sub>
-                    </div>
-                    <p>This means the equivalent inductance is always larger than the largest individual inductor in the series.</p>
-                    
-                    <h3><i class="fas fa-arrows-alt-h"></i> Inductors in Parallel</h3>
-                    <p>When inductors are connected in parallel, the equivalent inductance is calculated using:</p>
-                    <div class="formula">
-                        1/L<sub>eq</sub> = 1/L<sub>1</sub> + 1/L<sub>2</sub> + 1/L<sub>3</sub> + ... + 1/L<sub>n</sub>
-                    </div>
-                    <p>This means the equivalent inductance is always smaller than the smallest individual inductor in the parallel connection.</p>
-                    
-                    <h3><i class="fas fa-microscope"></i> Physical Explanation</h3>
-                    <p><strong>Series connection:</strong> In series, the same current flows through each inductor, and the voltage drops add up. The total inductance is the sum of individual inductances because the magnetic fields add constructively.</p>
-                    <p><strong>Parallel connection:</strong> In parallel, the voltage across each inductor is the same, but the currents divide. The total inductance is less than any individual inductance because the magnetic fields interact to reduce the overall inductance.</p>
-                    
-                    <h3><i class="fas fa-exclamation-triangle"></i> Important Notes</h3>
-                    <ul>
-                        <li>These formulas assume no mutual coupling between inductors</li>
-                        <li>For mutually coupled inductors, calculations are more complex</li>
-                        <li>In real circuits, always consider the inductor's DC resistance and self-resonant frequency</li>
-                    </ul>
-                </div>
+          </div>
+
+          <div id="ParallelTab" class="sub-tabcontent calculator">
+            <h2><i class="fas fa-arrows-alt-h"></i> Parallel Inductors Calculator</h2>
+            <p>Enter inductor values to calculate the equivalent inductance in parallel.</p>
+
+            <div id="parallel-inductors">
+              <div class="inductor-input">
+                <label>L1:</label>
+                <input type="number" min="0" step="0.01" value="10" onchange="calcCalc.calculateInductance('parallel')" aria-label="Inductor L1 value">
+                <select class="unit-selector" onchange="calcCalc.calculateInductance('parallel')" aria-label="Inductor L1 unit">
+                  <option value="1e-6">uH</option>
+                  <option value="1e-3" selected>mH</option>
+                  <option value="1">H</option>
+                </select>
+              </div>
+              <div class="inductor-input">
+                <label>L2:</label>
+                <input type="number" min="0" step="0.01" value="22" onchange="calcCalc.calculateInductance('parallel')" aria-label="Inductor L2 value">
+                <select class="unit-selector" onchange="calcCalc.calculateInductance('parallel')" aria-label="Inductor L2 unit">
+                  <option value="1e-6">uH</option>
+                  <option value="1e-3" selected>mH</option>
+                  <option value="1">H</option>
+                </select>
+              </div>
             </div>
+
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="calcCalc.addInductor('parallel')"><i class="fas fa-plus"></i> Add</button>
+              <button class="btn btn-secondary" onclick="calcCalc.removeInductor('parallel')"><i class="fas fa-minus"></i> Remove</button>
+              <button class="btn btn-success" onclick="calcCalc.saveCalculation('parallel')"><i class="fas fa-save"></i> Save</button>
+            </div>
+
+            <div id="parallel-result" class="result-box">
+              <div>
+                <div><strong>Equivalent Inductance:</strong> 6.88 mH</div>
+                <div class="result-details">Calculation: 1/Leq = 1/L1 + 1/L2 = 1/10 + 1/22 = 0.1455 H-1</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="TheoryTab" class="sub-tabcontent calculator">
+            <h2><i class="fas fa-book"></i> Theory of Inductors in Series and Parallel</h2>
+
+            <div class="info-box">
+              <h3><i class="fas fa-arrow-right"></i> Inductors in Series</h3>
+              <p>When inductors are connected in series, the equivalent inductance is the sum of the individual inductances:</p>
+              <div class="formula">Leq = L1 + L2 + L3 + ... + Ln</div>
+              <p>The equivalent inductance is always larger than the largest individual inductor in the series.</p>
+            </div>
+
+            <div class="info-box" style="margin-top: var(--space-lg);">
+              <h3><i class="fas fa-arrows-alt-h"></i> Inductors in Parallel</h3>
+              <p>When inductors are connected in parallel, the equivalent inductance is calculated using:</p>
+              <div class="formula">1/Leq = 1/L1 + 1/L2 + 1/L3 + ... + 1/Ln</div>
+              <p>The equivalent inductance is always smaller than the smallest individual inductor in the parallel connection.</p>
+            </div>
+
+            <div class="info-box" style="margin-top: var(--space-lg);">
+              <h3><i class="fas fa-microscope"></i> Physical Explanation</h3>
+              <p><strong>Series connection:</strong> The same current flows through each inductor, and the voltage drops add up. The total inductance is the sum because the magnetic fields add constructively.</p>
+              <p style="margin-top: var(--space-sm);"><strong>Parallel connection:</strong> The voltage across each inductor is the same, but the currents divide. The total inductance is less than any individual inductance because the magnetic fields interact.</p>
+            </div>
+
+            <div class="info-box" style="margin-top: var(--space-lg);">
+              <h3><i class="fas fa-exclamation-triangle"></i> Important Notes</h3>
+              <ul>
+                <li>These formulas assume no mutual coupling between inductors</li>
+                <li>For mutually coupled inductors, calculations are more complex</li>
+                <li>In real circuits, always consider the inductor's DC resistance and self-resonant frequency</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        
+
         <!-- Unit Converter Tab -->
         <div id="UnitConverter" class="main-tabcontent">
-            <div class="calculator">
-                <h2><i class="fas fa-exchange-alt"></i> Inductance Unit Converter</h2>
-                <p>Convert between different inductance units quickly and easily.</p>
-                
-                <div class="converter-container">
-                    <div class="converter-row">
-                        <div class="converter-input">
-                            <label for="converterValue">Value:</label>
-                            <input type="number" id="converterValue" value="1" step="0.001" min="0">
-                        </div>
-                        <div class="converter-unit">
-                            <label for="fromUnit">From:</label>
-                            <select id="fromUnit" class="unit-selector">
-                                <option value="1e-12">pH (picohenry)</option>
-                                <option value="1e-9">nH (nanohenry)</option>
-                                <option value="1e-6" selected>μH (microhenry)</option>
-                                <option value="1e-3">mH (millihenry)</option>
-                                <option value="1">H (henry)</option>
-                                <option value="1e3">kH (kilohenry)</option>
-                            </select>
-                        </div>
-                        <div class="converter-unit">
-                            <label for="toUnit">To:</label>
-                            <select id="toUnit" class="unit-selector">
-                                <option value="1e-12">pH (picohenry)</option>
-                                <option value="1e-9">nH (nanohenry)</option>
-                                <option value="1e-6">μH (microhenry)</option>
-                                <option value="1e-3" selected>mH (millihenry)</option>
-                                <option value="1">H (henry)</option>
-                                <option value="1e3">kH (kilohenry)</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <button class="btn btn-primary" onclick="convertUnits()">
-                        <i class="fas fa-exchange-alt"></i> Convert
-                    </button>
-                    <button class="btn btn-success" onclick="saveCalculation('converter')">
-                        <i class="fas fa-save"></i> Save
-                    </button>
-                    
-                    <div id="converter-result" class="converter-result">
-                        <p><strong>Conversion Result:</strong></p>
-                        <p>1 μH = 1,000 nH = 1,000,000 pH</p>
-                        <p>1 μH = 0.001 mH = 0.000001 H</p>
-                    </div>
+          <div class="calculator">
+            <h2><i class="fas fa-exchange-alt"></i> Inductance Unit Converter</h2>
+            <p>Convert between different inductance units quickly and easily.</p>
+
+            <div class="converter-container">
+              <div class="converter-row">
+                <div class="converter-group">
+                  <label for="converterValue">Value</label>
+                  <input type="number" id="converterValue" value="1" step="0.001" min="0" aria-label="Value to convert">
                 </div>
-                
-                <div class="info-box">
-                    <h3><i class="fas fa-info-circle"></i> Unit Conversion Factors</h3>
-                    <ul>
-                        <li>1 Henry (H) = 1,000 millihenries (mH)</li>
-                        <li>1 millihenry (mH) = 1,000 microhenries (μH)</li>
-                        <li>1 microhenry (μH) = 1,000 nanohenries (nH)</li>
-                        <li>1 nanohenry (nH) = 1,000 picohenries (pH)</li>
-                        <li>1 kilohenry (kH) = 1,000 Henry (H)</li>
-                    </ul>
+                <div class="converter-group">
+                  <label for="fromUnit">From</label>
+                  <select id="fromUnit" aria-label="Source unit">
+                    <option value="1e-12">pH (picohenry)</option>
+                    <option value="1e-9">nH (nanohenry)</option>
+                    <option value="1e-6" selected>uH (microhenry)</option>
+                    <option value="1e-3">mH (millihenry)</option>
+                    <option value="1">H (henry)</option>
+                    <option value="1e3">kH (kilohenry)</option>
+                  </select>
                 </div>
+                <div class="converter-group">
+                  <label for="toUnit">To</label>
+                  <select id="toUnit" aria-label="Target unit">
+                    <option value="1e-12">pH (picohenry)</option>
+                    <option value="1e-9">nH (nanohenry)</option>
+                    <option value="1e-6">uH (microhenry)</option>
+                    <option value="1e-3" selected>mH (millihenry)</option>
+                    <option value="1">H (henry)</option>
+                    <option value="1e3">kH (kilohenry)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="btn-group">
+                <button class="btn btn-primary" onclick="calcCalc.convertUnits()"><i class="fas fa-exchange-alt"></i> Convert</button>
+                <button class="btn btn-success" onclick="calcCalc.saveCalculation('converter')"><i class="fas fa-save"></i> Save</button>
+              </div>
+
+              <div id="converter-result" class="converter-result">
+                <p><strong>Conversion Result:</strong></p>
+                <p>1 uH = 1,000 nH = 1,000,000 pH</p>
+                <p>1 uH = 0.001 mH = 0.000001 H</p>
+              </div>
             </div>
+
+            <div class="info-box" style="margin-top: var(--space-xl);">
+              <h3><i class="fas fa-info-circle"></i> Unit Conversion Factors</h3>
+              <ul>
+                <li>1 Henry (H) = 1,000 millihenries (mH)</li>
+                <li>1 millihenry (mH) = 1,000 microhenries (uH)</li>
+                <li>1 microhenry (uH) = 1,000 nanohenries (nH)</li>
+                <li>1 nanohenry (nH) = 1,000 picohenries (pH)</li>
+                <li>1 kilohenry (kH) = 1,000 Henry (H)</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        
-        <!-- New Inductor Design Tab -->
+
+        <!-- Inductor Design Tab -->
         <div id="InductorDesign" class="main-tabcontent">
-            <div class="calculator">
-                <h2><i class="fas fa-cogs"></i> Inductor Design Calculator</h2>
-                <p>Design air-core inductors by specifying physical parameters.</p>
-                
-                <div class="design-controls">
-                    <div class="design-input">
-                        <label for="wireDiameter">Wire Diameter (mm):</label>
-                        <input type="number" id="wireDiameter" value="0.5" min="0.1" step="0.1" onchange="calculateInductorDesign()">
-                    </div>
-                    <div class="design-input">
-                        <label for="coilDiameter">Coil Diameter (mm):</label>
-                        <input type="number" id="coilDiameter" value="10" min="1" step="0.1" onchange="calculateInductorDesign()">
-                    </div>
-                    <div class="design-input">
-                        <label for="numberTurns">Number of Turns:</label>
-                        <input type="number" id="numberTurns" value="20" min="1" step="1" onchange="calculateInductorDesign()">
-                    </div>
-                    <div class="design-input">
-                        <label for="coilLength">Coil Length (mm):</label>
-                        <input type="number" id="coilLength" value="10" min="1" step="0.1" onchange="calculateInductorDesign()">
-                    </div>
-                </div>
-                
-                <button class="btn btn-success" onclick="saveCalculation('design')">
-                    <i class="fas fa-save"></i> Save Design
-                </button>
-                
-                <div class="design-results">
-                    <div class="design-result-box">
-                        <div class="design-result-label">Calculated Inductance</div>
-                        <div class="design-result-value" id="calculatedInductance">1.26 μH</div>
-                    </div>
-                    <div class="design-result-box">
-                        <div class="design-result-label">Wire Length</div>
-                        <div class="design-result-value" id="wireLength">0.63 m</div>
-                    </div>
-                    <div class="design-result-box">
-                        <div class="design-result-label">DC Resistance</div>
-                        <div class="design-result-value" id="dcResistance">0.32 Ω</div>
-                    </div>
-                    <div class="design-result-box">
-                        <div class="design-result-label">Quality Factor (Q)</div>
-                        <div class="design-result-value" id="qualityFactor">45.6</div>
-                    </div>
-                </div>
-                
-                <div class="info-box">
-                    <h3><i class="fas fa-info-circle"></i> Air-Core Inductor Formula</h3>
-                    <p>The inductance of an air-core solenoid is calculated using:</p>
-                    <div class="formula">
-                        L = (μ₀ × N² × A) / l
-                    </div>
-                    <p>Where:</p>
-                    <ul>
-                        <li>L = Inductance in Henries</li>
-                        <li>μ₀ = Permeability of free space (4π × 10⁻⁷ H/m)</li>
-                        <li>N = Number of turns</li>
-                        <li>A = Cross-sectional area of coil (m²)</li>
-                        <li>l = Length of coil (m)</li>
-                    </ul>
-                </div>
+          <div class="calculator">
+            <h2><i class="fas fa-cogs"></i> Inductor Design Calculator</h2>
+            <p>Design air-core inductors by specifying physical parameters.</p>
+
+            <div class="design-grid">
+              <div class="design-input-group">
+                <label for="wireDiameter">Wire Diameter (mm)</label>
+                <input type="number" id="wireDiameter" value="0.5" min="0.1" step="0.1" onchange="calcCalc.calculateInductorDesign()" aria-label="Wire diameter in millimeters">
+              </div>
+              <div class="design-input-group">
+                <label for="coilDiameter">Coil Diameter (mm)</label>
+                <input type="number" id="coilDiameter" value="10" min="1" step="0.1" onchange="calcCalc.calculateInductorDesign()" aria-label="Coil diameter in millimeters">
+              </div>
+              <div class="design-input-group">
+                <label for="numberTurns">Number of Turns</label>
+                <input type="number" id="numberTurns" value="20" min="1" step="1" onchange="calcCalc.calculateInductorDesign()" aria-label="Number of turns">
+              </div>
+              <div class="design-input-group">
+                <label for="coilLength">Coil Length (mm)</label>
+                <input type="number" id="coilLength" value="10" min="1" step="0.1" onchange="calcCalc.calculateInductorDesign()" aria-label="Coil length in millimeters">
+              </div>
             </div>
+
+            <div class="btn-group">
+              <button class="btn btn-success" onclick="calcCalc.saveCalculation('design')"><i class="fas fa-save"></i> Save Design</button>
+            </div>
+
+            <div class="design-results">
+              <div class="design-result-box">
+                <div class="design-result-label">Calculated Inductance</div>
+                <div class="design-result-value" id="calculatedInductance">1.26 uH</div>
+              </div>
+              <div class="design-result-box">
+                <div class="design-result-label">Wire Length</div>
+                <div class="design-result-value" id="wireLength">0.63 m</div>
+              </div>
+              <div class="design-result-box">
+                <div class="design-result-label">DC Resistance</div>
+                <div class="design-result-value" id="dcResistance">0.32 ohm</div>
+              </div>
+              <div class="design-result-box">
+                <div class="design-result-label">Quality Factor (Q)</div>
+                <div class="design-result-value" id="qualityFactor">45.6</div>
+              </div>
+            </div>
+
+            <div class="info-box" style="margin-top: var(--space-xl);">
+              <h3><i class="fas fa-info-circle"></i> Air-Core Inductor Formula</h3>
+              <p>The inductance of an air-core solenoid is calculated using:</p>
+              <div class="formula">L = (mu_0 * N^2 * A) / l</div>
+              <p>Where:</p>
+              <ul>
+                <li>L = Inductance in Henries</li>
+                <li>mu_0 = Permeability of free space (4pi x 10^-7 H/m)</li>
+                <li>N = Number of turns</li>
+                <li>A = Cross-sectional area of coil (m^2)</li>
+                <li>l = Length of coil (m)</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        
-        <!-- Info Tab -->
+
+        <!-- Information Tab -->
         <div id="Info" class="main-tabcontent">
-            <h2><i class="fas fa-info-circle"></i> Inductor Information</h2>
-            
-            <div class="info-box">
-                <h3><i class="fas fa-table"></i> Inductor Color Code Chart</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Color</th>
-                            <th>1st Digit</th>
-                            <th>2nd Digit</th>
-                            <th>Multiplier</th>
-                            <th>Tolerance</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="background-color: black; color: white;">Black</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>1μH</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: #966f33; color: white;">Brown</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>10μH</td>
-                            <td>±1%</td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: red; color: white;">Red</td>
-                            <td>2</td>
-                            <td>2</td>
-                            <td>100μH</td>
-                            <td>±2%</td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: orange; color: black;">Orange</td>
-                            <td>3</td>
-                            <td>3</td>
-                            <td>1mH</td>
-                            <td>±3%</td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: yellow; color: black;">Yellow</td>
-                            <td>4</td>
-                            <td>4</td>
-                            <td>10mH</td>
-                            <td>±4%</td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: green; color: white;">Green</td>
-                            <td>5</td>
-                            <td>5</td>
-                            <td>100mH</td>
-                            <td>±0.5%</td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: blue; color: white;">Blue</td>
-                            <td>6</td>
-                            <td>6</td>
-                            <td>1H</td>
-                            <td>±0.25%</td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: violet; color: white;">Violet</td>
-                            <td>7</td>
-                            <td>7</td>
-                            <td>10H</td>
-                            <td>±0.1%</td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: gray; color: white;">Gray</td>
-                            <td>8</td>
-                            <td>8</td>
-                            <td>100H</td>
-                            <td>±0.05%</td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: white; color: black;">White</td>
-                            <td>9</td>
-                            <td>9</td>
-                            <td>1000H</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: gold; color: black;">Gold</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>0.1μH</td>
-                            <td>±5%</td>
-                        </tr>
-                        <tr>
-                            <td style="background-color: silver; color: black;">Silver</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>0.01μH</td>
-                            <td>±10%</td>
-                        </tr>
-                    </tbody>
-                </table>
+          <div class="info-section">
+            <h3><i class="fas fa-table"></i> Inductor Color Code Chart</h3>
+            <div style="overflow-x: auto;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Color</th>
+                    <th>1st Digit</th>
+                    <th>2nd Digit</th>
+                    <th>Multiplier</th>
+                    <th>Tolerance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td style="background:#000;color:#fff;">Black</td><td>0</td><td>0</td><td>1uH</td><td>-</td></tr>
+                  <tr><td style="background:#966f33;color:#fff;">Brown</td><td>1</td><td>1</td><td>10uH</td><td>&plusmn;1%</td></tr>
+                  <tr><td style="background:red;color:#fff;">Red</td><td>2</td><td>2</td><td>100uH</td><td>&plusmn;2%</td></tr>
+                  <tr><td style="background:orange;color:#000;">Orange</td><td>3</td><td>3</td><td>1mH</td><td>&plusmn;3%</td></tr>
+                  <tr><td style="background:yellow;color:#000;">Yellow</td><td>4</td><td>4</td><td>10mH</td><td>&plusmn;4%</td></tr>
+                  <tr><td style="background:green;color:#fff;">Green</td><td>5</td><td>5</td><td>100mH</td><td>&plusmn;0.5%</td></tr>
+                  <tr><td style="background:blue;color:#fff;">Blue</td><td>6</td><td>6</td><td>1H</td><td>&plusmn;0.25%</td></tr>
+                  <tr><td style="background:violet;color:#fff;">Violet</td><td>7</td><td>7</td><td>10H</td><td>&plusmn;0.1%</td></tr>
+                  <tr><td style="background:gray;color:#fff;">Gray</td><td>8</td><td>8</td><td>100H</td><td>&plusmn;0.05%</td></tr>
+                  <tr><td style="background:white;color:#000;">White</td><td>9</td><td>9</td><td>1000H</td><td>-</td></tr>
+                  <tr><td style="background:gold;color:#000;">Gold</td><td>-</td><td>-</td><td>0.1uH</td><td>&plusmn;5%</td></tr>
+                  <tr><td style="background:silver;color:#000;">Silver</td><td>-</td><td>-</td><td>0.01uH</td><td>&plusmn;10%</td></tr>
+                </tbody>
+              </table>
             </div>
-            
-            <div class="info-box">
-                <h3><i class="fas fa-microchip"></i> Common Inductor Types</h3>
-                <div class="design-results">
-                    <div class="design-result-box">
-                        <div class="design-result-label">Air Core</div>
-                        <div class="design-result-value">Low inductance, high frequency</div>
-                    </div>
-                    <div class="design-result-box">
-                        <div class="design-result-label">Ferrite Core</div>
-                        <div class="design-result-value">Medium inductance, RF applications</div>
-                    </div>
-                    <div class="design-result-box">
-                        <div class="design-result-label">Iron Core</div>
-                        <div class="design-result-value">High inductance, power applications</div>
-                    </div>
-                    <div class="design-result-box">
-                        <div class="design-result-label">Toroidal</div>
-                        <div class="design-result-value">Minimal EMI, high efficiency</div>
-                    </div>
-                </div>
+          </div>
+
+          <div class="info-section">
+            <h3><i class="fas fa-microchip"></i> Common Inductor Types</h3>
+            <div class="inductor-types">
+              <div class="inductor-type-card">
+                <h4>Air Core</h4>
+                <p>Low inductance, high frequency applications</p>
+              </div>
+              <div class="inductor-type-card">
+                <h4>Ferrite Core</h4>
+                <p>Medium inductance, RF applications</p>
+              </div>
+              <div class="inductor-type-card">
+                <h4>Iron Core</h4>
+                <p>High inductance, power applications</p>
+              </div>
+              <div class="inductor-type-card">
+                <h4>Toroidal</h4>
+                <p>Minimal EMI, high efficiency</p>
+              </div>
             </div>
-            
-            <div class="info-box">
-                <h3><i class="fas fa-exchange-alt"></i> Unit Conversions</h3>
-                <ul>
-                    <li>1 Henry (H) = 1,000 millihenries (mH)</li>
-                    <li>1 millihenry (mH) = 1,000 microhenries (μH)</li>
-                    <li>1 microhenry (μH) = 1,000 nanohenries (nH)</li>
-                    <li>1 nanohenry (nH) = 1,000 picohenries (pH)</li>
-                </ul>
+          </div>
+
+          <div class="info-section">
+            <h3><i class="fas fa-exchange-alt"></i> Unit Conversions</h3>
+            <ul>
+              <li>1 Henry (H) = 1,000 millihenries (mH)</li>
+              <li>1 millihenry (mH) = 1,000 microhenries (uH)</li>
+              <li>1 microhenry (uH) = 1,000 nanohenries (nH)</li>
+              <li>1 nanohenry (nH) = 1,000 picohenries (pH)</li>
+            </ul>
+          </div>
+
+          <div class="info-section">
+            <h3><i class="fas fa-history"></i> Calculation History</h3>
+            <div id="history-container">
+              <div class="empty-state" id="empty-history">
+                <i class="fas fa-history"></i>
+                <p>No calculations saved yet.</p>
+              </div>
             </div>
-            
-            <div class="info-box">
-                <h3><i class="fas fa-history"></i> Calculation History</h3>
-                <div id="history-container">
-                    <div class="empty-state" id="empty-history">
-                        <i class="fas fa-history"></i>
-                        <p>No calculations saved yet.</p>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
+  </main>
 
-    <!-- Notification Area -->
-    <div id="notificationArea"></div>
-
-    <!-- Dark Mode Toggle -->
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-        <i class="fas fa-moon"></i>
-    </button>
-
-    <!-- Footer -->
-    <footer>
-        <div class="social-footer">
-            <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-                <i class="fab fa-whatsapp"></i>
-            </a>
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
         <div class="footer-bottom">
-            <p>&copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.</p>
-            <p>&copy; M.T.A.</p>
+          &copy; <span id="currentYear"></span> Mohamed Tarek. All Rights Reserved. | <a href="../index.html">Back to Portfolio</a>
         </div>
-    </footer>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-        // Color definitions for bands
+  <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode"><i class="fas fa-moon"></i></button>
+  <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+  <script>
+    (() => {
+      'use strict';
+
+      /* ── Loader ── */
+      const loader = document.getElementById('loader');
+      window.addEventListener('load', () => { setTimeout(() => loader.classList.add('hidden'), 300); });
+
+      /* ── Scroll / Header ── */
+      const scrollProgress = document.getElementById('scrollProgress');
+      const header = document.getElementById('header');
+      const backToTop = document.getElementById('backToTop');
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const s = window.scrollY;
+            const d = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress.style.width = (d > 0 ? (s / d) * 100 : 0) + '%';
+            header.classList.toggle('scrolled', s > 50);
+            backToTop.classList.toggle('visible', s > 400);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      /* ── Mobile Menu ── */
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+      const toggleMenu = () => {
+        const isActive = navMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', String(isActive));
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = isActive ? 'hidden' : '';
+      };
+      menuToggle.addEventListener('click', toggleMenu);
+      mobileOverlay.addEventListener('click', toggleMenu);
+
+      /* ── Theme ── */
+      const STORAGE_KEY = 'portfolio-theme';
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('i');
+      const getPreferredTheme = () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      };
+      const applyTheme = (theme) => {
+        document.documentElement.setAttribute('data-theme', theme);
+        themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        localStorage.setItem(STORAGE_KEY, theme);
+      };
+      applyTheme(getPreferredTheme());
+      themeToggle.addEventListener('click', () => {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+      });
+
+      /* ── Toast ── */
+      function showToast(message, type) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast' + (type ? ' ' + type : '');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+      /* ── Tab System ── */
+      const mainTabs = document.querySelectorAll('.main-tab-btn');
+      mainTabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+          mainTabs.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          document.querySelectorAll('.main-tabcontent').forEach(tc => tc.style.display = 'none');
+          document.getElementById(btn.dataset.tab).style.display = 'block';
+        });
+      });
+
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const parent = btn.closest('.main-tabcontent');
+          parent.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          parent.querySelectorAll('.sub-tabcontent').forEach(sc => sc.classList.remove('active'));
+          const target = parent.querySelector('[id="' + btn.dataset.subtab + '"]');
+          if (target) target.classList.add('active');
+        });
+      });
+
+      /* ══════════════════════════════════════════════
+         CALCULATOR LOGIC
+         ══════════════════════════════════════════════ */
+      const calcCalc = (() => {
         const colors = [
-            { name: "Black", code: "#000000", value: 0, multiplier: 1 },
-            { name: "Brown", code: "#966f33", value: 1, multiplier: 10 },
-            { name: "Red", code: "#ff0000", value: 2, multiplier: 100 },
-            { name: "Orange", code: "#ffa500", value: 3, multiplier: 1000 },
-            { name: "Yellow", code: "#ffff00", value: 4, multiplier: 10000 },
-            { name: "Green", code: "#008000", value: 5, multiplier: 100000 },
-            { name: "Blue", code: "#0000ff", value: 6, multiplier: 1000000 },
-            { name: "Violet", code: "#800080", value: 7, multiplier: 10000000 },
-            { name: "Gray", code: "#808080", value: 8, multiplier: 100000000 },
-            { name: "White", code: "#ffffff", value: 9, multiplier: 1000000000 },
-            { name: "Gold", code: "#d4af37", value: -1, multiplier: 0.1, tolerance: "±5%" },
-            { name: "Silver", code: "#c0c0c0", value: -1, multiplier: 0.01, tolerance: "±10%" }
+          { name: "Black", code: "#000000", value: 0, multiplier: 1 },
+          { name: "Brown", code: "#966f33", value: 1, multiplier: 10 },
+          { name: "Red", code: "#ff0000", value: 2, multiplier: 100 },
+          { name: "Orange", code: "#ffa500", value: 3, multiplier: 1000 },
+          { name: "Yellow", code: "#ffff00", value: 4, multiplier: 10000 },
+          { name: "Green", code: "#008000", value: 5, multiplier: 100000 },
+          { name: "Blue", code: "#0000ff", value: 6, multiplier: 1000000 },
+          { name: "Violet", code: "#800080", value: 7, multiplier: 10000000 },
+          { name: "Gray", code: "#808080", value: 8, multiplier: 100000000 },
+          { name: "White", code: "#ffffff", value: 9, multiplier: 1000000000 },
+          { name: "Gold", code: "#d4af37", value: -1, multiplier: 0.1, tolerance: "±5%" },
+          { name: "Silver", code: "#c0c0c0", value: -1, multiplier: 0.01, tolerance: "±10%" }
         ];
 
-        // Current band selections
-        let bandSelections = [1, 0, 11, 10]; // Default: Brown-Black-Silver-Gold
-        let bandSelections5 = [1, 0, 0, 11, 10]; // Default: Brown-Black-Black-Silver-Gold
-        
-        // Calculation history
-        let calculationHistory = [];
+        let bandSelections = [1, 0, 11, 10];
+        let bandSelections5 = [1, 0, 0, 11, 10];
         let activeBand = null;
+        let calculationHistory = [];
 
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', function() {
-            init();
-            calculateInductance('series');
-            calculateInductance('parallel');
-            calculateInductorDesign();
-        });
-
-        function init() {
-            loadHistory();
-            updateColorCodeResult();
-            updateColorCodeResult5();
-            highlightActiveBand();
-        }
-        
-        // Main tab switching
-        function openMainTab(evt, tabName) {
-            var i, tabcontent, tabbuttons;
-            tabcontent = document.getElementsByClassName("main-tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tabbuttons = document.getElementsByClassName("main-tab-button");
-            for (i = 0; i < tabbuttons.length; i++) {
-                tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-        
-        // Color code calculator tab switching
-        function switchTab(tabId) {
-            document.querySelectorAll('#ColorCode .tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('#ColorCode .tab-button').forEach(button => {
-                button.classList.remove('active');
-            });
-            
-            document.getElementById(tabId).classList.add('active');
-            document.querySelector(`#ColorCode button[onclick="switchTab('${tabId}')"]`).classList.add('active');
-            
-            // Update the display when switching tabs
-            if (tabId === '4band') {
-                updateColorCodeResult();
-            } else if (tabId === '5band') {
-                updateColorCodeResult5();
-            }
-        }
-        
-        // Series/parallel calculator tab switching
-        function switchCalcTab(tabId) {
-            document.querySelectorAll('#SeriesParallel .tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('#SeriesParallel .tab-button').forEach(button => {
-                button.classList.remove('active');
-            });
-            
-            document.getElementById(tabId).classList.add('active');
-            document.querySelector(`#SeriesParallel button[onclick="switchCalcTab('${tabId}')"]`).classList.add('active');
+        /* ── Color Legend builders ── */
+        function buildLegend(containerId, clickFn) {
+          const c = document.getElementById(containerId);
+          c.innerHTML = '';
+          colors.forEach((col, idx) => {
+            const item = document.createElement('div');
+            item.className = 'color-item';
+            item.innerHTML = '<div class="color-swatch" style="background:' + col.code + ';"></div>' + col.name + (col.value >= 0 ? ' (' + col.value + ')' : ' (' + col.tolerance + ')');
+            item.addEventListener('click', () => clickFn(idx));
+            c.appendChild(item);
+          });
         }
 
-        // Dark/Light Mode Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        // Check for saved theme preference or use preferred color scheme
-        const currentTheme = localStorage.getItem('theme') || 
-                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        
-        if (currentTheme === 'dark') {
-            document.body.setAttribute('data-theme', 'dark');
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
-        } else {
-            document.body.setAttribute('data-theme', 'light');
-            themeIcon.classList.replace('fa-sun', 'fa-moon');
-        }
-        
-        themeToggle.addEventListener('click', () => {
-            if (document.body.getAttribute('data-theme') === 'light') {
-                document.body.setAttribute('data-theme', 'dark');
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                document.body.setAttribute('data-theme', 'light');
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'light');
-            }
-        });
-
-        // Show notification
-        function showNotification(message, type = 'success') {
-            const notificationArea = document.getElementById('notificationArea');
-            const notificationId = 'notification-' + Date.now();
-            
-            const notification = document.createElement('div');
-            notification.id = notificationId;
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <i class="fas fa-${getNotificationIcon(type)}"></i>
-                <span>${message}</span>
-                <button class="close-notification" onclick="document.getElementById('${notificationId}').remove()">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
-            
-            notificationArea.appendChild(notification);
-            
-            // Show notification
-            setTimeout(() => {
-                notification.classList.add('show');
-            }, 100);
-            
-            // Auto remove after 5 seconds
-            setTimeout(() => {
-                if (document.getElementById(notificationId)) {
-                    notification.classList.remove('show');
-                    setTimeout(() => {
-                        if (document.getElementById(notificationId)) {
-                            document.getElementById(notificationId).remove();
-                        }
-                    }, 500);
-                }
-            }, 5000);
-        }
-        
-        function getNotificationIcon(type) {
-            switch(type) {
-                case 'success': return 'check-circle';
-                case 'error': return 'exclamation-circle';
-                case 'warning': return 'exclamation-triangle';
-                default: return 'info-circle';
-            }
-        }
-
-        // Highlight active band
         function highlightActiveBand() {
-            document.querySelectorAll('.band').forEach(band => {
-                band.classList.remove('active');
-            });
-            
-            if (activeBand) {
-                const bandElement = document.getElementById(`band${activeBand}`);
-                if (bandElement) bandElement.classList.add('active');
-            }
+          document.querySelectorAll('.band').forEach(b => b.classList.remove('active'));
+          if (activeBand) {
+            const el = document.getElementById('band' + activeBand);
+            if (el) el.classList.add('active');
+            const el5 = document.getElementById('band' + activeBand + '-5');
+            if (el5) el5.classList.add('active');
+          }
         }
 
-        // Band selection for 4-band
         function selectBand(bandNum) {
-            activeBand = bandNum;
-            highlightActiveBand();
-            
-            const currentColor = bandSelections[bandNum-1];
-            let newIndex = (currentColor + 1) % colors.length;
-            
-            // Skip colors that don't make sense for certain positions
-            if (bandNum === 4) { // Tolerance band
-                while (newIndex < 10 || colors[newIndex].tolerance === undefined) {
-                    newIndex = (newIndex + 1) % colors.length;
-                }
-            } else { // Digit or multiplier bands
-                while (newIndex >= 10) {
-                    newIndex = (newIndex + 1) % colors.length;
-                }
-            }
-            
-            bandSelections[bandNum-1] = newIndex;
-            document.getElementById(`band${bandNum}`).style.backgroundColor = colors[newIndex].code;
-            updateColorCodeResult();
+          activeBand = bandNum;
+          highlightActiveBand();
+          let cur = bandSelections[bandNum - 1];
+          let ni = (cur + 1) % colors.length;
+          if (bandNum === 4) {
+            while (ni < 10 || colors[ni].tolerance === undefined) ni = (ni + 1) % colors.length;
+          } else {
+            while (ni >= 10) ni = (ni + 1) % colors.length;
+          }
+          bandSelections[bandNum - 1] = ni;
+          document.getElementById('band' + bandNum).style.backgroundColor = colors[ni].code;
+          updateColorCodeResult();
         }
 
-        // Band selection for 5-band
         function selectBand5(bandNum) {
-            activeBand = bandNum;
-            highlightActiveBand();
-            
-            const currentColor = bandSelections5[bandNum-1];
-            let newIndex = (currentColor + 1) % colors.length;
-            
-            // Skip colors that don't make sense for certain positions
-            if (bandNum === 5) { // Tolerance band
-                while (newIndex < 10 || colors[newIndex].tolerance === undefined) {
-                    newIndex = (newIndex + 1) % colors.length;
-                }
-            } else { // Digit or multiplier bands
-                while (newIndex >= 10) {
-                    newIndex = (newIndex + 1) % colors.length;
-                }
-            }
-            
-            bandSelections5[bandNum-1] = newIndex;
-            document.getElementById(`band${bandNum}-5`).style.backgroundColor = colors[newIndex].code;
-            updateColorCodeResult5();
+          activeBand = bandNum;
+          highlightActiveBand();
+          let cur = bandSelections5[bandNum - 1];
+          let ni = (cur + 1) % colors.length;
+          if (bandNum === 5) {
+            while (ni < 10 || colors[ni].tolerance === undefined) ni = (ni + 1) % colors.length;
+          } else {
+            while (ni >= 10) ni = (ni + 1) % colors.length;
+          }
+          bandSelections5[bandNum - 1] = ni;
+          document.getElementById('band' + bandNum + '-5').style.backgroundColor = colors[ni].code;
+          updateColorCodeResult5();
         }
 
-        // Select color from legend for 4-band
         function selectColorFromLegend(colorIndex) {
-            if (activeBand >= 1 && activeBand <= 4) {
-                bandSelections[activeBand-1] = colorIndex;
-                document.getElementById(`band${activeBand}`).style.backgroundColor = colors[colorIndex].code;
-                updateColorCodeResult();
-                showNotification(`Band ${activeBand} set to ${colors[colorIndex].name}`, 'success');
-            }
+          if (activeBand >= 1 && activeBand <= 4) {
+            bandSelections[activeBand - 1] = colorIndex;
+            document.getElementById('band' + activeBand).style.backgroundColor = colors[colorIndex].code;
+            updateColorCodeResult();
+            showToast('Band ' + activeBand + ' set to ' + colors[colorIndex].name);
+          }
         }
 
-        // Select color from legend for 5-band
         function selectColorFromLegend5(colorIndex) {
-            if (activeBand >= 1 && activeBand <= 5) {
-                bandSelections5[activeBand-1] = colorIndex;
-                document.getElementById(`band${activeBand}-5`).style.backgroundColor = colors[colorIndex].code;
-                updateColorCodeResult5();
-                showNotification(`Band ${activeBand} set to ${colors[colorIndex].name}`, 'success');
-            }
+          if (activeBand >= 1 && activeBand <= 5) {
+            bandSelections5[activeBand - 1] = colorIndex;
+            document.getElementById('band' + activeBand + '-5').style.backgroundColor = colors[colorIndex].code;
+            updateColorCodeResult5();
+            showToast('Band ' + activeBand + ' set to ' + colors[colorIndex].name);
+          }
         }
 
-        // Update 4-band result display
         function updateColorCodeResult() {
-            const digit1 = colors[bandSelections[0]].value;
-            const digit2 = colors[bandSelections[1]].value;
-            const multiplier = colors[bandSelections[2]].multiplier;
-            const tolerance = colors[bandSelections[3]].tolerance;
-            
-            const inductance = (digit1 * 10 + digit2) * multiplier;
-            let displayValue, unit;
-            
-            if (inductance >= 1000000) {
-                displayValue = inductance / 1000000;
-                unit = "H";
-            } else if (inductance >= 1000) {
-                displayValue = inductance / 1000;
-                unit = "mH";
-            } else {
-                displayValue = inductance;
-                unit = "μH";
-            }
-            
-            const colorNames = bandSelections.map(idx => colors[idx].name).join('-');
-            const resultDiv = document.getElementById("colorCodeResult");
-            resultDiv.innerHTML = `
-                <div>
-                    <div>Inductance: ${displayValue.toFixed(2)}${unit} ${tolerance}</div>
-                    <div class="result-details">Raw Value: ${inductance} μH | Color Code: ${colorNames}</div>
-                </div>
-                <button class="save-btn" onclick="saveCalculation('color-4band')">
-                    <i class="fas fa-save"></i> Save
-                </button>
-            `;
+          const d1 = colors[bandSelections[0]].value;
+          const d2 = colors[bandSelections[1]].value;
+          const mul = colors[bandSelections[2]].multiplier;
+          const tol = colors[bandSelections[3]].tolerance;
+          const ind = (d1 * 10 + d2) * mul;
+          let dv, unit;
+          if (ind >= 1000000) { dv = ind / 1000000; unit = 'H'; }
+          else if (ind >= 1000) { dv = ind / 1000; unit = 'mH'; }
+          else { dv = ind; unit = 'uH'; }
+          const cn = bandSelections.map(i => colors[i].name).join('-');
+          document.getElementById('colorCodeResult').innerHTML =
+            '<div><div>Inductance: ' + dv.toFixed(2) + unit + ' ' + tol + '</div>' +
+            '<div class="result-details">Raw Value: ' + ind + ' uH | Color Code: ' + cn + '</div></div>';
         }
 
-        // Update 5-band result display
         function updateColorCodeResult5() {
-            const digit1 = colors[bandSelections5[0]].value;
-            const digit2 = colors[bandSelections5[1]].value;
-            const digit3 = colors[bandSelections5[2]].value;
-            const multiplier = colors[bandSelections5[3]].multiplier;
-            const tolerance = colors[bandSelections5[4]].tolerance;
-            
-            const inductance = (digit1 * 100 + digit2 * 10 + digit3) * multiplier;
-            let displayValue, unit;
-            
-            if (inductance >= 1000000) {
-                displayValue = inductance / 1000000;
-                unit = "H";
-            } else if (inductance >= 1000) {
-                displayValue = inductance / 1000;
-                unit = "mH";
-            } else {
-                displayValue = inductance;
-                unit = "μH";
-            }
-            
-            const colorNames = bandSelections5.map(idx => colors[idx].name).join('-');
-            const resultDiv = document.getElementById("colorCodeResult5");
-            resultDiv.innerHTML = `
-                <div>
-                    <div>Inductance: ${displayValue.toFixed(2)}${unit} ${tolerance}</div>
-                    <div class="result-details">Raw Value: ${inductance} μH | Color Code: ${colorNames}</div>
-                </div>
-                <button class="save-btn" onclick="saveCalculation('color-5band')">
-                    <i class="fas fa-save"></i> Save
-                </button>
-            `;
+          const d1 = colors[bandSelections5[0]].value;
+          const d2 = colors[bandSelections5[1]].value;
+          const d3 = colors[bandSelections5[2]].value;
+          const mul = colors[bandSelections5[3]].multiplier;
+          const tol = colors[bandSelections5[4]].tolerance;
+          const ind = (d1 * 100 + d2 * 10 + d3) * mul;
+          let dv, unit;
+          if (ind >= 1000000) { dv = ind / 1000000; unit = 'H'; }
+          else if (ind >= 1000) { dv = ind / 1000; unit = 'mH'; }
+          else { dv = ind; unit = 'uH'; }
+          const cn = bandSelections5.map(i => colors[i].name).join('-');
+          document.getElementById('colorCodeResult5').innerHTML =
+            '<div><div>Inductance: ' + dv.toFixed(2) + unit + ' ' + tol + '</div>' +
+            '<div class="result-details">Raw Value: ' + ind + ' uH | Color Code: ' + cn + '</div></div>';
         }
 
-        // Series/parallel calculator functions
+        /* ── Band click events ── */
+        ['band1','band2','band3','band4'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.addEventListener('click', () => selectBand(parseInt(id.replace('band',''))));
+        });
+        ['band1-5','band2-5','band3-5','band4-5','band5-5'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.addEventListener('click', () => selectBand5(parseInt(id.split('-')[0].replace('band',''))));
+        });
+
+        buildLegend('colorLegend4', selectColorFromLegend);
+        buildLegend('colorLegend5', selectColorFromLegend5);
+
+        /* ── Series / Parallel ── */
         function addInductor(type) {
-            const container = document.getElementById(type + '-inductors');
-            const count = container.children.length + 1;
-            
-            const inductorInput = document.createElement('div');
-            inductorInput.className = 'inductor-input';
-            
-            inductorInput.innerHTML = `
-                <label>L${count}:</label>
-                <input type="number" min="0" step="0.01" value="10" onchange="calculateInductance('${type}')">
-                <select class="unit-selector" onchange="calculateInductance('${type}')">
-                    <option value="1e-6">μH</option>
-                    <option value="1e-3" selected>mH</option>
-                    <option value="1">H</option>
-                </select>
-            `;
-            
-            container.appendChild(inductorInput);
-            calculateInductance(type);
-            showNotification(`Added inductor L${count}`, 'success');
-        }
-        
-        function removeInductor(type) {
-            const container = document.getElementById(type + '-inductors');
-            if (container.children.length > 1) {
-                container.removeChild(container.lastChild);
-                calculateInductance(type);
-                showNotification('Removed last inductor', 'warning');
-            }
-        }
-        
-        function calculateInductance(type) {
-            const container = document.getElementById(type + '-inductors');
-            const inputs = container.querySelectorAll('input');
-            const units = container.querySelectorAll('select');
-            const resultDiv = document.getElementById(type + '-result');
-            
-            // Get all inductor values in Henries
-            const inductors = [];
-            for (let i = 0; i < inputs.length; i++) {
-                const value = parseFloat(inputs[i].value);
-                const unit = parseFloat(units[i].value);
-                
-                if (isNaN(value) || value <= 0) {
-                    resultDiv.innerHTML = `
-                        <div style="color: var(--error-color);">
-                            <i class="fas fa-exclamation-circle"></i> Error: All inductor values must be positive numbers.
-                        </div>
-                    `;
-                    return;
-                }
-                
-                // Convert to Henries
-                inductors.push(value * unit);
-            }
-            
-            let equivalentInductance;
-            let formula = '';
-            let details = '';
-            
-            if (type === 'series') {
-                // Calculate L = L1 + L2 + ... + Ln
-                equivalentInductance = 0;
-                formula = 'Leq = ';
-                
-                for (let i = 0; i < inductors.length; i++) {
-                    equivalentInductance += inductors[i];
-                    formula += `L${i+1}`;
-                    details += `${formatInductance(inductors[i])}`;
-                    if (i < inductors.length - 1) {
-                        formula += ' + ';
-                        details += ' + ';
-                    }
-                }
-                
-                formula += ` = ${equivalentInductance.toExponential(6)} H`;
-                details = `Calculation: Leq = ${details} = ${formatInductance(equivalentInductance)}`;
-            } else {
-                // Calculate 1/L = 1/L1 + 1/L2 + ... + 1/Ln
-                let sum = 0;
-                formula = '1/Leq = ';
-                
-                for (let i = 0; i < inductors.length; i++) {
-                    sum += 1 / inductors[i];
-                    formula += `1/L${i+1}`;
-                    if (i < inductors.length - 1) {
-                        formula += ' + ';
-                    }
-                }
-                
-                equivalentInductance = 1 / sum;
-                formula += ` = ${sum.toFixed(6)} (H⁻¹)<br>Therefore, Leq = 1/${sum.toFixed(6)} = ${equivalentInductance.toExponential(6)} H`;
-                details = `Calculation: 1/Leq = ${formula.split('=')[1].trim()}`;
-            }
-            
-            resultDiv.innerHTML = `
-                <div>
-                    <div><strong>Equivalent Inductance:</strong> ${formatInductance(equivalentInductance)}</div>
-                    <div class="result-details">${details}</div>
-                </div>
-            `;
-        }
-        
-        // Format inductance value with appropriate unit
-        function formatInductance(value) {
-            if (value >= 1) {
-                return value.toFixed(4) + ' H';
-            } else if (value >= 1e-3) {
-                return (value * 1e3).toFixed(4) + ' mH';
-            } else if (value >= 1e-6) {
-                return (value * 1e6).toFixed(4) + ' μH';
-            } else if (value >= 1e-9) {
-                return (value * 1e9).toFixed(4) + ' nH';
-            } else {
-                return (value * 1e12).toFixed(4) + ' pH';
-            }
+          const container = document.getElementById(type + '-inductors');
+          const count = container.children.length + 1;
+          const div = document.createElement('div');
+          div.className = 'inductor-input';
+          div.innerHTML =
+            '<label>L' + count + ':</label>' +
+            '<input type="number" min="0" step="0.01" value="10" onchange="calcCalc.calculateInductance(\'' + type + '\')" aria-label="Inductor L' + count + ' value">' +
+            '<select class="unit-selector" onchange="calcCalc.calculateInductance(\'' + type + '\')" aria-label="Inductor L' + count + ' unit">' +
+            '<option value="1e-6">uH</option><option value="1e-3" selected>mH</option><option value="1">H</option></select>';
+          container.appendChild(div);
+          calculateInductance(type);
+          showToast('Added inductor L' + count);
         }
 
-        // Unit converter function
+        function removeInductor(type) {
+          const container = document.getElementById(type + '-inductors');
+          if (container.children.length > 1) {
+            container.removeChild(container.lastChild);
+            calculateInductance(type);
+            showToast('Removed last inductor', 'warning');
+          }
+        }
+
+        function calculateInductance(type) {
+          const container = document.getElementById(type + '-inductors');
+          const inputs = container.querySelectorAll('input');
+          const units = container.querySelectorAll('select');
+          const resultDiv = document.getElementById(type + '-result');
+          const inductors = [];
+          for (let i = 0; i < inputs.length; i++) {
+            const val = parseFloat(inputs[i].value);
+            const unit = parseFloat(units[i].value);
+            if (isNaN(val) || val <= 0) {
+              resultDiv.innerHTML = '<div style="color:var(--color-error);"><i class="fas fa-exclamation-circle"></i> Error: All inductor values must be positive numbers.</div>';
+              return;
+            }
+            inductors.push(val * unit);
+          }
+          let equiv, details = '';
+          if (type === 'series') {
+            equiv = 0;
+            const parts = [];
+            for (let i = 0; i < inductors.length; i++) {
+              equiv += inductors[i];
+              parts.push(formatInductance(inductors[i]));
+            }
+            details = 'Calculation: Leq = ' + parts.join(' + ') + ' = ' + formatInductance(equiv);
+          } else {
+            let sum = 0;
+            for (let i = 0; i < inductors.length; i++) sum += 1 / inductors[i];
+            equiv = 1 / sum;
+            details = 'Calculation: 1/Leq = ' + inductors.map((_, i) => '1/L' + (i + 1)).join(' + ') + ' => Leq = ' + formatInductance(equiv);
+          }
+          resultDiv.innerHTML = '<div><div><strong>Equivalent Inductance:</strong> ' + formatInductance(equiv) + '</div><div class="result-details">' + details + '</div></div>';
+        }
+
+        function formatInductance(value) {
+          if (value >= 1) return value.toFixed(4) + ' H';
+          if (value >= 1e-3) return (value * 1e3).toFixed(4) + ' mH';
+          if (value >= 1e-6) return (value * 1e6).toFixed(4) + ' uH';
+          if (value >= 1e-9) return (value * 1e9).toFixed(4) + ' nH';
+          return (value * 1e12).toFixed(4) + ' pH';
+        }
+
+        /* ── Unit Converter ── */
         function convertUnits() {
-            const value = parseFloat(document.getElementById('converterValue').value);
-            const fromUnit = parseFloat(document.getElementById('fromUnit').value);
-            const toUnit = parseFloat(document.getElementById('toUnit').value);
-            const resultDiv = document.getElementById('converter-result');
-            
-            if (isNaN(value) || value < 0) {
-                resultDiv.innerHTML = '<p style="color: var(--error-color);">Error: Please enter a valid positive number.</p>';
-                showNotification('Please enter a valid value!', 'error');
-                return;
-            }
-            
-            // Convert to base unit (Henries) first
-            const valueInHenries = value * fromUnit;
-            
-            // Convert to target unit
-            const convertedValue = valueInHenries / toUnit;
-            
-            // Get unit names for display
-            const fromUnitName = document.getElementById('fromUnit').options[document.getElementById('fromUnit').selectedIndex].text;
-            const toUnitName = document.getElementById('toUnit').options[document.getElementById('toUnit').selectedIndex].text;
-            
-            resultDiv.innerHTML = `
-                <p><strong>Conversion Result:</strong></p>
-                <p>${value} ${fromUnitName} = ${convertedValue.toFixed(6)} ${toUnitName}</p>
-                <p><small>In Scientific Notation: ${convertedValue.toExponential(6)} ${toUnitName.split(' ')[0]}</small></p>
-            `;
-            
-            showNotification('Conversion completed successfully!', 'success');
+          const value = parseFloat(document.getElementById('converterValue').value);
+          const fromUnit = parseFloat(document.getElementById('fromUnit').value);
+          const toUnit = parseFloat(document.getElementById('toUnit').value);
+          const resultDiv = document.getElementById('converter-result');
+          if (isNaN(value) || value < 0) {
+            resultDiv.innerHTML = '<p style="color:var(--color-error);">Error: Please enter a valid positive number.</p>';
+            showToast('Please enter a valid value!', 'error');
+            return;
+          }
+          const inHenries = value * fromUnit;
+          const converted = inHenries / toUnit;
+          const fromName = document.getElementById('fromUnit').options[document.getElementById('fromUnit').selectedIndex].text;
+          const toName = document.getElementById('toUnit').options[document.getElementById('toUnit').selectedIndex].text;
+          resultDiv.innerHTML =
+            '<p><strong>Conversion Result:</strong></p>' +
+            '<p>' + value + ' ' + fromName + ' = ' + converted.toFixed(6) + ' ' + toName + '</p>' +
+            '<p><small>In Scientific Notation: ' + converted.toExponential(6) + ' ' + toName.split(' ')[0] + '</small></p>';
+          showToast('Conversion completed successfully!');
         }
-        
-        // Inductor design calculator
+
+        /* ── Inductor Design ── */
         function calculateInductorDesign() {
-            const wireDiameter = parseFloat(document.getElementById('wireDiameter').value) / 1000; // Convert to meters
-            const coilDiameter = parseFloat(document.getElementById('coilDiameter').value) / 1000; // Convert to meters
-            const numberTurns = parseInt(document.getElementById('numberTurns').value);
-            const coilLength = parseFloat(document.getElementById('coilLength').value) / 1000; // Convert to meters
-            
-            if (isNaN(wireDiameter) || isNaN(coilDiameter) || isNaN(numberTurns) || isNaN(coilLength) ||
-                wireDiameter <= 0 || coilDiameter <= 0 || numberTurns <= 0 || coilLength <= 0) {
-                showNotification('Please enter valid design parameters!', 'error');
-                return;
-            }
-            
-            // Constants
-            const mu0 = 4 * Math.PI * 1e-7; // Permeability of free space
-            const copperResistivity = 1.68e-8; // Ω·m at 20°C
-            
-            // Calculate inductance using solenoid formula
-            const area = Math.PI * Math.pow(coilDiameter / 2, 2);
-            const inductance = (mu0 * Math.pow(numberTurns, 2) * area) / coilLength;
-            
-            // Calculate wire length
-            const wireLength = numberTurns * Math.PI * coilDiameter;
-            
-            // Calculate DC resistance
-            const wireArea = Math.PI * Math.pow(wireDiameter / 2, 2);
-            const dcResistance = (copperResistivity * wireLength) / wireArea;
-            
-            // Calculate quality factor (estimated at 1 MHz)
-            const frequency = 1e6; // 1 MHz
-            const inductiveReactance = 2 * Math.PI * frequency * inductance;
-            const qualityFactor = inductiveReactance / dcResistance;
-            
-            // Update display
-            document.getElementById('calculatedInductance').textContent = formatInductance(inductance);
-            document.getElementById('wireLength').textContent = wireLength.toFixed(2) + ' m';
-            document.getElementById('dcResistance').textContent = dcResistance.toFixed(2) + ' Ω';
-            document.getElementById('qualityFactor').textContent = qualityFactor.toFixed(1);
+          const wireDiameter = parseFloat(document.getElementById('wireDiameter').value) / 1000;
+          const coilDiameter = parseFloat(document.getElementById('coilDiameter').value) / 1000;
+          const numberTurns = parseInt(document.getElementById('numberTurns').value);
+          const coilLength = parseFloat(document.getElementById('coilLength').value) / 1000;
+          if (isNaN(wireDiameter) || isNaN(coilDiameter) || isNaN(numberTurns) || isNaN(coilLength) ||
+              wireDiameter <= 0 || coilDiameter <= 0 || numberTurns <= 0 || coilLength <= 0) {
+            showToast('Please enter valid design parameters!', 'error');
+            return;
+          }
+          const mu0 = 4 * Math.PI * 1e-7;
+          const copperResistivity = 1.68e-8;
+          const area = Math.PI * Math.pow(coilDiameter / 2, 2);
+          const inductance = (mu0 * Math.pow(numberTurns, 2) * area) / coilLength;
+          const wireLength = numberTurns * Math.PI * coilDiameter;
+          const wireArea = Math.PI * Math.pow(wireDiameter / 2, 2);
+          const dcResistance = (copperResistivity * wireLength) / wireArea;
+          const frequency = 1e6;
+          const inductiveReactance = 2 * Math.PI * frequency * inductance;
+          const qualityFactor = inductiveReactance / dcResistance;
+          document.getElementById('calculatedInductance').textContent = formatInductance(inductance);
+          document.getElementById('wireLength').textContent = wireLength.toFixed(2) + ' m';
+          document.getElementById('dcResistance').textContent = dcResistance.toFixed(2) + ' ohm';
+          document.getElementById('qualityFactor').textContent = qualityFactor.toFixed(1);
         }
-        
-        // Save calculation to history
+
+        /* ── History ── */
         function saveCalculation(type) {
-            let calculation = {
-                id: Date.now(),
-                type: type,
-                timestamp: new Date().toLocaleString(),
-                details: ''
-            };
-            
-            if (type.includes('color')) {
-                if (type === 'color-4band') {
-                    const inductance = document.getElementById('colorCodeResult').innerText.split('Inductance: ')[1].split(' ')[0];
-                    calculation.details = `4-Band: ${inductance}`;
-                } else if (type === 'color-5band') {
-                    const inductance = document.getElementById('colorCodeResult5').innerText.split('Inductance: ')[1].split(' ')[0];
-                    calculation.details = `5-Band: ${inductance}`;
-                }
-            } else if (type === 'series' || type === 'parallel') {
-                const resultDiv = document.getElementById(`${type}-result`);
-                const resultText = resultDiv.querySelector('div > div').textContent;
-                calculation.details = `${type.charAt(0).toUpperCase() + type.slice(1)}: ${resultText}`;
-            } else if (type === 'converter') {
-                const resultDiv = document.getElementById('converter-result');
-                calculation.details = `Converter: ${resultDiv.querySelector('p:nth-child(2)').textContent}`;
-            } else if (type === 'design') {
-                const inductance = document.getElementById('calculatedInductance').textContent;
-                calculation.details = `Design: ${inductance}`;
+          let calc = { id: Date.now(), type: type, timestamp: new Date().toLocaleString(), details: '' };
+          if (type.includes('color')) {
+            if (type === 'color-4band') {
+              const ind = document.getElementById('colorCodeResult').innerText.split('Inductance: ')[1].split(' ')[0];
+              calc.details = '4-Band: ' + ind;
+            } else {
+              const ind = document.getElementById('colorCodeResult5').innerText.split('Inductance: ')[1].split(' ')[0];
+              calc.details = '5-Band: ' + ind;
             }
-            
-            calculationHistory.unshift(calculation);
-            
-            // Keep only last 10 calculations
-            if (calculationHistory.length > 10) {
-                calculationHistory = calculationHistory.slice(0, 10);
-            }
-            
-            localStorage.setItem('inductorCalculationHistory', JSON.stringify(calculationHistory));
-            updateHistoryDisplay();
-            showNotification('Calculation saved to history!', 'success');
+          } else if (type === 'series' || type === 'parallel') {
+            const rd = document.getElementById(type + '-result');
+            calc.details = type.charAt(0).toUpperCase() + type.slice(1) + ': ' + (rd.querySelector('div > div')?.textContent || '');
+          } else if (type === 'converter') {
+            const rd = document.getElementById('converter-result');
+            calc.details = 'Converter: ' + (rd.querySelector('p:nth-child(2)')?.textContent || '');
+          } else if (type === 'design') {
+            calc.details = 'Design: ' + document.getElementById('calculatedInductance').textContent;
+          }
+          calculationHistory.unshift(calc);
+          if (calculationHistory.length > 10) calculationHistory = calculationHistory.slice(0, 10);
+          localStorage.setItem('inductorCalculationHistory', JSON.stringify(calculationHistory));
+          updateHistoryDisplay();
+          showToast('Calculation saved to history!');
         }
-        
-        // Load history from localStorage
+
         function loadHistory() {
-            const savedHistory = localStorage.getItem('inductorCalculationHistory');
-            if (savedHistory) {
-                calculationHistory = JSON.parse(savedHistory);
-                updateHistoryDisplay();
-            }
+          const saved = localStorage.getItem('inductorCalculationHistory');
+          if (saved) { calculationHistory = JSON.parse(saved); updateHistoryDisplay(); }
         }
-        
-        // Update history display
+
         function updateHistoryDisplay() {
-            const historyContainer = document.getElementById('history-container');
-            const emptyHistory = document.getElementById('empty-history');
-            
-            if (calculationHistory.length === 0) {
-                if (emptyHistory) emptyHistory.style.display = 'block';
-                return;
-            }
-            
-            if (emptyHistory) emptyHistory.style.display = 'none';
-            
-            historyContainer.innerHTML = '';
-            
-            calculationHistory.forEach(calc => {
-                const historyItem = document.createElement('div');
-                historyItem.className = 'history-item';
-                
-                const icon = getHistoryIcon(calc.type);
-                const typeName = getTypeName(calc.type);
-                
-                historyItem.innerHTML = `
-                    <div>
-                        <i class="${icon}"></i> ${typeName}
-                        <div class="history-details">${calc.details}</div>
-                    </div>
-                    <div style="font-size: 0.8em; color: var(--text-muted);">
-                        ${calc.timestamp}
-                    </div>
-                `;
-                
-                historyContainer.appendChild(historyItem);
-            });
+          const container = document.getElementById('history-container');
+          const emptyEl = document.getElementById('empty-history');
+          if (calculationHistory.length === 0) { if (emptyEl) emptyEl.style.display = 'block'; return; }
+          if (emptyEl) emptyEl.style.display = 'none';
+          container.innerHTML = '';
+          calculationHistory.forEach(calc => {
+            const item = document.createElement('div');
+            item.className = 'history-item';
+            const icon = getHistoryIcon(calc.type);
+            item.innerHTML =
+              '<div><i class="' + icon + '"></i> ' + getTypeName(calc.type) +
+              '<div class="history-details">' + calc.details + '</div></div>' +
+              '<div style="font-size:0.8em;color:var(--color-text-tertiary);">' + calc.timestamp + '</div>';
+            container.appendChild(item);
+          });
         }
-        
+
         function getHistoryIcon(type) {
-            if (type.includes('color')) return 'fas fa-palette';
-            if (type === 'series') return 'fas fa-arrow-right';
-            if (type === 'parallel') return 'fas fa-arrows-alt-h';
-            if (type === 'converter') return 'fas fa-exchange-alt';
-            if (type === 'design') return 'fas fa-cogs';
-            return 'fas fa-calculator';
+          if (type.includes('color')) return 'fas fa-palette';
+          if (type === 'series') return 'fas fa-arrow-right';
+          if (type === 'parallel') return 'fas fa-arrows-alt-h';
+          if (type === 'converter') return 'fas fa-exchange-alt';
+          if (type === 'design') return 'fas fa-cogs';
+          return 'fas fa-calculator';
         }
-        
+
         function getTypeName(type) {
-            if (type === 'color-4band') return '4-Band Color Code';
-            if (type === 'color-5band') return '5-Band Color Code';
-            if (type === 'series') return 'Series Calculation';
-            if (type === 'parallel') return 'Parallel Calculation';
-            if (type === 'converter') return 'Unit Converter';
-            if (type === 'design') return 'Inductor Design';
-            return 'Calculation';
+          if (type === 'color-4band') return '4-Band Color Code';
+          if (type === 'color-5band') return '5-Band Color Code';
+          if (type === 'series') return 'Series Calculation';
+          if (type === 'parallel') return 'Parallel Calculation';
+          if (type === 'converter') return 'Unit Converter';
+          if (type === 'design') return 'Inductor Design';
+          return 'Calculation';
         }
-        
-        // Set current year in footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script>
+
+        /* ── Init ── */
+        loadHistory();
+        updateColorCodeResult();
+        updateColorCodeResult5();
+        calculateInductance('series');
+        calculateInductance('parallel');
+        calculateInductorDesign();
+
+        return {
+          addInductor,
+          removeInductor,
+          calculateInductance,
+          convertUnits,
+          calculateInductorDesign,
+          saveCalculation
+        };
+      })();
+
+      window.calcCalc = calcCalc;
+    })();
+  </script>
 </body>
 </html>

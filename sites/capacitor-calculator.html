@@ -1,1258 +1,1271 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Advanced Capacitor Calculator for Electronics Engineers">
-  <meta name="keywords" content="capacitor calculator, electronics, engineering, series parallel, capacitor codes">
-  <meta name="author" content="Mohamed Tarek">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
   <title>Capacitor Calculator | Mohamed Tarek</title>
-  <link rel="icon" href="icon.png" type="image/png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta name="description" content="Advanced Capacitor Calculator for Electronics Engineers - Calculate ceramic codes, series/parallel combinations, RC time constants, and energy storage.">
+  <meta name="keywords" content="capacitor calculator, electronics, engineering, series parallel, capacitor codes, RC time constant">
+  <meta name="author" content="Mohamed Tarek">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Capacitor Calculator | Mohamed Tarek">
+  <meta property="og:description" content="Advanced Capacitor Calculator for Electronics Engineers - Calculate ceramic codes, series/parallel combinations, RC time constants, and energy storage.">
+  <meta property="og:image" content="https://website-mohamed.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://website-mohamed.vercel.app/sites/capacitor-calculator.html">
+  <meta property="og:site_name" content="Mohamed Tarek Portfolio">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Capacitor Calculator | Mohamed Tarek">
+  <meta name="twitter:description" content="Advanced Capacitor Calculator for Electronics Engineers.">
+  <meta name="twitter:image" content="https://website-mohamed.vercel.app/photo.jpg">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="../icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Capacitor Calculator",
+    "description": "Advanced Capacitor Calculator for Electronics Engineers - Calculate ceramic codes, series/parallel combinations, RC time constants, and energy storage.",
+    "url": "https://website-mohamed.vercel.app/sites/capacitor-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek",
+      "url": "https://website-mohamed.vercel.app"
+    }
+  }
+  </script>
+
   <style>
     :root {
-      --primary-color: #4e9eff;
-      --primary-dark: #3a6cf4;
-      --primary-light: #6ab1ff;
-      --background-dark: #121212;
-      --background-darker: #0a0a0a;
-      --background-secondary: #1a1a1a;
-      --card-dark: #1e1e1e;
-      --card-light: #252525;
-      --text-light: #ffffff;
-      --text-muted: #aaaaaa;
-      --success-color: #4caf50;
-      --warning-color: #ff9800;
-      --error-color: #f44336;
-      --transition-speed: 0.3s;
-      --border-radius: 12px;
-      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
-      --glass-effect: rgba(30, 30, 30, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.1);
-      --glass-blur: blur(10px);
+      --color-bg-primary: #0a0e1a;
+      --color-bg-secondary: #0f1322;
+      --color-bg-tertiary: #141829;
+      --color-bg-card: #161b2e;
+      --color-bg-card-hover: #1c2240;
+      --color-bg-elevated: #1a2038;
+      --color-accent: #3b82f6;
+      --color-accent-hover: #2563eb;
+      --color-accent-light: #60a5fa;
+      --color-accent-glow: rgba(59, 130, 246, 0.15);
+      --color-accent-subtle: rgba(59, 130, 246, 0.08);
+      --color-text-primary: #f1f5f9;
+      --color-text-secondary: #94a3b8;
+      --color-text-tertiary: #64748b;
+      --color-border: rgba(255, 255, 255, 0.06);
+      --color-border-hover: rgba(255, 255, 255, 0.12);
+      --color-border-accent: rgba(59, 130, 246, 0.3);
+      --color-success: #22c55e;
+      --color-error: #ef4444;
+      --color-warning: #f59e0b;
+      --color-info: #3b82f6;
+      --gradient-hero: linear-gradient(135deg, #0a0e1a 0%, #111833 50%, #0f1322 100%);
+      --gradient-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 4rem;
+      --space-4xl: 6rem;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.15);
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --container-max: 1200px;
+      --header-height: 72px;
     }
 
-    /* Light mode variables */
     [data-theme="light"] {
-      --background-dark: #f5f7fa;
-      --background-darker: #e8ebf0;
-      --background-secondary: #ffffff;
-      --card-dark: #ffffff;
-      --card-light: #f9f9f9;
-      --text-light: #333333;
-      --text-muted: #666666;
-      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
-      --glass-effect: rgba(255, 255, 255, 0.7);
-      --glass-border: rgba(0, 0, 0, 0.1);
+      --color-bg-primary: #f8fafc;
+      --color-bg-secondary: #f1f5f9;
+      --color-bg-tertiary: #e2e8f0;
+      --color-bg-card: #ffffff;
+      --color-bg-card-hover: #f8fafc;
+      --color-bg-elevated: #ffffff;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      --color-text-tertiary: #94a3b8;
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-border-hover: rgba(0, 0, 0, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+      --gradient-hero: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 50%, #f1f5f9 100%);
     }
 
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-    }
-
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--background-dark);
-      color: var(--text-light);
-      line-height: 1.6;
-      transition: background-color var(--transition-speed) ease;
-      padding: 20px;
-      min-height: 100vh;
+      font-family: var(--font-sans);
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color var(--transition-slow), color var(--transition-slow);
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; }
+    ul, ol { list-style: none; }
+    ::selection { background: var(--color-accent); color: white; }
+
+    .skip-link {
+      position: fixed; top: -100%; left: var(--space-md);
+      background: var(--color-accent); color: white;
+      padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm);
+      z-index: 10000; font-weight: 600; font-size: 0.875rem;
+      transition: top var(--transition-fast);
+    }
+    .skip-link:focus { top: var(--space-md); }
+
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+      background: var(--gradient-accent); z-index: 10001;
+      transition: width 50ms linear;
     }
 
-    h1, h2, h3 {
-      color: var(--primary-color);
-      margin-bottom: 15px;
-    }
+    .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-xl); }
+    @media (max-width: 768px) { .container { padding: 0 var(--space-md); } }
 
-    /* Header */
     .header {
-      text-align: center;
-      margin-bottom: 30px;
-      padding: 20px;
-      background: var(--card-dark);
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
+      position: fixed; top: 0; left: 0; right: 0; height: var(--header-height);
+      z-index: 1000; transition: all var(--transition-base); background: transparent;
+    }
+    .header.scrolled {
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid var(--color-border);
+    }
+    [data-theme="light"] .header.scrolled { background: rgba(248, 250, 252, 0.85); }
+    .header .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+
+    .logo { display: flex; align-items: center; gap: var(--space-sm); font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; }
+    .logo-icon {
+      width: 36px; height: 36px; background: var(--gradient-accent);
+      border-radius: var(--radius-sm); display: flex; align-items: center;
+      justify-content: center; color: white; font-size: 0.875rem; font-weight: 800;
     }
 
-    .header h1 {
-      margin-bottom: 10px;
-      font-size: 2.2em;
+    .nav { display: flex; align-items: center; gap: var(--space-xs); }
+    .nav-link {
+      position: relative; padding: var(--space-sm) var(--space-md);
+      font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
+      border-radius: var(--radius-sm); transition: all var(--transition-fast);
+    }
+    .nav-link:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
+
+    .menu-toggle {
+      display: none; flex-direction: column; gap: 5px; padding: var(--space-sm);
+      z-index: 1001; align-items: center; justify-content: center;
+    }
+    .menu-toggle .bar {
+      width: 22px; height: 2px; background: var(--color-text-primary);
+      border-radius: 2px; transition: all var(--transition-base); transform-origin: center;
+    }
+    .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .mobile-overlay {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
+      z-index: 999; opacity: 0; pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+    .mobile-overlay.active { opacity: 1; pointer-events: auto; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .nav {
+        position: fixed; top: 0; right: -100%; width: min(320px, 85vw);
+        height: 100vh; background: var(--color-bg-secondary);
+        flex-direction: column; align-items: flex-start; justify-content: center;
+        padding: var(--space-3xl); gap: var(--space-sm);
+        transition: right var(--transition-slow); border-left: 1px solid var(--color-border);
+      }
+      .nav.active { right: 0; }
+      .nav-link { font-size: 1.125rem; width: 100%; padding: var(--space-md); }
     }
 
-    .header p {
-      color: var(--text-muted);
-      font-size: 1.1em;
+    .page-hero {
+      padding-top: calc(var(--header-height) + var(--space-3xl));
+      padding-bottom: var(--space-3xl);
+      background: var(--gradient-hero);
+      position: relative; overflow: hidden;
     }
+    .page-hero-bg {
+      position: absolute; inset: 0; overflow: hidden; z-index: 0;
+    }
+    .page-hero-orb {
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+    .page-hero-orb:nth-child(1) { width: 400px; height: 400px; background: rgba(59, 130, 246, 0.15); top: -100px; right: -50px; }
+    .page-hero-orb:nth-child(2) { width: 300px; height: 300px; background: rgba(139, 92, 246, 0.12); bottom: -80px; left: -80px; animation-delay: -7s; }
+    .page-hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px; z-index: 1;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(20px, 10px) scale(1.02); }
+    }
+    .page-hero .container { position: relative; z-index: 2; text-align: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-md); background: var(--color-accent-subtle);
+      border: 1px solid var(--color-border-accent); border-radius: var(--radius-full);
+      font-size: 0.8125rem; font-weight: 500; color: var(--color-accent-light);
+      margin-bottom: var(--space-lg);
+    }
+    .hero-badge .dot {
+      width: 8px; height: 8px; background: var(--color-success);
+      border-radius: 50%; animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+    .page-hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.03em; margin-bottom: var(--space-md);
+    }
+    .page-hero h1 .gradient-text {
+      background: var(--gradient-accent); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-hero p {
+      font-size: clamp(1rem, 2vw, 1.125rem); color: var(--color-text-secondary);
+      max-width: 600px; margin: 0 auto;
+    }
+    .hero-stats {
+      display: flex; justify-content: center; gap: var(--space-lg);
+      margin-top: var(--space-xl); flex-wrap: wrap;
+    }
+    .hero-stat {
+      display: flex; align-items: center; gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-md); background: var(--color-accent-subtle);
+      border: 1px solid var(--color-border-accent); border-radius: var(--radius-full);
+      font-size: 0.8125rem; font-weight: 500; color: var(--color-accent-light);
+    }
+    .hero-stat i { font-size: 0.75rem; }
 
-    /* Calculator Styles */
-    .calculator-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    /* Tab styles */
+    .main-content { padding: var(--space-3xl) 0 var(--space-4xl); }
+
     .main-tabs {
-      display: flex;
-      background-color: var(--card-light);
-      border-radius: var(--border-radius) var(--border-radius) 0 0;
-      margin-bottom: 0;
-      overflow-x: auto;
+      display: flex; background: var(--color-bg-card);
+      border: 1px solid var(--color-border); border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      overflow: hidden; overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
-    
+    .main-tabs::-webkit-scrollbar { display: none; }
     .main-tab-button {
-      background-color: inherit;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      padding: 16px 20px;
-      transition: all var(--transition-speed) ease;
-      color: var(--text-light);
-      font-weight: 600;
-      white-space: nowrap;
-      flex: 1;
-      text-align: center;
+      flex: 1; min-width: 160px; padding: var(--space-md) var(--space-lg);
+      background: transparent; border: none; outline: none; cursor: pointer;
+      font-family: var(--font-sans); font-size: 0.9375rem; font-weight: 600;
+      color: var(--color-text-secondary); display: flex; align-items: center;
+      justify-content: center; gap: var(--space-sm); transition: all var(--transition-fast);
+      position: relative; white-space: nowrap;
     }
-    
-    .main-tab-button:hover {
-      background-color: var(--background-secondary);
+    .main-tab-button::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px; background: var(--color-accent); transform: scaleX(0);
+      transition: transform var(--transition-fast);
     }
-    
-    .main-tab-button.active {
-      background-color: var(--primary-color);
-      color: white;
-    }
-    
+    .main-tab-button:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
+    .main-tab-button.active { color: var(--color-accent); background: var(--color-accent-subtle); }
+    .main-tab-button.active::after { transform: scaleX(1); }
+    .main-tab-button i { font-size: 0.875rem; }
+
     .main-tabcontent {
-      display: none;
-      padding: 30px;
-      border: 1px solid var(--background-secondary);
-      border-top: none;
-      border-radius: 0 0 var(--border-radius) var(--border-radius);
-      background-color: var(--card-dark);
-      box-shadow: var(--box-shadow);
+      display: none; padding: var(--space-xl);
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-top: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      box-shadow: var(--shadow-md); animation: tabFadeIn 0.3s ease;
     }
-    
-    /* Code calculator styles */
-    .calculator {
-      border-radius: var(--border-radius);
+    @keyframes tabFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .sub-tabs {
+      display: flex; gap: var(--space-sm); margin-bottom: var(--space-xl);
+      overflow-x: auto; scrollbar-width: none; padding-bottom: var(--space-xs);
     }
-    
-    .input-field {
-      margin: 10px 0;
-      padding: 14px 16px;
-      width: 100%;
-      max-width: 300px;
-      border: 1px solid var(--background-secondary);
-      border-radius: var(--border-radius);
-      background-color: var(--background-secondary);
-      color: var(--text-light);
-      font-family: inherit;
-      font-size: 1em;
-      transition: all var(--transition-speed) ease;
+    .sub-tabs::-webkit-scrollbar { display: none; }
+    .sub-tab-button {
+      padding: var(--space-sm) var(--space-lg); background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border); border-radius: var(--radius-full);
+      color: var(--color-text-secondary); font-family: var(--font-sans);
+      font-size: 0.875rem; font-weight: 600; cursor: pointer;
+      transition: all var(--transition-fast); display: flex; align-items: center;
+      gap: var(--space-sm); white-space: nowrap; flex-shrink: 0;
     }
-    
-    .input-field:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
+    .sub-tab-button:hover { background: var(--color-bg-card-hover); color: var(--color-text-primary); border-color: var(--color-border-hover); }
+    .sub-tab-button.active { background: var(--color-accent); color: white; border-color: var(--color-accent); box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3); }
+    .sub-tab-button i { font-size: 0.8125rem; }
+
+    .sub-tabcontent { display: none; animation: tabFadeIn 0.3s ease; }
+    .sub-tabcontent.active { display: block; }
+
+    .calc-section {
+      padding: var(--space-xl); background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+      transition: all var(--transition-base); margin-bottom: var(--space-lg);
     }
-    
-    .result {
-      font-size: 1.2em;
-      margin: 20px 0;
-      padding: 20px;
-      background: var(--background-secondary);
-      border-radius: var(--border-radius);
-      color: var(--text-light);
-      border-left: 4px solid var(--primary-color);
+    .calc-section:hover { border-color: var(--color-border-hover); }
+    .calc-section h2 {
+      font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary);
+      margin-bottom: var(--space-sm); display: flex; align-items: center; gap: var(--space-sm);
     }
-    
-    .tabs {
-      display: flex;
-      margin-bottom: 20px;
-      overflow-x: auto;
+    .calc-section h2 i { color: var(--color-accent); font-size: 1.125rem; }
+    .calc-section h3 {
+      font-size: 1rem; font-weight: 600; color: var(--color-text-primary);
+      margin-top: var(--space-xl); margin-bottom: var(--space-md);
     }
-    
-    .tab-button {
-      padding: 12px 20px;
-      margin-right: 10px;
-      border: none;
-      background: var(--background-secondary);
-      color: var(--text-light);
-      cursor: pointer;
-      border-radius: var(--border-radius);
-      transition: all var(--transition-speed) ease;
-      white-space: nowrap;
-    }
-    
-    .tab-button.active {
-      background: var(--primary-color);
-      color: white;
-    }
-    
-    .tab-content {
-      display: none;
-    }
-    
-    .tab-content.active {
-      display: block;
-      animation: fadeIn 0.5s ease;
-    }
-    
-    .info-box {
-      margin-top: 20px;
-      padding: 20px;
-      background: rgba(78, 158, 255, 0.1);
-      border-radius: var(--border-radius);
-      border-left: 4px solid var(--primary-color);
-      color: var(--text-light);
-    }
-    
-    /* Series/parallel calculator styles */
-    .capacitors-container {
-      margin-top: 15px;
-    }
-    
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 24px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.9em;
-      transition: all var(--transition-speed) ease;
-      cursor: pointer;
-      border: none;
-      outline: none;
-      margin-right: 10px;
-      margin-bottom: 10px;
-    }
-    
-    .btn-primary {
-      background-color: var(--primary-color);
-      color: white;
-      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
-    }
-    
-    .btn-primary:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(78, 158, 255, 0.6);
-    }
-    
-    .btn-outline {
-      background-color: transparent;
-      color: var(--primary-color);
-      border: 2px solid var(--primary-color);
-    }
-    
-    .btn-outline:hover {
-      background-color: var(--primary-color);
-      color: white;
-      transform: translateY(-3px);
-    }
-    
-    .btn-success {
-      background-color: var(--success-color);
-      color: white;
-    }
-    
-    .btn-success:hover {
-      background-color: #3d8b40;
-      transform: translateY(-3px);
-    }
-    
-    input {
-      padding: 12px 15px;
-      border: 1px solid var(--background-secondary);
-      border-radius: var(--border-radius);
-      margin-bottom: 10px;
-      width: 120px;
-      background-color: var(--background-secondary);
-      color: var(--text-light);
-      transition: all var(--transition-speed) ease;
-    }
-    
-    input:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
-    }
-    
-    label {
-      display: inline-block;
-      margin-right: 10px;
-      color: var(--text-light);
-      font-weight: 500;
-    }
-    
-    .result-box {
-      margin-top: 20px;
-      padding: 20px;
-      background-color: rgba(78, 158, 255, 0.1);
-      border-radius: var(--border-radius);
-      border-left: 4px solid var(--primary-color);
-      color: var(--text-light);
-    }
-    
-    .capacitor-input {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
+    .calc-section > p { color: var(--color-text-secondary); margin-bottom: var(--space-lg); font-size: 0.9375rem; line-height: 1.6; }
+
+    .input-group {
+      display: flex; align-items: center; gap: var(--space-md);
+      margin-bottom: var(--space-md); padding: var(--space-md) var(--space-lg);
+      background: var(--color-bg-tertiary); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); transition: all var(--transition-fast);
       flex-wrap: wrap;
-      gap: 10px;
     }
-    
-    .capacitor-input span {
-      margin-left: 5px;
-      color: var(--text-light);
+    .input-group:hover { background: var(--color-bg-card-hover); border-color: var(--color-border-hover); }
+    .input-group label { font-weight: 600; color: var(--color-text-primary); min-width: 40px; font-size: 0.9375rem; }
+    .input-group input {
+      flex: 1; min-width: 100px; max-width: 200px; padding: 10px 14px;
+      background: var(--color-bg-card); border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-sm); color: var(--color-text-primary);
+      font-family: var(--font-mono); font-size: 0.9375rem; font-weight: 500;
+      transition: all var(--transition-fast); outline: none;
     }
-    
-    .unit-selector {
-      padding: 12px 15px;
-      border: 1px solid var(--background-secondary);
-      border-radius: var(--border-radius);
-      background-color: var(--background-secondary);
-      color: var(--text-light);
-      transition: all var(--transition-speed) ease;
+    .input-group input::placeholder { color: var(--color-text-tertiary); }
+    .input-group input:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); background: var(--color-bg-card); }
+    .input-group select {
+      padding: 10px 32px 10px 16px; background: var(--color-bg-tertiary);
+      border: 1.5px solid var(--color-border); border-radius: var(--radius-md);
+      color: var(--color-text-primary); font-family: var(--font-sans);
+      font-size: 0.9375rem; font-weight: 500; cursor: pointer;
+      transition: all var(--transition-fast); outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
     }
-    
-    .unit-selector:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
+    .input-group select:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: var(--space-sm); padding: 12px 24px; font-size: 0.9375rem;
+      font-weight: 600; border-radius: var(--radius-full);
+      transition: all var(--transition-fast); position: relative; overflow: hidden;
     }
-    
+    .btn-primary {
+      background: var(--color-accent); color: white;
+      box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
+    }
+    .btn-primary:hover { background: var(--color-accent-hover); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(59, 130, 246, 0.4); }
+    .btn-secondary {
+      background: var(--color-bg-tertiary); color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
+    .btn-secondary:hover { border-color: var(--color-border-hover); transform: translateY(-2px); }
+    .btn-success {
+      background: var(--color-success); color: white;
+      box-shadow: 0 2px 12px rgba(34, 197, 94, 0.3);
+    }
+    .btn-success:hover { background: #16a34a; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(34, 197, 94, 0.4); }
+    .btn-outline {
+      background: transparent; color: var(--color-accent);
+      border: 1.5px solid var(--color-accent);
+    }
+    .btn-outline:hover { background: var(--color-accent-subtle); color: var(--color-accent-light); transform: translateY(-2px); }
+
+    .btn-group {
+      display: flex; flex-wrap: wrap; gap: var(--space-sm); margin: var(--space-lg) 0;
+    }
+
+    .result-box {
+      margin-top: var(--space-lg); padding: var(--space-lg);
+      background: var(--color-bg-tertiary); border: 1px solid var(--color-border);
+      border-left: 4px solid var(--color-accent); border-radius: var(--radius-md);
+      color: var(--color-text-primary); line-height: 1.6; transition: all var(--transition-base);
+    }
+    .result-box:empty { display: none; }
+    .result-box strong { color: var(--color-accent-light); }
+
+    .result {
+      margin: var(--space-lg) 0; padding: var(--space-lg);
+      background: var(--color-bg-tertiary); border: 1px solid var(--color-border);
+      border-left: 4px solid var(--color-accent); border-radius: var(--radius-md);
+      color: var(--color-text-primary); font-size: 1rem; font-weight: 500;
+      line-height: 1.6; transition: all var(--transition-base);
+    }
+    .result:empty { display: none; }
+
+    .codes-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: var(--space-sm); margin-top: var(--space-lg);
+    }
+    .code-item {
+      padding: var(--space-md); background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border); border-radius: var(--radius-md);
+      text-align: center; cursor: pointer; transition: all var(--transition-fast);
+      font-family: var(--font-mono); font-size: 0.875rem; font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+    .code-item:hover { background: var(--color-accent); color: white; border-color: var(--color-accent); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3); }
+
+    .info-box {
+      margin-top: var(--space-xl); padding: var(--space-xl);
+      background: var(--color-accent-subtle); border: 1px solid var(--color-border-accent);
+      border-left: 4px solid var(--color-accent); border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+    }
+    .info-box h3 {
+      font-size: 1rem; font-weight: 700; color: var(--color-accent-light);
+      margin-bottom: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);
+    }
+    .info-box h3 i { color: var(--color-accent); }
+    .info-box p { color: var(--color-text-secondary); margin-bottom: var(--space-md); line-height: 1.7; font-size: 0.9375rem; }
+    .info-box p:last-child { margin-bottom: 0; }
+    .info-box ul { list-style: none; padding: 0; margin: var(--space-md) 0; }
+    .info-box ul li {
+      padding: var(--space-xs) 0; color: var(--color-text-secondary);
+      font-size: 0.9375rem; line-height: 1.6; padding-left: var(--space-lg);
+      position: relative;
+    }
+    .info-box ul li::before {
+      content: ''; position: absolute; left: 0; top: 12px;
+      width: 6px; height: 6px; background: var(--color-accent); border-radius: 50%;
+    }
+    .info-box strong { color: var(--color-text-primary); }
+
+    .formula {
+      text-align: center; font-size: 1.125rem; font-family: var(--font-mono);
+      font-weight: 600; margin: var(--space-lg) 0; padding: var(--space-md) var(--space-lg);
+      background: var(--color-bg-tertiary); border-radius: var(--radius-md);
+      border-left: 4px solid var(--color-accent); color: var(--color-text-primary);
+    }
+
     .explanation {
-      margin-top: 30px;
-      padding: 20px;
-      background-color: rgba(241, 196, 15, 0.1);
-      border-radius: var(--border-radius);
-      border-left: 4px solid #f1c40f;
-      color: var(--text-light);
+      margin-top: var(--space-xl); padding: var(--space-xl);
+      background: rgba(245, 158, 11, 0.06); border: 1px solid rgba(245, 158, 11, 0.15);
+      border-left: 4px solid var(--color-warning); border-radius: var(--radius-md);
+      color: var(--color-text-primary);
     }
+    .explanation h3 {
+      font-size: 1rem; font-weight: 700; color: var(--color-warning);
+      margin-bottom: var(--space-md); margin-top: var(--space-xl);
+    }
+    .explanation h3:first-child { margin-top: 0; }
+    .explanation p { color: var(--color-text-secondary); margin-bottom: var(--space-md); line-height: 1.7; font-size: 0.9375rem; }
+    .explanation strong { color: var(--color-text-primary); }
 
-    /* Dark Mode Toggle */
-    .theme-toggle {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: var(--card-dark);
-      color: var(--primary-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2em;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      transition: all var(--transition-speed) ease;
-      z-index: 999;
+    .tooltip {
+      position: relative; display: inline-flex; align-items: center; cursor: help;
     }
-    
-    .theme-toggle:hover {
-      transform: scale(1.1);
+    .tooltip .tooltiptext {
+      visibility: hidden; width: 220px; background: var(--color-bg-elevated);
+      color: var(--color-text-secondary); text-align: center; border-radius: var(--radius-md);
+      padding: var(--space-sm) var(--space-md); position: absolute; z-index: 100;
+      bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+      opacity: 0; transition: all var(--transition-fast); font-size: 0.8125rem;
+      font-weight: 500; box-shadow: var(--shadow-lg); border: 1px solid var(--color-border);
+      pointer-events: none;
     }
+    .tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
 
-    /* Footer */
-    footer {
-      background-color: var(--card-dark);
-      color: var(--text-light);
-      text-align: center;
-      padding: 30px;
-      margin-top: 50px;
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
+    .loading {
+      display: inline-block; width: 18px; height: 18px;
+      border: 2px solid var(--color-border); border-top-color: var(--color-accent);
+      border-radius: 50%; animation: spin 0.6s linear infinite;
+      vertical-align: middle; margin-right: var(--space-sm);
     }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    .social-footer {
-      display: flex;
-      justify-content: center;
-      margin: 20px 0;
-    }
-
-    .social-footer a {
-      color: var(--text-light);
-      font-size: 1.5em;
-      margin: 0 15px;
-      transition: all var(--transition-speed) ease;
-      display: inline-block;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .social-footer a:hover {
-      color: white;
-      background: var(--primary-color);
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
-    }
-
-    .footer-bottom {
-      margin-top: 20px;
-      font-size: 0.9em;
-      opacity: 0.8;
-    }
-
-    /* Animations */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+    .footer {
+      background: var(--color-bg-primary); border-top: 1px solid var(--color-border);
+      padding: var(--space-3xl) 0 var(--space-xl);
+    }
+    .footer-content {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: var(--space-md);
+    }
+    .footer-social { display: flex; gap: var(--space-sm); }
+    .footer-social a {
+      width: 40px; height: 40px; display: flex; align-items: center;
+      justify-content: center; border-radius: var(--radius-md);
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      color: var(--color-text-secondary); transition: all var(--transition-fast);
+    }
+    .footer-social a:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+    .footer-bottom { font-size: 0.875rem; color: var(--color-text-tertiary); }
+    .footer-bottom a { color: var(--color-accent); }
+
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-secondary);
+      font-size: 1rem; z-index: 999; opacity: 0; visibility: hidden;
+      transform: translateY(12px); transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+
+    .theme-toggle {
+      position: fixed; bottom: 32px; right: 90px; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-secondary);
+      font-size: 1rem; z-index: 999; transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+    .theme-toggle:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+
+    .toast {
+      position: fixed; bottom: 100px; right: 32px; padding: var(--space-md) var(--space-lg);
+      background: var(--color-success); color: white; border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg); z-index: 10000; font-size: 0.875rem; font-weight: 500;
+      transform: translateX(120%); transition: transform var(--transition-base);
+      max-width: 400px;
+    }
+    .toast.show { transform: translateX(0); }
+    .toast.error { background: var(--color-error); }
+
+    .loader {
+      position: fixed; inset: 0; background: var(--color-bg-primary);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 99999; transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-spinner {
+      width: 40px; height: 40px; border: 3px solid var(--color-border);
+      border-top-color: var(--color-accent); border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .loader-text { margin-top: var(--space-lg); font-size: 0.875rem; color: var(--color-text-tertiary); font-weight: 500; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
     }
 
-    .pulse {
-      animation: pulse 0.5s ease;
+    @media all and (display-mode: standalone) {
+      body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
     }
 
-    /* Common Codes Grid */
-    .codes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .code-item {
-      background: var(--background-secondary);
-      padding: 15px;
-      border-radius: var(--border-radius);
-      text-align: center;
-      transition: all var(--transition-speed) ease;
-      cursor: pointer;
-    }
-
-    .code-item:hover {
-      background: var(--primary-color);
-      color: white;
-      transform: translateY(-3px);
-    }
-
-    /* Responsive Design */
     @media (max-width: 768px) {
-      .input-field {
-        width: 100%;
-      }
-      
-      .tab-button {
-        padding: 10px 15px;
-        font-size: 14px;
-      }
-      
-      .main-tab-button {
-        padding: 14px 16px;
-        font-size: 14px;
-      }
-      
-      .capacitor-input {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      
-      .capacitor-input input {
-        width: 100%;
-      }
+      .main-tab-button { min-width: 120px; padding: var(--space-sm) var(--space-md); font-size: 0.8125rem; }
+      .main-tabcontent { padding: var(--space-lg); }
+      .input-group { flex-direction: column; align-items: stretch; }
+      .input-group input { max-width: 100%; }
+      .input-group label { min-width: auto; }
+      .btn-group { flex-direction: column; align-items: center; }
+      .btn { width: 100%; max-width: 300px; justify-content: center; }
+      .codes-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 480px) {
-      .header h1 {
-        font-size: 1.8em;
-      }
-      
-      .main-tabs {
-        flex-direction: column;
-      }
-      
-      .tabs {
-        flex-direction: column;
-      }
-      
-      .tab-button {
-        margin-right: 0;
-        margin-bottom: 5px;
-      }
-      
-      .theme-toggle {
-        width: 40px;
-        height: 40px;
-        font-size: 1em;
-        bottom: 20px;
-        left: 20px;
-      }
-    }
-
-    /* Loading Spinner */
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid rgba(255,255,255,.3);
-      border-radius: 50%;
-      border-top-color: var(--primary-color);
-      animation: spin 1s ease-in-out infinite;
-      margin-right: 10px;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Tooltip */
-    .tooltip {
-      position: relative;
-      display: inline-block;
-    }
-
-    .tooltip .tooltiptext {
-      visibility: hidden;
-      width: 200px;
-      background-color: var(--card-dark);
-      color: var(--text-light);
-      text-align: center;
-      border-radius: var(--border-radius);
-      padding: 10px;
-      position: absolute;
-      z-index: 1;
-      bottom: 125%;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      font-size: 0.8em;
-      box-shadow: var(--box-shadow);
-    }
-
-    .tooltip:hover .tooltiptext {
-      visibility: visible;
-      opacity: 1;
+      .codes-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
 <body>
-  <div class="calculator-container">
-    <div class="header">
-      <h1><i class="fas fa-bolt"></i> Capacitor Calculators</h1>
-      <p>Advanced tools for electronics engineers and hobbyists</p>
-    </div>
-    
-    <div class="main-tabs">
-      <button class="main-tab-button active" onclick="openMainTab(event, 'CodeCalculator')">
-        <i class="fas fa-code"></i> Code Calculator
-      </button>
-      <button class="main-tab-button" onclick="openMainTab(event, 'SeriesParallel')">
-        <i class="fas fa-project-diagram"></i> Series/Parallel
-      </button>
-      <button class="main-tab-button" onclick="openMainTab(event, 'AdvancedTools')">
-        <i class="fas fa-tools"></i> Advanced Tools
-      </button>
-    </div>
-    
-    <!-- Code Calculator Tab -->
-    <div id="CodeCalculator" class="main-tabcontent" style="display: block;">
-      <div class="tabs">
-        <button class="tab-button active" onclick="switchTab('ceramic')">
-          <i class="fas fa-microchip"></i> Ceramic
-        </button>
-        <button class="tab-button" onclick="switchTab('electrolytic')">
-          <i class="fas fa-battery-half"></i> Electrolytic
-        </button>
-        <button class="tab-button" onclick="switchTab('info')">
-          <i class="fas fa-info-circle"></i> Information
-        </button>
-      </div>
-
-      <div id="ceramic" class="tab-content active calculator">
-        <h2>Ceramic Capacitor Calculator</h2>
-        <p>Enter 3-digit code (e.g., 104, 472) or 2-digit code with multiplier (e.g., 4R7):</p>
-        <input type="text" class="input-field" id="ceramicCode" placeholder="e.g., 104" oninput="calculateCeramic()">
-        <div class="result" id="ceramicResult">Enter a code to calculate capacitance</div>
-        
-        <h3>Common Codes <span class="tooltip">ⓘ
-          <span class="tooltiptext">Click on any code to automatically input it</span>
-        </span>:</h3>
-        <div class="codes-grid">
-          <div class="code-item" onclick="setCeramicCode('104')">104 = 100nF</div>
-          <div class="code-item" onclick="setCeramicCode('473')">473 = 47nF</div>
-          <div class="code-item" onclick="setCeramicCode('222')">222 = 2.2nF</div>
-          <div class="code-item" onclick="setCeramicCode('103')">103 = 10nF</div>
-          <div class="code-item" onclick="setCeramicCode('224')">224 = 220nF</div>
-          <div class="code-item" onclick="setCeramicCode('4R7')">4R7 = 4.7pF</div>
-        </div>
-      </div>
-
-      <div id="electrolytic" class="tab-content calculator">
-        <h2>Electrolytic Capacitor Calculator</h2>
-        <p>Enter value with unit (e.g., 10µF, 47nF, 1000pF):</p>
-        <input type="text" class="input-field" id="electrolyticValue" placeholder="e.g., 10µF" oninput="calculateElectrolytic()">
-        <div class="result" id="electrolyticResult">Enter a value to calculate</div>
-        
-        <h3>Voltage Rating Colors (optional):</h3>
-        <select class="input-field" id="voltageColor" onchange="calculateElectrolytic()">
-          <option value="">Select color</option>
-          <option value="4">Black (4V)</option>
-          <option value="6.3">Brown (6.3V)</option>
-          <option value="10">Red (10V)</option>
-          <option value="16">Orange (16V)</option>
-          <option value="25">Yellow (25V)</option>
-          <option value="35">Green (35V)</option>
-          <option value="50">Blue (50V)</option>
-          <option value="63">Violet (63V)</option>
-        </select>
-        <div id="voltageResult" class="result"></div>
-      </div>
-
-      <div id="info" class="tab-content calculator">
-        <h2>Capacitor Code Information</h2>
-        
-        <div class="info-box">
-          <h3>Ceramic Capacitor Codes:</h3>
-          <p>Most ceramic capacitors use a 3-digit code:</p>
-          <ul>
-            <li><strong>First two digits</strong>: Significant figures</li>
-            <li><strong>Third digit</strong>: Multiplier (power of 10)</li>
-            <li><strong>Result is in picofarads (pF)</strong></li>
-          </ul>
-          <p><strong>Example:</strong> 104 = 10 × 10⁴ pF = 100,000pF = 100nF = 0.1µF</p>
-        </div>
-        
-        <div class="info-box">
-          <h3>Electrolytic Capacitor Markings:</h3>
-          <p>Electrolytic capacitors are usually marked with:</p>
-          <ul>
-            <li>Actual capacitance value (e.g., 10µF)</li>
-            <li>Voltage rating (e.g., 16V)</li>
-            <li>Polarity markings (+, - or stripe)</li>
-          </ul>
-          <p>Some older capacitors may use color codes for voltage rating.</p>
-        </div>
-        
-        <div class="info-box">
-          <h3>Unit Conversions:</h3>
-          <ul>
-            <li>1 Farad (F) = 1,000,000 microfarads (µF)</li>
-            <li>1 microfarad (µF) = 1,000 nanofarads (nF)</li>
-            <li>1 nanofarad (nF) = 1,000 picofarads (pF)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Series/Parallel Calculator Tab -->
-    <div id="SeriesParallel" class="main-tabcontent">
-      <div class="tabs">
-        <button class="tab-button active" onclick="switchCalcTab('SeriesTab')">
-          <i class="fas fa-link"></i> Series
-        </button>
-        <button class="tab-button" onclick="switchCalcTab('ParallelTab')">
-          <i class="fas fa-th"></i> Parallel
-        </button>
-        <button class="tab-button" onclick="switchCalcTab('ExplanationTab')">
-          <i class="fas fa-book"></i> Theory
-        </button>
-      </div>
-      
-      <!-- Series Tab -->
-      <div id="SeriesTab" class="tab-content active calculator">
-        <h2>Series Capacitors Calculator</h2>
-        <p>Enter capacitor values to calculate the equivalent capacitance in series.</p>
-        
-        <div id="series-capacitors" class="capacitors-container">
-          <div class="capacitor-input">
-            <label>C1:</label>
-            <input type="number" min="0" step="0.01" value="10">
-            <select class="unit-selector">
-              <option value="1e-12">pF</option>
-              <option value="1e-9">nF</option>
-              <option value="1e-6" selected>μF</option>
-              <option value="1e-3">mF</option>
-              <option value="1">F</option>
-            </select>
-          </div>
-          <div class="capacitor-input">
-            <label>C2:</label>
-            <input type="number" min="0" step="0.01" value="22">
-            <select class="unit-selector">
-              <option value="1e-12">pF</option>
-              <option value="1e-9">nF</option>
-              <option value="1e-6" selected>μF</option>
-              <option value="1e-3">mF</option>
-              <option value="1">F</option>
-            </select>
-          </div>
-        </div>
-        
-        <button class="btn btn-primary" onclick="addCapacitor('series')">
-          <i class="fas fa-plus"></i> Add Capacitor
-        </button>
-        <button class="btn btn-outline" onclick="removeCapacitor('series')">
-          <i class="fas fa-minus"></i> Remove
-        </button>
-        <button class="btn btn-success" onclick="calculate('series')">
-          <i class="fas fa-calculator"></i> Calculate
-        </button>
-        
-        <div id="series-result" class="result-box">
-          <p>The equivalent capacitance will be shown here.</p>
-        </div>
-      </div>
-      
-      <!-- Parallel Tab -->
-      <div id="ParallelTab" class="tab-content calculator">
-        <h2>Parallel Capacitors Calculator</h2>
-        <p>Enter capacitor values to calculate the equivalent capacitance in parallel.</p>
-        
-        <div id="parallel-capacitors" class="capacitors-container">
-          <div class="capacitor-input">
-            <label>C1:</label>
-            <input type="number" min="0" step="0.01" value="10">
-            <select class="unit-selector">
-              <option value="1e-12">pF</option>
-              <option value="1e-9">nF</option>
-              <option value="1e-6" selected>μF</option>
-              <option value="1e-3">mF</option>
-              <option value="1">F</option>
-            </select>
-          </div>
-          <div class="capacitor-input">
-            <label>C2:</label>
-            <input type="number" min="0" step="0.01" value="22">
-            <select class="unit-selector">
-              <option value="1e-12">pF</option>
-              <option value="1e-9">nF</option>
-              <option value="1e-6" selected>μF</option>
-              <option value="1e-3">mF</option>
-              <option value="1">F</option>
-            </select>
-          </div>
-        </div>
-        
-        <button class="btn btn-primary" onclick="addCapacitor('parallel')">
-          <i class="fas fa-plus"></i> Add Capacitor
-        </button>
-        <button class="btn btn-outline" onclick="removeCapacitor('parallel')">
-          <i class="fas fa-minus"></i> Remove
-        </button>
-        <button class="btn btn-success" onclick="calculate('parallel')">
-          <i class="fas fa-calculator"></i> Calculate
-        </button>
-        
-        <div id="parallel-result" class="result-box">
-          <p>The equivalent capacitance will be shown here.</p>
-        </div>
-      </div>
-      
-      <!-- Explanation Tab -->
-      <div id="ExplanationTab" class="tab-content calculator">
-        <h2>Theory of Capacitors in Series and Parallel</h2>
-        
-        <div class="explanation">
-          <h3>Capacitors in Series</h3>
-          <p>When capacitors are connected in series, the equivalent capacitance is calculated using:</p>
-          <p style="text-align: center; font-size: 18px;">
-            1/C<sub>eq</sub> = 1/C<sub>1</sub> + 1/C<sub>2</sub> + 1/C<sub>3</sub> + ... + 1/C<sub>n</sub>
-          </p>
-          <p>This means the equivalent capacitance is always smaller than the smallest individual capacitor in the series.</p>
-          
-          <h3>Capacitors in Parallel</h3>
-          <p>When capacitors are connected in parallel, the equivalent capacitance is calculated by adding the individual capacitances:</p>
-          <p style="text-align: center; font-size: 18px;">
-            C<sub>eq</sub> = C<sub>1</sub> + C<sub>2</sub> + C<sub>3</sub> + ... + C<sub>n</sub>
-          </p>
-          <p>This means the equivalent capacitance is always larger than the largest individual capacitor in the parallel connection.</p>
-          
-          <h3>Physical Explanation</h3>
-          <p><strong>Series connection:</strong> In series, the same charge must exist on each capacitor, but the voltage is divided across all capacitors. This effectively creates a single capacitor with increased plate separation, resulting in decreased capacitance.</p>
-          <p><strong>Parallel connection:</strong> In parallel, each capacitor has the same voltage across it, but the charge is divided among all capacitors. This effectively creates a single capacitor with increased plate area, resulting in increased capacitance.</p>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Advanced Tools Tab -->
-    <div id="AdvancedTools" class="main-tabcontent">
-      <h2>Advanced Capacitor Tools</h2>
-      <p>Additional tools for electronics engineers and advanced hobbyists.</p>
-      
-      <div class="info-box">
-        <h3><i class="fas fa-calculator"></i> RC Time Constant Calculator</h3>
-        <p>Calculate the time constant (τ) of an RC circuit.</p>
-        
-        <div class="capacitor-input">
-          <label>Resistance (R):</label>
-          <input type="number" id="resistance" min="0" step="0.1" value="1000">
-          <select id="resistanceUnit">
-            <option value="1">Ω</option>
-            <option value="1000">kΩ</option>
-            <option value="1000000">MΩ</option>
-          </select>
-        </div>
-        
-        <div class="capacitor-input">
-          <label>Capacitance (C):</label>
-          <input type="number" id="capacitance" min="0" step="0.1" value="10">
-          <select id="capacitanceUnit">
-            <option value="1e-12">pF</option>
-            <option value="1e-9">nF</option>
-            <option value="1e-6" selected>μF</option>
-            <option value="1e-3">mF</option>
-            <option value="1">F</option>
-          </select>
-        </div>
-        
-        <button class="btn btn-primary" onclick="calculateTimeConstant()">
-          <i class="fas fa-calculator"></i> Calculate Time Constant
-        </button>
-        
-        <div id="timeConstantResult" class="result-box">
-          <p>Time constant will be shown here.</p>
-        </div>
-      </div>
-      
-      <div class="info-box">
-        <h3><i class="fas fa-bolt"></i> Energy Storage Calculator</h3>
-        <p>Calculate the energy stored in a capacitor.</p>
-        
-        <div class="capacitor-input">
-          <label>Capacitance:</label>
-          <input type="number" id="energyCapacitance" min="0" step="0.1" value="100">
-          <select id="energyCapacitanceUnit">
-            <option value="1e-12">pF</option>
-            <option value="1e-9">nF</option>
-            <option value="1e-6" selected>μF</option>
-            <option value="1e-3">mF</option>
-            <option value="1">F</option>
-          </select>
-        </div>
-        
-        <div class="capacitor-input">
-          <label>Voltage (V):</label>
-          <input type="number" id="voltage" min="0" step="0.1" value="12">
-        </div>
-        
-        <button class="btn btn-primary" onclick="calculateEnergy()">
-          <i class="fas fa-calculator"></i> Calculate Energy
-        </button>
-        
-        <div id="energyResult" class="result-box">
-          <p>Energy will be shown here.</p>
-        </div>
-      </div>
-    </div>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Loading calculator...</p>
   </div>
 
-  <!-- Dark Mode Toggle -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-    <i class="fas fa-moon"></i>
-  </button>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="social-footer">
-      <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn">
-        <i class="fab fa-linkedin-in"></i>
+  <header class="header" id="header" role="banner">
+    <div class="container">
+      <a href="../index.html" class="logo" aria-label="Mohamed Tarek - Home">
+        <span class="logo-icon">MT</span>
+        <span>Mohamed Tarek</span>
       </a>
-      <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub">
-        <i class="fab fa-github"></i>
-      </a>
-      <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#skills" class="nav-link">Skills</a>
+        <a href="../index.html#projects" class="nav-link">Projects</a>
+        <a href="../index.html#contact" class="nav-link">Contact</a>
+        <a href="../index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+      </nav>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; <span id="current-year">2025</span> Mohamed Tarek. All Rights Reserved.</p>
-      <p>Designed & Developed with <i class="fas fa-heart" style="color: #ff4757;"></i> by Mohamed Tarek</p>
+  </header>
+
+  <main id="main">
+    <section class="page-hero" aria-label="Page header">
+      <div class="page-hero-bg" aria-hidden="true">
+        <div class="page-hero-orb"></div>
+        <div class="page-hero-orb"></div>
+        <div class="page-hero-grid"></div>
+      </div>
+      <div class="container">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Engineering Tool
+        </div>
+        <h1><i class="fas fa-bolt"></i> <span class="gradient-text">Capacitor</span> Calculators</h1>
+        <p>Advanced tools for electronics engineers and hobbyists</p>
+        <div class="hero-stats">
+          <span class="hero-stat"><i class="fas fa-code"></i> Ceramic Codes</span>
+          <span class="hero-stat"><i class="fas fa-project-diagram"></i> Series/Parallel</span>
+          <span class="hero-stat"><i class="fas fa-stopwatch"></i> RC Time Constant</span>
+          <span class="hero-stat"><i class="fas fa-bolt"></i> Energy Storage</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="main-content" aria-label="Calculator">
+      <div class="container">
+        <!-- Main Tabs -->
+        <div class="main-tabs" role="tablist" aria-label="Calculator categories">
+          <button class="main-tab-button active" role="tab" aria-selected="true" aria-controls="CodeCalculator" id="tab-CodeCalculator" onclick="openMainTab(event, 'CodeCalculator')">
+            <i class="fas fa-code"></i> Code Calculator
+          </button>
+          <button class="main-tab-button" role="tab" aria-selected="false" aria-controls="SeriesParallel" id="tab-SeriesParallel" onclick="openMainTab(event, 'SeriesParallel')">
+            <i class="fas fa-project-diagram"></i> Series/Parallel
+          </button>
+          <button class="main-tab-button" role="tab" aria-selected="false" aria-controls="AdvancedTools" id="tab-AdvancedTools" onclick="openMainTab(event, 'AdvancedTools')">
+            <i class="fas fa-wrench"></i> Advanced Tools
+          </button>
+        </div>
+
+        <!-- CODE CALCULATOR TAB -->
+        <div id="CodeCalculator" class="main-tabcontent" role="tabpanel" aria-labelledby="tab-CodeCalculator" style="display: block;">
+          <div class="sub-tabs" role="tablist" aria-label="Code calculator types">
+            <button class="sub-tab-button active" role="tab" aria-selected="true" onclick="switchTab('ceramic')">
+              <i class="fas fa-microchip"></i> Ceramic
+            </button>
+            <button class="sub-tab-button" role="tab" aria-selected="false" onclick="switchTab('electrolytic')">
+              <i class="fas fa-battery-half"></i> Electrolytic
+            </button>
+            <button class="sub-tab-button" role="tab" aria-selected="false" onclick="switchTab('info')">
+              <i class="fas fa-info-circle"></i> Information
+            </button>
+          </div>
+
+          <!-- Ceramic -->
+          <div id="ceramic" class="sub-tabcontent active" role="tabpanel">
+            <div class="calc-section">
+              <h2><i class="fas fa-microchip"></i> Ceramic Capacitor Calculator</h2>
+              <p>Enter a 3-digit code (e.g., <strong>104</strong>) or a 2-digit code with multiplier (e.g., <strong>4R7</strong>):</p>
+              <div class="input-group">
+                <label for="ceramicCode">Code:</label>
+                <input type="text" id="ceramicCode" placeholder="e.g., 104" oninput="calculateCeramic()" aria-describedby="ceramicResult">
+              </div>
+              <div class="result" id="ceramicResult" role="status" aria-live="polite">Enter a code to calculate capacitance</div>
+
+              <h3>Common Codes <span class="tooltip" aria-label="Click any code to auto-fill">ⓘ
+                <span class="tooltiptext">Click on any code to automatically input it</span>
+              </span>:</h3>
+              <div class="codes-grid" role="group" aria-label="Common ceramic capacitor codes">
+                <button class="code-item" onclick="setCeramicCode('104')" aria-label="104 equals 100nF">104 = 100nF</button>
+                <button class="code-item" onclick="setCeramicCode('473')" aria-label="473 equals 47nF">473 = 47nF</button>
+                <button class="code-item" onclick="setCeramicCode('222')" aria-label="222 equals 2.2nF">222 = 2.2nF</button>
+                <button class="code-item" onclick="setCeramicCode('103')" aria-label="103 equals 10nF">103 = 10nF</button>
+                <button class="code-item" onclick="setCeramicCode('224')" aria-label="224 equals 220nF">224 = 220nF</button>
+                <button class="code-item" onclick="setCeramicCode('4R7')" aria-label="4R7 equals 4.7pF">4R7 = 4.7pF</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Electrolytic -->
+          <div id="electrolytic" class="sub-tabcontent" role="tabpanel">
+            <div class="calc-section">
+              <h2><i class="fas fa-battery-half"></i> Electrolytic Capacitor Calculator</h2>
+              <p>Enter a value with unit (e.g., <strong>10µF</strong>, <strong>47nF</strong>, <strong>1000pF</strong>):</p>
+              <div class="input-group">
+                <label for="electrolyticValue">Value:</label>
+                <input type="text" id="electrolyticValue" placeholder="e.g., 10µF" oninput="calculateElectrolytic()" aria-describedby="electrolyticResult">
+              </div>
+              <div class="result" id="electrolyticResult" role="status" aria-live="polite">Enter a value to calculate</div>
+
+              <h3>Voltage Rating Colors (optional):</h3>
+              <div class="input-group">
+                <label for="voltageColor">Color:</label>
+                <select id="voltageColor" onchange="calculateElectrolytic()">
+                  <option value="">Select color</option>
+                  <option value="4">Black (4V)</option>
+                  <option value="6.3">Brown (6.3V)</option>
+                  <option value="10">Red (10V)</option>
+                  <option value="16">Orange (16V)</option>
+                  <option value="25">Yellow (25V)</option>
+                  <option value="35">Green (35V)</option>
+                  <option value="50">Blue (50V)</option>
+                  <option value="63">Violet (63V)</option>
+                </select>
+              </div>
+              <div id="voltageResult" class="result" role="status" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <!-- Information -->
+          <div id="info" class="sub-tabcontent" role="tabpanel">
+            <div class="calc-section">
+              <h2><i class="fas fa-info-circle"></i> Capacitor Code Information</h2>
+
+              <div class="info-box">
+                <h3><i class="fas fa-graduation-cap"></i> Ceramic Capacitor Codes</h3>
+                <p>Most ceramic capacitors use a 3-digit code:</p>
+                <ul>
+                  <li><strong>First two digits</strong>: Significant figures</li>
+                  <li><strong>Third digit</strong>: Multiplier (power of 10)</li>
+                  <li><strong>Result is in picofarads (pF)</strong></li>
+                </ul>
+                <div class="formula">104 = 10 × 10⁴ pF = 100,000pF = 100nF = 0.1µF</div>
+              </div>
+
+              <div class="info-box">
+                <h3><i class="fas fa-battery-half"></i> Electrolytic Capacitor Markings</h3>
+                <p>Electrolytic capacitors are usually marked with:</p>
+                <ul>
+                  <li>Actual capacitance value (e.g., 10µF)</li>
+                  <li>Voltage rating (e.g., 16V)</li>
+                  <li>Polarity markings (+, - or stripe)</li>
+                </ul>
+                <p>Some older capacitors may use color codes for voltage rating.</p>
+              </div>
+
+              <div class="info-box">
+                <h3><i class="fas fa-exchange-alt"></i> Unit Conversions</h3>
+                <ul>
+                  <li>1 Farad (F) = 1,000,000 microfarads (µF)</li>
+                  <li>1 microfarad (µF) = 1,000 nanofarads (nF)</li>
+                  <li>1 nanofarad (nF) = 1,000 picofarads (pF)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SERIES / PARALLEL TAB -->
+        <div id="SeriesParallel" class="main-tabcontent" role="tabpanel" aria-labelledby="tab-SeriesParallel">
+          <div class="sub-tabs" role="tablist" aria-label="Series/Parallel modes">
+            <button class="sub-tab-button active" role="tab" aria-selected="true" onclick="switchCalcTab('SeriesTab')">
+              <i class="fas fa-link"></i> Series
+            </button>
+            <button class="sub-tab-button" role="tab" aria-selected="false" onclick="switchCalcTab('ParallelTab')">
+              <i class="fas fa-th"></i> Parallel
+            </button>
+            <button class="sub-tab-button" role="tab" aria-selected="false" onclick="switchCalcTab('ExplanationTab')">
+              <i class="fas fa-book"></i> Theory
+            </button>
+          </div>
+
+          <!-- Series -->
+          <div id="SeriesTab" class="sub-tabcontent active" role="tabpanel">
+            <div class="calc-section">
+              <h2><i class="fas fa-link"></i> Series Capacitors Calculator</h2>
+              <p>Enter capacitor values to calculate the equivalent capacitance in series.</p>
+
+              <div id="series-capacitors" role="group" aria-label="Series capacitor inputs">
+                <div class="input-group">
+                  <label for="series-c1">C1:</label>
+                  <input type="number" id="series-c1" min="0" step="0.01" value="10" aria-label="Capacitor 1 value">
+                  <select aria-label="Capacitor 1 unit">
+                    <option value="1e-12">pF</option>
+                    <option value="1e-9">nF</option>
+                    <option value="1e-6" selected>μF</option>
+                    <option value="1e-3">mF</option>
+                    <option value="1">F</option>
+                  </select>
+                </div>
+                <div class="input-group">
+                  <label for="series-c2">C2:</label>
+                  <input type="number" id="series-c2" min="0" step="0.01" value="22" aria-label="Capacitor 2 value">
+                  <select aria-label="Capacitor 2 unit">
+                    <option value="1e-12">pF</option>
+                    <option value="1e-9">nF</option>
+                    <option value="1e-6" selected>μF</option>
+                    <option value="1e-3">mF</option>
+                    <option value="1">F</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="btn-group">
+                <button class="btn btn-primary" onclick="addCapacitor('series')" aria-label="Add another capacitor">
+                  <i class="fas fa-plus"></i> Add
+                </button>
+                <button class="btn btn-outline" onclick="removeCapacitor('series')" aria-label="Remove last capacitor">
+                  <i class="fas fa-minus"></i> Remove
+                </button>
+                <button class="btn btn-success" onclick="calculate('series')" aria-label="Calculate series equivalent">
+                  <i class="fas fa-calculator"></i> Calculate
+                </button>
+              </div>
+
+              <div id="series-result" class="result-box" role="status" aria-live="polite">
+                <p>The equivalent capacitance will be shown here.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Parallel -->
+          <div id="ParallelTab" class="sub-tabcontent" role="tabpanel">
+            <div class="calc-section">
+              <h2><i class="fas fa-th"></i> Parallel Capacitors Calculator</h2>
+              <p>Enter capacitor values to calculate the equivalent capacitance in parallel.</p>
+
+              <div id="parallel-capacitors" role="group" aria-label="Parallel capacitor inputs">
+                <div class="input-group">
+                  <label for="parallel-c1">C1:</label>
+                  <input type="number" id="parallel-c1" min="0" step="0.01" value="10" aria-label="Capacitor 1 value">
+                  <select aria-label="Capacitor 1 unit">
+                    <option value="1e-12">pF</option>
+                    <option value="1e-9">nF</option>
+                    <option value="1e-6" selected>μF</option>
+                    <option value="1e-3">mF</option>
+                    <option value="1">F</option>
+                  </select>
+                </div>
+                <div class="input-group">
+                  <label for="parallel-c2">C2:</label>
+                  <input type="number" id="parallel-c2" min="0" step="0.01" value="22" aria-label="Capacitor 2 value">
+                  <select aria-label="Capacitor 2 unit">
+                    <option value="1e-12">pF</option>
+                    <option value="1e-9">nF</option>
+                    <option value="1e-6" selected>μF</option>
+                    <option value="1e-3">mF</option>
+                    <option value="1">F</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="btn-group">
+                <button class="btn btn-primary" onclick="addCapacitor('parallel')" aria-label="Add another capacitor">
+                  <i class="fas fa-plus"></i> Add
+                </button>
+                <button class="btn btn-outline" onclick="removeCapacitor('parallel')" aria-label="Remove last capacitor">
+                  <i class="fas fa-minus"></i> Remove
+                </button>
+                <button class="btn btn-success" onclick="calculate('parallel')" aria-label="Calculate parallel equivalent">
+                  <i class="fas fa-calculator"></i> Calculate
+                </button>
+              </div>
+
+              <div id="parallel-result" class="result-box" role="status" aria-live="polite">
+                <p>The equivalent capacitance will be shown here.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Theory -->
+          <div id="ExplanationTab" class="sub-tabcontent" role="tabpanel">
+            <div class="calc-section">
+              <h2><i class="fas fa-book"></i> Theory of Series & Parallel Capacitors</h2>
+
+              <div class="explanation">
+                <h3>Capacitors in Series</h3>
+                <p>When capacitors are connected in series, the equivalent capacitance is calculated using:</p>
+                <div class="formula">1/C<sub>eq</sub> = 1/C<sub>1</sub> + 1/C<sub>2</sub> + 1/C<sub>3</sub> + ... + 1/C<sub>n</sub></div>
+                <p>This means the equivalent capacitance is always <strong>smaller</strong> than the smallest individual capacitor in the series.</p>
+
+                <h3>Capacitors in Parallel</h3>
+                <p>When capacitors are connected in parallel, the equivalent capacitance is calculated by adding the individual capacitances:</p>
+                <div class="formula">C<sub>eq</sub> = C<sub>1</sub> + C<sub>2</sub> + C<sub>3</sub> + ... + C<sub>n</sub></div>
+                <p>This means the equivalent capacitance is always <strong>larger</strong> than the largest individual capacitor in the parallel connection.</p>
+
+                <h3>Physical Explanation</h3>
+                <p><strong>Series connection:</strong> In series, the same charge must exist on each capacitor, but the voltage is divided across all capacitors. This effectively creates a single capacitor with increased plate separation, resulting in decreased capacitance.</p>
+                <p><strong>Parallel connection:</strong> In parallel, each capacitor has the same voltage across it, but the charge is divided among all capacitors. This effectively creates a single capacitor with increased plate area, resulting in increased capacitance.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADVANCED TOOLS TAB -->
+        <div id="AdvancedTools" class="main-tabcontent" role="tabpanel" aria-labelledby="tab-AdvancedTools">
+          <!-- RC Time Constant -->
+          <div class="calc-section">
+            <h2><i class="fas fa-stopwatch"></i> RC Time Constant Calculator</h2>
+            <p>Calculate the time constant (τ) of an RC circuit: <strong>τ = R × C</strong></p>
+
+            <div class="input-group">
+              <label for="resistance">Resistance (R):</label>
+              <input type="number" id="resistance" min="0" step="0.1" value="1000" aria-label="Resistance value">
+              <select id="resistanceUnit" aria-label="Resistance unit">
+                <option value="1">Ω</option>
+                <option value="1000">kΩ</option>
+                <option value="1000000">MΩ</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="capacitance">Capacitance (C):</label>
+              <input type="number" id="capacitance" min="0" step="0.1" value="10" aria-label="Capacitance value">
+              <select id="capacitanceUnit" aria-label="Capacitance unit">
+                <option value="1e-12">pF</option>
+                <option value="1e-9">nF</option>
+                <option value="1e-6" selected>μF</option>
+                <option value="1e-3">mF</option>
+                <option value="1">F</option>
+              </select>
+            </div>
+
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="calculateTimeConstant()" aria-label="Calculate RC time constant">
+                <i class="fas fa-calculator"></i> Calculate Time Constant
+              </button>
+            </div>
+
+            <div id="timeConstantResult" class="result-box" role="status" aria-live="polite">
+              <p>Time constant will be shown here.</p>
+            </div>
+          </div>
+
+          <!-- Energy Storage -->
+          <div class="calc-section">
+            <h2><i class="fas fa-bolt"></i> Energy Storage Calculator</h2>
+            <p>Calculate the energy stored in a capacitor: <strong>E = ½CV²</strong></p>
+
+            <div class="input-group">
+              <label for="energyCapacitance">Capacitance:</label>
+              <input type="number" id="energyCapacitance" min="0" step="0.1" value="100" aria-label="Energy capacitance value">
+              <select id="energyCapacitanceUnit" aria-label="Energy capacitance unit">
+                <option value="1e-12">pF</option>
+                <option value="1e-9">nF</option>
+                <option value="1e-6" selected>μF</option>
+                <option value="1e-3">mF</option>
+                <option value="1">F</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="voltage">Voltage (V):</label>
+              <input type="number" id="voltage" min="0" step="0.1" value="12" aria-label="Voltage value">
+            </div>
+
+            <div class="btn-group">
+              <button class="btn btn-primary" onclick="calculateEnergy()" aria-label="Calculate stored energy">
+                <i class="fas fa-calculator"></i> Calculate Energy
+              </button>
+            </div>
+
+            <div id="energyResult" class="result-box" role="status" aria-live="polite">
+              <p>Energy will be shown here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="footer-bottom">
+          &copy; <span id="currentYear"></span> Mohamed Tarek. All Rights Reserved. | <a href="../index.html">Back to Portfolio</a>
+        </div>
+      </div>
     </div>
   </footer>
 
+  <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode"><i class="fas fa-moon"></i></button>
+  <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
   <script>
-    // Set current year in footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    (() => {
+      'use strict';
 
-    // Dark/Light Mode Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = themeToggle.querySelector('i');
-    
-    // Check for saved theme preference or use preferred color scheme
-    const currentTheme = localStorage.getItem('theme') || 
-                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    
-    if (currentTheme === 'dark') {
-      document.body.setAttribute('data-theme', 'dark');
-      themeIcon.classList.replace('fa-moon', 'fa-sun');
-    } else {
-      document.body.setAttribute('data-theme', 'light');
-      themeIcon.classList.replace('fa-sun', 'fa-moon');
-    }
-    
-    themeToggle.addEventListener('click', () => {
-      if (document.body.getAttribute('data-theme') === 'light') {
-        document.body.setAttribute('data-theme', 'dark');
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.body.setAttribute('data-theme', 'light');
-        themeIcon.classList.replace('fa-sun', 'fa-moon');
-        localStorage.setItem('theme', 'light');
-      }
-    });
+      const loader = document.getElementById('loader');
+      window.addEventListener('load', () => { setTimeout(() => { loader.classList.add('hidden'); }, 300); });
 
-    // Main tab switching
-    function openMainTab(evt, tabName) {
-      var i, tabcontent, tabbuttons;
-      tabcontent = document.getElementsByClassName("main-tabcontent");
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-      }
-      tabbuttons = document.getElementsByClassName("main-tab-button");
-      for (i = 0; i < tabbuttons.length; i++) {
-        tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
-      }
-      document.getElementById(tabName).style.display = "block";
-      evt.currentTarget.className += " active";
-    }
-    
-    // Code calculator tab switching
-    function switchTab(tabId) {
-      document.querySelectorAll('#CodeCalculator .tab-content').forEach(tab => {
-        tab.classList.remove('active');
-      });
-      document.querySelectorAll('#CodeCalculator .tab-button').forEach(button => {
-        button.classList.remove('active');
-      });
-      
-      document.getElementById(tabId).classList.add('active');
-      document.querySelector(`#CodeCalculator button[onclick="switchTab('${tabId}')"]`).classList.add('active');
-    }
-    
-    // Series/parallel calculator tab switching
-    function switchCalcTab(tabId) {
-      document.querySelectorAll('#SeriesParallel .tab-content').forEach(tab => {
-        tab.classList.remove('active');
-      });
-      document.querySelectorAll('#SeriesParallel .tab-button').forEach(button => {
-        button.classList.remove('active');
-      });
-      
-      document.getElementById(tabId).classList.add('active');
-      document.querySelector(`#SeriesParallel button[onclick="switchCalcTab('${tabId}')"]`).classList.add('active');
-    }
+      const scrollProgress = document.getElementById('scrollProgress');
+      const header = document.getElementById('header');
+      const backToTop = document.getElementById('backToTop');
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      const mobileOverlay = document.getElementById('mobileOverlay');
 
-    // Set ceramic code from common codes
-    function setCeramicCode(code) {
-      document.getElementById('ceramicCode').value = code;
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const s = window.scrollY;
+            const d = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress.style.width = (d > 0 ? (s / d) * 100 : 0) + '%';
+            header.classList.toggle('scrolled', s > 50);
+            backToTop.classList.toggle('visible', s > 400);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      const toggleMenu = () => {
+        const isActive = navMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', String(isActive));
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = isActive ? 'hidden' : '';
+      };
+      menuToggle.addEventListener('click', toggleMenu);
+      mobileOverlay.addEventListener('click', toggleMenu);
+
+      const STORAGE_KEY = 'portfolio-theme';
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('i');
+      const getPreferredTheme = () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      };
+      const applyTheme = (theme) => {
+        document.documentElement.setAttribute('data-theme', theme);
+        themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        localStorage.setItem(STORAGE_KEY, theme);
+      };
+      applyTheme(getPreferredTheme());
+      themeToggle.addEventListener('click', () => {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+      });
+
+      function showToast(message, type) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast' + (type ? ' ' + type : '');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+      // Main tab switching
+      function openMainTab(evt, tabName) {
+        document.querySelectorAll('.main-tabcontent').forEach(tc => tc.style.display = 'none');
+        document.querySelectorAll('.main-tab-button').forEach(btn => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+        document.getElementById(tabName).style.display = 'block';
+        evt.currentTarget.classList.add('active');
+        evt.currentTarget.setAttribute('aria-selected', 'true');
+      }
+      window.openMainTab = openMainTab;
+
+      // Sub tab switching
+      function switchTab(tabId) {
+        const parent = document.getElementById('CodeCalculator');
+        parent.querySelectorAll('.sub-tabcontent').forEach(t => t.classList.remove('active'));
+        parent.querySelectorAll('.sub-tab-button').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        document.getElementById(tabId).classList.add('active');
+        const btn = parent.querySelector(`button[onclick="switchTab('${tabId}')"]`);
+        if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected', 'true'); }
+      }
+      window.switchTab = switchTab;
+
+      function switchCalcTab(tabId) {
+        const parent = document.getElementById('SeriesParallel');
+        parent.querySelectorAll('.sub-tabcontent').forEach(t => t.classList.remove('active'));
+        parent.querySelectorAll('.sub-tab-button').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        document.getElementById(tabId).classList.add('active');
+        const btn = parent.querySelector(`button[onclick="switchCalcTab('${tabId}')"]`);
+        if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected', 'true'); }
+      }
+      window.switchCalcTab = switchCalcTab;
+
+      // Ceramic calculator
+      function setCeramicCode(code) {
+        document.getElementById('ceramicCode').value = code;
+        calculateCeramic();
+      }
+      window.setCeramicCode = setCeramicCode;
+
+      function calculateCeramic() {
+        const code = document.getElementById('ceramicCode').value.trim().toUpperCase();
+        let capacitance = 0, unit = 'pF';
+        if (code.includes('R')) {
+          capacitance = parseFloat(code.replace('R', '.'));
+        } else if (/^\d{2,3}$/.test(code)) {
+          const d = code.length;
+          capacitance = parseInt(code.substring(0, d-1)) * Math.pow(10, parseInt(code.substring(d-1)));
+          if (capacitance >= 1000000) { capacitance /= 1000000; unit = 'µF'; }
+          else if (capacitance >= 1000) { capacitance /= 1000; unit = 'nF'; }
+        }
+        let t = 'Capacitance: ';
+        if (capacitance > 0 || code === '0') {
+          t += capacitance.toFixed(2).replace(/\.?0+$/, '') + unit;
+          if (unit === 'pF' && capacitance >= 1000) t += ' (' + (capacitance/1000).toFixed(2).replace(/\.?0+$/, '') + 'nF)';
+          else if (unit === 'nF' && capacitance >= 1000) t += ' (' + (capacitance/1000).toFixed(2).replace(/\.?0+$/, '') + 'µF)';
+        } else if (code !== '') t = 'Invalid code format';
+        else t = 'Enter a code to calculate capacitance';
+        document.getElementById('ceramicResult').textContent = t;
+      }
+      window.calculateCeramic = calculateCeramic;
+
+      // Electrolytic calculator
+      function calculateElectrolytic() {
+        const v = document.getElementById('electrolyticValue').value.trim();
+        const vc = document.getElementById('voltageColor').value;
+        let c = 0, u = 'µF';
+        const m = v.match(/^([\d.]+)\s*([munp]?F)?$/i);
+        if (m) {
+          c = parseFloat(m[1]);
+          if (m[2]) u = m[2].toUpperCase();
+          if (u === 'PF') { c /= 1000000; u = 'µF'; }
+          else if (u === 'NF') { c /= 1000; u = 'µF'; }
+          else if (u === 'MF' || u === 'F') { c *= 1000000; u = 'µF'; }
+        }
+        let t = 'Capacitance: ';
+        if (c > 0 || v === '0') {
+          t += c.toFixed(2).replace(/\.?0+$/, '') + 'µF (' + (c*1000).toFixed(0) + 'nF, ' + (c*1000000).toFixed(0) + 'pF)';
+        } else if (v !== '') t = 'Invalid value format';
+        else t = 'Enter a value to calculate';
+        document.getElementById('electrolyticResult').textContent = t;
+        document.getElementById('voltageResult').textContent = vc ? 'Estimated Voltage Rating: ' + vc + 'V' : '';
+      }
+      window.calculateElectrolytic = calculateElectrolytic;
+
+      // Series/parallel
+      function addCapacitor(type) {
+        const c = document.getElementById(type + '-capacitors');
+        const n = c.children.length + 1;
+        const d = document.createElement('div');
+        d.className = 'input-group';
+        d.innerHTML = `<label>C${n}:</label><input type="number" min="0" step="0.01" value="10" aria-label="Capacitor ${n} value"><select aria-label="Capacitor ${n} unit"><option value="1e-12">pF</option><option value="1e-9">nF</option><option value="1e-6" selected>μF</option><option value="1e-3">mF</option><option value="1">F</option></select>`;
+        c.appendChild(d);
+      }
+      window.addCapacitor = addCapacitor;
+
+      function removeCapacitor(type) {
+        const c = document.getElementById(type + '-capacitors');
+        if (c.children.length > 1) c.removeChild(c.lastChild);
+      }
+      window.removeCapacitor = removeCapacitor;
+
+      function calculate(type) {
+        const c = document.getElementById(type + '-capacitors');
+        const inputs = c.querySelectorAll('input');
+        const units = c.querySelectorAll('select');
+        const r = document.getElementById(type + '-result');
+        r.innerHTML = '<p><span class="loading"></span> Calculating...</p>';
+        setTimeout(() => {
+          const caps = [];
+          for (let i = 0; i < inputs.length; i++) {
+            const val = parseFloat(inputs[i].value);
+            const u = parseFloat(units[i].value);
+            if (isNaN(val) || val <= 0) { r.innerHTML = '<p style="color: var(--color-error);">Error: All values must be positive.</p>'; return; }
+            caps.push(val * u);
+          }
+          let eq, f = '';
+          if (type === 'series') {
+            let s = 0; f = '1/Ceq = ';
+            for (let i = 0; i < caps.length; i++) { s += 1/caps[i]; f += `1/C${i+1}`; if (i < caps.length-1) f += ' + '; }
+            eq = 1/s;
+            f += ` = ${s.toFixed(6)}<br>Ceq = 1/${s.toFixed(6)} = ${eq.toExponential(6)} F`;
+          } else {
+            eq = 0; f = 'Ceq = ';
+            for (let i = 0; i < caps.length; i++) { eq += caps[i]; f += `C${i+1}`; if (i < caps.length-1) f += ' + '; }
+            f += ` = ${eq.toExponential(6)} F`;
+          }
+          let dv, u;
+          if (eq >= 1) { dv = eq; u = 'F'; }
+          else if (eq >= 1e-3) { dv = eq*1e3; u = 'mF'; }
+          else if (eq >= 1e-6) { dv = eq*1e6; u = 'μF'; }
+          else if (eq >= 1e-9) { dv = eq*1e9; u = 'nF'; }
+          else { dv = eq*1e12; u = 'pF'; }
+          r.innerHTML = `<p><strong>Equivalent Capacitance:</strong> ${dv.toFixed(4)} ${u}</p><p><strong>Calculation:</strong><br>${f}</p>`;
+        }, 500);
+      }
+      window.calculate = calculate;
+
+      // Advanced
+      function calculateTimeConstant() {
+        const R = parseFloat(document.getElementById('resistance').value) * parseFloat(document.getElementById('resistanceUnit').value);
+        const C = parseFloat(document.getElementById('capacitance').value) * parseFloat(document.getElementById('capacitanceUnit').value);
+        const tc = R * C;
+        let dv, u;
+        if (tc >= 1) { dv = tc; u = 's'; }
+        else if (tc >= 1e-3) { dv = tc*1e3; u = 'ms'; }
+        else if (tc >= 1e-6) { dv = tc*1e6; u = 'μs'; }
+        else { dv = tc*1e9; u = 'ns'; }
+        document.getElementById('timeConstantResult').innerHTML = `<p><strong>Time Constant (τ = R × C):</strong> ${dv.toFixed(4)} ${u}</p><p><strong>Calculation:</strong> ${R} Ω × ${C} F = ${tc} s</p>`;
+      }
+      window.calculateTimeConstant = calculateTimeConstant;
+
+      function calculateEnergy() {
+        const C = parseFloat(document.getElementById('energyCapacitance').value) * parseFloat(document.getElementById('energyCapacitanceUnit').value);
+        const V = parseFloat(document.getElementById('voltage').value);
+        const e = 0.5 * C * V * V;
+        let dv, u;
+        if (e >= 1) { dv = e; u = 'J'; }
+        else if (e >= 1e-3) { dv = e*1e3; u = 'mJ'; }
+        else { dv = e*1e6; u = 'μJ'; }
+        document.getElementById('energyResult').innerHTML = `<p><strong>Stored Energy (E = ½CV²):</strong> ${dv.toFixed(4)} ${u}</p><p><strong>Calculation:</strong> 0.5 × ${C} F × (${V} V)² = ${e} J</p>`;
+      }
+      window.calculateEnergy = calculateEnergy;
+
       calculateCeramic();
-      document.getElementById('ceramicCode').classList.add('pulse');
-      setTimeout(() => {
-        document.getElementById('ceramicCode').classList.remove('pulse');
-      }, 500);
-    }
-
-    // Ceramic capacitor code calculator
-    function calculateCeramic() {
-      const code = document.getElementById('ceramicCode').value.trim().toUpperCase();
-      let capacitance = 0;
-      let unit = 'pF';
-      
-      if (code.includes('R')) {
-        // Handle R notation (e.g., 4R7 = 4.7pF)
-        capacitance = parseFloat(code.replace('R', '.'));
-        unit = 'pF';
-      } else if (/^\d{2,3}$/.test(code)) {
-        // Handle standard 3-digit codes
-        const digits = code.length;
-        const value = parseInt(code.substring(0, digits-1));
-        const multiplier = parseInt(code.substring(digits-1));
-        capacitance = value * Math.pow(10, multiplier);
-        
-        // Convert to appropriate unit
-        if (capacitance >= 1000000) {
-          capacitance = capacitance / 1000000;
-          unit = 'µF';
-        } else if (capacitance >= 1000) {
-          capacitance = capacitance / 1000;
-          unit = 'nF';
-        } else {
-          unit = 'pF';
-        }
-      }
-      
-      let resultText = 'Capacitance: ';
-      if (capacitance > 0 || code === '0') {
-        resultText += capacitance.toFixed(2).replace(/\.?0+$/, '') + unit;
-        // Show alternative units
-        if (unit === 'pF' && capacitance >= 1000) {
-          const nfValue = capacitance / 1000;
-          resultText += ' (' + nfValue.toFixed(2).replace(/\.?0+$/, '') + 'nF)';
-        } else if (unit === 'nF' && capacitance >= 1000) {
-          const ufValue = capacitance / 1000;
-          resultText += ' (' + ufValue.toFixed(2).replace(/\.?0+$/, '') + 'µF)';
-        } else if (unit === 'pF' && capacitance >= 1000000) {
-          const ufValue = capacitance / 1000000;
-          resultText += ' (' + ufValue.toFixed(2).replace(/\.?0+$/, '') + 'µF)';
-        }
-      } else if (code !== '') {
-        resultText = 'Invalid code format';
-      } else {
-        resultText = 'Enter a code to calculate capacitance';
-      }
-      
-      document.getElementById('ceramicResult').textContent = resultText;
-    }
-
-    // Electrolytic capacitor calculator
-    function calculateElectrolytic() {
-      const valueStr = document.getElementById('electrolyticValue').value.trim();
-      const voltageColor = document.getElementById('voltageColor').value;
-      let capacitance = 0;
-      let unit = 'µF';
-      
-      // Parse the input value
-      const match = valueStr.match(/^([\d.]+)\s*([munp]?F)?$/i);
-      if (match) {
-        capacitance = parseFloat(match[1]);
-        if (match[2]) {
-          unit = match[2].toUpperCase();
-        }
-        
-        // Convert all to µF for consistency
-        if (unit === 'PF') {
-          capacitance = capacitance / 1000000;
-          unit = 'µF';
-        } else if (unit === 'NF') {
-          capacitance = capacitance / 1000;
-          unit = 'µF';
-        } else if (unit === 'MF' || unit === 'F') {
-          capacitance = capacitance * 1000000;
-          unit = 'µF';
-        }
-      }
-      
-      let resultText = 'Capacitance: ';
-      if (capacitance > 0 || valueStr === '0') {
-        // Show in µF with nF and pF equivalents
-        resultText += capacitance.toFixed(2).replace(/\.?0+$/, '') + 'µF';
-        const nfValue = capacitance * 1000;
-        const pfValue = capacitance * 1000000;
-        resultText += ' (' + nfValue.toFixed(0) + 'nF, ' + pfValue.toFixed(0) + 'pF)';
-      } else if (valueStr !== '') {
-        resultText = 'Invalid value format';
-      } else {
-        resultText = 'Enter a value to calculate';
-      }
-      
-      document.getElementById('electrolyticResult').textContent = resultText;
-      
-      // Show voltage rating if color selected
-      if (voltageColor) {
-        document.getElementById('voltageResult').textContent = 
-          'Estimated Voltage Rating: ' + voltageColor + 'V';
-      } else {
-        document.getElementById('voltageResult').textContent = '';
-      }
-    }
-
-    // Series/parallel calculator functions
-    function addCapacitor(type) {
-      const container = document.getElementById(type + '-capacitors');
-      const count = container.children.length + 1;
-      
-      const capacitorInput = document.createElement('div');
-      capacitorInput.className = 'capacitor-input';
-      
-      capacitorInput.innerHTML = `
-        <label>C${count}:</label>
-        <input type="number" min="0" step="0.01" value="10">
-        <select class="unit-selector">
-          <option value="1e-12">pF</option>
-          <option value="1e-9">nF</option>
-          <option value="1e-6" selected>μF</option>
-          <option value="1e-3">mF</option>
-          <option value="1">F</option>
-        </select>
-      `;
-      
-      container.appendChild(capacitorInput);
-    }
-    
-    function removeCapacitor(type) {
-      const container = document.getElementById(type + '-capacitors');
-      if (container.children.length > 1) {
-        container.removeChild(container.lastChild);
-      }
-    }
-    
-    function calculate(type) {
-      const container = document.getElementById(type + '-capacitors');
-      const inputs = container.querySelectorAll('input');
-      const units = container.querySelectorAll('select');
-      const resultDiv = document.getElementById(type + '-result');
-      
-      // Show loading state
-      resultDiv.innerHTML = '<p><span class="loading"></span> Calculating...</p>';
-      
-      setTimeout(() => {
-        // Get all capacitor values in Farads
-        const capacitors = [];
-        for (let i = 0; i < inputs.length; i++) {
-          const value = parseFloat(inputs[i].value);
-          const unit = parseFloat(units[i].value);
-          
-          if (isNaN(value) || value <= 0) {
-            resultDiv.innerHTML = '<p style="color: var(--error-color);">Error: All capacitor values must be positive numbers.</p>';
-            return;
-          }
-          
-          // Convert to Farads
-          capacitors.push(value * unit);
-        }
-        
-        let equivalentCapacitance;
-        let formula = '';
-        
-        if (type === 'series') {
-          // Calculate 1/C = 1/C1 + 1/C2 + ... + 1/Cn
-          let sum = 0;
-          formula = '1/Ceq = ';
-          
-          for (let i = 0; i < capacitors.length; i++) {
-            sum += 1 / capacitors[i];
-            formula += `1/C${i+1}`;
-            if (i < capacitors.length - 1) {
-              formula += ' + ';
-            }
-          }
-          
-          equivalentCapacitance = 1 / sum;
-          formula += ` = ${sum.toFixed(6)} (F<sup>-1</sup>)<br>Therefore, Ceq = 1/${sum.toFixed(6)} = ${equivalentCapacitance.toExponential(6)} F`;
-        } else {
-          // Calculate C = C1 + C2 + ... + Cn
-          equivalentCapacitance = 0;
-          formula = 'Ceq = ';
-          
-          for (let i = 0; i < capacitors.length; i++) {
-            equivalentCapacitance += capacitors[i];
-            formula += `C${i+1}`;
-            if (i < capacitors.length - 1) {
-              formula += ' + ';
-            }
-          }
-          
-          formula += ` = ${equivalentCapacitance.toExponential(6)} F`;
-        }
-        
-        // Display the result with appropriate unit
-        let displayValue, unit;
-        
-        if (equivalentCapacitance >= 1) {
-          displayValue = equivalentCapacitance;
-          unit = 'F';
-        } else if (equivalentCapacitance >= 1e-3) {
-          displayValue = equivalentCapacitance * 1e3;
-          unit = 'mF';
-        } else if (equivalentCapacitance >= 1e-6) {
-          displayValue = equivalentCapacitance * 1e6;
-          unit = 'μF';
-        } else if (equivalentCapacitance >= 1e-9) {
-          displayValue = equivalentCapacitance * 1e9;
-          unit = 'nF';
-        } else {
-          displayValue = equivalentCapacitance * 1e12;
-          unit = 'pF';
-        }
-        
-        resultDiv.innerHTML = `
-          <p><strong>Equivalent Capacitance:</strong> ${displayValue.toFixed(4)} ${unit}</p>
-          <p><strong>Calculation:</strong><br>${formula}</p>
-        `;
-      }, 500); // Simulate calculation delay
-    }
-    
-    // Advanced Tools Calculations
-    function calculateTimeConstant() {
-      const resistance = parseFloat(document.getElementById('resistance').value);
-      const resistanceUnit = parseFloat(document.getElementById('resistanceUnit').value);
-      const capacitance = parseFloat(document.getElementById('capacitance').value);
-      const capacitanceUnit = parseFloat(document.getElementById('capacitanceUnit').value);
-      
-      const R = resistance * resistanceUnit; // Convert to ohms
-      const C = capacitance * capacitanceUnit; // Convert to farads
-      
-      const timeConstant = R * C; // Time constant in seconds
-      
-      let displayValue, unit;
-      
-      if (timeConstant >= 1) {
-        displayValue = timeConstant;
-        unit = 's';
-      } else if (timeConstant >= 1e-3) {
-        displayValue = timeConstant * 1e3;
-        unit = 'ms';
-      } else if (timeConstant >= 1e-6) {
-        displayValue = timeConstant * 1e6;
-        unit = 'μs';
-      } else {
-        displayValue = timeConstant * 1e9;
-        unit = 'ns';
-      }
-      
-      document.getElementById('timeConstantResult').innerHTML = `
-        <p><strong>Time Constant (τ = R × C):</strong> ${displayValue.toFixed(4)} ${unit}</p>
-        <p><strong>Calculation:</strong> ${R} Ω × ${C} F = ${timeConstant} s</p>
-      `;
-    }
-    
-    function calculateEnergy() {
-      const capacitance = parseFloat(document.getElementById('energyCapacitance').value);
-      const capacitanceUnit = parseFloat(document.getElementById('energyCapacitanceUnit').value);
-      const voltage = parseFloat(document.getElementById('voltage').value);
-      
-      const C = capacitance * capacitanceUnit; // Convert to farads
-      const V = voltage;
-      
-      const energy = 0.5 * C * V * V; // Energy in joules
-      
-      let displayValue, unit;
-      
-      if (energy >= 1) {
-        displayValue = energy;
-        unit = 'J';
-      } else if (energy >= 1e-3) {
-        displayValue = energy * 1e3;
-        unit = 'mJ';
-      } else {
-        displayValue = energy * 1e6;
-        unit = 'μJ';
-      }
-      
-      document.getElementById('energyResult').innerHTML = `
-        <p><strong>Stored Energy (E = ½CV²):</strong> ${displayValue.toFixed(4)} ${unit}</p>
-        <p><strong>Calculation:</strong> 0.5 × ${C} F × (${V} V)² = ${energy} J</p>
-      `;
-    }
-    
-    // Initialize calculators
-    calculateCeramic();
+    })();
   </script>
 </body>
 </html>
