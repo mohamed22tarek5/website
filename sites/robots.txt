@@ -1,188 +1,39 @@
-# السماح للبوتات الشهيرة للذكاء الاصطناعي
-User-agent: ChatGPT-User
-Allow:
+# robots.txt
+# Mohamed Tarek Portfolio
+# Allow all crawlers
 
-User-agent: GPTBot
-Allow:
-
-User-agent: OAI-SearchBot
-Allow:
-
-User-agent: ClaudeBot
-Allow:
-
-User-agent: Claude-SearchBot
-Allow:
-
-User-agent: PerplexityBot
-Allow:
-
-User-agent: Anthropic-Bot
-Allow:
-
-User-agent: Google-Extended
-Allow:
-
-User-agent: Googlebot
-Allow:
-
-User-agent: Bingbot
-Allow:
-
-User-agent: GoogleOther
-Allow:
-
-User-agent: Bard
-Allow:
-
-User-agent: Gemini
-Allow:
-
-User-agent: Claude
-Allow:
-
-User-agent: Poe
-Allow:
-
-User-agent: DeepSeekBot
-Allow:
-
-User-agent: GrokBot
-Allow:
-
-User-agent: QwenBot
-Allow:
-
-User-agent: ForefrontBot
-Allow:
-
-User-agent: ArabyBot
-Allow:
-
-User-agent: KattebBot
-Allow:
-
-User-agent: LisanBot
-Allow:
-
-User-agent: QuillBot
-Allow:
-
-User-agent: WordtuneBot
-Allow:
-
-User-agent: RytrBot
-Allow:
-
-User-agent: CopyAI
-Allow:
-
-User-agent: BearlyBot
-Allow:
-
-User-agent: ChatPDFBot
-Allow:
-
-User-agent: AskYourPDFBot
-Allow:
-
-User-agent: HiPDFBot
-Allow:
-
-User-agent: ChatDocBot
-Allow:
-
-User-agent: TTSMakerBot
-Allow:
-
-User-agent: MurfAI
-Allow:
-
-User-agent: LovoAI
-Allow:
-
-User-agent: ElevenLabsBot
-Allow:
-
-User-agent: TranskriptorBot
-Allow:
-
-User-agent: ResembleBot
-Allow:
-
-User-agent: KrispBot
-Allow:
-
-User-agent: D-IDBot
-Allow:
-
-User-agent: FlikiBot
-Allow:
-
-User-agent: VideoAIBot
-Disallow:
-
-User-agent: RunwayMLBot
-Allow:
-
-User-agent: SynthesiaBot
-Allow:
-
-User-agent: SteveAIBot
-Allow:
-
-User-agent: MoovlyBot
-Allow:
-
-User-agent: VEEDBot
-Allow:
-
-User-agent: PapercupBot
-Allow:
-
-User-agent: KickresumeBot
-Allow:
-
-User-agent: FirefliesBot
-Allow:
-
-User-agent: HumataBot
-Allow:
-
-User-agent: AiterBot
-Allow:
-
-User-agent: BeulrBot
-Allow:
-
-User-agent: CVLoginBot
-Allow:
-
-User-agent: GPTZeroBot
-Allow:
-
-# منع باقي البوتات غير المذكورة
 User-agent: *
 Allow: /
+
+Sitemap: https://mohamedtarek.vercel.app/sitemap.xml
+
+# Blocked paths
+User-agent: *
+Disallow: /sw.js
+Disallow: /pwa.js
+Disallow: /cache/
 Disallow: /admin/
-Disallow: /test/
-Disallow: /private/
-Disallow: /backup/
 
-User-agent: *
-Disallow: /secret.html
-Disallow: /config.js
-Disallow: /api-key.txt
+# AI/ML training blocks
+User-agent: GPTBot
+Disallow: /
 
-User-agent: *
-Disallow: /tools/
-Allow: /tools/electrical-calculation.html
+User-agent: ChatGPT-User
+Disallow: /
 
+User-agent: CCBot
+Disallow: /
 
-Sitemap: https://your-domain.com/sitemap.xml
+User-agent: Google-Extended
+Disallow: /
 
+User-agent: anthropic-ai
+Disallow: /
 
-# Block temporary tools
-Disallow: /Medication-Reminder.html
-Disallow: /to-do-list.html
+User-agent: ClaudeBot
+Disallow: /
 
+# Image-specific rules
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /admin/

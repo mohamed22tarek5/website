@@ -1,1094 +1,1143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Medication Reminder</title>
-  <link rel="icon" href="icon.png" type="image/png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Medication Reminder | Mohamed Tarek</title>
+  <meta name="description" content="Never miss your important medications. Schedule reminders, track adherence, and maintain your medication history with this premium medication reminder app.">
+  <meta name="keywords" content="medication reminder, health tracker, pill reminder, medication schedule, health app, medication tracker">
+  <meta name="author" content="Mohamed Tarek">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Medication Reminder | Mohamed Tarek">
+  <meta property="og:description" content="Never miss your important medications. Schedule reminders, track adherence, and maintain your medication history.">
+  <meta property="og:image" content="https://website-mohamed.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://website-mohamed.vercel.app/sites/Medication-Reminder.html">
+  <meta property="og:site_name" content="Mohamed Tarek Portfolio">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Medication Reminder | Mohamed Tarek">
+  <meta name="twitter:description" content="Never miss your important medications. Schedule reminders, track adherence, and maintain your medication history.">
+  <meta name="twitter:image" content="https://website-mohamed.vercel.app/photo.jpg">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="../icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Medication Reminder",
+    "description": "Never miss your important medications. Schedule reminders, track adherence, and maintain your medication history.",
+    "url": "https://website-mohamed.vercel.app/sites/Medication-Reminder.html",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek",
+      "url": "https://website-mohamed.vercel.app"
+    }
+  }
+  </script>
+
   <style>
     :root {
-      --primary-color: #4e9eff;
-      --primary-dark: #3a6cf4;
-      --primary-light: #6ab1ff;
-      --background-dark: #121212;
-      --background-darker: #0a0a0a;
-      --background-secondary: #1a1a1a;
-      --card-dark: #1e1e1e;
-      --card-light: #252525;
-      --text-light: #ffffff;
-      --text-muted: #aaaaaa;
-      --success-color: #4caf50;
-      --error-color: #f44336;
-      --warning-color: #f1c40f;
-      --info-color: #3498db;
-      --transition-speed: 0.3s;
-      --border-radius: 12px;
-      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+      --color-bg-primary: #0a0e1a;
+      --color-bg-secondary: #0f1322;
+      --color-bg-tertiary: #141829;
+      --color-bg-card: #161b2e;
+      --color-bg-card-hover: #1c2240;
+      --color-bg-elevated: #1a2038;
+      --color-accent: #3b82f6;
+      --color-accent-hover: #2563eb;
+      --color-accent-light: #60a5fa;
+      --color-accent-glow: rgba(59, 130, 246, 0.15);
+      --color-accent-subtle: rgba(59, 130, 246, 0.08);
+      --color-text-primary: #f1f5f9;
+      --color-text-secondary: #94a3b8;
+      --color-text-tertiary: #64748b;
+      --color-border: rgba(255, 255, 255, 0.06);
+      --color-border-hover: rgba(255, 255, 255, 0.12);
+      --color-border-accent: rgba(59, 130, 246, 0.3);
+      --color-success: #22c55e;
+      --color-error: #ef4444;
+      --color-warning: #f59e0b;
+      --color-info: #3b82f6;
+      --gradient-hero: linear-gradient(135deg, #0a0e1a 0%, #111833 50%, #0f1322 100%);
+      --gradient-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 4rem;
+      --space-4xl: 6rem;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.15);
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --container-max: 1200px;
+      --header-height: 72px;
     }
 
-    /* Light mode variables */
     [data-theme="light"] {
-      --background-dark: #f5f7fa;
-      --background-darker: #e8ebf0;
-      --background-secondary: #ffffff;
-      --card-dark: #ffffff;
-      --card-light: #f9f9f9;
-      --text-light: #333333;
-      --text-muted: #666666;
-      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+      --color-bg-primary: #f8fafc;
+      --color-bg-secondary: #f1f5f9;
+      --color-bg-tertiary: #e2e8f0;
+      --color-bg-card: #ffffff;
+      --color-bg-card-hover: #f8fafc;
+      --color-bg-elevated: #ffffff;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      --color-text-tertiary: #94a3b8;
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-border-hover: rgba(0, 0, 0, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+      --gradient-hero: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 50%, #f1f5f9 100%);
     }
 
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-    }
-
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: var(--background-dark);
-      color: var(--text-light);
-      line-height: 1.6;
-      transition: background-color var(--transition-speed) ease;
-      padding: 20px;
-      min-height: 100vh;
+      font-family: var(--font-sans);
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color var(--transition-slow), color var(--transition-slow);
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; }
+    ul, ol { list-style: none; }
+    ::selection { background: var(--color-accent); color: white; }
+
+    .skip-link {
+      position: fixed; top: -100%; left: var(--space-md);
+      background: var(--color-accent); color: white;
+      padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm);
+      z-index: 10000; font-weight: 600; font-size: 0.875rem;
+      transition: top var(--transition-fast);
+    }
+    .skip-link:focus { top: var(--space-md); }
+
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+      background: var(--gradient-accent); z-index: 10001;
+      transition: width 50ms linear;
     }
 
-    h1, h2, h3 {
-      color: var(--primary-color);
-      margin-bottom: 15px;
+    .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-xl); }
+    @media (max-width: 768px) { .container { padding: 0 var(--space-md); } }
+
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--header-height);
+      z-index: 1000; transition: all var(--transition-base); background: transparent;
+    }
+    .header.scrolled {
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid var(--color-border);
+    }
+    [data-theme="light"] .header.scrolled { background: rgba(248, 250, 252, 0.85); }
+    .header .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+
+    .logo { display: flex; align-items: center; gap: var(--space-sm); font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; }
+    .logo-icon {
+      width: 36px; height: 36px; background: var(--gradient-accent);
+      border-radius: var(--radius-sm); display: flex; align-items: center;
+      justify-content: center; color: white; font-size: 0.875rem; font-weight: 800;
     }
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
+    .nav { display: flex; align-items: center; gap: var(--space-xs); }
+    .nav-link {
+      position: relative; padding: var(--space-sm) var(--space-md);
+      font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
+      border-radius: var(--radius-sm); transition: all var(--transition-fast);
+    }
+    .nav-link:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
+
+    .menu-toggle {
+      display: none; flex-direction: column; gap: 5px; padding: var(--space-sm);
+      z-index: 1001; align-items: center; justify-content: center;
+    }
+    .menu-toggle .bar {
+      width: 22px; height: 2px; background: var(--color-text-primary);
+      border-radius: 2px; transition: all var(--transition-base); transform-origin: center;
+    }
+    .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .mobile-overlay {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
+      z-index: 999; opacity: 0; pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+    .mobile-overlay.active { opacity: 1; pointer-events: auto; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .nav {
+        position: fixed; top: 0; right: -100%; width: min(320px, 85vw);
+        height: 100vh; background: var(--color-bg-secondary);
+        flex-direction: column; align-items: flex-start; justify-content: center;
+        padding: var(--space-3xl); gap: var(--space-sm);
+        transition: right var(--transition-slow); border-left: 1px solid var(--color-border);
+      }
+      .nav.active { right: 0; }
+      .nav-link { font-size: 1.125rem; width: 100%; padding: var(--space-md); }
     }
 
-    .text-center {
-      text-align: center;
+    .page-hero {
+      padding-top: calc(var(--header-height) + var(--space-3xl));
+      padding-bottom: var(--space-3xl);
+      background: var(--gradient-hero);
+      position: relative; overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0; overflow: hidden; z-index: 0;
+    }
+    .page-hero-orb {
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+    .page-hero-orb:nth-child(1) { width: 400px; height: 400px; background: rgba(59, 130, 246, 0.15); top: -100px; right: -50px; }
+    .page-hero-orb:nth-child(2) { width: 300px; height: 300px; background: rgba(139, 92, 246, 0.12); bottom: -80px; left: -80px; animation-delay: -7s; }
+    .page-hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px; z-index: 1;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(20px, 10px) scale(1.02); }
+    }
+    .page-hero .container { position: relative; z-index: 2; text-align: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-md); background: var(--color-accent-subtle);
+      border: 1px solid var(--color-border-accent); border-radius: var(--radius-full);
+      font-size: 0.8125rem; font-weight: 500; color: var(--color-accent-light);
+      margin-bottom: var(--space-lg);
+    }
+    .hero-badge .dot {
+      width: 8px; height: 8px; background: var(--color-success);
+      border-radius: 50%; animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+    .page-hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.03em; margin-bottom: var(--space-md);
+    }
+    .page-hero h1 .gradient-text {
+      background: var(--gradient-accent); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-hero p {
+      font-size: clamp(1rem, 2vw, 1.125rem); color: var(--color-text-secondary);
+      max-width: 600px; margin: 0 auto;
     }
 
-    .calculator {
-      background-color: var(--card-dark);
-      border-radius: var(--border-radius);
-      padding: 25px;
-      margin-bottom: 20px;
-      box-shadow: var(--box-shadow);
-      transition: all var(--transition-speed) ease;
+    .main-content { padding: var(--space-3xl) 0 var(--space-4xl); }
+
+    .tabs-wrapper {
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg); overflow: hidden; margin-bottom: var(--space-xl);
+    }
+    .tabs {
+      display: flex; overflow-x: auto; scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      flex: 1; min-width: max-content; padding: var(--space-lg) var(--space-xl);
+      text-align: center; background: transparent; cursor: pointer;
+      transition: all var(--transition-fast); border-bottom: 2px solid transparent;
+      font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+    .tab:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
+    .tab.active {
+      color: var(--color-accent); border-bottom-color: var(--color-accent);
+      font-weight: 600; background: var(--color-accent-subtle);
+    }
+    .tab i { margin-right: var(--space-sm); }
+
+    .tab-content {
+      display: none; padding: var(--space-xl);
+      animation: fadeIn 0.4s ease;
+    }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .calculator:hover {
-      box-shadow: var(--box-shadow-hover);
+    .calc-box {
+      padding: var(--space-xl); background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+      transition: all var(--transition-base); margin-bottom: var(--space-xl);
+    }
+    .calc-box:hover { border-color: var(--color-border-hover); }
+    .calc-box h3 {
+      font-size: 1.125rem; font-weight: 700; color: var(--color-accent);
+      margin-bottom: var(--space-lg); display: flex; align-items: center; gap: var(--space-sm);
+    }
+    .calc-box h2 {
+      font-size: 1.25rem; font-weight: 700; color: var(--color-accent);
+      margin-bottom: var(--space-lg); display: flex; align-items: center; gap: var(--space-sm);
     }
 
-    .input-group {
-      margin-bottom: 15px;
-    }
-
-    .input-label {
-      display: block;
-      margin-bottom: 5px;
-      color: var(--text-muted);
-      font-weight: 500;
+    .input-group { margin-bottom: var(--space-lg); }
+    .input-group label {
+      display: block; margin-bottom: var(--space-sm); font-size: 0.875rem;
+      font-weight: 600; color: var(--color-text-primary);
     }
 
     .input-field {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1px solid var(--background-secondary);
-      border-radius: var(--border-radius);
-      background-color: var(--background-secondary);
-      color: var(--text-light);
-      font-size: 1em;
-      transition: all var(--transition-speed) ease;
+      width: 100%; padding: 12px 16px;
+      background: var(--color-bg-tertiary); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-primary);
+      font-family: var(--font-sans); font-size: 0.9375rem;
+      transition: all var(--transition-fast); outline: none;
     }
-
-    .input-field:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
-    }
+    .input-field:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
+    .input-field option { background: var(--color-bg-card); color: var(--color-text-primary); }
 
     .form-row {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
     }
-
-    .form-row .input-group {
-      flex: 1;
-      min-width: 150px;
-    }
+    @media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
 
     .days-selector {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
+      display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-sm);
     }
-
     .day-checkbox {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
+      display: flex; align-items: center; cursor: pointer; font-size: 0.875rem;
+      color: var(--color-text-secondary); gap: var(--space-xs);
     }
-
-    .day-checkbox input {
-      margin-right: 5px;
+    .day-checkbox input[type="checkbox"] {
+      width: 18px; height: 18px; accent-color: var(--color-accent);
+      cursor: pointer;
     }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 20px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.9em;
-      transition: all var(--transition-speed) ease;
-      cursor: pointer;
-      border: none;
-      outline: none;
-      gap: 8px;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: var(--space-sm); padding: 12px 24px; font-size: 0.9375rem;
+      font-weight: 600; border-radius: var(--radius-full);
+      transition: all var(--transition-fast); position: relative; overflow: hidden;
     }
-
     .btn-primary {
-      background-color: var(--primary-color);
-      color: white;
-      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+      background: var(--color-accent); color: white;
+      box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
     }
-
     .btn-primary:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(78, 158, 255, 0.6);
+      background: var(--color-accent-hover); transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(59, 130, 246, 0.4);
     }
-
-    .btn-danger {
-      background-color: var(--error-color);
-      color: white;
-      box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+    .btn-secondary {
+      background: var(--color-bg-tertiary); color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
     }
-
-    .btn-danger:hover {
-      background-color: #d32f2f;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(244, 67, 54, 0.6);
+    .btn-secondary:hover {
+      border-color: var(--color-border-hover); transform: translateY(-2px);
     }
-
     .btn-success {
-      background-color: var(--success-color);
-      color: white;
-      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+      background: var(--color-success); color: white;
+      box-shadow: 0 2px 12px rgba(34, 197, 94, 0.3);
     }
-
     .btn-success:hover {
-      background-color: #388e3c;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
+      background: #16a34a; transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(34, 197, 94, 0.4);
     }
-
+    .btn-danger {
+      background: var(--color-error); color: white;
+      box-shadow: 0 2px 12px rgba(239, 68, 68, 0.3);
+    }
+    .btn-danger:hover {
+      background: #dc2626; transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(239, 68, 68, 0.4);
+    }
     .btn-warning {
-      background-color: var(--warning-color);
-      color: white;
-      box-shadow: 0 5px 15px rgba(241, 196, 15, 0.4);
+      background: var(--color-warning); color: white;
+      box-shadow: 0 2px 12px rgba(245, 158, 11, 0.3);
     }
-
     .btn-warning:hover {
-      background-color: #d4ac0d;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(241, 196, 15, 0.6);
+      background: #d97706; transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(245, 158, 11, 0.4);
+    }
+    .btn-group {
+      display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-lg);
     }
 
     .reminder-item {
-      background-color: var(--card-light);
-      padding: 20px;
-      border-radius: var(--border-radius);
-      margin-bottom: 15px;
-      box-shadow: var(--box-shadow);
-      transition: all var(--transition-speed) ease;
-      border-left: 4px solid var(--primary-color);
+      background: var(--color-bg-secondary); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg); padding: var(--space-xl);
+      margin-bottom: var(--space-md); transition: all var(--transition-base);
+      border-left: 4px solid var(--color-accent);
     }
-
-    .reminder-item:hover {
-      box-shadow: var(--box-shadow-hover);
-    }
-
+    .reminder-item:hover { border-color: var(--color-border-hover); box-shadow: var(--shadow-md); }
     .reminder-item.urgent {
-      border-left-color: var(--error-color);
-      animation: pulse 2s infinite;
+      border-left-color: var(--color-error);
+      animation: urgentPulse 2s infinite;
     }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(244, 67, 54, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); }
+    @keyframes urgentPulse {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.3); }
+      70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
     }
-
+    .reminder-header {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+    .reminder-name {
+      font-size: 1.125rem; font-weight: 700; color: var(--color-text-primary);
+    }
     .reminder-time {
-      color: var(--primary-color);
-      font-weight: bold;
-      font-size: 1.1em;
+      color: var(--color-accent); font-weight: 700; font-size: 1rem;
+      font-family: var(--font-mono);
+      display: flex; align-items: center; gap: var(--space-xs);
     }
-
     .remaining-time {
-      color: var(--warning-color);
-      font-weight: bold;
+      color: var(--color-warning); font-weight: 700;
+      font-family: var(--font-mono);
     }
-
     .medication-details {
-      color: var(--text-muted);
-      font-size: 0.9em;
-      margin-top: 5px;
+      color: var(--color-text-secondary); font-size: 0.875rem;
+      margin-top: var(--space-xs); line-height: 1.6;
     }
-
     .medication-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-
-    .tabs {
-      display: flex;
-      margin-bottom: 20px;
-      border-bottom: 1px solid var(--background-secondary);
-    }
-
-    .tab {
-      padding: 12px 20px;
-      cursor: pointer;
-      transition: all var(--transition-speed) ease;
-      border-bottom: 3px solid transparent;
-    }
-
-    .tab.active {
-      border-bottom-color: var(--primary-color);
-      color: var(--primary-color);
-    }
-
-    .tab:hover:not(.active) {
-      background-color: var(--background-secondary);
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
+      display: flex; gap: var(--space-sm); margin-top: var(--space-lg); flex-wrap: wrap;
     }
 
     .history-item {
-      background-color: var(--card-light);
-      padding: 15px;
-      border-radius: var(--border-radius);
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background: var(--color-bg-secondary); border: 1px solid var(--color-border);
+      padding: var(--space-lg); border-radius: var(--radius-lg); margin-bottom: var(--space-sm);
+      display: flex; justify-content: space-between; align-items: center;
+      transition: all var(--transition-fast);
     }
-
-    .history-item.taken {
-      border-left: 4px solid var(--success-color);
+    .history-item:hover { border-color: var(--color-border-hover); }
+    .history-item.taken { border-left: 4px solid var(--color-success); }
+    .history-item.missed { border-left: 4px solid var(--color-error); }
+    .history-item.upcoming { border-left: 4px solid var(--color-warning); }
+    .history-status {
+      padding: 4px 12px; border-radius: var(--radius-full); font-size: 0.75rem;
+      font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
     }
-
-    .history-item.missed {
-      border-left: 4px solid var(--error-color);
-    }
-
-    .history-item.upcoming {
-      border-left: 4px solid var(--warning-color);
-    }
-
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 15px 20px;
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      max-width: 400px;
-      transform: translateX(120%);
-      transition: transform 0.5s ease;
-    }
-
-    .notification.show {
-      transform: translateX(0);
-    }
-
-    .notification.success {
-      background-color: var(--success-color);
-      color: white;
-    }
-
-    .notification.error {
-      background-color: var(--error-color);
-      color: white;
-    }
-
-    .notification.warning {
-      background-color: var(--warning-color);
-      color: white;
-    }
-
-    .notification.info {
-      background-color: var(--info-color);
-      color: white;
-    }
-
-    .close-notification {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.2em;
-      cursor: pointer;
-      margin-left: auto;
-    }
-
-    /* Theme Toggle */
-    .theme-toggle {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: var(--card-dark);
-      color: var(--primary-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2em;
-      box-shadow: var(--box-shadow);
-      cursor: pointer;
-      transition: all var(--transition-speed) ease;
-      z-index: 999;
-    }
-
-    .theme-toggle:hover {
-      transform: scale(1.1);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .container {
-        padding: 0 15px;
-      }
-      
-      .theme-toggle {
-        bottom: 20px;
-        left: 20px;
-        width: 40px;
-        height: 40px;
-        font-size: 1em;
-      }
-
-      .form-row {
-        flex-direction: column;
-      }
-
-      .medication-actions {
-        flex-direction: column;
-      }
-
-      .medication-actions .btn {
-        width: 100%;
-      }
-
-      .tabs {
-        overflow-x: auto;
-        white-space: nowrap;
-      }
-    }
-
-    /* Footer */
-    footer {
-      background-color: var(--card-dark);
-      color: var(--text-light);
-      text-align: center;
-      padding: 30px;
-      margin-top: 30px;
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-    }
-
-    .social-footer {
-      display: flex;
-      justify-content: center;
-      margin: 20px 0;
-    }
-
-    .social-footer a {
-      color: var(--text-light);
-      font-size: 1.5em;
-      margin: 0 15px;
-      transition: all var(--transition-speed) ease;
-      display: inline-block;
-    }
-
-    .social-footer a:hover {
-      color: var(--primary-color);
-      transform: translateY(-5px);
-    }
-
-    .footer-bottom {
-      margin-top: 20px;
-      font-size: 0.9em;
-      opacity: 0.8;
-    }
+    .history-status.taken { background: rgba(34, 197, 94, 0.15); color: var(--color-success); }
+    .history-status.missed { background: rgba(239, 68, 68, 0.15); color: var(--color-error); }
 
     .empty-state {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--text-muted);
+      text-align: center; padding: var(--space-4xl) var(--space-xl);
+      color: var(--color-text-tertiary);
+    }
+    .empty-state i { font-size: 3rem; margin-bottom: var(--space-lg); opacity: 0.3; }
+    .empty-state h3 { font-size: 1.25rem; color: var(--color-text-secondary); margin-bottom: var(--space-sm); }
+    .empty-state p { font-size: 0.9375rem; }
+
+    .toast {
+      position: fixed; bottom: 100px; right: 32px; padding: var(--space-md) var(--space-lg);
+      background: var(--color-success); color: white; border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg); z-index: 10000; font-size: 0.875rem; font-weight: 500;
+      transform: translateX(120%); transition: transform var(--transition-base);
+      max-width: 400px;
+    }
+    .toast.show { transform: translateX(0); }
+    .toast.error { background: var(--color-error); }
+    .toast.warning { background: var(--color-warning); }
+    .toast.info { background: var(--color-info); }
+
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-secondary);
+      font-size: 1rem; z-index: 999; opacity: 0; visibility: hidden;
+      transform: translateY(12px); transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+
+    .theme-toggle {
+      position: fixed; bottom: 32px; right: 90px; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-secondary);
+      font-size: 1rem; z-index: 999; transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+    .theme-toggle:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+
+    .footer {
+      background: var(--color-bg-primary); border-top: 1px solid var(--color-border);
+      padding: var(--space-3xl) 0 var(--space-xl);
+    }
+    .footer-content {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: var(--space-md);
+    }
+    .footer-social { display: flex; gap: var(--space-sm); }
+    .footer-social a {
+      width: 40px; height: 40px; display: flex; align-items: center;
+      justify-content: center; border-radius: var(--radius-md);
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      color: var(--color-text-secondary); transition: all var(--transition-fast);
+    }
+    .footer-social a:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+    .footer-bottom { font-size: 0.875rem; color: var(--color-text-tertiary); }
+    .footer-bottom a { color: var(--color-accent); }
+
+    .loader {
+      position: fixed; inset: 0; background: var(--color-bg-primary);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 99999; transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-spinner {
+      width: 40px; height: 40px; border: 3px solid var(--color-border);
+      border-top-color: var(--color-accent); border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .loader-text { margin-top: var(--space-lg); font-size: 0.875rem; color: var(--color-text-tertiary); font-weight: 500; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
     }
 
-    .empty-state i {
-      font-size: 3em;
-      margin-bottom: 15px;
-      opacity: 0.5;
+    @media all and (display-mode: standalone) {
+      body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+    }
+
+    @media (max-width: 768px) {
+      .tabs { flex-direction: column; }
+      .tab { border-bottom: 1px solid var(--color-border); border-right: none; border-bottom-width: 1px; }
+      .tab.active { border-bottom-color: var(--color-accent); }
+      .reminder-header { flex-direction: column; }
+      .medication-actions { flex-direction: column; }
+      .medication-actions .btn { width: 100%; }
+      .history-item { flex-direction: column; gap: var(--space-sm); align-items: flex-start; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1 class="text-center">Medication Reminder</h1>
-    <p class="text-center" style="color: var(--text-muted); margin-bottom: 30px;">Never miss your important medications</p>
-    
-    <div class="tabs">
-      <div class="tab active" data-tab="medications">Medications</div>
-      <div class="tab" data-tab="history">History</div>
-      <div class="tab" data-tab="settings">Settings</div>
-    </div>
-
-    <!-- Medications Tab -->
-    <div class="tab-content active" id="medications-tab">
-      <div class="calculator">
-        <h2><i class="fas fa-pills"></i> Add New Medication</h2>
-        <div class="form-row">
-          <div class="input-group">
-            <label class="input-label">Medication Name</label>
-            <input type="text" id="medicationName" class="input-field" placeholder="Enter medication name">
-          </div>
-          <div class="input-group">
-            <label class="input-label">Dosage</label>
-            <input type="text" id="dosage" class="input-field" placeholder="e.g., 500mg">
-          </div>
-        </div>
-        
-        <div class="form-row">
-          <div class="input-group">
-            <label class="input-label">Time</label>
-            <input type="time" id="time" class="input-field">
-          </div>
-          <div class="input-group">
-            <label class="input-label">Frequency</label>
-            <select id="frequency" class="input-field">
-              <option value="daily">Daily</option>
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="as_needed">As Needed</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="input-group">
-          <label class="input-label">Days of the Week</label>
-          <div class="days-selector">
-            <label class="day-checkbox"><input type="checkbox" name="days" value="0"> Sun</label>
-            <label class="day-checkbox"><input type="checkbox" name="days" value="1"> Mon</label>
-            <label class="day-checkbox"><input type="checkbox" name="days" value="2"> Tue</label>
-            <label class="day-checkbox"><input type="checkbox" name="days" value="3"> Wed</label>
-            <label class="day-checkbox"><input type="checkbox" name="days" value="4"> Thu</label>
-            <label class="day-checkbox"><input type="checkbox" name="days" value="5"> Fri</label>
-            <label class="day-checkbox"><input type="checkbox" name="days" value="6"> Sat</label>
-          </div>
-        </div>
-        
-        <div class="input-group">
-          <label class="input-label">Instructions (Optional)</label>
-          <textarea id="instructions" class="input-field" placeholder="Special instructions..." rows="3"></textarea>
-        </div>
-        
-        <button class="btn btn-primary" onclick="addMedication()">
-          <i class="fas fa-plus"></i> Add Medication
-        </button>
-      </div>
-
-      <h2 class="text-center" style="margin: 30px 0 15px;">Next Doses</h2>
-      <div id="remindersContainer"></div>
-    </div>
-
-    <!-- History Tab -->
-    <div class="tab-content" id="history-tab">
-      <div class="calculator">
-        <h2><i class="fas fa-history"></i> Medication History</h2>
-        <div id="historyContainer"></div>
-      </div>
-    </div>
-
-    <!-- Settings Tab -->
-    <div class="tab-content" id="settings-tab">
-      <div class="calculator">
-        <h2><i class="fas fa-cog"></i> Settings</h2>
-        <div class="input-group">
-          <label class="input-label">Notification Sound</label>
-          <select id="notificationSound" class="input-field">
-            <option value="default">Default</option>
-            <option value="bell">Bell</option>
-            <option value="chime">Chime</option>
-            <option value="beep">Beep</option>
-          </select>
-        </div>
-        
-        <div class="input-group">
-          <label class="input-label">Reminder Before (minutes)</label>
-          <input type="number" id="reminderBefore" class="input-field" value="5" min="0" max="60">
-        </div>
-        
-        <div class="input-group">
-          <label class="input-label">
-            <input type="checkbox" id="enableNotifications" checked> Enable Browser Notifications
-          </label>
-        </div>
-        
-        <div class="input-group">
-          <button class="btn btn-primary" onclick="saveSettings()">
-            <i class="fas fa-save"></i> Save Settings
-          </button>
-          <button class="btn btn-warning" onclick="clearAllData()" style="margin-top: 10px;">
-            <i class="fas fa-trash"></i> Clear All Data
-          </button>
-        </div>
-      </div>
-    </div>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Loading reminder...</p>
   </div>
 
-  <!-- Notification Area -->
-  <div id="notificationArea"></div>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="social-footer">
-        <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-        <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-        <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+  <header class="header" id="header" role="banner">
+    <div class="container">
+      <a href="../index.html" class="logo" aria-label="Mohamed Tarek - Home">
+        <span class="logo-icon">MT</span>
+        <span>Mohamed Tarek</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#skills" class="nav-link">Skills</a>
+        <a href="../index.html#projects" class="nav-link">Projects</a>
+        <a href="../index.html#contact" class="nav-link">Contact</a>
+        <a href="../index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero" aria-label="Page header">
+      <div class="page-hero-bg" aria-hidden="true">
+        <div class="page-hero-orb"></div>
+        <div class="page-hero-orb"></div>
+        <div class="page-hero-grid"></div>
       </div>
-      <div class="footer-bottom">
-        &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
-        &copy; M.T.A.
+      <div class="container">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Health Tool
+        </div>
+        <h1><i class="fas fa-pills"></i> <span class="gradient-text">Medication</span> Reminder</h1>
+        <p>Never miss your important medications. Schedule reminders, track adherence, and maintain your medication history.</p>
+      </div>
+    </section>
+
+    <section class="main-content" aria-label="Medication Reminder">
+      <div class="container">
+        <div class="tabs-wrapper">
+          <div class="tabs" role="tablist" aria-label="Reminder tabs">
+            <div class="tab active" role="tab" tabindex="0" data-tab="medications" aria-selected="true" aria-controls="medications-tab">
+              <i class="fas fa-pills"></i> Medications
+            </div>
+            <div class="tab" role="tab" tabindex="0" data-tab="history" aria-selected="false" aria-controls="history-tab">
+              <i class="fas fa-history"></i> History
+            </div>
+            <div class="tab" role="tab" tabindex="0" data-tab="settings" aria-selected="false" aria-controls="settings-tab">
+              <i class="fas fa-cog"></i> Settings
+            </div>
+          </div>
+
+          <!-- Medications Tab -->
+          <div class="tab-content active" id="medications-tab" role="tabpanel">
+            <div class="calc-box">
+              <h2><i class="fas fa-plus-circle"></i> Add New Medication</h2>
+              <div class="form-row">
+                <div class="input-group">
+                  <label for="medicationName">Medication Name</label>
+                  <input type="text" id="medicationName" class="input-field" placeholder="Enter medication name" aria-required="true">
+                </div>
+                <div class="input-group">
+                  <label for="dosage">Dosage</label>
+                  <input type="text" id="dosage" class="input-field" placeholder="e.g., 500mg">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="input-group">
+                  <label for="time">Time</label>
+                  <input type="time" id="time" class="input-field" aria-required="true">
+                </div>
+                <div class="input-group">
+                  <label for="frequency">Frequency</label>
+                  <select id="frequency" class="input-field" aria-label="Frequency">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="as_needed">As Needed</option>
+                  </select>
+                </div>
+              </div>
+              <div class="input-group">
+                <label>Days of the Week</label>
+                <div class="days-selector" role="group" aria-label="Select days">
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="0"> Sun</label>
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="1"> Mon</label>
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="2"> Tue</label>
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="3"> Wed</label>
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="4"> Thu</label>
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="5"> Fri</label>
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="6"> Sat</label>
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="instructions">Instructions (Optional)</label>
+                <textarea id="instructions" class="input-field" placeholder="Special instructions..." rows="3"></textarea>
+              </div>
+              <button class="btn btn-primary" onclick="addMedication()" aria-label="Add medication">
+                <i class="fas fa-plus"></i> Add Medication
+              </button>
+            </div>
+
+            <h3 style="text-align:center; margin: var(--space-xl) 0 var(--space-lg); color: var(--color-text-secondary); font-weight: 600;">
+              <i class="fas fa-clock" style="color: var(--color-accent);"></i> Next Doses
+            </h3>
+            <div id="remindersContainer"></div>
+          </div>
+
+          <!-- History Tab -->
+          <div class="tab-content" id="history-tab" role="tabpanel">
+            <div class="calc-box">
+              <h2><i class="fas fa-history"></i> Medication History</h2>
+              <div id="historyContainer"></div>
+            </div>
+          </div>
+
+          <!-- Settings Tab -->
+          <div class="tab-content" id="settings-tab" role="tabpanel">
+            <div class="calc-box">
+              <h2><i class="fas fa-cog"></i> Settings</h2>
+              <div class="input-group">
+                <label for="notificationSound">Notification Sound</label>
+                <select id="notificationSound" class="input-field" aria-label="Notification sound">
+                  <option value="default">Default</option>
+                  <option value="bell">Bell</option>
+                  <option value="chime">Chime</option>
+                  <option value="beep">Beep</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="reminderBefore">Reminder Before (minutes)</label>
+                <input type="number" id="reminderBefore" class="input-field" value="5" min="0" max="60" aria-label="Reminder before minutes">
+              </div>
+              <div class="input-group">
+                <label class="day-checkbox" style="cursor:pointer;">
+                  <input type="checkbox" id="enableNotifications" checked> Enable Browser Notifications
+                </label>
+              </div>
+              <div class="btn-group">
+                <button class="btn btn-primary" onclick="saveSettings()" aria-label="Save settings">
+                  <i class="fas fa-save"></i> Save Settings
+                </button>
+                <button class="btn btn-danger" onclick="clearAllData()" aria-label="Clear all data">
+                  <i class="fas fa-trash"></i> Clear All Data
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="footer-bottom">
+          &copy; <span id="currentYear"></span> Mohamed Tarek. All Rights Reserved. | <a href="../index.html">Back to Portfolio</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- Theme Toggle Button -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-    <i class="fas fa-moon"></i>
-  </button>
+  <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode"><i class="fas fa-moon"></i></button>
+  <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
 
   <script>
-    // Global variables
-    var remindersInterval;
-    var reminderTimeouts = [];
-    var settings = {
-      notificationSound: 'default',
-      reminderBefore: 5,
-      enableNotifications: true
-    };
+    (() => {
+      'use strict';
 
-    // Initialize the application
-    function init() {
-      loadSettings();
-      displayReminders();
-      displayHistory();
-      setupTabNavigation();
-      
-      // Request notification permission
-      if ('Notification' in window && settings.enableNotifications) {
-        Notification.requestPermission();
-      }
-    }
-
-    // Tab navigation
-    function setupTabNavigation() {
-      const tabs = document.querySelectorAll('.tab');
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          // Remove active class from all tabs and contents
-          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-          
-          // Add active class to clicked tab and corresponding content
-          tab.classList.add('active');
-          document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
-        });
-      });
-    }
-
-    // Load settings from localStorage
-    function loadSettings() {
-      const savedSettings = localStorage.getItem('medicationSettings');
-      if (savedSettings) {
-        settings = { ...settings, ...JSON.parse(savedSettings) };
-        document.getElementById('notificationSound').value = settings.notificationSound;
-        document.getElementById('reminderBefore').value = settings.reminderBefore;
-        document.getElementById('enableNotifications').checked = settings.enableNotifications;
-      }
-    }
-
-    // Save settings to localStorage
-    function saveSettings() {
-      settings.notificationSound = document.getElementById('notificationSound').value;
-      settings.reminderBefore = parseInt(document.getElementById('reminderBefore').value) || 5;
-      settings.enableNotifications = document.getElementById('enableNotifications').checked;
-      
-      localStorage.setItem('medicationSettings', JSON.stringify(settings));
-      showNotification('Settings saved successfully!', 'success');
-    }
-
-    // Clear all data
-    function clearAllData() {
-      if (confirm('Are you sure you want to clear all medication data? This action cannot be undone.')) {
-        localStorage.removeItem('medications');
-        localStorage.removeItem('medicationHistory');
-        displayReminders();
-        displayHistory();
-        showNotification('All data cleared successfully!', 'success');
-      }
-    }
-
-    // Add new medication
-    function addMedication() {
-      const medicationName = document.getElementById("medicationName").value.trim();
-      const dosage = document.getElementById("dosage").value.trim();
-      const time = document.getElementById("time").value;
-      const frequency = document.getElementById("frequency").value;
-      const instructions = document.getElementById("instructions").value.trim();
-      
-      // Get selected days
-      const dayCheckboxes = document.querySelectorAll('input[name="days"]:checked');
-      const days = Array.from(dayCheckboxes).map(cb => parseInt(cb.value));
-      
-      if (medicationName === "" || time === "") {
-        showNotification("Please enter both the medication name and time.", "error");
-        return;
-      }
-      
-      const medications = JSON.parse(localStorage.getItem("medications")) || [];
-      const newMedication = {
-        id: Date.now(),
-        name: medicationName,
-        dosage: dosage,
-        time: time,
-        frequency: frequency,
-        days: days,
-        instructions: instructions,
-        createdAt: new Date().toISOString()
+      const STORAGE_KEY = 'portfolio-theme';
+      let remindersInterval;
+      let reminderTimeouts = [];
+      let settings = {
+        notificationSound: 'default',
+        reminderBefore: 5,
+        enableNotifications: true
       };
-      
-      medications.push(newMedication);
-      localStorage.setItem("medications", JSON.stringify(medications));
-      
-      // Clear form
-      document.getElementById("medicationName").value = "";
-      document.getElementById("dosage").value = "";
-      document.getElementById("time").value = "";
-      document.getElementById("instructions").value = "";
-      
-      // Uncheck all day checkboxes
-      document.querySelectorAll('input[name="days"]').forEach(cb => cb.checked = false);
-      
-      displayReminders();
-      showNotification(`"${medicationName}" added successfully!`, "success");
-    }
 
-    // Remove medication
-    function removeMedication(id) {
-      let medications = JSON.parse(localStorage.getItem("medications")) || [];
-      const medication = medications.find(m => m.id === id);
-      
-      if (medication && confirm(`Are you sure you want to remove "${medication.name}"?`)) {
-        medications = medications.filter(m => m.id !== id);
+      const loader = document.getElementById('loader');
+      window.addEventListener('load', () => { setTimeout(() => { loader.classList.add('hidden'); }, 300); });
+
+      const scrollProgress = document.getElementById('scrollProgress');
+      const header = document.getElementById('header');
+      const backToTop = document.getElementById('backToTop');
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const s = window.scrollY;
+            const d = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress.style.width = (d > 0 ? (s / d) * 100 : 0) + '%';
+            header.classList.toggle('scrolled', s > 50);
+            backToTop.classList.toggle('visible', s > 400);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      const toggleMenu = () => {
+        const isActive = navMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', String(isActive));
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = isActive ? 'hidden' : '';
+      };
+      menuToggle.addEventListener('click', toggleMenu);
+      mobileOverlay.addEventListener('click', toggleMenu);
+
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('i');
+      const getPreferredTheme = () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      };
+      const applyTheme = (theme) => {
+        document.documentElement.setAttribute('data-theme', theme);
+        themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        localStorage.setItem(STORAGE_KEY, theme);
+      };
+      applyTheme(getPreferredTheme());
+      themeToggle.addEventListener('click', () => {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+      });
+
+      document.querySelectorAll('.tab').forEach(tab => {
+        const activate = () => {
+          const tabId = tab.getAttribute('data-tab');
+          document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+          document.getElementById(tabId + '-tab').classList.add('active');
+        };
+        tab.addEventListener('click', activate);
+        tab.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
+      });
+
+      function showToast(message, type) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast' + (type ? ' ' + type : '');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+
+      function loadSettings() {
+        const savedSettings = localStorage.getItem('medicationSettings');
+        if (savedSettings) {
+          settings = { ...settings, ...JSON.parse(savedSettings) };
+          document.getElementById('notificationSound').value = settings.notificationSound;
+          document.getElementById('reminderBefore').value = settings.reminderBefore;
+          document.getElementById('enableNotifications').checked = settings.enableNotifications;
+        }
+      }
+
+      function saveSettings() {
+        settings.notificationSound = document.getElementById('notificationSound').value;
+        settings.reminderBefore = parseInt(document.getElementById('reminderBefore').value) || 5;
+        settings.enableNotifications = document.getElementById('enableNotifications').checked;
+        localStorage.setItem('medicationSettings', JSON.stringify(settings));
+        showToast('Settings saved successfully!');
+      }
+
+      function clearAllData() {
+        if (confirm('Are you sure you want to clear all medication data? This action cannot be undone.')) {
+          localStorage.removeItem('medications');
+          localStorage.removeItem('medicationHistory');
+          displayReminders();
+          displayHistory();
+          showToast('All data cleared successfully!');
+        }
+      }
+
+      function addMedication() {
+        const medicationName = document.getElementById("medicationName").value.trim();
+        const dosage = document.getElementById("dosage").value.trim();
+        const time = document.getElementById("time").value;
+        const frequency = document.getElementById("frequency").value;
+        const instructions = document.getElementById("instructions").value.trim();
+
+        const dayCheckboxes = document.querySelectorAll('input[name="days"]:checked');
+        const days = Array.from(dayCheckboxes).map(cb => parseInt(cb.value));
+
+        if (medicationName === "" || time === "") {
+          showToast("Please enter both the medication name and time.", "error");
+          return;
+        }
+
+        const medications = JSON.parse(localStorage.getItem("medications")) || [];
+        const newMedication = {
+          id: Date.now(),
+          name: medicationName,
+          dosage: dosage,
+          time: time,
+          frequency: frequency,
+          days: days,
+          instructions: instructions,
+          createdAt: new Date().toISOString()
+        };
+
+        medications.push(newMedication);
         localStorage.setItem("medications", JSON.stringify(medications));
+
+        document.getElementById("medicationName").value = "";
+        document.getElementById("dosage").value = "";
+        document.getElementById("time").value = "";
+        document.getElementById("instructions").value = "";
+        document.querySelectorAll('input[name="days"]').forEach(cb => cb.checked = false);
+
         displayReminders();
-        showNotification(`"${medication.name}" removed successfully!`, "success");
+        showToast('"' + medicationName + '" added successfully!');
       }
-    }
 
-    // Mark medication as taken
-    function markAsTaken(id) {
-      const medications = JSON.parse(localStorage.getItem("medications")) || [];
-      const medication = medications.find(m => m.id === id);
-      
-      if (medication) {
-        // Add to history
-        const history = JSON.parse(localStorage.getItem("medicationHistory")) || [];
-        history.push({
-          medicationId: id,
-          medicationName: medication.name,
-          dosage: medication.dosage,
-          time: medication.time,
-          takenAt: new Date().toISOString(),
-          status: 'taken'
+      function removeMedication(id) {
+        let medications = JSON.parse(localStorage.getItem("medications")) || [];
+        const medication = medications.find(m => m.id === id);
+
+        if (medication && confirm('Are you sure you want to remove "' + medication.name + '"?')) {
+          medications = medications.filter(m => m.id !== id);
+          localStorage.setItem("medications", JSON.stringify(medications));
+          displayReminders();
+          showToast('"' + medication.name + '" removed successfully!');
+        }
+      }
+
+      function markAsTaken(id) {
+        const medications = JSON.parse(localStorage.getItem("medications")) || [];
+        const medication = medications.find(m => m.id === id);
+
+        if (medication) {
+          const history = JSON.parse(localStorage.getItem("medicationHistory")) || [];
+          history.push({
+            medicationId: id,
+            medicationName: medication.name,
+            dosage: medication.dosage,
+            time: medication.time,
+            takenAt: new Date().toISOString(),
+            status: 'taken'
+          });
+          localStorage.setItem("medicationHistory", JSON.stringify(history));
+          showToast('"' + medication.name + '" marked as taken!');
+          displayHistory();
+        }
+      }
+
+      function displayReminders() {
+        const medications = JSON.parse(localStorage.getItem("medications")) || [];
+        const remindersContainer = document.getElementById("remindersContainer");
+
+        reminderTimeouts.forEach(timeout => clearTimeout(timeout));
+        reminderTimeouts = [];
+
+        if (medications.length === 0) {
+          remindersContainer.innerHTML = '<div class="empty-state"><i class="fas fa-pills"></i><h3>No medications scheduled</h3><p>Add your first medication to get started!</p></div>';
+          return;
+        }
+
+        remindersContainer.innerHTML = '';
+
+        medications.forEach(function(medication) {
+          const reminderTime = new Date(new Date().toDateString() + " " + medication.time);
+          const currentDay = new Date().getDay();
+          const shouldTakeToday = medication.days.length === 0 || medication.days.includes(currentDay);
+
+          if (!shouldTakeToday) return;
+
+          let remainingTime = reminderTime.getTime() - Date.now();
+
+          if (remainingTime <= 0) {
+            let nextDay = currentDay;
+            let daysToAdd = 1;
+            while (daysToAdd <= 7) {
+              nextDay = (currentDay + daysToAdd) % 7;
+              if (medication.days.length === 0 || medication.days.includes(nextDay)) break;
+              daysToAdd++;
+            }
+            reminderTime.setDate(reminderTime.getDate() + daysToAdd);
+            remainingTime = reminderTime.getTime() - Date.now();
+          }
+
+          const isUrgent = remainingTime <= 15 * 60 * 1000;
+          const reminderItem = document.createElement("div");
+          reminderItem.className = "reminder-item" + (isUrgent ? " urgent" : "");
+
+          const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+          const dayDisplay = medication.days.length > 0
+            ? medication.days.map(d => dayNames[d]).join(', ')
+            : 'Every day';
+
+          reminderItem.innerHTML =
+            '<div class="reminder-header">' +
+              '<div style="flex:1;">' +
+                '<div class="reminder-name">' + medication.name + '</div>' +
+                (medication.dosage ? '<div class="medication-details">Dosage: ' + medication.dosage + '</div>' : '') +
+                '<div class="reminder-time"><i class="far fa-clock"></i> ' + medication.time + '</div>' +
+                '<div class="medication-details">Frequency: ' + medication.frequency + ' &bull; ' + dayDisplay + '</div>' +
+                (medication.instructions ? '<div class="medication-details">Instructions: ' + medication.instructions + '</div>' : '') +
+                '<div style="margin-top:var(--space-sm);">Next dose in: <span class="remaining-time" id="remainingTime' + medication.id + '">' + formatRemainingTime(remainingTime) + '</span></div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="medication-actions">' +
+              '<button onclick="markAsTaken(' + medication.id + ')" class="btn btn-success" aria-label="Mark as taken"><i class="fas fa-check"></i> Mark as Taken</button>' +
+              '<button onclick="removeMedication(' + medication.id + ')" class="btn btn-danger" aria-label="Remove medication"><i class="fas fa-trash"></i> Remove</button>' +
+            '</div>';
+
+          remindersContainer.appendChild(reminderItem);
+
+          const advanceNotice = settings.reminderBefore * 60 * 1000;
+
+          if (remainingTime - advanceNotice > 0) {
+            const advanceTimeout = setTimeout(function() {
+              showMedicationNotification(medication, true);
+            }, remainingTime - advanceNotice);
+            reminderTimeouts.push(advanceTimeout);
+          }
+
+          const mainTimeout = setTimeout(function() {
+            showMedicationNotification(medication, false);
+            displayReminders();
+          }, remainingTime);
+          reminderTimeouts.push(mainTimeout);
         });
-        localStorage.setItem("medicationHistory", JSON.stringify(history));
-        
-        showNotification(`"${medication.name}" marked as taken!`, "success");
-        displayHistory();
-      }
-    }
 
-    // Display reminders
-    function displayReminders() {
-      const medications = JSON.parse(localStorage.getItem("medications")) || [];
-      const remindersContainer = document.getElementById("remindersContainer");
-
-      // Clear all existing timeouts
-      reminderTimeouts.forEach(timeout => clearTimeout(timeout));
-      reminderTimeouts = [];
-
-      if (medications.length === 0) {
-        remindersContainer.innerHTML = `
-          <div class="empty-state">
-            <i class="fas fa-pills"></i>
-            <h3>No medications scheduled</h3>
-            <p>Add your first medication to get started!</p>
-          </div>
-        `;
-        return;
+        clearInterval(remindersInterval);
+        remindersInterval = setInterval(updateRemainingTimes, 1000);
       }
 
-      remindersContainer.innerHTML = '';
-      
-      medications.forEach(function(medication) {
-        const reminderTime = new Date(new Date().toDateString() + " " + medication.time);
+      function updateRemainingTimes() {
+        const medications = JSON.parse(localStorage.getItem("medications")) || [];
         const currentDay = new Date().getDay();
-        
-        // Check if medication should be taken today
-        const shouldTakeToday = medication.days.length === 0 || medication.days.includes(currentDay);
-        
-        if (!shouldTakeToday) {
-          // Skip if not scheduled for today
-          return;
-        }
-        
-        let remainingTime = reminderTime.getTime() - Date.now();
-        
-        // If time has passed today, schedule for next applicable day
-        if (remainingTime <= 0) {
-          // Find next day when medication should be taken
-          let nextDay = currentDay;
-          let daysToAdd = 1;
-          
-          while (daysToAdd <= 7) {
-            nextDay = (currentDay + daysToAdd) % 7;
-            if (medication.days.length === 0 || medication.days.includes(nextDay)) {
-              break;
+
+        medications.forEach(function(medication) {
+          const reminderTime = new Date(new Date().toDateString() + " " + medication.time);
+          const shouldTakeToday = medication.days.length === 0 || medication.days.includes(currentDay);
+
+          if (!shouldTakeToday) return;
+
+          let remainingTime = reminderTime.getTime() - Date.now();
+
+          if (remainingTime <= 0) {
+            let nextDay = currentDay;
+            let daysToAdd = 1;
+            while (daysToAdd <= 7) {
+              nextDay = (currentDay + daysToAdd) % 7;
+              if (medication.days.length === 0 || medication.days.includes(nextDay)) break;
+              daysToAdd++;
             }
-            daysToAdd++;
+            reminderTime.setDate(reminderTime.getDate() + daysToAdd);
+            remainingTime = reminderTime.getTime() - Date.now();
           }
-          
-          reminderTime.setDate(reminderTime.getDate() + daysToAdd);
-          remainingTime = reminderTime.getTime() - Date.now();
-        }
 
-        const isUrgent = remainingTime <= 15 * 60 * 1000; // 15 minutes or less
-        
-        const reminderItem = document.createElement("div");
-        reminderItem.className = `reminder-item ${isUrgent ? 'urgent' : ''}`;
-        
-        // Format days for display
-        const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        const dayDisplay = medication.days.length > 0 
-          ? medication.days.map(d => dayNames[d]).join(', ')
-          : 'Every day';
-        
-        reminderItem.innerHTML = `
-          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-            <div style="flex: 1;">
-              <strong style="font-size: 1.1em;">${medication.name}</strong>
-              ${medication.dosage ? `<div class="medication-details">Dosage: ${medication.dosage}</div>` : ''}
-              <div class="reminder-time">
-                <i class="far fa-clock"></i> ${medication.time}
-              </div>
-              <div class="medication-details">Frequency: ${medication.frequency} • ${dayDisplay}</div>
-              ${medication.instructions ? `<div class="medication-details">Instructions: ${medication.instructions}</div>` : ''}
-              <div style="margin-top: 10px;">
-                Next dose in: <span class="remaining-time" id='remainingTime${medication.id}'>${formatRemainingTime(remainingTime)}</span>
-              </div>
-            </div>
-          </div>
-          <div class="medication-actions">
-            <button onclick="markAsTaken(${medication.id})" class="btn btn-success">
-              <i class="fas fa-check"></i> Mark as Taken
-            </button>
-            <button onclick="removeMedication(${medication.id})" class="btn btn-danger">
-              <i class="fas fa-trash"></i> Remove
-            </button>
-          </div>
-        `;
-
-        remindersContainer.appendChild(reminderItem);
-
-        // Set timeout for this reminder (with advance notice)
-        const advanceNotice = settings.reminderBefore * 60 * 1000; // Convert to milliseconds
-        
-        if (remainingTime - advanceNotice > 0) {
-          // Set advance reminder
-          const advanceTimeout = setTimeout(function() {
-            showMedicationNotification(medication, true);
-          }, remainingTime - advanceNotice);
-          
-          reminderTimeouts.push(advanceTimeout);
-        }
-        
-        // Set main reminder
-        const mainTimeout = setTimeout(function() {
-          showMedicationNotification(medication, false);
-          displayReminders(); // Refresh the display after notification
-        }, remainingTime);
-        
-        reminderTimeouts.push(mainTimeout);
-      });
-
-      // Update remaining times every second
-      clearInterval(remindersInterval);
-      remindersInterval = setInterval(updateRemainingTimes, 1000);
-    }
-
-    // Update remaining times
-    function updateRemainingTimes() {
-      const medications = JSON.parse(localStorage.getItem("medications")) || [];
-      const currentDay = new Date().getDay();
-      
-      medications.forEach(function(medication) {
-        const reminderTime = new Date(new Date().toDateString() + " " + medication.time);
-        const shouldTakeToday = medication.days.length === 0 || medication.days.includes(currentDay);
-        
-        if (!shouldTakeToday) {
-          return;
-        }
-        
-        let remainingTime = reminderTime.getTime() - Date.now();
-        
-        if (remainingTime <= 0) {
-          // Find next day when medication should be taken
-          let nextDay = currentDay;
-          let daysToAdd = 1;
-          
-          while (daysToAdd <= 7) {
-            nextDay = (currentDay + daysToAdd) % 7;
-            if (medication.days.length === 0 || medication.days.includes(nextDay)) {
-              break;
-            }
-            daysToAdd++;
-          }
-          
-          reminderTime.setDate(reminderTime.getDate() + daysToAdd);
-          remainingTime = reminderTime.getTime() - Date.now();
-        }
-        
-        const remainingElement = document.getElementById("remainingTime" + medication.id);
-        if (remainingElement) {
-          remainingElement.innerHTML = formatRemainingTime(remainingTime);
-          
-          // Update urgency class
-          const reminderItem = remainingElement.closest('.reminder-item');
-          if (reminderItem) {
-            if (remainingTime <= 15 * 60 * 1000) {
-              reminderItem.classList.add('urgent');
-            } else {
-              reminderItem.classList.remove('urgent');
+          const remainingElement = document.getElementById("remainingTime" + medication.id);
+          if (remainingElement) {
+            remainingElement.innerHTML = formatRemainingTime(remainingTime);
+            const reminderItem = remainingElement.closest('.reminder-item');
+            if (reminderItem) {
+              if (remainingTime <= 15 * 60 * 1000) {
+                reminderItem.classList.add('urgent');
+              } else {
+                reminderItem.classList.remove('urgent');
+              }
             }
           }
-        }
-      });
-    }
-
-    // Format remaining time
-    function formatRemainingTime(remainingTime) {
-      if (remainingTime <= 0) return "Now";
-      
-      const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-      const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-      
-      if (hours > 0) {
-        return `${hours}h ${minutes}m ${seconds}s`;
-      } else if (minutes > 0) {
-        return `${minutes}m ${seconds}s`;
-      } else {
-        return `${seconds}s`;
-      }
-    }
-
-    // Show medication notification
-    function showMedicationNotification(medication, isAdvance) {
-      const message = isAdvance 
-        ? `Reminder: "${medication.name}" is due in ${settings.reminderBefore} minutes`
-        : `Time to take your medication: ${medication.name}`;
-      
-      showNotification(message, isAdvance ? 'info' : 'warning');
-      
-      // Browser notification
-      if (settings.enableNotifications && 'Notification' in window && Notification.permission === 'granted') {
-        new Notification('Medication Reminder', {
-          body: message,
-          icon: 'icon.png'
         });
       }
-      
-      // Play sound if enabled
-      if (settings.notificationSound !== 'none') {
-        playNotificationSound();
+
+      function formatRemainingTime(remainingTime) {
+        if (remainingTime <= 0) return "Now";
+        const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+        if (hours > 0) return hours + "h " + minutes + "m " + seconds + "s";
+        if (minutes > 0) return minutes + "m " + seconds + "s";
+        return seconds + "s";
       }
-    }
 
-    // Play notification sound
-    function playNotificationSound() {
-      // In a real app, you would play different sounds based on settings
-      // This is a simple implementation
-      const audio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==');
-      audio.play().catch(e => console.log('Audio play failed:', e));
-    }
+      function showMedicationNotification(medication, isAdvance) {
+        const message = isAdvance
+          ? 'Reminder: "' + medication.name + '" is due in ' + settings.reminderBefore + ' minutes'
+          : 'Time to take your medication: ' + medication.name;
 
-    // Display history
-    function displayHistory() {
-      const history = JSON.parse(localStorage.getItem("medicationHistory")) || [];
-      const historyContainer = document.getElementById("historyContainer");
-      
-      if (history.length === 0) {
-        historyContainer.innerHTML = `
-          <div class="empty-state">
-            <i class="fas fa-history"></i>
-            <h3>No medication history</h3>
-            <p>Your taken medications will appear here</p>
-          </div>
-        `;
-        return;
-      }
-      
-      // Sort by date (newest first)
-      history.sort((a, b) => new Date(b.takenAt) - new Date(a.takenAt));
-      
-      historyContainer.innerHTML = '';
-      
-      history.forEach((item, index) => {
-        const historyItem = document.createElement("div");
-        historyItem.className = `history-item ${item.status}`;
-        
-        const takenDate = new Date(item.takenAt);
-        const formattedDate = takenDate.toLocaleDateString() + ' ' + takenDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        
-        historyItem.innerHTML = `
-          <div>
-            <strong>${item.medicationName}</strong>
-            ${item.dosage ? `<div>${item.dosage}</div>` : ''}
-            <div style="font-size: 0.9em; color: var(--text-muted);">Taken at: ${formattedDate}</div>
-          </div>
-          <div>
-            <span style="padding: 4px 8px; border-radius: 4px; font-size: 0.8em; 
-              background-color: ${item.status === 'taken' ? 'var(--success-color)' : 'var(--error-color)'}; 
-              color: white;">
-              ${item.status === 'taken' ? 'Taken' : 'Missed'}
-            </span>
-          </div>
-        `;
-        
-        historyContainer.appendChild(historyItem);
-      });
-    }
+        showToast(message, isAdvance ? 'info' : 'warning');
 
-    // Show notification
-    function showNotification(message, type = 'info') {
-      const notificationArea = document.getElementById('notificationArea');
-      const notificationId = 'notification-' + Date.now();
-      
-      const notification = document.createElement('div');
-      notification.id = notificationId;
-      notification.className = `notification ${type}`;
-      notification.innerHTML = `
-        <i class="fas fa-${getNotificationIcon(type)}"></i>
-        <span>${message}</span>
-        <button class="close-notification" onclick="document.getElementById('${notificationId}').remove()">
-          <i class="fas fa-times"></i>
-        </button>
-      `;
-      
-      notificationArea.appendChild(notification);
-      
-      // Show notification
-      setTimeout(() => {
-        notification.classList.add('show');
-      }, 100);
-      
-      // Auto remove after 5 seconds
-      setTimeout(() => {
-        if (document.getElementById(notificationId)) {
-          notification.classList.remove('show');
-          setTimeout(() => {
-            if (document.getElementById(notificationId)) {
-              document.getElementById(notificationId).remove();
-            }
-          }, 500);
+        if (settings.enableNotifications && 'Notification' in window && Notification.permission === 'granted') {
+          new Notification('Medication Reminder', {
+            body: message,
+            icon: '../icon.png'
+          });
         }
-      }, 5000);
-    }
 
-    // Get notification icon based on type
-    function getNotificationIcon(type) {
-      switch(type) {
-        case 'success': return 'check-circle';
-        case 'error': return 'exclamation-circle';
-        case 'warning': return 'exclamation-triangle';
-        default: return 'info-circle';
+        if (settings.notificationSound !== 'none') {
+          playNotificationSound();
+        }
       }
-    }
 
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = themeToggle.querySelector('i');
-    
-    // Check for saved theme preference or use preferred color scheme
-    const currentTheme = localStorage.getItem('theme') || 
-                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    
-    if (currentTheme === 'dark') {
-      document.body.setAttribute('data-theme', 'dark');
-      themeIcon.classList.replace('fa-moon', 'fa-sun');
-    } else {
-      document.body.setAttribute('data-theme', 'light');
-      themeIcon.classList.replace('fa-sun', 'fa-moon');
-    }
-    
-    themeToggle.addEventListener('click', () => {
-      if (document.body.getAttribute('data-theme') === 'light') {
-        document.body.setAttribute('data-theme', 'dark');
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.body.setAttribute('data-theme', 'light');
-        themeIcon.classList.replace('fa-sun', 'fa-moon');
-        localStorage.setItem('theme', 'light');
+      function playNotificationSound() {
+        const audio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==');
+        audio.play().catch(e => console.log('Audio play failed:', e));
       }
-    });
 
-    // Initialize on load
-    window.onload = init;
-    
-    // Set current year in footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+      function displayHistory() {
+        const history = JSON.parse(localStorage.getItem("medicationHistory")) || [];
+        const historyContainer = document.getElementById("historyContainer");
+
+        if (history.length === 0) {
+          historyContainer.innerHTML = '<div class="empty-state"><i class="fas fa-history"></i><h3>No medication history</h3><p>Your taken medications will appear here</p></div>';
+          return;
+        }
+
+        history.sort((a, b) => new Date(b.takenAt) - new Date(a.takenAt));
+        historyContainer.innerHTML = '';
+
+        history.forEach(function(item) {
+          const historyItem = document.createElement("div");
+          historyItem.className = "history-item " + item.status;
+
+          const takenDate = new Date(item.takenAt);
+          const formattedDate = takenDate.toLocaleDateString() + ' ' + takenDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+          historyItem.innerHTML =
+            '<div style="flex:1;">' +
+              '<strong style="color:var(--color-text-primary);">' + item.medicationName + '</strong>' +
+              (item.dosage ? '<div class="medication-details">' + item.dosage + '</div>' : '') +
+              '<div class="medication-details">Taken at: ' + formattedDate + '</div>' +
+            '</div>' +
+            '<span class="history-status ' + item.status + '">' + (item.status === 'taken' ? 'Taken' : 'Missed') + '</span>';
+
+          historyContainer.appendChild(historyItem);
+        });
+      }
+
+      window.addMedication = addMedication;
+      window.removeMedication = removeMedication;
+      window.markAsTaken = markAsTaken;
+      window.saveSettings = saveSettings;
+      window.clearAllData = clearAllData;
+
+      function init() {
+        loadSettings();
+        displayReminders();
+        displayHistory();
+
+        if ('Notification' in window && settings.enableNotifications) {
+          Notification.requestPermission();
+        }
+      }
+
+      init();
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+    })();
   </script>
 </body>
 </html>

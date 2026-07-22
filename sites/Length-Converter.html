@@ -1,1435 +1,1029 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Unit Converter</title>
-    <meta name="description" content="Comprehensive unit converter for length, angle, temperature, weight, time, and more">
-    <link rel="icon" href="icon.png" type="image/png">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #3498db;
-            --primary-dark: #2980b9;
-            --primary-light: #5dade2;
-            --background-dark: #121212;
-            --background-darker: #0a0a0a;
-            --background-secondary: #1a1a1a;
-            --card-dark: #1e1e1e;
-            --card-light: #252525;
-            --text-light: #ffffff;
-            --text-muted: #aaaaaa;
-            --success-color: #4caf50;
-            --error-color: #f44336;
-            --warning-color: #ff9800;
-            --transition-speed: 0.3s;
-            --border-radius: 12px;
-            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        /* Light mode variables */
-        [data-theme="light"] {
-            --background-dark: #f5f7fa;
-            --background-darker: #e8ebf0;
-            --background-secondary: #ffffff;
-            --card-dark: #ffffff;
-            --card-light: #f9f9f9;
-            --text-light: #333333;
-            --text-muted: #666666;
-            --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
+  <title>Advanced Unit Converter | Mohamed Tarek</title>
+  <meta name="description" content="Comprehensive unit converter for length, angle, temperature, weight, time, and area. Supports scientific notation and conversion history.">
+  <meta name="keywords" content="unit converter, length converter, temperature converter, weight converter, angle converter, time converter, area converter, scientific notation">
+  <meta name="author" content="Mohamed Tarek">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
 
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Advanced Unit Converter | Mohamed Tarek">
+  <meta property="og:description" content="Comprehensive unit converter for length, angle, temperature, weight, time, and area with scientific notation.">
+  <meta property="og:image" content="https://website-mohamed.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://website-mohamed.vercel.app/sites/Length-Converter.html">
+  <meta property="og:site_name" content="Mohamed Tarek Portfolio">
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--background-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-            transition: background-color var(--transition-speed) ease;
-            padding: 20px;
-            min-height: 100vh;
-        }
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Advanced Unit Converter | Mohamed Tarek">
+  <meta name="twitter:description" content="Comprehensive unit converter for length, angle, temperature, weight, time, and area.">
+  <meta name="twitter:image" content="https://website-mohamed.vercel.app/photo.jpg">
 
-        h1, h2, h3 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="../icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 
-        .category-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        .category-tab {
-            padding: 8px 16px;
-            background-color: var(--card-dark);
-            border: 1px solid var(--background-secondary);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all var(--transition-speed) ease;
-            font-size: 14px;
-        }
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Advanced Unit Converter",
+    "description": "Comprehensive unit converter for length, angle, temperature, weight, time, and area with scientific notation and conversion history.",
+    "url": "https://website-mohamed.vercel.app/sites/Length-Converter.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek",
+      "url": "https://website-mohamed.vercel.app"
+    }
+  }
+  </script>
 
-        .category-tab.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
+  <style>
+    :root {
+      --color-bg-primary: #0a0e1a;
+      --color-bg-secondary: #0f1322;
+      --color-bg-tertiary: #141829;
+      --color-bg-card: #161b2e;
+      --color-bg-card-hover: #1c2240;
+      --color-bg-elevated: #1a2038;
+      --color-accent: #3b82f6;
+      --color-accent-hover: #2563eb;
+      --color-accent-light: #60a5fa;
+      --color-accent-glow: rgba(59, 130, 246, 0.15);
+      --color-accent-subtle: rgba(59, 130, 246, 0.08);
+      --color-text-primary: #f1f5f9;
+      --color-text-secondary: #94a3b8;
+      --color-text-tertiary: #64748b;
+      --color-border: rgba(255, 255, 255, 0.06);
+      --color-border-hover: rgba(255, 255, 255, 0.12);
+      --color-border-accent: rgba(59, 130, 246, 0.3);
+      --color-success: #22c55e;
+      --color-error: #ef4444;
+      --color-warning: #f59e0b;
+      --color-info: #3b82f6;
+      --gradient-hero: linear-gradient(135deg, #0a0e1a 0%, #111833 50%, #0f1322 100%);
+      --gradient-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 4rem;
+      --space-4xl: 6rem;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.15);
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --container-max: 1200px;
+      --header-height: 72px;
+    }
 
-        .category-tab:hover:not(.active) {
-            background-color: var(--background-secondary);
-        }
+    [data-theme="light"] {
+      --color-bg-primary: #f8fafc;
+      --color-bg-secondary: #f1f5f9;
+      --color-bg-tertiary: #e2e8f0;
+      --color-bg-card: #ffffff;
+      --color-bg-card-hover: #f8fafc;
+      --color-bg-elevated: #ffffff;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      --color-text-tertiary: #94a3b8;
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-border-hover: rgba(0, 0, 0, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+      --gradient-hero: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 50%, #f1f5f9 100%);
+    }
 
-        .converter-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 20px;
-        }
-        
-        .main-section {
-            flex: 2;
-            min-width: 600px;
-        }
-        
-        .side-section {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .panel {
-            background-color: var(--card-dark);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            margin-bottom: 20px;
-            border: 1px solid var(--background-secondary);
-        }
-        
-        .unit-group {
-            margin-bottom: 20px;
-            background-color: var(--background-secondary);
-            padding: 15px;
-            border-radius: var(--border-radius);
-            border-left: 4px solid var(--primary-color);
-        }
-        
-        .unit-group h3 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            font-size: 18px;
-        }
-        
-        .unit-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .unit-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 8px;
-            background-color: var(--card-dark);
-            border-radius: 5px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: background-color var(--transition-speed) ease;
-        }
-        
-        .unit-item:hover {
-            background-color: var(--background-secondary);
-        }
-        
-        .unit-label {
-            display: flex;
-            align-items: center;
-            width: 150px;
-            font-size: 14px;
-        }
-        
-        .unit-symbol {
-            margin-left: 5px;
-            color: var(--text-muted);
-            font-weight: bold;
-        }
-        
-        .unit-input {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid var(--background-secondary);
-            border-radius: 4px;
-            font-size: 14px;
-            text-align: right;
-            background-color: var(--background-secondary);
-            color: var(--text-light);
-            transition: all var(--transition-speed) ease;
-        }
-        
-        .unit-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-        
-        .scientific {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-left: 10px;
-            white-space: nowrap;
-            min-width: 120px;
-        }
-        
-        .controls {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-        
-        .button {
-            padding: 8px 15px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color var(--transition-speed) ease;
-        }
-        
-        .button:hover {
-            background-color: var(--primary-dark);
-        }
-        
-        .button.secondary {
-            background-color: var(--background-secondary);
-            color: var(--text-light);
-        }
-        
-        .button.secondary:hover {
-            background-color: var(--card-light);
-        }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color var(--transition-slow), color var(--transition-slow);
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; }
+    ul, ol { list-style: none; }
+    ::selection { background: var(--color-accent); color: white; }
 
-        .button.warning {
-            background-color: var(--warning-color);
-        }
-        
-        .button.warning:hover {
-            background-color: #e68900;
-        }
-        
-        .angle-converter {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .angle-input-group {
-            display: flex;
-            align-items: center;
-        }
-        
-        .angle-input {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid var(--background-secondary);
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: var(--background-secondary);
-            color: var(--text-light);
-            transition: all var(--transition-speed) ease;
-        }
-        
-        .angle-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-        
-        .angle-label {
-            width: 100px;
-            font-size: 14px;
-        }
-        
-        .note {
-            margin-top: 20px;
-            font-size: 13px;
-            color: var(--text-muted);
-            text-align: center;
-            font-style: italic;
-        }
-        
-        sup {
-            font-size: 0.8em;
-            vertical-align: super;
-        }
+    .skip-link {
+      position: fixed; top: -100%; left: var(--space-md);
+      background: var(--color-accent); color: white;
+      padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm);
+      z-index: 10000; font-weight: 600; font-size: 0.875rem;
+      transition: top var(--transition-fast);
+    }
+    .skip-link:focus { top: var(--space-md); }
 
-        /* Dark Mode Toggle */
-        .theme-toggle {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--card-dark);
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2em;
-            box-shadow: var(--box-shadow);
-            cursor: pointer;
-            transition: all var(--transition-speed) ease;
-            z-index: 999;
-        }
-        
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+      background: var(--gradient-accent); z-index: 10001;
+      transition: width 50ms linear;
+    }
 
-        /* History Panel */
-        .history-panel {
-            max-height: 300px;
-            overflow-y: auto;
-        }
+    .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-xl); }
+    @media (max-width: 768px) { .container { padding: 0 var(--space-md); } }
 
-        .history-item {
-            padding: 10px;
-            border-bottom: 1px solid var(--background-secondary);
-            font-size: 14px;
-        }
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--header-height);
+      z-index: 1000; transition: all var(--transition-base); background: transparent;
+    }
+    .header.scrolled {
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid var(--color-border);
+    }
+    [data-theme="light"] .header.scrolled { background: rgba(248, 250, 252, 0.85); }
+    .header .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
 
-        .history-item:last-child {
-            border-bottom: none;
-        }
+    .logo { display: flex; align-items: center; gap: var(--space-sm); font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; }
+    .logo-icon {
+      width: 36px; height: 36px; background: var(--gradient-accent);
+      border-radius: var(--radius-sm); display: flex; align-items: center;
+      justify-content: center; color: white; font-size: 0.875rem; font-weight: 800;
+    }
 
-        .history-item .value {
-            font-weight: bold;
-            color: var(--primary-color);
-        }
+    .nav { display: flex; align-items: center; gap: var(--space-xs); }
+    .nav-link {
+      position: relative; padding: var(--space-sm) var(--space-md);
+      font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
+      border-radius: var(--radius-sm); transition: all var(--transition-fast);
+    }
+    .nav-link:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
 
-        .history-item .units {
-            color: var(--text-muted);
-            font-size: 12px;
-        }
+    .menu-toggle {
+      display: none; flex-direction: column; gap: 5px; padding: var(--space-sm);
+      z-index: 1001; align-items: center; justify-content: center;
+    }
+    .menu-toggle .bar {
+      width: 22px; height: 2px; background: var(--color-text-primary);
+      border-radius: 2px; transition: all var(--transition-base); transform-origin: center;
+    }
+    .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .main-section, .side-section {
-                min-width: 100%;
-            }
-            
-            .unit-label {
-                width: 120px;
-            }
+    .mobile-overlay {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
+      z-index: 999; opacity: 0; pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+    .mobile-overlay.active { opacity: 1; pointer-events: auto; }
 
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .nav {
+        position: fixed; top: 0; right: -100%; width: min(320px, 85vw);
+        height: 100vh; background: var(--color-bg-secondary);
+        flex-direction: column; align-items: flex-start; justify-content: center;
+        padding: var(--space-3xl); gap: var(--space-sm);
+        transition: right var(--transition-slow); border-left: 1px solid var(--color-border);
+      }
+      .nav.active { right: 0; }
+      .nav-link { font-size: 1.125rem; width: 100%; padding: var(--space-md); }
+    }
 
-            .category-tabs {
-                width: 100%;
-                overflow-x: auto;
-                padding-bottom: 10px;
-            }
-        }
+    .page-hero {
+      padding-top: calc(var(--header-height) + var(--space-3xl));
+      padding-bottom: var(--space-3xl);
+      background: var(--gradient-hero);
+      position: relative; overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0; overflow: hidden; z-index: 0;
+    }
+    .page-hero-orb {
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+    .page-hero-orb:nth-child(1) { width: 400px; height: 400px; background: rgba(59, 130, 246, 0.15); top: -100px; right: -50px; }
+    .page-hero-orb:nth-child(2) { width: 300px; height: 300px; background: rgba(139, 92, 246, 0.12); bottom: -80px; left: -80px; animation-delay: -7s; }
+    .page-hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px; z-index: 1;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(20px, 10px) scale(1.02); }
+    }
+    .page-hero .container { position: relative; z-index: 2; text-align: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-md); background: var(--color-accent-subtle);
+      border: 1px solid var(--color-border-accent); border-radius: var(--radius-full);
+      font-size: 0.8125rem; font-weight: 500; color: var(--color-accent-light);
+      margin-bottom: var(--space-lg);
+    }
+    .hero-badge .dot {
+      width: 8px; height: 8px; background: var(--color-success);
+      border-radius: 50%; animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+    .page-hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.03em; margin-bottom: var(--space-md);
+    }
+    .page-hero h1 .gradient-text {
+      background: var(--gradient-accent); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-hero p {
+      font-size: clamp(1rem, 2vw, 1.125rem); color: var(--color-text-secondary);
+      max-width: 600px; margin: 0 auto;
+    }
 
-        /* Footer */
-        footer {
-            background-color: var(--card-dark);
-            color: var(--text-light);
-            text-align: center;
-            padding: 30px;
-            margin-top: 30px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
+    .main-content { padding: var(--space-3xl) 0 var(--space-4xl); }
 
-        .social-footer {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
+    .converter-layout {
+      display: grid; grid-template-columns: 2fr 1fr;
+      gap: var(--space-xl); margin-bottom: var(--space-xl);
+    }
+    @media (max-width: 992px) { .converter-layout { grid-template-columns: 1fr; } }
 
-        .social-footer a {
-            color: var(--text-light);
-            font-size: 1.5em;
-            margin: 0 15px;
-            transition: all var(--transition-speed) ease;
-            display: inline-block;
-        }
+    .category-tabs {
+      display: flex; flex-wrap: wrap; gap: var(--space-sm);
+      margin-bottom: var(--space-xl);
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg); overflow: hidden;
+    }
+    .category-tab {
+      flex: 1; min-width: max-content; padding: var(--space-md) var(--space-lg);
+      text-align: center; background: transparent; cursor: pointer;
+      transition: all var(--transition-fast); border-bottom: 2px solid transparent;
+      font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+    .category-tab:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
+    .category-tab.active {
+      color: var(--color-accent); border-bottom-color: var(--color-accent);
+      font-weight: 600; background: var(--color-accent-subtle);
+    }
+    @media (max-width: 768px) {
+      .category-tabs { flex-direction: column; overflow-x: visible; }
+      .category-tab { border-bottom: 1px solid var(--color-border); border-right: none; }
+      .category-tab.active { border-bottom-color: var(--color-accent); }
+    }
 
-        .social-footer a:hover {
-            color: var(--primary-color);
-            transform: translateY(-5px);
-        }
+    .panel {
+      background: var(--color-bg-card); padding: var(--space-xl);
+      border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+      transition: all var(--transition-base);
+    }
+    .panel:hover { border-color: var(--color-border-hover); }
+    .panel h2, .panel h3 {
+      font-size: 1rem; font-weight: 700; color: var(--color-accent);
+      margin-bottom: var(--space-lg); display: flex; align-items: center; gap: var(--space-sm);
+    }
 
-        .footer-bottom {
-            margin-top: 20px;
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
+    .unit-group {
+      margin-bottom: var(--space-lg); background: var(--color-bg-secondary);
+      padding: var(--space-lg); border-radius: var(--radius-md);
+      border-left: 3px solid var(--color-accent);
+      border: 1px solid var(--color-border); border-left: 3px solid var(--color-accent);
+    }
+    .unit-group h3 { margin-bottom: var(--space-md); }
 
-        /* Hidden class for toggling visibility */
-        .hidden {
-            display: none;
-        }
+    .unit-list { display: flex; flex-direction: column; gap: var(--space-sm); }
 
-        /* Error styling */
-        .error {
-            color: var(--error-color);
-            font-size: 12px;
-            margin-top: 5px;
-        }
+    .unit-item {
+      display: flex; align-items: center; gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--color-bg-tertiary); border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm); transition: all var(--transition-fast);
+    }
+    .unit-item:hover { border-color: var(--color-border-hover); background: var(--color-bg-card-hover); }
 
-        /* Loading indicator */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: var(--primary-color);
-            animation: spin 1s ease-in-out infinite;
-        }
+    .unit-label {
+      display: flex; align-items: center; min-width: 160px;
+      font-size: 0.875rem; color: var(--color-text-primary);
+    }
+    .unit-symbol { margin-left: var(--space-xs); color: var(--color-text-tertiary); font-family: var(--font-mono); font-size: 0.8125rem; }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
+    .unit-input {
+      flex: 1; padding: var(--space-sm) var(--space-md);
+      background: var(--color-bg-primary); border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm); color: var(--color-text-primary);
+      font-family: var(--font-mono); font-size: 0.875rem; text-align: right;
+      transition: all var(--transition-fast); outline: none; min-width: 0;
+    }
+    .unit-input:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
+
+    .scientific {
+      font-size: 0.75rem; color: var(--color-text-tertiary);
+      white-space: nowrap; min-width: 120px; text-align: right;
+      font-family: var(--font-mono);
+    }
+
+    .controls {
+      display: flex; justify-content: center; margin-bottom: var(--space-xl);
+      gap: var(--space-sm); flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: var(--space-sm); padding: 10px 20px; font-size: 0.875rem;
+      font-weight: 600; border-radius: var(--radius-full);
+      transition: all var(--transition-fast); position: relative; overflow: hidden;
+    }
+    .btn-primary {
+      background: var(--color-accent); color: white;
+      box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
+    }
+    .btn-primary:hover {
+      background: var(--color-accent-hover); transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(59, 130, 246, 0.4);
+    }
+    .btn-secondary {
+      background: var(--color-bg-tertiary); color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
+    .btn-secondary:hover { border-color: var(--color-border-hover); transform: translateY(-2px); }
+    .btn-warning {
+      background: var(--color-warning); color: white;
+    }
+    .btn-warning:hover { background: #d97706; transform: translateY(-2px); }
+
+    .angle-converter { display: flex; flex-direction: column; gap: var(--space-md); }
+    .angle-input-group { display: flex; align-items: center; gap: var(--space-sm); }
+    .angle-label {
+      min-width: 120px; font-size: 0.875rem; color: var(--color-text-primary);
+    }
+    .angle-input {
+      flex: 1; padding: var(--space-sm) var(--space-md);
+      background: var(--color-bg-primary); border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm); color: var(--color-text-primary);
+      font-family: var(--font-mono); font-size: 0.875rem;
+      transition: all var(--transition-fast); outline: none;
+    }
+    .angle-input:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
+
+    .note {
+      margin-top: var(--space-xl); font-size: 0.8125rem; color: var(--color-text-tertiary);
+      text-align: center; font-style: italic;
+    }
+    sup { font-size: 0.8em; vertical-align: super; }
+
+    .history-panel { max-height: 400px; overflow-y: auto; }
+    .history-panel::-webkit-scrollbar { width: 4px; }
+    .history-panel::-webkit-scrollbar-track { background: transparent; }
+    .history-panel::-webkit-scrollbar-thumb { background: var(--color-border-hover); border-radius: 2px; }
+
+    .history-item {
+      padding: var(--space-sm) var(--space-md); border-bottom: 1px solid var(--color-border);
+      font-size: 0.8125rem; transition: background var(--transition-fast);
+    }
+    .history-item:last-child { border-bottom: none; }
+    .history-item:hover { background: var(--color-accent-subtle); }
+    .history-item .value { font-weight: 600; color: var(--color-accent); font-family: var(--font-mono); }
+    .history-item .units { color: var(--color-text-tertiary); font-size: 0.75rem; margin-top: 2px; }
+
+    .hidden { display: none !important; }
+
+    .error {
+      color: var(--color-error); font-size: 0.75rem; margin-top: var(--space-xs);
+    }
+
+    .column {
+      display: flex; flex-direction: column; gap: var(--space-lg);
+    }
+
+    .converter-category { animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-secondary);
+      font-size: 1rem; z-index: 999; opacity: 0; visibility: hidden;
+      transform: translateY(12px); transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+
+    .theme-toggle {
+      position: fixed; bottom: 32px; right: 90px; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-secondary);
+      font-size: 1rem; z-index: 999; transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+    .theme-toggle:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+
+    .toast {
+      position: fixed; bottom: 100px; right: 32px; padding: var(--space-md) var(--space-lg);
+      background: var(--color-success); color: white; border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg); z-index: 10000; font-size: 0.875rem; font-weight: 500;
+      transform: translateX(120%); transition: transform var(--transition-base);
+      max-width: 400px;
+    }
+    .toast.show { transform: translateX(0); }
+    .toast.error { background: var(--color-error); }
+
+    .footer {
+      background: var(--color-bg-primary); border-top: 1px solid var(--color-border);
+      padding: var(--space-3xl) 0 var(--space-xl);
+    }
+    .footer-content {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: var(--space-md);
+    }
+    .footer-social { display: flex; gap: var(--space-sm); }
+    .footer-social a {
+      width: 40px; height: 40px; display: flex; align-items: center;
+      justify-content: center; border-radius: var(--radius-md);
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      color: var(--color-text-secondary); transition: all var(--transition-fast);
+    }
+    .footer-social a:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+    .footer-bottom { font-size: 0.875rem; color: var(--color-text-tertiary); }
+    .footer-bottom a { color: var(--color-accent); }
+
+    .loader {
+      position: fixed; inset: 0; background: var(--color-bg-primary);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 99999; transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-spinner {
+      width: 40px; height: 40px; border: 3px solid var(--color-border);
+      border-top-color: var(--color-accent); border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .loader-text { margin-top: var(--space-lg); font-size: 0.875rem; color: var(--color-text-tertiary); font-weight: 500; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    @media all and (display-mode: standalone) {
+      body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+    }
+
+    @media (max-width: 768px) {
+      .converter-layout { grid-template-columns: 1fr; }
+      .unit-label { min-width: 120px; font-size: 0.8125rem; }
+      .angle-label { min-width: 100px; font-size: 0.8125rem; }
+      .scientific { display: none; }
+    }
+  </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Advanced Unit Converter</h1>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Loading converter...</p>
+  </div>
+
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+
+  <header class="header" id="header" role="banner">
+    <div class="container">
+      <a href="../index.html" class="logo" aria-label="Mohamed Tarek - Home">
+        <span class="logo-icon">MT</span>
+        <span>Mohamed Tarek</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#skills" class="nav-link">Skills</a>
+        <a href="../index.html#projects" class="nav-link">Projects</a>
+        <a href="../index.html#contact" class="nav-link">Contact</a>
+        <a href="../index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero" aria-label="Page header">
+      <div class="page-hero-bg" aria-hidden="true">
+        <div class="page-hero-orb"></div>
+        <div class="page-hero-orb"></div>
+        <div class="page-hero-grid"></div>
+      </div>
+      <div class="container">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Engineering Tool
+        </div>
+        <h1><i class="fas fa-exchange-alt"></i> <span class="gradient-text">Advanced Unit</span> Converter</h1>
+        <p>Comprehensive conversions for length, angle, temperature, weight, time, and area with scientific notation</p>
+      </div>
+    </section>
+
+    <section class="main-content" aria-label="Unit Converter">
+      <div class="container">
         <div class="controls">
-            <button class="button" onclick="UnitConverterUI.swapColumns()">Swap Columns</button>
-            <button class="button secondary" onclick="UnitConverterUI.clearAllFields()">Clear All</button>
-            <button class="button warning" onclick="UnitConverterUI.clearHistory()">Clear History</button>
+          <button class="btn btn-primary" onclick="UnitConverterUI.swapColumns()" aria-label="Swap columns"><i class="fas fa-arrows-alt-h"></i> Swap Columns</button>
+          <button class="btn btn-secondary" onclick="UnitConverterUI.clearAllFields()" aria-label="Clear all fields"><i class="fas fa-eraser"></i> Clear All</button>
+          <button class="btn btn-warning" onclick="UnitConverterUI.clearHistory()" aria-label="Clear history"><i class="fas fa-trash-alt"></i> Clear History</button>
         </div>
-    </div>
-    
-    <div class="category-tabs">
-        <div class="category-tab active" data-category="length">Length</div>
-        <div class="category-tab" data-category="angle">Angle</div>
-        <div class="category-tab" data-category="temperature">Temperature</div>
-        <div class="category-tab" data-category="weight">Weight</div>
-        <div class="category-tab" data-category="time">Time</div>
-        <div class="category-tab" data-category="area">Area</div>
-    </div>
-    
-    <div class="converter-container">
-        <div class="main-section">
-            <div class="panel">
-                <!-- Length Converter (Default) -->
-                <div id="length-converter" class="converter-category">
-                    <div class="column" id="column1">
-                        <div class="unit-group">
-                            <h3>Metric System</h3>
-                            <ul class="unit-list">
-                                <li class="unit-item">
-                                    <span class="unit-label">Kilometers <span class="unit-symbol">(km)</span></span>
-                                    <input type="number" class="unit-input" id="kilometers" oninput="UnitConverter.convertFrom(this, 'km', 'length')">
-                                    <span class="scientific" id="km-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Meters <span class="unit-symbol">(m)</span></span>
-                                    <input type="number" class="unit-input" id="meters" oninput="UnitConverter.convertFrom(this, 'm', 'length')">
-                                    <span class="scientific" id="m-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Decimeters <span class="unit-symbol">(dm)</span></span>
-                                    <input type="number" class="unit-input" id="decimeters" oninput="UnitConverter.convertFrom(this, 'dm', 'length')">
-                                    <span class="scientific" id="dm-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Centimeters <span class="unit-symbol">(cm)</span></span>
-                                    <input type="number" class="unit-input" id="centimeters" oninput="UnitConverter.convertFrom(this, 'cm', 'length')">
-                                    <span class="scientific" id="cm-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Millimeters <span class="unit-symbol">(mm)</span></span>
-                                    <input type="number" class="unit-input" id="millimeters" oninput="UnitConverter.convertFrom(this, 'mm', 'length')">
-                                    <span class="scientific" id="mm-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Micrometers <span class="unit-symbol">(µm)</span></span>
-                                    <input type="number" class="unit-input" id="micrometers" oninput="UnitConverter.convertFrom(this, 'µm', 'length')">
-                                    <span class="scientific" id="µm-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Nanometers <span class="unit-symbol">(nm)</span></span>
-                                    <input type="number" class="unit-input" id="nanometers" oninput="UnitConverter.convertFrom(this, 'nm', 'length')">
-                                    <span class="scientific" id="nm-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Picometers <span class="unit-symbol">(pm)</span></span>
-                                    <input type="number" class="unit-input" id="picometers" oninput="UnitConverter.convertFrom(this, 'pm', 'length')">
-                                    <span class="scientific" id="pm-sci"></span>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div class="unit-group">
-                            <h3>Imperial/US Customary</h3>
-                            <ul class="unit-list">
-                                <li class="unit-item">
-                                    <span class="unit-label">Miles <span class="unit-symbol">(mi)</span></span>
-                                    <input type="number" class="unit-input" id="miles" oninput="UnitConverter.convertFrom(this, 'mi', 'length')">
-                                    <span class="scientific" id="mi-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Yards <span class="unit-symbol">(yd)</span></span>
-                                    <input type="number" class="unit-input" id="yards" oninput="UnitConverter.convertFrom(this, 'yd', 'length')">
-                                    <span class="scientific" id="yd-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Feet <span class="unit-symbol">(ft)</span></span>
-                                    <input type="number" class="unit-input" id="feet" oninput="UnitConverter.convertFrom(this, 'ft', 'length')">
-                                    <span class="scientific" id="ft-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Inches <span class="unit-symbol">(in)</span></span>
-                                    <input type="number" class="unit-input" id="inches" oninput="UnitConverter.convertFrom(this, 'in', 'length')">
-                                    <span class="scientific" id="in-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Mils <span class="unit-symbol">(mil)</span></span>
-                                    <input type="number" class="unit-input" id="mils" oninput="UnitConverter.convertFrom(this, 'mil', 'length')">
-                                    <span class="scientific" id="mil-sci"></span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="column" id="column2">
-                        <div class="unit-group">
-                            <h3>Nautical Units</h3>
-                            <ul class="unit-list">
-                                <li class="unit-item">
-                                    <span class="unit-label">Nautical Miles <span class="unit-symbol">(nmi)</span></span>
-                                    <input type="number" class="unit-input" id="nauticalMiles" oninput="UnitConverter.convertFrom(this, 'nmi', 'length')">
-                                    <span class="scientific" id="nmi-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Fathoms <span class="unit-symbol">(ftm)</span></span>
-                                    <input type="number" class="unit-input" id="fathoms" oninput="UnitConverter.convertFrom(this, 'ftm', 'length')">
-                                    <span class="scientific" id="ftm-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Cables <span class="unit-symbol">(cable)</span></span>
-                                    <input type="number" class="unit-input" id="cables" oninput="UnitConverter.convertFrom(this, 'cable', 'length')">
-                                    <span class="scientific" id="cable-sci"></span>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div class="unit-group">
-                            <h3>Astronomical Units</h3>
-                            <ul class="unit-list">
-                                <li class="unit-item">
-                                    <span class="unit-label">Astronomical Units <span class="unit-symbol">(au)</span></span>
-                                    <input type="number" class="unit-input" id="astronomicalUnits" oninput="UnitConverter.convertFrom(this, 'au', 'length')">
-                                    <span class="scientific" id="au-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Light Years <span class="unit-symbol">(ly)</span></span>
-                                    <input type="number" class="unit-input" id="lightYears" oninput="UnitConverter.convertFrom(this, 'ly', 'length')">
-                                    <span class="scientific" id="ly-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Parsecs <span class="unit-symbol">(pc)</span></span>
-                                    <input type="number" class="unit-input" id="parsecs" oninput="UnitConverter.convertFrom(this, 'pc', 'length')">
-                                    <span class="scientific" id="pc-sci"></span>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div class="unit-group">
-                            <h3>Specialized Units</h3>
-                            <ul class="unit-list">
-                                <li class="unit-item">
-                                    <span class="unit-label">Angstroms <span class="unit-symbol">(Å)</span></span>
-                                    <input type="number" class="unit-input" id="angstroms" oninput="UnitConverter.convertFrom(this, 'Å', 'length')">
-                                    <span class="scientific" id="Å-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Fermis <span class="unit-symbol">(fm)</span></span>
-                                    <input type="number" class="unit-input" id="fermis" oninput="UnitConverter.convertFrom(this, 'fm', 'length')">
-                                    <span class="scientific" id="fm-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Furlongs <span class="unit-symbol">(fur)</span></span>
-                                    <input type="number" class="unit-input" id="furlongs" oninput="UnitConverter.convertFrom(this, 'fur', 'length')">
-                                    <span class="scientific" id="fur-sci"></span>
-                                </li>
-                                <li class="unit-item">
-                                    <span class="unit-label">Planck Lengths <span class="unit-symbol">(ℓ<sub>P</sub>)</span></span>
-                                    <input type="number" class="unit-input" id="planckLengths" oninput="UnitConverter.convertFrom(this, 'ℓP', 'length')">
-                                    <span class="scientific" id="ℓP-sci"></span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Angle Converter -->
-                <div id="angle-converter" class="converter-category hidden">
-                    <div class="angle-converter">
-                        <div class="angle-input-group">
-                            <span class="angle-label">Degrees (°):</span>
-                            <input type="number" class="angle-input" id="degrees" oninput="AngleConverter.convertFrom(this, 'deg')">
-                            <span class="scientific" id="deg-sci"></span>
-                        </div>
-                        <div class="angle-input-group">
-                            <span class="angle-label">Radians (rad):</span>
-                            <input type="number" class="angle-input" id="radians" oninput="AngleConverter.convertFrom(this, 'rad')">
-                            <span class="scientific" id="rad-sci"></span>
-                        </div>
-                        <div class="angle-input-group">
-                            <span class="angle-label">π Radians:</span>
-                            <input type="number" class="angle-input" id="piRadians" oninput="AngleConverter.convertFrom(this, 'pi')">
-                            <span class="scientific" id="pi-sci"></span>
-                        </div>
-                        <div class="angle-input-group">
-                            <span class="angle-label">Gradians (grad):</span>
-                            <input type="number" class="angle-input" id="gradians" oninput="AngleConverter.convertFrom(this, 'grad')">
-                            <span class="scientific" id="grad-sci"></span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Temperature Converter -->
-                <div id="temperature-converter" class="converter-category hidden">
-                    <div class="unit-group">
-                        <h3>Temperature Scales</h3>
-                        <ul class="unit-list">
-                            <li class="unit-item">
-                                <span class="unit-label">Celsius <span class="unit-symbol">(°C)</span></span>
-                                <input type="number" class="unit-input" id="celsius" oninput="TemperatureConverter.convertFrom(this, 'celsius')">
-                                <span class="scientific" id="celsius-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Fahrenheit <span class="unit-symbol">(°F)</span></span>
-                                <input type="number" class="unit-input" id="fahrenheit" oninput="TemperatureConverter.convertFrom(this, 'fahrenheit')">
-                                <span class="scientific" id="fahrenheit-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Kelvin <span class="unit-symbol">(K)</span></span>
-                                <input type="number" class="unit-input" id="kelvin" oninput="TemperatureConverter.convertFrom(this, 'kelvin')">
-                                <span class="scientific" id="kelvin-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Rankine <span class="unit-symbol">(°R)</span></span>
-                                <input type="number" class="unit-input" id="rankine" oninput="TemperatureConverter.convertFrom(this, 'rankine')">
-                                <span class="scientific" id="rankine-sci"></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Weight Converter -->
-                <div id="weight-converter" class="converter-category hidden">
-                    <div class="unit-group">
-                        <h3>Metric Weight</h3>
-                        <ul class="unit-list">
-                            <li class="unit-item">
-                                <span class="unit-label">Tonnes <span class="unit-symbol">(t)</span></span>
-                                <input type="number" class="unit-input" id="tonnes" oninput="WeightConverter.convertFrom(this, 'tonnes')">
-                                <span class="scientific" id="tonnes-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Kilograms <span class="unit-symbol">(kg)</span></span>
-                                <input type="number" class="unit-input" id="kilograms" oninput="WeightConverter.convertFrom(this, 'kilograms')">
-                                <span class="scientific" id="kilograms-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Grams <span class="unit-symbol">(g)</span></span>
-                                <input type="number" class="unit-input" id="grams" oninput="WeightConverter.convertFrom(this, 'grams')">
-                                <span class="scientific" id="grams-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Milligrams <span class="unit-symbol">(mg)</span></span>
-                                <input type="number" class="unit-input" id="milligrams" oninput="WeightConverter.convertFrom(this, 'milligrams')">
-                                <span class="scientific" id="milligrams-sci"></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="unit-group">
-                        <h3>Imperial/US Weight</h3>
-                        <ul class="unit-list">
-                            <li class="unit-item">
-                                <span class="unit-label">Tons <span class="unit-symbol">(ton)</span></span>
-                                <input type="number" class="unit-input" id="tons" oninput="WeightConverter.convertFrom(this, 'tons')">
-                                <span class="scientific" id="tons-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Pounds <span class="unit-symbol">(lb)</span></span>
-                                <input type="number" class="unit-input" id="pounds" oninput="WeightConverter.convertFrom(this, 'pounds')">
-                                <span class="scientific" id="pounds-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Ounces <span class="unit-symbol">(oz)</span></span>
-                                <input type="number" class="unit-input" id="ounces" oninput="WeightConverter.convertFrom(this, 'ounces')">
-                                <span class="scientific" id="ounces-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Stones <span class="unit-symbol">(st)</span></span>
-                                <input type="number" class="unit-input" id="stones" oninput="WeightConverter.convertFrom(this, 'stones')">
-                                <span class="scientific" id="stones-sci"></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Time Converter -->
-                <div id="time-converter" class="converter-category hidden">
-                    <div class="unit-group">
-                        <h3>Time Units</h3>
-                        <ul class="unit-list">
-                            <li class="unit-item">
-                                <span class="unit-label">Milliseconds <span class="unit-symbol">(ms)</span></span>
-                                <input type="number" class="unit-input" id="milliseconds" oninput="TimeConverter.convertFrom(this, 'milliseconds')">
-                                <span class="scientific" id="milliseconds-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Seconds <span class="unit-symbol">(s)</span></span>
-                                <input type="number" class="unit-input" id="seconds" oninput="TimeConverter.convertFrom(this, 'seconds')">
-                                <span class="scientific" id="seconds-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Minutes <span class="unit-symbol">(min)</span></span>
-                                <input type="number" class="unit-input" id="minutes" oninput="TimeConverter.convertFrom(this, 'minutes')">
-                                <span class="scientific" id="minutes-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Hours <span class="unit-symbol">(h)</span></span>
-                                <input type="number" class="unit-input" id="hours" oninput="TimeConverter.convertFrom(this, 'hours')">
-                                <span class="scientific" id="hours-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Days <span class="unit-symbol">(d)</span></span>
-                                <input type="number" class="unit-input" id="days" oninput="TimeConverter.convertFrom(this, 'days')">
-                                <span class="scientific" id="days-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Weeks <span class="unit-symbol">(wk)</span></span>
-                                <input type="number" class="unit-input" id="weeks" oninput="TimeConverter.convertFrom(this, 'weeks')">
-                                <span class="scientific" id="weeks-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Years <span class="unit-symbol">(yr)</span></span>
-                                <input type="number" class="unit-input" id="years" oninput="TimeConverter.convertFrom(this, 'years')">
-                                <span class="scientific" id="years-sci"></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Area Converter -->
-                <div id="area-converter" class="converter-category hidden">
-                    <div class="unit-group">
-                        <h3>Metric Area</h3>
-                        <ul class="unit-list">
-                            <li class="unit-item">
-                                <span class="unit-label">Square Kilometers <span class="unit-symbol">(km²)</span></span>
-                                <input type="number" class="unit-input" id="sqKilometers" oninput="AreaConverter.convertFrom(this, 'sqKilometers')">
-                                <span class="scientific" id="sqKilometers-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Square Meters <span class="unit-symbol">(m²)</span></span>
-                                <input type="number" class="unit-input" id="sqMeters" oninput="AreaConverter.convertFrom(this, 'sqMeters')">
-                                <span class="scientific" id="sqMeters-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Hectares <span class="unit-symbol">(ha)</span></span>
-                                <input type="number" class="unit-input" id="hectares" oninput="AreaConverter.convertFrom(this, 'hectares')">
-                                <span class="scientific" id="hectares-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Square Centimeters <span class="unit-symbol">(cm²)</span></span>
-                                <input type="number" class="unit-input" id="sqCentimeters" oninput="AreaConverter.convertFrom(this, 'sqCentimeters')">
-                                <span class="scientific" id="sqCentimeters-sci"></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="unit-group">
-                        <h3>Imperial/US Area</h3>
-                        <ul class="unit-list">
-                            <li class="unit-item">
-                                <span class="unit-label">Square Miles <span class="unit-symbol">(mi²)</span></span>
-                                <input type="number" class="unit-input" id="sqMiles" oninput="AreaConverter.convertFrom(this, 'sqMiles')">
-                                <span class="scientific" id="sqMiles-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Acres <span class="unit-symbol">(ac)</span></span>
-                                <input type="number" class="unit-input" id="acres" oninput="AreaConverter.convertFrom(this, 'acres')">
-                                <span class="scientific" id="acres-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Square Yards <span class="unit-symbol">(yd²)</span></span>
-                                <input type="number" class="unit-input" id="sqYards" oninput="AreaConverter.convertFrom(this, 'sqYards')">
-                                <span class="scientific" id="sqYards-sci"></span>
-                            </li>
-                            <li class="unit-item">
-                                <span class="unit-label">Square Feet <span class="unit-symbol">(ft²)</span></span>
-                                <input type="number" class="unit-input" id="sqFeet" oninput="AreaConverter.convertFrom(this, 'sqFeet')">
-                                <span class="scientific" id="sqFeet-sci"></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+
+        <div class="category-tabs" role="tablist" aria-label="Conversion categories">
+          <div class="category-tab active" data-category="length" role="tab" tabindex="0" aria-selected="true" aria-controls="length-converter"><i class="fas fa-ruler"></i> Length</div>
+          <div class="category-tab" data-category="angle" role="tab" tabindex="0" aria-selected="false" aria-controls="angle-converter"><i class="fas fa-drafting-compass"></i> Angle</div>
+          <div class="category-tab" data-category="temperature" role="tab" tabindex="0" aria-selected="false" aria-controls="temperature-converter"><i class="fas fa-thermometer-half"></i> Temperature</div>
+          <div class="category-tab" data-category="weight" role="tab" tabindex="0" aria-selected="false" aria-controls="weight-converter"><i class="fas fa-weight-hanging"></i> Weight</div>
+          <div class="category-tab" data-category="time" role="tab" tabindex="0" aria-selected="false" aria-controls="time-converter"><i class="fas fa-clock"></i> Time</div>
+          <div class="category-tab" data-category="area" role="tab" tabindex="0" aria-selected="false" aria-controls="area-converter"><i class="fas fa-vector-square"></i> Area</div>
         </div>
-        
-        <div class="side-section">
+
+        <div class="converter-layout">
+          <div class="main-section">
             <div class="panel">
-                <h2>Common Angle Values</h2>
-                <div class="unit-group">
-                    <h3>Degrees to Radians</h3>
+              <div id="length-converter" class="converter-category" role="tabpanel">
+                <div class="column" id="column1">
+                  <div class="unit-group">
+                    <h3><i class="fas fa-globe-americas"></i> Metric System</h3>
                     <ul class="unit-list">
-                        <li class="unit-item">
-                            <span class="unit-label">30°</span>
-                            <span class="unit-input">= π/6 rad ≈ 0.5236 rad</span>
-                        </li>
-                        <li class="unit-item">
-                            <span class="unit-label">45°</span>
-                            <span class="unit-input">= π/4 rad ≈ 0.7854 rad</span>
-                        </li>
-                        <li class="unit-item">
-                            <span class="unit-label">60°</span>
-                            <span class="unit-input">= π/3 rad ≈ 1.0472 rad</span>
-                        </li>
-                        <li class="unit-item">
-                            <span class="unit-label">90°</span>
-                            <span class="unit-input">= π/2 rad ≈ 1.5708 rad</span>
-                        </li>
-                        <li class="unit-item">
-                            <span class="unit-label">180°</span>
-                            <span class="unit-input">= π rad ≈ 3.1416 rad</span>
-                        </li>
-                        <li class="unit-item">
-                            <span class="unit-label">360°</span>
-                            <span class="unit-input">= 2π rad ≈ 6.2832 rad</span>
-                        </li>
+                      <li class="unit-item"><span class="unit-label">Kilometers <span class="unit-symbol">(km)</span></span><input type="number" class="unit-input" id="kilometers" oninput="UnitConverter.convertFrom(this, 'km', 'length')" aria-label="Kilometers"><span class="scientific" id="km-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Meters <span class="unit-symbol">(m)</span></span><input type="number" class="unit-input" id="meters" oninput="UnitConverter.convertFrom(this, 'm', 'length')" aria-label="Meters"><span class="scientific" id="m-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Decimeters <span class="unit-symbol">(dm)</span></span><input type="number" class="unit-input" id="decimeters" oninput="UnitConverter.convertFrom(this, 'dm', 'length')" aria-label="Decimeters"><span class="scientific" id="dm-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Centimeters <span class="unit-symbol">(cm)</span></span><input type="number" class="unit-input" id="centimeters" oninput="UnitConverter.convertFrom(this, 'cm', 'length')" aria-label="Centimeters"><span class="scientific" id="cm-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Millimeters <span class="unit-symbol">(mm)</span></span><input type="number" class="unit-input" id="millimeters" oninput="UnitConverter.convertFrom(this, 'mm', 'length')" aria-label="Millimeters"><span class="scientific" id="mm-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Micrometers <span class="unit-symbol">(µm)</span></span><input type="number" class="unit-input" id="micrometers" oninput="UnitConverter.convertFrom(this, 'µm', 'length')" aria-label="Micrometers"><span class="scientific" id="µm-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Nanometers <span class="unit-symbol">(nm)</span></span><input type="number" class="unit-input" id="nanometers" oninput="UnitConverter.convertFrom(this, 'nm', 'length')" aria-label="Nanometers"><span class="scientific" id="nm-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Picometers <span class="unit-symbol">(pm)</span></span><input type="number" class="unit-input" id="picometers" oninput="UnitConverter.convertFrom(this, 'pm', 'length')" aria-label="Picometers"><span class="scientific" id="pm-sci"></span></li>
                     </ul>
+                  </div>
+                  <div class="unit-group">
+                    <h3><i class="fas fa-flag-usa"></i> Imperial/US Customary</h3>
+                    <ul class="unit-list">
+                      <li class="unit-item"><span class="unit-label">Miles <span class="unit-symbol">(mi)</span></span><input type="number" class="unit-input" id="miles" oninput="UnitConverter.convertFrom(this, 'mi', 'length')" aria-label="Miles"><span class="scientific" id="mi-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Yards <span class="unit-symbol">(yd)</span></span><input type="number" class="unit-input" id="yards" oninput="UnitConverter.convertFrom(this, 'yd', 'length')" aria-label="Yards"><span class="scientific" id="yd-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Feet <span class="unit-symbol">(ft)</span></span><input type="number" class="unit-input" id="feet" oninput="UnitConverter.convertFrom(this, 'ft', 'length')" aria-label="Feet"><span class="scientific" id="ft-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Inches <span class="unit-symbol">(in)</span></span><input type="number" class="unit-input" id="inches" oninput="UnitConverter.convertFrom(this, 'in', 'length')" aria-label="Inches"><span class="scientific" id="in-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Mils <span class="unit-symbol">(mil)</span></span><input type="number" class="unit-input" id="mils" oninput="UnitConverter.convertFrom(this, 'mil', 'length')" aria-label="Mils"><span class="scientific" id="mil-sci"></span></li>
+                    </ul>
+                  </div>
                 </div>
+                <div class="column" id="column2">
+                  <div class="unit-group">
+                    <h3><i class="fas fa-anchor"></i> Nautical Units</h3>
+                    <ul class="unit-list">
+                      <li class="unit-item"><span class="unit-label">Nautical Miles <span class="unit-symbol">(nmi)</span></span><input type="number" class="unit-input" id="nauticalMiles" oninput="UnitConverter.convertFrom(this, 'nmi', 'length')" aria-label="Nautical Miles"><span class="scientific" id="nmi-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Fathoms <span class="unit-symbol">(ftm)</span></span><input type="number" class="unit-input" id="fathoms" oninput="UnitConverter.convertFrom(this, 'ftm', 'length')" aria-label="Fathoms"><span class="scientific" id="ftm-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Cables <span class="unit-symbol">(cable)</span></span><input type="number" class="unit-input" id="cables" oninput="UnitConverter.convertFrom(this, 'cable', 'length')" aria-label="Cables"><span class="scientific" id="cable-sci"></span></li>
+                    </ul>
+                  </div>
+                  <div class="unit-group">
+                    <h3><i class="fas fa-star"></i> Astronomical Units</h3>
+                    <ul class="unit-list">
+                      <li class="unit-item"><span class="unit-label">Astronomical Units <span class="unit-symbol">(au)</span></span><input type="number" class="unit-input" id="astronomicalUnits" oninput="UnitConverter.convertFrom(this, 'au', 'length')" aria-label="Astronomical Units"><span class="scientific" id="au-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Light Years <span class="unit-symbol">(ly)</span></span><input type="number" class="unit-input" id="lightYears" oninput="UnitConverter.convertFrom(this, 'ly', 'length')" aria-label="Light Years"><span class="scientific" id="ly-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Parsecs <span class="unit-symbol">(pc)</span></span><input type="number" class="unit-input" id="parsecs" oninput="UnitConverter.convertFrom(this, 'pc', 'length')" aria-label="Parsecs"><span class="scientific" id="pc-sci"></span></li>
+                    </ul>
+                  </div>
+                  <div class="unit-group">
+                    <h3><i class="fas fa-atom"></i> Specialized Units</h3>
+                    <ul class="unit-list">
+                      <li class="unit-item"><span class="unit-label">Angstroms <span class="unit-symbol">(Å)</span></span><input type="number" class="unit-input" id="angstroms" oninput="UnitConverter.convertFrom(this, 'Å', 'length')" aria-label="Angstroms"><span class="scientific" id="Å-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Fermis <span class="unit-symbol">(fm)</span></span><input type="number" class="unit-input" id="fermis" oninput="UnitConverter.convertFrom(this, 'fm', 'length')" aria-label="Fermis"><span class="scientific" id="fm-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Furlongs <span class="unit-symbol">(fur)</span></span><input type="number" class="unit-input" id="furlongs" oninput="UnitConverter.convertFrom(this, 'fur', 'length')" aria-label="Furlongs"><span class="scientific" id="fur-sci"></span></li>
+                      <li class="unit-item"><span class="unit-label">Planck Lengths <span class="unit-symbol">(ℓ<sub>P</sub>)</span></span><input type="number" class="unit-input" id="planckLengths" oninput="UnitConverter.convertFrom(this, 'ℓP', 'length')" aria-label="Planck Lengths"><span class="scientific" id="ℓP-sci"></span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div id="angle-converter" class="converter-category hidden" role="tabpanel">
+                <div class="angle-converter">
+                  <div class="angle-input-group"><span class="angle-label">Degrees (°):</span><input type="number" class="angle-input" id="degrees" oninput="AngleConverter.convertFrom(this, 'deg')" aria-label="Degrees"><span class="scientific" id="deg-sci"></span></div>
+                  <div class="angle-input-group"><span class="angle-label">Radians (rad):</span><input type="number" class="angle-input" id="radians" oninput="AngleConverter.convertFrom(this, 'rad')" aria-label="Radians"><span class="scientific" id="rad-sci"></span></div>
+                  <div class="angle-input-group"><span class="angle-label">π Radians:</span><input type="number" class="angle-input" id="piRadians" oninput="AngleConverter.convertFrom(this, 'pi')" aria-label="Pi Radians"><span class="scientific" id="pi-sci"></span></div>
+                  <div class="angle-input-group"><span class="angle-label">Gradians (grad):</span><input type="number" class="angle-input" id="gradians" oninput="AngleConverter.convertFrom(this, 'grad')" aria-label="Gradians"><span class="scientific" id="grad-sci"></span></div>
+                </div>
+              </div>
+
+              <div id="temperature-converter" class="converter-category hidden" role="tabpanel">
+                <div class="unit-group">
+                  <h3><i class="fas fa-thermometer-half"></i> Temperature Scales</h3>
+                  <ul class="unit-list">
+                    <li class="unit-item"><span class="unit-label">Celsius <span class="unit-symbol">(°C)</span></span><input type="number" class="unit-input" id="celsius" oninput="TemperatureConverter.convertFrom(this, 'celsius')" aria-label="Celsius"><span class="scientific" id="celsius-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Fahrenheit <span class="unit-symbol">(°F)</span></span><input type="number" class="unit-input" id="fahrenheit" oninput="TemperatureConverter.convertFrom(this, 'fahrenheit')" aria-label="Fahrenheit"><span class="scientific" id="fahrenheit-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Kelvin <span class="unit-symbol">(K)</span></span><input type="number" class="unit-input" id="kelvin" oninput="TemperatureConverter.convertFrom(this, 'kelvin')" aria-label="Kelvin"><span class="scientific" id="kelvin-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Rankine <span class="unit-symbol">(°R)</span></span><input type="number" class="unit-input" id="rankine" oninput="TemperatureConverter.convertFrom(this, 'rankine')" aria-label="Rankine"><span class="scientific" id="rankine-sci"></span></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div id="weight-converter" class="converter-category hidden" role="tabpanel">
+                <div class="unit-group">
+                  <h3><i class="fas fa-weight-hanging"></i> Metric Weight</h3>
+                  <ul class="unit-list">
+                    <li class="unit-item"><span class="unit-label">Tonnes <span class="unit-symbol">(t)</span></span><input type="number" class="unit-input" id="tonnes" oninput="WeightConverter.convertFrom(this, 'tonnes')" aria-label="Tonnes"><span class="scientific" id="tonnes-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Kilograms <span class="unit-symbol">(kg)</span></span><input type="number" class="unit-input" id="kilograms" oninput="WeightConverter.convertFrom(this, 'kilograms')" aria-label="Kilograms"><span class="scientific" id="kilograms-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Grams <span class="unit-symbol">(g)</span></span><input type="number" class="unit-input" id="grams" oninput="WeightConverter.convertFrom(this, 'grams')" aria-label="Grams"><span class="scientific" id="grams-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Milligrams <span class="unit-symbol">(mg)</span></span><input type="number" class="unit-input" id="milligrams" oninput="WeightConverter.convertFrom(this, 'milligrams')" aria-label="Milligrams"><span class="scientific" id="milligrams-sci"></span></li>
+                  </ul>
+                </div>
+                <div class="unit-group">
+                  <h3><i class="fas fa-flag-usa"></i> Imperial/US Weight</h3>
+                  <ul class="unit-list">
+                    <li class="unit-item"><span class="unit-label">Tons <span class="unit-symbol">(ton)</span></span><input type="number" class="unit-input" id="tons" oninput="WeightConverter.convertFrom(this, 'tons')" aria-label="Tons"><span class="scientific" id="tons-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Pounds <span class="unit-symbol">(lb)</span></span><input type="number" class="unit-input" id="pounds" oninput="WeightConverter.convertFrom(this, 'pounds')" aria-label="Pounds"><span class="scientific" id="pounds-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Ounces <span class="unit-symbol">(oz)</span></span><input type="number" class="unit-input" id="ounces" oninput="WeightConverter.convertFrom(this, 'ounces')" aria-label="Ounces"><span class="scientific" id="ounces-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Stones <span class="unit-symbol">(st)</span></span><input type="number" class="unit-input" id="stones" oninput="WeightConverter.convertFrom(this, 'stones')" aria-label="Stones"><span class="scientific" id="stones-sci"></span></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div id="time-converter" class="converter-category hidden" role="tabpanel">
+                <div class="unit-group">
+                  <h3><i class="fas fa-clock"></i> Time Units</h3>
+                  <ul class="unit-list">
+                    <li class="unit-item"><span class="unit-label">Milliseconds <span class="unit-symbol">(ms)</span></span><input type="number" class="unit-input" id="milliseconds" oninput="TimeConverter.convertFrom(this, 'milliseconds')" aria-label="Milliseconds"><span class="scientific" id="milliseconds-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Seconds <span class="unit-symbol">(s)</span></span><input type="number" class="unit-input" id="seconds" oninput="TimeConverter.convertFrom(this, 'seconds')" aria-label="Seconds"><span class="scientific" id="seconds-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Minutes <span class="unit-symbol">(min)</span></span><input type="number" class="unit-input" id="minutes" oninput="TimeConverter.convertFrom(this, 'minutes')" aria-label="Minutes"><span class="scientific" id="minutes-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Hours <span class="unit-symbol">(h)</span></span><input type="number" class="unit-input" id="hours" oninput="TimeConverter.convertFrom(this, 'hours')" aria-label="Hours"><span class="scientific" id="hours-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Days <span class="unit-symbol">(d)</span></span><input type="number" class="unit-input" id="days" oninput="TimeConverter.convertFrom(this, 'days')" aria-label="Days"><span class="scientific" id="days-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Weeks <span class="unit-symbol">(wk)</span></span><input type="number" class="unit-input" id="weeks" oninput="TimeConverter.convertFrom(this, 'weeks')" aria-label="Weeks"><span class="scientific" id="weeks-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Years <span class="unit-symbol">(yr)</span></span><input type="number" class="unit-input" id="years" oninput="TimeConverter.convertFrom(this, 'years')" aria-label="Years"><span class="scientific" id="years-sci"></span></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div id="area-converter" class="converter-category hidden" role="tabpanel">
+                <div class="unit-group">
+                  <h3><i class="fas fa-vector-square"></i> Metric Area</h3>
+                  <ul class="unit-list">
+                    <li class="unit-item"><span class="unit-label">Square Kilometers <span class="unit-symbol">(km²)</span></span><input type="number" class="unit-input" id="sqKilometers" oninput="AreaConverter.convertFrom(this, 'sqKilometers')" aria-label="Square Kilometers"><span class="scientific" id="sqKilometers-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Square Meters <span class="unit-symbol">(m²)</span></span><input type="number" class="unit-input" id="sqMeters" oninput="AreaConverter.convertFrom(this, 'sqMeters')" aria-label="Square Meters"><span class="scientific" id="sqMeters-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Hectares <span class="unit-symbol">(ha)</span></span><input type="number" class="unit-input" id="hectares" oninput="AreaConverter.convertFrom(this, 'hectares')" aria-label="Hectares"><span class="scientific" id="hectares-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Square Centimeters <span class="unit-symbol">(cm²)</span></span><input type="number" class="unit-input" id="sqCentimeters" oninput="AreaConverter.convertFrom(this, 'sqCentimeters')" aria-label="Square Centimeters"><span class="scientific" id="sqCentimeters-sci"></span></li>
+                  </ul>
+                </div>
+                <div class="unit-group">
+                  <h3><i class="fas fa-flag-usa"></i> Imperial/US Area</h3>
+                  <ul class="unit-list">
+                    <li class="unit-item"><span class="unit-label">Square Miles <span class="unit-symbol">(mi²)</span></span><input type="number" class="unit-input" id="sqMiles" oninput="AreaConverter.convertFrom(this, 'sqMiles')" aria-label="Square Miles"><span class="scientific" id="sqMiles-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Acres <span class="unit-symbol">(ac)</span></span><input type="number" class="unit-input" id="acres" oninput="AreaConverter.convertFrom(this, 'acres')" aria-label="Acres"><span class="scientific" id="acres-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Square Yards <span class="unit-symbol">(yd²)</span></span><input type="number" class="unit-input" id="sqYards" oninput="AreaConverter.convertFrom(this, 'sqYards')" aria-label="Square Yards"><span class="scientific" id="sqYards-sci"></span></li>
+                    <li class="unit-item"><span class="unit-label">Square Feet <span class="unit-symbol">(ft²)</span></span><input type="number" class="unit-input" id="sqFeet" oninput="AreaConverter.convertFrom(this, 'sqFeet')" aria-label="Square Feet"><span class="scientific" id="sqFeet-sci"></span></li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            
+          </div>
+
+          <div class="side-section">
+            <div class="panel">
+              <h2><i class="fas fa-book"></i> Common Angle Values</h2>
+              <div class="unit-group">
+                <h3>Degrees to Radians</h3>
+                <ul class="unit-list">
+                  <li class="unit-item"><span class="unit-label">30°</span><span class="unit-input" style="cursor:default;border:none;background:none;">= π/6 rad ≈ 0.5236 rad</span></li>
+                  <li class="unit-item"><span class="unit-label">45°</span><span class="unit-input" style="cursor:default;border:none;background:none;">= π/4 rad ≈ 0.7854 rad</span></li>
+                  <li class="unit-item"><span class="unit-label">60°</span><span class="unit-input" style="cursor:default;border:none;background:none;">= π/3 rad ≈ 1.0472 rad</span></li>
+                  <li class="unit-item"><span class="unit-label">90°</span><span class="unit-input" style="cursor:default;border:none;background:none;">= π/2 rad ≈ 1.5708 rad</span></li>
+                  <li class="unit-item"><span class="unit-label">180°</span><span class="unit-input" style="cursor:default;border:none;background:none;">= π rad ≈ 3.1416 rad</span></li>
+                  <li class="unit-item"><span class="unit-label">360°</span><span class="unit-input" style="cursor:default;border:none;background:none;">= 2π rad ≈ 6.2832 rad</span></li>
+                </ul>
+              </div>
+            </div>
             <div class="panel history-panel">
-                <h2>Conversion History</h2>
-                <div id="history-list">
-                    <!-- History items will be added here dynamically -->
-                </div>
+              <h2><i class="fas fa-history"></i> Conversion History</h2>
+              <div id="history-list"></div>
             </div>
+          </div>
         </div>
-    </div>
-    
-    <div class="note">
-        Note: All conversions are based on standard conversion factors. Scientific notation shows the value in base units.
-    </div>
 
-    <!-- Dark Mode Toggle -->
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-        <i class="fas fa-moon"></i>
-    </button>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="social-footer">
-                <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-                <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <div class="footer-bottom">
-                &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
-                &copy; M.T.A.
-            </div>
+        <div class="note">
+          Note: All conversions are based on standard conversion factors. Scientific notation shows the value in base units.
         </div>
-    </footer>
+      </div>
+    </section>
+  </main>
 
-    <script>
-        /**
-         * Constants Module - Stores all conversion factors and constants
-         */
-        const Constants = {
-            // Length conversion factors to meters
-            lengthUnits: {
-                // Metric
-                'km': 1000,
-                'm': 1,
-                'dm': 0.1,
-                'cm': 0.01,
-                'mm': 0.001,
-                'µm': 0.000001,
-                'nm': 0.000000001,
-                'pm': 0.000000000001,
-                
-                // Imperial/US
-                'mi': 1609.344,
-                'yd': 0.9144,
-                'ft': 0.3048,
-                'in': 0.0254,
-                'mil': 0.0000254,
-                
-                // Nautical
-                'nmi': 1852,
-                'ftm': 1.8288,
-                'cable': 185.2,
-                
-                // Astronomical
-                'au': 149597870700,
-                'ly': 9460730472580800,
-                'pc': 30856775814913672,
-                
-                // Specialized
-                'Å': 0.0000000001,
-                'fm': 0.000000000000001,
-                'fur': 201.168,
-                'ℓP': 1.616255e-35
-            },
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="footer-bottom">
+          &copy; <span id="currentYear"></span> Mohamed Tarek. All Rights Reserved. | <a href="../index.html">Back to Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-            // Angle conversion factors to radians
-            angleUnits: {
-                'deg': Math.PI / 180,
-                'rad': 1,
-                'pi': Math.PI,
-                'grad': Math.PI / 200
-            },
+  <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode"><i class="fas fa-moon"></i></button>
+  <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
 
-            // Temperature conversion
-            temperatureUnits: {
-                'celsius': { base: 0, factor: 1 },
-                'fahrenheit': { base: 32, factor: 5/9 },
-                'kelvin': { base: 273.15, factor: 1 },
-                'rankine': { base: 491.67, factor: 5/9 }
-            },
+  <script>
+    const Constants = {
+        lengthUnits: {
+            'km': 1000, 'm': 1, 'dm': 0.1, 'cm': 0.01, 'mm': 0.001,
+            'µm': 0.000001, 'nm': 0.000000001, 'pm': 0.000000000001,
+            'mi': 1609.344, 'yd': 0.9144, 'ft': 0.3048, 'in': 0.0254, 'mil': 0.0000254,
+            'nmi': 1852, 'ftm': 1.8288, 'cable': 185.2,
+            'au': 149597870700, 'ly': 9460730472580800, 'pc': 30856775814913672,
+            'Å': 0.0000000001, 'fm': 0.000000000000001, 'fur': 201.168, 'ℓP': 1.616255e-35
+        },
+        angleUnits: { 'deg': Math.PI / 180, 'rad': 1, 'pi': Math.PI, 'grad': Math.PI / 200 },
+        temperatureUnits: {
+            'celsius': { base: 0, factor: 1 }, 'fahrenheit': { base: 32, factor: 5/9 },
+            'kelvin': { base: 273.15, factor: 1 }, 'rankine': { base: 491.67, factor: 5/9 }
+        },
+        weightUnits: {
+            'tonnes': 1000, 'kilograms': 1, 'grams': 0.001, 'milligrams': 0.000001,
+            'tons': 907.18474, 'pounds': 0.45359237, 'ounces': 0.028349523125, 'stones': 6.35029318
+        },
+        timeUnits: {
+            'milliseconds': 0.001, 'seconds': 1, 'minutes': 60, 'hours': 3600,
+            'days': 86400, 'weeks': 604800, 'years': 31557600
+        },
+        areaUnits: {
+            'sqKilometers': 1000000, 'sqMeters': 1, 'hectares': 10000, 'sqCentimeters': 0.0001,
+            'sqMiles': 2589988.110336, 'acres': 4046.8564224, 'sqYards': 0.83612736, 'sqFeet': 0.09290304
+        },
+        lengthUnitMap: {
+            'kilometers': 'km', 'meters': 'm', 'decimeters': 'dm', 'centimeters': 'cm',
+            'millimeters': 'mm', 'micrometers': 'µm', 'nanometers': 'nm', 'picometers': 'pm',
+            'miles': 'mi', 'yards': 'yd', 'feet': 'ft', 'inches': 'in', 'mils': 'mil',
+            'nauticalMiles': 'nmi', 'fathoms': 'ftm', 'cables': 'cable',
+            'astronomicalUnits': 'au', 'lightYears': 'ly', 'parsecs': 'pc',
+            'angstroms': 'Å', 'fermis': 'fm', 'furlongs': 'fur', 'planckLengths': 'ℓP'
+        },
+        angleUnitMap: { 'degrees': 'deg', 'radians': 'rad', 'piRadians': 'pi', 'gradians': 'grad' },
+        temperatureUnitMap: { 'celsius': 'celsius', 'fahrenheit': 'fahrenheit', 'kelvin': 'kelvin', 'rankine': 'rankine' },
+        weightUnitMap: { 'tonnes': 'tonnes', 'kilograms': 'kilograms', 'grams': 'grams', 'milligrams': 'milligrams', 'tons': 'tons', 'pounds': 'pounds', 'ounces': 'ounces', 'stones': 'stones' },
+        timeUnitMap: { 'milliseconds': 'milliseconds', 'seconds': 'seconds', 'minutes': 'minutes', 'hours': 'hours', 'days': 'days', 'weeks': 'weeks', 'years': 'years' },
+        areaUnitMap: { 'sqKilometers': 'sqKilometers', 'sqMeters': 'sqMeters', 'hectares': 'hectares', 'sqCentimeters': 'sqCentimeters', 'sqMiles': 'sqMiles', 'acres': 'acres', 'sqYards': 'sqYards', 'sqFeet': 'sqFeet' }
+    };
 
-            // Weight conversion factors to kilograms
-            weightUnits: {
-                // Metric
-                'tonnes': 1000,
-                'kilograms': 1,
-                'grams': 0.001,
-                'milligrams': 0.000001,
-                
-                // Imperial/US
-                'tons': 907.18474,
-                'pounds': 0.45359237,
-                'ounces': 0.028349523125,
-                'stones': 6.35029318
-            },
-
-            // Time conversion factors to seconds
-            timeUnits: {
-                'milliseconds': 0.001,
-                'seconds': 1,
-                'minutes': 60,
-                'hours': 3600,
-                'days': 86400,
-                'weeks': 604800,
-                'years': 31557600
-            },
-
-            // Area conversion factors to square meters
-            areaUnits: {
-                // Metric
-                'sqKilometers': 1000000,
-                'sqMeters': 1,
-                'hectares': 10000,
-                'sqCentimeters': 0.0001,
-                
-                // Imperial/US
-                'sqMiles': 2589988.110336,
-                'acres': 4046.8564224,
-                'sqYards': 0.83612736,
-                'sqFeet': 0.09290304
-            },
-
-            // Map of input element IDs to unit symbols for length
-            lengthUnitMap: {
-                'kilometers': 'km',
-                'meters': 'm',
-                'decimeters': 'dm',
-                'centimeters': 'cm',
-                'millimeters': 'mm',
-                'micrometers': 'µm',
-                'nanometers': 'nm',
-                'picometers': 'pm',
-                'miles': 'mi',
-                'yards': 'yd',
-                'feet': 'ft',
-                'inches': 'in',
-                'mils': 'mil',
-                'nauticalMiles': 'nmi',
-                'fathoms': 'ftm',
-                'cables': 'cable',
-                'astronomicalUnits': 'au',
-                'lightYears': 'ly',
-                'parsecs': 'pc',
-                'angstroms': 'Å',
-                'fermis': 'fm',
-                'furlongs': 'fur',
-                'planckLengths': 'ℓP'
-            },
-
-            // Map of input element IDs to unit symbols for angles
-            angleUnitMap: {
-                'degrees': 'deg',
-                'radians': 'rad',
-                'piRadians': 'pi',
-                'gradians': 'grad'
-            },
-
-            // Map of input element IDs to unit symbols for temperature
-            temperatureUnitMap: {
-                'celsius': 'celsius',
-                'fahrenheit': 'fahrenheit',
-                'kelvin': 'kelvin',
-                'rankine': 'rankine'
-            },
-
-            // Map of input element IDs to unit symbols for weight
-            weightUnitMap: {
-                'tonnes': 'tonnes',
-                'kilograms': 'kilograms',
-                'grams': 'grams',
-                'milligrams': 'milligrams',
-                'tons': 'tons',
-                'pounds': 'pounds',
-                'ounces': 'ounces',
-                'stones': 'stones'
-            },
-
-            // Map of input element IDs to unit symbols for time
-            timeUnitMap: {
-                'milliseconds': 'milliseconds',
-                'seconds': 'seconds',
-                'minutes': 'minutes',
-                'hours': 'hours',
-                'days': 'days',
-                'weeks': 'weeks',
-                'years': 'years'
-            },
-
-            // Map of input element IDs to unit symbols for area
-            areaUnitMap: {
-                'sqKilometers': 'sqKilometers',
-                'sqMeters': 'sqMeters',
-                'hectares': 'hectares',
-                'sqCentimeters': 'sqCentimeters',
-                'sqMiles': 'sqMiles',
-                'acres': 'acres',
-                'sqYards': 'sqYards',
-                'sqFeet': 'sqFeet'
+    const Formatter = {
+        formatDecimal: function(num) {
+            if (num === 0) return '0';
+            const absNum = Math.abs(num);
+            if (absNum >= 1000 || absNum < 0.001) {
+                return num.toExponential(6).replace(/(\.\d*?[1-9])0+e/, '$1e').replace(/\.?0+e/, 'e');
             }
-        };
-
-        /**
-         * Formatter Module - Handles formatting of numbers and scientific notation
-         */
-        const Formatter = {
-            /**
-             * Format decimal numbers appropriately based on their magnitude
-             * @param {number} num - The number to format
-             * @returns {string} Formatted number as string
-             */
-            formatDecimal: function(num) {
-                if (num === 0) return '0';
-                
-                const absNum = Math.abs(num);
-                if (absNum >= 1000 || absNum < 0.001) {
-                    return num.toExponential(6)
-                        .replace(/(\.\d*?[1-9])0+e/, '$1e')
-                        .replace(/\.?0+e/, 'e');
-                }
-                return num.toFixed(10).replace(/\.?0+$/, '');
-            },
-
-            /**
-             * Update scientific notation display for a given input element
-             * @param {HTMLElement} inputElement - The input element
-             * @param {number} valueInBaseUnit - The value in base units
-             */
-            updateScientificNotation: function(inputElement, valueInBaseUnit) {
-                const sciElement = document.getElementById(inputElement.id + '-sci');
-                if (!sciElement) return;
-                
-                if (valueInBaseUnit === 0 || isNaN(valueInBaseUnit)) {
-                    sciElement.textContent = '';
-                    return;
-                }
-                
-                const absValue = Math.abs(valueInBaseUnit);
-                let sciValue;
-                
-                if (absValue >= 1e6 || absValue <= 1e-6) {
-                    sciValue = valueInBaseUnit.toExponential(6)
-                        .replace(/e\+?(-?\d+)/, '×10<sup>$1</sup>')
-                        .replace(/e-/, '×10<sup>-');
-                } else {
-                    sciValue = valueInBaseUnit.toFixed(6).replace(/\.?0+$/, '');
-                }
-                
-                sciElement.innerHTML = sciValue;
-            },
-
-            /**
-             * Clear scientific notation for a field
-             * @param {HTMLElement} inputElement - The input element to clear notation for
-             */
-            clearScientificNotation: function(inputElement) {
-                const sciElement = document.getElementById(inputElement.id + '-sci');
-                if (sciElement) sciElement.textContent = '';
-            }
-        };
-
-        /**
-         * History Module - Handles conversion history
-         */
-        const History = {
-            history: [],
-            maxHistoryItems: 10,
-
-            /**
-             * Add a conversion to history
-             * @param {string} fromValue - The original value
-             * @param {string} fromUnit - The original unit
-             * @param {string} toValue - The converted value
-             * @param {string} toUnit - The converted unit
-             * @param {string} category - The conversion category
-             */
-            add: function(fromValue, fromUnit, toValue, toUnit, category) {
-                const historyItem = {
-                    id: Date.now(),
-                    fromValue: fromValue,
-                    fromUnit: fromUnit,
-                    toValue: toValue,
-                    toUnit: toUnit,
-                    category: category,
-                    timestamp: new Date().toLocaleTimeString()
-                };
-
-                this.history.unshift(historyItem);
-                
-                // Limit history size
-                if (this.history.length > this.maxHistoryItems) {
-                    this.history.pop();
-                }
-                
-                this.updateDisplay();
-            },
-
-            /**
-             * Clear all history
-             */
-            clear: function() {
-                this.history = [];
-                this.updateDisplay();
-            },
-
-            /**
-             * Update the history display
-             */
-            updateDisplay: function() {
-                const historyList = document.getElementById('history-list');
-                if (!historyList) return;
-                
-                if (this.history.length === 0) {
-                    historyList.innerHTML = '<div class="history-item">No conversion history yet</div>';
-                    return;
-                }
-                
-                historyList.innerHTML = this.history.map(item => `
-                    <div class="history-item">
-                        <span class="value">${item.fromValue}</span> ${item.fromUnit} → 
-                        <span class="value">${item.toValue}</span> ${item.toUnit}
-                        <div class="units">${item.category} • ${item.timestamp}</div>
-                    </div>
-                `).join('');
-            }
-        };
-
-        /**
-         * BaseConverter Module - Common conversion functionality
-         */
-        const BaseConverter = {
-            /**
-             * Convert from a specific unit to all others
-             * @param {HTMLElement} inputElement - The input element that triggered the conversion
-             * @param {string} unit - The unit symbol of the input element
-             * @param {string} category - The conversion category
-             * @param {object} unitMap - Map of unit symbols to conversion factors
-             * @param {object} elementMap - Map of element IDs to unit symbols
-             */
-            convertFrom: function(inputElement, unit, category, unitMap, elementMap) {
-                const value = parseFloat(inputElement.value);
-                if (isNaN(value)) {
-                    if (inputElement.value === '') {
-                        Formatter.clearScientificNotation(inputElement);
-                    }
-                    return;
-                }
-
-                // Convert to base unit
-                let baseValue;
-                if (category === 'temperature') {
-                    // Temperature conversion is special (offset + scaling)
-                    const unitData = unitMap[unit];
-                    baseValue = (value - unitData.base) * unitData.factor;
-                } else {
-                    baseValue = value * unitMap[unit];
-                }
-
-                // Update all fields except the one we're typing in
-                const selector = category === 'angle' ? '.angle-input' : '.unit-input';
-                document.querySelectorAll(selector).forEach(field => {
-                    if (field !== inputElement && field.closest(`#${category}-converter`)) {
-                        const fieldId = field.id;
-                        const fieldUnit = elementMap[fieldId];
-                        
-                        let convertedValue;
-                        if (category === 'temperature') {
-                            // Temperature conversion is special (offset + scaling)
-                            const fieldUnitData = unitMap[fieldUnit];
-                            convertedValue = (baseValue / fieldUnitData.factor) + fieldUnitData.base;
-                        } else {
-                            convertedValue = baseValue / unitMap[fieldUnit];
-                        }
-                        
-                        field.value = Formatter.formatDecimal(convertedValue);
-                        Formatter.updateScientificNotation(field, convertedValue * (category === 'temperature' ? 1 : unitMap[fieldUnit]));
-                    }
-                });
-                
-                // Update scientific notation for the input field
-                Formatter.updateScientificNotation(inputElement, baseValue);
-                
-                // Add to history (only for the first conversion in a category)
-                if (category !== 'angle') {
-                    const firstOtherField = document.querySelector(`#${category}-converter ${selector}:not(#${inputElement.id})`);
-                    if (firstOtherField && firstOtherField.value) {
-                        History.add(
-                            inputElement.value, 
-                            unit, 
-                            firstOtherField.value, 
-                            elementMap[firstOtherField.id],
-                            category.charAt(0).toUpperCase() + category.slice(1)
-                        );
-                    }
-                }
-            }
-        };
-
-        /**
-         * UnitConverter Module - Handles length unit conversions
-         */
-        const UnitConverter = {
-            /**
-             * Convert from a specific length unit to all others
-             * @param {HTMLElement} inputElement - The input element that triggered the conversion
-             * @param {string} unit - The unit symbol of the input element
-             * @param {string} category - The conversion category
-             */
-            convertFrom: function(inputElement, unit, category) {
-                BaseConverter.convertFrom(inputElement, unit, category, Constants.lengthUnits, Constants.lengthUnitMap);
-            }
-        };
-
-        /**
-         * AngleConverter Module - Handles angle unit conversions
-         */
-        const AngleConverter = {
-            /**
-             * Convert from a specific angle unit to all others
-             * @param {HTMLElement} inputElement - The input element that triggered the conversion
-             * @param {string} unit - The unit symbol of the input element
-             */
-            convertFrom: function(inputElement, unit) {
-                BaseConverter.convertFrom(inputElement, unit, 'angle', Constants.angleUnits, Constants.angleUnitMap);
-            }
-        };
-
-        /**
-         * TemperatureConverter Module - Handles temperature conversions
-         */
-        const TemperatureConverter = {
-            /**
-             * Convert from a specific temperature unit to all others
-             * @param {HTMLElement} inputElement - The input element that triggered the conversion
-             * @param {string} unit - The unit symbol of the input element
-             */
-            convertFrom: function(inputElement, unit) {
-                BaseConverter.convertFrom(inputElement, unit, 'temperature', Constants.temperatureUnits, Constants.temperatureUnitMap);
-            }
-        };
-
-        /**
-         * WeightConverter Module - Handles weight conversions
-         */
-        const WeightConverter = {
-            /**
-             * Convert from a specific weight unit to all others
-             * @param {HTMLElement} inputElement - The input element that triggered the conversion
-             * @param {string} unit - The unit symbol of the input element
-             */
-            convertFrom: function(inputElement, unit) {
-                BaseConverter.convertFrom(inputElement, unit, 'weight', Constants.weightUnits, Constants.weightUnitMap);
-            }
-        };
-
-        /**
-         * TimeConverter Module - Handles time conversions
-         */
-        const TimeConverter = {
-            /**
-             * Convert from a specific time unit to all others
-             * @param {HTMLElement} inputElement - The input element that triggered the conversion
-             * @param {string} unit - The unit symbol of the input element
-             */
-            convertFrom: function(inputElement, unit) {
-                BaseConverter.convertFrom(inputElement, unit, 'time', Constants.timeUnits, Constants.timeUnitMap);
-            }
-        };
-
-        /**
-         * AreaConverter Module - Handles area conversions
-         */
-        const AreaConverter = {
-            /**
-             * Convert from a specific area unit to all others
-             * @param {HTMLElement} inputElement - The input element that triggered the conversion
-             * @param {string} unit - The unit symbol of the input element
-             */
-            convertFrom: function(inputElement, unit) {
-                BaseConverter.convertFrom(inputElement, unit, 'area', Constants.areaUnits, Constants.areaUnitMap);
-            }
-        };
-
-        /**
-         * UnitConverterUI Module - Handles UI interactions
-         */
-        const UnitConverterUI = {
-            /**
-             * Clear all input fields and scientific notation
-             */
-            clearAllFields: function() {
-                document.querySelectorAll('.unit-input, .angle-input').forEach(field => {
-                    field.value = '';
-                });
-                document.querySelectorAll('.scientific').forEach(el => {
-                    el.textContent = '';
-                });
-            },
-
-            /**
-             * Swap the two columns in the main section
-             */
-            swapColumns: function() {
-                const column1 = document.getElementById('column1');
-                const column2 = document.getElementById('column2');
-                const parent = column1.parentNode;
-                
-                parent.insertBefore(column2, column1);
-            },
-
-            /**
-             * Clear conversion history
-             */
-            clearHistory: function() {
-                History.clear();
-            },
-
-            /**
-             * Switch between conversion categories
-             * @param {string} category - The category to switch to
-             */
-            switchCategory: function(category) {
-                // Hide all converters
-                document.querySelectorAll('.converter-category').forEach(el => {
-                    el.classList.add('hidden');
-                });
-                
-                // Show selected converter
-                document.getElementById(`${category}-converter`).classList.remove('hidden');
-                
-                // Update active tab
-                document.querySelectorAll('.category-tab').forEach(tab => {
-                    tab.classList.remove('active');
-                });
-                document.querySelector(`.category-tab[data-category="${category}"]`).classList.add('active');
-            }
-        };
-
-        // Dark/Light Mode Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        // Check for saved theme preference or use preferred color scheme
-        const currentTheme = localStorage.getItem('theme') || 
-                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        
-        if (currentTheme === 'dark') {
-            document.body.setAttribute('data-theme', 'dark');
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
-        } else {
-            document.body.setAttribute('data-theme', 'light');
-            themeIcon.classList.replace('fa-sun', 'fa-moon');
-        }
-        
-        themeToggle.addEventListener('click', () => {
-            if (document.body.getAttribute('data-theme') === 'light') {
-                document.body.setAttribute('data-theme', 'dark');
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'dark');
+            return num.toFixed(10).replace(/\.?0+$/, '');
+        },
+        updateScientificNotation: function(inputElement, valueInBaseUnit) {
+            const sciElement = document.getElementById(inputElement.id + '-sci');
+            if (!sciElement) return;
+            if (valueInBaseUnit === 0 || isNaN(valueInBaseUnit)) { sciElement.textContent = ''; return; }
+            const absValue = Math.abs(valueInBaseUnit);
+            let sciValue;
+            if (absValue >= 1e6 || absValue <= 1e-6) {
+                sciValue = valueInBaseUnit.toExponential(6).replace(/e\+?(-?\d+)/, '×10<sup>$1</sup>').replace(/e-/, '×10<sup>-');
             } else {
-                document.body.setAttribute('data-theme', 'light');
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'light');
+                sciValue = valueInBaseUnit.toFixed(6).replace(/\.?0+$/, '');
             }
-        });
+            sciElement.innerHTML = sciValue;
+        },
+        clearScientificNotation: function(inputElement) {
+            const sciElement = document.getElementById(inputElement.id + '-sci');
+            if (sciElement) sciElement.textContent = '';
+        }
+    };
 
-        // Initialize any event listeners or setup required
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set up category tab click handlers
-            document.querySelectorAll('.category-tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const category = this.getAttribute('data-category');
-                    UnitConverterUI.switchCategory(category);
-                });
+    const History = {
+        history: [],
+        maxHistoryItems: 10,
+        add: function(fromValue, fromUnit, toValue, toUnit, category) {
+            this.history.unshift({ id: Date.now(), fromValue, fromUnit, toValue, toUnit, category, timestamp: new Date().toLocaleTimeString() });
+            if (this.history.length > this.maxHistoryItems) this.history.pop();
+            this.updateDisplay();
+        },
+        clear: function() { this.history = []; this.updateDisplay(); },
+        updateDisplay: function() {
+            const historyList = document.getElementById('history-list');
+            if (!historyList) return;
+            if (this.history.length === 0) { historyList.innerHTML = '<div class="history-item">No conversion history yet</div>'; return; }
+            historyList.innerHTML = this.history.map(item => '<div class="history-item"><span class="value">' + item.fromValue + '</span> ' + item.fromUnit + ' → <span class="value">' + item.toValue + '</span> ' + item.toUnit + '<div class="units">' + item.category + ' • ' + item.timestamp + '</div></div>').join('');
+        }
+    };
+
+    const BaseConverter = {
+        convertFrom: function(inputElement, unit, category, unitMap, elementMap) {
+            const value = parseFloat(inputElement.value);
+            if (isNaN(value)) { if (inputElement.value === '') Formatter.clearScientificNotation(inputElement); return; }
+            let baseValue;
+            if (category === 'temperature') { const unitData = unitMap[unit]; baseValue = (value - unitData.base) * unitData.factor; }
+            else { baseValue = value * unitMap[unit]; }
+            const selector = category === 'angle' ? '.angle-input' : '.unit-input';
+            document.querySelectorAll(selector).forEach(field => {
+                if (field !== inputElement && field.closest('#' + category + '-converter')) {
+                    const fieldId = field.id;
+                    const fieldUnit = elementMap[fieldId];
+                    let convertedValue;
+                    if (category === 'temperature') { const fieldUnitData = unitMap[fieldUnit]; convertedValue = (baseValue / fieldUnitData.factor) + fieldUnitData.base; }
+                    else { convertedValue = baseValue / unitMap[fieldUnit]; }
+                    field.value = Formatter.formatDecimal(convertedValue);
+                    Formatter.updateScientificNotation(field, convertedValue * (category === 'temperature' ? 1 : unitMap[fieldUnit]));
+                }
             });
+            Formatter.updateScientificNotation(inputElement, baseValue);
+            if (category !== 'angle') {
+                const firstOtherField = document.querySelector('#' + category + '-converter ' + selector + ':not(#' + inputElement.id + ')');
+                if (firstOtherField && firstOtherField.value) {
+                    History.add(inputElement.value, unit, firstOtherField.value, elementMap[firstOtherField.id], category.charAt(0).toUpperCase() + category.slice(1));
+                }
+            }
+        }
+    };
 
-            // Initialize history display
-            History.updateDisplay();
-            
-            console.log('Advanced Unit Converter initialized');
+    const UnitConverter = {
+        convertFrom: function(inputElement, unit, category) {
+            BaseConverter.convertFrom(inputElement, unit, category, Constants.lengthUnits, Constants.lengthUnitMap);
+        }
+    };
+
+    const AngleConverter = {
+        convertFrom: function(inputElement, unit) {
+            BaseConverter.convertFrom(inputElement, unit, 'angle', Constants.angleUnits, Constants.angleUnitMap);
+        }
+    };
+
+    const TemperatureConverter = {
+        convertFrom: function(inputElement, unit) {
+            BaseConverter.convertFrom(inputElement, unit, 'temperature', Constants.temperatureUnits, Constants.temperatureUnitMap);
+        }
+    };
+
+    const WeightConverter = {
+        convertFrom: function(inputElement, unit) {
+            BaseConverter.convertFrom(inputElement, unit, 'weight', Constants.weightUnits, Constants.weightUnitMap);
+        }
+    };
+
+    const TimeConverter = {
+        convertFrom: function(inputElement, unit) {
+            BaseConverter.convertFrom(inputElement, unit, 'time', Constants.timeUnits, Constants.timeUnitMap);
+        }
+    };
+
+    const AreaConverter = {
+        convertFrom: function(inputElement, unit) {
+            BaseConverter.convertFrom(inputElement, unit, 'area', Constants.areaUnits, Constants.areaUnitMap);
+        }
+    };
+
+    const UnitConverterUI = {
+        clearAllFields: function() {
+            document.querySelectorAll('.unit-input, .angle-input').forEach(field => { field.value = ''; });
+            document.querySelectorAll('.scientific').forEach(el => { el.textContent = ''; });
+        },
+        swapColumns: function() {
+            const column1 = document.getElementById('column1');
+            const column2 = document.getElementById('column2');
+            column1.parentNode.insertBefore(column2, column1);
+        },
+        clearHistory: function() { History.clear(); },
+        switchCategory: function(category) {
+            document.querySelectorAll('.converter-category').forEach(el => el.classList.add('hidden'));
+            document.getElementById(category + '-converter').classList.remove('hidden');
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.setAttribute('aria-selected', 'false');
+            });
+            const activeTab = document.querySelector('.category-tab[data-category="' + category + '"]');
+            activeTab.classList.add('active');
+            activeTab.setAttribute('aria-selected', 'true');
+        }
+    };
+
+    (() => {
+        'use strict';
+
+        const loader = document.getElementById('loader');
+        window.addEventListener('load', () => { setTimeout(() => { loader.classList.add('hidden'); }, 300); });
+
+        const scrollProgress = document.getElementById('scrollProgress');
+        const header = document.getElementById('header');
+        const backToTop = document.getElementById('backToTop');
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const s = window.scrollY;
+                    const d = document.documentElement.scrollHeight - window.innerHeight;
+                    scrollProgress.style.width = (d > 0 ? (s / d) * 100 : 0) + '%';
+                    header.classList.toggle('scrolled', s > 50);
+                    backToTop.classList.toggle('visible', s > 400);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        const toggleMenu = () => {
+            const isActive = navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', String(isActive));
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        };
+        menuToggle.addEventListener('click', toggleMenu);
+        mobileOverlay.addEventListener('click', toggleMenu);
+
+        const STORAGE_KEY = 'portfolio-theme';
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const getPreferredTheme = () => {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) return saved;
+            return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        };
+        const applyTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+            localStorage.setItem(STORAGE_KEY, theme);
+        };
+        applyTheme(getPreferredTheme());
+        themeToggle.addEventListener('click', () => {
+            const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            applyTheme(next);
         });
 
-        // Set current year in footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script>
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast' + (type ? ' ' + type : '');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            const activate = () => {
+                const category = tab.getAttribute('data-category');
+                UnitConverterUI.switchCategory(category);
+            };
+            tab.addEventListener('click', activate);
+            tab.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
+        });
+
+        History.updateDisplay();
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    })();
+  </script>
 </body>
 </html>

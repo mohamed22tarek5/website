@@ -1,1755 +1,1655 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <title>Advanced Ohm's Law Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <!-- Icons -->
-  <link rel="icon" href="icon.png" type="image/png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <title>Advanced Ohm's Law Calculator | Mohamed Tarek</title>
+  <meta name="description" content="Complete Ohm's Law calculator with circuit analysis, power calculations, component selection, and unit converter. Interactive charts and visualizations.">
+  <meta name="keywords" content="Ohm's law calculator, electrical calculator, circuit analysis, power calculations, resistance, voltage, current, unit converter">
+  <meta name="author" content="Mohamed Tarek">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Advanced Ohm's Law Calculator | Mohamed Tarek">
+  <meta property="og:description" content="Complete Ohm's Law calculator with circuit analysis, power calculations, component selection, and unit converter.">
+  <meta property="og:image" content="https://website-mohamed.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://website-mohamed.vercel.app/sites/ohms-law-calculator.html">
+  <meta property="og:site_name" content="Mohamed Tarek Portfolio">
 
-  <!-- Chart.js for graphs -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Advanced Ohm's Law Calculator | Mohamed Tarek">
+  <meta name="twitter:description" content="Complete Ohm's Law calculator with circuit analysis, power calculations, component selection, and unit converter.">
+  <meta name="twitter:image" content="https://website-mohamed.vercel.app/photo.jpg">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="../icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Advanced Ohm's Law Calculator",
+    "description": "Complete Ohm's Law calculator with circuit analysis, power calculations, component selection, and unit converter.",
+    "url": "https://website-mohamed.vercel.app/sites/ohms-law-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek",
+      "url": "https://website-mohamed.vercel.app"
+    }
+  }
+  </script>
 
   <style>
     :root {
-      --primary-color: #4e9eff;
-      --primary-dark: #3a6cf4;
-      --primary-light: #6ab1ff;
-      --secondary-color: #9b59b6;
-      --background-dark: #121212;
-      --background-darker: #0a0a0a;
-      --background-secondary: #1a1a1a;
-      --card-dark: #1e1e1e;
-      --card-light: #252525;
-      --text-light: #ffffff;
-      --text-muted: #aaaaaa;
-      --success-color: #4caf50;
-      --error-color: #f44336;
-      --warning-color: #ff9800;
-      --info-color: #2196f3;
-      --transition-speed: 0.3s;
-      --border-radius: 12px;
-      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.4);
+      --color-bg-primary: #0a0e1a;
+      --color-bg-secondary: #0f1322;
+      --color-bg-tertiary: #141829;
+      --color-bg-card: #161b2e;
+      --color-bg-card-hover: #1c2240;
+      --color-bg-elevated: #1a2038;
+      --color-accent: #3b82f6;
+      --color-accent-hover: #2563eb;
+      --color-accent-light: #60a5fa;
+      --color-accent-glow: rgba(59, 130, 246, 0.15);
+      --color-accent-subtle: rgba(59, 130, 246, 0.08);
+      --color-text-primary: #f1f5f9;
+      --color-text-secondary: #94a3b8;
+      --color-text-tertiary: #64748b;
+      --color-border: rgba(255, 255, 255, 0.06);
+      --color-border-hover: rgba(255, 255, 255, 0.12);
+      --color-border-accent: rgba(59, 130, 246, 0.3);
+      --color-success: #22c55e;
+      --color-error: #ef4444;
+      --color-warning: #f59e0b;
+      --color-info: #3b82f6;
+      --gradient-hero: linear-gradient(135deg, #0a0e1a 0%, #111833 50%, #0f1322 100%);
+      --gradient-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 4rem;
+      --space-4xl: 6rem;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.15);
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --container-max: 1200px;
+      --header-height: 72px;
     }
 
-    /* Light mode variables */
     [data-theme="light"] {
-      --background-dark: #f5f7fa;
-      --background-darker: #e8ebf0;
-      --background-secondary: #ffffff;
-      --card-dark: #ffffff;
-      --card-light: #f9f9f9;
-      --text-light: #333333;
-      --text-muted: #666666;
-      --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-      --box-shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+      --color-bg-primary: #f8fafc;
+      --color-bg-secondary: #f1f5f9;
+      --color-bg-tertiary: #e2e8f0;
+      --color-bg-card: #ffffff;
+      --color-bg-card-hover: #f8fafc;
+      --color-bg-elevated: #ffffff;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      --color-text-tertiary: #94a3b8;
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-border-hover: rgba(0, 0, 0, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+      --gradient-hero: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 50%, #f1f5f9 100%);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--background-dark);
-      color: var(--text-light);
-      line-height: 1.6;
-      min-height: 100vh;
-      padding: 20px;
-      transition: background-color var(--transition-speed) ease,
-                  color var(--transition-speed) ease;
+      font-family: var(--font-sans);
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color var(--transition-slow), color var(--transition-slow);
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; }
+    ul, ol { list-style: none; }
+    ::selection { background: var(--color-accent); color: white; }
+
+    .skip-link {
+      position: fixed; top: -100%; left: var(--space-md);
+      background: var(--color-accent); color: white;
+      padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm);
+      z-index: 10000; font-weight: 600; font-size: 0.875rem;
+      transition: top var(--transition-fast);
+    }
+    .skip-link:focus { top: var(--space-md); }
+
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+      background: var(--gradient-accent); z-index: 10001;
+      transition: width 50ms linear;
     }
 
-    .main-container {
-      max-width: 1200px;
-      margin: 0 auto;
+    .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-xl); }
+    @media (max-width: 768px) { .container { padding: 0 var(--space-md); } }
+
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--header-height);
+      z-index: 1000; transition: all var(--transition-base); background: transparent;
+    }
+    .header.scrolled {
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid var(--color-border);
+    }
+    [data-theme="light"] .header.scrolled { background: rgba(248, 250, 252, 0.85); }
+    .header .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+
+    .logo { display: flex; align-items: center; gap: var(--space-sm); font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; }
+    .logo-icon {
+      width: 36px; height: 36px; background: var(--gradient-accent);
+      border-radius: var(--radius-sm); display: flex; align-items: center;
+      justify-content: center; color: white; font-size: 0.875rem; font-weight: 800;
     }
 
-    .page-header {
-      text-align: center;
-      margin-bottom: 30px;
-      padding: 30px;
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      border-radius: var(--border-radius);
-      color: white;
-      box-shadow: var(--box-shadow);
+    .nav { display: flex; align-items: center; gap: var(--space-xs); }
+    .nav-link {
+      position: relative; padding: var(--space-sm) var(--space-md);
+      font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
+      border-radius: var(--radius-sm); transition: all var(--transition-fast);
+    }
+    .nav-link:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
+
+    .menu-toggle {
+      display: none; flex-direction: column; gap: 5px; padding: var(--space-sm);
+      z-index: 1001; align-items: center; justify-content: center;
+    }
+    .menu-toggle .bar {
+      width: 22px; height: 2px; background: var(--color-text-primary);
+      border-radius: 2px; transition: all var(--transition-base); transform-origin: center;
+    }
+    .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .mobile-overlay {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
+      z-index: 999; opacity: 0; pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+    .mobile-overlay.active { opacity: 1; pointer-events: auto; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .nav {
+        position: fixed; top: 0; right: -100%; width: min(320px, 85vw);
+        height: 100vh; background: var(--color-bg-secondary);
+        flex-direction: column; align-items: flex-start; justify-content: center;
+        padding: var(--space-3xl); gap: var(--space-sm);
+        transition: right var(--transition-slow); border-left: 1px solid var(--color-border);
+      }
+      .nav.active { right: 0; }
+      .nav-link { font-size: 1.125rem; width: 100%; padding: var(--space-md); }
     }
 
-    .page-header h1 {
-      font-size: 2.8rem;
-      margin-bottom: 15px;
+    .page-hero {
+      padding-top: calc(var(--header-height) + var(--space-3xl));
+      padding-bottom: var(--space-3xl);
+      background: var(--gradient-hero);
+      position: relative; overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0; overflow: hidden; z-index: 0;
+    }
+    .page-hero-orb {
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+    .page-hero-orb:nth-child(1) { width: 400px; height: 400px; background: rgba(59, 130, 246, 0.15); top: -100px; right: -50px; }
+    .page-hero-orb:nth-child(2) { width: 300px; height: 300px; background: rgba(139, 92, 246, 0.12); bottom: -80px; left: -80px; animation-delay: -7s; }
+    .page-hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px; z-index: 1;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(20px, 10px) scale(1.02); }
+    }
+    .page-hero .container { position: relative; z-index: 2; text-align: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-md); background: var(--color-accent-subtle);
+      border: 1px solid var(--color-border-accent); border-radius: var(--radius-full);
+      font-size: 0.8125rem; font-weight: 500; color: var(--color-accent-light);
+      margin-bottom: var(--space-lg);
+    }
+    .hero-badge .dot {
+      width: 8px; height: 8px; background: var(--color-success);
+      border-radius: 50%; animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+    .page-hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.03em; margin-bottom: var(--space-md);
+    }
+    .page-hero h1 .gradient-text {
+      background: var(--gradient-accent); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-hero p {
+      font-size: clamp(1rem, 2vw, 1.125rem); color: var(--color-text-secondary);
+      max-width: 600px; margin: 0 auto;
     }
 
-    .page-header p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
+    .main-content { padding: var(--space-3xl) 0 var(--space-4xl); }
 
-    /* Tabs */
+    .tabs-wrapper {
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg); overflow: hidden; margin-bottom: var(--space-xl);
+    }
     .tabs {
-      display: flex;
-      background: var(--background-secondary);
-      border-radius: var(--border-radius) var(--border-radius) 0 0;
-      overflow: hidden;
-      margin-bottom: 0;
+      display: flex; overflow-x: auto;
+      scrollbar-width: none;
     }
-
+    .tabs::-webkit-scrollbar { display: none; }
     .tab {
-      flex: 1;
-      padding: 20px;
-      text-align: center;
-      background: var(--card-dark);
-      cursor: pointer;
-      transition: all var(--transition-speed) ease;
-      border-bottom: 3px solid transparent;
-      font-weight: 500;
+      flex: 1; min-width: max-content; padding: var(--space-lg) var(--space-xl);
+      text-align: center; background: transparent; cursor: pointer;
+      transition: all var(--transition-fast); border-bottom: 2px solid transparent;
+      font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
+      white-space: nowrap;
     }
-
-    .tab:hover {
-      background: var(--card-light);
-    }
-
+    .tab:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
     .tab.active {
-      background: var(--card-dark);
-      border-bottom: 3px solid var(--primary-color);
-      font-weight: bold;
+      color: var(--color-accent); border-bottom-color: var(--color-accent);
+      font-weight: 600; background: var(--color-accent-subtle);
     }
+    .tab i { margin-right: var(--space-sm); }
 
     .tab-content {
-      display: none;
-      padding: 30px;
-      background: var(--card-dark);
-      border-radius: 0 var(--border-radius) var(--border-radius) var(--border-radius);
-      box-shadow: var(--box-shadow);
-      margin-bottom: 30px;
+      display: none; padding: var(--space-xl);
+      animation: fadeIn 0.4s ease;
     }
-
-    .tab-content.active {
-      display: block;
-      animation: fadeIn 0.5s ease;
-    }
-
+    .tab-content.active { display: block; }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .calculator-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-bottom: 30px;
+    .calc-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl); margin-bottom: var(--space-xl);
+    }
+    @media (max-width: 992px) { .calc-grid { grid-template-columns: 1fr; } }
+
+    .calc-box {
+      padding: var(--space-xl); background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+      transition: all var(--transition-base);
+    }
+    .calc-box:hover { border-color: var(--color-border-hover); }
+    .calc-box h3 {
+      font-size: 1.125rem; font-weight: 700; color: var(--color-accent);
+      margin-bottom: var(--space-lg); display: flex; align-items: center; gap: var(--space-sm);
     }
 
-    @media (max-width: 992px) {
-      .calculator-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .calculator-box {
-      padding: 25px;
-      background: var(--card-light);
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      transition: all var(--transition-speed) ease;
-    }
-
-    .calculator-box:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--box-shadow-hover);
-    }
-
-    h2, h3 {
-      color: var(--primary-color);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-subtitle {
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
-
-    /* Input Groups */
-    .input-group {
-      margin-bottom: 20px;
-    }
-
+    .input-group { margin-bottom: var(--space-lg); }
     .input-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-      color: var(--text-light);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: var(--space-sm); font-size: 0.875rem; font-weight: 600;
+      color: var(--color-text-primary);
     }
+    .unit-display { color: var(--color-text-tertiary); font-weight: 400; font-size: 0.8125rem; }
 
-    .unit-display {
-      color: var(--text-muted);
-      font-size: 0.9em;
-      font-weight: normal;
+    .input-field {
+      width: 100%; padding: 12px 16px;
+      background: var(--color-bg-tertiary); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-primary);
+      font-family: var(--font-sans); font-size: 0.9375rem;
+      transition: all var(--transition-fast); outline: none;
     }
-
-    select, input {
-      width: 100%;
-      padding: 14px;
-      border-radius: var(--border-radius);
-      border: 2px solid var(--background-secondary);
-      background-color: var(--background-secondary);
-      color: var(--text-light);
-      font-size: 1em;
-      font-family: inherit;
-      transition: all var(--transition-speed) ease;
-    }
-
-    select:focus, input:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(78, 158, 255, 0.2);
-    }
+    .input-field:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
+    .input-field.error { border-color: var(--color-error); box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15); }
+    .input-field option { background: var(--color-bg-card); color: var(--color-text-primary); }
 
     .range-slider {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 8px;
-      border-radius: 4px;
-      background: var(--background-secondary);
-      outline: none;
-      margin: 10px 0;
+      -webkit-appearance: none; appearance: none;
+      width: 100%; height: 6px; border-radius: 3px;
+      background: var(--color-bg-tertiary); outline: none; margin: var(--space-md) 0;
     }
-
     .range-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: var(--primary-color);
-      cursor: pointer;
-      transition: all var(--transition-speed) ease;
+      -webkit-appearance: none; width: 20px; height: 20px;
+      border-radius: 50%; background: var(--color-accent); cursor: pointer;
+      transition: all var(--transition-fast); border: 2px solid var(--color-bg-card);
+      box-shadow: var(--shadow-sm);
     }
-
-    .range-slider::-webkit-slider-thumb:hover {
-      background: var(--primary-dark);
-      transform: scale(1.2);
-    }
-
-    /* Buttons */
-    .btn-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-top: 20px;
+    .range-slider::-webkit-slider-thumb:hover { transform: scale(1.15); box-shadow: var(--shadow-glow); }
+    .range-slider::-moz-range-thumb {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--color-accent); cursor: pointer; border: 2px solid var(--color-bg-card);
     }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 24px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 1em;
-      transition: all var(--transition-speed) ease;
-      cursor: pointer;
-      border: none;
-      outline: none;
-      gap: 10px;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: var(--space-sm); padding: 12px 24px; font-size: 0.9375rem;
+      font-weight: 600; border-radius: var(--radius-full);
+      transition: all var(--transition-fast); position: relative; overflow: hidden;
     }
-
     .btn-primary {
-      background-color: var(--primary-color);
-      color: white;
-      box-shadow: 0 5px 15px rgba(78, 158, 255, 0.4);
+      background: var(--color-accent); color: white;
+      box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
     }
-
     .btn-primary:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(78, 158, 255, 0.6);
+      background: var(--color-accent-hover); transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(59, 130, 246, 0.4);
     }
-
     .btn-secondary {
-      background-color: var(--background-secondary);
-      color: var(--text-light);
+      background: var(--color-bg-tertiary); color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
     }
-
     .btn-secondary:hover {
-      background-color: var(--card-light);
-      transform: translateY(-3px);
+      border-color: var(--color-border-hover); transform: translateY(-2px);
+    }
+    .btn-group {
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm);
+      margin-top: var(--space-lg);
     }
 
-    .btn-success {
-      background-color: var(--success-color);
-      color: white;
-    }
-
-    /* Results */
     .results-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 25px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-md); margin-top: var(--space-lg);
     }
-
     .result-box {
-      padding: 20px;
-      border-radius: var(--border-radius);
-      border-left: 4px solid var(--primary-color);
-      transition: all var(--transition-speed) ease;
-      background-color: rgba(78, 158, 255, 0.05);
-      text-align: center;
+      padding: var(--space-lg); text-align: center;
+      background: var(--color-accent-subtle); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); border-left: 3px solid var(--color-accent);
+      transition: all var(--transition-fast);
+    }
+    .result-box:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .result-box.success { border-left-color: var(--color-success); background: rgba(34, 197, 94, 0.06); }
+    .result-box.warning { border-left-color: var(--color-warning); background: rgba(245, 158, 11, 0.06); }
+    .result-box.info { border-left-color: var(--color-info); background: rgba(59, 130, 246, 0.06); }
+    .result-box.error { border-left-color: var(--color-error); background: rgba(239, 68, 68, 0.06); }
+    .result-label { font-size: 0.75rem; color: var(--color-text-tertiary); margin-bottom: var(--space-xs); font-weight: 500; }
+    .result-value { font-size: 1.5rem; font-weight: 800; color: var(--color-text-primary); line-height: 1.2; }
+    .result-unit { font-size: 0.8125rem; color: var(--color-text-tertiary); margin-left: 2px; font-weight: 400; }
+
+    .circuit-container { margin: var(--space-xl) 0; text-align: center; }
+
+    .chart-container { height: 300px; margin-top: var(--space-xl); position: relative; }
+    .chart-title {
+      text-align: center; color: var(--color-accent);
+      margin-bottom: var(--space-lg); font-size: 1rem; font-weight: 600;
     }
 
-    .result-box:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--box-shadow-hover);
-    }
-
-    .result-box.success {
-      border-left-color: var(--success-color);
-      background-color: rgba(76, 175, 80, 0.05);
-    }
-
-    .result-box.warning {
-      border-left-color: var(--warning-color);
-      background-color: rgba(255, 152, 0, 0.05);
-    }
-
-    .result-box.info {
-      border-left-color: var(--info-color);
-      background-color: rgba(33, 150, 243, 0.05);
-    }
-
-    .result-label {
-      font-size: 0.9em;
-      color: var(--text-muted);
-      margin-bottom: 5px;
-    }
-
-    .result-value {
-      font-size: 1.6em;
-      font-weight: bold;
-      color: var(--text-light);
-    }
-
-    .result-unit {
-      font-size: 0.9em;
-      color: var(--text-muted);
-      margin-left: 5px;
-    }
-
-    /* Circuit Visualization */
-    .circuit-container {
-      margin: 30px 0;
-      text-align: center;
-    }
-
-    .circuit-diagram {
-      max-width: 100%;
-      height: auto;
-      border-radius: var(--border-radius);
-      background: var(--card-light);
-      padding: 20px;
-    }
-
-    /* Chart container */
-    .chart-container {
-      height: 300px;
-      margin-top: 30px;
-      position: relative;
-    }
-
-    /* Info boxes */
     .info-box {
-      margin-top: 30px;
-      padding: 25px;
-      background: rgba(241, 196, 15, 0.05);
-      border-radius: var(--border-radius);
-      border-left: 4px solid #f1c40f;
-      color: var(--text-light);
-      box-shadow: var(--box-shadow);
+      margin-top: var(--space-xl); padding: var(--space-xl);
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg); border-left: 3px solid var(--color-warning);
     }
-
     .info-box h3 {
-      color: #f1c40f;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      color: var(--color-warning); margin-bottom: var(--space-md);
+      font-size: 1rem; font-weight: 600; display: flex; align-items: center; gap: var(--space-sm);
     }
-
-    .info-box ul {
-      padding-left: 20px;
-    }
-
+    .info-box ul { padding-left: var(--space-xl); }
     .info-box li {
-      margin-bottom: 8px;
-      line-height: 1.8;
+      margin-bottom: var(--space-sm); line-height: 1.8;
+      font-size: 0.875rem; color: var(--color-text-secondary);
     }
+    .info-box li strong { color: var(--color-text-primary); }
 
-    /* Comparison table */
     .comparison-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background: var(--card-light);
-      border-radius: var(--border-radius);
-      overflow: hidden;
+      width: 100%; border-collapse: collapse; margin-top: var(--space-lg);
+      background: var(--color-bg-card); border-radius: var(--radius-lg);
+      overflow: hidden; border: 1px solid var(--color-border);
     }
-
     .comparison-table th, .comparison-table td {
-      padding: 15px;
-      text-align: left;
-      border-bottom: 1px solid var(--background-secondary);
+      padding: var(--space-md) var(--space-lg); text-align: left;
+      border-bottom: 1px solid var(--color-border); font-size: 0.875rem;
     }
-
     .comparison-table th {
-      background: var(--background-secondary);
-      color: var(--primary-color);
-      font-weight: 600;
+      background: var(--color-bg-tertiary); color: var(--color-accent);
+      font-weight: 600; font-size: 0.8125rem; text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table tr:hover td { background: var(--color-accent-subtle); }
+
+    .component-cards {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-md); margin-top: var(--space-lg);
+    }
+    .component-card {
+      padding: var(--space-lg); background: var(--color-bg-secondary);
+      border: 1px solid var(--color-border); border-radius: var(--radius-md);
+      text-align: center; transition: all var(--transition-fast);
+    }
+    .component-card:hover {
+      transform: translateY(-3px); border-color: var(--color-border-accent);
+      box-shadow: var(--shadow-md), var(--shadow-glow);
+    }
+    .component-name {
+      font-weight: 600; font-size: 0.9375rem; margin-bottom: 2px;
+      color: var(--color-accent);
+    }
+    .component-value {
+      font-size: 1.125rem; font-weight: 800; margin: var(--space-sm) 0;
+      color: var(--color-text-primary);
     }
 
-    .comparison-table tr:hover {
-      background: rgba(78, 158, 255, 0.05);
+    .formula-display {
+      background: var(--color-bg-tertiary); padding: var(--space-md) var(--space-lg);
+      border-radius: var(--radius-md); font-family: var(--font-mono); font-size: 0.875rem;
+      margin: var(--space-md) 0; border-left: 3px solid var(--color-accent);
+      color: var(--color-text-secondary);
     }
 
-    /* Theme toggle */
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-secondary);
+      font-size: 1rem; z-index: 999; opacity: 0; visibility: hidden;
+      transform: translateY(12px); transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+
     .theme-toggle {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background-color: var(--card-dark);
-      color: var(--primary-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4em;
-      box-shadow: var(--box-shadow);
-      cursor: pointer;
-      transition: all var(--transition-speed) ease;
-      z-index: 999;
-      border: none;
+      position: fixed; bottom: 32px; right: 90px; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-secondary);
+      font-size: 1rem; z-index: 999; transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
     }
+    .theme-toggle:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
 
-    .theme-toggle:hover {
-      transform: scale(1.1) rotate(30deg);
-      box-shadow: var(--box-shadow-hover);
-    }
-
-    /* Toast notification */
     .toast {
-      position: fixed;
-      bottom: 100px;
-      right: 30px;
-      padding: 15px 25px;
-      background-color: var(--success-color);
-      color: white;
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-      z-index: 1000;
-      transform: translateX(150%);
-      transition: transform 0.3s ease;
+      position: fixed; bottom: 100px; right: 32px; padding: var(--space-md) var(--space-lg);
+      background: var(--color-success); color: white; border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg); z-index: 10000; font-size: 0.875rem; font-weight: 500;
+      transform: translateX(120%); transition: transform var(--transition-base);
       max-width: 400px;
     }
+    .toast.show { transform: translateX(0); }
+    .toast.error { background: var(--color-error); }
+    .toast.warning { background: var(--color-warning); }
 
-    .toast.show {
-      transform: translateX(0);
+    .footer {
+      background: var(--color-bg-primary); border-top: 1px solid var(--color-border);
+      padding: var(--space-3xl) 0 var(--space-xl);
+    }
+    .footer-content {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: var(--space-md);
+    }
+    .footer-social { display: flex; gap: var(--space-sm); }
+    .footer-social a {
+      width: 40px; height: 40px; display: flex; align-items: center;
+      justify-content: center; border-radius: var(--radius-md);
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      color: var(--color-text-secondary); transition: all var(--transition-fast);
+    }
+    .footer-social a:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+    .footer-bottom { font-size: 0.875rem; color: var(--color-text-tertiary); }
+    .footer-bottom a { color: var(--color-accent); }
+
+    .loader {
+      position: fixed; inset: 0; background: var(--color-bg-primary);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 99999; transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-spinner {
+      width: 40px; height: 40px; border: 3px solid var(--color-border);
+      border-top-color: var(--color-accent); border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .loader-text { margin-top: var(--space-lg); font-size: 0.875rem; color: var(--color-text-tertiary); font-weight: 500; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
     }
 
-    .toast.error {
-      background-color: var(--error-color);
+    @media all and (display-mode: standalone) {
+      body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
     }
 
-    .toast.warning {
-      background-color: var(--warning-color);
-    }
-
-    /* Footer */
-    footer {
-      background-color: var(--card-dark);
-      color: var(--text-light);
-      text-align: center;
-      padding: 40px;
-      margin-top: 50px;
-      border-radius: var(--border-radius);
-      box-shadow: var(--box-shadow);
-    }
-
-    .social-footer {
-      display: flex;
-      justify-content: center;
-      margin: 30px 0;
-      gap: 25px;
-    }
-
-    .social-footer a {
-      color: var(--text-light);
-      font-size: 1.8em;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: var(--background-secondary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all var(--transition-speed) ease;
-    }
-
-    .social-footer a:hover {
-      color: white;
-      background: var(--primary-color);
-      transform: translateY(-5px);
-    }
-
-    .footer-bottom {
-      margin-top: 20px;
-      font-size: 1em;
-      opacity: 0.8;
-    }
-
-    /* Responsive Design */
     @media (max-width: 768px) {
-      .calculator-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .page-header h1 {
-        font-size: 2rem;
-      }
-      
-      .page-header {
-        padding: 20px;
-      }
-      
-      .tabs {
-        flex-direction: column;
-      }
-      
-      .tab {
-        border-bottom: 1px solid var(--background-secondary);
-        border-right: none;
-      }
-      
-      .theme-toggle {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2em;
-        bottom: 20px;
-        left: 20px;
-      }
-      
-      .results-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+      .calc-grid { grid-template-columns: 1fr; }
+      .tabs { flex-direction: column; }
+      .tab { border-bottom: 1px solid var(--color-border); border-right: none; border-bottom-width: 1px; }
+      .tab.active { border-bottom-color: var(--color-accent); }
+      .results-grid { grid-template-columns: 1fr 1fr; }
+      .btn-group { grid-template-columns: 1fr; }
+      .comparison-table { font-size: 0.8125rem; }
+      .comparison-table th, .comparison-table td { padding: var(--space-sm) var(--space-md); }
+      .component-cards { grid-template-columns: 1fr 1fr; }
     }
-
     @media (max-width: 480px) {
-      .results-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .btn-group {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--background-secondary);
-      border-radius: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--primary-color);
-      border-radius: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--primary-dark);
-    }
-
-    /* Component selection */
-    .component-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .component-card {
-      padding: 20px;
-      background: var(--card-light);
-      border-radius: var(--border-radius);
-      text-align: center;
-      transition: all var(--transition-speed) ease;
-    }
-
-    .component-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--box-shadow-hover);
-    }
-
-    .component-name {
-      font-weight: bold;
-      color: var(--primary-color);
-      margin-bottom: 10px;
-    }
-
-    .component-value {
-      font-size: 1.2em;
-      font-weight: bold;
-      margin: 10px 0;
-    }
-
-    /* Animation for circuit elements */
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.7; }
-      100% { opacity: 1; }
-    }
-
-    .pulse {
-      animation: pulse 2s infinite;
-    }
-
-    /* Formula display */
-    .formula-display {
-      background: var(--background-secondary);
-      padding: 15px;
-      border-radius: var(--border-radius);
-      font-family: 'Courier New', monospace;
-      margin: 15px 0;
-      border-left: 4px solid var(--primary-color);
+      .results-grid { grid-template-columns: 1fr; }
+      .component-cards { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="main-container">
-    <div class="page-header">
-      <h1><i class="fas fa-bolt"></i> Advanced Ohm's Law Calculator</h1>
-      <p>Complete electrical calculations with circuit analysis, power calculations, and component selection</p>
-    </div>
-
-    <div class="tabs">
-      <div class="tab active" data-tab="basic">Basic Calculator</div>
-      <div class="tab" data-tab="circuit">Circuit Analysis</div>
-      <div class="tab" data-tab="power">Power Calculations</div>
-      <div class="tab" data-tab="components">Component Selection</div>
-    </div>
-
-    <!-- Basic Calculator Tab -->
-    <div class="tab-content active" id="basic-tab">
-      <div class="calculator-grid">
-        <div class="calculator-box">
-          <h3><i class="fas fa-calculator"></i> Input Parameters</h3>
-          
-          <div class="input-group">
-            <label for="voltage">
-              Voltage
-              <span class="unit-display">Volts (V)</span>
-            </label>
-            <input type="number" id="voltage" placeholder="e.g., 12" step="0.1" min="0">
-            <input type="range" class="range-slider" id="voltageRange" min="0" max="100" value="12">
-          </div>
-          
-          <div class="input-group">
-            <label for="current">
-              Current
-              <span class="unit-display">Amperes (A)</span>
-            </label>
-            <input type="number" id="current" placeholder="e.g., 2" step="0.1" min="0">
-            <input type="range" class="range-slider" id="currentRange" min="0" max="10" value="2">
-          </div>
-          
-          <div class="input-group">
-            <label for="resistance">
-              Resistance
-              <span class="unit-display">Ohms (Ω)</span>
-            </label>
-            <input type="number" id="resistance" placeholder="e.g., 6" step="0.1" min="0">
-            <input type="range" class="range-slider" id="resistanceRange" min="0" max="100" value="6">
-          </div>
-          
-          <div class="input-group">
-            <label for="power">
-              Power
-              <span class="unit-display">Watts (W)</span>
-            </label>
-            <input type="number" id="power" placeholder="e.g., 24" step="0.1" min="0">
-            <input type="range" class="range-slider" id="powerRange" min="0" max="500" value="24">
-          </div>
-          
-          <div class="btn-group">
-            <button class="btn btn-primary" onclick="calculateOhmsLaw()">
-              <i class="fas fa-calculator"></i> Calculate All
-            </button>
-            <button class="btn btn-secondary" onclick="resetCalculator()">
-              <i class="fas fa-redo"></i> Reset
-            </button>
-          </div>
-        </div>
-        
-        <div class="calculator-box">
-          <h3><i class="fas fa-chart-line"></i> Results & Visualization</h3>
-          
-          <div class="circuit-container">
-            <svg width="300" height="150" viewBox="0 0 300 150" class="circuit-diagram">
-              <rect x="50" y="60" width="50" height="30" fill="var(--primary-color)" rx="5"/>
-              <text x="75" y="80" text-anchor="middle" fill="var(--text-light)" font-weight="bold">V</text>
-              
-              <rect x="200" y="60" width="50" height="30" fill="var(--success-color)" rx="5"/>
-              <text x="225" y="80" text-anchor="middle" fill="var(--text-light)" font-weight="bold">R</text>
-              
-              <line x1="100" y1="75" x2="150" y2="75" stroke="var(--warning-color)" stroke-width="3"/>
-              <polygon points="150,75 140,70 140,80" fill="var(--warning-color)"/>
-              <text x="125" y="70" text-anchor="middle" fill="var(--text-light)" font-weight="bold">I</text>
-              
-              <circle cx="175" cy="75" r="10" fill="var(--error-color)"/>
-              <text x="175" y="80" text-anchor="middle" fill="var(--text-light)" font-weight="bold">P</text>
-            </svg>
-          </div>
-          
-          <div class="results-grid">
-            <div class="result-box success">
-              <div class="result-label">Voltage</div>
-              <div class="result-value" id="resultV">--</div>
-              <div class="result-unit">V</div>
-            </div>
-            
-            <div class="result-box warning">
-              <div class="result-label">Current</div>
-              <div class="result-value" id="resultI">--</div>
-              <div class="result-unit">A</div>
-            </div>
-            
-            <div class="result-box info">
-              <div class="result-label">Resistance</div>
-              <div class="result-value" id="resultR">--</div>
-              <div class="result-unit">Ω</div>
-            </div>
-            
-            <div class="result-box">
-              <div class="result-label">Power</div>
-              <div class="result-value" id="resultP">--</div>
-              <div class="result-unit">W</div>
-            </div>
-          </div>
-          
-          <div class="formula-display" id="formulaDisplay">
-            V = I × R, P = V × I
-          </div>
-        </div>
-      </div>
-      
-      <div class="calculator-box">
-        <h3><i class="fas fa-chart-bar"></i> Current vs Voltage Relationship</h3>
-        <div class="chart-container">
-          <canvas id="ivChart"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <!-- Circuit Analysis Tab -->
-    <div class="tab-content" id="circuit-tab">
-      <div class="calculator-grid">
-        <div class="calculator-box">
-          <h3><i class="fas fa-project-diagram"></i> Circuit Configuration</h3>
-          
-          <div class="input-group">
-            <label for="circuitType">Circuit Type</label>
-            <select id="circuitType" class="input-field">
-              <option value="series">Series Circuit</option>
-              <option value="parallel">Parallel Circuit</option>
-              <option value="series-parallel">Series-Parallel</option>
-            </select>
-          </div>
-          
-          <div class="input-group">
-            <label for="numResistors">Number of Resistors</label>
-            <select id="numResistors" class="input-field">
-              <option value="2">2</option>
-              <option value="3" selected>3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-          
-          <div id="resistorInputs">
-            <!-- Dynamically generated resistor inputs -->
-          </div>
-          
-          <div class="input-group">
-            <label for="circuitVoltage">Supply Voltage</label>
-            <input type="number" id="circuitVoltage" class="input-field" placeholder="e.g., 12" value="12">
-            <div class="unit-display">Volts (V)</div>
-          </div>
-          
-          <button class="btn btn-primary" onclick="analyzeCircuit()">
-            <i class="fas fa-bolt"></i> Analyze Circuit
-          </button>
-        </div>
-        
-        <div class="calculator-box">
-          <h3><i class="fas fa-chart-pie"></i> Circuit Analysis Results</h3>
-          
-          <div class="results-grid">
-            <div class="result-box success">
-              <div class="result-label">Total Resistance</div>
-              <div class="result-value" id="totalResistance">--</div>
-              <div class="result-unit">Ω</div>
-            </div>
-            
-            <div class="result-box warning">
-              <div class="result-label">Total Current</div>
-              <div class="result-value" id="totalCurrent">--</div>
-              <div class="result-unit">A</div>
-            </div>
-            
-            <div class="result-box info">
-              <div class="result-label">Total Power</div>
-              <div class="result-value" id="totalPower">--</div>
-              <div class="result-unit">W</div>
-            </div>
-            
-            <div class="result-box">
-              <div class="result-label">Voltage Drop</div>
-              <div class="result-value" id="voltageDrop">--</div>
-              <div class="result-unit">V</div>
-            </div>
-          </div>
-          
-          <div class="chart-container">
-            <canvas id="circuitChart"></canvas>
-          </div>
-        </div>
-      </div>
-      
-      <div class="info-box">
-        <h3><i class="fas fa-info-circle"></i> Circuit Analysis Formulas</h3>
-        <ul>
-          <li><strong>Series Circuit:</strong> R<sub>total</sub> = R₁ + R₂ + R₃ + ...</li>
-          <li><strong>Parallel Circuit:</strong> 1/R<sub>total</sub> = 1/R₁ + 1/R₂ + 1/R₃ + ...</li>
-          <li><strong>Current (Series):</strong> I = V / R<sub>total</sub> (same through all components)</li>
-          <li><strong>Current (Parallel):</strong> I<sub>total</sub> = I₁ + I₂ + I₃ + ...</li>
-          <li><strong>Voltage Drop (Series):</strong> V<sub>n</sub> = I × R<sub>n</sub></li>
-          <li><strong>Power Dissipation:</strong> P = I² × R = V² / R</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Power Calculations Tab -->
-    <div class="tab-content" id="power-tab">
-      <div class="calculator-grid">
-        <div class="calculator-box">
-          <h3><i class="fas fa-bolt"></i> Power Calculations</h3>
-          
-          <div class="input-group">
-            <label for="powerVoltage">Voltage</label>
-            <input type="number" id="powerVoltage" class="input-field" placeholder="e.g., 120" value="120">
-            <div class="unit-display">Volts (V)</div>
-          </div>
-          
-          <div class="input-group">
-            <label for="powerCurrent">Current</label>
-            <input type="number" id="powerCurrent" class="input-field" placeholder="e.g., 5" value="5">
-            <div class="unit-display">Amperes (A)</div>
-          </div>
-          
-          <div class="input-group">
-            <label for="powerTime">Time</label>
-            <input type="number" id="powerTime" class="input-field" placeholder="e.g., 2" value="2">
-            <div class="unit-display">Hours</div>
-          </div>
-          
-          <div class="input-group">
-            <label for="powerCost">Electricity Cost</label>
-            <input type="number" id="powerCost" class="input-field" placeholder="e.g., 0.12" value="0.12" step="0.01">
-            <div class="unit-display">$ per kWh</div>
-          </div>
-          
-          <button class="btn btn-primary" onclick="calculatePower()">
-            <i class="fas fa-calculator"></i> Calculate Energy & Cost
-          </button>
-        </div>
-        
-        <div class="calculator-box">
-          <h3><i class="fas fa-money-bill-wave"></i> Energy & Cost Results</h3>
-          
-          <div class="results-grid">
-            <div class="result-box success">
-              <div class="result-label">Power Consumption</div>
-              <div class="result-value" id="powerResult">--</div>
-              <div class="result-unit">W</div>
-            </div>
-            
-            <div class="result-box warning">
-              <div class="result-label">Energy Used</div>
-              <div class="result-value" id="energyResult">--</div>
-              <div class="result-unit">kWh</div>
-            </div>
-            
-            <div class="result-box info">
-              <div class="result-label">Cost per Day</div>
-              <div class="result-value" id="dailyCost">--</div>
-              <div class="result-unit">$</div>
-            </div>
-            
-            <div class="result-box">
-              <div class="result-label">Cost per Month</div>
-              <div class="result-value" id="monthlyCost">--</div>
-              <div class="result-unit">$</div>
-            </div>
-          </div>
-          
-          <div class="chart-container">
-            <canvas id="powerChart"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Component Selection Tab -->
-    <div class="tab-content" id="components-tab">
-      <div class="calculator-box">
-        <h3><i class="fas fa-microchip"></i> Resistor & Component Selection</h3>
-        
-        <div class="input-group">
-          <label for="requiredResistance">Required Resistance</label>
-          <input type="number" id="requiredResistance" class="input-field" placeholder="e.g., 470" value="470">
-          <div class="unit-display">Ohms (Ω)</div>
-        </div>
-        
-        <div class="input-group">
-          <label for="requiredPower">Required Power Rating</label>
-          <input type="number" id="requiredPower" class="input-field" placeholder="e.g., 0.25" value="0.25" step="0.05">
-          <div class="unit-display">Watts (W)</div>
-        </div>
-        
-        <div class="input-group">
-          <label for="tolerance">Tolerance</label>
-          <select id="tolerance" class="input-field">
-            <option value="1">±1%</option>
-            <option value="5" selected>±5%</option>
-            <option value="10">±10%</option>
-          </select>
-        </div>
-        
-        <button class="btn btn-primary" onclick="findComponents()">
-          <i class="fas fa-search"></i> Find Components
-        </button>
-      </div>
-      
-      <div class="calculator-box">
-        <h3><i class="fas fa-tools"></i> Recommended Components</h3>
-        
-        <div class="component-cards" id="componentResults">
-          <!-- Component cards will be generated here -->
-        </div>
-        
-        <div class="info-box">
-          <h3><i class="fas fa-info-circle"></i> Standard Resistor Values (E12 Series)</h3>
-          <p>10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82 (multiplied by 10ⁿ)</p>
-          <p><strong>Power Ratings:</strong> ¼W (0.25W), ½W (0.5W), 1W, 2W, 5W, 10W</p>
-          <p><strong>Color Codes:</strong> 
-            <span style="color:#c41e3a">Brown(1)</span>, 
-            <span style="color:#ff7518">Red(2)</span>, 
-            <span style="color:#ffd700">Orange(3)</span>, 
-            <span style="color:#228b22">Green(5)</span>, 
-            <span style="color:#1e90ff">Blue(6)</span>, 
-            <span style="color:#8a2be2">Violet(7)</span>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Ohm's Law Triangles -->
-    <div class="calculator-grid">
-      <div class="calculator-box">
-        <h3><i class="fas fa-play"></i> Ohm's Law Triangle</h3>
-        <div class="circuit-container">
-          <svg width="300" height="200" viewBox="0 0 300 200">
-            <polygon points="150,20 50,180 250,180" 
-                     fill="rgba(78, 158, 255, 0.1)" 
-                     stroke="var(--primary-color)" 
-                     stroke-width="3"/>
-            
-            <text x="150" y="60" text-anchor="middle" font-size="24" fill="var(--primary-color)" font-weight="bold">V</text>
-            <text x="80" y="160" text-anchor="middle" font-size="24" fill="var(--warning-color)" font-weight="bold">I</text>
-            <text x="220" y="160" text-anchor="middle" font-size="24" fill="var(--success-color)" font-weight="bold">R</text>
-            
-            <line x1="150" y1="70" x2="110" y2="150" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="5,5"/>
-            <line x1="150" y1="70" x2="190" y2="150" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="5,5"/>
-            
-            <text x="130" y="110" text-anchor="middle" font-size="16" fill="var(--text-muted)">×</text>
-            <text x="170" y="110" text-anchor="middle" font-size="16" fill="var(--text-muted)">÷</text>
-          </svg>
-        </div>
-        <div class="formula-display">
-          V = I × R<br>
-          I = V ÷ R<br>
-          R = V ÷ I
-        </div>
-      </div>
-      
-      <div class="calculator-box">
-        <h3><i class="fas fa-play"></i> Power Triangle</h3>
-        <div class="circuit-container">
-          <svg width="300" height="200" viewBox="0 0 300 200">
-            <polygon points="150,20 50,180 250,180" 
-                     fill="rgba(76, 175, 80, 0.1)" 
-                     stroke="var(--success-color)" 
-                     stroke-width="3"/>
-            
-            <text x="150" y="60" text-anchor="middle" font-size="24" fill="var(--success-color)" font-weight="bold">P</text>
-            <text x="80" y="160" text-anchor="middle" font-size="24" fill="var(--primary-color)" font-weight="bold">V</text>
-            <text x="220" y="160" text-anchor="middle" font-size="24" fill="var(--warning-color)" font-weight="bold">I</text>
-            
-            <line x1="150" y1="70" x2="110" y2="150" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="5,5"/>
-            <line x1="150" y1="70" x2="190" y2="150" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="5,5"/>
-            
-            <text x="130" y="110" text-anchor="middle" font-size="16" fill="var(--text-muted)">×</text>
-            <text x="170" y="110" text-anchor="middle" font-size="16" fill="var(--text-muted)">÷</text>
-          </svg>
-        </div>
-        <div class="formula-display">
-          P = V × I<br>
-          V = P ÷ I<br>
-          I = P ÷ V<br>
-          P = I² × R = V² ÷ R
-        </div>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <div class="social-footer">
-        <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://github.com/mohamed22tarek5" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://wa.me/+201090637406" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-      </div>
-      <div class="footer-bottom">
-        &copy; <span id="current-year">2025</span> Mohamed Tarek Portfolio. All Rights Reserved.
-        &copy; M.T.A.
-      </div>
-    </footer>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Loading calculator...</p>
   </div>
 
-  <!-- Theme Toggle -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-    <i class="fas fa-moon"></i>
-  </button>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
 
-  <!-- Toast Notification -->
-  <div class="toast" id="toast"></div>
+  <header class="header" id="header" role="banner">
+    <div class="container">
+      <a href="../index.html" class="logo" aria-label="Mohamed Tarek - Home">
+        <span class="logo-icon">MT</span>
+        <span>Mohamed Tarek</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#skills" class="nav-link">Skills</a>
+        <a href="../index.html#projects" class="nav-link">Projects</a>
+        <a href="../index.html#contact" class="nav-link">Contact</a>
+        <a href="../index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero" aria-label="Page header">
+      <div class="page-hero-bg" aria-hidden="true">
+        <div class="page-hero-orb"></div>
+        <div class="page-hero-orb"></div>
+        <div class="page-hero-grid"></div>
+      </div>
+      <div class="container">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Engineering Tool
+        </div>
+        <h1><i class="fas fa-bolt"></i> <span class="gradient-text">Advanced Ohm's Law</span> Calculator</h1>
+        <p>Complete electrical calculations with circuit analysis, power calculations, and component selection</p>
+      </div>
+    </section>
+
+    <section class="main-content" aria-label="Calculator">
+      <div class="container">
+        <div class="tabs-wrapper">
+          <div class="tabs" role="tablist" aria-label="Calculator tabs">
+            <div class="tab active" role="tab" tabindex="0" data-tab="basic" aria-selected="true" aria-controls="basic-tab">
+              <i class="fas fa-calculator"></i> Ohm's Law
+            </div>
+            <div class="tab" role="tab" tabindex="0" data-tab="power" aria-selected="false" aria-controls="power-tab">
+              <i class="fas fa-bolt"></i> Power Calculations
+            </div>
+            <div class="tab" role="tab" tabindex="0" data-tab="circuit" aria-selected="false" aria-controls="circuit-tab">
+              <i class="fas fa-project-diagram"></i> Circuit Analysis
+            </div>
+            <div class="tab" role="tab" tabindex="0" data-tab="components" aria-selected="false" aria-controls="components-tab">
+              <i class="fas fa-microchip"></i> Component Selection
+            </div>
+            <div class="tab" role="tab" tabindex="0" data-tab="converter" aria-selected="false" aria-controls="converter-tab">
+              <i class="fas fa-exchange-alt"></i> Unit Converter
+            </div>
+          </div>
+
+          <!-- Ohm's Law Tab -->
+          <div class="tab-content active" id="basic-tab" role="tabpanel">
+            <div class="calc-grid">
+              <div class="calc-box">
+                <h3><i class="fas fa-calculator"></i> Input Parameters</h3>
+
+                <div class="input-group">
+                  <label for="voltage">Voltage <span class="unit-display">Volts (V)</span></label>
+                  <input type="number" id="voltage" class="input-field" placeholder="e.g., 12" step="0.1" min="0">
+                  <input type="range" class="range-slider" id="voltageRange" min="0" max="100" value="12" aria-label="Voltage slider">
+                </div>
+
+                <div class="input-group">
+                  <label for="current">Current <span class="unit-display">Amperes (A)</span></label>
+                  <input type="number" id="current" class="input-field" placeholder="e.g., 2" step="0.1" min="0">
+                  <input type="range" class="range-slider" id="currentRange" min="0" max="10" value="2" aria-label="Current slider">
+                </div>
+
+                <div class="input-group">
+                  <label for="resistance">Resistance <span class="unit-display">Ohms (\u03A9)</span></label>
+                  <input type="number" id="resistance" class="input-field" placeholder="e.g., 6" step="0.1" min="0">
+                  <input type="range" class="range-slider" id="resistanceRange" min="0" max="100" value="6" aria-label="Resistance slider">
+                </div>
+
+                <div class="input-group">
+                  <label for="powerInput">Power <span class="unit-display">Watts (W)</span></label>
+                  <input type="number" id="powerInput" class="input-field" placeholder="e.g., 24" step="0.1" min="0">
+                  <input type="range" class="range-slider" id="powerRange" min="0" max="500" value="24" aria-label="Power slider">
+                </div>
+
+                <div class="btn-group">
+                  <button class="btn btn-primary" onclick="calculateOhmsLaw()" aria-label="Calculate all values">
+                    <i class="fas fa-calculator"></i> Calculate All
+                  </button>
+                  <button class="btn btn-secondary" onclick="resetCalculator()" aria-label="Reset calculator">
+                    <i class="fas fa-redo"></i> Reset
+                  </button>
+                </div>
+              </div>
+
+              <div class="calc-box">
+                <h3><i class="fas fa-chart-line"></i> Results & Visualization</h3>
+
+                <div class="circuit-container">
+                  <svg width="300" height="150" viewBox="0 0 300 150" role="img" aria-label="Circuit diagram showing voltage, current, resistance, and power">
+                    <rect x="50" y="60" width="50" height="30" fill="var(--color-accent)" rx="5"/>
+                    <text x="75" y="80" text-anchor="middle" fill="var(--color-text-primary)" font-weight="bold">V</text>
+                    <rect x="200" y="60" width="50" height="30" fill="var(--color-success)" rx="5"/>
+                    <text x="225" y="80" text-anchor="middle" fill="var(--color-text-primary)" font-weight="bold">R</text>
+                    <line x1="100" y1="75" x2="150" y2="75" stroke="var(--color-warning)" stroke-width="3"/>
+                    <polygon points="150,75 140,70 140,80" fill="var(--color-warning)"/>
+                    <text x="125" y="70" text-anchor="middle" fill="var(--color-text-primary)" font-weight="bold">I</text>
+                    <circle cx="175" cy="75" r="10" fill="var(--color-error)"/>
+                    <text x="175" y="80" text-anchor="middle" fill="var(--color-text-primary)" font-weight="bold">P</text>
+                  </svg>
+                </div>
+
+                <div class="results-grid">
+                  <div class="result-box success">
+                    <div class="result-label">Voltage</div>
+                    <div class="result-value" id="resultV">--</div>
+                    <div class="result-unit">V</div>
+                  </div>
+                  <div class="result-box warning">
+                    <div class="result-label">Current</div>
+                    <div class="result-value" id="resultI">--</div>
+                    <div class="result-unit">A</div>
+                  </div>
+                  <div class="result-box info">
+                    <div class="result-label">Resistance</div>
+                    <div class="result-value" id="resultR">--</div>
+                    <div class="result-unit">\u03A9</div>
+                  </div>
+                  <div class="result-box">
+                    <div class="result-label">Power</div>
+                    <div class="result-value" id="resultP">--</div>
+                    <div class="result-unit">W</div>
+                  </div>
+                </div>
+
+                <div class="formula-display" id="formulaDisplay">
+                  V = I \u00D7 R, P = V \u00D7 I
+                </div>
+              </div>
+            </div>
+
+            <div class="calc-box">
+              <h3><i class="fas fa-chart-bar"></i> Current vs Voltage Relationship</h3>
+              <div class="chart-container">
+                <canvas id="ivChart" aria-label="Current vs Voltage chart showing Ohm's law relationship"></canvas>
+              </div>
+            </div>
+
+            <div class="calc-grid" style="margin-top: var(--space-xl);">
+              <div class="calc-box">
+                <h3><i class="fas fa-play"></i> Ohm's Law Triangle</h3>
+                <div class="circuit-container">
+                  <svg width="300" height="200" viewBox="0 0 300 200" role="img" aria-label="Ohm's Law triangle diagram">
+                    <polygon points="150,20 50,180 250,180"
+                             fill="rgba(59, 130, 246, 0.1)"
+                             stroke="var(--color-accent)"
+                             stroke-width="3"/>
+                    <text x="150" y="60" text-anchor="middle" font-size="24" fill="var(--color-accent)" font-weight="bold">V</text>
+                    <text x="80" y="160" text-anchor="middle" font-size="24" fill="var(--color-warning)" font-weight="bold">I</text>
+                    <text x="220" y="160" text-anchor="middle" font-size="24" fill="var(--color-success)" font-weight="bold">R</text>
+                    <line x1="150" y1="70" x2="110" y2="150" stroke="var(--color-text-tertiary)" stroke-width="1" stroke-dasharray="5,5"/>
+                    <line x1="150" y1="70" x2="190" y2="150" stroke="var(--color-text-tertiary)" stroke-width="1" stroke-dasharray="5,5"/>
+                    <text x="130" y="110" text-anchor="middle" font-size="16" fill="var(--color-text-tertiary)">\u00D7</text>
+                    <text x="170" y="110" text-anchor="middle" font-size="16" fill="var(--color-text-tertiary)">\u00F7</text>
+                  </svg>
+                </div>
+                <div class="formula-display">
+                  V = I \u00D7 R<br>
+                  I = V \u00F7 R<br>
+                  R = V \u00F7 I
+                </div>
+              </div>
+
+              <div class="calc-box">
+                <h3><i class="fas fa-play"></i> Power Triangle</h3>
+                <div class="circuit-container">
+                  <svg width="300" height="200" viewBox="0 0 300 200" role="img" aria-label="Power triangle diagram">
+                    <polygon points="150,20 50,180 250,180"
+                             fill="rgba(34, 197, 94, 0.1)"
+                             stroke="var(--color-success)"
+                             stroke-width="3"/>
+                    <text x="150" y="60" text-anchor="middle" font-size="24" fill="var(--color-success)" font-weight="bold">P</text>
+                    <text x="80" y="160" text-anchor="middle" font-size="24" fill="var(--color-accent)" font-weight="bold">V</text>
+                    <text x="220" y="160" text-anchor="middle" font-size="24" fill="var(--color-warning)" font-weight="bold">I</text>
+                    <line x1="150" y1="70" x2="110" y2="150" stroke="var(--color-text-tertiary)" stroke-width="1" stroke-dasharray="5,5"/>
+                    <line x1="150" y1="70" x2="190" y2="150" stroke="var(--color-text-tertiary)" stroke-width="1" stroke-dasharray="5,5"/>
+                    <text x="130" y="110" text-anchor="middle" font-size="16" fill="var(--color-text-tertiary)">\u00D7</text>
+                    <text x="170" y="110" text-anchor="middle" font-size="16" fill="var(--color-text-tertiary)">\u00F7</text>
+                  </svg>
+                </div>
+                <div class="formula-display">
+                  P = V \u00D7 I<br>
+                  V = P \u00F7 I<br>
+                  I = P \u00F7 V<br>
+                  P = I\u00B2 \u00D7 R = V\u00B2 \u00F7 R
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Power Calculations Tab -->
+          <div class="tab-content" id="power-tab" role="tabpanel">
+            <div class="calc-grid">
+              <div class="calc-box">
+                <h3><i class="fas fa-bolt"></i> Power Calculations</h3>
+
+                <div class="input-group">
+                  <label for="powerVoltage">Voltage <span class="unit-display">Volts (V)</span></label>
+                  <input type="number" id="powerVoltage" class="input-field" placeholder="e.g., 120" value="120">
+                </div>
+                <div class="input-group">
+                  <label for="powerCurrent">Current <span class="unit-display">Amperes (A)</span></label>
+                  <input type="number" id="powerCurrent" class="input-field" placeholder="e.g., 5" value="5">
+                </div>
+                <div class="input-group">
+                  <label for="powerTime">Time <span class="unit-display">Hours</span></label>
+                  <input type="number" id="powerTime" class="input-field" placeholder="e.g., 2" value="2">
+                </div>
+                <div class="input-group">
+                  <label for="powerCost">Electricity Cost <span class="unit-display">$ per kWh</span></label>
+                  <input type="number" id="powerCost" class="input-field" placeholder="e.g., 0.12" value="0.12" step="0.01">
+                </div>
+
+                <button class="btn btn-primary" onclick="calculatePower()" style="width: 100%;" aria-label="Calculate energy and cost">
+                  <i class="fas fa-calculator"></i> Calculate Energy & Cost
+                </button>
+              </div>
+
+              <div class="calc-box">
+                <h3><i class="fas fa-money-bill-wave"></i> Energy & Cost Results</h3>
+
+                <div class="results-grid">
+                  <div class="result-box success">
+                    <div class="result-label">Power Consumption</div>
+                    <div class="result-value" id="powerResult">--</div>
+                    <div class="result-unit">W</div>
+                  </div>
+                  <div class="result-box warning">
+                    <div class="result-label">Energy Used</div>
+                    <div class="result-value" id="energyResult">--</div>
+                    <div class="result-unit">kWh</div>
+                  </div>
+                  <div class="result-box info">
+                    <div class="result-label">Cost per Day</div>
+                    <div class="result-value" id="dailyCost">--</div>
+                    <div class="result-unit">$</div>
+                  </div>
+                  <div class="result-box">
+                    <div class="result-label">Cost per Month</div>
+                    <div class="result-value" id="monthlyCost">--</div>
+                    <div class="result-unit">$</div>
+                  </div>
+                </div>
+
+                <div class="chart-container">
+                  <canvas id="powerChart" aria-label="Power consumption doughnut chart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Circuit Analysis Tab -->
+          <div class="tab-content" id="circuit-tab" role="tabpanel">
+            <div class="calc-grid">
+              <div class="calc-box">
+                <h3><i class="fas fa-project-diagram"></i> Circuit Configuration</h3>
+
+                <div class="input-group">
+                  <label for="circuitType">Circuit Type</label>
+                  <select id="circuitType" class="input-field" aria-label="Circuit type">
+                    <option value="series">Series Circuit</option>
+                    <option value="parallel">Parallel Circuit</option>
+                    <option value="series-parallel">Series-Parallel</option>
+                  </select>
+                </div>
+
+                <div class="input-group">
+                  <label for="numResistors">Number of Resistors</label>
+                  <select id="numResistors" class="input-field" aria-label="Number of resistors">
+                    <option value="2">2</option>
+                    <option value="3" selected>3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+
+                <div id="resistorInputs"></div>
+
+                <div class="input-group">
+                  <label for="circuitVoltage">Supply Voltage <span class="unit-display">Volts (V)</span></label>
+                  <input type="number" id="circuitVoltage" class="input-field" placeholder="e.g., 12" value="12">
+                </div>
+
+                <button class="btn btn-primary" onclick="analyzeCircuit()" style="width: 100%;" aria-label="Analyze circuit">
+                  <i class="fas fa-bolt"></i> Analyze Circuit
+                </button>
+              </div>
+
+              <div class="calc-box">
+                <h3><i class="fas fa-chart-pie"></i> Circuit Analysis Results</h3>
+
+                <div class="results-grid">
+                  <div class="result-box success">
+                    <div class="result-label">Total Resistance</div>
+                    <div class="result-value" id="totalResistance">--</div>
+                    <div class="result-unit">\u03A9</div>
+                  </div>
+                  <div class="result-box warning">
+                    <div class="result-label">Total Current</div>
+                    <div class="result-value" id="totalCurrent">--</div>
+                    <div class="result-unit">A</div>
+                  </div>
+                  <div class="result-box info">
+                    <div class="result-label">Total Power</div>
+                    <div class="result-value" id="totalPower">--</div>
+                    <div class="result-unit">W</div>
+                  </div>
+                  <div class="result-box">
+                    <div class="result-label">Voltage Drop</div>
+                    <div class="result-value" id="voltageDrop">--</div>
+                    <div class="result-unit">V</div>
+                  </div>
+                </div>
+
+                <div class="chart-container">
+                  <canvas id="circuitChart" aria-label="Circuit resistor values bar chart"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-box">
+              <h3><i class="fas fa-info-circle"></i> Circuit Analysis Formulas</h3>
+              <ul>
+                <li><strong>SERIES Circuit:</strong> R<sub>total</sub> = R\u2081 + R\u2082 + R\u2083 + ...</li>
+                <li><strong>PARALLEL Circuit:</strong> 1/R<sub>total</sub> = 1/R\u2081 + 1/R\u2082 + 1/R\u2083 + ...</li>
+                <li><strong>Current (Series):</strong> I = V / R<sub>total</sub> (same through all components)</li>
+                <li><strong>Current (Parallel):</strong> I<sub>total</sub> = I\u2081 + I\u2082 + I\u2083 + ...</li>
+                <li><strong>Voltage Drop (Series):</strong> V<sub>n</sub> = I \u00D7 R<sub>n</sub></li>
+                <li><strong>Power Dissipation:</strong> P = I\u00B2 \u00D7 R = V\u00B2 / R</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Component Selection Tab -->
+          <div class="tab-content" id="components-tab" role="tabpanel">
+            <div class="calc-grid">
+              <div class="calc-box">
+                <h3><i class="fas fa-microchip"></i> Resistor & Component Selection</h3>
+
+                <div class="input-group">
+                  <label for="requiredResistance">Required Resistance <span class="unit-display">Ohms (\u03A9)</span></label>
+                  <input type="number" id="requiredResistance" class="input-field" placeholder="e.g., 470" value="470">
+                </div>
+                <div class="input-group">
+                  <label for="requiredPower">Required Power Rating <span class="unit-display">Watts (W)</span></label>
+                  <input type="number" id="requiredPower" class="input-field" placeholder="e.g., 0.25" value="0.25" step="0.05">
+                </div>
+                <div class="input-group">
+                  <label for="tolerance">Tolerance</label>
+                  <select id="tolerance" class="input-field" aria-label="Resistor tolerance">
+                    <option value="\u00B11">\u00B11%</option>
+                    <option value="5" selected>\u00B15%</option>
+                    <option value="10">\u00B110%</option>
+                  </select>
+                </div>
+
+                <button class="btn btn-primary" onclick="findComponents()" style="width: 100%;" aria-label="Find matching components">
+                  <i class="fas fa-search"></i> Find Components
+                </button>
+              </div>
+
+              <div class="calc-box">
+                <h3><i class="fas fa-tools"></i> Recommended Components</h3>
+
+                <div class="component-cards" id="componentResults"></div>
+
+                <div class="info-box" style="margin-top: var(--space-lg);">
+                  <h3><i class="fas fa-info-circle"></i> Standard Resistor Values (E12 Series)</h3>
+                  <p style="color: var(--color-text-secondary); font-size: 0.875rem; line-height: 1.8;">10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82 (multiplied by 10\u207F)</p>
+                  <p style="color: var(--color-text-secondary); font-size: 0.875rem;"><strong>Power Ratings:</strong> \u00BCW (0.25W), \u00BDW (0.5W), 1W, 2W, 5W, 10W</p>
+                  <p style="color: var(--color-text-secondary); font-size: 0.875rem; margin-top: var(--space-sm);">
+                    <strong>Color Codes:</strong>
+                    <span style="color:#c41e3a">Brown(1)</span>,
+                    <span style="color:#ff7518">Red(2)</span>,
+                    <span style="color:#ffd700">Orange(3)</span>,
+                    <span style="color:#228b22">Green(5)</span>,
+                    <span style="color:#1e90ff">Blue(6)</span>,
+                    <span style="color:#8a2be2">Violet(7)</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Unit Converter Tab -->
+          <div class="tab-content" id="converter-tab" role="tabpanel">
+            <div class="calc-grid">
+              <div class="calc-box">
+                <h3><i class="fas fa-exchange-alt"></i> Electrical Unit Converter</h3>
+
+                <div class="input-group">
+                  <label for="convCategory">Conversion Type</label>
+                  <select id="convCategory" class="input-field" aria-label="Conversion type" onchange="updateConverterUnits()">
+                    <option value="voltage">Voltage</option>
+                    <option value="current">Current</option>
+                    <option value="resistance">Resistance</option>
+                    <option value="power">Power</option>
+                    <option value="energy">Energy</option>
+                    <option value="capacitance">Capacitance</option>
+                  </select>
+                </div>
+
+                <div class="input-group">
+                  <label for="convValue">Value</label>
+                  <input type="number" id="convValue" class="input-field" placeholder="Enter value" value="1" step="any">
+                </div>
+
+                <div class="input-group">
+                  <label for="convFrom">From</label>
+                  <select id="convFrom" class="input-field" aria-label="Source unit"></select>
+                </div>
+
+                <div class="input-group">
+                  <label for="convTo">To</label>
+                  <select id="convTo" class="input-field" aria-label="Target unit"></select>
+                </div>
+
+                <button class="btn btn-primary" onclick="convertUnits()" style="width: 100%;" aria-label="Convert units">
+                  <i class="fas fa-exchange-alt"></i> Convert
+                </button>
+              </div>
+
+              <div class="calc-box">
+                <h3><i class="fas fa-equals"></i> Conversion Result</h3>
+
+                <div class="results-grid" style="margin-top: 0;">
+                  <div class="result-box info" style="grid-column: 1 / -1;">
+                    <div class="result-label">Input Value</div>
+                    <div class="result-value" id="convInputDisplay">--</div>
+                    <div class="result-unit" id="convFromUnit"></div>
+                  </div>
+                </div>
+
+                <div style="text-align: center; padding: var(--space-xl) 0; color: var(--color-accent); font-size: 1.5rem;">
+                  <i class="fas fa-arrow-down"></i>
+                </div>
+
+                <div class="results-grid" style="margin-top: 0;">
+                  <div class="result-box success" style="grid-column: 1 / -1;">
+                    <div class="result-label">Converted Value</div>
+                    <div class="result-value" id="convResult">--</div>
+                    <div class="result-unit" id="convToUnit"></div>
+                  </div>
+                </div>
+
+                <div class="info-box" style="margin-top: var(--space-xl);">
+                  <h3><i class="fas fa-lightbulb"></i> Common Conversions</h3>
+                  <ul id="commonConversions">
+                    <li><strong>Voltage:</strong> 1 kV = 1000 V, 1 mV = 0.001 V</li>
+                    <li><strong>Current:</strong> 1 mA = 0.001 A, 1 \u00B5A = 0.000001 A</li>
+                    <li><strong>Resistance:</strong> 1 M\u03A9 = 1,000,000 \u03A9, 1 k\u03A9 = 1000 \u03A9</li>
+                    <li><strong>Power:</strong> 1 kW = 1000 W, 1 mW = 0.001 W</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="footer-bottom">
+          &copy; <span id="currentYear"></span> Mohamed Tarek. All Rights Reserved. | <a href="../index.html">Back to Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode"><i class="fas fa-moon"></i></button>
+  <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
 
   <script>
-    // Initialize variables
-    let ivChart, circuitChart, powerChart;
-    let currentValues = {};
+    (() => {
+      'use strict';
 
-    // Theme Toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon = themeToggle.querySelector('i');
-    
-    const savedTheme = localStorage.getItem('theme') ||
-      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    
-    document.body.setAttribute('data-theme', savedTheme);
-    if (savedTheme === 'dark') {
-      themeIcon.classList.remove('fa-moon');
-      themeIcon.classList.add('fa-sun');
-    } else {
-      themeIcon.classList.remove('fa-sun');
-      themeIcon.classList.add('fa-moon');
-    }
-    
-    themeToggle.addEventListener('click', () => {
-      if (document.body.getAttribute('data-theme') === 'light') {
-        document.body.setAttribute('data-theme', 'dark');
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        document.body.setAttribute('data-theme', 'light');
-        themeIcon.classList.replace('fa-sun', 'fa-moon');
-        localStorage.setItem('theme', 'light');
-      }
-      updateChartColors();
-    });
+      let ivChart, circuitChart, powerChart;
+      let currentValues = {};
 
-    // Tab switching
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const tabId = tab.getAttribute('data-tab');
-        
-        // Update active tab
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        
-        // Update active content
-        document.querySelectorAll('.tab-content').forEach(content => {
-          content.classList.remove('active');
-        });
-        document.getElementById(`${tabId}-tab`).classList.add('active');
-        
-        // Initialize specific tab features
-        if (tabId === 'circuit') {
-          generateResistorInputs();
+      const loader = document.getElementById('loader');
+      window.addEventListener('load', () => { setTimeout(() => { loader.classList.add('hidden'); }, 300); });
+
+      const scrollProgress = document.getElementById('scrollProgress');
+      const header = document.getElementById('header');
+      const backToTop = document.getElementById('backToTop');
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const s = window.scrollY;
+            const d = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress.style.width = (d > 0 ? (s / d) * 100 : 0) + '%';
+            header.classList.toggle('scrolled', s > 50);
+            backToTop.classList.toggle('visible', s > 400);
+            ticking = false;
+          });
+          ticking = true;
         }
-      });
-    });
+      }, { passive: true });
 
-    // Show toast notification
-    function showToast(message, type = 'success') {
-      const toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.className = 'toast';
-      
-      if (type === 'error') {
-        toast.classList.add('error');
-      } else if (type === 'warning') {
-        toast.classList.add('warning');
-      }
-      
-      toast.classList.add('show');
-      
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 3000);
-    }
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Update range sliders with input values
-    function syncRangeSliders() {
-      const voltage = parseFloat(document.getElementById('voltage').value) || 0;
-      const current = parseFloat(document.getElementById('current').value) || 0;
-      const resistance = parseFloat(document.getElementById('resistance').value) || 0;
-      const power = parseFloat(document.getElementById('power').value) || 0;
-      
-      document.getElementById('voltageRange').value = Math.min(voltage, 100);
-      document.getElementById('currentRange').value = Math.min(current, 10);
-      document.getElementById('resistanceRange').value = Math.min(resistance, 100);
-      document.getElementById('powerRange').value = Math.min(power, 500);
-    }
-
-    // Sync inputs with range sliders
-    document.getElementById('voltageRange').addEventListener('input', function() {
-      document.getElementById('voltage').value = this.value;
-    });
-    
-    document.getElementById('currentRange').addEventListener('input', function() {
-      document.getElementById('current').value = this.value;
-    });
-    
-    document.getElementById('resistanceRange').addEventListener('input', function() {
-      document.getElementById('resistance').value = this.value;
-    });
-    
-    document.getElementById('powerRange').addEventListener('input', function() {
-      document.getElementById('power').value = this.value;
-    });
-
-    // Calculate Ohm's Law
-    function calculateOhmsLaw() {
-      let V = parseFloat(document.getElementById('voltage').value);
-      let I = parseFloat(document.getElementById('current').value);
-      let R = parseFloat(document.getElementById('resistance').value);
-      let P = parseFloat(document.getElementById('power').value);
-      
-      // Count how many values are provided
-      const provided = [V, I, R, P].filter(val => !isNaN(val) && val > 0).length;
-      
-      if (provided < 2) {
-        showToast('Please enter at least two values', 'error');
-        return;
-      }
-      
-      let formulasUsed = [];
-      
-      // Calculate missing values
-      if (!isNaN(V) && !isNaN(I)) {
-        R = V / I;
-        P = V * I;
-        formulasUsed.push('R = V ÷ I', 'P = V × I');
-      } else if (!isNaN(V) && !isNaN(R)) {
-        I = V / R;
-        P = V * I;
-        formulasUsed.push('I = V ÷ R', 'P = V × I');
-      } else if (!isNaN(I) && !isNaN(R)) {
-        V = I * R;
-        P = V * I;
-        formulasUsed.push('V = I × R', 'P = V × I');
-      } else if (!isNaN(P) && !isNaN(V)) {
-        I = P / V;
-        R = V / I;
-        formulasUsed.push('I = P ÷ V', 'R = V ÷ I');
-      } else if (!isNaN(P) && !isNaN(I)) {
-        V = P / I;
-        R = V / I;
-        formulasUsed.push('V = P ÷ I', 'R = V ÷ I');
-      } else if (!isNaN(P) && !isNaN(R)) {
-        I = Math.sqrt(P / R);
-        V = I * R;
-        formulasUsed.push('I = √(P ÷ R)', 'V = I × R');
-      }
-      
-      // Update results
-      document.getElementById('resultV').textContent = V.toFixed(3);
-      document.getElementById('resultI').textContent = I.toFixed(3);
-      document.getElementById('resultR').textContent = R.toFixed(3);
-      document.getElementById('resultP').textContent = P.toFixed(3);
-      
-      // Update input fields
-      document.getElementById('voltage').value = V.toFixed(3);
-      document.getElementById('current').value = I.toFixed(3);
-      document.getElementById('resistance').value = R.toFixed(3);
-      document.getElementById('power').value = P.toFixed(3);
-      
-      // Update formula display
-      document.getElementById('formulaDisplay').textContent = 'Formulas used: ' + formulasUsed.join(', ');
-      
-      // Update current values for chart
-      currentValues = { V, I, R, P };
-      
-      // Update chart
-      updateIVChart(V, R);
-      
-      // Sync range sliders
-      syncRangeSliders();
-      
-      showToast('Calculation completed successfully!');
-    }
-
-    // Update IV Chart
-    function updateIVChart(V, R) {
-      const ctx = document.getElementById('ivChart').getContext('2d');
-      
-      // Destroy existing chart if it exists
-      if (ivChart) {
-        ivChart.destroy();
-      }
-      
-      // Generate data points for Ohm's law line
-      const voltages = [];
-      const currents = [];
-      const maxV = Math.max(V * 1.5, 10);
-      
-      for (let v = 0; v <= maxV; v += maxV / 20) {
-        voltages.push(v);
-        currents.push(v / R);
-      }
-      
-      // Get chart colors based on theme
-      const isDark = document.body.getAttribute('data-theme') === 'dark';
-      const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-      const textColor = isDark ? '#ffffff' : '#333333';
-      
-      ivChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: voltages.map(v => v.toFixed(1)),
-          datasets: [{
-            label: `I = V / ${R.toFixed(1)}Ω`,
-            data: currents,
-            borderColor: '#4e9eff',
-            backgroundColor: 'rgba(78, 158, 255, 0.1)',
-            borderWidth: 3,
-            fill: true,
-            tension: 0.1
-          }, {
-            label: 'Operating Point',
-            data: [{
-              x: V,
-              y: V / R
-            }],
-            type: 'scatter',
-            backgroundColor: '#ff9800',
-            borderColor: '#ff9800',
-            pointRadius: 8,
-            pointHoverRadius: 12
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              labels: {
-                color: textColor
-              }
-            },
-            tooltip: {
-              callbacks: {
-                label: function(context) {
-                  if (context.dataset.label === 'Operating Point') {
-                    return `V = ${V.toFixed(2)}V, I = ${(V/R).toFixed(2)}A`;
-                  }
-                  return `I = ${context.raw.toFixed(2)}A`;
-                }
-              }
-            }
-          },
-          scales: {
-            x: {
-              title: {
-                display: true,
-                text: 'Voltage (V)',
-                color: textColor
-              },
-              grid: {
-                color: gridColor
-              },
-              ticks: {
-                color: textColor
-              }
-            },
-            y: {
-              title: {
-                display: true,
-                text: 'Current (A)',
-                color: textColor
-              },
-              grid: {
-                color: gridColor
-              },
-              ticks: {
-                color: textColor
-              }
-            }
-          }
-        }
-      });
-    }
-
-    // Reset calculator
-    function resetCalculator() {
-      document.getElementById('voltage').value = '';
-      document.getElementById('current').value = '';
-      document.getElementById('resistance').value = '';
-      document.getElementById('power').value = '';
-      
-      document.getElementById('resultV').textContent = '--';
-      document.getElementById('resultI').textContent = '--';
-      document.getElementById('resultR').textContent = '--';
-      document.getElementById('resultP').textContent = '--';
-      
-      document.getElementById('formulaDisplay').textContent = 'V = I × R, P = V × I';
-      
-      syncRangeSliders();
-      
-      showToast('Calculator reset');
-    }
-
-    // Circuit Analysis Functions
-    function generateResistorInputs() {
-      const numResistors = parseInt(document.getElementById('numResistors').value);
-      const container = document.getElementById('resistorInputs');
-      container.innerHTML = '';
-      
-      for (let i = 1; i <= numResistors; i++) {
-        const div = document.createElement('div');
-        div.className = 'input-group';
-        div.innerHTML = `
-          <label for="resistor${i}">Resistor R${i}</label>
-          <input type="number" id="resistor${i}" class="input-field" placeholder="e.g., 100" value="${100 * i}">
-          <div class="unit-display">Ohms (Ω)</div>
-        `;
-        container.appendChild(div);
-      }
-    }
-
-    function analyzeCircuit() {
-      const circuitType = document.getElementById('circuitType').value;
-      const numResistors = parseInt(document.getElementById('numResistors').value);
-      const voltage = parseFloat(document.getElementById('circuitVoltage').value);
-      
-      // Get resistor values
-      const resistors = [];
-      for (let i = 1; i <= numResistors; i++) {
-        const r = parseFloat(document.getElementById(`resistor${i}`).value);
-        if (!isNaN(r) && r > 0) {
-          resistors.push(r);
-        }
-      }
-      
-      if (resistors.length === 0) {
-        showToast('Please enter valid resistor values', 'error');
-        return;
-      }
-      
-      // Calculate total resistance
-      let totalResistance;
-      if (circuitType === 'series') {
-        totalResistance = resistors.reduce((sum, r) => sum + r, 0);
-      } else if (circuitType === 'parallel') {
-        totalResistance = 1 / resistors.reduce((sum, r) => sum + 1/r, 0);
-      } else {
-        // Series-parallel: assume first two in series, rest in parallel
-        const seriesPart = resistors.slice(0, 2).reduce((sum, r) => sum + r, 0);
-        const parallelPart = resistors.length > 2 ? 
-          1 / resistors.slice(2).reduce((sum, r) => sum + 1/r, 0) : 0;
-        totalResistance = seriesPart + parallelPart;
-      }
-      
-      // Calculate total current
-      const totalCurrent = voltage / totalResistance;
-      
-      // Calculate total power
-      const totalPower = voltage * totalCurrent;
-      
-      // Calculate voltage drop (for series circuits)
-      const voltageDrop = circuitType === 'series' ? 
-        totalCurrent * resistors[0] : voltage;
-      
-      // Update results
-      document.getElementById('totalResistance').textContent = totalResistance.toFixed(2);
-      document.getElementById('totalCurrent').textContent = totalCurrent.toFixed(3);
-      document.getElementById('totalPower').textContent = totalPower.toFixed(2);
-      document.getElementById('voltageDrop').textContent = voltageDrop.toFixed(2);
-      
-      // Update circuit chart
-      updateCircuitChart(resistors, circuitType);
-      
-      showToast('Circuit analyzed successfully!');
-    }
-
-    function updateCircuitChart(resistors, circuitType) {
-      const ctx = document.getElementById('circuitChart').getContext('2d');
-      
-      // Destroy existing chart if it exists
-      if (circuitChart) {
-        circuitChart.destroy();
-      }
-      
-      // Get chart colors based on theme
-      const isDark = document.body.getAttribute('data-theme') === 'dark';
-      const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-      const textColor = isDark ? '#ffffff' : '#333333';
-      
-      const colors = ['#4e9eff', '#9b59b6', '#2ecc71', '#e74c3c', '#f39c12', '#1abc9c'];
-      
-      circuitChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: resistors.map((_, i) => `R${i+1}`),
-          datasets: [{
-            label: 'Resistor Values',
-            data: resistors,
-            backgroundColor: resistors.map((_, i) => colors[i % colors.length]),
-            borderColor: resistors.map((_, i) => colors[i % colors.length]),
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              labels: {
-                color: textColor
-              }
-            },
-            title: {
-              display: true,
-              text: `Circuit Type: ${circuitType}`,
-              color: textColor,
-              font: {
-                size: 16
-              }
-            }
-          },
-          scales: {
-            x: {
-              grid: {
-                color: gridColor
-              },
-              ticks: {
-                color: textColor
-              }
-            },
-            y: {
-              title: {
-                display: true,
-                text: 'Resistance (Ω)',
-                color: textColor
-              },
-              grid: {
-                color: gridColor
-              },
-              ticks: {
-                color: textColor
-              }
-            }
-          }
-        }
-      });
-    }
-
-    // Power Calculations
-    function calculatePower() {
-      const voltage = parseFloat(document.getElementById('powerVoltage').value);
-      const current = parseFloat(document.getElementById('powerCurrent').value);
-      const time = parseFloat(document.getElementById('powerTime').value);
-      const costPerKWh = parseFloat(document.getElementById('powerCost').value);
-      
-      if (isNaN(voltage) || isNaN(current) || isNaN(time) || isNaN(costPerKWh)) {
-        showToast('Please enter all power calculation values', 'error');
-        return;
-      }
-      
-      // Calculate power
-      const power = voltage * current; // Watts
-      const energy = (power * time) / 1000; // kWh
-      const dailyCost = energy * costPerKWh;
-      const monthlyCost = dailyCost * 30;
-      
-      // Update results
-      document.getElementById('powerResult').textContent = power.toFixed(2);
-      document.getElementById('energyResult').textContent = energy.toFixed(3);
-      document.getElementById('dailyCost').textContent = dailyCost.toFixed(2);
-      document.getElementById('monthlyCost').textContent = monthlyCost.toFixed(2);
-      
-      // Update power chart
-      updatePowerChart(power, energy, dailyCost);
-      
-      showToast('Power calculations completed!');
-    }
-
-    function updatePowerChart(power, energy, cost) {
-      const ctx = document.getElementById('powerChart').getContext('2d');
-      
-      // Destroy existing chart if it exists
-      if (powerChart) {
-        powerChart.destroy();
-      }
-      
-      // Get chart colors based on theme
-      const isDark = document.body.getAttribute('data-theme') === 'dark';
-      const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
-      const textColor = isDark ? '#ffffff' : '#333333';
-      
-      powerChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          labels: ['Power (W)', 'Energy (kWh)', 'Daily Cost ($)'],
-          datasets: [{
-            data: [power, energy * 10, cost * 100], // Scale for better visualization
-            backgroundColor: ['#4e9eff', '#2ecc71', '#e74c3c'],
-            borderColor: ['#4e9eff', '#2ecc71', '#e74c3c'],
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              position: 'bottom',
-              labels: {
-                color: textColor
-              }
-            },
-            tooltip: {
-              callbacks: {
-                label: function(context) {
-                  let label = context.label || '';
-                  if (label) {
-                    label += ': ';
-                  }
-                  if (context.dataIndex === 0) {
-                    label += power.toFixed(2) + 'W';
-                  } else if (context.dataIndex === 1) {
-                    label += (energy).toFixed(3) + 'kWh';
-                  } else {
-                    label += '$' + cost.toFixed(2);
-                  }
-                  return label;
-                }
-              }
-            }
-          }
-        }
-      });
-    }
-
-    // Component Selection
-    function findComponents() {
-      const requiredResistance = parseFloat(document.getElementById('requiredResistance').value);
-      const requiredPower = parseFloat(document.getElementById('requiredPower').value);
-      const tolerance = parseInt(document.getElementById('tolerance').value);
-      
-      if (isNaN(requiredResistance) || isNaN(requiredPower)) {
-        showToast('Please enter required values', 'error');
-        return;
-      }
-      
-      // E12 standard resistor values
-      const e12 = [10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82];
-      
-      // Find nearest standard values
-      const results = [];
-      for (let multiplier = 0.1; multiplier <= 1000000; multiplier *= 10) {
-        for (const base of e12) {
-          const value = base * multiplier;
-          const min = value * (1 - tolerance/100);
-          const max = value * (1 + tolerance/100);
-          
-          if (requiredResistance >= min && requiredResistance <= max) {
-            results.push({
-              value: value,
-              base: base,
-              multiplier: multiplier,
-              tolerance: tolerance,
-              power: requiredPower
-            });
-          }
-        }
-        if (results.length >= 3) break;
-      }
-      
-      // Generate component cards
-      const container = document.getElementById('componentResults');
-      container.innerHTML = '';
-      
-      if (results.length === 0) {
-        container.innerHTML = '<p>No standard resistor found. Try adjusting tolerance.</p>';
-        return;
-      }
-      
-      results.forEach((resistor, index) => {
-        const card = document.createElement('div');
-        card.className = 'component-card';
-        
-        // Calculate color bands
-        const bands = calculateColorBands(resistor.base, resistor.multiplier, resistor.tolerance);
-        
-        card.innerHTML = `
-          <div class="component-name">Resistor ${index + 1}</div>
-          <div class="component-value">${resistor.value.toLocaleString()} Ω</div>
-          <div style="margin: 10px 0; display: flex; justify-content: center; gap: 3px;">
-            ${bands.map(color => `
-              <div style="width: 20px; height: 40px; background-color: ${color}; border-radius: 2px;"></div>
-            `).join('')}
-          </div>
-          <div>${resistor.tolerance}% Tolerance</div>
-          <div>${resistor.power}W Power Rating</div>
-          <div style="margin-top: 10px; font-size: 0.9em; color: var(--text-muted);">
-            ${resistor.base} × ${resistor.multiplier}
-          </div>
-        `;
-        
-        container.appendChild(card);
-      });
-      
-      showToast('Found ' + results.length + ' matching resistors');
-    }
-
-    // Calculate color bands for resistor
-    function calculateColorBands(base, multiplier, tolerance) {
-      const colorMap = {
-        0: '#000000', // Black
-        1: '#964B00', // Brown
-        2: '#FF0000', // Red
-        3: '#FFA500', // Orange
-        4: '#FFFF00', // Yellow
-        5: '#008000', // Green
-        6: '#0000FF', // Blue
-        7: '#800080', // Violet
-        8: '#A0A0A0', // Gray
-        9: '#FFFFFF', // White
-        gold: '#FFD700',
-        silver: '#C0C0C0'
+      const toggleMenu = () => {
+        const isActive = navMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', String(isActive));
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = isActive ? 'hidden' : '';
       };
-      
-      const digits = base.toString().padStart(2, '0').split('').map(Number);
-      const bands = [];
-      
-      // First two bands (digits)
-      bands.push(colorMap[digits[0]]);
-      bands.push(colorMap[digits[1]]);
-      
-      // Multiplier band
-      let multiplierValue;
-      if (multiplier === 0.1) multiplierValue = -1;
-      else if (multiplier === 1) multiplierValue = 0;
-      else if (multiplier === 10) multiplierValue = 1;
-      else if (multiplier === 100) multiplierValue = 2;
-      else if (multiplier === 1000) multiplierValue = 3;
-      else if (multiplier === 10000) multiplierValue = 4;
-      else multiplierValue = 5;
-      
-      bands.push(colorMap[multiplierValue]);
-      
-      // Tolerance band
-      if (tolerance === 1) bands.push(colorMap[1]); // Brown
-      else if (tolerance === 2) bands.push(colorMap[2]); // Red
-      else if (tolerance === 5) bands.push(colorMap['gold']); // Gold
-      else bands.push(colorMap['silver']); // Silver
-      
-      return bands;
-    }
+      menuToggle.addEventListener('click', toggleMenu);
+      mobileOverlay.addEventListener('click', toggleMenu);
 
-    // Update chart colors when theme changes
-    function updateChartColors() {
-      if (ivChart) updateIVChart(currentValues.V || 12, currentValues.R || 6);
-      if (circuitChart) {
+      const STORAGE_KEY = 'portfolio-theme';
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('i');
+      const getPreferredTheme = () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      };
+      const applyTheme = (theme) => {
+        document.documentElement.setAttribute('data-theme', theme);
+        themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        localStorage.setItem(STORAGE_KEY, theme);
+      };
+      applyTheme(getPreferredTheme());
+      themeToggle.addEventListener('click', () => {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        updateChartColors();
+      });
+
+      document.querySelectorAll('.tab').forEach(tab => {
+        const activate = () => {
+          const tabId = tab.getAttribute('data-tab');
+          document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+          document.getElementById(tabId + '-tab').classList.add('active');
+          if (tabId === 'circuit') generateResistorInputs();
+          if (tabId === 'converter') updateConverterUnits();
+        };
+        tab.addEventListener('click', activate);
+        tab.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
+      });
+
+      function showToast(message, type) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast' + (type ? ' ' + type : '');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+
+      document.getElementById('voltageRange').addEventListener('input', function() { document.getElementById('voltage').value = this.value; });
+      document.getElementById('currentRange').addEventListener('input', function() { document.getElementById('current').value = this.value; });
+      document.getElementById('resistanceRange').addEventListener('input', function() { document.getElementById('resistance').value = this.value; });
+      document.getElementById('powerRange').addEventListener('input', function() { document.getElementById('powerInput').value = this.value; });
+
+      function syncRangeSliders() {
+        document.getElementById('voltageRange').value = Math.min(parseFloat(document.getElementById('voltage').value) || 0, 100);
+        document.getElementById('currentRange').value = Math.min(parseFloat(document.getElementById('current').value) || 0, 10);
+        document.getElementById('resistanceRange').value = Math.min(parseFloat(document.getElementById('resistance').value) || 0, 100);
+        document.getElementById('powerRange').value = Math.min(parseFloat(document.getElementById('powerInput').value) || 0, 500);
+      }
+
+      function getChartColors() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        return {
+          grid: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)',
+          text: isDark ? '#94a3b8' : '#475569',
+          accent: '#3b82f6',
+          success: '#22c55e',
+          error: '#ef4444',
+          warning: '#f59e0b'
+        };
+      }
+
+      window.calculateOhmsLaw = function() {
+        let V = parseFloat(document.getElementById('voltage').value);
+        let I = parseFloat(document.getElementById('current').value);
+        let R = parseFloat(document.getElementById('resistance').value);
+        let P = parseFloat(document.getElementById('powerInput').value);
+
+        const provided = [V, I, R, P].filter(val => !isNaN(val) && val > 0).length;
+
+        if (provided < 2) {
+          showToast('Please enter at least two values', 'error');
+          return;
+        }
+
+        let formulasUsed = [];
+
+        if (!isNaN(V) && !isNaN(I)) {
+          R = V / I; P = V * I;
+          formulasUsed.push('R = V \u00F7 I', 'P = V \u00D7 I');
+        } else if (!isNaN(V) && !isNaN(R)) {
+          I = V / R; P = V * I;
+          formulasUsed.push('I = V \u00F7 R', 'P = V \u00D7 I');
+        } else if (!isNaN(I) && !isNaN(R)) {
+          V = I * R; P = V * I;
+          formulasUsed.push('V = I \u00D7 R', 'P = V \u00D7 I');
+        } else if (!isNaN(P) && !isNaN(V)) {
+          I = P / V; R = V / I;
+          formulasUsed.push('I = P \u00F7 V', 'R = V \u00F7 I');
+        } else if (!isNaN(P) && !isNaN(I)) {
+          V = P / I; R = V / I;
+          formulasUsed.push('V = P \u00F7 I', 'R = V \u00F7 I');
+        } else if (!isNaN(P) && !isNaN(R)) {
+          I = Math.sqrt(P / R); V = I * R;
+          formulasUsed.push('I = \u221A(P \u00F7 R)', 'V = I \u00D7 R');
+        }
+
+        document.getElementById('resultV').textContent = V.toFixed(3);
+        document.getElementById('resultI').textContent = I.toFixed(3);
+        document.getElementById('resultR').textContent = R.toFixed(3);
+        document.getElementById('resultP').textContent = P.toFixed(3);
+
+        document.getElementById('voltage').value = V.toFixed(3);
+        document.getElementById('current').value = I.toFixed(3);
+        document.getElementById('resistance').value = R.toFixed(3);
+        document.getElementById('powerInput').value = P.toFixed(3);
+
+        document.getElementById('formulaDisplay').textContent = 'Formulas used: ' + formulasUsed.join(', ');
+
+        currentValues = { V, I, R, P };
+        updateIVChart(V, R);
+        syncRangeSliders();
+        showToast('Calculation completed successfully!');
+      };
+
+      function updateIVChart(V, R) {
+        const ctx = document.getElementById('ivChart').getContext('2d');
+        if (ivChart) ivChart.destroy();
+
+        const voltages = [];
+        const currents = [];
+        const maxV = Math.max(V * 1.5, 10);
+        for (let v = 0; v <= maxV; v += maxV / 20) {
+          voltages.push(v);
+          currents.push(v / R);
+        }
+
+        const c = getChartColors();
+        ivChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: voltages.map(v => v.toFixed(1)),
+            datasets: [{
+              label: `I = V / ${R.toFixed(1)}\u03A9`,
+              data: currents,
+              borderColor: c.accent,
+              backgroundColor: 'rgba(59, 130, 246, 0.08)',
+              borderWidth: 2.5,
+              fill: true,
+              tension: 0.4,
+              pointRadius: 2,
+              pointBackgroundColor: c.accent
+            }, {
+              label: 'Operating Point',
+              data: [{ x: V, y: V / R }],
+              type: 'scatter',
+              backgroundColor: c.warning,
+              borderColor: c.warning,
+              pointRadius: 8,
+              pointHoverRadius: 12
+            }]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { labels: { color: c.text, font: { family: 'Inter' } } },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    if (context.dataset.label === 'Operating Point') {
+                      return `V = ${V.toFixed(2)}V, I = ${(V/R).toFixed(2)}A`;
+                    }
+                    return `I = ${context.raw.toFixed(2)}A`;
+                  }
+                }
+              }
+            },
+            scales: {
+              x: { title: { display: true, text: 'Voltage (V)', color: c.text }, grid: { color: c.grid }, ticks: { color: c.text } },
+              y: { title: { display: true, text: 'Current (A)', color: c.text }, grid: { color: c.grid }, ticks: { color: c.text } }
+            }
+          }
+        });
+      }
+
+      window.resetCalculator = function() {
+        document.getElementById('voltage').value = '';
+        document.getElementById('current').value = '';
+        document.getElementById('resistance').value = '';
+        document.getElementById('powerInput').value = '';
+        document.getElementById('resultV').textContent = '--';
+        document.getElementById('resultI').textContent = '--';
+        document.getElementById('resultR').textContent = '--';
+        document.getElementById('resultP').textContent = '--';
+        document.getElementById('formulaDisplay').textContent = 'V = I \u00D7 R, P = V \u00D7 I';
+        syncRangeSliders();
+        showToast('Calculator reset');
+      };
+
+      function generateResistorInputs() {
+        const numResistors = parseInt(document.getElementById('numResistors').value);
+        const container = document.getElementById('resistorInputs');
+        container.innerHTML = '';
+        for (let i = 1; i <= numResistors; i++) {
+          const div = document.createElement('div');
+          div.className = 'input-group';
+          div.innerHTML = `
+            <label for="resistor${i}">Resistor R${i} <span class="unit-display">Ohms (\u03A9)</span></label>
+            <input type="number" id="resistor${i}" class="input-field" placeholder="e.g., 100" value="${100 * i}">
+          `;
+          container.appendChild(div);
+        }
+      }
+
+      window.analyzeCircuit = function() {
+        const circuitType = document.getElementById('circuitType').value;
+        const numResistors = parseInt(document.getElementById('numResistors').value);
+        const voltage = parseFloat(document.getElementById('circuitVoltage').value);
+
         const resistors = [];
-        for (let i = 1; i <= 5; i++) {
-          const r = parseFloat(document.getElementById(`resistor${i}`)?.value) || 0;
-          if (r > 0) resistors.push(r);
+        for (let i = 1; i <= numResistors; i++) {
+          const r = parseFloat(document.getElementById(`resistor${i}`).value);
+          if (!isNaN(r) && r > 0) resistors.push(r);
         }
-        if (resistors.length > 0) {
-          updateCircuitChart(resistors, document.getElementById('circuitType').value);
-        }
-      }
-      if (powerChart) {
-        const power = parseFloat(document.getElementById('powerResult')?.textContent) || 0;
-        const energy = parseFloat(document.getElementById('energyResult')?.textContent) || 0;
-        const cost = parseFloat(document.getElementById('dailyCost')?.textContent) || 0;
-        if (power > 0) updatePowerChart(power, energy, cost);
-      }
-    }
 
-    // Initialize on load
-    window.onload = function() {
-      // Set current year
-      document.getElementById('current-year').textContent = new Date().getFullYear();
-      
-      // Generate initial resistor inputs
+        if (resistors.length === 0) {
+          showToast('Please enter valid resistor values', 'error');
+          return;
+        }
+
+        let totalResistance;
+        if (circuitType === 'series') {
+          totalResistance = resistors.reduce((sum, r) => sum + r, 0);
+        } else if (circuitType === 'parallel') {
+          totalResistance = 1 / resistors.reduce((sum, r) => sum + 1/r, 0);
+        } else {
+          const seriesPart = resistors.slice(0, 2).reduce((sum, r) => sum + r, 0);
+          const parallelPart = resistors.length > 2 ? 1 / resistors.slice(2).reduce((sum, r) => sum + 1/r, 0) : 0;
+          totalResistance = seriesPart + parallelPart;
+        }
+
+        const totalCurrent = voltage / totalResistance;
+        const totalPower = voltage * totalCurrent;
+        const voltageDrop = circuitType === 'series' ? totalCurrent * resistors[0] : voltage;
+
+        document.getElementById('totalResistance').textContent = totalResistance.toFixed(2);
+        document.getElementById('totalCurrent').textContent = totalCurrent.toFixed(3);
+        document.getElementById('totalPower').textContent = totalPower.toFixed(2);
+        document.getElementById('voltageDrop').textContent = voltageDrop.toFixed(2);
+
+        updateCircuitChart(resistors, circuitType);
+        showToast('Circuit analyzed successfully!');
+      };
+
+      function updateCircuitChart(resistors, circuitType) {
+        const ctx = document.getElementById('circuitChart').getContext('2d');
+        if (circuitChart) circuitChart.destroy();
+
+        const c = getChartColors();
+        const colors = [c.accent, '#8b5cf6', c.success, c.error, c.warning, '#14b8a6'];
+
+        circuitChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: resistors.map((_, i) => `R${i+1}`),
+            datasets: [{
+              label: 'Resistor Values',
+              data: resistors,
+              backgroundColor: resistors.map((_, i) => colors[i % colors.length] + '99'),
+              borderColor: resistors.map((_, i) => colors[i % colors.length]),
+              borderWidth: 1,
+              borderRadius: 6
+            }]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { labels: { color: c.text, font: { family: 'Inter' } } },
+              title: { display: true, text: `Circuit Type: ${circuitType}`, color: c.text, font: { size: 16, family: 'Inter' } }
+            },
+            scales: {
+              x: { grid: { color: c.grid }, ticks: { color: c.text } },
+              y: { title: { display: true, text: 'Resistance (\u03A9)', color: c.text }, grid: { color: c.grid }, ticks: { color: c.text } }
+            }
+          }
+        });
+      }
+
+      window.calculatePower = function() {
+        const voltage = parseFloat(document.getElementById('powerVoltage').value);
+        const current = parseFloat(document.getElementById('powerCurrent').value);
+        const time = parseFloat(document.getElementById('powerTime').value);
+        const costPerKWh = parseFloat(document.getElementById('powerCost').value);
+
+        if (isNaN(voltage) || isNaN(current) || isNaN(time) || isNaN(costPerKWh)) {
+          showToast('Please enter all power calculation values', 'error');
+          return;
+        }
+
+        const power = voltage * current;
+        const energy = (power * time) / 1000;
+        const dailyCost = energy * costPerKWh;
+        const monthlyCost = dailyCost * 30;
+
+        document.getElementById('powerResult').textContent = power.toFixed(2);
+        document.getElementById('energyResult').textContent = energy.toFixed(3);
+        document.getElementById('dailyCost').textContent = dailyCost.toFixed(2);
+        document.getElementById('monthlyCost').textContent = monthlyCost.toFixed(2);
+
+        updatePowerChart(power, energy, dailyCost);
+        showToast('Power calculations completed!');
+      };
+
+      function updatePowerChart(power, energy, cost) {
+        const ctx = document.getElementById('powerChart').getContext('2d');
+        if (powerChart) powerChart.destroy();
+
+        const c = getChartColors();
+        powerChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Power (W)', 'Energy (kWh)', 'Daily Cost ($)'],
+            datasets: [{
+              data: [power, energy * 10, cost * 100],
+              backgroundColor: [c.accent + 'cc', c.success + 'cc', c.error + 'cc'],
+              borderColor: [c.accent, c.success, c.error],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom', labels: { color: c.text, font: { family: 'Inter' } } },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    let label = context.label || '';
+                    if (label) label += ': ';
+                    if (context.dataIndex === 0) label += power.toFixed(2) + 'W';
+                    else if (context.dataIndex === 1) label += energy.toFixed(3) + 'kWh';
+                    else label += '$' + cost.toFixed(2);
+                    return label;
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      window.findComponents = function() {
+        const requiredResistance = parseFloat(document.getElementById('requiredResistance').value);
+        const requiredPower = parseFloat(document.getElementById('requiredPower').value);
+        const tolerance = parseInt(document.getElementById('tolerance').value);
+
+        if (isNaN(requiredResistance) || isNaN(requiredPower)) {
+          showToast('Please enter required values', 'error');
+          return;
+        }
+
+        const e12 = [10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82];
+        const results = [];
+        for (let multiplier = 0.1; multiplier <= 1000000; multiplier *= 10) {
+          for (const base of e12) {
+            const value = base * multiplier;
+            const min = value * (1 - tolerance/100);
+            const max = value * (1 + tolerance/100);
+            if (requiredResistance >= min && requiredResistance <= max) {
+              results.push({ value, base, multiplier, tolerance, power: requiredPower });
+            }
+          }
+          if (results.length >= 3) break;
+        }
+
+        const container = document.getElementById('componentResults');
+        container.innerHTML = '';
+
+        if (results.length === 0) {
+          container.innerHTML = '<p style="color: var(--color-text-secondary);">No standard resistor found. Try adjusting tolerance.</p>';
+          return;
+        }
+
+        results.forEach((resistor, index) => {
+          const card = document.createElement('div');
+          card.className = 'component-card';
+          const bands = calculateColorBands(resistor.base, resistor.multiplier, resistor.tolerance);
+          card.innerHTML = `
+            <div class="component-name">Resistor ${index + 1}</div>
+            <div class="component-value">${resistor.value.toLocaleString()} \u03A9</div>
+            <div style="margin: var(--space-sm) 0; display: flex; justify-content: center; gap: 3px;">
+              ${bands.map(color => `<div style="width: 20px; height: 40px; background-color: ${color}; border-radius: 2px;"></div>`).join('')}
+            </div>
+            <div style="color: var(--color-text-secondary); font-size: 0.875rem;">${resistor.tolerance}% Tolerance</div>
+            <div style="color: var(--color-text-secondary); font-size: 0.875rem;">${resistor.power}W Power Rating</div>
+            <div style="margin-top: var(--space-sm); font-size: 0.8125rem; color: var(--color-text-tertiary);">
+              ${resistor.base} \u00D7 ${resistor.multiplier}
+            </div>
+          `;
+          container.appendChild(card);
+        });
+
+        showToast('Found ' + results.length + ' matching resistors');
+      };
+
+      function calculateColorBands(base, multiplier, tolerance) {
+        const colorMap = {
+          0: '#000000', 1: '#964B00', 2: '#FF0000', 3: '#FFA500', 4: '#FFFF00',
+          5: '#008000', 6: '#0000FF', 7: '#800080', 8: '#A0A0A0', 9: '#FFFFFF',
+          gold: '#FFD700', silver: '#C0C0C0'
+        };
+        const digits = base.toString().padStart(2, '0').split('').map(Number);
+        const bands = [colorMap[digits[0]], colorMap[digits[1]]];
+
+        let multiplierValue;
+        if (multiplier === 0.1) multiplierValue = -1;
+        else if (multiplier === 1) multiplierValue = 0;
+        else if (multiplier === 10) multiplierValue = 1;
+        else if (multiplier === 100) multiplierValue = 2;
+        else if (multiplier === 1000) multiplierValue = 3;
+        else if (multiplier === 10000) multiplierValue = 4;
+        else multiplierValue = 5;
+
+        bands.push(colorMap[multiplierValue]);
+
+        if (tolerance === 1) bands.push(colorMap[1]);
+        else if (tolerance === 2) bands.push(colorMap[2]);
+        else if (tolerance === 5) bands.push(colorMap.gold);
+        else bands.push(colorMap.silver);
+
+        return bands;
+      }
+
+      const converterUnits = {
+        voltage: [
+          { value: 1, label: 'Volts (V)' },
+          { value: 0.001, label: 'Millivolts (mV)' },
+          { value: 1000, label: 'Kilovolts (kV)' },
+          { value: 0.000001, label: 'Microvolts (\u00B5V)' }
+        ],
+        current: [
+          { value: 1, label: 'Amperes (A)' },
+          { value: 0.001, label: 'Milliamperes (mA)' },
+          { value: 0.000001, label: 'Microamperes (\u00B5A)' },
+          { value: 1000, label: 'Kiloamperes (kA)' }
+        ],
+        resistance: [
+          { value: 1, label: 'Ohms (\u03A9)' },
+          { value: 0.001, label: 'Milliohms (m\u03A9)' },
+          { value: 1000, label: 'Kilohms (k\u03A9)' },
+          { value: 1000000, label: 'Megohms (M\u03A9)' }
+        ],
+        power: [
+          { value: 1, label: 'Watts (W)' },
+          { value: 0.001, label: 'Milliwatts (mW)' },
+          { value: 1000, label: 'Kilowatts (kW)' },
+          { value: 1000000, label: 'Megawatts (MW)' }
+        ],
+        energy: [
+          { value: 1, label: 'Watt-hours (Wh)' },
+          { value: 0.001, label: 'Kilowatt-hours (kWh)' },
+          { value: 3600, label: 'Joules (J)' },
+          { value: 3600000, label: 'Kilojoules (kJ)' }
+        ],
+        capacitance: [
+          { value: 1, label: 'Farads (F)' },
+          { value: 0.000001, label: 'Microfarads (\u00B5F)' },
+          { value: 0.000000001, label: 'Nanofarads (nF)' },
+          { value: 0.000000000001, label: 'Picofarads (pF)' }
+        ]
+      };
+
+      window.updateConverterUnits = function() {
+        const category = document.getElementById('convCategory').value;
+        const units = converterUnits[category];
+        const fromSelect = document.getElementById('convFrom');
+        const toSelect = document.getElementById('convTo');
+
+        fromSelect.innerHTML = '';
+        toSelect.innerHTML = '';
+
+        units.forEach((unit, i) => {
+          fromSelect.innerHTML += `<option value="${unit.value}" ${i === 0 ? 'selected' : ''}>${unit.label}</option>`;
+          toSelect.innerHTML += `<option value="${unit.value}" ${i === 1 ? 'selected' : ''}>${unit.label}</option>`;
+        });
+      };
+
+      window.convertUnits = function() {
+        const value = parseFloat(document.getElementById('convValue').value);
+        const from = parseFloat(document.getElementById('convFrom').value);
+        const to = parseFloat(document.getElementById('convTo').value);
+
+        if (isNaN(value)) {
+          showToast('Please enter a valid number', 'error');
+          return;
+        }
+
+        const baseValue = value * from;
+        const result = baseValue / to;
+
+        const fromText = document.getElementById('convFrom').options[document.getElementById('convFrom').selectedIndex].text;
+        const toText = document.getElementById('convTo').options[document.getElementById('convTo').selectedIndex].text;
+
+        document.getElementById('convInputDisplay').textContent = value.toFixed(6).replace(/\.?0+$/, '');
+        document.getElementById('convFromUnit').textContent = fromText;
+        document.getElementById('convResult').textContent = result.toFixed(6).replace(/\.?0+$/, '');
+        document.getElementById('convToUnit').textContent = toText;
+
+        showToast('Conversion completed!');
+      };
+
+      function updateChartColors() {
+        if (ivChart) updateIVChart(currentValues.V || 12, currentValues.R || 6);
+        if (circuitChart) {
+          const resistors = [];
+          for (let i = 1; i <= 5; i++) {
+            const r = parseFloat(document.getElementById(`resistor${i}`)?.value) || 0;
+            if (r > 0) resistors.push(r);
+          }
+          if (resistors.length > 0) updateCircuitChart(resistors, document.getElementById('circuitType').value);
+        }
+        if (powerChart) {
+          const power = parseFloat(document.getElementById('powerResult')?.textContent) || 0;
+          const energy = parseFloat(document.getElementById('energyResult')?.textContent) || 0;
+          const cost = parseFloat(document.getElementById('dailyCost')?.textContent) || 0;
+          if (power > 0) updatePowerChart(power, energy, cost);
+        }
+      }
+
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
       generateResistorInputs();
-      
-      // Initialize with sample calculation
-      setTimeout(() => {
-        calculateOhmsLaw();
-      }, 100);
-    };
+      updateConverterUnits();
+      setTimeout(() => { calculateOhmsLaw(); }, 100);
+    })();
   </script>
 </body>
 </html>
