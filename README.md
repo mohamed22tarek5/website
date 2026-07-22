@@ -1,6 +1,5 @@
 # Mohamed Tarek Portfolio
 
-![Portfolio](https://website-mohamed.vercel.app/photo.jpg)
 
 **Live Site:** [website-mohamed.vercel.app](https://website-mohamed.vercel.app/)
 
