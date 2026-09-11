@@ -2,13 +2,22 @@
 
 ## Agent Authentication — Mohamed Tarek Portfolio
 
-### Audience
+### Agent Audience
 
-This document is for AI agents and automated systems accessing the Mohamed Tarek Portfolio.
+This document is for AI agents, automated systems, and MCP clients accessing the Mohamed Tarek Portfolio.
 
 ### Registration
 
 No registration is required. All content and tools are publicly accessible without authentication.
+
+### Provisioning
+
+No provisioning needed. Access all endpoints directly via HTTP GET.
+
+### Supported Methods
+
+- **Anonymous access**: No credentials required
+- **API Key**: Optional, pass via `Authorization: Bearer <key>` header
 
 ### Available Endpoints
 
@@ -22,10 +31,11 @@ No registration is required. All content and tools are publicly accessible witho
 | `/.well-known/agent-card.json` | GET | A2A Agent Card |
 | `/.well-known/ai-catalog.json` | GET | ARD capability manifest |
 | `/.well-known/oauth-protected-resource` | GET | OAuth Protected Resource Metadata |
+| `/.well-known/oauth-authorization-server` | GET | OAuth Authorization Server Metadata |
 
 ### Credential Use
 
-No credentials are needed. All endpoints return public data.
+No credentials are needed for public endpoints. All portfolio content, calculators, and tools are freely accessible.
 
 ### Contact
 
