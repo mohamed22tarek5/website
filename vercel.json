@@ -13,19 +13,20 @@
       "source": "/",
       "headers": [
         { "key": "Link", "value": "</.well-known/api-catalog/index.json>; rel=\"api-catalog\"" },
-        { "key": "Link", "value": "</.well-known/oauth-protected-resource>; rel=\"resource-metadata\"" },
-        { "key": "Link", "value": "</.well-known/mcp/server-card.json>; rel=\"mcp-server\"" },
-        { "key": "Link", "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\"" },
-        { "key": "Link", "value": "</.well-known/ai-catalog.json>; rel=\"ard-manifest\"" },
-        { "key": "Link", "value": "</auth.md>; rel=\"auth-md\"" },
+        { "key": "Link", "value": "</.well-known/mcp/server-card.json>; rel=\"service-desc\"" },
+        { "key": "Link", "value": "</.well-known/agent-skills/index.json>; rel=\"linkset\"" },
+        { "key": "Link", "value": "</.well-known/ai-catalog.json>; rel=\"describedby\"" },
+        { "key": "Link", "value": "</.well-known/agent-card.json>; rel=\"service-desc\"" },
+        { "key": "Link", "value": "</auth.md>; rel=\"describedby\"" },
         { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"" },
-        { "key": "Link", "value": "</manifest.webmanifest>; rel=\"webmanifest\"" }
+        { "key": "Link", "value": "</manifest.webmanifest>; rel=\"manifest\"" },
+        { "key": "Link", "value": "</Mohamed%20-%20Services.html>; rel=\"service-doc\"" }
       ]
     },
     {
       "source": "/sites/(.*)",
       "headers": [
-        { "key": "Link", "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\"" },
+        { "key": "Link", "value": "</.well-known/agent-skills/index.json>; rel=\"linkset\"" },
         { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"" }
       ]
     },

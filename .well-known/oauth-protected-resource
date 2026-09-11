@@ -1,7 +1,9 @@
 {
   "resource": "https://mohamedtarek.vercel.app/",
-  "authorization_servers": [],
-  "scopes_supported": [],
+  "authorization_servers": [
+    "https://mohamedtarek.vercel.app"
+  ],
+  "scopes_supported": ["read", "tools"],
   "bearer_methods_supported": ["header"],
   "resource_documentation": "https://mohamedtarek.vercel.app/Mohamed%20-%20Services.html"
 }

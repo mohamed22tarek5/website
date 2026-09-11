@@ -2,35 +2,38 @@
 
 ## Agent Authentication — Mohamed Tarek Portfolio
 
-### Overview
+### Audience
 
-This site is a static portfolio with no protected APIs requiring authentication. All content is publicly accessible.
+This document is for AI agents and automated systems accessing the Mohamed Tarek Portfolio.
 
-### Public Endpoints
+### Registration
 
-All endpoints are open and do not require authentication:
+No registration is required. All content and tools are publicly accessible without authentication.
 
-| Endpoint | Description |
-|----------|-------------|
-| `/` | Main portfolio homepage |
-| `/sites/` | Tools and calculators directory |
-| `/.well-known/api-catalog` | API catalog (RFC 9727) |
-| `/.well-known/agent-skills/index.json` | Agent skills discovery |
-| `/.well-known/mcp/server-card.json` | MCP Server Card |
-| `/.well-known/ai-catalog.json` | ARD capability manifest |
+### Available Endpoints
 
-### Agent Registration
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/` | GET | Main portfolio homepage |
+| `/sites/` | GET | Tools and calculators directory |
+| `/.well-known/api-catalog` | GET | API catalog (RFC 9727) |
+| `/.well-known/agent-skills/index.json` | GET | Agent skills discovery |
+| `/.well-known/mcp/server-card.json` | GET | MCP Server Card |
+| `/.well-known/agent-card.json` | GET | A2A Agent Card |
+| `/.well-known/ai-catalog.json` | GET | ARD capability manifest |
+| `/.well-known/oauth-protected-resource` | GET | OAuth Protected Resource Metadata |
 
-No registration is required to access this site. All content is freely available.
+### Credential Use
+
+No credentials are needed. All endpoints return public data.
 
 ### Contact
 
-For questions or collaboration, reach out via:
+For questions or collaboration:
 
 - **GitHub**: [MohamedTarek20](https://github.com/MohamedTarek20)
 - **LinkedIn**: [Mohamed Tarek](https://www.linkedin.com/in/mohamedtarek20)
-- **Email**: Available through social media links
 
 ### Content Usage
 
-See `robots.txt` for content usage preferences including AI training and search directives.
+See `robots.txt` for AI content usage preferences (Content-Signal directives).

@@ -1,0 +1,66 @@
+{
+  "name": "Mohamed Tarek Portfolio Agent",
+  "version": "1.0.0",
+  "description": "AI agent for Mohamed Tarek's portfolio. Provides access to engineering calculators, project information, services, and tools for electronics and communications engineering.",
+  "url": "https://mohamedtarek.vercel.app/",
+  "provider": {
+    "organization": "Mohamed Tarek",
+    "url": "https://mohamedtarek.vercel.app/"
+  },
+  "supportedInterfaces": [
+    {
+      "protocol": "https",
+      "url": "https://mohamedtarek.vercel.app/mcp",
+      "transport": "streamable-http"
+    }
+  ],
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "skills": [
+    {
+      "id": "ohms-law",
+      "name": "Ohm's Law Calculator",
+      "description": "Calculate voltage, current, resistance, or power using Ohm's Law (V=IR). Enter any two values to compute the remaining two.",
+      "tags": ["electronics", "calculator", "ohms-law"]
+    },
+    {
+      "id": "resistor-color-code",
+      "name": "Resistor Color Code Calculator",
+      "description": "Calculate resistor values from color bands. Supports 4-band and 5-band resistor codes.",
+      "tags": ["electronics", "calculator", "resistor"]
+    },
+    {
+      "id": "led-resistor",
+      "name": "LED Resistor Calculator",
+      "description": "Calculate the correct resistor value for LED circuits based on supply voltage, forward voltage, and desired current.",
+      "tags": ["electronics", "calculator", "led"]
+    },
+    {
+      "id": "capacitor-calculator",
+      "name": "Capacitor Calculator",
+      "description": "Calculate capacitor values including RC time constant, reactance, and energy storage.",
+      "tags": ["electronics", "calculator", "capacitor"]
+    },
+    {
+      "id": "wire-gauge",
+      "name": "Wire Gauge Calculator",
+      "description": "Calculate wire gauge (AWG) based on current, voltage drop, and wire length requirements.",
+      "tags": ["electronics", "calculator", "wire"]
+    },
+    {
+      "id": "project-info",
+      "name": "Project Information",
+      "description": "Access details about engineering and web development projects in the portfolio.",
+      "tags": ["portfolio", "projects"]
+    },
+    {
+      "id": "services-info",
+      "name": "Services Information",
+      "description": "Learn about engineering services offered: web development, Arduino programming, PCB design, embedded systems.",
+      "tags": ["services", "engineering"]
+    }
+  ]
+}
