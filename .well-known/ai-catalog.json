@@ -1,0 +1,71 @@
+{
+  "specVersion": "1.0.0",
+  "host": {
+    "name": "Mohamed Tarek Portfolio",
+    "domain": "mohamedtarek.vercel.app",
+    "url": "https://mohamedtarek.vercel.app/",
+    "description": "Portfolio and engineering tools for Mohamed Tarek - Communications Engineer, Web Developer, Arduino Expert, and PCB Designer."
+  },
+  "entries": [
+    {
+      "urn": "urn:air:mohamedtarek.vercel.app:tool:ohms-law-calculator",
+      "displayName": "Ohm's Law Calculator",
+      "description": "Calculate voltage, current, resistance, or power using Ohm's Law.",
+      "type": "text/html",
+      "url": "https://mohamedtarek.vercel.app/sites/ohms-law-calculator.html",
+      "representativeQueries": [
+        "calculate resistance from voltage and current",
+        "ohm's law calculator online",
+        "find voltage given current and resistance"
+      ]
+    },
+    {
+      "urn": "urn:air:mohamedtarek.vercel.app:tool:resistor-calculator",
+      "displayName": "Resistor Color Code Calculator",
+      "description": "Calculate resistor values from color bands.",
+      "type": "text/html",
+      "url": "https://mohamedtarek.vercel.app/sites/resistor-calculator.html",
+      "representativeQueries": [
+        "resistor color code calculator",
+        "what is the value of a resistor with bands red violet orange gold",
+        "decode resistor colors"
+      ]
+    },
+    {
+      "urn": "urn:air:mohamedtarek.vercel.app:tool:lcd-character-generator",
+      "displayName": "LCD Custom Character Generator",
+      "description": "Generate custom character bitmaps for LCD displays.",
+      "type": "text/html",
+      "url": "https://mohamedtarek.vercel.app/sites/LCD-Custom-Character-Generator.html",
+      "representativeQueries": [
+        "generate custom LCD character",
+        "create bitmap for 16x2 LCD",
+        "LCD character generator Arduino"
+      ]
+    },
+    {
+      "urn": "urn:air:mohamedtarek.vercel.app:tool:ai-sites-directory",
+      "displayName": "AI Sites Directory",
+      "description": "Curated directory of AI tools and websites.",
+      "type": "text/html",
+      "url": "https://mohamedtarek.vercel.app/sites/ai-sites-list.html",
+      "representativeQueries": [
+        "list of AI tools",
+        "best AI websites for productivity",
+        "AI tools directory"
+      ]
+    },
+    {
+      "urn": "urn:air:mohamedtarek.vercel.app:page:portfolio",
+      "displayName": "Mohamed Tarek Portfolio",
+      "description": "Main portfolio page showcasing engineering projects and skills.",
+      "type": "text/html",
+      "url": "https://mohamedtarek.vercel.app/",
+      "representativeQueries": [
+        "Mohamed Tarek engineer portfolio",
+        "communications engineer web developer",
+        "Arduino expert PCB designer"
+      ]
+    }
+  ]
+}

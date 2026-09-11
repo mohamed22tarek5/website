@@ -1,0 +1,65 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+      ]
+    },
+    {
+      "source": "/",
+      "headers": [
+        { "key": "Link", "value": "</.well-known/api-catalog/index.json>; rel=\"api-catalog\"" },
+        { "key": "Link", "value": "</.well-known/oauth-protected-resource>; rel=\"resource-metadata\"" },
+        { "key": "Link", "value": "</.well-known/mcp/server-card.json>; rel=\"mcp-server\"" },
+        { "key": "Link", "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\"" },
+        { "key": "Link", "value": "</.well-known/ai-catalog.json>; rel=\"ard-manifest\"" },
+        { "key": "Link", "value": "</auth.md>; rel=\"auth-md\"" },
+        { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"" },
+        { "key": "Link", "value": "</manifest.webmanifest>; rel=\"webmanifest\"" }
+      ]
+    },
+    {
+      "source": "/sites/(.*)",
+      "headers": [
+        { "key": "Link", "value": "</.well-known/agent-skills/index.json>; rel=\"agent-skills\"" },
+        { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"" }
+      ]
+    },
+    {
+      "source": "/.well-known/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Accept, Accept-Type" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml" },
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/.well-known/oauth-authorization-server",
+      "destination": "/.well-known/oauth-authorization-server.json"
+    },
+    {
+      "source": "/.well-known/openid-configuration",
+      "destination": "/.well-known/openid-configuration.json"
+    }
+  ]
+}
