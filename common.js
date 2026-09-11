@@ -331,171 +331,175 @@
      WebMCP — Expose tools to AI agents via browser
      ---------------------------------------- */
   if (navigator.modelContext) {
-    navigator.modelContext.provideContext({
-      tools: [
-        {
-          name: 'get_page_info',
-          description: 'Get information about the current portfolio page including title, description, and navigation links.',
-          inputSchema: {
-            type: 'object',
-            properties: {},
-            required: []
-          },
-          execute: async () => {
-            const meta = document.querySelector('meta[name="description"]');
-            const title = document.title;
-            const links = Array.from(document.querySelectorAll('.nav-link')).map(a => ({
-              text: a.textContent.trim(),
-              href: a.getAttribute('href')
-            }));
-            return {
-              title,
-              description: meta ? meta.content : '',
-              navigation: links,
-              url: window.location.href
-            };
+    const ac = new AbortController();
+    const signal = ac.signal;
+
+    navigator.modelContext.registerTool({
+      name: 'get_page_info',
+      description: 'Get information about the current portfolio page including title, description, and navigation links.',
+      inputSchema: {
+        type: 'object',
+        properties: {},
+        required: []
+      },
+      execute: async () => {
+        const meta = document.querySelector('meta[name="description"]');
+        const title = document.title;
+        const links = Array.from(document.querySelectorAll('.nav-link')).map(a => ({
+          text: a.textContent.trim(),
+          href: a.getAttribute('href')
+        }));
+        return {
+          title,
+          description: meta ? meta.content : '',
+          navigation: links,
+          url: window.location.href
+        };
+      }
+    }, { signal });
+
+    navigator.modelContext.registerTool({
+      name: 'navigate_to',
+      description: 'Navigate to a specific section or page on the portfolio site.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          target: {
+            type: 'string',
+            description: 'The navigation target: section ID (e.g. "projects", "contact") or page URL'
           }
         },
-        {
-          name: 'navigate_to',
-          description: 'Navigate to a specific section or page on the portfolio site.',
-          inputSchema: {
-            type: 'object',
-            properties: {
-              target: {
-                type: 'string',
-                description: 'The navigation target: section ID (e.g. "projects", "contact") or page URL'
-              }
-            },
-            required: ['target']
-          },
-          execute: async ({ target }) => {
-            if (target.startsWith('/') || target.startsWith('http')) {
-              window.location.href = target;
-              return { success: true, navigated_to: target };
-            }
-            const el = document.getElementById(target) || document.querySelector(`[href="#${target}"]`);
-            if (el) {
-              el.scrollIntoView({ behavior: 'smooth' });
-              return { success: true, navigated_to: target };
-            }
-            return { success: false, error: 'Target not found' };
-          }
-        },
-        {
-          name: 'get_projects',
-          description: 'List all featured projects from the portfolio.',
-          inputSchema: {
-            type: 'object',
-            properties: {},
-            required: []
-          },
-          execute: async () => {
-            const cards = document.querySelectorAll('.project-card');
-            return Array.from(cards).map(card => {
-              const title = card.querySelector('.card-title, h3');
-              const desc = card.querySelector('.card-text, p');
-              const link = card.querySelector('a');
-              return {
-                title: title ? title.textContent.trim() : '',
-                description: desc ? desc.textContent.trim() : '',
-                url: link ? link.href : ''
-              };
-            });
-          }
-        },
-        {
-          name: 'get_services',
-          description: 'List all engineering services offered.',
-          inputSchema: {
-            type: 'object',
-            properties: {},
-            required: []
-          },
-          execute: async () => {
-            const cards = document.querySelectorAll('.service-card');
-            return Array.from(cards).map(card => {
-              const title = card.querySelector('.card-title, h3');
-              const desc = card.querySelector('.card-text, p');
-              return {
-                title: title ? title.textContent.trim() : '',
-                description: desc ? desc.textContent.trim() : ''
-              };
-            });
-          }
-        },
-        {
-          name: 'get_tools_list',
-          description: 'List all available engineering calculators and tools on the site.',
-          inputSchema: {
-            type: 'object',
-            properties: {},
-            required: []
-          },
-          execute: async () => {
-            const tools = [
-              { name: "Ohm's Law Calculator", url: '/sites/ohms-law-calculator.html' },
-              { name: 'Resistor Calculator', url: '/sites/resistor-calculator.html' },
-              { name: 'Resistor for LED', url: '/sites/resistor-for-led.html' },
-              { name: 'Capacitor Calculator', url: '/sites/capacitor-calculator.html' },
-              { name: 'Inductance Calculator', url: '/sites/Indactance-calculator.html' },
-              { name: 'Buck-Boost Calculator', url: '/sites/buck-boost-calculator.html' },
-              { name: 'Battery Capacity Calculator', url: '/sites/Battery-Capacity-&-Runtime-Calculator.html' },
-              { name: 'Power Factor Calculator', url: '/sites/Power-Factor-Calculator.html' },
-              { name: 'Power Triangle Calculator', url: '/sites/Power-Triangle-Calculator.html' },
-              { name: 'RC Filter & LC Resonance Calculator', url: '/sites/RC-Filter-&-LC-Resonance-Calculator.html' },
-              { name: 'Transformer Turns Calculator', url: '/sites/Transformer-Turns-Calculator.html' },
-              { name: 'Wire Gauge Calculator', url: '/sites/Wire-Gauge-Calculator.html' },
-              { name: 'Length Converter', url: '/sites/Length-Converter.html' },
-              { name: 'LCD Custom Character Generator', url: '/sites/LCD-Custom-Character-Generator.html' },
-              { name: 'Electrical Calculation', url: '/sites/electrical-calculation.html' },
-              { name: 'AI Sites Directory', url: '/sites/ai-sites-list.html' },
-              { name: 'Linux Commands Reference', url: '/sites/Mastering%20Linux%20Commands.html' },
-              { name: 'To-Do List', url: '/sites/to-do-list.html' },
-              { name: 'Medication Reminder', url: '/sites/Medication-Reminder.html' }
-            ];
-            return tools;
-          }
-        },
-        {
-          name: 'toggle_theme',
-          description: 'Toggle between dark and light theme on the portfolio site.',
-          inputSchema: {
-            type: 'object',
-            properties: {},
-            required: []
-          },
-          execute: async () => {
-            const toggle = document.getElementById('themeToggle');
-            if (toggle) {
-              toggle.click();
-              const theme = document.documentElement.getAttribute('data-theme');
-              return { success: true, current_theme: theme };
-            }
-            return { success: false, error: 'Theme toggle not found' };
-          }
-        },
-        {
-          name: 'get_contact_info',
-          description: 'Get contact information and social media links.',
-          inputSchema: {
-            type: 'object',
-            properties: {},
-            required: []
-          },
-          execute: async () => {
-            const socialLinks = document.querySelectorAll('.social-link, .footer-social a, [href*="linkedin"], [href*="github"]');
-            return {
-              social: Array.from(socialLinks).map(a => ({
-                platform: a.getAttribute('aria-label') || a.href.split('/')[2],
-                url: a.href
-              })),
-              page_url: window.location.origin
-            };
-          }
+        required: ['target']
+      },
+      execute: async ({ target }) => {
+        if (target.startsWith('/') || target.startsWith('http')) {
+          window.location.href = target;
+          return { success: true, navigated_to: target };
         }
-      ]
-    });
+        const el = document.getElementById(target) || document.querySelector(`[href="#${target}"]`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+          return { success: true, navigated_to: target };
+        }
+        return { success: false, error: 'Target not found' };
+      }
+    }, { signal });
+
+    navigator.modelContext.registerTool({
+      name: 'get_projects',
+      description: 'List all featured projects from the portfolio.',
+      inputSchema: {
+        type: 'object',
+        properties: {},
+        required: []
+      },
+      execute: async () => {
+        const cards = document.querySelectorAll('.project-card');
+        return Array.from(cards).map(card => {
+          const title = card.querySelector('.card-title, h3');
+          const desc = card.querySelector('.card-text, p');
+          const link = card.querySelector('a');
+          return {
+            title: title ? title.textContent.trim() : '',
+            description: desc ? desc.textContent.trim() : '',
+            url: link ? link.href : ''
+          };
+        });
+      }
+    }, { signal });
+
+    navigator.modelContext.registerTool({
+      name: 'get_services',
+      description: 'List all engineering services offered.',
+      inputSchema: {
+        type: 'object',
+        properties: {},
+        required: []
+      },
+      execute: async () => {
+        const cards = document.querySelectorAll('.service-card');
+        return Array.from(cards).map(card => {
+          const title = card.querySelector('.card-title, h3');
+          const desc = card.querySelector('.card-text, p');
+          return {
+            title: title ? title.textContent.trim() : '',
+            description: desc ? desc.textContent.trim() : ''
+          };
+        });
+      }
+    }, { signal });
+
+    navigator.modelContext.registerTool({
+      name: 'get_tools_list',
+      description: 'List all available engineering calculators and tools on the site.',
+      inputSchema: {
+        type: 'object',
+        properties: {},
+        required: []
+      },
+      execute: async () => {
+        return [
+          { name: "Ohm's Law Calculator", url: '/sites/ohms-law-calculator.html' },
+          { name: 'Resistor Calculator', url: '/sites/resistor-calculator.html' },
+          { name: 'Resistor for LED', url: '/sites/resistor-for-led.html' },
+          { name: 'Capacitor Calculator', url: '/sites/capacitor-calculator.html' },
+          { name: 'Inductance Calculator', url: '/sites/Indactance-calculator.html' },
+          { name: 'Buck-Boost Calculator', url: '/sites/buck-boost-calculator.html' },
+          { name: 'Battery Capacity Calculator', url: '/sites/Battery-Capacity-&-Runtime-Calculator.html' },
+          { name: 'Power Factor Calculator', url: '/sites/Power-Factor-Calculator.html' },
+          { name: 'Power Triangle Calculator', url: '/sites/Power-Triangle-Calculator.html' },
+          { name: 'RC Filter & LC Resonance Calculator', url: '/sites/RC-Filter-&-LC-Resonance-Calculator.html' },
+          { name: 'Transformer Turns Calculator', url: '/sites/Transformer-Turns-Calculator.html' },
+          { name: 'Wire Gauge Calculator', url: '/sites/Wire-Gauge-Calculator.html' },
+          { name: 'Length Converter', url: '/sites/Length-Converter.html' },
+          { name: 'LCD Custom Character Generator', url: '/sites/LCD-Custom-Character-Generator.html' },
+          { name: 'Electrical Calculation', url: '/sites/electrical-calculation.html' },
+          { name: 'AI Sites Directory', url: '/sites/ai-sites-list.html' },
+          { name: 'Linux Commands Reference', url: '/sites/Mastering%20Linux%20Commands.html' },
+          { name: 'To-Do List', url: '/sites/to-do-list.html' },
+          { name: 'Medication Reminder', url: '/sites/Medication-Reminder.html' }
+        ];
+      }
+    }, { signal });
+
+    navigator.modelContext.registerTool({
+      name: 'toggle_theme',
+      description: 'Toggle between dark and light theme on the portfolio site.',
+      inputSchema: {
+        type: 'object',
+        properties: {},
+        required: []
+      },
+      execute: async () => {
+        const toggle = document.getElementById('themeToggle');
+        if (toggle) {
+          toggle.click();
+          const theme = document.documentElement.getAttribute('data-theme');
+          return { success: true, current_theme: theme };
+        }
+        return { success: false, error: 'Theme toggle not found' };
+      }
+    }, { signal });
+
+    navigator.modelContext.registerTool({
+      name: 'get_contact_info',
+      description: 'Get contact information and social media links.',
+      inputSchema: {
+        type: 'object',
+        properties: {},
+        required: []
+      },
+      execute: async () => {
+        const socialLinks = document.querySelectorAll('.social-link, .footer-social a, [href*="linkedin"], [href*="github"]');
+        return {
+          social: Array.from(socialLinks).map(a => ({
+            platform: a.getAttribute('aria-label') || a.href.split('/')[2],
+            url: a.href
+          })),
+          page_url: window.location.origin
+        };
+      }
+    }, { signal });
   }
 
 })();
