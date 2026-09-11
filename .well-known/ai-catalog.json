@@ -1,14 +1,12 @@
 {
-  "specVersion": "1.0.0",
+  "specVersion": "1.0",
   "host": {
-    "name": "Mohamed Tarek Portfolio",
-    "domain": "mohamedtarek.vercel.app",
-    "url": "https://mohamedtarek.vercel.app/",
-    "description": "Portfolio and engineering tools for Mohamed Tarek - Communications Engineer, Web Developer, Arduino Expert, and PCB Designer."
+    "displayName": "Mohamed Tarek Portfolio",
+    "identifier": "did:web:mohamedtarek.vercel.app"
   },
   "entries": [
     {
-      "urn": "urn:air:mohamedtarek.vercel.app:tool:ohms-law-calculator",
+      "identifier": "urn:air:mohamedtarek.vercel.app:tool:ohms-law-calculator",
       "displayName": "Ohm's Law Calculator",
       "description": "Calculate voltage, current, resistance, or power using Ohm's Law.",
       "type": "text/html",
@@ -20,7 +18,7 @@
       ]
     },
     {
-      "urn": "urn:air:mohamedtarek.vercel.app:tool:resistor-calculator",
+      "identifier": "urn:air:mohamedtarek.vercel.app:tool:resistor-calculator",
       "displayName": "Resistor Color Code Calculator",
       "description": "Calculate resistor values from color bands.",
       "type": "text/html",
@@ -32,7 +30,7 @@
       ]
     },
     {
-      "urn": "urn:air:mohamedtarek.vercel.app:tool:lcd-character-generator",
+      "identifier": "urn:air:mohamedtarek.vercel.app:tool:lcd-character-generator",
       "displayName": "LCD Custom Character Generator",
       "description": "Generate custom character bitmaps for LCD displays.",
       "type": "text/html",
@@ -44,7 +42,7 @@
       ]
     },
     {
-      "urn": "urn:air:mohamedtarek.vercel.app:tool:ai-sites-directory",
+      "identifier": "urn:air:mohamedtarek.vercel.app:tool:ai-sites-directory",
       "displayName": "AI Sites Directory",
       "description": "Curated directory of AI tools and websites.",
       "type": "text/html",
@@ -56,7 +54,7 @@
       ]
     },
     {
-      "urn": "urn:air:mohamedtarek.vercel.app:page:portfolio",
+      "identifier": "urn:air:mohamedtarek.vercel.app:page:portfolio",
       "displayName": "Mohamed Tarek Portfolio",
       "description": "Main portfolio page showcasing engineering projects and skills.",
       "type": "text/html",

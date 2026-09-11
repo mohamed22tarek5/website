@@ -1,14 +1,10 @@
 {
-  "schema": "https://modelcontextprotocol.io/schema/2025-03-26/server-card.json",
   "serverInfo": {
     "name": "Mohamed Tarek Portfolio",
     "version": "1.0.0"
   },
   "description": "Portfolio and engineering tools for Mohamed Tarek - Communications Engineer, Web Developer, Arduino Expert, and PCB Designer. Provides calculators, tools, and project information.",
-  "transport": {
-    "type": "http",
-    "url": "https://mohamedtarek.vercel.app/.well-known/mcp/"
-  },
+  "endpoint": "/mcp",
   "capabilities": {
     "tools": true,
     "resources": true,

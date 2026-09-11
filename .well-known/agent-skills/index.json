@@ -1,119 +1,119 @@
 {
-  "$schema": "https://agentskills.io/schema/v0.2.0",
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
   "version": "0.2.0",
   "domain": "mohamedtarek.vercel.app",
   "skills": [
     {
       "name": "ohms-law-calculator",
-      "type": "tool",
+      "type": "skill-md",
       "description": "Calculate voltage, current, resistance, or power using Ohm's Law. Enter any two values to compute the remaining two.",
       "url": "https://mohamedtarek.vercel.app/sites/ohms-law-calculator.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "resistor-calculator",
-      "type": "tool",
+      "type": "skill-md",
       "description": "Calculate resistor values from color bands. Supports 4-band and 5-band resistor codes.",
       "url": "https://mohamedtarek.vercel.app/sites/resistor-calculator.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "resistor-for-led",
-      "type": "tool",
+      "type": "skill-md",
       "description": "Calculate the correct resistor value for LED circuits based on supply voltage, LED forward voltage, and desired current.",
       "url": "https://mohamedtarek.vercel.app/sites/resistor-for-led.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "capacitor-calculator",
-      "type": "tool",
+      "type": "skill-md",
       "description": "Calculate capacitor values including RC time constant, reactance, and energy storage.",
       "url": "https://mohamedtarek.vercel.app/sites/capacitor-calculator.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "inductance-calculator",
-      "type": "tool",
+      "type": "skill-md",
       "description": "Calculate inductor values including reactance, energy storage, and LC resonance frequency.",
       "url": "https://mohamedtarek.vercel.app/sites/Indactance-calculator.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "buck-boost-calculator",
-      "type": "tool",
+      "type": "skill-md",
       "description": "Design buck and boost converters. Calculate duty cycle, component values, and efficiency.",
       "url": "https://mohamedtarek.vercel.app/sites/buck-boost-calculator.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "battery-capacity-calculator",
-      "type": "tool",
+      "type": "skill-md",
       "description": "Calculate battery capacity, runtime, and discharge rates for various battery configurations.",
       "url": "https://mohamedtarek.vercel.app/sites/Battery-Capacity-&-Runtime-Calculator.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "power-factor-calculator",
-      "type": "tool",
+      "type": "skill-md",
       "description": "Calculate power factor, real power, reactive power, and apparent power for AC circuits.",
       "url": "https://mohamedtarek.vercel.app/sites/Power-Factor-Calculator.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "lcd-custom-character-generator",
-      "type": "tool",
+      "type": "skill-md",
       "description": "Generate custom character bitmaps for 16x2 and 20x4 LCD displays. Export as Arduino code.",
       "url": "https://mohamedtarek.vercel.app/sites/LCD-Custom-Character-Generator.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "wire-gauge-calculator",
-      "type": "tool",
+      "type": "skill-md",
       "description": "Calculate wire gauge (AWG) based on current, voltage drop, and wire length requirements.",
       "url": "https://mohamedtarek.vercel.app/sites/Wire-Gauge-Calculator.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "length-converter",
-      "type": "tool",
+      "type": "skill-md",
       "description": "Convert between different length units including meters, feet, inches, centimeters, and more.",
       "url": "https://mohamedtarek.vercel.app/sites/Length-Converter.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "ai-sites-list",
-      "type": "directory",
+      "type": "skill-md",
       "description": "Curated directory of AI tools and websites for productivity, creativity, and development.",
       "url": "https://mohamedtarek.vercel.app/sites/ai-sites-list.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "linux-commands",
-      "type": "reference",
+      "type": "skill-md",
       "description": "Interactive reference for mastering essential Linux commands with examples and explanations.",
       "url": "https://mohamedtarek.vercel.app/sites/Mastering%20Linux%20Commands.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "portfolio-homepage",
-      "type": "page",
+      "type": "skill-md",
       "description": "Main portfolio page for Mohamed Tarek - Communications Engineer, Web Developer, Arduino Expert, and PCB Designer.",
       "url": "https://mohamedtarek.vercel.app/",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "projects-showcase",
-      "type": "page",
+      "type": "skill-md",
       "description": "Showcase of featured engineering and web development projects.",
       "url": "https://mohamedtarek.vercel.app/Mohamed%20-%20Project.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "services",
-      "type": "page",
+      "type": "skill-md",
       "description": "Engineering services offered including web development, Arduino programming, PCB design, and embedded systems.",
       "url": "https://mohamedtarek.vercel.app/Mohamed%20-%20Services.html",
-      "sha256": ""
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   ]
 }

@@ -1,10 +1,12 @@
-# Agent Authentication — Mohamed Tarek Portfolio
+# auth.md
 
-## Overview
+## Agent Authentication — Mohamed Tarek Portfolio
+
+### Overview
 
 This site is a static portfolio with no protected APIs requiring authentication. All content is publicly accessible.
 
-## Public Endpoints
+### Public Endpoints
 
 All endpoints are open and do not require authentication:
 
@@ -17,11 +19,11 @@ All endpoints are open and do not require authentication:
 | `/.well-known/mcp/server-card.json` | MCP Server Card |
 | `/.well-known/ai-catalog.json` | ARD capability manifest |
 
-## Agent Registration
+### Agent Registration
 
 No registration is required to access this site. All content is freely available.
 
-## Contact
+### Contact
 
 For questions or collaboration, reach out via:
 
@@ -29,6 +31,6 @@ For questions or collaboration, reach out via:
 - **LinkedIn**: [Mohamed Tarek](https://www.linkedin.com/in/mohamedtarek20)
 - **Email**: Available through social media links
 
-## Content Usage
+### Content Usage
 
 See `robots.txt` for content usage preferences including AI training and search directives.
