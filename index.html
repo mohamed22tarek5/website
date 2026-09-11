@@ -8,18 +8,23 @@
   <!-- Primary Meta -->
   <title>Mohamed Tarek | Communications Engineer & Developer</title>
   <meta name="description" content="Portfolio of Mohamed Tarek — Communications Engineer, Web Developer, Arduino Expert, and PCB Designer. Building innovative solutions at the intersection of hardware and software.">
-  <meta name="keywords" content="Mohamed Tarek, communications engineer, web developer, Arduino, PCB design,PCBA, embedded systems, IoT, portfolio">
+  <meta name="keywords" content="Mohamed Tarek, communications engineer, web developer, Arduino, PCB design, PCBA, embedded systems, IoT, portfolio">
   <meta name="author" content="Mohamed Tarek">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0a0e1a">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0e1a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+  <link rel="canonical" href="https://website-mohamed.vercel.app/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Mohamed Tarek | Engineer & Developer">
   <meta property="og:description" content="Communications Engineer, Web Developer, Arduino Expert, and PCB Designer building innovative solutions.">
   <meta property="og:image" content="https://website-mohamed.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://website-mohamed.vercel.app">
   <meta property="og:site_name" content="Mohamed Tarek Portfolio">
+  <meta property="og:locale" content="en_US">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -241,6 +246,22 @@
     }
 
     /* ============================================
+       FOCUS STATES (Accessibility)
+       ============================================ */
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+
+    .btn:focus-visible,
+    .nav-link:focus-visible,
+    .nav-cta:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    /* ============================================
        SKIP LINK (Accessibility)
        ============================================ */
     .skip-link {
@@ -432,6 +453,21 @@
       transform: rotate(-45deg) translate(5px, -5px);
     }
 
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+
+    .mobile-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     @media (max-width: 768px) {
       .menu-toggle {
         display: flex;
@@ -443,6 +479,7 @@
         right: -100%;
         width: min(320px, 85vw);
         height: 100vh;
+        height: 100dvh;
         background: var(--color-bg-secondary);
         flex-direction: column;
         align-items: flex-start;
@@ -470,21 +507,6 @@
         text-align: center;
         display: block;
         padding: var(--space-md);
-      }
-
-      .mobile-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity var(--transition-base);
-      }
-
-      .mobile-overlay.active {
-        opacity: 1;
-        pointer-events: auto;
       }
     }
 
@@ -939,8 +961,10 @@
 
     .about-image {
       width: 100%;
+      aspect-ratio: 480 / 560;
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-lg);
+      object-fit: cover;
     }
 
     .about-image-accent {
@@ -1493,6 +1517,15 @@
     .form-input::placeholder,
     .form-textarea::placeholder {
       color: var(--color-text-tertiary);
+    }
+
+    .form-input:invalid:not(:placeholder-shown),
+    .form-textarea:invalid:not(:placeholder-shown) {
+      border-color: var(--color-error);
+    }
+
+    .form-input:valid:not(:placeholder-shown) {
+      border-color: var(--color-success);
     }
 
     .form-textarea {
@@ -2547,7 +2580,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="#" class="logo" aria-label="Mohamed Tarek - Home">
+      <a href="#home" class="logo" aria-label="Mohamed Tarek - Home">
             <span class="logo-icon">MT</span>
             <span>Mohamed Tarek</span>
           </a>
@@ -2608,7 +2641,7 @@
   </button>
 
   <!-- Theme Toggle -->
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+  <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">
     <i class="fas fa-moon"></i>
   </button>
 
@@ -2634,12 +2667,14 @@
          LOADING SCREEN
          ---------------------------------------- */
       const loader = document.getElementById('loader');
-      window.addEventListener('load', () => {
-        setTimeout(() => {
+      const hideLoader = () => {
+        if (loader && !loader.classList.contains('hidden')) {
           loader.classList.add('hidden');
           document.body.style.overflow = '';
-        }, 400);
-      });
+        }
+      };
+      window.addEventListener('load', () => setTimeout(hideLoader, 400));
+      setTimeout(hideLoader, 3000);
 
       /* ----------------------------------------
          SCROLL PROGRESS BAR
@@ -2728,6 +2763,13 @@
       menuToggle.addEventListener('click', toggleMenu);
       mobileOverlay.addEventListener('click', toggleMenu);
 
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+          toggleMenu();
+          menuToggle.focus();
+        }
+      });
+
       navLinks.forEach(link => {
         link.addEventListener('click', () => {
           if (navMenu.classList.contains('active')) toggleMenu();
@@ -2750,7 +2792,9 @@
       const applyTheme = (theme) => {
         document.documentElement.setAttribute('data-theme', theme);
         themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
         localStorage.setItem(STORAGE_KEY, theme);
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === 'dark' ? '#0a0e1a' : '#f8fafc');
       };
 
       applyTheme(getPreferredTheme());
@@ -2855,11 +2899,13 @@
 
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
+        const subject = document.getElementById('subject').value.trim();
         const message = document.getElementById('message').value.trim();
 
         if (!name || !email || !message) {
           formStatus.textContent = 'Please fill in all required fields.';
           formStatus.className = 'form-status error';
+          formStatus.focus();
           return;
         }
 
@@ -2867,14 +2913,27 @@
         if (!emailRegex.test(email)) {
           formStatus.textContent = 'Please enter a valid email address.';
           formStatus.className = 'form-status error';
+          formStatus.focus();
+          return;
+        }
+
+        if (message.length < 10) {
+          formStatus.textContent = 'Message must be at least 10 characters.';
+          formStatus.className = 'form-status error';
+          formStatus.focus();
           return;
         }
 
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
+        const mailtoLink = 'mailto:mohammed.tarek.abdelhady.ali@gmail.com'
+          + '?subject=' + encodeURIComponent(subject || 'Portfolio Contact from ' + name)
+          + '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+
         setTimeout(() => {
-          formStatus.textContent = 'Message sent successfully! I\'ll get back to you soon.';
+          window.location.href = mailtoLink;
+          formStatus.textContent = 'Opening your email client... If it didn\'t open, email me directly at mohammed.tarek.abdelhady.ali@gmail.com';
           formStatus.className = 'form-status success';
           contactForm.reset();
           submitBtn.disabled = false;
@@ -2882,8 +2941,8 @@
 
           setTimeout(() => {
             formStatus.className = 'form-status';
-          }, 5000);
-        }, 1500);
+          }, 8000);
+        }, 800);
       });
 
       /* ----------------------------------------
@@ -2972,13 +3031,17 @@
       function showUpdateNotification() {
         const el = document.createElement('div');
         el.className = 'pwa-update-notification';
+        el.setAttribute('role', 'status');
+        el.setAttribute('aria-live', 'polite');
         el.innerHTML = `
           <p>New update available!</p>
           <div class="btn-group">
-            <button class="btn btn-primary" style="padding:8px 16px;font-size:0.8125rem;" onclick="window.location.reload()">Update</button>
-            <button class="btn btn-ghost" style="padding:8px 16px;font-size:0.8125rem;color:var(--color-text-secondary);" onclick="this.closest('.pwa-update-notification').remove()">Later</button>
+            <button class="btn btn-primary update-apply" style="padding:8px 16px;font-size:0.8125rem;">Update</button>
+            <button class="btn btn-ghost update-dismiss" style="padding:8px 16px;font-size:0.8125rem;color:var(--color-text-secondary);">Later</button>
           </div>
         `;
+        el.querySelector('.update-apply').addEventListener('click', () => window.location.reload());
+        el.querySelector('.update-dismiss').addEventListener('click', () => el.remove());
         document.body.appendChild(el);
         setTimeout(() => { if (el.parentNode) el.remove(); }, 15000);
       }
@@ -2999,7 +3062,9 @@
          ---------------------------------------- */
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
-          const target = document.querySelector(anchor.getAttribute('href'));
+          const href = anchor.getAttribute('href');
+          if (href === '#') return;
+          const target = document.querySelector(href);
           if (target) {
             e.preventDefault();
             const offset = 80;
@@ -3007,6 +3072,15 @@
             window.scrollTo({ top, behavior: 'smooth' });
           }
         });
+      });
+
+      /* ----------------------------------------
+         IMAGE ERROR HANDLING
+         ---------------------------------------- */
+      document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', function() {
+          this.style.display = 'none';
+        }, { once: true });
       });
 
       /* ----------------------------------------
