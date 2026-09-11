@@ -10,6 +10,8 @@ This document is for AI agents, automated systems, and MCP clients accessing the
 
 No registration is required. All content and tools are publicly accessible without authentication.
 
+Use anonymous access — no credentials needed for any endpoint.
+
 ### Provisioning
 
 No provisioning needed. Access all endpoints directly via HTTP GET.

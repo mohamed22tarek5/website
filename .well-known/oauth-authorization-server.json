@@ -11,7 +11,11 @@
     "skill": "auth-md",
     "register_uri": "https://mohamedtarek.vercel.app/agent/auth",
     "identity_types_supported": ["anonymous"],
+    "anonymous": {
+      "credential_types_supported": ["api_key"]
+    },
     "credential_types_supported": ["api_key"],
-    "claim_uri": "https://mohamedtarek.vercel.app/.well-known/oauth-protected-resource"
+    "claim_uri": "https://mohamedtarek.vercel.app/.well-known/oauth-protected-resource",
+    "revocation_uri": "https://mohamedtarek.vercel.app/agent/auth/revoke"
   }
 }
