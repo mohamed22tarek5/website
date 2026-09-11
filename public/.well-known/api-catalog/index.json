@@ -1,0 +1,45 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://mohamedtarek.vercel.app/",
+      "service-desc": [
+        {
+          "href": "https://mohamedtarek.vercel.app/Mohamed%20-%20CV.html",
+          "title": "CV & Resume",
+          "type": "text/html"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://mohamedtarek.vercel.app/Mohamed%20-%20Services.html",
+          "title": "Services Documentation",
+          "type": "text/html"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://mohamedtarek.vercel.app/.well-known/health",
+          "title": "Health Check",
+          "type": "application/json"
+        }
+      ]
+    },
+    {
+      "anchor": "https://mohamedtarek.vercel.app/sites/ohms-law-calculator.html",
+      "service-desc": [
+        {
+          "href": "https://mohamedtarek.vercel.app/sites/ohms-law-calculator.html",
+          "title": "Ohm's Law Calculator",
+          "type": "text/html"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://mohamedtarek.vercel.app/sites/Mastering%20Linux%20Commands.html",
+          "title": "Engineering Tools Documentation",
+          "type": "text/html"
+        }
+      ]
+    }
+  ]
+}

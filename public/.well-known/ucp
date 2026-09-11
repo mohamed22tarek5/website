@@ -1,0 +1,26 @@
+{
+  "protocol_version": "1.0.0",
+  "protocol": "ucp",
+  "services": [
+    {
+      "name": "portfolio",
+      "description": "Mohamed Tarek Portfolio — engineering projects, tools, and calculators",
+      "base_url": "https://mohamedtarek.vercel.app"
+    },
+    {
+      "name": "calculators",
+      "description": "Electronics and engineering calculators",
+      "base_url": "https://mohamedtarek.vercel.app/sites/"
+    }
+  ],
+  "capabilities": {
+    "content_access": true,
+    "micropayments": true,
+    "agent_registration": true
+  },
+  "endpoints": {
+    "catalog": "https://mohamedtarek.vercel.app/.well-known/ai-catalog.json",
+    "mcp": "https://mohamedtarek.vercel.app/.well-known/mcp/server-card.json",
+    "auth": "https://mohamedtarek.vercel.app/auth.md"
+  }
+}
