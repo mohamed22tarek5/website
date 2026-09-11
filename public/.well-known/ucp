@@ -5,12 +5,12 @@
     {
       "name": "portfolio",
       "description": "Mohamed Tarek Portfolio — engineering projects, tools, and calculators",
-      "base_url": "https://mohamedtarek.vercel.app"
+      "base_url": "https://website-mohamed.vercel.app"
     },
     {
       "name": "calculators",
       "description": "Electronics and engineering calculators",
-      "base_url": "https://mohamedtarek.vercel.app/sites/"
+      "base_url": "https://website-mohamed.vercel.app/sites/"
     }
   ],
   "capabilities": {
@@ -19,8 +19,8 @@
     "agent_registration": true
   },
   "endpoints": {
-    "catalog": "https://mohamedtarek.vercel.app/.well-known/ai-catalog.json",
-    "mcp": "https://mohamedtarek.vercel.app/.well-known/mcp/server-card.json",
-    "auth": "https://mohamedtarek.vercel.app/auth.md"
+    "catalog": "https://website-mohamed.vercel.app/.well-known/ai-catalog.json",
+    "mcp": "https://website-mohamed.vercel.app/.well-known/mcp/server-card.json",
+    "auth": "https://website-mohamed.vercel.app/auth.md"
   }
 }
