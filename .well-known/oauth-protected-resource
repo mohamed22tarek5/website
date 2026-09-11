@@ -1,10 +1,11 @@
 {
-  "resource": "https://mohamedtarek.vercel.app/",
+  "resource": "https://mohamedtarek.vercel.app",
   "authorization_servers": [
     "https://mohamedtarek.vercel.app"
   ],
   "scopes_supported": ["read", "tools"],
   "bearer_methods_supported": ["header"],
   "resource_name": "Mohamed Tarek Portfolio",
-  "resource_documentation": "https://mohamedtarek.vercel.app/Mohamed%20-%20Services.html"
+  "resource_documentation": "https://mohamedtarek.vercel.app/Mohamed%20-%20Services.html",
+  "resource_signing_alg_values_supported": ["RS256"]
 }
