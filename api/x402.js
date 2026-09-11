@@ -4,12 +4,13 @@
  * Implements agent-native HTTP payments per https://x402.org
  * Protected routes return HTTP 402 with payment requirements.
  *
- * In production, replace RECEIVER_WALLET with your actual wallet address.
+ * In production, replace RECEIVER_WALLET with your actual wallet address
+ * and install @x402/next middleware for full protocol support.
  */
 
 const FACILITATOR_URL = 'https://x402.org/facilitator';
 const RECEIVER_WALLET = '0x0000000000000000000000000000000000000000';
-const NETWORK = 'base-sepolia';
+const NETWORK = 'eip155:84532';
 const SITE_URL = 'https://website-mohamed.vercel.app';
 
 function toBase64Url(obj) {
