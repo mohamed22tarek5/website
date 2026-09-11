@@ -53,7 +53,7 @@
       ]
     },
     {
-      "source": "/.well-known/oauth-protected-resource",
+      "source": "/.well-known/oauth-protected-resource\\.json",
       "headers": [
         { "key": "Content-Type", "value": "application/resource-metadata+json" },
         { "key": "Access-Control-Allow-Origin", "value": "*" },
