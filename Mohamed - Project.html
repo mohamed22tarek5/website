@@ -303,7 +303,7 @@
   </main>
 
   <!-- Modal -->
-  <div class="modal-overlay" id="modalOverlay" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
       <button class="modal-close" id="modalClose" aria-label="Close modal"><i class="fas fa-xmark"></i></button>
       <div class="modal-image"><img id="modalImg" src="" alt=""></div>
@@ -350,9 +350,9 @@
 
     // Project Data
     const projectsData = [
-      { id:'blind-glasses', title:'Blind Assistance Glasses', category:'arduino iot', displayCategory:'Arduino Project', image:'Project/5.jpg', description:'Innovative wearable device using ultrasonic sensors to detect obstacles and provide audio feedback for visually impaired users. Features adjustable detection range and multiple alert modes.', tech:['Arduino Nano','Ultrasonic HC-SR04','Audio Module','3D Printed Frame','Li-ion Battery','Bluetooth'], links:[{text:'View Demo',url:'https://fb.watch/ipRaFH0KIr/',external:true,type:'primary'},{text:'View Schematic',url:'Project/5-schematic.jpg',external:false,type:'secondary'}], isRecent:true, date:'2024' },
+      { id:'blind-glasses', title:'Blind Assistance Glasses', category:'arduino iot', displayCategory:'Arduino Project', image:'Project/5.jpg', description:'Innovative wearable device using ultrasonic sensors to detect obstacles and provide audio feedback for visually impaired users. Features adjustable detection range and multiple alert modes.', tech:['Arduino Nano','Ultrasonic HC-SR04','Audio Module','3D Printed Frame','Li-ion Battery','Bluetooth'], links:[{text:'View Demo',url:'https://fb.watch/ipRaFH0KIr/',external:true,type:'primary'}], isRecent:true, date:'2024' },
       { id:'portfolio-website', title:'Portfolio Website', category:'web', displayCategory:'Web Development', image:'Project/2.png', description:'Responsive personal portfolio website built with HTML5, CSS3, and JavaScript featuring modern design, smooth animations, and comprehensive project showcase.', tech:['HTML5','CSS3','JavaScript','Responsive Design','CSS Grid','Flexbox'], links:[{text:'Live Preview',url:'index.html',external:false,type:'primary'},{text:'View Code',url:'https://github.com/mohamed22tarek5/website',external:true,type:'secondary'}], isRecent:true, date:'2024' },
-      { id:'relay-pcb', title:'20-Line Relay Module PCB', category:'pcb electronics', displayCategory:'PCB Design', image:'Project/3.png', description:'Professional PCB design for a 20-line relay module with optimized routing, power distribution, and thermal management for industrial automation applications.', tech:['Altium Designer','Relay Drivers','Power Regulation','Signal Isolation','Thermal Management'], links:[{text:'View Design',url:'Project/3.1.jpg',external:false,type:'primary'},{text:'Schematic PDF',url:'Project/3-schematic.pdf',external:false,type:'secondary'}], isRecent:true, date:'2023' },
+      { id:'relay-pcb', title:'20-Line Relay Module PCB', category:'pcb electronics', displayCategory:'PCB Design', image:'Project/3.png', description:'Professional PCB design for a 20-line relay module with optimized routing, power distribution, and thermal management for industrial automation applications.', tech:['Altium Designer','Relay Drivers','Power Regulation','Signal Isolation','Thermal Management'], links:[{text:'View Design',url:'Project/3.1.jpg',external:false,type:'primary'}], isRecent:true, date:'2023' },
       { id:'smart-home-v1', title:'Smart Home Control Board V1', category:'arduino iot', displayCategory:'Arduino Project', image:'Project/1.jpg', description:'First iteration of a smart home control system with basic automation features, relay control, and manual override capabilities for residential automation.', tech:['Arduino Uno','Relay Modules','Temperature Sensors','LCD Display','IR Remote'], links:[{text:'View Schematic',url:'Project/1.jpg',external:false,type:'primary'}], isRecent:false, date:'2022' },
       { id:'smart-home-v2', title:'Smart Home Control Board V2', category:'arduino iot', displayCategory:'Arduino Project', image:'Project/6.jpg', description:'Enhanced version with improved functionality, user interface, and additional sensors for more sophisticated home automation scenarios.', tech:['Arduino Mega','WiFi Module','Motion Sensors','Touch Interface','Power Monitoring'], links:[{text:'View Design',url:'Project/6.jpg',external:false,type:'primary'}], isRecent:true, date:'2023' },
       { id:'flasher-charger', title:'Flasher & Charger Circuit', category:'electronics', displayCategory:'Electronics', image:'Project/7.jpg', description:'Dual-purpose circuit designed for both battery charging and LED flashing applications with adjustable parameters and protection features.', tech:['555 Timer IC','Voltage Regulation','Battery Management','LED Drivers','PCB Design'], links:[{text:'View Circuit',url:'Project/7.jpg',external:false,type:'primary'}], isRecent:true, date:'2023' },
@@ -409,6 +409,12 @@
     menuToggle.addEventListener('click', toggleMenu);
     mobileOverlay.addEventListener('click', toggleMenu);
     document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => { if (navMenu.classList.contains('active')) toggleMenu(); }));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && navMenu.classList.contains('active')) {
+        toggleMenu();
+        menuToggle.focus();
+      }
+    });
 
     // Theme
     const themeToggle = document.getElementById('themeToggle');
@@ -497,10 +503,12 @@
     const modalDesc = document.getElementById('modalDesc');
     const modalTech = document.getElementById('modalTech');
     const modalActions = document.getElementById('modalActions');
+    let lastFocusedElement = null;
 
     function openModal(id) {
       const p = projectsData.find(x => x.id === id);
       if (!p) return;
+      lastFocusedElement = document.activeElement;
       modalImg.src = p.image;
       modalImg.alt = p.title;
       modalCategory.textContent = p.displayCategory;
@@ -511,12 +519,14 @@
       modalOverlay.classList.add('active');
       modalOverlay.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      modalClose.focus();
     }
 
     function closeModal() {
       modalOverlay.classList.remove('active');
       modalOverlay.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      lastFocusedElement?.focus();
     }
 
     document.addEventListener('click', (e) => {
@@ -527,6 +537,14 @@
     modalClose.addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal(); });
+    modalOverlay.addEventListener('keydown', (event) => {
+      if (event.key !== 'Tab' || !modalOverlay.classList.contains('active')) return;
+      const focusable = modalOverlay.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])');
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
 
     // Footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();

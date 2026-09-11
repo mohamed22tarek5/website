@@ -487,6 +487,15 @@
     const certsGrid = document.getElementById('certs-grid');
     const searchInput = document.getElementById('cert-search');
     const noResults = document.getElementById('no-results');
+    let lastFocusedElement = null;
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
     const renderCerts = (filter = 'all', search = '') => {
       const filtered = certificatesData.filter(c => {
@@ -524,22 +533,16 @@
           certsGrid.appendChild(card);
         });
         document.querySelectorAll('.cert-card .btn-view').forEach(btn => {
-          btn.addEventListener('click', () => openModal(parseInt(btn.dataset.idx)); });
+          btn.addEventListener('click', () => openModal(parseInt(btn.dataset.idx), btn)); });
       }
-      // Re-observe reveals
-      document.querySelectorAll('.reveal:not(.revealed)').forEach(el => {
-        if (!el.dataset.observed) { el.dataset.observed = 'true'; }
-      });
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('revealed'); revealObserver.unobserve(entry.target); } });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
       document.querySelectorAll('.reveal:not(.revealed)').forEach(el => revealObserver.observe(el));
       document.getElementById('cert-count').textContent = filtered.length;
     };
 
-    const openModal = (id) => {
+    const openModal = (id, trigger) => {
       const cert = certificatesData.find(c => c.id === id);
       if (!cert) return;
+      lastFocusedElement = trigger || document.activeElement;
       document.getElementById('modal-cert-title').textContent = cert.title;
       document.getElementById('modal-cert-img').src = cert.image;
       document.getElementById('modal-cert-img').alt = cert.title + ' certificate';
@@ -557,6 +560,7 @@
       modal.classList.remove('active');
       modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      lastFocusedElement?.focus();
     };
     document.getElementById('cert-modal-close').addEventListener('click', closeModal);
     document.getElementById('cert-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
