@@ -77,6 +77,40 @@
       ]
     },
     {
+      "source": "/.well-known/ucp",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/openapi\\.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/agent/identity",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
+      ]
+    },
+    {
+      "source": "/agent/identity/claim",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" }
+      ]
+    },
+    {
       "source": "/.well-known/agent-card\\.json",
       "headers": [
         { "key": "Content-Type", "value": "application/json" },
@@ -123,6 +157,14 @@
     {
       "source": "/.well-known/openid-configuration",
       "destination": "/.well-known/openid-configuration.json"
+    },
+    {
+      "source": "/agent/identity",
+      "destination": "/api/agent/identity"
+    },
+    {
+      "source": "/agent/identity/claim",
+      "destination": "/api/agent/identity/claim"
     }
   ]
 }
