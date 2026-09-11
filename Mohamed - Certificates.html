@@ -1,4 +1,3 @@
-@ -0,0 +1,808 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -322,6 +321,7 @@
       padding: var(--space-md);
       transition: transform var(--transition-slow);
     }
+    .cert-img-fallback { padding: 3rem; opacity: 0.72; }
     .cert-card:hover .cert-img { transform: scale(1.05); }
 
     .cert-badge {
@@ -732,8 +732,7 @@
         card.innerHTML = `
           <div class="cert-img-wrap">
             <span class="cert-badge">${badge}</span>
-            <img src="${cert.image}" alt="${cert.title} Certificate" class="cert-img" loading="lazy"
-              onerror="this.src='https://via.placeholder.com/400x250/161b2e/3b82f6?text=${encodeURIComponent(cert.title)}'">
+            <img src="${cert.image}" alt="${cert.title} Certificate" class="cert-img" loading="lazy">
           </div>
           <div class="cert-body">
             <h3>${cert.title}</h3>
@@ -753,10 +752,30 @@
           </div>
         `;
         certsGrid.appendChild(card);
+        const image = card.querySelector('.cert-img');
+        let retries = 0;
+        const recoverImage = () => {
+          if (retries === 0) {
+            retries += 1;
+            window.setTimeout(() => {
+              image.src = `${cert.image}?retry=${Date.now()}`;
+            }, 250);
+            return;
+          }
+          image.removeEventListener('error', recoverImage);
+          image.removeAttribute('src');
+          image.src = 'icon.png';
+          image.alt = `${cert.title} certificate preview unavailable`;
+          image.classList.add('cert-img-fallback');
+        };
+        image.addEventListener('error', recoverImage);
       });
 
       requestAnimationFrame(() => {
-        certsGrid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        certsGrid.querySelectorAll('.reveal').forEach(el => {
+          if (revealObserver) revealObserver.observe(el);
+          else el.classList.add('revealed');
+        });
       });
     }
 
@@ -796,12 +815,22 @@
     certModal.addEventListener('click', e => { if (e.target === certModal) closeCertModal(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCertModal(); });
 
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('revealed'); });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    const revealObserver = 'IntersectionObserver' in window
+      ? new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' })
+      : null;
 
     renderCertificates();
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => {
+      if (revealObserver) revealObserver.observe(el);
+      else el.classList.add('revealed');
+    });
     document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
   <script src="pwa.js"></script>
