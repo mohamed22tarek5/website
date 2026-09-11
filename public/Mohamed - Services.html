@@ -8,8 +8,10 @@
   <meta name="description" content="Professional services offered by Mohamed Tarek — Web Development, Arduino Programming, PCB Design, IoT Solutions, and more.">
   <meta name="keywords" content="web development, arduino programming, PCB design, smart home automation, embedded systems, electronics services, IoT solutions">
   <meta name="author" content="Mohamed Tarek">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0a0e1a">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="theme-color" content="#0a0e1a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+  <link rel="canonical" href="https://website-mohamed.vercel.app/Mohamed%20-%20Services.html">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="M. Tarek">
@@ -17,7 +19,10 @@
   <meta property="og:title" content="Mohamed Tarek - Services">
   <meta property="og:description" content="Professional services in web development, Arduino programming, PCB design and more">
   <meta property="og:image" content="https://website-mohamed.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:url" content="https://website-mohamed.vercel.app/Mohamed%20-%20Services.html">
+  <meta property="og:locale" content="en_US">
   <link rel="icon" href="icon.png" type="image/png" sizes="any">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="manifest" href="manifest.webmanifest">
@@ -25,6 +30,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Mohamed Tarek - Engineering Services",
+    "description": "Professional services in web development, Arduino programming, PCB design, IoT solutions, and embedded systems.",
+    "url": "https://website-mohamed.vercel.app/Mohamed%20-%20Services.html",
+    "image": "https://website-mohamed.vercel.app/photo.jpg",
+    "provider": {
+      "@type": "Person",
+      "name": "Mohamed Tarek",
+      "url": "https://website-mohamed.vercel.app"
+    },
+    "areaServed": "EG",
+    "serviceType": ["Web Development", "Arduino Programming", "PCB Design", "IoT Solutions", "Embedded Systems", "Smart Home Automation"]
+  }
+  </script>
   <style>
     :root {
       --color-bg-primary: #0a0e1a;
@@ -127,6 +149,10 @@
       transition: width 50ms linear;
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-progress { transition: none; }
+    }
+
     .container {
       width: 100%; max-width: var(--container-max);
       margin: 0 auto; padding: 0 var(--space-xl);
@@ -135,14 +161,6 @@
     @media (max-width: 768px) { .container { padding: 0 var(--space-md); } }
     section { padding: var(--space-4xl) 0; position: relative; }
     @media (max-width: 768px) { section { padding: var(--space-3xl) 0; } }
-
-    .glass {
-      background: var(--gradient-card);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--color-border);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
 
     .header {
       position: fixed; top: 0; left: 0; right: 0;
@@ -458,7 +476,7 @@
       .menu-toggle { display: flex; }
       .nav {
         position: fixed; top: 0; right: -100%;
-        width: min(320px, 85vw); height: 100vh;
+        width: min(320px, 85vw); height: 100vh; height: 100dvh;
         background: var(--color-bg-secondary); flex-direction: column;
         align-items: flex-start; justify-content: center;
         padding: 3rem; gap: 0.25rem;
@@ -641,7 +659,7 @@
     </section>
   </main>
 
-  <div class="service-modal" id="service-modal" aria-hidden="true" role="dialog">
+  <div class="service-modal" id="service-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-panel">
       <div class="modal-header">
         <h2 id="modal-title"></h2>
@@ -652,7 +670,7 @@
         <div class="modal-features" id="modal-features"></div>
       </div>
       <div class="modal-footer">
-        <a href="#contact" class="btn-primary" id="modal-cta">Get Started <i class="fas fa-arrow-right"></i></a>
+        <a href="index.html#contact" class="btn-primary" id="modal-cta">Get Started <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </div>
@@ -667,10 +685,10 @@
           </a>
           <p>Communications Engineer and Web Developer creating innovative solutions that bridge hardware and software.</p>
           <div class="footer-social">
-            <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://wa.me/+201090637406" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
         <div class="footer-col">
@@ -791,12 +809,28 @@
       }
     };
 
-    // Scroll progress
+    // Scroll progress + header + back-to-top (combined & throttled)
+    const scrollProgress = document.getElementById('scroll-progress');
+    const header = document.getElementById('header');
+    const backToTop = document.getElementById('back-to-top');
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    let scrollTicking = false;
+
+    const onScroll = () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      scrollProgress.style.width = docHeight > 0 ? (scrollTop / docHeight * 100) + '%' : '0%';
+      header.classList.toggle('scrolled', scrollTop > 50);
+      backToTop.classList.toggle('active', scrollTop > 400);
+      themeToggleBtn.classList.toggle('active', scrollTop > 200);
+      scrollTicking = false;
+    };
+
     window.addEventListener('scroll', () => {
-      const scrollTop = document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      document.getElementById('scroll-progress').style.width = (scrollTop / scrollHeight * 100) + '%';
-    });
+      if (!scrollTicking) { requestAnimationFrame(onScroll); scrollTicking = true; }
+    }, { passive: true });
+
+    document.getElementById('back-to-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     // Mobile menu
     const menuToggle = document.getElementById('menuToggle');
@@ -811,32 +845,38 @@
     };
     menuToggle.addEventListener('click', toggleMenu);
     mobileOverlay.addEventListener('click', toggleMenu);
-
-    // Header scroll
-    window.addEventListener('scroll', () => {
-      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
-      document.getElementById('back-to-top').classList.toggle('active', window.scrollY > 400);
-      document.getElementById('theme-toggle').classList.toggle('active', window.scrollY > 200);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        toggleMenu();
+        menuToggle.focus();
+      }
     });
-
-    document.getElementById('back-to-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
     // Theme toggle
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = themeToggle.querySelector('i');
-    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    const STORAGE_KEY = 'portfolio-theme';
+    const savedTheme = localStorage.getItem(STORAGE_KEY) || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+    const applyTheme = (theme) => {
+      document.documentElement.setAttribute('data-theme', theme);
+      themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+      themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      localStorage.setItem(STORAGE_KEY, theme);
+    };
+
+    applyTheme(savedTheme);
+
     themeToggle.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      themeIcon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-      localStorage.setItem('theme', next);
+      applyTheme(current === 'dark' ? 'light' : 'dark');
     });
 
     // Service modal
     const serviceModal = document.getElementById('service-modal');
+    const modalClose = document.getElementById('modal-close');
+    let lastFocusedElement = null;
+
     document.querySelectorAll('.open-service-modal').forEach(btn => {
       btn.addEventListener('click', () => {
         const service = serviceData[btn.dataset.service];
@@ -848,13 +888,24 @@
         for (const [cat, items] of Object.entries(service.features)) {
           const col = document.createElement('div');
           col.className = 'feature-col';
-          col.innerHTML = `<h4>${cat}</h4><ul>${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+          const h4 = document.createElement('h4');
+          h4.textContent = cat;
+          const ul = document.createElement('ul');
+          items.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            ul.appendChild(li);
+          });
+          col.appendChild(h4);
+          col.appendChild(ul);
           featuresEl.appendChild(col);
         }
         document.getElementById('modal-cta').textContent = `Inquire About ${service.title}`;
+        lastFocusedElement = btn;
         serviceModal.classList.add('active');
         serviceModal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
+        modalClose.focus();
       });
     });
 
@@ -862,10 +913,23 @@
       serviceModal.classList.remove('active');
       serviceModal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      if (lastFocusedElement) lastFocusedElement.focus();
     };
-    document.getElementById('modal-close').addEventListener('click', closeModal);
+    modalClose.addEventListener('click', closeModal);
     serviceModal.addEventListener('click', e => { if (e.target === serviceModal) closeModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && serviceModal.classList.contains('active')) closeModal();
+    });
+
+    // Focus trap in modal
+    serviceModal.addEventListener('keydown', (e) => {
+      if (e.key !== 'Tab' || !serviceModal.classList.contains('active')) return;
+      const focusable = serviceModal.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])');
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
 
     // Reveal on scroll
     const revealObserver = new IntersectionObserver((entries) => {
