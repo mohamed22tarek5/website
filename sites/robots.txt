@@ -1,14 +1,16 @@
 # robots.txt
-# Mohamed Tarek Portfolio
-# Allow all crawlers
+# Mohamed Tarek Portfolio - Sites Directory
+# https://mohamedtarek.vercel.app
 
 User-agent: *
 Allow: /
 
 Sitemap: https://mohamedtarek.vercel.app/sitemap.xml
 
+# Content Signals — AI content usage preferences
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
 # Blocked paths
-User-agent: *
 Disallow: /sw.js
 Disallow: /pwa.js
 Disallow: /cache/
