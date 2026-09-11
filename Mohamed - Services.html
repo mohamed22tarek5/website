@@ -464,19 +464,20 @@
     .back-to-top, .theme-toggle {
       position: fixed; z-index: 999; border-radius: var(--radius-full);
       display: flex; align-items: center; justify-content: center;
-      width: 44px; height: 44px; font-size: 1rem;
+      width: 48px; height: 48px; font-size: 1rem;
       opacity: 0; visibility: hidden;
       transition: all var(--transition-base);
       box-shadow: var(--shadow-md);
     }
     .back-to-top {
-      bottom: 24px; right: 24px;
+      bottom: 2rem; right: 2rem;
       background: var(--gradient-accent); color: white;
     }
     .theme-toggle {
-      bottom: 24px; left: 24px;
+      bottom: 2rem; right: 5.5rem;
       background: var(--color-bg-card); border: 1px solid var(--color-border);
       color: var(--color-accent);
+      opacity: 1; visibility: visible;
     }
     .back-to-top.active, .theme-toggle.active { opacity: 1; visibility: visible; }
     .back-to-top:hover { transform: translateY(-4px); box-shadow: var(--shadow-glow); }
@@ -747,9 +748,9 @@
         </div>
         <div class="footer-col">
           <h4>Connect</h4>
-          <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://wa.me/+201090637406" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer">WhatsApp</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -887,6 +888,11 @@
     };
     menuToggle.addEventListener('click', toggleMenu);
     mobileOverlay.addEventListener('click', toggleMenu);
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (navMenu.classList.contains('active')) toggleMenu();
+      });
+    });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && navMenu.classList.contains('active')) {
         toggleMenu();
