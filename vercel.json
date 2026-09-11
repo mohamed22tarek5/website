@@ -23,7 +23,7 @@
         { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"" },
         { "key": "Link", "value": "</manifest.webmanifest>; rel=\"manifest\"" },
         { "key": "Link", "value": "</Mohamed%20-%20Services.html>; rel=\"service-doc\"" },
-        { "key": "Link", "value": "</.well-known/http-message-signatures-directory>; rel=\"http-signatures-directory\"" },
+        { "key": "Link", "value": "</.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\"" },
         { "key": "Link", "value": "</api/x402>; rel=\"payment\"" }
       ]
     },

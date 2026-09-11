@@ -5,7 +5,7 @@
     "supported_versions": ["2025-09-29"],
     "documentation_url": "https://agenticcommerce.dev"
   },
-  "api_base_url": "https://mohamedtarek.vercel.app/api",
+  "api_base_url": "https://website-mohamed.vercel.app/api",
   "transports": ["rest"],
   "capabilities": {
     "services": ["checkout"]

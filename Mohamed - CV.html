@@ -6,6 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <title>Mohamed Tarek | Professional CV</title>
+  <meta name="description" content="View and download Mohamed Tarek's professional CV, covering communications engineering, embedded systems, IoT, PCB design, and web development.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+  <link rel="canonical" href="https://website-mohamed.vercel.app/Mohamed%20-%20CV.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mohamed Tarek | Professional CV">
+  <meta property="og:description" content="View Mohamed Tarek's professional CV and engineering qualifications.">
+  <meta property="og:image" content="https://website-mohamed.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://website-mohamed.vercel.app/Mohamed%20-%20CV.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mohamed Tarek | Professional CV">
+  <meta name="twitter:description" content="View Mohamed Tarek's professional CV and engineering qualifications.">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="description" content="Professional CV of Mohamed Tarek — Communications Engineer, Web Developer, Arduino Expert, and PCB Designer. Download or view my complete resume.">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0a0e1a">
@@ -1133,14 +1149,14 @@
             <i class="fas fa-exclamation-triangle"></i>
             <h3>Unable to load PDF</h3>
             <p>The CV PDF could not be loaded. Please download it instead.</p>
-            <a href="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
+            <a href="CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
               <i class="fas fa-download"></i> Download CV
             </a>
           </div>
 
           <!-- PDF Frame -->
           <iframe
-            src="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf#toolbar=0&navpanes=0&scrollbar=0"
+            src="CV.pdf#toolbar=0&navpanes=0&scrollbar=0"
             class="pdf-frame"
             title="Mohamed Tarek's CV PDF Viewer"
             id="pdfViewer"
@@ -1176,10 +1192,10 @@
     <section class="download-section">
       <div class="container">
         <div class="download-actions reveal">
-          <a href="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
+          <a href="CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
             <i class="fas fa-download"></i> Download Full CV
           </a>
-          <a href="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <a href="CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
             <i class="fas fa-arrow-up-right-from-square"></i> Open in New Tab
           </a>
           <button id="printCv" class="btn btn-secondary">
@@ -1338,6 +1354,13 @@
         });
       });
 
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && navMenu.classList.contains('active')) {
+          toggleMenu();
+          menuToggle.focus();
+        }
+      });
+
       /* ----------------------------------------
          THEME TOGGLE
          ---------------------------------------- */
@@ -1434,16 +1457,12 @@
 
       document.getElementById('pdfZoomIn')?.addEventListener('click', () => {
         currentZoom = Math.min(currentZoom + 20, 200);
-        pdfViewer.style.transform = `scale(${currentZoom / 100})`;
-        pdfViewer.style.transformOrigin = 'top center';
-        pdfViewer.style.height = (100 / (currentZoom / 100)) + '%';
+        pdfViewer.style.zoom = `${currentZoom}%`;
       });
 
       document.getElementById('pdfZoomOut')?.addEventListener('click', () => {
         currentZoom = Math.max(currentZoom - 20, 60);
-        pdfViewer.style.transform = `scale(${currentZoom / 100})`;
-        pdfViewer.style.transformOrigin = 'top center';
-        pdfViewer.style.height = (100 / (currentZoom / 100)) + '%';
+        pdfViewer.style.zoom = `${currentZoom}%`;
       });
 
       document.getElementById('pdfFullscreen')?.addEventListener('click', () => {
@@ -1457,7 +1476,10 @@
 
       // Print
       document.getElementById('printCv')?.addEventListener('click', () => {
-        window.open('Mohamed_Tarek_Abdelhady_Engineer_CV.pdf', '_blank')?.print();
+        const printWindow = window.open('CV.pdf', '_blank');
+        if (printWindow) {
+          printWindow.addEventListener('load', () => printWindow.print(), { once: true });
+        }
       });
 
       /* ----------------------------------------
@@ -1472,6 +1494,9 @@
          FOOTER YEAR
          ---------------------------------------- */
       document.getElementById('currentYear').textContent = new Date().getFullYear();
+      updateScrollProgress();
+      updateHeader();
+      updateBackToTop();
 
     })();
   </script>

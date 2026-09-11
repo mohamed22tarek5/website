@@ -456,6 +456,11 @@
     };
     menuToggle.addEventListener('click', toggleMenu);
     mobileOverlay.addEventListener('click', toggleMenu);
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (navMenu.classList.contains('active')) toggleMenu();
+      });
+    });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && navMenu.classList.contains('active')) { toggleMenu(); menuToggle.focus(); }
     });
@@ -581,6 +586,9 @@
     renderCerts();
 
     document.getElementById('current-year').textContent = new Date().getFullYear();
+    scrollProgress.style.width = '0%';
+    header.classList.toggle('scrolled', window.scrollY > 50);
+    backToTop.classList.toggle('visible', window.scrollY > 400);
   })();
   </script>
   <script src="pwa.js"></script>

@@ -2,15 +2,15 @@
   "name": "Mohamed Tarek Portfolio Agent",
   "version": "1.0.0",
   "description": "AI agent for Mohamed Tarek's portfolio. Provides access to engineering calculators, project information, services, and tools for electronics and communications engineering.",
-  "url": "https://mohamedtarek.vercel.app/",
+  "url": "https://website-mohamed.vercel.app/",
   "provider": {
     "organization": "Mohamed Tarek",
-    "url": "https://mohamedtarek.vercel.app/"
+    "url": "https://website-mohamed.vercel.app/"
   },
   "supportedInterfaces": [
     {
       "protocol": "https",
-      "url": "https://mohamedtarek.vercel.app/mcp",
+      "url": "https://website-mohamed.vercel.app/mcp",
       "transport": "streamable-http"
     }
   ],
