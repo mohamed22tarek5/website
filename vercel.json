@@ -169,6 +169,10 @@
     {
       "source": "/agent/identity/claim",
       "destination": "/api/agent/identity/claim"
+    },
+    {
+      "source": "/api/markdown/:path*",
+      "destination": "/api/markdown"
     }
   ]
 }
