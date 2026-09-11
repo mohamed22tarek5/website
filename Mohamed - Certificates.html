@@ -152,9 +152,6 @@
       .nav-cta { margin-left: 0; margin-top: 1rem; width: 100%; text-align: center; display: block; padding: 1rem; }
     }
 
-    section { padding: var(--header-height) 0 4rem; position: relative; }
-    @media (max-width: 768px) { section { padding: var(--header-height) 0 3rem; } }
-
     /* Page Hero */
     .page-hero { padding-top: calc(var(--header-height) + 3rem); padding-bottom: 2rem; text-align: center; position: relative; }
     .page-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px); background-size: 60px 60px; }
@@ -228,11 +225,11 @@
     .cert-modal-footer { padding: 1.5rem 2rem; border-top: 1px solid var(--color-border); text-align: center; }
 
     /* Footer */
-    footer { background: var(--color-bg-secondary); border-top: 1px solid var(--color-border); padding: 3rem 0 1.5rem; }
+    .footer { background: var(--color-bg-primary); border-top: 1px solid var(--color-border); padding: 3rem 0 1.5rem; }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
     .footer-brand p { color: var(--color-text-secondary); font-size: 0.9375rem; margin-top: 1rem; max-width: 300px; line-height: 1.7; }
     .footer-social { display: flex; gap: 0.5rem; margin-top: 1.5rem; }
-    .footer-social a { width: 40px; height: 40px; border-radius: var(--radius-md); background: var(--color-accent-subtle); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center; color: var(--color-text-secondary); transition: all var(--transition-fast); }
+    .footer-social a { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); background: var(--color-bg-card); border: 1px solid var(--color-border); color: var(--color-text-secondary); transition: all var(--transition-fast); }
     .footer-social a:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
     .footer-col h4 { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-primary); margin-bottom: 1.5rem; }
     .footer-links { display: flex; flex-direction: column; gap: 0.5rem; }
@@ -243,11 +240,11 @@
     @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; } .footer-brand { grid-column: 1 / -1; } .footer-bottom { flex-direction: column; text-align: center; } }
     @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
 
-    /* Back to Top & Theme Toggle */
-    .back-to-top, .theme-toggle { position: fixed; z-index: 999; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; font-size: 1rem; opacity: 0; visibility: hidden; transition: all var(--transition-base); box-shadow: var(--shadow-md); }
-    .back-to-top { bottom: 2rem; right: 2rem; background: var(--gradient-accent); color: white; transform: translateY(12px); }
+    /* Controls */
+    .back-to-top, .theme-toggle { position: fixed; bottom: 2rem; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-md); color: var(--color-text-secondary); font-size: 1rem; z-index: 999; transition: all var(--transition-base); box-shadow: var(--shadow-md); }
+    .back-to-top { right: 2rem; opacity: 0; visibility: hidden; transform: translateY(12px); }
     .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-    .theme-toggle { bottom: 2rem; right: 5.5rem; background: var(--color-bg-card); border: 1px solid var(--color-border); color: var(--color-accent); }
+    .theme-toggle { right: 5.5rem; }
     .back-to-top:hover, .theme-toggle:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
 
     /* Loader */
@@ -292,7 +289,7 @@
     </div>
   </header>
 
-  <main id="main" role="main">
+  <main id="main">
     <section class="page-hero">
       <div class="container">
         <div class="reveal">
@@ -348,7 +345,7 @@
     </div>
   </div>
 
-  <footer role="contentinfo">
+  <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
