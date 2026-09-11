@@ -18,6 +18,7 @@
         { "key": "Link", "value": "</.well-known/ai-catalog.json>; rel=\"describedby\"" },
         { "key": "Link", "value": "</.well-known/agent-card.json>; rel=\"service-desc\"" },
         { "key": "Link", "value": "</.well-known/acp.json>; rel=\"service-desc\"" },
+        { "key": "Link", "value": "</.well-known/oauth-protected-resource>; rel=\"resource-metadata\"" },
         { "key": "Link", "value": "</auth.md>; rel=\"describedby\"" },
         { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"" },
         { "key": "Link", "value": "</manifest.webmanifest>; rel=\"manifest\"" },
