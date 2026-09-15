@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartEnergy | Graduation Project Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg: #060c18;
+  --bg2: #0b1525;
+  --bg3: #0f1e35;
+  --surface: rgba(15,30,55,0.7);
+  --surface2: rgba(20,40,70,0.5);
+  --border: rgba(42,212,182,0.15);
+  --border-glow: rgba(42,212,182,0.4);
+  --cyan: #2ad4b6;
+  --cyan-dim: rgba(42,212,182,0.12);
+  --cyan-glow: 0 0 20px rgba(42,212,182,0.4);
+  --cyan-glow2: 0 0 40px rgba(42,212,182,0.2);
+  --blue: #3b82f6;
+  --orange: #f59e0b;
+  --green: #22c55e;
+  --red: #ef4444;
+  --text: #e8f4ff;
+  --text2: #8ba4bc;
+  --text3: #5a7a95;
+  --shadow: 0 20px 60px rgba(0,0,0,0.5);
+  --font-display: 'Orbitron', monospace;
+  --font-body: 'DM Sans', sans-serif;
+  --trans: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+body.light {
+  --bg: #eef3fa;
+  --bg2: #ffffff;
+  --bg3: #f4f8fd;
+  --surface: rgba(255,255,255,0.8);
+  --surface2: rgba(240,248,255,0.8);
+  --border: rgba(42,212,182,0.25);
+  --border-glow: rgba(42,212,182,0.5);
+  --cyan-dim: rgba(42,212,182,0.08);
+  --cyan-glow: 0 0 15px rgba(42,212,182,0.25);
+  --cyan-glow2: 0 0 30px rgba(42,212,182,0.12);
+  --text: #0f2037;
+  --text2: #3a5a72;
+  --text3: #6a8a9a;
+  --shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);transition:background 0.4s,color 0.3s;overflow-x:hidden;line-height:1.6}
+
+/* ===== SCANLINE OVERLAY ===== */
+body::before{
+  content:'';position:fixed;top:0;left:0;width:100%;height:100%;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);
+  pointer-events:none;z-index:1;opacity:0.4;
+}
+body.light::before{opacity:0.02}
+
+/* ===== GRID BACKGROUND ===== */
+body::after{
+  content:'';position:fixed;top:0;left:0;width:100%;height:100%;
+  background-image:linear-gradient(rgba(42,212,182,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(42,212,182,0.03) 1px,transparent 1px);
+  background-size:50px 50px;pointer-events:none;z-index:0;
+}
+body.light::after{background-image:linear-gradient(rgba(42,212,182,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(42,212,182,0.06) 1px,transparent 1px)}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:3px}
+::selection{background:var(--cyan);color:#060c18}
+
+/* ===== HEADER ===== */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  background:rgba(6,12,24,0.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:var(--trans);
+}
+body.light header{background:rgba(238,243,250,0.9)}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:14px 5%;gap:16px}
+.logo{font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--text);text-decoration:none;letter-spacing:2px}
+.logo span{color:var(--cyan)}
+.nav-links{display:flex;list-style:none;gap:4px;align-items:center;flex-wrap:wrap}
+.nav-links a{color:var(--text2);font-size:0.82rem;font-weight:500;padding:6px 12px;border-radius:6px;text-decoration:none;transition:var(--trans);letter-spacing:0.5px}
+.nav-links a:hover,.nav-links a.active{color:var(--cyan);background:var(--cyan-dim)}
+.header-controls{display:flex;gap:10px;align-items:center}
+.theme-btn{background:var(--surface);border:1px solid var(--border);color:var(--cyan);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1rem;transition:var(--trans);backdrop-filter:blur(10px)}
+.theme-btn:hover{box-shadow:var(--cyan-glow);transform:scale(1.05)}
+.mobile-btn{display:none;background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer}
+@media(max-width:900px){
+  .nav-links{display:none;position:fixed;top:64px;left:0;width:100%;background:var(--bg2);flex-direction:column;padding:20px;border-bottom:1px solid var(--border);gap:6px}
+  .nav-links.open{display:flex}
+  .mobile-btn{display:block}
+}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding:120px 5% 80px;text-align:center;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(42,212,182,0.08) 0%,transparent 60%),var(--bg);
+}
+.hero-particles{position:absolute;inset:0;pointer-events:none}
+.particle{position:absolute;width:2px;height:2px;background:var(--cyan);border-radius:50%;animation:float linear infinite;opacity:0.6}
+@keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:0.6}90%{opacity:0.6}100%{transform:translateY(-100px) scale(1.5);opacity:0}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--cyan-dim);border:1px solid var(--border-glow);color:var(--cyan);font-size:0.8rem;font-weight:600;padding:8px 20px;border-radius:50px;margin-bottom:30px;letter-spacing:1px;font-family:var(--font-display);animation:fadeDown 0.8s ease both}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.hero h1{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.8rem);font-weight:900;line-height:1.1;margin-bottom:24px;color:var(--text);letter-spacing:-1px;animation:fadeUp 0.9s ease 0.1s both}
+.hero h1 span{color:var(--cyan);display:block;text-shadow:var(--cyan-glow)}
+.hero-sub{font-size:1.1rem;color:var(--text2);max-width:650px;margin:0 auto 44px;animation:fadeUp 0.9s ease 0.2s both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fadeUp 0.9s ease 0.3s both}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--cyan);color:#060c18;font-weight:700;font-size:0.9rem;padding:14px 28px;border-radius:50px;border:none;cursor:pointer;transition:var(--trans);font-family:var(--font-display);letter-spacing:1px;text-decoration:none}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:var(--cyan-glow),0 10px 30px rgba(42,212,182,0.3)}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--cyan);font-weight:600;font-size:0.9rem;padding:13px 28px;border-radius:50px;border:1px solid var(--border-glow);cursor:pointer;transition:var(--trans);font-family:var(--font-display);letter-spacing:1px;text-decoration:none}
+.btn-outline:hover{background:var(--cyan-dim);transform:translateY(-3px)}
+
+/* Hero Stats Row */
+.hero-stats{display:flex;gap:40px;justify-content:center;margin-top:60px;flex-wrap:wrap;animation:fadeUp 0.9s ease 0.4s both}
+.hero-stat{text-align:center}
+.hero-stat-value{font-family:var(--font-display);font-size:2.2rem;font-weight:700;color:var(--cyan)}
+.hero-stat-label{font-size:0.8rem;color:var(--text3);letter-spacing:1px;margin-top:4px}
+.hero-stat-div{width:1px;background:var(--border);align-self:stretch}
+
+
+/* ===== ABOUT / SLIDER SECTIONS ===== */
+.section{padding:100px 5%;position:relative}
+.section-alt{background:var(--bg2)}
+.slider-wrap{position:relative;overflow:hidden;border-radius:20px;border:1px solid var(--border)}
+.slider-track{display:flex;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)}
+.slide{min-width:100%;padding:60px;text-align:center;background:var(--surface);backdrop-filter:blur(20px)}
+.slide h3{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:16px;letter-spacing:1px}
+.slide p{color:var(--text2);max-width:700px;margin:0 auto;font-size:1rem;line-height:1.8}
+.slide-icon{font-size:3rem;color:var(--cyan);margin-bottom:24px;text-shadow:var(--cyan-glow)}
+.slide-controls{display:flex;align-items:center;justify-content:center;gap:16px;padding:20px;background:var(--surface);border-top:1px solid var(--border)}
+.s-btn{width:44px;height:44px;border-radius:50%;background:var(--cyan-dim);border:1px solid var(--border);color:var(--cyan);cursor:pointer;transition:var(--trans);font-size:1rem;display:flex;align-items:center;justify-content:center}
+.s-btn:hover{background:var(--cyan);color:#060c18;box-shadow:var(--cyan-glow)}
+.s-dots{display:flex;gap:8px}
+.s-dot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:var(--trans)}
+.s-dot.on{background:var(--cyan);transform:scale(1.3);box-shadow:0 0 8px var(--cyan)}
+.s-counter{font-family:var(--font-display);font-size:0.78rem;color:var(--cyan);letter-spacing:2px}
+.equation{background:rgba(42,212,182,0.07);border:1px solid var(--border-glow);border-left:3px solid var(--cyan);border-radius:8px;padding:16px 24px;font-family:'Courier New',monospace;color:var(--text);margin:20px auto;max-width:500px;font-size:0.95rem;text-align:left}
+
+/* ===== SYSTEM OVERVIEW SLIDES ===== */
+.sys-slide-inner{display:flex;align-items:center;gap:40px;max-width:900px;margin:0 auto;text-align:left}
+@media(max-width:700px){.sys-slide-inner{flex-direction:column;text-align:center}}
+.sys-icon-box{width:140px;height:140px;min-width:140px;border-radius:20px;background:var(--cyan-dim);border:1px solid var(--border-glow);display:flex;align-items:center;justify-content:center;font-size:3.5rem;color:var(--cyan);text-shadow:var(--cyan-glow)}
+.sys-features{list-style:none;margin-top:14px}
+.sys-features li{padding:6px 0;display:flex;align-items:center;gap:10px;font-size:0.95rem;color:var(--text2);border-bottom:1px solid var(--border)}
+.sys-features li::before{content:'▶';color:var(--cyan);font-size:0.6rem;flex-shrink:0}
+
+/* ===== RESULTS GRID ===== */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:20px auto;max-width:800px}
+.result-card{background:var(--cyan-dim);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;transition:var(--trans)}
+.result-card:hover{border-color:var(--border-glow);transform:translateY(-4px)}
+.result-val{font-family:var(--font-display);font-size:2.2rem;font-weight:700;color:var(--cyan)}
+.result-lbl{font-size:0.8rem;color:var(--text3);letter-spacing:0.5px;margin-top:6px}
+
+/* ===== HARDWARE ===== */
+.hw-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:30px}
+@media(max-width:700px){.hw-grid{grid-template-columns:1fr}}
+.hw-img{background:var(--surface);border:1px solid var(--border);border-radius:16px;height:280px;display:flex;align-items:center;justify-content:center;font-size:4rem;color:var(--cyan);position:relative;overflow:hidden}
+.hw-img::after{content:'HARDWARE PROTOTYPE';position:absolute;bottom:16px;left:0;right:0;text-align:center;font-family:var(--font-display);font-size:0.65rem;color:var(--text3);letter-spacing:3px}
+.comp-list{list-style:none}
+.comp-list li{padding:10px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;color:var(--text2);font-size:0.95rem}
+.comp-list li::before{content:'✓';color:var(--cyan);font-weight:700;flex-shrink:0}
+
+/* ===== TEAM ===== */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:900px;margin:0 auto}
+@media(max-width:700px){.team-grid{grid-template-columns:1fr}}
+.team-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center;transition:var(--trans)}
+.team-card:hover{border-color:var(--border-glow);transform:translateY(-6px);box-shadow:var(--cyan-glow2)}
+.avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--blue));display:flex;align-items:center;justify-content:center;font-size:2rem;color:#060c18;margin:0 auto 16px;position:relative}
+.avatar::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--border-glow);animation:spin 8s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.team-name{font-family:var(--font-display);font-size:0.9rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.team-role{color:var(--cyan);font-size:0.8rem;font-weight:600;margin-bottom:8px}
+.team-desc{font-size:0.82rem;color:var(--text3)}
+
+/* Supervisors */
+.sup-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:900px;margin:40px auto 0}
+@media(max-width:700px){.sup-grid{grid-template-columns:1fr}}
+.sup-card{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--cyan);border-radius:16px;padding:30px;text-align:center;transition:var(--trans)}
+.sup-card:hover{transform:translateY(-6px);box-shadow:var(--cyan-glow2)}
+.sup-avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,rgba(42,212,182,0.3),rgba(59,130,246,0.3));border:2px solid var(--border-glow);display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:var(--cyan);margin:0 auto 20px}
+.sup-name{font-family:var(--font-display);font-size:0.88rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.sup-tag{display:inline-block;background:var(--cyan-dim);color:var(--cyan);font-size:0.75rem;font-weight:600;padding:4px 14px;border-radius:20px;border:1px solid var(--border);margin-bottom:12px}
+.sup-desc{font-size:0.82rem;color:var(--text3)}
+
+/* ===== TOOLS ===== */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:24px;margin-top:40px}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px 16px;text-align:center;transition:var(--trans);cursor:default}
+.tool-card:hover{border-color:var(--border-glow);transform:translateY(-6px);box-shadow:var(--cyan-glow2)}
+.tool-card:hover .tool-ico{background:var(--cyan);color:#060c18;box-shadow:var(--cyan-glow)}
+.tool-ico{width:56px;height:56px;border-radius:50%;background:var(--cyan-dim);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--cyan);margin:0 auto 14px;transition:var(--trans)}
+.tool-name{font-size:0.82rem;font-weight:600;color:var(--text2)}
+
+/* ===== CONCLUSION ===== */
+.conclusion-box{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:50px;max-width:800px;margin:0 auto;text-align:center;position:relative;overflow:hidden}
+.conclusion-box::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(42,212,182,0.15),transparent 70%)}
+.conclusion-box h3{font-family:var(--font-display);font-size:1.2rem;color:var(--cyan);margin-bottom:16px;letter-spacing:1px}
+.conclusion-box p{color:var(--text2);line-height:1.9}
+
+/* ===== FOOTER ===== */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:50px 5% 30px}
+.footer-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;margin-bottom:40px}
+.footer-logo{font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:var(--text);letter-spacing:2px}
+.footer-logo span{color:var(--cyan)}
+.footer-info p{color:var(--text3);font-size:0.88rem;margin-top:8px}
+.footer-copy{text-align:center;color:var(--text3);font-size:0.8rem;padding-top:30px;border-top:1px solid var(--border);letter-spacing:0.5px}
+
+/* ===== MODAL ===== */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(10px)}
+.modal.open{opacity:1;pointer-events:all}
+.modal-inner{position:relative;max-width:90vw;max-height:90vh;border-radius:16px;overflow:hidden;border:1px solid var(--border-glow);box-shadow:var(--cyan-glow2)}
+.modal-inner img{max-width:90vw;max-height:80vh;object-fit:contain;display:block}
+.modal-close{position:absolute;top:12px;right:12px;background:rgba(0,0,0,0.6);border:none;color:var(--text);font-size:1.5rem;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:var(--trans)}
+.modal-close:hover{color:var(--cyan);background:var(--cyan-dim)}
+
+/* ===== ANIMATIONS ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-inner">
+    <img src="https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&w=1800&q=80" alt="Project Setup">
+    <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <nav class="navbar">
+    <a href="#home" class="logo">Smart<span>Energy</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#system">System</a></li>
+      <li><a href="#modules">Modules</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#hardware">Hardware</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#conclusion">Conclusion</a></li>
+    </ul>
+    <div class="header-controls">
+      <button class="theme-btn" id="themeBtn"><i class="fas fa-moon"></i></button>
+      <button class="mobile-btn" id="mobileBtn"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="hero-particles" id="particles"></div>
+  <div>
+    <div class="hero-badge"><i class="fas fa-certificate"></i> Graduation Project 2024 — EE Department</div>
+    <h1>Smart Renewable<span>Energy System</span></h1>
+    <p class="hero-sub">Design & Implementation of a Smart Solar-Based Power System with IoT Monitoring, MPPT Control, and Real-Time Dashboard</p>
+    <div class="hero-actions">
+      <button class="btn-primary" id="viewProjectBtn"><i class="fas fa-expand"></i> View Project Image</button>
+      <a href="dashboard.html" class="btn-outline"><i class="fas fa-tachometer-alt"></i> Live Dashboard</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-value" data-target="92.5" data-suffix="%">0%</div><div class="hero-stat-label">SYSTEM EFFICIENCY</div></div>
+      <div class="hero-stat-div"></div>
+      <div class="hero-stat"><div class="hero-stat-value" data-target="98.5" data-suffix="%">0%</div><div class="hero-stat-label">MPPT ACCURACY</div></div>
+      <div class="hero-stat-div"></div>
+      <div class="hero-stat"><div class="hero-stat-value" data-target="200" data-suffix="W">0W</div><div class="hero-stat-label">PEAK SOLAR OUTPUT</div></div>
+      <div class="hero-stat-div"></div>
+      <div class="hero-stat"><div class="hero-stat-value" data-target="2.8" data-suffix="%">0%</div><div class="hero-stat-label">OUTPUT THD</div></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ===== ABOUT ===== -->
+<section class="section" id="about">
+  <div class="section-header reveal">
+    <span class="section-tag">Overview</span>
+    <h2 class="section-title">About the <span>Project</span></h2>
+    <div class="section-under"></div>
+    <p class="section-desc">Smart solar energy system integrating power electronics, energy storage, and IoT monitoring.</p>
+  </div>
+  <div class="reveal">
+    <div class="slider-wrap" id="aboutSlider">
+      <div class="slider-track">
+        <div class="slide">
+          <div class="slide-icon"><i class="fas fa-exclamation-triangle"></i></div>
+          <h3>Problem Statement</h3>
+          <p>Growing energy demands and reliance on fossil fuels have led to environmental degradation and energy insecurity. There's a critical need for efficient, scalable renewable energy solutions with real-time monitoring capabilities. The global energy crisis demands innovative solutions that combine sustainability with smart technology integration.</p>
+        </div>
+        <div class="slide">
+          <div class="slide-icon"><i class="fas fa-bullseye"></i></div>
+          <h3>Project Objectives</h3>
+          <p>Design and implement a smart solar energy system with maximum power point tracking (MPPT), efficient power conversion, battery storage, and IoT-based remote monitoring for optimal performance and reliability. Achieving 90%+ system efficiency, real-time monitoring, scalable design, and user-friendly dashboard interface.</p>
+        </div>
+        <div class="slide">
+          <div class="slide-icon"><i class="fas fa-leaf"></i></div>
+          <h3>Why Renewable Energy</h3>
+          <p>Renewable energy sources are sustainable, environmentally friendly, and essential for reducing carbon emissions. They offer energy independence and long-term economic benefits compared to finite fossil fuels. Transitioning to renewables is a fundamental step toward global climate goals.</p>
+        </div>
+        <div class="slide">
+          <div class="slide-icon"><i class="fas fa-sun"></i></div>
+          <h3>Why Solar Energy</h3>
+          <p>Solar energy is abundant, scalable, and has rapidly decreasing implementation costs. The Middle East region receives some of the highest solar irradiation levels globally — an ideal environment for photovoltaic systems offering maximum energy yield year-round.</p>
+        </div>
+      </div>
+      <div class="slide-controls" data-slider="about">
+        <button class="s-btn prev"><i class="fas fa-chevron-left"></i></button>
+        <div class="s-dots"></div>
+        <span class="s-counter">1 / 4</span>
+        <button class="s-btn next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SYSTEM OVERVIEW ===== -->
+<section class="section section-alt" id="system">
+  <div class="section-header reveal">
+    <span class="section-tag">Architecture</span>
+    <h2 class="section-title">System <span>Overview</span></h2>
+    <div class="section-under"></div>
+  </div>
+  <div class="reveal">
+    <div class="slider-wrap" id="systemSlider">
+      <div class="slider-track">
+        <div class="slide">
+          <div class="sys-slide-inner">
+            <div class="sys-icon-box"><i class="fas fa-solar-panel"></i></div>
+            <div style="flex:1">
+              <h3 style="text-align:left;color:var(--cyan);font-family:var(--font-display);font-size:1.3rem;letter-spacing:1px">Solar PV Panel</h3>
+              <p style="text-align:left;margin-top:8px">Converts sunlight into DC electricity using monocrystalline silicon photovoltaic cells with high quantum efficiency.</p>
+              <ul class="sys-features"><li>Power Output: 200W rated</li><li>Cell Efficiency: 22%</li><li>MPPT Integration enabled</li><li>Voc = 24.3V, Isc = 8.4A</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="sys-slide-inner">
+            <div class="sys-icon-box"><i class="fas fa-bolt"></i></div>
+            <div style="flex:1">
+              <h3 style="text-align:left;color:var(--cyan);font-family:var(--font-display);font-size:1.3rem;letter-spacing:1px">Buck Converter — MPPT Charger</h3>
+              <p style="text-align:left;margin-top:8px">Regulates PV voltage for optimal battery charging using the Perturb & Observe MPPT algorithm with 20kHz switching.</p>
+              <ul class="sys-features"><li>Converter Efficiency: 95%</li><li>MPPT Accuracy: 98.5%</li><li>Overcharge Protection included</li><li>Switching Freq: 20 kHz</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="sys-slide-inner">
+            <div class="sys-icon-box"><i class="fas fa-car-battery"></i></div>
+            <div style="flex:1">
+              <h3 style="text-align:left;color:var(--cyan);font-family:var(--font-display);font-size:1.3rem;letter-spacing:1px">Battery Storage System</h3>
+              <p style="text-align:left;margin-top:8px">Deep cycle lead-acid battery with integrated Battery Management System for safe, reliable energy storage.</p>
+              <ul class="sys-features"><li>Capacity: 100 Ah</li><li>Nominal Voltage: 12V DC</li><li>BMS Integration active</li><li>DoD limit: 50% max</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="sys-slide-inner">
+            <div class="sys-icon-box"><i class="fas fa-level-up-alt"></i></div>
+            <div style="flex:1">
+              <h3 style="text-align:left;color:var(--cyan);font-family:var(--font-display);font-size:1.3rem;letter-spacing:1px">Boost Converter</h3>
+              <p style="text-align:left;margin-top:8px">Steps up 12V battery voltage to 170V DC peak for inverter input with continuous conduction mode operation.</p>
+              <ul class="sys-features"><li>Input: 12V DC</li><li>Output: 170V DC peak</li><li>Efficiency: 93%</li><li>CCM operation</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="sys-slide-inner">
+            <div class="sys-icon-box"><i class="fas fa-exchange-alt"></i></div>
+            <div style="flex:1">
+              <h3 style="text-align:left;color:var(--cyan);font-family:var(--font-display);font-size:1.3rem;letter-spacing:1px">Pure Sine Wave Inverter</h3>
+              <p style="text-align:left;margin-top:8px">Full-bridge topology with SPWM modulation converts DC to clean AC power suitable for all household appliances.</p>
+              <ul class="sys-features"><li>Output: 220V AC, 50Hz</li><li>Rated Power: 500W</li><li>THD: &lt;3% (IEEE 519)</li><li>Efficiency: 94.2%</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="sys-slide-inner">
+            <div class="sys-icon-box"><i class="fas fa-wifi"></i></div>
+            <div style="flex:1">
+              <h3 style="text-align:left;color:var(--cyan);font-family:var(--font-display);font-size:1.3rem;letter-spacing:1px">IoT Monitoring — ESP32</h3>
+              <p style="text-align:left;margin-top:8px">Real-time monitoring via ESP32 microcontroller with WiFi, pushing live sensor data to Firebase cloud every second.</p>
+              <ul class="sys-features"><li>ESP32 dual-core MCU</li><li>Firebase Realtime DB</li><li>Sampling: 1 Hz continuous</li><li>Web dashboard accessible</li></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-controls" data-slider="system">
+        <button class="s-btn prev"><i class="fas fa-chevron-left"></i></button>
+        <div class="s-dots"></div>
+        <span class="s-counter">1 / 6</span>
+        <button class="s-btn next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TECHNICAL MODULES ===== -->
+<section class="section" id="modules">
+  <div class="section-header reveal">
+    <span class="section-tag">Engineering</span>
+    <h2 class="section-title">Technical <span>Modules</span></h2>
+    <div class="section-under"></div>
+  </div>
+  <div class="reveal">
+    <div class="slider-wrap" id="modulesSlider">
+      <div class="slider-track">
+        <div class="slide">
+          <div class="slide-icon"><i class="fas fa-atom"></i></div>
+          <h3>Photovoltaic Modeling — One-Diode Model</h3>
+          <div class="equation">I = I<sub>ph</sub> − I<sub>0</sub>[exp((V+IR<sub>s</sub>)/(nV<sub>t</sub>))−1] − (V+IR<sub>s</sub>)/R<sub>sh</sub></div>
+          <p>Mathematical representation of solar cell behavior using the single-diode equivalent circuit. Accounts for series resistance, shunt resistance, and diode ideality factor for accurate system modeling under variable irradiance and temperature conditions.</p>
+        </div>
+        <div class="slide">
+          <div class="slide-icon"><i class="fas fa-compress-alt"></i></div>
+          <h3>Buck Converter & MPPT Charger</h3>
+          <div class="equation">V<sub>out</sub> = D × V<sub>in</sub><br>D = t<sub>on</sub> / (t<sub>on</sub> + t<sub>off</sub>)</div>
+          <p>Step-down DC-DC converter uses Perturb & Observe MPPT algorithm. The duty cycle D is dynamically adjusted every switching period to track the maximum power point with 98.5% accuracy across all irradiance conditions.</p>
+        </div>
+        <div class="slide">
+          <div class="slide-icon"><i class="fas fa-expand-alt"></i></div>
+          <h3>Boost Converter Design</h3>
+          <div class="equation">V<sub>out</sub> = V<sub>in</sub> / (1 − D)<br>ΔI<sub>L</sub> = (V<sub>in</sub> × D) / (f<sub>s</sub> × L)</div>
+          <p>Boosts 12V battery voltage to 170V DC for inverter input. Operates in continuous conduction mode (CCM) achieving 93% efficiency. Inductor and capacitor values are optimized to minimize ripple below 1%.</p>
+        </div>
+        <div class="slide">
+          <div class="slide-icon"><i class="fas fa-wave-square"></i></div>
+          <h3>Pure Sine Wave Inverter</h3>
+          <div class="equation">f<sub>switching</sub> = 20–50 kHz<br>THD &lt; 3% (IEEE 519)</div>
+          <p>Full H-bridge inverter with Sinusoidal Pulse Width Modulation (SPWM) at 20kHz switching frequency. LC output filter eliminates harmonics. Achieves 220V RMS ± 1%, 50Hz ± 0.1Hz output meeting IEEE 519 power quality standards.</p>
+        </div>
+        <div class="slide">
+          <div class="slide-icon"><i class="fas fa-satellite-dish"></i></div>
+          <h3>IoT Monitoring System</h3>
+          <div class="equation">Sample Rate = 1 Hz continuous<br>Firebase Realtime DB sync</div>
+          <p>ESP32 reads voltage, current, and temperature sensors via ADC at 1Hz. Data is transmitted over WiFi to Firebase. The web dashboard renders live charts and alerts. Sensor accuracy is 99.5% with calibration against precision references.</p>
+        </div>
+      </div>
+      <div class="slide-controls" data-slider="modules">
+        <button class="s-btn prev"><i class="fas fa-chevron-left"></i></button>
+        <div class="s-dots"></div>
+        <span class="s-counter">1 / 5</span>
+        <button class="s-btn next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RESULTS ===== -->
+<section class="section section-alt" id="results">
+  <div class="section-header reveal">
+    <span class="section-tag">Simulation & Testing</span>
+    <h2 class="section-title">Results & <span>Performance</span></h2>
+    <div class="section-under"></div>
+  </div>
+  <div class="reveal">
+    <div class="slider-wrap" id="resultsSlider">
+      <div class="slider-track">
+        <div class="slide">
+          <div class="slide-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>I-V Characteristics Analysis</h3>
+          <div class="results-grid">
+            <div class="result-card"><div class="result-val">0.58</div><div class="result-lbl">MPP Voltage (V)</div></div>
+            <div class="result-card"><div class="result-val">5.42</div><div class="result-lbl">MPP Current (A)</div></div>
+            <div class="result-card"><div class="result-val">98.5%</div><div class="result-lbl">MPPT Accuracy</div></div>
+          </div>
+          <p>MPPT algorithm tracks the maximum power point with 98.5% accuracy across varying irradiance levels from 200 to 1000 W/m². Tracking speed under sudden irradiance changes is under 50ms.</p>
+        </div>
+        <div class="slide">
+          <div class="slide-icon"><i class="fas fa-chart-area"></i></div>
+          <h3>Power-Voltage Performance</h3>
+          <div class="results-grid">
+            <div class="result-card"><div class="result-val">185W</div><div class="result-lbl">Max Measured Power</div></div>
+            <div class="result-card"><div class="result-val">92.5%</div><div class="result-lbl">Overall System Efficiency</div></div>
+            <div class="result-card"><div class="result-val">95%</div><div class="result-lbl">Buck Converter Efficiency</div></div>
+          </div>
+          <p>At STC (1000 W/m², 25°C), the system outputs 185W from a 200W panel with 92.5% end-to-end efficiency including all converter and wiring losses.</p>
+        </div>
+        <div class="slide">
+          <div class="slide-icon"><i class="fas fa-wave-square"></i></div>
+          <h3>Inverter Output Analysis</h3>
+          <div class="results-grid">
+            <div class="result-card"><div class="result-val">220V</div><div class="result-lbl">RMS Output Voltage</div></div>
+            <div class="result-card"><div class="result-val">2.8%</div><div class="result-lbl">Total Harmonic Distortion</div></div>
+            <div class="result-card"><div class="result-val">94.2%</div><div class="result-lbl">Inverter Efficiency</div></div>
+          </div>
+          <p>Pure sine wave output with 2.8% THD — comfortably below the 5% IEEE 519 limit. Suitable for powering sensitive electronics, motors, and appliances without any derating required.</p>
+        </div>
+        <div class="slide">
+          <div class="slide-icon"><i class="fas fa-wifi"></i></div>
+          <h3>IoT Monitoring Performance</h3>
+          <div class="results-grid">
+            <div class="result-card"><div class="result-val">99.8%</div><div class="result-lbl">Data Transmission Rate</div></div>
+            <div class="result-card"><div class="result-val">99.5%</div><div class="result-lbl">Sensor Accuracy</div></div>
+            <div class="result-card"><div class="result-val">&lt;200ms</div><div class="result-lbl">Firebase Latency</div></div>
+          </div>
+          <p>99.8% data reliability over 72-hour continuous test. Firebase latency remains under 200ms on standard WiFi. Sensor readings verified against calibrated reference instruments.</p>
+        </div>
+      </div>
+      <div class="slide-controls" data-slider="results">
+        <button class="s-btn prev"><i class="fas fa-chevron-left"></i></button>
+        <div class="s-dots"></div>
+        <span class="s-counter">1 / 4</span>
+        <button class="s-btn next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HARDWARE ===== -->
+<section class="section" id="hardware">
+  <div class="section-header reveal">
+    <span class="section-tag">Implementation</span>
+    <h2 class="section-title">Hardware <span>Implementation</span></h2>
+    <div class="section-under"></div>
+  </div>
+  <div class="hw-grid reveal">
+    <div>
+      <div class="hw-img"><i class="fas fa-microchip"></i></div>
+      <p style="text-align:center;margin-top:16px;color:var(--text3);font-size:0.88rem">Complete integrated prototype — all modules assembled on custom PCB</p>
+    </div>
+    <div>
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;color:var(--cyan);letter-spacing:1px;margin-bottom:20px">Components List</h3>
+      <ul class="comp-list">
+        <li>200W Monocrystalline Solar PV Panel</li>
+        <li>Custom MPPT Buck Converter PCB</li>
+        <li>100Ah Deep Cycle Lead-Acid Battery</li>
+        <li>Boost Converter Module (12V → 170V DC)</li>
+        <li>500W Pure Sine Wave Inverter</li>
+        <li>ESP32 Microcontroller + WiFi module</li>
+        <li>Voltage, Current & Temperature Sensors</li>
+        <li>16×2 LCD Display & Relay Modules</li>
+      </ul>
+      <h3 style="font-family:var(--font-display);font-size:1.1rem;color:var(--cyan);letter-spacing:1px;margin:28px 0 16px">Protection Features</h3>
+      <ul class="comp-list">
+        <li>Overcharge / Over-discharge protection</li>
+        <li>Overload and short-circuit protection</li>
+        <li>Reverse polarity & thermal monitoring</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TEAM ===== -->
+<section class="section section-alt" id="team">
+  <div class="section-header reveal">
+    <span class="section-tag">The People</span>
+    <h2 class="section-title">Team <span>Members</span></h2>
+    <div class="section-under"></div>
+  </div>
+  <div class="reveal">
+    <div class="slider-wrap" id="teamSlider">
+      <div class="slider-track">
+        <div class="slide" style="padding:40px 30px">
+          <div class="team-grid">
+            <div class="team-card"><div class="avatar"><i class="fas fa-user"></i></div><div class="team-name">Ahmed Mohammed</div><div class="team-role">Project Manager</div><div class="team-desc">System integration & overall coordination</div></div>
+            <div class="team-card"><div class="avatar"><i class="fas fa-user"></i></div><div class="team-name">Sara Al-Mansoori</div><div class="team-role">PV Specialist</div><div class="team-desc">Solar modeling & MPPT algorithm development</div></div>
+            <div class="team-card"><div class="avatar"><i class="fas fa-user"></i></div><div class="team-name">Layla Mohammed</div><div class="team-role">IoT Developer</div><div class="team-desc">ESP32 firmware & Firebase integration</div></div>
+            <div class="team-card"><div class="avatar"><i class="fas fa-user"></i></div><div class="team-name">Layla Mohammed</div><div class="team-role">IoT Developer</div><div class="team-desc">ESP32 firmware & Firebase integration</div></div> 
+            <div class="team-card"><div class="avatar"><i class="fas fa-user"></i></div><div class="team-name">Layla Mohammed</div><div class="team-role">IoT Developer</div><div class="team-desc">ESP32 firmware & Firebase integration</div></div>
+            <div class="team-card"><div class="avatar"><i class="fas fa-user"></i></div><div class="team-name">Khalid Ibrahim</div><div class="team-role">Power Electronics</div><div class="team-desc">Converter design & MATLAB simulation</div></div>
+          </div>
+        </div>
+          <div class="slide" style="padding:40px 30px">
+          <div class="team-grid">
+            <div class="team-card"><div class="avatar"><i class="fas fa-user"></i></div><div class="team-name">Fatima Abdullah</div><div class="team-role">Battery Management</div><div class="team-desc">Storage system & BMS design & testing</div></div>
+            <div class="team-card"><div class="avatar"><i class="fas fa-user"></i></div><div class="team-name">Omar Hassan</div><div class="team-role">Inverter Design</div><div class="team-desc">Power conversion, SPWM & output filtering</div></div>
+            <div class="team-card"><div class="avatar"><i class="fas fa-user"></i></div><div class="team-name">Layla Mohammed</div><div class="team-role">IoT Developer</div><div class="team-desc">ESP32 firmware & Firebase integration</div></div>
+            <div class="team-card"><div class="avatar"><i class="fas fa-user"></i></div><div class="team-name">Layla Mohammed</div><div class="team-role">IoT Developer</div><div class="team-desc">ESP32 firmware & Firebase integration</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-controls" data-slider="team">
+        <button class="s-btn prev"><i class="fas fa-chevron-left"></i></button>
+        <div class="s-dots"></div>
+        <span class="s-counter">1 / 2</span>
+        <button class="s-btn next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supervisors -->
+  <div style="margin-top:80px" class="reveal">
+    <div class="section-header">
+      <span class="section-tag">Faculty</span>
+      <h2 class="section-title" style="font-size:1.8rem">Project <span>Supervisors</span></h2>
+      <div class="section-under"></div>
+    </div>
+    <div class="sup-grid">
+      <div class="sup-card"><div class="sup-avatar"><i class="fas fa-user-tie"></i></div><div class="sup-name">Dr. Mohammed Al-Harthy</div><div class="sup-tag">Power Electronics</div><p class="sup-desc">Technical advisor for system design, converter topology, and validation.</p></div>
+      <div class="sup-card"><div class="sup-avatar"><i class="fas fa-user-tie"></i></div><div class="sup-name">Dr. Salim Abdullah</div><div class="sup-tag">Solar Energy</div><p class="sup-desc">Expert in photovoltaic systems design, MPPT, and optimization.</p></div>
+      <div class="sup-card"><div class="sup-avatar"><i class="fas fa-user-tie"></i></div><div class="sup-name">Dr. Aisha Al-Jabri</div><div class="sup-tag">IoT Systems</div><p class="sup-desc">Specialized in embedded systems, IoT design, and cloud integration.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TOOLS ===== -->
+<section class="section" id="tools">
+  <div class="section-header reveal">
+    <span class="section-tag">Technology Stack</span>
+    <h2 class="section-title">Tools & <span>Technologies</span></h2>
+    <div class="section-under"></div>
+  </div>
+  <div class="tools-grid reveal">
+    <div class="tool-card"><div class="tool-ico"><i class="fas fa-chart-bar"></i></div><div class="tool-name">MATLAB</div></div>
+    <div class="tool-card"><div class="tool-ico"><i class="fas fa-project-diagram"></i></div><div class="tool-name">Simulink</div></div>
+    <div class="tool-card"><div class="tool-ico"><i class="fas fa-bolt"></i></div><div class="tool-name">Multisim</div></div>
+    <div class="tool-card"><div class="tool-ico"><i class="fas fa-code"></i></div><div class="tool-name">Arduino IDE</div></div>
+    <div class="tool-card"><div class="tool-ico"><i class="fas fa-microchip"></i></div><div class="tool-name">ESP32</div></div>
+    <div class="tool-card"><div class="tool-ico"><i class="fas fa-database"></i></div><div class="tool-name">Firebase</div></div>
+    <div class="tool-card"><div class="tool-ico"><i class="fas fa-laptop-code"></i></div><div class="tool-name">HTML/CSS/JS</div></div>
+  </div>
+</section>
+
+<!-- ===== CONCLUSION ===== -->
+<section class="section section-alt" id="conclusion">
+  <div class="section-header reveal">
+    <span class="section-tag">Final Thoughts</span>
+    <h2 class="section-title">Conclusion & <span>Impact</span></h2>
+    <div class="section-under"></div>
+  </div>
+  <div class="reveal">
+    <div class="conclusion-box">
+      <i class="fas fa-lightbulb" style="font-size:2.5rem;color:var(--cyan);margin-bottom:24px;text-shadow:var(--cyan-glow);display:block"></i>
+      <h3>Project Impact</h3>
+      <p>This project demonstrates a practical, scalable solution for renewable energy integration that reduces grid reliance, lowers carbon footprint, and provides energy security with intelligent IoT monitoring. The end-to-end system from solar generation through clean AC output achieves 92.5% efficiency — a viable real-world deployment.</p>
+      <h3 style="margin-top:36px">Skills Developed</h3>
+      <p>The team gained deep expertise in solar energy systems engineering, power electronics design and simulation, embedded systems programming, IoT cloud integration, PCB prototyping, and cross-disciplinary project management — all aligned with modern industrial demands.</p>
+      <div style="display:flex;gap:16px;justify-content:center;margin-top:36px;flex-wrap:wrap">
+        <button class="btn-primary" onclick="document.getElementById('modal').classList.add('open')"><i class="fas fa-expand"></i> View Project</button>
+        <a href="dashboard.html" class="btn-outline"><i class="fas fa-chart-line"></i> Live Dashboard</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Smart<span>Energy</span></div>
+      <div class="footer-info"><p>Electrical & Computer Engineering Department</p><p>Graduation Project — Class of 2026</p></div>
+    </div>
+    <div style="text-align:right">
+      <p style="color:var(--text3);font-size:0.85rem;line-height:2">
+        <i class="fas fa-solar-panel" style="color:var(--cyan)"></i> Solar PV + MPPT<br>
+        <i class="fas fa-wifi" style="color:var(--cyan)"></i> IoT + Firebase<br>
+        <i class="fas fa-bolt" style="color:var(--cyan)"></i> 500W Pure Sine Inverter
+      </p>
+    </div>
+  </div>
+  <div class="footer-copy">&copy; 2026 Smart Renewable Energy System. All rights reserved.</div>
+</footer>
+
+<script>
+// ===== PARTICLES =====
+(function(){
+  const c = document.getElementById('particles');
+  for(let i=0;i<25;i++){
+    const p = document.createElement('div');
+    p.className='particle';
+    p.style.cssText=`left:${Math.random()*100}%;animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*10}s;width:${1+Math.random()*3}px;height:${1+Math.random()*3}px;opacity:${0.3+Math.random()*0.5}`;
+    c.appendChild(p);
+  }
+})();
+
+// ===== THEME =====
+const themeBtn=document.getElementById('themeBtn');
+themeBtn.addEventListener('click',()=>{
+  document.body.classList.toggle('light');
+  themeBtn.querySelector('i').className=document.body.classList.contains('light')?'fas fa-sun':'fas fa-moon';
+});
+
+// ===== MOBILE NAV =====
+document.getElementById('mobileBtn').addEventListener('click',()=>{
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));
+
+// ===== MODAL =====
+document.getElementById('viewProjectBtn').addEventListener('click',()=>document.getElementById('modal').classList.add('open'));
+document.getElementById('modalClose').addEventListener('click',()=>document.getElementById('modal').classList.remove('open'));
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))document.getElementById('modal').classList.remove('open')});
+
+// ===== COUNTER ANIMATION =====
+function animateCounter(el){
+  const target=parseFloat(el.dataset.target);
+  const suffix=el.dataset.suffix||'';
+  const dec=target%1!==0?1:0;
+  let start=0;
+  const dur=2000,step=16;
+  const timer=setInterval(()=>{
+    start+=target/(dur/step);
+    if(start>=target){start=target;clearInterval(timer)}
+    el.textContent=start.toFixed(dec)+suffix;
+  },step);
+}
+const counters=document.querySelectorAll('.hero-stat-value[data-target]');
+let counted=false;
+const countObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting&&!counted){counted=true;counters.forEach(c=>animateCounter(c));}
+});
+countObs.observe(document.querySelector('.hero-stats'));
+
+// ===== REVEAL ON SCROLL =====
+const revealObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+// ===== SLIDERS =====
+class Slider{
+  constructor(id){
+    this.el=document.getElementById(id);
+    this.track=this.el.querySelector('.slider-track');
+    this.slides=this.el.querySelectorAll('.slide');
+    this.ctrl=this.el.querySelector('.slide-controls');
+    this.dotsEl=this.ctrl.querySelector('.s-dots');
+    this.counter=this.ctrl.querySelector('.s-counter');
+    this.n=this.slides.length;this.cur=0;
+    this.init();
+  }
+  init(){
+    for(let i=0;i<this.n;i++){
+      const d=document.createElement('span');d.className='s-dot'+(i===0?' on':'');
+      d.addEventListener('click',()=>this.go(i));
+      this.dotsEl.appendChild(d);
+    }
+    this.ctrl.querySelector('.prev').addEventListener('click',()=>this.go((this.cur-1+this.n)%this.n));
+    this.ctrl.querySelector('.next').addEventListener('click',()=>this.go((this.cur+1)%this.n));
+    this.auto=setInterval(()=>this.go((this.cur+1)%this.n),8000);
+  }
+  go(i){
+    this.cur=i;
+    this.track.style.transform=`translateX(-${i*100}%)`;
+    this.dotsEl.querySelectorAll('.s-dot').forEach((d,idx)=>d.classList.toggle('on',idx===i));
+    this.counter.textContent=`${i+1} / ${this.n}`;
+    clearInterval(this.auto);this.auto=setInterval(()=>this.go((this.cur+1)%this.n),8000);
+  }
+}
+['aboutSlider','systemSlider','modulesSlider','resultsSlider','teamSlider'].forEach(id=>new Slider(id));
+
+// ===== GAUGE ANIMATION =====
+function animateGauge(arcId,pct){
+  const arc=document.getElementById(arcId);
+  if(!arc)return;
+  const total=220;
+  arc.style.strokeDashoffset=total-(total*pct/100);
+}
+const gaugeObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){
+    setTimeout(()=>{
+      animateGauge('gMPPT',98.5);
+      animateGauge('gEff',92.5);
+      animateGauge('gInv',94.2);
+      animateGauge('gData',99.8);
+    },300);
+    gaugeObs.disconnect();
+  }
+},{threshold:0.3});
+gaugeObs.observe(document.querySelector('.gauge-card'));
+
+// ===== POWER CHART =====
+(function(){
+  const hours=25;
+  // Solar generation profile (night low, rises midday)
+  const solar=[0,0,0,0,0,2,15,35,65,110,155,180,185,178,160,140,100,65,30,10,3,0,0,0,0];
+  // Load profile
+  const load=[20,18,16,15,15,20,45,80,90,85,80,75,80,85,90,100,110,130,120,100,80,60,40,25,20];
+  const W=800,H=155,pad=5;
+  const maxV=200;
+  function px(i){return pad+(i/(hours-1))*(W-pad*2)}
+  function py(v){return H-pad-(v/maxV)*(H-pad*2)}
+  function makePath(data){return data.map((v,i)=>`${i===0?'M':'L'}${px(i)},${py(v)}`).join(' ')}
+  function makeArea(data){
+    const p=makePath(data);
+    return p+` L${px(hours-1)},${H} L${px(0)},${H} Z`;
+  }
+  document.getElementById('solarLine').setAttribute('d',makePath(solar));
+  document.getElementById('solarFill').setAttribute('d',makeArea(solar));
+  document.getElementById('loadLine').setAttribute('d',makePath(load));
+  document.getElementById('loadFill').setAttribute('d',makeArea(load));
+})();
+
+// ===== LIVE DATA SIMULATION =====
+function rand(base,delta){return (base+((Math.random()-0.5)*delta)).toFixed(1)}
+function liveUpdate(){
+  const solar=rand(183,12);
+  const batt=Math.min(100,Math.max(70,parseFloat(document.getElementById('mBattery').textContent)+(Math.random()>0.5?0.1:-0.05))).toFixed(0);
+  document.getElementById('mSolar').innerHTML=solar+'<span>W</span>';
+  document.getElementById('mBattery').innerHTML=batt+'<span>%</span>';
+  document.getElementById('mVoltage').innerHTML=rand(220,1.5)+'<span>V AC</span>';
+  document.getElementById('mTemp').innerHTML=rand(47,2)+'<span>°C</span>';
+}
+setInterval(liveUpdate,3000);
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t)window.scrollTo({top:t.offsetTop-70,behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
