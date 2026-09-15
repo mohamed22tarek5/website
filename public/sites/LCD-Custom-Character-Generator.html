@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>LCD Custom Character Generator | Mohamed Tarek</title>
+  <meta name="description" content="Advanced custom character designer for Liquid Crystal Display (LCD) with Arduino code generation. Design 5x8 pixel characters and export to Arduino code.">
+  <meta name="keywords" content="lcd, custom character, generator, arduino, i2c, parallel, lcd character designer, 5x8 pixel grid">
+  <meta name="author" content="Mohamed Tarek">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LCD Custom Character Generator | Mohamed Tarek">
+  <meta property="og:description" content="Advanced custom character designer for LCD displays with Arduino code generation.">
+  <meta property="og:image" content="https://website-mohamed.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://website-mohamed.vercel.app/sites/LCD-Custom-Character-Generator.html">
+  <meta property="og:site_name" content="Mohamed Tarek Portfolio">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LCD Custom Character Generator | Mohamed Tarek">
+  <meta name="twitter:description" content="Advanced custom character designer for LCD displays with Arduino code generation.">
+  <meta name="twitter:image" content="https://website-mohamed.vercel.app/photo.jpg">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="../icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "LCD Custom Character Generator",
+    "description": "Advanced custom character designer for Liquid Crystal Display (LCD) with Arduino code generation.",
+    "url": "https://website-mohamed.vercel.app/sites/LCD-Custom-Character-Generator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek",
+      "url": "https://website-mohamed.vercel.app"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --color-bg-primary: #0a0e1a;
+      --color-bg-secondary: #0f1322;
+      --color-bg-tertiary: #141829;
+      --color-bg-card: #161b2e;
+      --color-bg-card-hover: #1c2240;
+      --color-bg-elevated: #1a2038;
+      --color-accent: #3b82f6;
+      --color-accent-hover: #2563eb;
+      --color-accent-light: #60a5fa;
+      --color-accent-glow: rgba(59, 130, 246, 0.15);
+      --color-accent-subtle: rgba(59, 130, 246, 0.08);
+      --color-text-primary: #f1f5f9;
+      --color-text-secondary: #94a3b8;
+      --color-text-tertiary: #64748b;
+      --color-border: rgba(255, 255, 255, 0.06);
+      --color-border-hover: rgba(255, 255, 255, 0.12);
+      --color-border-accent: rgba(59, 130, 246, 0.3);
+      --color-success: #22c55e;
+      --color-error: #ef4444;
+      --color-warning: #f59e0b;
+      --color-info: #3b82f6;
+      --lcd-green: #4CAF50;
+      --lcd-blue: #2196F3;
+      --lcd-white: #ffffff;
+      --inactive-gray: #444444;
+      --selection-color: #f59e0b;
+      --gradient-hero: linear-gradient(135deg, #0a0e1a 0%, #111833 50%, #0f1322 100%);
+      --gradient-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 4rem;
+      --space-4xl: 6rem;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.15);
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --container-max: 1200px;
+      --header-height: 72px;
+    }
+
+    [data-theme="light"] {
+      --color-bg-primary: #f8fafc;
+      --color-bg-secondary: #f1f5f9;
+      --color-bg-tertiary: #e2e8f0;
+      --color-bg-card: #ffffff;
+      --color-bg-card-hover: #f8fafc;
+      --color-bg-elevated: #ffffff;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      --color-text-tertiary: #94a3b8;
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-border-hover: rgba(0, 0, 0, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+      --gradient-hero: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 50%, #f1f5f9 100%);
+      --lcd-green: #2e7d32;
+      --lcd-blue: #1565c0;
+      --inactive-gray: #cccccc;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color var(--transition-slow), color var(--transition-slow);
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; }
+    ul, ol { list-style: none; }
+    ::selection { background: var(--color-accent); color: white; }
+
+    .skip-link {
+      position: fixed; top: -100%; left: var(--space-md);
+      background: var(--color-accent); color: white;
+      padding: var(--space-sm) var(--space-md); border-radius: var(--radius-sm);
+      z-index: 10000; font-weight: 600; font-size: 0.875rem;
+      transition: top var(--transition-fast);
+    }
+    .skip-link:focus { top: var(--space-md); }
+
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; width: 0%; height: 3px;
+      background: var(--gradient-accent); z-index: 10001;
+      transition: width 50ms linear;
+    }
+
+    .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 var(--space-xl); }
+    @media (max-width: 768px) { .container { padding: 0 var(--space-md); } }
+
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--header-height);
+      z-index: 1000; transition: all var(--transition-base); background: transparent;
+    }
+    .header.scrolled {
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid var(--color-border);
+    }
+    [data-theme="light"] .header.scrolled { background: rgba(248, 250, 252, 0.85); }
+    .header .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+
+    .logo { display: flex; align-items: center; gap: var(--space-sm); font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; }
+    .logo-icon {
+      width: 36px; height: 36px; background: var(--gradient-accent);
+      border-radius: var(--radius-sm); display: flex; align-items: center;
+      justify-content: center; color: white; font-size: 0.875rem; font-weight: 800;
+    }
+
+    .nav { display: flex; align-items: center; gap: var(--space-xs); }
+    .nav-link {
+      position: relative; padding: var(--space-sm) var(--space-md);
+      font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
+      border-radius: var(--radius-sm); transition: all var(--transition-fast);
+    }
+    .nav-link:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
+
+    .menu-toggle {
+      display: none; flex-direction: column; gap: 5px; padding: var(--space-sm);
+      z-index: 1001; align-items: center; justify-content: center;
+    }
+    .menu-toggle .bar {
+      width: 22px; height: 2px; background: var(--color-text-primary);
+      border-radius: 2px; transition: all var(--transition-base); transform-origin: center;
+    }
+    .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .mobile-overlay {
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5);
+      z-index: 999; opacity: 0; pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+    .mobile-overlay.active { opacity: 1; pointer-events: auto; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+      .nav {
+        position: fixed; top: 0; right: -100%; width: min(320px, 85vw);
+        height: 100vh; background: var(--color-bg-secondary);
+        flex-direction: column; align-items: flex-start; justify-content: center;
+        padding: var(--space-3xl); gap: var(--space-sm);
+        transition: right var(--transition-slow); border-left: 1px solid var(--color-border);
+      }
+      .nav.active { right: 0; }
+      .nav-link { font-size: 1.125rem; width: 100%; padding: var(--space-md); }
+    }
+
+    .page-hero {
+      padding-top: calc(var(--header-height) + var(--space-3xl));
+      padding-bottom: var(--space-3xl);
+      background: var(--gradient-hero);
+      position: relative; overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0; overflow: hidden; z-index: 0;
+    }
+    .page-hero-orb {
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+    .page-hero-orb:nth-child(1) { width: 400px; height: 400px; background: rgba(59, 130, 246, 0.15); top: -100px; right: -50px; }
+    .page-hero-orb:nth-child(2) { width: 300px; height: 300px; background: rgba(139, 92, 246, 0.12); bottom: -80px; left: -80px; animation-delay: -7s; }
+    .page-hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px; z-index: 1;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(20px, 10px) scale(1.02); }
+    }
+    .page-hero .container { position: relative; z-index: 2; text-align: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-md); background: var(--color-accent-subtle);
+      border: 1px solid var(--color-border-accent); border-radius: var(--radius-full);
+      font-size: 0.8125rem; font-weight: 500; color: var(--color-accent-light);
+      margin-bottom: var(--space-lg);
+    }
+    .hero-badge .dot {
+      width: 8px; height: 8px; background: var(--color-success);
+      border-radius: 50%; animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+    .page-hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.03em; margin-bottom: var(--space-md);
+    }
+    .page-hero h1 .gradient-text {
+      background: var(--gradient-accent); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .page-hero p {
+      font-size: clamp(1rem, 2vw, 1.125rem); color: var(--color-text-secondary);
+      max-width: 600px; margin: 0 auto;
+    }
+
+    .main-content { padding: var(--space-3xl) 0 var(--space-4xl); }
+
+    .main-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+
+    .design-area {
+      background: var(--color-bg-card);
+      padding: var(--space-xl);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      transition: all var(--transition-base);
+    }
+    .design-area:hover { border-color: var(--color-border-hover); }
+
+    .design-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-lg);
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+
+    .character-slots {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .char-slot {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--color-bg-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      border: 2px solid transparent;
+      position: relative;
+      color: var(--color-text-secondary);
+    }
+
+    .char-slot:hover {
+      background: var(--color-accent);
+      color: white;
+    }
+
+    .char-slot.active {
+      background: var(--color-accent);
+      color: white;
+      border-color: var(--color-accent-light);
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+    }
+
+    .char-slot.selected {
+      border-color: var(--selection-color);
+      background: var(--color-bg-tertiary);
+      color: var(--selection-color);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+    }
+
+    .char-slot.selected::after {
+      content: '\2713';
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--selection-color);
+      color: white;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .char-name-input {
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-tertiary);
+      color: var(--color-text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      width: 200px;
+      transition: all var(--transition-fast);
+      outline: none;
+    }
+
+    .char-name-input:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-accent-glow);
+    }
+
+    .selection-controls {
+      display: flex;
+      gap: var(--space-sm);
+      margin: var(--space-md) 0;
+      padding: var(--space-md);
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .selection-info {
+      color: var(--color-text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .selection-info span {
+      color: var(--selection-color);
+      font-weight: bold;
+    }
+
+    .char-grid-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: var(--space-lg);
+    }
+
+    .char-grid {
+      width: 320px;
+      height: 320px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: 2px;
+      border: 3px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-bg-secondary);
+      padding: 10px;
+      margin-bottom: var(--space-md);
+    }
+
+    .char-grid.green {
+      border-color: var(--lcd-green);
+    }
+
+    .char-grid.blue {
+      border-color: var(--lcd-blue);
+    }
+
+    .char-grid.white {
+      border-color: var(--lcd-white);
+    }
+
+    .pixel {
+      background-color: var(--inactive-gray);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      border: 1px solid transparent;
+    }
+
+    .char-grid.green .pixel.active {
+      background-color: var(--lcd-green);
+      box-shadow: 0 0 8px rgba(76, 175, 80, 0.7);
+    }
+
+    .char-grid.blue .pixel.active {
+      background-color: var(--lcd-blue);
+      box-shadow: 0 0 8px rgba(33, 150, 243, 0.7);
+    }
+
+    .char-grid.white .pixel.active {
+      background-color: var(--lcd-white);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+    }
+
+    .pixel:hover {
+      border-color: var(--color-accent);
+      transform: scale(1.05);
+    }
+
+    .grid-coordinates {
+      display: grid;
+      grid-template-columns: 30px repeat(5, 1fr);
+      grid-template-rows: 30px repeat(8, 1fr);
+      width: 320px;
+      height: 320px;
+      margin-bottom: var(--space-md);
+    }
+
+    .coord-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--color-text-tertiary);
+    }
+
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      justify-content: center;
+      margin: var(--space-lg) 0;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: var(--space-sm); padding: 12px 24px; font-size: 0.9375rem;
+      font-weight: 600; border-radius: var(--radius-full);
+      transition: all var(--transition-fast); position: relative; overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--color-accent); color: white;
+      box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
+    }
+    .btn-primary:hover {
+      background: var(--color-accent-hover); transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--color-bg-tertiary); color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
+    .btn-secondary:hover {
+      border-color: var(--color-border-hover); transform: translateY(-2px);
+    }
+
+    .btn-success {
+      background-color: var(--color-success);
+      color: white;
+      box-shadow: 0 2px 12px rgba(34, 197, 94, 0.3);
+    }
+    .btn-success:hover {
+      background-color: #16a34a;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(34, 197, 94, 0.4);
+    }
+
+    .btn-warning {
+      background-color: var(--color-warning);
+      color: white;
+      box-shadow: 0 2px 12px rgba(245, 158, 11, 0.3);
+    }
+    .btn-warning:hover {
+      background-color: #d97706;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-danger {
+      background-color: var(--color-error);
+      color: white;
+      box-shadow: 0 2px 12px rgba(239, 68, 68, 0.3);
+    }
+    .btn-danger:hover {
+      background-color: #dc2626;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(239, 68, 68, 0.4);
+    }
+
+    .btn-selection {
+      background-color: var(--selection-color);
+      color: white;
+      box-shadow: 0 2px 12px rgba(245, 158, 11, 0.3);
+    }
+    .btn-selection:hover {
+      background-color: #d97706;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(245, 158, 11, 0.4);
+    }
+
+    .char-preview-container {
+      margin-top: var(--space-lg);
+      padding-top: var(--space-lg);
+      border-top: 1px solid var(--color-border);
+    }
+
+    .char-preview-title {
+      color: var(--color-accent);
+      font-size: 1.125rem;
+      margin-bottom: var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-weight: 600;
+    }
+
+    .char-preview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+    }
+
+    .preview-char {
+      background: var(--color-bg-secondary);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+      border: 2px solid transparent;
+      transition: all var(--transition-fast);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .preview-char.active {
+      border-color: var(--color-accent);
+      background: var(--color-bg-card-hover);
+    }
+
+    .preview-char.selected {
+      border-color: var(--selection-color);
+      background: var(--color-bg-card-hover);
+    }
+
+    .preview-char.selected::after {
+      content: '\2713';
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--selection-color);
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .preview-char-name {
+      font-weight: 600;
+      color: var(--color-text-primary);
+      font-size: 0.8125rem;
+    }
+
+    .preview-grid {
+      width: 80px;
+      height: 80px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: 1px;
+    }
+
+    .config-area {
+      background: var(--color-bg-card);
+      padding: var(--space-xl);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+      transition: all var(--transition-base);
+    }
+    .config-area:hover { border-color: var(--color-border-hover); }
+
+    .config-section {
+      margin-bottom: var(--space-sm);
+    }
+
+    .config-title {
+      color: var(--color-accent);
+      font-size: 1.125rem;
+      margin-bottom: var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-weight: 700;
+    }
+
+    .config-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+
+    .option-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .option-group strong {
+      font-size: 0.8125rem;
+      color: var(--color-text-secondary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      cursor: pointer;
+      color: var(--color-text-primary);
+      transition: color var(--transition-fast);
+      font-size: 0.9375rem;
+    }
+
+    .option-label:hover {
+      color: var(--color-accent);
+    }
+
+    .option-label input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--color-accent);
+    }
+
+    .code-gen-options {
+      display: flex;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .gen-option {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .gen-option input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--color-accent);
+    }
+
+    .gen-option label {
+      cursor: pointer;
+      color: var(--color-text-primary);
+      font-size: 0.9375rem;
+    }
+
+    .code-section {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-md);
+    }
+
+    .code-actions {
+      display: flex;
+      gap: var(--space-sm);
+    }
+
+    .code-box {
+      background: var(--color-bg-secondary);
+      padding: var(--space-lg);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre;
+      color: var(--color-text-primary);
+      flex-grow: 1;
+      overflow-y: auto;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+      max-height: 400px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: var(--color-bg-card);
+      padding: var(--space-xl);
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 500px;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-lg);
+    }
+
+    .modal-title {
+      color: var(--color-accent);
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .close-modal {
+      background: none;
+      border: none;
+      color: var(--color-text-tertiary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color var(--transition-fast);
+    }
+
+    .close-modal:hover {
+      color: var(--color-error);
+    }
+
+    .modal-body {
+      margin-bottom: var(--space-lg);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-sm);
+    }
+
+    .modal-body textarea {
+      width: 100%;
+      background: var(--color-bg-secondary);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      outline: none;
+      transition: border-color var(--transition-fast);
+    }
+    .modal-body textarea:focus {
+      border-color: var(--color-accent);
+    }
+
+    .footer {
+      background: var(--color-bg-primary); border-top: 1px solid var(--color-border);
+      padding: var(--space-3xl) 0 var(--space-xl);
+    }
+    .footer-content {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: var(--space-md);
+    }
+    .footer-social { display: flex; gap: var(--space-sm); }
+    .footer-social a {
+      width: 40px; height: 40px; display: flex; align-items: center;
+      justify-content: center; border-radius: var(--radius-md);
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      color: var(--color-text-secondary); transition: all var(--transition-fast);
+    }
+    .footer-social a:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+    .footer-bottom { font-size: 0.875rem; color: var(--color-text-tertiary); }
+    .footer-bottom a { color: var(--color-accent); }
+
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-secondary);
+      font-size: 1rem; z-index: 999; opacity: 0; visibility: hidden;
+      transform: translateY(12px); transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+    .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    .back-to-top:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+
+    .theme-toggle {
+      position: fixed; bottom: 32px; right: 90px; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--color-bg-card); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); color: var(--color-text-secondary);
+      font-size: 1rem; z-index: 999; transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+    .theme-toggle:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
+
+    .toast {
+      position: fixed; bottom: 100px; right: 32px; padding: var(--space-md) var(--space-lg);
+      background: var(--color-success); color: white; border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg); z-index: 10000; font-size: 0.875rem; font-weight: 500;
+      transform: translateX(120%); transition: transform var(--transition-base);
+      max-width: 400px;
+    }
+    .toast.show { transform: translateX(0); }
+    .toast.error { background: var(--color-error); }
+    .toast.warning { background: var(--color-warning); }
+
+    .loader {
+      position: fixed; inset: 0; background: var(--color-bg-primary);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 99999; transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .loader.hidden { opacity: 0; visibility: hidden; }
+    .loader-spinner {
+      width: 40px; height: 40px; border: 3px solid var(--color-border);
+      border-top-color: var(--color-accent); border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .loader-text { margin-top: var(--space-lg); font-size: 0.875rem; color: var(--color-text-tertiary); font-weight: 500; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    @media all and (display-mode: standalone) {
+      body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+    }
+
+    @media (max-width: 1100px) {
+      .main-container { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .char-grid {
+        width: 250px;
+        height: 250px;
+      }
+      .grid-coordinates {
+        width: 250px;
+        height: 250px;
+      }
+      .button-group {
+        flex-direction: column;
+        align-items: center;
+      }
+      .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+      .char-preview {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .design-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .char-name-input {
+        width: 100%;
+      }
+      .selection-controls {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .config-options {
+        flex-direction: column;
+      }
+      .code-gen-options {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .char-grid {
+        width: 220px;
+        height: 220px;
+      }
+      .grid-coordinates {
+        width: 220px;
+        height: 220px;
+      }
+      .char-preview {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Loading generator...</p>
+  </div>
+
+  <a href="#main" class="skip-link">Skip to content</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+
+  <header class="header" id="header" role="banner">
+    <div class="container">
+      <a href="../index.html" class="logo" aria-label="Mohamed Tarek - Home">
+        <span class="logo-icon">MT</span>
+        <span>Mohamed Tarek</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../index.html#skills" class="nav-link">Skills</a>
+        <a href="../index.html#projects" class="nav-link">Projects</a>
+        <a href="../index.html#contact" class="nav-link">Contact</a>
+        <a href="../index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero" aria-label="Page header">
+      <div class="page-hero-bg" aria-hidden="true">
+        <div class="page-hero-orb"></div>
+        <div class="page-hero-orb"></div>
+        <div class="page-hero-grid"></div>
+      </div>
+      <div class="container">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Engineering Tool
+        </div>
+        <h1><i class="fas fa-microchip"></i> <span class="gradient-text">LCD Custom Character</span> Generator</h1>
+        <p>Design custom 5x8 pixel characters for LCD displays and generate Arduino code</p>
+      </div>
+    </section>
+
+    <section class="main-content" aria-label="Character Generator">
+      <div class="container">
+        <div class="main-container">
+          <div class="design-area">
+            <div class="design-header">
+              <div class="character-slots" id="char-slots" role="group" aria-label="Character slots"></div>
+              <input type="text" class="char-name-input" id="char-name" placeholder="Character name" maxlength="10" aria-label="Character name">
+            </div>
+
+            <div class="selection-controls" id="selection-controls">
+              <div class="selection-info">
+                <span id="selected-count">0</span> characters selected
+              </div>
+              <button class="btn btn-selection" id="select-all-btn" aria-label="Select all characters">
+                <i class="fas fa-check-double"></i> Select All
+              </button>
+              <button class="btn btn-selection" id="deselect-all-btn" aria-label="Deselect all characters">
+                <i class="fas fa-times"></i> Deselect All
+              </button>
+              <button class="btn btn-selection" id="select-active-btn" aria-label="Select active character">
+                <i class="fas fa-check-square"></i> Select Active
+              </button>
+            </div>
+
+            <div class="char-grid-container">
+              <div class="grid-coordinates" aria-hidden="true"></div>
+              <div class="char-grid green" id="char-grid" role="grid" aria-label="Character pixel grid"></div>
+            </div>
+
+            <div class="button-group">
+              <button class="btn btn-primary" id="clear-btn" aria-label="Clear character">
+                <i class="fas fa-eraser"></i> Clear
+              </button>
+              <button class="btn btn-primary" id="invert-btn" aria-label="Invert character">
+                <i class="fas fa-exchange-alt"></i> Invert
+              </button>
+              <button class="btn btn-success" id="save-char-btn" aria-label="Save character name">
+                <i class="fas fa-save"></i> Save Character
+              </button>
+              <button class="btn btn-warning" id="load-examples-btn" aria-label="Load example characters">
+                <i class="fas fa-magic"></i> Load Examples
+              </button>
+            </div>
+
+            <div class="char-preview-container">
+              <div class="char-preview-title">
+                <i class="fas fa-eye"></i> Character Preview (8 slots)
+              </div>
+              <div class="char-preview" id="char-preview" role="group" aria-label="Character previews"></div>
+            </div>
+          </div>
+
+          <div class="config-area">
+            <div class="config-section">
+              <div class="config-title">
+                <i class="fas fa-palette"></i> Display Configuration
+              </div>
+              <div class="config-options">
+                <div class="option-group">
+                  <strong>LCD Color</strong>
+                  <label class="option-label">
+                    <input type="radio" name="color" value="green" checked>
+                    <span>Green</span>
+                  </label>
+                  <label class="option-label">
+                    <input type="radio" name="color" value="blue">
+                    <span>Blue</span>
+                  </label>
+                  <label class="option-label">
+                    <input type="radio" name="color" value="white">
+                    <span>White</span>
+                  </label>
+                </div>
+
+                <div class="option-group">
+                  <strong>Interface</strong>
+                  <label class="option-label">
+                    <input type="radio" name="interface" value="parallel" checked>
+                    <span>Parallel</span>
+                  </label>
+                  <label class="option-label">
+                    <input type="radio" name="interface" value="i2c">
+                    <span>I2C</span>
+                  </label>
+                </div>
+
+                <div class="option-group">
+                  <strong>Data Format</strong>
+                  <label class="option-label">
+                    <input type="radio" name="format" value="binary" checked>
+                    <span>Binary</span>
+                  </label>
+                  <label class="option-label">
+                    <input type="radio" name="format" value="hex">
+                    <span>Hexadecimal</span>
+                  </label>
+                  <label class="option-label">
+                    <input type="radio" name="format" value="decimal">
+                    <span>Decimal</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="config-section">
+              <div class="config-title">
+                <i class="fas fa-code"></i> Code Generation Options
+              </div>
+              <div class="code-gen-options">
+                <div class="gen-option">
+                  <input type="checkbox" id="gen-all-chars" checked>
+                  <label for="gen-all-chars">Generate all characters</label>
+                </div>
+                <div class="gen-option">
+                  <input type="checkbox" id="gen-selected-chars">
+                  <label for="gen-selected-chars">Generate selected characters only</label>
+                </div>
+                <div class="gen-option">
+                  <input type="checkbox" id="gen-display-code" checked>
+                  <label for="gen-display-code">Include display code</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="config-section">
+              <div class="config-title">
+                <i class="fas fa-file-export"></i> Import / Export
+              </div>
+              <div class="button-group">
+                <button class="btn btn-secondary" id="export-json-btn" aria-label="Export characters as JSON">
+                  <i class="fas fa-download"></i> Export as JSON
+                </button>
+                <button class="btn btn-secondary" id="import-json-btn" aria-label="Import characters from JSON">
+                  <i class="fas fa-upload"></i> Import JSON
+                </button>
+                <button class="btn btn-danger" id="reset-all-btn" aria-label="Reset all characters">
+                  <i class="fas fa-trash-alt"></i> Reset All
+                </button>
+              </div>
+            </div>
+
+            <div class="code-section">
+              <div class="code-header">
+                <div class="config-title">
+                  <i class="fas fa-code"></i> Arduino Code
+                </div>
+                <div class="code-actions">
+                  <button class="btn btn-primary" id="copy-code-btn" aria-label="Copy code to clipboard">
+                    <i class="fas fa-copy"></i> Copy
+                  </button>
+                </div>
+              </div>
+              <pre class="code-box" id="code-box"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="footer-bottom">
+          &copy; <span id="currentYear"></span> Mohamed Tarek. All Rights Reserved. | <a href="../index.html">Back to Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode"><i class="fas fa-moon"></i></button>
+  <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+  <div class="modal" id="import-modal" role="dialog" aria-modal="true" aria-labelledby="importModalTitle">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="importModalTitle">
+          <i class="fas fa-upload"></i> Import Characters
+        </div>
+        <button class="close-modal" id="close-import-modal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color: var(--color-text-secondary); margin-bottom: var(--space-md);">Paste your JSON data below to import characters:</p>
+        <textarea id="import-json-text" rows="10" aria-label="JSON data to import"></textarea>
+        <p style="margin-top: var(--space-sm); font-size: 0.8125rem; color: var(--color-text-tertiary);">
+          Note: Importing will overwrite your current characters.
+        </p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="cancel-import-btn">Cancel</button>
+        <button class="btn btn-primary" id="confirm-import-btn">Import</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const loader = document.getElementById('loader');
+      window.addEventListener('load', () => { setTimeout(() => { loader.classList.add('hidden'); }, 300); });
+
+      const scrollProgress = document.getElementById('scrollProgress');
+      const header = document.getElementById('header');
+      const backToTop = document.getElementById('backToTop');
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const s = window.scrollY;
+            const d = document.documentElement.scrollHeight - window.innerHeight;
+            scrollProgress.style.width = (d > 0 ? (s / d) * 100 : 0) + '%';
+            header.classList.toggle('scrolled', s > 50);
+            backToTop.classList.toggle('visible', s > 400);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      const toggleMenu = () => {
+        const isActive = navMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', String(isActive));
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = isActive ? 'hidden' : '';
+      };
+      menuToggle.addEventListener('click', toggleMenu);
+      mobileOverlay.addEventListener('click', toggleMenu);
+
+      const STORAGE_KEY = 'portfolio-theme';
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('i');
+      const getPreferredTheme = () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      };
+      const applyTheme = (theme) => {
+        document.documentElement.setAttribute('data-theme', theme);
+        themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        localStorage.setItem(STORAGE_KEY, theme);
+      };
+      applyTheme(getPreferredTheme());
+      themeToggle.addEventListener('click', () => {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+      });
+
+      function showToast(message, type) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast' + (type ? ' ' + type : '');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+      const appState = {
+        currentCharIndex: 0,
+        selectedChars: new Set([0]),
+        characters: Array(8).fill().map((_, i) => ({
+          id: i,
+          name: `Char ${i}`,
+          pixels: Array(8).fill().map(() => Array(5).fill(false))
+        })),
+        color: 'green',
+        interface: 'parallel',
+        format: 'binary',
+        generateAll: true,
+        generateSelected: false,
+        generateDisplayCode: true,
+        exampleSet: 0
+      };
+
+      const charGrid = document.getElementById('char-grid');
+      const charSlotsContainer = document.getElementById('char-slots');
+      const charPreviewContainer = document.getElementById('char-preview');
+      const charNameInput = document.getElementById('char-name');
+      const gridCoordinates = document.querySelector('.grid-coordinates');
+      const codeBox = document.getElementById('code-box');
+      const selectedCountElement = document.getElementById('selected-count');
+
+      function initApp() {
+        createCharacterSlots();
+        createGridCoordinates();
+        createCharacterGrid();
+        createCharacterPreviews();
+        updateCharacterDisplay();
+        updateSelectionInfo();
+        updateCode();
+        setupEventListeners();
+        loadFromLocalStorage();
+      }
+
+      function createCharacterSlots() {
+        charSlotsContainer.innerHTML = '';
+        appState.characters.forEach((char, index) => {
+          const slot = document.createElement('div');
+          slot.className = 'char-slot';
+          if (index === appState.currentCharIndex) slot.classList.add('active');
+          if (appState.selectedChars.has(index)) slot.classList.add('selected');
+          slot.textContent = index;
+          slot.title = char.name;
+          slot.dataset.index = index;
+          slot.addEventListener('click', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+              toggleCharacterSelection(index);
+            } else {
+              switchCharacter(index);
+            }
+          });
+          slot.addEventListener('dblclick', () => {
+            toggleCharacterSelection(index);
+          });
+          charSlotsContainer.appendChild(slot);
+        });
+      }
+
+      function createGridCoordinates() {
+        gridCoordinates.innerHTML = '';
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'coord-cell';
+        gridCoordinates.appendChild(emptyCell);
+        for (let x = 0; x < 5; x++) {
+          const colHeader = document.createElement('div');
+          colHeader.className = 'coord-cell';
+          colHeader.textContent = x;
+          gridCoordinates.appendChild(colHeader);
+        }
+        for (let y = 0; y < 8; y++) {
+          const rowLabel = document.createElement('div');
+          rowLabel.className = 'coord-cell';
+          rowLabel.textContent = y;
+          gridCoordinates.appendChild(rowLabel);
+          for (let x = 0; x < 5; x++) {
+            const cell = document.createElement('div');
+            cell.className = 'coord-cell';
+            cell.textContent = `${x},${y}`;
+            gridCoordinates.appendChild(cell);
+          }
+        }
+      }
+
+      function createCharacterGrid() {
+        charGrid.innerHTML = '';
+        for (let y = 0; y < 8; y++) {
+          for (let x = 0; x < 5; x++) {
+            const pixel = document.createElement('div');
+            pixel.className = 'pixel';
+            pixel.dataset.x = x;
+            pixel.dataset.y = y;
+            pixel.title = `Pixel (${x}, ${y})`;
+            pixel.addEventListener('click', () => {
+              togglePixel(x, y);
+            });
+            charGrid.appendChild(pixel);
+          }
+        }
+      }
+
+      function createCharacterPreviews() {
+        charPreviewContainer.innerHTML = '';
+        appState.characters.forEach((char, index) => {
+          const preview = document.createElement('div');
+          preview.className = 'preview-char';
+          if (index === appState.currentCharIndex) preview.classList.add('active');
+          if (appState.selectedChars.has(index)) preview.classList.add('selected');
+          preview.dataset.index = index;
+          const name = document.createElement('div');
+          name.className = 'preview-char-name';
+          name.textContent = char.name;
+          const grid = document.createElement('div');
+          grid.className = 'preview-grid';
+          for (let y = 0; y < 8; y++) {
+            for (let x = 0; x < 5; x++) {
+              const pixel = document.createElement('div');
+              pixel.className = 'pixel';
+              pixel.style.backgroundColor = char.pixels[y][x] ?
+                (appState.color === 'green' ? 'var(--lcd-green)' :
+                 appState.color === 'blue' ? 'var(--lcd-blue)' : 'var(--lcd-white)') :
+                'var(--inactive-gray)';
+              grid.appendChild(pixel);
+            }
+          }
+          preview.appendChild(name);
+          preview.appendChild(grid);
+          preview.addEventListener('click', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+              toggleCharacterSelection(index);
+            } else {
+              switchCharacter(index);
+            }
+          });
+          preview.addEventListener('dblclick', () => {
+            toggleCharacterSelection(index);
+          });
+          charPreviewContainer.appendChild(preview);
+        });
+      }
+
+      function switchCharacter(index) {
+        appState.currentCharIndex = index;
+        document.querySelectorAll('.char-slot').forEach((slot, i) => {
+          slot.classList.toggle('active', i === index);
+        });
+        document.querySelectorAll('.preview-char').forEach((preview, i) => {
+          preview.classList.toggle('active', i === index);
+        });
+        charNameInput.value = appState.characters[index].name;
+        updateCharacterDisplay();
+        saveToLocalStorage();
+      }
+
+      function toggleCharacterSelection(index) {
+        if (appState.selectedChars.has(index)) {
+          appState.selectedChars.delete(index);
+        } else {
+          appState.selectedChars.add(index);
+        }
+        updateSelectionUI();
+        updateSelectionInfo();
+        updateCode();
+        saveToLocalStorage();
+      }
+
+      function selectAllCharacters() {
+        for (let i = 0; i < 8; i++) {
+          appState.selectedChars.add(i);
+        }
+        updateSelectionUI();
+        updateSelectionInfo();
+        updateCode();
+        saveToLocalStorage();
+      }
+
+      function deselectAllCharacters() {
+        appState.selectedChars.clear();
+        appState.selectedChars.add(appState.currentCharIndex);
+        updateSelectionUI();
+        updateSelectionInfo();
+        updateCode();
+        saveToLocalStorage();
+      }
+
+      function selectActiveCharacter() {
+        appState.selectedChars.clear();
+        appState.selectedChars.add(appState.currentCharIndex);
+        updateSelectionUI();
+        updateSelectionInfo();
+        updateCode();
+        saveToLocalStorage();
+      }
+
+      function updateSelectionUI() {
+        document.querySelectorAll('.char-slot').forEach((slot, i) => {
+          slot.classList.toggle('selected', appState.selectedChars.has(i));
+        });
+        document.querySelectorAll('.preview-char').forEach((preview, i) => {
+          preview.classList.toggle('selected', appState.selectedChars.has(i));
+        });
+      }
+
+      function updateSelectionInfo() {
+        selectedCountElement.textContent = appState.selectedChars.size;
+      }
+
+      function updateCharacterDisplay() {
+        const currentChar = appState.characters[appState.currentCharIndex];
+        const pixels = document.querySelectorAll('#char-grid .pixel');
+        pixels.forEach(pixel => {
+          const x = parseInt(pixel.dataset.x);
+          const y = parseInt(pixel.dataset.y);
+          if (currentChar.pixels[y][x]) {
+            pixel.classList.add('active');
+          } else {
+            pixel.classList.remove('active');
+          }
+        });
+        updateCharacterPreviews();
+      }
+
+      function updateCharacterPreviews() {
+        const previews = document.querySelectorAll('.preview-char');
+        previews.forEach((preview, index) => {
+          const char = appState.characters[index];
+          const grid = preview.querySelector('.preview-grid');
+          const name = preview.querySelector('.preview-char-name');
+          name.textContent = char.name;
+          const pixels = grid.querySelectorAll('.pixel');
+          pixels.forEach((pixel, i) => {
+            const y = Math.floor(i / 5);
+            const x = i % 5;
+            pixel.style.backgroundColor = char.pixels[y][x] ?
+              (appState.color === 'green' ? 'var(--lcd-green)' :
+               appState.color === 'blue' ? 'var(--lcd-blue)' : 'var(--lcd-white)') :
+              'var(--inactive-gray)';
+          });
+        });
+      }
+
+      function togglePixel(x, y) {
+        const currentChar = appState.characters[appState.currentCharIndex];
+        currentChar.pixels[y][x] = !currentChar.pixels[y][x];
+        updateCharacterDisplay();
+        updateCode();
+        saveToLocalStorage();
+      }
+
+      function clearCharacter() {
+        const currentChar = appState.characters[appState.currentCharIndex];
+        currentChar.pixels = Array(8).fill().map(() => Array(5).fill(false));
+        updateCharacterDisplay();
+        updateCode();
+        saveToLocalStorage();
+      }
+
+      function invertCharacter() {
+        const currentChar = appState.characters[appState.currentCharIndex];
+        for (let y = 0; y < 8; y++) {
+          for (let x = 0; x < 5; x++) {
+            currentChar.pixels[y][x] = !currentChar.pixels[y][x];
+          }
+        }
+        updateCharacterDisplay();
+        updateCode();
+        saveToLocalStorage();
+      }
+
+      function saveCharacterName() {
+        const currentChar = appState.characters[appState.currentCharIndex];
+        currentChar.name = charNameInput.value.trim() || `Char ${appState.currentCharIndex}`;
+        updateCharacterPreviews();
+        updateCode();
+        saveToLocalStorage();
+      }
+
+      const exampleSets = [
+        [
+          { name: "Heart", pixels: [[0,1,0,1,0],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Smiley", pixels: [[0,1,0,1,0],[0,1,0,1,0],[0,0,0,0,0],[1,0,0,0,1],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Arrow Right", pixels: [[0,0,1,0,0],[0,0,0,1,0],[1,1,1,1,1],[0,0,0,1,0],[0,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Bell", pixels: [[0,0,1,0,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[1,1,1,1,1],[0,0,1,0,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Check Mark", pixels: [[0,0,0,0,0],[0,0,0,0,1],[0,0,0,1,0],[0,0,1,0,0],[1,0,1,0,0],[0,1,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Note", pixels: [[0,1,1,0,0],[0,1,1,1,0],[0,1,1,0,0],[0,1,1,0,0],[1,1,1,1,0],[1,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Lock", pixels: [[0,1,1,0,0],[1,0,0,1,0],[1,0,0,1,0],[1,1,1,1,0],[1,1,1,1,0],[1,1,1,1,0],[0,1,1,0,0],[0,0,0,0,0]] },
+          { name: "Battery", pixels: [[1,1,1,1,1],[1,0,0,0,1],[1,0,0,0,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,0,0,0,0]] }
+        ],
+        [
+          { name: "Arrow Up", pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,0,1,0,1],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Arrow Down", pixels: [[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[1,0,1,0,1],[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Arrow Left", pixels: [[0,0,1,0,0],[0,1,0,0,0],[1,1,1,1,1],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Arrow Right", pixels: [[0,0,1,0,0],[0,0,0,1,0],[1,1,1,1,1],[0,0,0,1,0],[0,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Double Arrow", pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,0,1,0,1],[0,0,1,0,0],[1,0,1,0,1],[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Play", pixels: [[0,0,0,0,0],[0,0,0,1,0],[0,0,1,1,0],[0,1,1,1,0],[0,0,1,1,0],[0,0,0,1,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Stop", pixels: [[0,0,0,0,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Pause", pixels: [[0,0,0,0,0],[0,1,1,0,0],[0,1,1,0,0],[0,1,1,0,0],[0,1,1,0,0],[0,1,1,0,0],[0,0,0,0,0],[0,0,0,0,0]] }
+        ],
+        [
+          { name: "Zero", pixels: [[0,1,1,0,0],[1,0,0,1,0],[1,0,0,1,0],[1,0,0,1,0],[1,0,0,1,0],[1,0,0,1,0],[0,1,1,0,0],[0,0,0,0,0]] },
+          { name: "One", pixels: [[0,0,1,0,0],[0,1,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,1,1,1,0],[0,0,0,0,0]] },
+          { name: "Two", pixels: [[0,1,1,0,0],[1,0,0,1,0],[0,0,0,1,0],[0,0,1,0,0],[0,1,0,0,0],[1,0,0,0,0],[1,1,1,1,0],[0,0,0,0,0]] },
+          { name: "Three", pixels: [[0,1,1,0,0],[1,0,0,1,0],[0,0,0,1,0],[0,0,1,0,0],[0,0,0,1,0],[1,0,0,1,0],[0,1,1,0,0],[0,0,0,0,0]] },
+          { name: "Four", pixels: [[0,0,0,1,0],[0,0,1,1,0],[0,1,0,1,0],[1,0,0,1,0],[1,1,1,1,0],[0,0,0,1,0],[0,0,0,1,0],[0,0,0,0,0]] },
+          { name: "Five", pixels: [[1,1,1,1,0],[1,0,0,0,0],[1,1,1,0,0],[0,0,0,1,0],[0,0,0,1,0],[1,0,0,1,0],[0,1,1,0,0],[0,0,0,0,0]] },
+          { name: "Six", pixels: [[0,1,1,0,0],[1,0,0,1,0],[1,0,0,0,0],[1,1,1,0,0],[1,0,0,1,0],[1,0,0,1,0],[0,1,1,0,0],[0,0,0,0,0]] },
+          { name: "Seven", pixels: [[1,1,1,1,0],[0,0,0,1,0],[0,0,1,0,0],[0,0,1,0,0],[0,1,0,0,0],[0,1,0,0,0],[0,1,0,0,0],[0,0,0,0,0]] }
+        ],
+        [
+          { name: "Sun", pixels: [[1,0,1,0,1],[0,1,1,1,0],[1,1,1,1,1],[0,1,1,1,0],[1,1,1,1,1],[0,1,1,1,0],[1,0,1,0,1],[0,0,0,0,0]] },
+          { name: "Cloud", pixels: [[0,0,0,0,0],[0,1,1,0,0],[1,1,1,1,0],[1,1,1,1,1],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Rain", pixels: [[0,1,0,1,0],[1,0,1,0,1],[0,1,0,1,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Snow", pixels: [[1,0,1,0,1],[0,1,0,1,0],[1,0,1,0,1],[0,1,0,1,0],[1,0,1,0,1],[0,1,0,1,0],[1,0,1,0,1],[0,0,0,0,0]] },
+          { name: "Thermometer", pixels: [[0,1,0,0,0],[0,1,0,0,0],[0,1,1,0,0],[0,1,0,1,0],[0,1,1,0,0],[0,1,0,0,0],[0,1,0,0,0],[0,0,0,0,0]] },
+          { name: "Umbrella", pixels: [[0,1,1,1,0],[1,1,1,1,1],[0,0,1,0,0],[0,0,1,0,0],[0,0,1,0,0],[0,1,0,1,0],[0,1,0,1,0],[0,0,0,0,0]] },
+          { name: "Wind", pixels: [[0,0,0,0,0],[0,0,0,0,0],[0,1,1,1,1],[0,0,0,0,0],[1,1,1,1,0],[0,0,0,0,0],[0,1,1,1,1],[0,0,0,0,0]] },
+          { name: "Lightning", pixels: [[0,0,1,0,0],[0,0,1,1,0],[0,0,1,0,1],[0,1,1,0,0],[1,0,1,0,0],[0,0,1,1,0],[0,0,0,1,0],[0,0,0,0,0]] }
+        ],
+        [
+          { name: "Note 1", pixels: [[0,0,1,0,0],[0,0,1,1,0],[0,0,1,0,1],[0,1,1,0,0],[1,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Note 2", pixels: [[0,0,1,0,0],[0,0,1,1,0],[0,0,1,0,1],[0,1,1,0,0],[1,0,1,0,0],[0,0,0,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Clef", pixels: [[0,0,1,1,0],[0,1,0,0,1],[0,1,0,0,0],[0,0,1,0,0],[0,0,0,1,0],[0,1,0,0,1],[0,0,1,1,0],[0,0,0,0,0]] },
+          { name: "Speaker", pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Volume Up", pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,1,1,1,1],[0,0,0,0,0],[0,0,0,0,0],[0,1,0,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Volume Down", pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,1,1,1,1],[0,0,0,0,0],[0,0,0,0,0],[0,0,1,0,0],[0,1,0,1,0],[0,0,0,0,0]] },
+          { name: "Play Button", pixels: [[0,0,0,0,0],[0,0,1,0,0],[0,0,1,1,0],[0,0,1,1,1],[0,0,1,1,0],[0,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Stop Button", pixels: [[0,0,0,0,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0]] }
+        ],
+        [
+          { name: "Peace", pixels: [[0,0,1,0,0],[0,1,0,1,0],[0,0,1,0,0],[1,1,1,1,1],[0,0,1,0,0],[0,1,0,1,0],[1,0,0,0,1],[0,0,0,0,0]] },
+          { name: "Yin Yang", pixels: [[0,1,1,0,0],[1,0,0,1,0],[1,0,0,1,0],[0,1,1,0,1],[1,0,0,1,1],[1,0,0,1,0],[0,1,1,0,0],[0,0,0,0,0]] },
+          { name: "Infinity", pixels: [[0,0,0,0,0],[0,1,0,1,0],[1,0,1,0,1],[1,0,1,0,1],[1,0,1,0,1],[0,1,0,1,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Diamond", pixels: [[0,0,1,0,0],[0,1,0,1,0],[1,0,0,0,1],[0,1,0,1,0],[1,0,0,0,1],[0,1,0,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Spade", pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,1,1,1,1],[1,1,1,1,1],[0,1,1,1,0],[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Club", pixels: [[0,0,1,0,0],[0,1,1,1,0],[1,1,1,1,1],[0,1,1,1,0],[0,1,1,1,0],[0,1,1,1,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Star", pixels: [[0,0,1,0,0],[0,0,1,0,0],[1,1,1,1,1],[0,1,1,1,0],[1,1,1,1,1],[0,0,1,0,0],[0,0,1,0,0],[0,0,0,0,0]] },
+          { name: "Target", pixels: [[0,0,1,0,0],[0,1,0,1,0],[1,0,1,0,1],[0,1,0,1,0],[1,0,1,0,1],[0,1,0,1,0],[0,0,1,0,0],[0,0,0,0,0]] }
+        ],
+        [
+          { name: "Happy", pixels: [[0,1,0,1,0],[0,0,0,0,0],[1,0,0,0,1],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Sad", pixels: [[0,1,0,1,0],[0,0,0,0,0],[0,1,1,1,0],[1,0,0,0,1],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Angry", pixels: [[1,0,0,0,1],[0,1,0,1,0],[0,0,0,0,0],[1,1,1,1,1],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Surprised", pixels: [[0,1,0,1,0],[0,0,0,0,0],[0,1,1,1,0],[0,1,0,1,0],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Wink", pixels: [[0,1,0,0,0],[0,0,0,0,0],[1,0,0,0,1],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Cool", pixels: [[1,0,0,0,1],[0,0,0,0,0],[0,1,0,1,0],[0,0,1,0,0],[1,0,0,0,1],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Sleepy", pixels: [[0,0,0,0,0],[0,1,0,1,0],[0,0,0,0,0],[1,1,1,1,1],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]] },
+          { name: "Laughing", pixels: [[0,1,0,1,0],[0,0,0,0,0],[1,0,0,0,1],[0,1,1,1,0],[1,0,0,0,1],[0,1,1,1,0],[0,0,0,0,0],[0,0,0,0,0]] }
+        ]
+      ];
+
+      function loadExamples() {
+        appState.exampleSet = (appState.exampleSet + 1) % 7;
+        const currentSet = exampleSets[appState.exampleSet];
+        currentSet.forEach((charData, index) => {
+          if (index < 8) {
+            appState.characters[index].name = charData.name;
+            appState.characters[index].pixels = charData.pixels.map(row => [...row]);
+          }
+        });
+        selectAllCharacters();
+        switchCharacter(0);
+        updateCharacterDisplay();
+        updateCode();
+        saveToLocalStorage();
+        const exampleBtn = document.getElementById('load-examples-btn');
+        exampleBtn.innerHTML = `<i class="fas fa-magic"></i> Examples Set ${appState.exampleSet + 1}/7`;
+        showToast(`Loaded Example Set ${appState.exampleSet + 1}/7`);
+      }
+
+      function resetAllCharacters() {
+        if (confirm('Are you sure you want to reset all characters? This cannot be undone.')) {
+          appState.characters = Array(8).fill().map((_, i) => ({
+            id: i,
+            name: `Char ${i}`,
+            pixels: Array(8).fill().map(() => Array(5).fill(false))
+          }));
+          appState.exampleSet = 0;
+          appState.selectedChars.clear();
+          appState.selectedChars.add(0);
+          const exampleBtn = document.getElementById('load-examples-btn');
+          exampleBtn.innerHTML = `<i class="fas fa-magic"></i> Load Examples`;
+          charNameInput.value = 'Char 0';
+          switchCharacter(0);
+          updateSelectionUI();
+          updateSelectionInfo();
+          updateCharacterDisplay();
+          updateCode();
+          saveToLocalStorage();
+          showToast('All characters have been reset.');
+        }
+      }
+
+      function exportAsJSON() {
+        const exportData = {
+          version: '1.0',
+          generated: new Date().toISOString(),
+          characters: appState.characters,
+          selectedChars: Array.from(appState.selectedChars)
+        };
+        const dataStr = JSON.stringify(exportData, null, 2);
+        const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+        const exportFileDefaultName = `lcd_characters_${new Date().toISOString().slice(0,10)}.json`;
+        const linkElement = document.createElement('a');
+        linkElement.setAttribute('href', dataUri);
+        linkElement.setAttribute('download', exportFileDefaultName);
+        linkElement.click();
+        showToast('Characters exported successfully!');
+      }
+
+      function importFromJSON() {
+        document.getElementById('import-modal').style.display = 'flex';
+      }
+
+      function processImport() {
+        const jsonText = document.getElementById('import-json-text').value.trim();
+        if (!jsonText) {
+          showToast('Please enter JSON data to import.', 'error');
+          return;
+        }
+        try {
+          const importData = JSON.parse(jsonText);
+          if (!importData.characters || !Array.isArray(importData.characters)) {
+            throw new Error('Invalid format: Missing characters array');
+          }
+          for (let i = 0; i < Math.min(importData.characters.length, 8); i++) {
+            const char = importData.characters[i];
+            if (char.name) appState.characters[i].name = char.name;
+            if (char.pixels && Array.isArray(char.pixels)) {
+              for (let y = 0; y < Math.min(char.pixels.length, 8); y++) {
+                if (Array.isArray(char.pixels[y])) {
+                  for (let x = 0; x < Math.min(char.pixels[y].length, 5); x++) {
+                    appState.characters[i].pixels[y][x] = !!char.pixels[y][x];
+                  }
+                }
+              }
+            }
+          }
+          if (importData.selectedChars && Array.isArray(importData.selectedChars)) {
+            appState.selectedChars = new Set(importData.selectedChars);
+          } else {
+            selectAllCharacters();
+          }
+          switchCharacter(0);
+          updateSelectionUI();
+          updateSelectionInfo();
+          updateCharacterDisplay();
+          updateCode();
+          saveToLocalStorage();
+          document.getElementById('import-modal').style.display = 'none';
+          document.getElementById('import-json-text').value = '';
+          showToast('Characters imported successfully!');
+        } catch (error) {
+          showToast(`Error parsing JSON: ${error.message}`, 'error');
+        }
+      }
+
+      function updateCode() {
+        const color = document.querySelector('input[name="color"]:checked').value;
+        const iface = document.querySelector('input[name="interface"]:checked').value;
+        const format = document.querySelector('input[name="format"]:checked').value;
+        const generateAll = document.getElementById('gen-all-chars').checked;
+        const generateSelected = document.getElementById('gen-selected-chars').checked;
+        const generateDisplayCode = document.getElementById('gen-display-code').checked;
+
+        appState.color = color;
+        appState.interface = iface;
+        appState.format = format;
+        appState.generateAll = generateAll;
+        appState.generateSelected = generateSelected;
+        appState.generateDisplayCode = generateDisplayCode;
+
+        charGrid.className = `char-grid ${color}`;
+
+        const charData = [];
+        const charsToInclude = [];
+        if (generateSelected) {
+          appState.selectedChars.forEach(index => {
+            if (index < appState.characters.length) {
+              charsToInclude.push({index, char: appState.characters[index]});
+            }
+          });
+        } else if (generateAll) {
+          appState.characters.forEach((char, index) => {
+            charsToInclude.push({index, char});
+          });
+        } else {
+          charsToInclude.push({
+            index: appState.currentCharIndex,
+            char: appState.characters[appState.currentCharIndex]
+          });
+        }
+
+        charsToInclude.forEach(({index, char}) => {
+          const rows = [];
+          for (let y = 0; y < 8; y++) {
+            let binaryStr = '';
+            for (let x = 0; x < 5; x++) {
+              binaryStr += char.pixels[y][x] ? '1' : '0';
+            }
+            const paddedBinary = binaryStr + '000';
+            let value;
+            if (format === 'binary') {
+              value = 'B' + paddedBinary;
+            } else if (format === 'hex') {
+              const decimal = parseInt(paddedBinary, 2);
+              value = '0x' + decimal.toString(16).toUpperCase().padStart(2, '0');
+            } else {
+              const decimal = parseInt(paddedBinary, 2);
+              value = decimal.toString();
+            }
+            rows.push(value);
+          }
+          charData.push({ index, name: char.name, rows });
+        });
+
+        let code;
+        if (iface === 'parallel') {
+          code = `// LCD Custom Character Generator
+// Generated: ${new Date().toLocaleString()}
+// Characters included: ${charsToInclude.length}/8
+// ${generateSelected ? 'Selected characters only' : generateAll ? 'All characters' : 'Active character only'}
+
+#include <LiquidCrystal.h>
+
+// Initialize LCD (RS, E, D4, D5, D6, D7)
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+// Custom character definitions
+${charData.map(char => `// ${char.name} (Slot ${char.index})
+byte char${char.index}[] = {
+  ${char.rows.join(',\n  ')}
+};`).join('\n\n')}
+
+void setup() {
+  // Initialize LCD
+  lcd.begin(16, 2);
+  
+  // Create custom characters
+${charData.map(char => `  lcd.createChar(${char.index}, char${char.index});`).join('\n')}
+  ${generateDisplayCode ? `
+  // Display characters
+  lcd.home();${charData.map(char => `
+  lcd.write(${char.index}); // ${char.name}`).join('')}` : ''}
+}
+
+void loop() {
+  // Your code here
+}`;
+        } else {
+          code = `// LCD Custom Character Generator
+// Generated: ${new Date().toLocaleString()}
+// Characters included: ${charsToInclude.length}/8
+// ${generateSelected ? 'Selected characters only' : generateAll ? 'All characters' : 'Active character only'}
+// Interface: I2C (Default address: 0x27)
+
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+// Initialize LCD (address, columns, rows)
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+// Custom character definitions
+${charData.map(char => `// ${char.name} (Slot ${char.index})
+byte char${char.index}[] = {
+  ${char.rows.join(',\n  ')}
+};`).join('\n\n')}
+
+void setup() {
+  // Initialize LCD
+  lcd.init();
+  lcd.backlight();
+  
+  // Create custom characters
+${charData.map(char => `  lcd.createChar(${char.index}, char${char.index});`).join('\n')}
+  ${generateDisplayCode ? `
+  // Display characters
+  lcd.home();${charData.map(char => `
+  lcd.write(${char.index}); // ${char.name}`).join('')}` : ''}
+}
+
+void loop() {
+  // Your code here
+}`;
+        }
+
+        codeBox.textContent = code;
+        updateCharacterPreviews();
+      }
+
+      function copyCodeToClipboard() {
+        const code = codeBox.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+          showToast('Code copied to clipboard!');
+        }).catch(err => {
+          console.error('Failed to copy: ', err);
+          showToast('Failed to copy code to clipboard.', 'error');
+        });
+      }
+
+      function saveToLocalStorage() {
+        const saveData = {
+          version: '1.0',
+          characters: appState.characters,
+          currentCharIndex: appState.currentCharIndex,
+          selectedChars: Array.from(appState.selectedChars),
+          color: appState.color,
+          interface: appState.interface,
+          format: appState.format,
+          generateAll: appState.generateAll,
+          generateSelected: appState.generateSelected,
+          generateDisplayCode: appState.generateDisplayCode,
+          exampleSet: appState.exampleSet
+        };
+        localStorage.setItem('lcdCharGen', JSON.stringify(saveData));
+      }
+
+      function loadFromLocalStorage() {
+        const savedData = localStorage.getItem('lcdCharGen');
+        if (savedData) {
+          try {
+            const data = JSON.parse(savedData);
+            if (data.characters && Array.isArray(data.characters)) {
+              for (let i = 0; i < Math.min(data.characters.length, 8); i++) {
+                const savedChar = data.characters[i];
+                if (savedChar.name) appState.characters[i].name = savedChar.name;
+                if (savedChar.pixels && Array.isArray(savedChar.pixels)) {
+                  for (let y = 0; y < Math.min(savedChar.pixels.length, 8); y++) {
+                    if (Array.isArray(savedChar.pixels[y])) {
+                      for (let x = 0; x < Math.min(savedChar.pixels[y].length, 5); x++) {
+                        appState.characters[i].pixels[y][x] = !!savedChar.pixels[y][x];
+                      }
+                    }
+                  }
+                }
+              }
+              if (data.selectedChars && Array.isArray(data.selectedChars)) {
+                appState.selectedChars = new Set(data.selectedChars);
+              }
+              if (data.currentCharIndex !== undefined) appState.currentCharIndex = data.currentCharIndex;
+              if (data.color) {
+                appState.color = data.color;
+                document.querySelector(`input[name="color"][value="${data.color}"]`).checked = true;
+              }
+              if (data.interface) {
+                appState.interface = data.interface;
+                document.querySelector(`input[name="interface"][value="${data.interface}"]`).checked = true;
+              }
+              if (data.format) {
+                appState.format = data.format;
+                document.querySelector(`input[name="format"][value="${data.format}"]`).checked = true;
+              }
+              if (data.generateAll !== undefined) {
+                appState.generateAll = data.generateAll;
+                document.getElementById('gen-all-chars').checked = data.generateAll;
+              }
+              if (data.generateSelected !== undefined) {
+                appState.generateSelected = data.generateSelected;
+                document.getElementById('gen-selected-chars').checked = data.generateSelected;
+              }
+              if (data.generateDisplayCode !== undefined) {
+                appState.generateDisplayCode = data.generateDisplayCode;
+                document.getElementById('gen-display-code').checked = data.generateDisplayCode;
+              }
+              if (data.exampleSet !== undefined) {
+                appState.exampleSet = data.exampleSet;
+                if (appState.exampleSet > 0) {
+                  const exampleBtn = document.getElementById('load-examples-btn');
+                  exampleBtn.innerHTML = `<i class="fas fa-magic"></i> Examples Set ${appState.exampleSet + 1}/7`;
+                }
+              }
+              switchCharacter(appState.currentCharIndex);
+              updateSelectionUI();
+              updateSelectionInfo();
+              updateCharacterDisplay();
+              updateCode();
+            }
+          } catch (error) {
+            console.error('Error loading saved data:', error);
+          }
+        }
+      }
+
+      function setupEventListeners() {
+        document.getElementById('clear-btn').addEventListener('click', clearCharacter);
+        document.getElementById('invert-btn').addEventListener('click', invertCharacter);
+        charNameInput.addEventListener('change', saveCharacterName);
+        charNameInput.addEventListener('blur', saveCharacterName);
+        document.getElementById('save-char-btn').addEventListener('click', saveCharacterName);
+        document.getElementById('load-examples-btn').addEventListener('click', loadExamples);
+        document.getElementById('select-all-btn').addEventListener('click', selectAllCharacters);
+        document.getElementById('deselect-all-btn').addEventListener('click', deselectAllCharacters);
+        document.getElementById('select-active-btn').addEventListener('click', selectActiveCharacter);
+        document.getElementById('reset-all-btn').addEventListener('click', resetAllCharacters);
+        document.getElementById('export-json-btn').addEventListener('click', exportAsJSON);
+        document.getElementById('import-json-btn').addEventListener('click', importFromJSON);
+        document.getElementById('copy-code-btn').addEventListener('click', copyCodeToClipboard);
+
+        document.querySelectorAll('input[name="color"]').forEach(radio => {
+          radio.addEventListener('change', updateCode);
+        });
+        document.querySelectorAll('input[name="interface"]').forEach(radio => {
+          radio.addEventListener('change', updateCode);
+        });
+        document.querySelectorAll('input[name="format"]').forEach(radio => {
+          radio.addEventListener('change', updateCode);
+        });
+
+        document.getElementById('gen-all-chars').addEventListener('change', updateCode);
+        document.getElementById('gen-selected-chars').addEventListener('change', updateCode);
+        document.getElementById('gen-display-code').addEventListener('change', updateCode);
+
+        document.getElementById('close-import-modal').addEventListener('click', () => {
+          document.getElementById('import-modal').style.display = 'none';
+        });
+        document.getElementById('cancel-import-btn').addEventListener('click', () => {
+          document.getElementById('import-modal').style.display = 'none';
+          document.getElementById('import-json-text').value = '';
+        });
+        document.getElementById('confirm-import-btn').addEventListener('click', processImport);
+        document.getElementById('import-modal').addEventListener('click', (e) => {
+          if (e.target.id === 'import-modal') {
+            document.getElementById('import-modal').style.display = 'none';
+            document.getElementById('import-json-text').value = '';
+          }
+        });
+      }
+
+      initApp();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "keys": [
+    {
+      "kty": "OKP",
+      "crv": "Ed25519",
+      "x": "JrQLj5P_89iXES9-vFgrIy29clF9CC_oPPsw3c5D0bs",
+      "kid": "mohamed-tarek-bot-auth-2026-01",
+      "use": "sig",
+      "alg": "EdDSA"
+    }
+  ]
+}

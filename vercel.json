@@ -1,0 +1,205 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+      ]
+    },
+    {
+      "source": "/",
+      "headers": [
+        { "key": "Link", "value": "</.well-known/api-catalog/index.json>; rel=\"api-catalog\"" },
+        { "key": "Link", "value": "</.well-known/mcp/server-card.json>; rel=\"service-desc\"" },
+        { "key": "Link", "value": "</.well-known/agent-skills/index.json>; rel=\"linkset\"" },
+        { "key": "Link", "value": "</.well-known/ai-catalog.json>; rel=\"describedby\"" },
+        { "key": "Link", "value": "</.well-known/agent-card.json>; rel=\"service-desc\"" },
+        { "key": "Link", "value": "</.well-known/acp.json>; rel=\"service-desc\"" },
+        { "key": "Link", "value": "</.well-known/oauth-protected-resource.json>; rel=\"resource-metadata\"" },
+        { "key": "Link", "value": "</auth.md>; rel=\"describedby\"" },
+        { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"" },
+        { "key": "Link", "value": "</manifest.webmanifest>; rel=\"manifest\"" },
+        { "key": "Link", "value": "</Mohamed%20-%20Services.html>; rel=\"service-doc\"" },
+        { "key": "Link", "value": "</.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\"" },
+        { "key": "Link", "value": "</api/x402>; rel=\"payment\"" }
+      ]
+    },
+    {
+      "source": "/sites/(.*)",
+      "headers": [
+        { "key": "Link", "value": "</.well-known/agent-skills/index.json>; rel=\"linkset\"" },
+        { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"" }
+      ]
+    },
+    {
+      "source": "/.well-known/api-catalog(/.*)?",
+      "headers": [
+        { "key": "Content-Type", "value": "application/linkset+json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Accept, Accept-Type" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/.well-known/ai-catalog\\.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Accept, Accept-Type" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/.well-known/oauth-protected-resource\\.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/resource-metadata+json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/.well-known/oauth-authorization-server\\.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/.well-known/mcp/server-card\\.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/.well-known/ucp",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/openapi\\.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/agent/identity",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
+      ]
+    },
+    {
+      "source": "/agent/identity/claim",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" }
+      ]
+    },
+    {
+      "source": "/.well-known/agent-card\\.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/.well-known/acp\\.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/.well-known/x402",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/.well-known/http-message-signatures-directory",
+      "headers": [
+        { "key": "Content-Type", "value": "application/http-message-signatures-directory+json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
+    },
+    {
+      "source": "/api/x402",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, PAYMENT-SIGNATURE, PAYMENT-REQUIRED, PAYMENT-RESPONSE" }
+      ]
+    },
+    {
+      "source": "/.well-known/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Accept, Accept-Type" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml" },
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+      ]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/.well-known/oauth-protected-resource",
+      "destination": "/.well-known/oauth-protected-resource.json"
+    },
+    {
+      "source": "/.well-known/oauth-authorization-server",
+      "destination": "/.well-known/oauth-authorization-server.json"
+    },
+    {
+      "source": "/.well-known/openid-configuration",
+      "destination": "/.well-known/openid-configuration.json"
+    },
+    {
+      "source": "/agent/identity",
+      "destination": "/api/agent/identity"
+    },
+    {
+      "source": "/agent/identity/claim",
+      "destination": "/api/agent/identity/claim"
+    },
+    {
+      "source": "/api/markdown/:path*",
+      "destination": "/api/markdown"
+    }
+  ]
+}

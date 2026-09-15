@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>ESP32 SolarEdge Pro | SCADA Monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ===== DESIGN SYSTEM ===== */
+:root {
+  --bg:        #060d1a;
+  --bg2:       #08111f;
+  --bg3:       #0c1a2e;
+  --panel:     rgba(10,20,38,0.85);
+  --panel2:    rgba(14,26,46,0.9);
+  --border:    rgba(251,191,36,0.12);
+  --border2:   rgba(251,191,36,0.25);
+  --amber:     #fbbf24;
+  --amber-dim: rgba(251,191,36,0.08);
+  --amber-glow: 0 0 20px rgba(251,191,36,0.35);
+  --amber-glow2: 0 0 40px rgba(251,191,36,0.15);
+  --cyan:      #2dd4bf;
+  --cyan-dim:  rgba(45,212,191,0.08);
+  --cyan-glow: 0 0 20px rgba(45,212,191,0.35);
+  --blue:      #3b82f6;
+  --green:     #22c55e;
+  --red:       #ef4444;
+  --text:      #e2eaf4;
+  --text2:     #7a96b4;
+  --text3:     #3d5a75;
+  --mono:      'DM Mono', monospace;
+  --display:   'Orbitron', monospace;
+  --body:      'DM Sans', sans-serif;
+  --trans:     all 0.25s cubic-bezier(0.4,0,0.2,1);
+  --success:   #22c55e;
+  --warning:   #eab308;
+  --danger:    #ef4444;
+  --card-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  /* chart.js compat */
+  --accent-solar: #fbbf24;
+  --accent-charger: #3b82f6;
+  --accent-load: #2dd4bf;
+  --accent-cyan: #2dd4bf;
+  --text-primary: #e2eaf4;
+  --text-secondary: #7a96b4;
+  --surface: rgba(10,20,38,0.85);
+  --surface-hover: rgba(18,32,56,0.9);
+  --bg-primary: #060d1a;
+  --bg-secondary: #08111f;
+}
+body.light {
+  --bg: #ecf2fa;
+  --bg2: #f8fafd;
+  --bg3: #ffffff;
+  --panel: rgba(255,255,255,0.9);
+  --panel2: rgba(245,250,255,0.95);
+  --border: rgba(251,191,36,0.2);
+  --border2: rgba(251,191,36,0.4);
+  --amber-dim: rgba(251,191,36,0.07);
+  --amber-glow: 0 0 15px rgba(251,191,36,0.2);
+  --amber-glow2: 0 0 30px rgba(251,191,36,0.08);
+  --cyan-dim: rgba(45,212,191,0.07);
+  --cyan-glow: 0 0 15px rgba(45,212,191,0.2);
+  --text: #0d1f36;
+  --text2: #3a5a78;
+  --text3: #7a9ab4;
+  --card-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  --surface: rgba(255,255,255,0.9);
+  --surface-hover: rgba(241,248,255,0.95);
+  --bg-primary: #ecf2fa;
+  --bg-secondary: #f8fafd;
+  --text-primary: #0d1f36;
+  --text-secondary: #3a5a78;
+}
+
+/* ===== RESET ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--bg);color:var(--text);transition:background 0.4s,color 0.3s;overflow-x:hidden;min-height:100vh}
+
+/* ===== BACKGROUND TEXTURE ===== */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(251,191,36,0.012) 3px,rgba(251,191,36,0.012) 4px),
+    radial-gradient(ellipse 70% 50% at 50% -10%,rgba(251,191,36,0.06) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 30% at 100% 80%,rgba(45,212,191,0.04) 0%,transparent 60%);
+}
+body.light::before{background:radial-gradient(ellipse 70% 40% at 50% -5%,rgba(251,191,36,0.04) 0%,transparent 60%)}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--amber);border-radius:3px}
+
+/* ===== MAIN LAYOUT ===== */
+.wrap{max-width:1680px;margin:0 auto;padding:24px 28px;position:relative;z-index:1}
+@media(max-width:700px){.wrap{padding:16px}}
+
+/* ===== HEADER ===== */
+.header{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
+  gap:16px;margin-bottom:28px;padding-bottom:20px;
+  border-bottom:1px solid var(--border2);
+  position:relative;
+}
+.header::after{content:'';position:absolute;bottom:-1px;left:0;width:140px;height:2px;background:var(--amber);box-shadow:var(--amber-glow)}
+.logo-area{display:flex;align-items:center;gap:16px}
+.logo-icon{width:52px;height:52px;border-radius:14px;background:var(--amber-dim);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--amber);box-shadow:var(--amber-glow2)}
+.logo-text h1{font-family:var(--display);font-size:1.35rem;font-weight:700;color:var(--text);letter-spacing:2px}
+.logo-text h1 span{color:var(--amber)}
+.logo-text p{font-family:var(--mono);font-size:0.68rem;color:var(--text3);letter-spacing:2px;margin-top:3px;text-transform:uppercase}
+.header-right{display:flex;align-items:center;gap:12px}
+.live-badge{display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--border);border-radius:50px;padding:8px 18px;font-family:var(--mono);font-size:0.72rem;color:var(--text2);letter-spacing:1px}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--danger);box-shadow:0 0 0 0 rgba(239,68,68,0.4);transition:all 0.3s}
+.live-dot.on{background:var(--green);box-shadow:0 0 0 0 rgba(34,197,94,0.4);animation:lp 2s infinite}
+@keyframes lp{0%{box-shadow:0 0 0 0 rgba(34,197,94,0.4)}70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.theme-btn{background:var(--panel);border:1px solid var(--border);color:var(--amber);width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.1rem;transition:var(--trans);display:flex;align-items:center;justify-content:center}
+.theme-btn:hover{box-shadow:var(--amber-glow);transform:scale(1.06)}
+
+/* ===== STATUS STRIP ===== */
+.status-strip{
+  background:var(--panel);border:1px solid var(--border);border-radius:14px;
+  padding:14px 24px;display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:14px;margin-bottom:24px;
+  position:relative;overflow:hidden;
+}
+.status-strip::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber)}
+.status-item{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:0.78rem;color:var(--text2);letter-spacing:0.5px}
+.status-dot{width:10px;height:10px;border-radius:50%;background:var(--danger);flex-shrink:0;transition:all 0.3s}
+.status-dot.active{background:var(--green);box-shadow:0 0 8px var(--green)}
+.s-tag{background:var(--amber-dim);border:1px solid var(--border2);color:var(--amber);font-family:var(--mono);font-size:0.7rem;padding:4px 14px;border-radius:50px;letter-spacing:1px}
+#lastUpdateTime,#dataPointsCount{color:var(--amber);font-weight:500}
+
+/* ===== CORNER DECORATION ===== */
+.card{
+  background:var(--panel);backdrop-filter:blur(20px);
+  border:1px solid var(--border);border-radius:16px;
+  padding:22px;transition:var(--trans);position:relative;overflow:hidden;
+  box-shadow:var(--card-shadow);
+}
+.card::before,.card::after{content:'';position:absolute;width:12px;height:12px;border-color:var(--amber);border-style:solid;transition:var(--trans);opacity:0.4}
+.card::before{top:10px;left:10px;border-width:2px 0 0 2px;border-radius:2px 0 0 0}
+.card::after{bottom:10px;right:10px;border-width:0 2px 2px 0;border-radius:0 0 2px 2px}
+.card:hover{border-color:var(--border2);box-shadow:var(--card-shadow),var(--amber-glow2);transform:translateY(-3px)}
+.card:hover::before,.card:hover::after{opacity:1}
+
+/* ===== METRICS GRID ===== */
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-bottom:20px}
+.card-label{font-family:var(--display);font-size:0.65rem;font-weight:600;letter-spacing:3px;color:var(--text3);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.card-label i{font-size:1rem}
+.metric-icon-solar{color:var(--amber)}
+.metric-icon-charger{color:var(--blue)}
+.metric-icon-ac{color:var(--cyan)}
+.metric-icon-sys{color:var(--cyan)}
+
+/* Big value display */
+.readout-row{display:flex;align-items:flex-end;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.readout-block{display:flex;align-items:flex-end;gap:4px}
+.readout-val{font-family:var(--display);font-size:2.4rem;font-weight:700;line-height:1;color:var(--text);letter-spacing:-1px}
+.readout-unit{font-family:var(--mono);font-size:0.78rem;color:var(--text3);margin-bottom:6px;letter-spacing:1px}
+.readout-sep{font-family:var(--mono);color:var(--text3);font-size:1.2rem;margin-bottom:5px;align-self:flex-end}
+.power-big{font-family:var(--display);font-size:1.8rem;font-weight:700;color:var(--amber);letter-spacing:-1px}
+.power-unit{font-family:var(--mono);font-size:0.8rem;color:var(--text3);margin-bottom:4px;margin-left:4px}
+
+.card-footer{
+  margin-top:16px;padding-top:14px;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  font-family:var(--mono);font-size:0.73rem;color:var(--text3);
+}
+.card-footer span{display:flex;align-items:center;gap:6px}
+.card-footer strong{color:var(--text2)}
+
+/* ===== KPI ROW ===== */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:20px}
+.kpi-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:14px;
+  padding:18px;text-align:center;transition:var(--trans);position:relative;overflow:hidden;
+}
+.kpi-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--amber);transform:scaleX(0);transition:transform 0.3s;transform-origin:left}
+.kpi-card:hover::after{transform:scaleX(1)}
+.kpi-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.kpi-icon{font-size:1rem;color:var(--text3);margin-bottom:8px}
+.kpi-label{font-family:var(--display);font-size:0.58rem;letter-spacing:2px;color:var(--text3);text-transform:uppercase;margin-bottom:10px}
+.kpi-val{font-family:var(--display);font-size:1.9rem;font-weight:700;color:var(--amber);line-height:1}
+.kpi-suffix{font-family:var(--mono);font-size:0.75rem;color:var(--text3);margin-top:4px}
+
+/* ===== CHARTS ===== */
+.charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(480px,1fr));gap:18px;margin-bottom:20px}
+@media(max-width:700px){.charts-grid{grid-template-columns:1fr}}
+.chart-card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:var(--card-shadow);transition:var(--trans)}
+.chart-card:hover{border-color:var(--border2)}
+.chart-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px}
+.chart-title{font-family:var(--display);font-size:0.72rem;letter-spacing:2px;color:var(--text2);text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.chart-title i{color:var(--amber)}
+.chart-toggle{background:var(--panel2);border:1px solid var(--border);color:var(--amber);padding:6px 14px;border-radius:50px;font-family:var(--mono);font-size:0.68rem;cursor:pointer;transition:var(--trans);letter-spacing:1px}
+.chart-toggle:hover{background:var(--amber-dim);box-shadow:var(--amber-glow)}
+canvas{max-height:280px;width:100%}
+
+/* ===== COST PANEL ===== */
+.cost-panel{
+  background:var(--panel);border:1px solid var(--border);border-radius:16px;
+  padding:22px 28px;margin-bottom:20px;display:flex;flex-wrap:wrap;
+  align-items:center;justify-content:space-between;gap:20px;
+  box-shadow:var(--card-shadow);position:relative;overflow:hidden;
+}
+.cost-panel::before{content:'ENERGY COST ESTIMATOR';position:absolute;top:12px;left:24px;font-family:var(--display);font-size:0.6rem;letter-spacing:3px;color:var(--text3);text-transform:uppercase}
+.cost-left{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:10px}
+.cost-input-group{display:flex;flex-direction:column;gap:4px}
+.cost-input-label{font-family:var(--mono);font-size:0.65rem;color:var(--text3);letter-spacing:1px;text-transform:uppercase}
+.cost-input-group input{
+  background:var(--bg2);border:1px solid var(--border2);
+  padding:8px 16px;border-radius:10px;color:var(--amber);
+  font-family:var(--mono);font-size:0.9rem;font-weight:500;
+  width:130px;outline:none;transition:var(--trans);
+}
+.cost-input-group input:focus{border-color:var(--amber);box-shadow:var(--amber-glow)}
+.cost-right{display:flex;gap:30px;flex-wrap:wrap}
+.cost-item{text-align:center}
+.cost-item-label{font-family:var(--mono);font-size:0.65rem;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.cost-item-val{font-family:var(--display);font-size:1.6rem;font-weight:700;color:var(--amber);line-height:1}
+.cost-currency{font-family:var(--mono);font-size:0.75rem;color:var(--text3);margin-top:2px}
+
+/* ===== ACTION BAR ===== */
+.action-bar{display:flex;justify-content:center;gap:14px;margin:20px 0;flex-wrap:wrap}
+.btn-primary{
+  background:var(--amber);color:#060d1a;
+  font-family:var(--display);font-size:0.72rem;font-weight:700;letter-spacing:2px;
+  padding:12px 28px;border-radius:50px;border:none;cursor:pointer;
+  transition:var(--trans);display:inline-flex;align-items:center;gap:8px;text-transform:uppercase;
+}
+.btn-primary:hover{box-shadow:var(--amber-glow),0 10px 30px rgba(251,191,36,0.3);transform:translateY(-2px)}
+.btn-secondary{
+  background:transparent;color:var(--amber);
+  font-family:var(--display);font-size:0.72rem;font-weight:600;letter-spacing:2px;
+  padding:11px 28px;border-radius:50px;border:1px solid var(--border2);cursor:pointer;
+  transition:var(--trans);display:inline-flex;align-items:center;gap:8px;text-transform:uppercase;
+}
+.btn-secondary:hover{background:var(--amber-dim);transform:translateY(-2px)}
+/* compat aliases for JS */
+.btn{background:var(--amber);color:#060d1a;font-family:var(--display);font-size:0.72rem;font-weight:700;letter-spacing:2px;padding:12px 28px;border-radius:50px;border:none;cursor:pointer;transition:var(--trans);display:inline-flex;align-items:center;gap:8px;text-transform:uppercase}
+.btn:hover{box-shadow:var(--amber-glow);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--amber);font-family:var(--display);font-size:0.72rem;font-weight:600;letter-spacing:2px;padding:11px 28px;border-radius:50px;border:1px solid var(--border2);cursor:pointer;transition:var(--trans);display:inline-flex;align-items:center;gap:8px;text-transform:uppercase}
+.btn-outline:hover{background:var(--amber-dim);transform:translateY(-2px)}
+
+/* ===== FOOTER ===== */
+.footer{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid var(--border);font-family:var(--mono);font-size:0.66rem;color:var(--text3);letter-spacing:1px;line-height:2}
+.footer i{color:var(--amber)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){.metrics-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.metrics-grid{grid-template-columns:1fr}.readout-val{font-size:2rem}.kpi-val{font-size:1.6rem}.cost-right{gap:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===== HEADER ===== -->
+  <div class="header">
+    <div class="logo-area">
+      <div class="logo-icon"><i class="fas fa-solar-panel"></i></div>
+      <div class="logo-text">
+        <h1>ESP32 · <span>SolarEdge</span> Pro</h1>
+        <p>Industrial Grade · Real-Time SCADA · Firebase Sync</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="live-badge">
+        <span class="live-dot" id="statusLed"></span>
+        <span id="statusMsg">Initializing link...</span>
+      </div>
+      <button class="theme-btn" id="themeToggle"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+
+  <!-- ===== STATUS STRIP ===== -->
+  <div class="status-strip">
+    <div class="status-item"><i class="far fa-clock" style="color:var(--amber)"></i> Last poll: <strong id="lastUpdateTime">--:--:--</strong></div>
+    <div class="status-item"><i class="fas fa-database" style="color:var(--cyan)"></i> Buffer: <strong><span id="dataPointsCount">0</span> samples</strong></div>
+    <div class="status-item"><i class="fas fa-wifi" style="color:var(--green)"></i> Firebase Realtime DB</div>
+    <div class="s-tag"><i class="fas fa-sync-alt" style="margin-right:6px"></i>3.2s AUTO-REFRESH</div>
+  </div>
+
+  <!-- ===== METRIC CARDS ===== -->
+  <div class="metrics-grid">
+
+    <!-- PV Array -->
+    <div class="card">
+      <div class="card-label"><i class="fas fa-sun metric-icon-solar"></i> Photovoltaic Array</div>
+      <div class="readout-row">
+        <div class="readout-block">
+          <div class="readout-val" id="pv_voltage">--</div>
+          <div class="readout-unit">V</div>
+        </div>
+        <div class="readout-sep">/</div>
+        <div class="readout-block">
+          <div class="readout-val" id="pv_current">--</div>
+          <div class="readout-unit">A</div>
+        </div>
+      </div>
+      <div class="readout-row">
+        <div class="power-big" id="pv_power">-- W</div>
+        <div class="power-unit">DC Power Out</div>
+      </div>
+      <div class="card-footer">
+        <span><i class="fas fa-bolt" style="color:var(--amber)"></i> DC Power</span>
+        <span><strong id="pv_power_unit">Solar Yield</strong></span>
+      </div>
+    </div>
+
+    <!-- Charger -->
+    <div class="card">
+      <div class="card-label"><i class="fas fa-charging-station metric-icon-charger"></i> Charger Controller (MPPT)</div>
+      <div class="readout-row">
+        <div class="readout-block">
+          <div class="readout-val" id="charger_voltage">--</div>
+          <div class="readout-unit">V</div>
+        </div>
+        <div class="readout-sep">/</div>
+        <div class="readout-block">
+          <div class="readout-val" id="charger_current">--</div>
+          <div class="readout-unit">A</div>
+        </div>
+      </div>
+      <div class="readout-row">
+        <div class="power-big" id="charger_power">-- W</div>
+        <div class="power-unit">Battery Bus</div>
+      </div>
+      <div class="card-footer">
+        <span><i class="fas fa-car-battery" style="color:var(--blue)"></i> Regulated Output</span>
+        <span><strong>MPPT Active</strong></span>
+      </div>
+    </div>
+
+    <!-- AC Load / Inverter -->
+    <div class="card">
+      <div class="card-label"><i class="fas fa-plug metric-icon-ac"></i> Inverter Output (AC Load)</div>
+      <div class="readout-row">
+        <div class="readout-block">
+          <div class="readout-val" id="ac_voltage">--</div>
+          <div class="readout-unit">V</div>
+        </div>
+        <div class="readout-sep">/</div>
+        <div class="readout-block">
+          <div class="readout-val" id="ac_current">--</div>
+          <div class="readout-unit">A</div>
+        </div>
+      </div>
+      <div class="readout-row">
+        <div class="power-big" id="ac_power">-- W</div>
+        <div class="power-unit">AC Output</div>
+      </div>
+      <div class="card-footer">
+        <span>PF: <strong id="ac_power_factor">--</strong> &nbsp;|&nbsp; Freq: <strong id="ac_frequency">--</strong> Hz</span>
+        <span>Energy: <strong id="ac_energy">--</strong> kWh</span>
+      </div>
+    </div>
+
+    <!-- System Analytics -->
+    <div class="card">
+      <div class="card-label"><i class="fas fa-chart-line metric-icon-sys"></i> System Analytics</div>
+      <div class="readout-row">
+        <div class="readout-block">
+          <div class="readout-val" id="efficiency">--</div>
+          <div class="readout-unit">%</div>
+        </div>
+        <div class="readout-sep">|</div>
+        <div class="readout-block">
+          <div class="readout-val" id="power_loss">--</div>
+          <div class="readout-unit">W</div>
+        </div>
+      </div>
+      <div class="card-footer" style="margin-top:8px">
+        <span><i class="far fa-calendar-alt" style="color:var(--amber)"></i> Timestamp: <strong id="timestamp_value">--</strong></span>
+      </div>
+      <div class="card-footer">
+        <span><i class="fas fa-microchip" style="color:var(--cyan)"></i> Status: <strong id="system_status" style="color:var(--cyan)">--</strong></span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== KPI ROW ===== -->
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-chart-line"></i></div><div class="kpi-label">Peak AC Power</div><div class="kpi-val" id="peakAcPower">0</div><div class="kpi-suffix">Watts</div></div>
+    <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-wave-sine"></i></div><div class="kpi-label">Avg AC (1h)</div><div class="kpi-val" id="avgAcPower">0</div><div class="kpi-suffix">Watts</div></div>
+    <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-bolt"></i></div><div class="kpi-label">Energy (1h)</div><div class="kpi-val" id="energyLastHour">0.00</div><div class="kpi-suffix">kWh</div></div>
+    <div class="kpi-card"><div class="kpi-icon"><i class="fas fa-percent"></i></div><div class="kpi-label">Avg Efficiency</div><div class="kpi-val" id="avgEfficiencyStat">0</div><div class="kpi-suffix">%</div></div>
+  </div>
+
+  <!-- ===== CHARTS ===== -->
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-hdr">
+        <div class="chart-title"><i class="fas fa-chart-line"></i> Power Trends · PV / Charger / AC</div>
+        <button class="chart-toggle" id="toggleLineChartBtn"><i class="fas fa-chart-simple"></i> Bar / Line</button>
+      </div>
+      <canvas id="multiPowerChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-hdr">
+        <div class="chart-title"><i class="fas fa-chart-pie"></i> Live Power Distribution</div>
+        <button class="chart-toggle" id="toggleDistChartBtn"><i class="fas fa-chart-pie"></i> Pie ↔ Doughnut</button>
+      </div>
+      <canvas id="distChart"></canvas>
+    </div>
+  </div>
+
+  <!-- ===== COST PANEL ===== -->
+  <div class="cost-panel">
+    <div class="cost-left">
+      <div class="cost-input-group">
+        <div class="cost-input-label">Tariff (EGP/kWh)</div>
+        <input type="number" id="tariffRate" step="0.05" value="1.45" placeholder="EGP/kWh">
+      </div>
+      <div class="cost-input-group">
+        <div class="cost-input-label">Daily Hours</div>
+        <input type="number" id="dailyHours" step="0.5" value="8" placeholder="Hrs/day">
+      </div>
+    </div>
+    <div class="cost-right">
+      <div class="cost-item">
+        <div class="cost-item-label">Hourly</div>
+        <div class="cost-item-val" id="hourlyCost">0.00</div>
+        <div class="cost-currency">EGP</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-item-label">Daily Est.</div>
+        <div class="cost-item-val" id="dailyCostEst">0.00</div>
+        <div class="cost-currency">EGP</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-item-label">Monthly Est.</div>
+        <div class="cost-item-val" id="monthlyCostEst">0.00</div>
+        <div class="cost-currency">EGP</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ACTION BAR ===== -->
+  <div class="action-bar">
+    <button id="manualRefreshBtn" class="btn"><i class="fas fa-sync-alt"></i> Force Sync</button>
+    <button id="exportAllDataBtn" class="btn-outline"><i class="fas fa-download"></i> Export Full Report (JSON)</button>
+  </div>
+
+  <div class="footer">
+    <i class="fas fa-shield-alt"></i>&nbsp; Real-time Firebase Realtime DB &nbsp;·&nbsp; All ESP32 metrics: PV · Charger · AC · Efficiency · Power Loss · Timestamp · Status &nbsp;·&nbsp; Auto-refresh 3.2s
+  </div>
+
+</div><!-- /wrap -->
+
+<script>
+// ======================== FIREBASE REST CONFIG ========================
+const DB_BASE = "https://poweriot22-default-rtdb.europe-west1.firebasedatabase.app";
+const ENDPOINTS = {
+  pv_voltage: "/pv_voltage.json", pv_current: "/pv_current.json", pv_power: "/pv_power.json",
+  charger_voltage: "/charger_voltage.json", charger_current: "/charger_current.json", charger_power: "/charger_power.json",
+  efficiency: "/efficiency.json", power_loss: "/power_loss.json",
+  ac_voltage: "/ac_voltage.json", ac_current: "/ac_current.json", ac_power: "/ac_power.json",
+  ac_power_factor: "/ac_power_factor.json", ac_frequency: "/ac_frequency.json", ac_energy: "/ac_energy.json",
+  timestamp: "/timestamp.json", system_status: "/system_status.json"
+};
+
+let history = {
+  timestamps: [], ac_power: [], pv_power: [], charger_power: [], efficiency: []
+};
+const MAX_HISTORY = 210;
+let currentAcPower = 0;
+let currentEfficiency = 0;
+let lastTimestampRaw = "";
+
+let multiChart = null, distChartObj = null;
+let currentDistType = 'pie';
+let currentMultiType = 'line';
+
+async function fetchNumber(path) {
+  try {
+    const res = await fetch(DB_BASE + path, { cache: "no-store", headers: { "Cache-Control": "no-cache" } });
+    if (!res.ok) return NaN;
+    const data = await res.json();
+    if (data === null || data === undefined) return NaN;
+    return parseFloat(data);
+  } catch(e) {
+    console.warn(`Fetch error ${path}`, e);
+    return NaN;
+  }
+}
+
+async function fetchAllMetrics() {
+  try {
+    const [
+      pvV, pvC, pvP, chV, chC, chP, eff, loss,
+      acV, acC, acP, acPf, acFreq, acE, ts, sysStat
+    ] = await Promise.all([
+      fetchNumber(ENDPOINTS.pv_voltage), fetchNumber(ENDPOINTS.pv_current), fetchNumber(ENDPOINTS.pv_power),
+      fetchNumber(ENDPOINTS.charger_voltage), fetchNumber(ENDPOINTS.charger_current), fetchNumber(ENDPOINTS.charger_power),
+      fetchNumber(ENDPOINTS.efficiency), fetchNumber(ENDPOINTS.power_loss),
+      fetchNumber(ENDPOINTS.ac_voltage), fetchNumber(ENDPOINTS.ac_current), fetchNumber(ENDPOINTS.ac_power),
+      fetchNumber(ENDPOINTS.ac_power_factor), fetchNumber(ENDPOINTS.ac_frequency), fetchNumber(ENDPOINTS.ac_energy),
+      fetchNumber(ENDPOINTS.timestamp), fetchNumber(ENDPOINTS.system_status)
+    ]);
+
+    setEl("pv_voltage",   isNaN(pvV)  ? "--" : pvV.toFixed(1));
+    setEl("pv_current",   isNaN(pvC)  ? "--" : pvC.toFixed(2));
+    setEl("pv_power",     isNaN(pvP)  ? "--" : pvP.toFixed(1) + " W");
+    setEl("charger_voltage", isNaN(chV) ? "--" : chV.toFixed(1));
+    setEl("charger_current", isNaN(chC) ? "--" : chC.toFixed(2));
+    setEl("charger_power",   isNaN(chP) ? "--" : chP.toFixed(1) + " W");
+    setEl("ac_voltage",  isNaN(acV)  ? "--" : acV.toFixed(1));
+    setEl("ac_current",  isNaN(acC)  ? "--" : acC.toFixed(2));
+    setEl("ac_power",    isNaN(acP)  ? "--" : acP.toFixed(1) + " W");
+    setEl("ac_power_factor", isNaN(acPf)   ? "--" : acPf.toFixed(3));
+    setEl("ac_frequency",    isNaN(acFreq) ? "--" : acFreq.toFixed(1));
+    setEl("ac_energy",       isNaN(acE)    ? "--" : acE.toFixed(3));
+    setEl("efficiency",  isNaN(eff)  ? "--" : eff.toFixed(1));
+    setEl("power_loss",  isNaN(loss) ? "--" : loss.toFixed(1));
+
+    let tsStr = (typeof ts === 'string') ? ts : (isNaN(ts) ? "" : ts.toString());
+    if (tsStr && tsStr.length > 0) lastTimestampRaw = tsStr;
+    setEl("timestamp_value", lastTimestampRaw || "--");
+
+    let statusVal = (typeof sysStat === 'string') ? sysStat : (isNaN(sysStat) ? "Standby" : (sysStat === 1 ? "Online" : "Idle"));
+    setEl("system_status", statusVal || "Unknown");
+
+    if (!isNaN(acP)) currentAcPower = acP;
+    if (!isNaN(eff)) currentEfficiency = eff;
+
+    const now = new Date();
+    if (!isNaN(acP) && !isNaN(pvP) && !isNaN(chP)) {
+      history.timestamps.push(now);
+      history.ac_power.push(acP);
+      history.pv_power.push(pvP);
+      history.charger_power.push(chP);
+      history.efficiency.push(isNaN(eff) ? 0 : eff);
+      while(history.timestamps.length > MAX_HISTORY) {
+        history.timestamps.shift(); history.ac_power.shift(); history.pv_power.shift();
+        history.charger_power.shift(); history.efficiency.shift();
+      }
+      document.getElementById("dataPointsCount").innerHTML = history.timestamps.length;
+    }
+
+    const led = document.getElementById("statusLed");
+    led.classList.add("on");
+    document.getElementById("statusMsg").innerHTML = "<i class='fas fa-link'></i> Live · Firebase OK";
+    document.getElementById("lastUpdateTime").innerHTML = now.toLocaleTimeString();
+
+    computeAnalytics();
+    updateCostEstimator();
+    refreshCharts();
+
+  } catch (error) {
+    console.error("Global data error", error);
+    document.getElementById("statusLed").classList.remove("on");
+    document.getElementById("statusMsg").innerHTML = "<i class='fas fa-exclamation-triangle'></i> Connection issue";
+  }
+}
+
+function setEl(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = value;
+}
+
+function computeAnalytics() {
+  if (history.timestamps.length === 0) return;
+  const now = new Date();
+  const oneHourAgo = new Date(now.getTime() - 60*60*1000);
+  let indices = [];
+  for (let i = 0; i < history.timestamps.length; i++) {
+    if (history.timestamps[i] >= oneHourAgo) indices.push(i);
+  }
+  if (indices.length === 0 && history.timestamps.length > 0) indices = [...Array(history.timestamps.length).keys()];
+  let sumAc=0, peakAc=0, sumEff=0, effCount=0;
+  for (let idx of indices) {
+    let p = history.ac_power[idx]; sumAc += p; if(p>peakAc) peakAc=p;
+    let e = history.efficiency[idx]; if(!isNaN(e)&&e>0){sumEff+=e;effCount++;}
+  }
+  const avgAc = indices.length ? sumAc/indices.length : 0;
+  const energyKwh = (avgAc/1000)*1.0;
+  const avgEff = effCount ? sumEff/effCount : 0;
+  setEl("peakAcPower",       peakAc.toFixed(1));
+  setEl("avgAcPower",        avgAc.toFixed(1));
+  setEl("energyLastHour",    energyKwh.toFixed(3));
+  setEl("avgEfficiencyStat", avgEff.toFixed(1));
+}
+
+function updateCostEstimator() {
+  const tariff = parseFloat(document.getElementById("tariffRate").value) || 1.45;
+  const dailyHours = parseFloat(document.getElementById("dailyHours").value) || 8;
+  const powerKW = currentAcPower / 1000;
+  const hourlyCost  = powerKW * tariff;
+  const dailyCost   = hourlyCost * dailyHours;
+  const monthlyCost = dailyCost * 30;
+  setEl("hourlyCost",    hourlyCost.toFixed(2));
+  setEl("dailyCostEst",  dailyCost.toFixed(2));
+  setEl("monthlyCostEst",monthlyCost.toFixed(2));
+}
+
+const chartDefaults = {
+  responsive: true,
+  maintainAspectRatio: true,
+  animation: { duration: 400 },
+  plugins: {
+    legend: { position: 'top', labels: { color: '#7a96b4', font: { family: 'DM Mono', size: 11 }, padding: 16, boxWidth: 12 } }
+  }
+};
+
+function initCharts() {
+  const ctxM = document.getElementById("multiPowerChart").getContext("2d");
+  multiChart = new Chart(ctxM, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [
+        { label: 'AC Load (W)',  data: [], borderColor: '#2dd4bf', backgroundColor: 'rgba(45,212,191,0.08)', borderWidth: 2.5, fill: true, tension: 0.25, pointRadius: 1.5, pointHoverRadius: 5 },
+        { label: 'PV Power (W)', data: [], borderColor: '#fbbf24', backgroundColor: 'rgba(251,191,36,0.04)', borderWidth: 2, fill: false, tension: 0.25, pointRadius: 1 },
+        { label: 'Charger (W)',  data: [], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.04)', borderWidth: 2, fill: false, tension: 0.25, pointRadius: 1 }
+      ]
+    },
+    options: {
+      ...chartDefaults,
+      scales: {
+        y: { beginAtZero: true, grid: { color: 'rgba(251,191,36,0.06)' }, ticks: { color: '#7a96b4', font: { family: 'DM Mono', size: 10 } }, title: { display: true, text: 'Power (W)', color: '#3d5a75', font: { family: 'DM Mono' } } },
+        x: { grid: { color: 'rgba(251,191,36,0.04)' }, ticks: { color: '#7a96b4', maxRotation: 45, autoSkip: true, font: { family: 'DM Mono', size: 10 } } }
+      }
+    }
+  });
+
+  const ctxD = document.getElementById("distChart").getContext("2d");
+  distChartObj = new Chart(ctxD, {
+    type: 'pie',
+    data: {
+      labels: ['☀️ PV Array', '🔋 Charger Out', '⚡ AC Load'],
+      datasets: [{ data: [0,0,0], backgroundColor: ['#fbbf24','#3b82f6','#2dd4bf'], borderWidth: 0, hoverOffset: 12 }]
+    },
+    options: { ...chartDefaults, plugins: { ...chartDefaults.plugins, legend: { position: 'bottom', labels: { color: '#7a96b4', font: { family: 'DM Mono', size: 11 }, padding: 20 } } } }
+  });
+}
+
+function refreshCharts() {
+  if (!multiChart || !distChartObj) return;
+  const labels = history.timestamps.map(t => t.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'}));
+  multiChart.data.labels = labels;
+  multiChart.data.datasets[0].data = history.ac_power;
+  multiChart.data.datasets[1].data = history.pv_power;
+  multiChart.data.datasets[2].data = history.charger_power;
+  multiChart.update('none');
+
+  const li = history.ac_power.length - 1;
+  const pvL = li>=0 ? history.pv_power[li] : 0;
+  const chL = li>=0 ? history.charger_power[li] : 0;
+  const acL = li>=0 ? history.ac_power[li] : 0;
+  distChartObj.data.datasets[0].data = [pvL, chL, acL];
+  distChartObj.update('none');
+}
+
+function toggleMultiChartStyle() {
+  if (currentMultiType === 'line') { multiChart.config.type = 'bar'; currentMultiType = 'bar'; }
+  else { multiChart.config.type = 'line'; currentMultiType = 'line'; }
+  multiChart.update();
+}
+
+function toggleDistributionStyle() {
+  if (currentDistType === 'pie') { distChartObj.config.type = 'doughnut'; currentDistType = 'doughnut'; }
+  else { distChartObj.config.type = 'pie'; currentDistType = 'pie'; }
+  distChartObj.update();
+}
+
+function exportFullData() {
+  const g = id => document.getElementById(id)?.innerText || "--";
+  const report = {
+    report_generated: new Date().toISOString(),
+    device: "ESP32 SolarEdge Pro",
+    live_snapshot: {
+      pv: { voltage: g("pv_voltage"), current: g("pv_current"), power: g("pv_power") },
+      charger: { voltage: g("charger_voltage"), current: g("charger_current"), power: g("charger_power") },
+      ac: { voltage: g("ac_voltage"), current: g("ac_current"), power: g("ac_power"), pf: g("ac_power_factor"), freq: g("ac_frequency"), energy_kwh: g("ac_energy") },
+      system: { efficiency: g("efficiency"), loss_w: g("power_loss"), timestamp: g("timestamp_value"), status: g("system_status") }
+    },
+    analytics_last_hour: {
+      peak_ac_w: g("peakAcPower"), avg_ac_w: g("avgAcPower"),
+      energy_kwh: g("energyLastHour"), avg_efficiency_percent: g("avgEfficiencyStat")
+    },
+    time_series_samples: history.timestamps.map((t,i) => ({
+      time_utc: t.toISOString(), ac_power_w: history.ac_power[i],
+      pv_power_w: history.pv_power[i], charger_power_w: history.charger_power[i],
+      efficiency_pct: history.efficiency[i]
+    }))
+  };
+  const blob = new Blob([JSON.stringify(report,null,2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = `solaredge_export_${new Date().toISOString().slice(0,19)}.json`;
+  a.click(); URL.revokeObjectURL(url);
+}
+
+function applyTheme() {
+  document.body.classList.toggle("light");
+  const icon = document.querySelector("#themeToggle i");
+  icon.className = document.body.classList.contains("light") ? "fas fa-sun" : "fas fa-moon";
+  const lc = document.body.classList.contains("light") ? '#3a5a78' : '#7a96b4';
+  if (multiChart) { multiChart.options.plugins.legend.labels.color = lc; multiChart.update(); }
+  if (distChartObj) { distChartObj.options.plugins.legend.labels.color = lc; distChartObj.update(); }
+}
+
+let refreshTimer;
+function startLiveUpdates(ms=3200) {
+  if (refreshTimer) clearInterval(refreshTimer);
+  refreshTimer = setInterval(() => fetchAllMetrics(), ms);
+}
+
+// ===== EVENT BINDINGS =====
+document.getElementById("manualRefreshBtn").addEventListener("click", () => fetchAllMetrics());
+document.getElementById("exportAllDataBtn").addEventListener("click", exportFullData);
+document.getElementById("themeToggle").addEventListener("click", applyTheme);
+document.getElementById("toggleLineChartBtn").addEventListener("click", toggleMultiChartStyle);
+document.getElementById("toggleDistChartBtn").addEventListener("click", toggleDistributionStyle);
+document.getElementById("tariffRate").addEventListener("input", updateCostEstimator);
+document.getElementById("dailyHours").addEventListener("input", updateCostEstimator);
+
+// ===== BOOTSTRAP =====
+initCharts();
+fetchAllMetrics().then(() => startLiveUpdates(3200));
+</script>
+</body>
+</html>

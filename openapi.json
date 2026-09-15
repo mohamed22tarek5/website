@@ -1,0 +1,116 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Mohamed Tarek Portfolio API",
+    "description": "Engineering tools, calculators, and portfolio API with x402 payment discovery.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Mohamed Tarek",
+      "url": "https://website-mohamed.vercel.app/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://website-mohamed.vercel.app",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/api/x402": {
+      "get": {
+        "operationId": "getPremiumResource",
+        "summary": "Access premium API resource",
+        "description": "Returns premium content. Payment required via x402 protocol.",
+        "x402-version": 1,
+        "x402-accepts": [
+          {
+            "scheme": "exact",
+            "network": "base-sepolia",
+            "maxAmountRequired": "1000",
+            "resource": "https://website-mohamed.vercel.app/api/x402",
+            "description": "Premium API resource access",
+            "mimeType": "application/json",
+            "payTo": "0x0000000000000000000000000000000000000000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource returned successfully (payment verified)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "resource": { "type": "string" },
+                    "timestamp": { "type": "string", "format": "date-time" }
+                  }
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment required — x402 payment requirements",
+            "headers": {
+              "PAYMENT-REQUIRED": {
+                "description": "Base64url-encoded PaymentRequirements object",
+                "schema": { "type": "string" }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "x402Version": { "type": "integer", "example": 1 },
+                    "accepts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "scheme": { "type": "string" },
+                          "network": { "type": "string" },
+                          "maxAmountRequired": { "type": "string" },
+                          "resource": { "type": "string" },
+                          "description": { "type": "string" },
+                          "mimeType": { "type": "string" },
+                          "payTo": { "type": "string" }
+                        }
+                      }
+                    },
+                    "ordering": { "type": "string" },
+                    "maxTimeoutSeconds": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "operationId": "getHomepage",
+        "summary": "Portfolio homepage",
+        "description": "Main portfolio page — free, no payment required.",
+        "responses": {
+          "200": { "description": "Homepage HTML" }
+        }
+      }
+    },
+    "/sites/ohms-law-calculator.html": {
+      "get": {
+        "operationId": "ohmsLawCalculator",
+        "summary": "Ohm's Law Calculator",
+        "description": "Calculate voltage, current, resistance, or power using Ohm's Law.",
+        "responses": {
+          "200": { "description": "Calculator page" }
+        }
+      }
+    }
+  },
+  "x-service-info": {
+    "categories": ["engineering", "calculators", "portfolio"],
+    "payment_protocols": ["x402"]
+  }
+}
