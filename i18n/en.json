@@ -1,0 +1,28 @@
+{
+  "marketing": {
+    "one_liner": "Communications & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.",
+    "hero_title": "Building the future with code & circuits",
+    "hero_sub": "Communications Engineer and Developer crafting innovative solutions at the intersection of hardware and software.",
+    "tldr": "Mohamed Tarek is a Communications & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.",
+    "services_title": "What I can do for you",
+    "contact_cta": "Let's work together",
+    "faq_title": "Frequently asked questions"
+  },
+  "app": {
+    "switcher_label": "Language",
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "auth": {
+    "n_a": "No auth on public portfolio pages"
+  },
+  "emails": {
+    "contact_subject": "Project inquiry for Mohamed Tarek"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please email mohammed.tarek.abdelhady.ali@gmail.com."
+  }
+}

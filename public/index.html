@@ -14,6 +14,16 @@
   <meta name="theme-color" content="#0a0e1a" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
   <link rel="canonical" href="https://website-mohamed.vercel.app/">
+  <!-- Multilingual SEO: one language per URL, reciprocal hreflang + x-default.
+       Country redirects are for humans only — never for crawlers (see middleware.js). -->
+  <link rel="alternate" hreflang="en" href="https://website-mohamed.vercel.app/">
+  <link rel="alternate" hreflang="ar" href="https://website-mohamed.vercel.app/ar/">
+  <link rel="alternate" hreflang="de" href="https://website-mohamed.vercel.app/de/">
+  <link rel="alternate" hreflang="fr" href="https://website-mohamed.vercel.app/fr/">
+  <link rel="alternate" hreflang="es" href="https://website-mohamed.vercel.app/es/">
+  <link rel="alternate" hreflang="x-default" href="https://website-mohamed.vercel.app/">
+  <meta name="geo.region" content="EG">
+  <meta name="author" content="Mohamed Tarek">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -60,33 +70,83 @@
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD Structured Data: GEO entity identity (Citation Trinity #1).
+       ONE_LINER is frozen and reused verbatim on About, LinkedIn, GitHub. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Mohamed Tarek",
-    "jobTitle": "Communications Engineer & Developer",
-    "url": "https://website-mohamed.vercel.app",
-    "image": "https://website-mohamed.vercel.app/photo.jpg",
-    "sameAs": [
-      "https://www.linkedin.com/in/mohamedtarek225",
-      "https://github.com/mohamed22tarek5",
-      "https://www.instagram.com/_m7md_tarek_/"
-    ],
-    "knowsAbout": [
-      "Web Development", "Arduino", "PCB Design", "Embedded Systems",
-      "IoT", "JavaScript", "HTML5", "CSS3", "C++", "Proteus", "Eagle", "KiCad"
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Kafr el Sheikh",
-      "addressCountry": "Egypt"
-    },
-    "email": "mohammed.tarek.abdelhady.ali@gmail.com",
-    "telephone": "+201090637406"
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://website-mohamed.vercel.app/#person",
+        "name": "Mohamed Tarek",
+        "jobTitle": "Communications Engineer & Developer",
+        "description": "Communications & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.",
+        "url": "https://website-mohamed.vercel.app",
+        "image": "https://website-mohamed.vercel.app/photo.jpg",
+        "sameAs": [
+          "https://www.linkedin.com/in/mohamedtarek225",
+          "https://github.com/mohamed22tarek5",
+          "https://www.instagram.com/_m7md_tarek_/"
+        ],
+        "knowsAbout": [
+          "Web Development", "Arduino", "PCB Design", "Embedded Systems",
+          "IoT", "JavaScript", "HTML5", "CSS3", "C++", "Proteus", "Eagle", "KiCad"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kafr el Sheikh",
+          "addressCountry": "EG"
+        },
+        "email": "mohammed.tarek.abdelhady.ali@gmail.com",
+        "telephone": "+201090637406"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://website-mohamed.vercel.app/#website",
+        "url": "https://website-mohamed.vercel.app/",
+        "name": "Mohamed Tarek Portfolio",
+        "description": "Communications & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.",
+        "inLanguage": ["en", "ar", "de", "fr", "es"],
+        "author": { "@id": "https://website-mohamed.vercel.app/#person" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://website-mohamed.vercel.app/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Who is Mohamed Tarek?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Mohamed Tarek is a Communications & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies. He is based in Kafr el Sheikh, Egypt and offers freelance engineering services including custom PCB design, Arduino development, and IoT systems." }
+          },
+          {
+            "@type": "Question",
+            "name": "What services does Mohamed Tarek offer?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Mohamed Tarek offers web development, Arduino development for IoT and automation, PCB design with KiCad and EAGLE, embedded systems with ESP/PIC/ARM, circuit simulation, and complete IoT solutions including hardware, firmware, and cloud dashboards." }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I contact Mohamed Tarek for a PCB or Arduino project?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Email mohammed.tarek.abdelhady.ali@gmail.com, call or WhatsApp +20 109 063 7406, or connect on LinkedIn at linkedin.com/in/mohamedtarek225. Include your schematic or requirements, timeline, and target quantities for the fastest quote." }
+          },
+          {
+            "@type": "Question",
+            "name": "What engineering tools and calculators are available on this site?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The site hosts free browser-based tools: Ohm's law, resistor, LED resistor, capacitor, inductance, buck-boost, battery capacity, power factor, transformer turns, wire gauge calculators, plus an LCD character generator, Linux commands reference, and an AI sites directory." }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://website-mohamed.vercel.app/#breadcrumbs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://website-mohamed.vercel.app/" }
+        ]
+      }
+    ]
   }
   </script>
+  <!-- Last updated: 2026-09-16 (keep honest; bump when content materially changes) -->
 
   <style>
     /* ============================================
@@ -2031,6 +2091,13 @@
         <a href="#contact" class="nav-link">Contact</a>
         <a href="Mohamed - Certificates.html" class="nav-link">Certificates</a>
         <a href="Mohamed - CV.html" class="nav-cta">My CV</a>
+        <span class="locale-switcher" id="localeSwitcher" aria-label="Language" style="display:inline-flex;gap:.35rem;margin-inline-start:.5rem;font-size:.8125rem;">
+          <a href="/" hreflang="en" aria-current="true" lang="en">EN</a> ·
+          <a href="/ar/" hreflang="ar" lang="ar">عربي</a> ·
+          <a href="/de/" hreflang="de" lang="de">DE</a> ·
+          <a href="/fr/" hreflang="fr" lang="fr">FR</a> ·
+          <a href="/es/" hreflang="es" lang="es">ES</a>
+        </span>
       </nav>
     </div>
   </header>
@@ -2113,6 +2180,15 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- GEO answer box: self-contained 40–60 word extractable passage (server-rendered). -->
+    <section class="geo-answer" id="tldr" aria-labelledby="tldr-title" style="padding:2rem 0;">
+      <div class="container">
+        <h2 id="tldr-title" style="font-size:1.125rem;margin-bottom:.5rem;">TL;DR — Who is Mohamed Tarek?</h2>
+        <p style="max-width:65ch;"><strong>Mohamed Tarek is a Communications &amp; Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.</strong> Based in Kafr el Sheikh, Egypt, he offers freelance PCB design (KiCad/EAGLE), Arduino and ESP-based IoT development, and responsive web apps — plus free browser-based engineering calculators.</p>
+        <p style="max-width:65ch;font-size:.9375rem;">Best for: founders and teams needing a custom controller board, sensor-to-cloud IoT prototype, or hardware-aware web dashboard. Contact: <a href="mailto:mohammed.tarek.abdelhady.ali@gmail.com">mohammed.tarek.abdelhady.ali@gmail.com</a> · +20 109 063 7406 · <a href="https://www.linkedin.com/in/mohamedtarek225" rel="noopener">LinkedIn</a>. Last updated: 2026-09-16.</p>
       </div>
     </section>
 
@@ -2571,6 +2647,40 @@
             <div class="form-status" id="formStatus" role="alert"></div>
           </form>
         </div>
+      </div>
+    </section>
+
+    <!-- FAQ: visible Q&A in raw HTML + matching FAQPage JSON-LD above (GEO extractability). -->
+    <section class="faq" id="faq" aria-labelledby="faq-title" style="padding:2rem 0 3rem;">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">FAQ</span>
+          <h2 class="section-title" id="faq-title">Frequently asked questions</h2>
+          <p class="section-subtitle">Direct answers for buyers and AI answer engines alike.</p>
+        </div>
+        <div style="max-width:70ch;display:grid;gap:1rem;">
+          <div>
+            <h3 style="font-size:1rem;">Who is Mohamed Tarek?</h3>
+            <p>Mohamed Tarek is a Communications &amp; Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies. He is based in Kafr el Sheikh, Egypt and works with clients worldwide.</p>
+          </div>
+          <div>
+            <h3 style="font-size:1rem;">What services does Mohamed Tarek offer?</h3>
+            <p>Web development, Arduino development for IoT and automation, PCB design with KiCad and EAGLE, embedded systems with ESP/PIC/ARM, circuit simulation, and complete IoT solutions including hardware, firmware, and cloud dashboards.</p>
+          </div>
+          <div>
+            <h3 style="font-size:1rem;">How can I contact Mohamed Tarek for a PCB or Arduino project?</h3>
+            <p>Email mohammed.tarek.abdelhady.ali@gmail.com, call or WhatsApp +20 109 063 7406, or connect on LinkedIn at linkedin.com/in/mohamedtarek225. Include your schematic or requirements, timeline, and target quantities for the fastest quote.</p>
+          </div>
+          <div>
+            <h3 style="font-size:1rem;">What engineering tools are free on this site?</h3>
+            <p>Free browser-based tools include Ohm's law, resistor, LED resistor, capacitor, inductance, buck-boost, battery capacity, power factor, transformer turns, and wire gauge calculators, plus an LCD character generator, Linux commands reference, and an AI sites directory.</p>
+          </div>
+          <div>
+            <h3 style="font-size:1rem;">What does Mohamed Tarek NOT do?</h3>
+            <p>No mass manufacturing at scale, no certified safety-critical or medical-device design claims, and no Meta Tech Provider or audited GDPR/SOC 2 claims. He designs prototypes and small-batch-ready boards and says so honestly.</p>
+          </div>
+        </div>
+        <p style="font-size:.875rem;margin-top:1rem;">También disponible en <a href="/es/">español</a> · Disponible en <a href="/fr/">français</a> · <a href="/de/">Deutsch</a> · <a href="/ar/" dir="rtl" lang="ar">العربية</a></p>
       </div>
     </section>
   </main>
@@ -3196,5 +3306,6 @@
     })();
   </script>
   <script src="pwa.js"></script>
+  <script src="/locale-router.js" defer></script>
 </body>
 </html>

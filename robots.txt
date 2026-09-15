@@ -1,42 +1,54 @@
 # robots.txt
-# Mohamed Tarek Portfolio
-# https://mohamedtarek.vercel.app
+# Mohamed Tarek Portfolio — https://website-mohamed.vercel.app
+# Multilingual SEO + GEO: AI answer-engine crawlers are explicitly ALLOWED
+# so ChatGPT / Claude / Perplexity / Gemini / Copilot / AI Overviews can
+# retrieve and cite public pages (RAG pathway). No paywall on cited pages.
 
 User-agent: *
 Allow: /
 
-Sitemap: https://mohamedtarek.vercel.app/sitemap.xml
+Sitemap: https://website-mohamed.vercel.app/sitemap.xml
 
-# ARD manifest for agent discovery
-Agentmap: https://mohamedtarek.vercel.app/.well-known/ai-catalog.json
+# Agent discovery
+Agentmap: https://website-mohamed.vercel.app/.well-known/ai-catalog.json
 
-# Content Signals — AI content usage preferences
-Content-Signal: ai-train=no, search=yes, ai-input=no
-
-# Blocked paths
+# Blocked paths (app internals only — never block locale pages or llms.txt)
 Disallow: /sw.js
 Disallow: /pwa.js
 Disallow: /cache/
 Disallow: /admin/
 
-# AI/ML training blocks
+# AI search / answer-engine crawlers — explicitly allowed (GEO).
+# Do NOT add Disallow for these unless a deliberate block policy is adopted.
 User-agent: GPTBot
-Disallow: /
+Allow: /
 
 User-agent: ChatGPT-User
-Disallow: /
+Allow: /
 
-User-agent: CCBot
-Disallow: /
-
-User-agent: Google-Extended
-Disallow: /
-
-User-agent: anthropic-ai
-Disallow: /
+User-agent: OAI-SearchBot
+Allow: /
 
 User-agent: ClaudeBot
-Disallow: /
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: CCBot
+Allow: /
 
 # Image-specific rules
 User-agent: Googlebot-Image

@@ -1,0 +1,28 @@
+{
+  "marketing": {
+    "one_liner": "Elektronik- und Nachrichtentechnik-Ingenieur für integrierte Hardware-Software-Lösungen mit Arduino, eingebetteten Systemen, PCB-Design und Webtechnologien.",
+    "hero_title": "Die Zukunft mit Code & Schaltungen bauen",
+    "hero_sub": "Ingenieur und Entwickler für innovative Lösungen an der Schnittstelle von Hardware und Software.",
+    "tldr": "Mohamed Tarek ist Elektronikingenieur für integrierte Hardware-Software-Lösungen mit Arduino, eingebetteten Systemen, PCB-Design und Webtechnologien.",
+    "services_title": "Was ich für Sie tun kann",
+    "contact_cta": "Lassen Sie uns zusammenarbeiten",
+    "faq_title": "Häufige Fragen"
+  },
+  "app": {
+    "switcher_label": "Sprache",
+    "home": "Start",
+    "about": "Über mich",
+    "services": "Leistungen",
+    "projects": "Projekte",
+    "contact": "Kontakt"
+  },
+  "auth": {
+    "n_a": "Kein Login auf öffentlichen Portfolioseiten"
+  },
+  "emails": {
+    "contact_subject": "Projektanfrage an Mohamed Tarek"
+  },
+  "errors": {
+    "generic": "Etwas ist schiefgelaufen. Bitte an mohammed.tarek.abdelhady.ali@gmail.com schreiben."
+  }
+}
