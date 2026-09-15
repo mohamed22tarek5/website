@@ -1,0 +1,47 @@
+; DNS for AI Discovery (DNS-AID) — SVCB/HTTPS records
+; Draft: draft-mozleywilliams-dnsop-dnsaid | RFC 9460 (SVCB/HTTPS)
+;
+; HOW TO APPLY
+; 1) These records CANNOT be published for *.vercel.app subdomains
+;    (DNS for vercel.app is controlled by Vercel). To pass the DNS-AID
+;    check you MUST use a custom domain (e.g. mohamedtarek.dev) with
+;    Vercel + a DNS provider that supports SVCB/HTTPS (Cloudflare, etc.).
+; 2) At your authoritative DNS provider, add the records below,
+;    replacing website-mohamed.vercel.app with your custom domain.
+; 3) Enable DNSSEC at your registrar / DNS provider (required: validating
+;    resolvers must return authenticated data). On Cloudflare: Dashboard
+;    -> DNS -> DNSSEC -> Enable. On Vercel custom domains: follow
+;    Vercel Docs "Enabling DNSSEC" and add the DS record at your registrar.
+; 4) Verify via DoH (same resolvers the scanner uses):
+;    https://cloudflare-dns.com/dns-query?name=_index._agents.YOUR-DOMAIN&type=HTTPS
+;    https://cloudflare-dns.com/dns-query?name=_a2a._agents.YOUR-DOMAIN&type=SVCB
+;    curl -H 'accept: application/dns-json' \
+;      'https://cloudflare-dns.com/dns-query?name=_index._agents.YOUR-DOMAIN&type=HTTPS'
+;
+; NOTES
+; - ServiceMode (priority 1) with target = your HTTPS host.
+; - alpn + port are standard RFC 9460 keys; experimental DNS-AID keys
+;   MUST use numeric keyNNNNN form until registered (private-use range
+;   65280-65534). Here key65280 carries the agent endpoint path and
+;   key65281 carries the protocol label.
+; - TTL 3600 is a sane default; adjust as needed.
+
+; --- Replace DOMAIN below with your custom domain when you have one ---
+; Agent index / discovery endpoint
+_index._agents.website-mohamed.vercel.app. 3600 IN HTTPS 1 website-mohamed.vercel.app. alpn="h2" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="index"
+
+; A2A protocol endpoint
+_a2a._agents.website-mohamed.vercel.app. 3600 IN SVCB 1 website-mohamed.vercel.app. alpn="a2a" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="a2a"
+
+; MCP protocol endpoint
+_mcp._agents.website-mohamed.vercel.app. 3600 IN SVCB 1 website-mohamed.vercel.app. alpn="mcp" port=443 mandatory=alpn,port key65280="/.well-known/mcp/server-card.json" key65281="mcp"
+
+; --- Generic BIND-style template for a custom domain (copy/paste) ---
+; _index._agents.@ 3600 IN HTTPS 1 @ alpn="h2" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="index"
+; _a2a._agents.@ 3600 IN SVCB 1 @ alpn="a2a" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="a2a"
+; _mcp._agents.@ 3600 IN SVCB 1 @ alpn="mcp" port=443 mandatory=alpn,port key65280="/.well-known/mcp/server-card.json" key65281="mcp"
+
+; --- Cloudflare Dashboard equivalent (Type HTTPS/SVCB, Name, Priority, Target, Params) ---
+; Type: HTTPS | Name: _index._agents | Priority: 1 | Target: @ | Params: alpn="h2" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="index"
+; Type: SVCB  | Name: _a2a._agents   | Priority: 1 | Target: @ | Params: alpn="a2a" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="a2a"
+; Type: SVCB  | Name: _mcp._agents   | Priority: 1 | Target: @ | Params: alpn="mcp" port=443 mandatory=alpn,port key65280="/.well-known/mcp/server-card.json" key65281="mcp"

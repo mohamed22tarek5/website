@@ -12,26 +12,32 @@
     {
       "source": "/",
       "headers": [
-        { "key": "Link", "value": "</.well-known/api-catalog/index.json>; rel=\"api-catalog\"" },
-        { "key": "Link", "value": "</.well-known/mcp/server-card.json>; rel=\"service-desc\"" },
-        { "key": "Link", "value": "</.well-known/agent-skills/index.json>; rel=\"linkset\"" },
-        { "key": "Link", "value": "</.well-known/ai-catalog.json>; rel=\"describedby\"" },
-        { "key": "Link", "value": "</.well-known/agent-card.json>; rel=\"service-desc\"" },
-        { "key": "Link", "value": "</.well-known/acp.json>; rel=\"service-desc\"" },
-        { "key": "Link", "value": "</.well-known/oauth-protected-resource.json>; rel=\"resource-metadata\"" },
-        { "key": "Link", "value": "</auth.md>; rel=\"describedby\"" },
-        { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"" },
-        { "key": "Link", "value": "</manifest.webmanifest>; rel=\"manifest\"" },
-        { "key": "Link", "value": "</Mohamed%20-%20Services.html>; rel=\"service-doc\"" },
-        { "key": "Link", "value": "</.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\"" },
-        { "key": "Link", "value": "</api/x402>; rel=\"payment\"" }
+        {
+          "key": "Link",
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </Mohamed%20-%20Services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
+        },
+        { "key": "Vary", "value": "Accept" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/index.html",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </Mohamed%20-%20Services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
+        },
+        { "key": "Vary", "value": "Accept" }
       ]
     },
     {
       "source": "/sites/(.*)",
       "headers": [
-        { "key": "Link", "value": "</.well-known/agent-skills/index.json>; rel=\"linkset\"" },
-        { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"" }
+        {
+          "key": "Link",
+          "value": "</.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\""
+        },
+        { "key": "Vary", "value": "Accept" }
       ]
     },
     {
@@ -55,9 +61,17 @@
       ]
     },
     {
+      "source": "/.well-known/oauth-protected-resource",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+      ]
+    },
+    {
       "source": "/.well-known/oauth-protected-resource\\.json",
       "headers": [
-        { "key": "Content-Type", "value": "application/resource-metadata+json" },
+        { "key": "Content-Type", "value": "application/json" },
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
       ]
@@ -178,8 +192,32 @@
   ],
   "rewrites": [
     {
+      "source": "/",
+      "has": [{ "type": "header", "key": "Accept", "value": ".*text/markdown.*" }],
+      "destination": "/api/markdown?path=/"
+    },
+    {
+      "source": "/index.html",
+      "has": [{ "type": "header", "key": "Accept", "value": ".*text/markdown.*" }],
+      "destination": "/api/markdown?path=/"
+    },
+    {
+      "source": "/sites/:slug.html",
+      "has": [{ "type": "header", "key": "Accept", "value": ".*text/markdown.*" }],
+      "destination": "/api/markdown?path=/sites/:slug.html"
+    },
+    {
+      "source": "/:slug.html",
+      "has": [{ "type": "header", "key": "Accept", "value": ".*text/markdown.*" }],
+      "destination": "/api/markdown?path=/:slug.html"
+    },
+    {
+      "source": "/.well-known/api-catalog",
+      "destination": "/.well-known/api-catalog/index.json"
+    },
+    {
       "source": "/.well-known/oauth-protected-resource",
-      "destination": "/.well-known/oauth-protected-resource.json"
+      "destination": "/api/oauth-protected-resource"
     },
     {
       "source": "/.well-known/oauth-authorization-server",
