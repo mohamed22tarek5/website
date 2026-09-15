@@ -1,37 +1,77 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mohamed Tarek | Ingénieur électronique — Arduino, conception PCB & IoT</title>
-  <meta name="description" content="Mohamed Tarek — ingénieur en communications et électronique : solutions intégrées matériel-logiciel avec Arduino, systèmes embarqués, conception PCB et technologies web.">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Primary Meta -->
+  <title>Mohamed Tarek | Communications Engineer & Developer</title>
+  <meta name="description" content="Portfolio of Mohamed Tarek — Communications Engineer, Web Developer, Arduino Expert, and PCB Designer. Building innovative solutions at the intersection of hardware and software.">
+  <meta name="keywords" content="Mohamed Tarek, communications engineer, web developer, Arduino, PCB design, PCBA, embedded systems, IoT, portfolio">
   <meta name="author" content="Mohamed Tarek">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-  <link rel="canonical" href="https://website-mohamed.vercel.app/fr/">
+  <meta name="theme-color" content="#0a0e1a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+  <link rel="canonical" href="https://website-mohamed.vercel.app/">
+  <!-- Multilingual SEO: one language per URL, reciprocal hreflang + x-default.
+       Country redirects are for humans only — never for crawlers (see middleware.js). -->
   <link rel="alternate" hreflang="en" href="https://website-mohamed.vercel.app/">
   <link rel="alternate" hreflang="ar" href="https://website-mohamed.vercel.app/ar/">
   <link rel="alternate" hreflang="de" href="https://website-mohamed.vercel.app/de/">
   <link rel="alternate" hreflang="fr" href="https://website-mohamed.vercel.app/fr/">
   <link rel="alternate" hreflang="es" href="https://website-mohamed.vercel.app/es/">
   <link rel="alternate" hreflang="x-default" href="https://website-mohamed.vercel.app/">
+  <meta name="geo.region" content="EG">
+  <meta name="author" content="Mohamed Tarek">
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Mohamed Tarek | Ingénieur électronicien & développeur">
-  <meta property="og:description" content="Solutions intégrées matériel-logiciel : Arduino, systèmes embarqués, conception PCB (KiCad/EAGLE) et IoT.">
-  <meta property="og:url" content="https://website-mohamed.vercel.app/fr/">
+  <meta property="og:title" content="Mohamed Tarek | Engineer & Developer">
+  <meta property="og:description" content="Communications Engineer, Web Developer, Arduino Expert, and PCB Designer building innovative solutions.">
   <meta property="og:image" content="https://website-mohamed.vercel.app/photo.jpg">
-  <meta property="og:locale" content="fr_FR">
-  <link rel="icon" href="/icon.png" type="image/png">
-  <style>
-    :root { --bg:#0a0e1a; --card:#161b2e; --text:#f1f5f9; --muted:#94a3b8; --accent:#3b82f6; }
-    * { box-sizing:border-box; }
-    body { margin:0; background:var(--bg); color:var(--text); font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif; line-height:1.7; }
-    .container { max-width:880px; margin:0 auto; padding:2rem 1.25rem; }
-    a { color:var(--accent); }
-    .card { background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:1.25rem; margin:1rem 0; }
-    .switcher { font-size:.875rem; color:var(--muted); }
-    h1 { font-size:1.75rem; line-height:1.35; }
-    h2 { font-size:1.25rem; margin-top:2rem; }
-  </style>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://website-mohamed.vercel.app">
+  <meta property="og:site_name" content="Mohamed Tarek Portfolio">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mohamed Tarek | Engineer & Developer">
+  <meta name="twitter:description" content="Communications Engineer, Web Developer, Arduino Expert, and PCB Designer building innovative solutions.">
+  <meta name="twitter:image" content="https://website-mohamed.vercel.app/photo.jpg">
+
+  <!-- PWA Meta -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M. Tarek">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- Manifest -->
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <!-- Agent Discovery -->
+  <link rel="ai-catalog" href="/.well-known/ai-catalog.json">
+  <link rel="api-catalog" href="/.well-known/api-catalog/index.json">
+  <link rel="service-desc" href="/.well-known/agent-card.json">
+
+  <!-- Icons -->
+  <link rel="icon" href="icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- JSON-LD Structured Data: GEO entity identity (Citation Trinity #1).
+       ONE_LINER is frozen and reused verbatim on About, LinkedIn, GitHub. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -40,78 +80,3232 @@
         "@type": "Person",
         "@id": "https://website-mohamed.vercel.app/#person",
         "name": "Mohamed Tarek",
-        "jobTitle": "Ingénieur en communications et électronique",
-        "description": "Ingénieur en communications et électronique : solutions intégrées matériel-logiciel avec Arduino, systèmes embarqués, conception PCB et technologies web.",
-        "url": "https://website-mohamed.vercel.app/fr/",
+        "jobTitle": "Communications Engineer & Developer",
+        "description": "Communications & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.",
+        "url": "https://website-mohamed.vercel.app",
         "image": "https://website-mohamed.vercel.app/photo.jpg",
-        "sameAs": ["https://www.linkedin.com/in/mohamedtarek225","https://github.com/mohamed22tarek5","https://www.instagram.com/_m7md_tarek_/"],
-        "address": { "@type": "PostalAddress", "addressLocality": "Kafr el Sheikh", "addressCountry": "EG" }
+        "sameAs": [
+          "https://www.linkedin.com/in/mohamedtarek225",
+          "https://github.com/mohamed22tarek5",
+          "https://www.instagram.com/_m7md_tarek_/"
+        ],
+        "knowsAbout": [
+          "Web Development", "Arduino", "PCB Design", "Embedded Systems",
+          "IoT", "JavaScript", "HTML5", "CSS3", "C++", "Proteus", "Eagle", "KiCad"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kafr el Sheikh",
+          "addressCountry": "EG"
+        },
+        "email": "mohammed.tarek.abdelhady.ali@gmail.com",
+        "telephone": "+201090637406"
       },
-      { "@type": "WebSite", "@id": "https://website-mohamed.vercel.app/fr/#website", "url": "https://website-mohamed.vercel.app/fr/", "name": "Mohamed Tarek Portfolio", "inLanguage": "fr", "author": { "@id": "https://website-mohamed.vercel.app/#person" } },
+      {
+        "@type": "WebSite",
+        "@id": "https://website-mohamed.vercel.app/#website",
+        "url": "https://website-mohamed.vercel.app/",
+        "name": "Mohamed Tarek Portfolio",
+        "description": "Communications & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.",
+        "inLanguage": ["en", "ar", "de", "fr", "es"],
+        "author": { "@id": "https://website-mohamed.vercel.app/#person" }
+      },
       {
         "@type": "FAQPage",
-        "@id": "https://website-mohamed.vercel.app/fr/#faq",
+        "@id": "https://website-mohamed.vercel.app/#faq",
         "mainEntity": [
-          { "@type": "Question", "name": "Qui est Mohamed Tarek ?", "acceptedAnswer": { "@type": "Answer", "text": "Mohamed Tarek est ingénieur en communications et électronique : solutions intégrées matériel-logiciel avec Arduino, systèmes embarqués, conception PCB et web. Basé à Kafr el Sheikh (Égypte), disponible à distance dans le monde entier." } },
-          { "@type": "Question", "name": "Quels services propose-t-il ?", "acceptedAnswer": { "@type": "Answer", "text": "Conception PCB avec KiCad et EAGLE, développement Arduino et ESP pour l'IoT et l'automatisation, systèmes embarqués (ESP/PIC/ARM), simulation de circuits et applications web responsives." } },
-          { "@type": "Question", "name": "Comment le contacter pour un projet PCB ou Arduino ?", "acceptedAnswer": { "@type": "Answer", "text": "Par e-mail à mohammed.tarek.abdelhady.ali@gmail.com, WhatsApp +20 109 063 7406 ou LinkedIn linkedin.com/in/mohamedtarek225 — avec schéma ou exigences, planning et quantités." } }
+          {
+            "@type": "Question",
+            "name": "Who is Mohamed Tarek?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Mohamed Tarek is a Communications & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies. He is based in Kafr el Sheikh, Egypt and offers freelance engineering services including custom PCB design, Arduino development, and IoT systems." }
+          },
+          {
+            "@type": "Question",
+            "name": "What services does Mohamed Tarek offer?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Mohamed Tarek offers web development, Arduino development for IoT and automation, PCB design with KiCad and EAGLE, embedded systems with ESP/PIC/ARM, circuit simulation, and complete IoT solutions including hardware, firmware, and cloud dashboards." }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I contact Mohamed Tarek for a PCB or Arduino project?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Email mohammed.tarek.abdelhady.ali@gmail.com, call or WhatsApp +20 109 063 7406, or connect on LinkedIn at linkedin.com/in/mohamedtarek225. Include your schematic or requirements, timeline, and target quantities for the fastest quote." }
+          },
+          {
+            "@type": "Question",
+            "name": "What engineering tools and calculators are available on this site?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The site hosts free browser-based tools: Ohm's law, resistor, LED resistor, capacitor, inductance, buck-boost, battery capacity, power factor, transformer turns, wire gauge calculators, plus an LCD character generator, Linux commands reference, and an AI sites directory." }
+          }
         ]
       },
       {
         "@type": "BreadcrumbList",
+        "@id": "https://website-mohamed.vercel.app/#breadcrumbs",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://website-mohamed.vercel.app/" },
-          { "@type": "ListItem", "position": 2, "name": "Français", "item": "https://website-mohamed.vercel.app/fr/" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://website-mohamed.vercel.app/" }
         ]
       }
     ]
   }
   </script>
+  <!-- Last updated: 2026-09-16 (keep honest; bump when content materially changes) -->
+
+  <style>
+    /* ============================================
+       DESIGN SYSTEM — CSS Custom Properties
+       ============================================ */
+    :root {
+      /* Color Palette — Premium Dark */
+      --color-bg-primary: #0a0e1a;
+      --color-bg-secondary: #0f1322;
+      --color-bg-tertiary: #141829;
+      --color-bg-card: #161b2e;
+      --color-bg-card-hover: #1c2240;
+      --color-bg-elevated: #1a2038;
+
+      /* Accent Colors */
+      --color-accent: #3b82f6;
+      --color-accent-hover: #2563eb;
+      --color-accent-light: #60a5fa;
+      --color-accent-glow: rgba(59, 130, 246, 0.15);
+      --color-accent-subtle: rgba(59, 130, 246, 0.08);
+
+      /* Text */
+      --color-text-primary: #f1f5f9;
+      --color-text-secondary: #94a3b8;
+      --color-text-tertiary: #64748b;
+      --color-text-accent: #3b82f6;
+
+      /* Borders */
+      --color-border: rgba(255, 255, 255, 0.06);
+      --color-border-hover: rgba(255, 255, 255, 0.12);
+      --color-border-accent: rgba(59, 130, 246, 0.3);
+
+      /* Status */
+      --color-success: #22c55e;
+      --color-error: #ef4444;
+      --color-warning: #f59e0b;
+
+      /* Gradients */
+      --gradient-hero: linear-gradient(135deg, #0a0e1a 0%, #111833 50%, #0f1322 100%);
+      --gradient-accent: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --gradient-card: linear-gradient(145deg, rgba(22, 27, 46, 0.8), rgba(15, 19, 34, 0.6));
+      --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.06), transparent 40%);
+
+      /* Typography */
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+      /* Spacing */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 4rem;
+      --space-4xl: 6rem;
+
+      /* Radii */
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 30px rgba(59, 130, 246, 0.15);
+
+      /* Transitions */
+      --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      /* Layout */
+      --container-max: 1200px;
+      --header-height: 72px;
+    }
+
+    /* Light Theme */
+    [data-theme="light"] {
+      --color-bg-primary: #f8fafc;
+      --color-bg-secondary: #f1f5f9;
+      --color-bg-tertiary: #e2e8f0;
+      --color-bg-card: #ffffff;
+      --color-bg-card-hover: #f8fafc;
+      --color-bg-elevated: #ffffff;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      --color-text-tertiary: #94a3b8;
+      --color-border: rgba(0, 0, 0, 0.08);
+      --color-border-hover: rgba(0, 0, 0, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+      --gradient-hero: linear-gradient(135deg, #f8fafc 0%, #e8f0fe 50%, #f1f5f9 100%);
+      --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(241, 245, 249, 0.7));
+      --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.04), transparent 40%);
+    }
+
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background-color var(--transition-slow), color var(--transition-slow);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color var(--transition-fast);
+    }
+
+    button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    ::selection {
+      background: var(--color-accent);
+      color: white;
+    }
+
+    /* ============================================
+       FOCUS STATES (Accessibility)
+       ============================================ */
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+
+    .btn:focus-visible,
+    .nav-link:focus-visible,
+    .nav-cta:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 3px;
+    }
+
+    /* ============================================
+       SKIP LINK (Accessibility)
+       ============================================ */
+    .skip-link {
+      position: fixed;
+      top: -100%;
+      left: var(--space-md);
+      background: var(--color-accent);
+      color: white;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-sm);
+      z-index: 10000;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: top var(--transition-fast);
+    }
+
+    .skip-link:focus {
+      top: var(--space-md);
+    }
+
+    /* ============================================
+       SCROLL PROGRESS BAR
+       ============================================ */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--gradient-accent);
+      z-index: 10001;
+      transition: width 50ms linear;
+    }
+
+    /* ============================================
+       LAYOUT
+       ============================================ */
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--space-xl);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 var(--space-md);
+      }
+    }
+
+    section {
+      padding: var(--space-4xl) 0;
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: var(--space-3xl) 0;
+      }
+    }
+
+    /* ============================================
+       HEADER / NAVIGATION
+       ============================================ */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      z-index: 1000;
+      transition: all var(--transition-base);
+      background: transparent;
+    }
+
+    .header.scrolled {
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    [data-theme="light"] .header.scrolled {
+      background: rgba(248, 250, 252, 0.85);
+    }
+
+    .header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--gradient-accent);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.875rem;
+      font-weight: 800;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .nav-link {
+      position: relative;
+      padding: var(--space-sm) var(--space-md);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--color-text-primary);
+      background: var(--color-accent-subtle);
+    }
+
+    .nav-link.active {
+      color: var(--color-accent);
+    }
+
+    .nav-cta {
+      margin-left: var(--space-sm);
+      padding: var(--space-sm) var(--space-lg);
+      background: var(--color-accent);
+      color: white;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all var(--transition-fast);
+    }
+
+    .nav-cta:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: var(--space-sm);
+      z-index: 1001;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-toggle .bar {
+      width: 22px;
+      height: 2px;
+      background: var(--color-text-primary);
+      border-radius: 2px;
+      transition: all var(--transition-base);
+      transform-origin: center;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-base);
+    }
+
+    .mobile-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: min(320px, 85vw);
+        height: 100vh;
+        height: 100dvh;
+        background: var(--color-bg-secondary);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding: var(--space-3xl);
+        gap: var(--space-sm);
+        transition: right var(--transition-slow);
+        border-left: 1px solid var(--color-border);
+      }
+
+      .nav.active {
+        right: 0;
+      }
+
+      .nav-link {
+        font-size: 1.125rem;
+        width: 100%;
+        padding: var(--space-md);
+      }
+
+      .nav-cta {
+        margin-left: 0;
+        margin-top: var(--space-md);
+        width: 100%;
+        text-align: center;
+        display: block;
+        padding: var(--space-md);
+      }
+    }
+
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--gradient-hero);
+      padding-top: var(--header-height);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .hero-gradient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+
+    .hero-gradient-orb:nth-child(1) {
+      width: 600px;
+      height: 600px;
+      background: rgba(59, 130, 246, 0.15);
+      top: -200px;
+      right: -100px;
+      animation-delay: 0s;
+    }
+
+    .hero-gradient-orb:nth-child(2) {
+      width: 400px;
+      height: 400px;
+      background: rgba(139, 92, 246, 0.12);
+      bottom: -100px;
+      left: -100px;
+      animation-delay: -7s;
+    }
+
+    .hero-gradient-orb:nth-child(3) {
+      width: 300px;
+      height: 300px;
+      background: rgba(59, 130, 246, 0.08);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -14s;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -30px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(20px, 10px) scale(1.02); }
+    }
+
+    /* Grid pattern overlay */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 1;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: var(--space-4xl);
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 640px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-md);
+      background: var(--color-accent-subtle);
+      border: 1px solid var(--color-border-accent);
+      border-radius: var(--radius-full);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--color-accent-light);
+      margin-bottom: var(--space-xl);
+    }
+
+    .hero-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--color-success);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-lg);
+    }
+
+    .hero-title .gradient-text {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--space-xl);
+      max-width: 520px;
+    }
+
+    .hero-role {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-2xl);
+      font-size: 1.125rem;
+    }
+
+    .hero-role .label {
+      color: var(--color-text-tertiary);
+    }
+
+    .hero-role .typed-text {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--color-accent-light);
+      border-right: 2px solid var(--color-accent);
+      padding-right: 4px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: var(--color-accent); }
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      padding: 14px 28px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--color-accent);
+      color: white;
+      box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border-hover);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+      background: var(--color-accent-subtle);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-text-secondary);
+      padding: 14px 20px;
+    }
+
+    .btn-ghost:hover {
+      color: var(--color-text-primary);
+      background: var(--color-accent-subtle);
+    }
+
+    .hero-social {
+      display: flex;
+      gap: var(--space-md);
+    }
+
+    .hero-social a {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+      font-size: 1.125rem;
+      transition: all var(--transition-fast);
+    }
+
+    .hero-social a:hover {
+      color: var(--color-accent);
+      border-color: var(--color-border-accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* Hero Image */
+    .hero-visual {
+      flex: 0 0 auto;
+      position: relative;
+    }
+
+    .hero-image-wrapper {
+      position: relative;
+      width: 320px;
+      height: 320px;
+    }
+
+    .hero-image-ring {
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border-accent);
+      animation: ringRotate 30s linear infinite;
+    }
+
+    .hero-image-ring::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 12px var(--color-accent);
+    }
+
+    @keyframes ringRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--color-border-accent);
+      box-shadow: 0 0 60px rgba(59, 130, 246, 0.15);
+    }
+
+    .hero-floating-card {
+      position: absolute;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      box-shadow: var(--shadow-md);
+      animation: float 6s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    .hero-floating-card:nth-child(3) {
+      top: 10%;
+      right: -20px;
+      animation-delay: 0s;
+    }
+
+    .hero-floating-card:nth-child(4) {
+      bottom: 15%;
+      left: -30px;
+      animation-delay: -2s;
+    }
+
+    .hero-floating-card:nth-child(5) {
+      bottom: 5%;
+      right: -10px;
+      animation-delay: -4s;
+    }
+
+    .hero-floating-card i {
+      color: var(--color-accent);
+      font-size: 1rem;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 992px) {
+      .hero .container {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding-top: var(--space-3xl);
+      }
+
+      .hero-content {
+        max-width: 100%;
+      }
+
+      .hero-subtitle {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-social {
+        justify-content: center;
+      }
+
+      .hero-image-wrapper {
+        width: 240px;
+        height: 240px;
+      }
+
+      .hero-floating-card {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+    }
+
+    /* ============================================
+       SECTION HEADERS
+       ============================================ */
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-md);
+    }
+
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--color-accent);
+      opacity: 0.4;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: var(--space-md);
+    }
+
+    .section-subtitle {
+      font-size: 1.0625rem;
+      color: var(--color-text-secondary);
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ============================================
+       ABOUT SECTION
+       ============================================ */
+    .about {
+      background: var(--color-bg-secondary);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: var(--space-4xl);
+      align-items: center;
+    }
+
+    .about-image-container {
+      position: relative;
+    }
+
+    .about-image {
+      width: 100%;
+      aspect-ratio: 480 / 560;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      object-fit: cover;
+    }
+
+    .about-image-accent {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      width: 120px;
+      height: 120px;
+      background: var(--gradient-accent);
+      border-radius: var(--radius-lg);
+      z-index: -1;
+      opacity: 0.5;
+    }
+
+    .about-content h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: var(--space-lg);
+      letter-spacing: -0.01em;
+    }
+
+    .about-content p {
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-xl);
+      line-height: 1.8;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .about-stat {
+      text-align: center;
+      padding: var(--space-lg);
+      background: var(--color-bg-card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+    }
+
+    .about-stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--color-accent);
+      line-height: 1;
+      margin-bottom: var(--space-xs);
+    }
+
+    .about-stat-label {
+      font-size: 0.8125rem;
+      color: var(--color-text-tertiary);
+      font-weight: 500;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .about-tag {
+      padding: 6px 14px;
+      background: var(--color-accent-subtle);
+      border: 1px solid var(--color-border-accent);
+      border-radius: var(--radius-full);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--color-accent-light);
+    }
+
+    .about-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+      }
+
+      .about-stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================
+       SKILLS SECTION
+       ============================================ */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .skill-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-accent);
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+
+    .skill-card:hover {
+      border-color: var(--color-border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .skill-card:hover::before {
+      opacity: 1;
+    }
+
+    .skill-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-accent-subtle);
+      border-radius: var(--radius-md);
+      color: var(--color-accent);
+      font-size: 1.25rem;
+      margin-bottom: var(--space-lg);
+    }
+
+    .skill-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .skill-card p {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-lg);
+      line-height: 1.6;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-tag {
+      padding: 4px 10px;
+      background: var(--color-bg-tertiary);
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      font-family: var(--font-mono);
+    }
+
+    /* ============================================
+       SERVICES SECTION
+       ============================================ */
+    .services {
+      background: var(--color-bg-secondary);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .service-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+      transition: all var(--transition-base);
+      position: relative;
+    }
+
+    .service-card:hover {
+      border-color: var(--color-border-accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gradient-accent);
+      border-radius: var(--radius-md);
+      color: white;
+      font-size: 1.375rem;
+      margin-bottom: var(--space-lg);
+      box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+    }
+
+    .service-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .service-card p {
+      font-size: 0.9375rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 480px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================
+       PROJECTS SECTION
+       ============================================ */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .project-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--transition-base);
+    }
+
+    .project-card:hover {
+      border-color: var(--color-border-hover);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .project-image {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: var(--color-bg-tertiary);
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.05);
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10, 14, 26, 0.9) 0%, transparent 60%);
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-lg);
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .project-overlay-actions {
+      display: flex;
+      gap: var(--space-sm);
+    }
+
+    .project-overlay-btn {
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border-radius: var(--radius-sm);
+      color: white;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      transition: all var(--transition-fast);
+    }
+
+    .project-overlay-btn:hover {
+      background: var(--color-accent);
+    }
+
+    .project-body {
+      padding: var(--space-xl);
+    }
+
+    .project-category {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+    }
+
+    .project-desc {
+      font-size: 0.9375rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      margin-bottom: var(--space-lg);
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .project-tech span {
+      padding: 4px 10px;
+      background: var(--color-bg-tertiary);
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--color-text-tertiary);
+      font-family: var(--font-mono);
+    }
+
+    @media (max-width: 480px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================
+       STATS SECTION
+       ============================================ */
+    .stats-section {
+      background: var(--gradient-accent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M30 0v60M0 30h60' stroke='rgba(255,255,255,0.05)' stroke-width='1'/%3E%3C/svg%3E");
+    }
+
+    .stats-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-xl);
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: var(--space-2xl);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all var(--transition-base);
+    }
+
+    .stat-card:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-4px);
+    }
+
+    .stat-number {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1;
+      margin-bottom: var(--space-sm);
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================
+       CONTACT SECTION
+       ============================================ */
+    .contact {
+      background: var(--color-bg-secondary);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3xl);
+    }
+
+    .contact-info h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: var(--space-md);
+    }
+
+    .contact-info > p {
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-2xl);
+      line-height: 1.7;
+    }
+
+    .contact-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-base);
+    }
+
+    .contact-card:hover {
+      border-color: var(--color-border-accent);
+      transform: translateX(4px);
+    }
+
+    .contact-card-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-accent-subtle);
+      border-radius: var(--radius-md);
+      color: var(--color-accent);
+      font-size: 1.125rem;
+      flex-shrink: 0;
+    }
+
+    .contact-card-content h4 {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+
+    .contact-card-content p,
+    .contact-card-content a {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: var(--color-text-primary);
+    }
+
+    .contact-card-content a:hover {
+      color: var(--color-accent);
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-lg);
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-sm);
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.9375rem;
+      transition: all var(--transition-fast);
+      outline: none;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-accent-glow);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--color-text-tertiary);
+    }
+
+    .form-input:invalid:not(:placeholder-shown),
+    .form-textarea:invalid:not(:placeholder-shown) {
+      border-color: var(--color-error);
+    }
+
+    .form-input:valid:not(:placeholder-shown) {
+      border-color: var(--color-success);
+    }
+
+    .form-textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    @media (max-width: 480px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--color-accent);
+      color: white;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+    }
+
+    .form-submit:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(59, 130, 246, 0.3);
+    }
+
+    .form-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-status {
+      margin-top: var(--space-md);
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: none;
+    }
+
+    .form-status.success {
+      display: block;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: var(--color-success);
+    }
+
+    .form-status.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--color-error);
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      background: var(--color-bg-primary);
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-3xl) 0 var(--space-xl);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--space-3xl);
+      margin-bottom: var(--space-3xl);
+    }
+
+    .footer-brand p {
+      color: var(--color-text-secondary);
+      font-size: 0.9375rem;
+      margin-top: var(--space-md);
+      max-width: 300px;
+      line-height: 1.7;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: var(--space-sm);
+      margin-top: var(--space-lg);
+    }
+
+    .footer-social a {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+      transition: all var(--transition-fast);
+    }
+
+    .footer-social a:hover {
+      color: var(--color-accent);
+      border-color: var(--color-border-accent);
+      transform: translateY(-2px);
+    }
+
+    .footer-col h4 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-lg);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .footer-links a {
+      font-size: 0.9375rem;
+      color: var(--color-text-secondary);
+      transition: all var(--transition-fast);
+      padding: 2px 0;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-accent);
+      transform: translateX(4px);
+    }
+
+    .footer-bottom {
+      padding-top: var(--space-xl);
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+
+    .footer-bottom p {
+      font-size: 0.875rem;
+      color: var(--color-text-tertiary);
+    }
+
+    .footer-bottom a {
+      color: var(--color-accent);
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-2xl);
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================
+       BACK TO TOP
+       ============================================ */
+    .back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+      font-size: 1rem;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      color: var(--color-accent);
+      border-color: var(--color-border-accent);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================
+       THEME TOGGLE
+       ============================================ */
+    .theme-toggle {
+      position: fixed;
+      bottom: 32px;
+      right: 90px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+      font-size: 1rem;
+      z-index: 999;
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-md);
+    }
+
+    .theme-toggle:hover {
+      color: var(--color-accent);
+      border-color: var(--color-border-accent);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================
+       PWA ELEMENTS
+       ============================================ */
+    .pwa-install-btn {
+      position: fixed;
+      bottom: 32px;
+      left: 32px;
+      background: var(--color-accent);
+      color: white;
+      padding: 12px 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 600;
+      z-index: 1000;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: all var(--transition-base);
+    }
+
+    .pwa-install-btn.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .pwa-install-btn:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .offline-indicator {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--color-error);
+      color: white;
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 500;
+      z-index: 10000;
+      opacity: 0;
+      transition: all var(--transition-base);
+    }
+
+    .offline-indicator.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .pwa-toast {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: var(--color-bg-card);
+      color: var(--color-text-primary);
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-lg);
+      z-index: 10000;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transform: translateY(12px);
+      opacity: 0;
+      transition: all var(--transition-base);
+    }
+
+    .pwa-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .pwa-toast.success {
+      background: var(--color-success);
+      color: white;
+      border-color: var(--color-success);
+    }
+
+    .pwa-update-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border-accent);
+      padding: var(--space-lg);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-xl);
+      z-index: 10000;
+      max-width: 320px;
+      animation: slideInRight 0.3s ease;
+    }
+
+    .pwa-update-notification p {
+      margin-bottom: var(--space-md);
+      font-size: 0.9375rem;
+      font-weight: 500;
+    }
+
+    .pwa-update-notification .btn-group {
+      display: flex;
+      gap: var(--space-sm);
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* ============================================
+       SCROLL REVEAL ANIMATIONS
+       ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ============================================
+       LOADING SCREEN
+       ============================================ */
+    .loader {
+      position: fixed;
+      inset: 0;
+      background: var(--color-bg-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--color-border);
+      border-top-color: var(--color-accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .loader-text {
+      margin-top: var(--space-lg);
+      font-size: 0.875rem;
+      color: var(--color-text-tertiary);
+      font-weight: 500;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ============================================
+       REDUCED MOTION
+       ============================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* ============================================
+       STANDALONE PWA
+       ============================================ */
+    @media all and (display-mode: standalone) {
+      body {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+
+      .header {
+        padding-top: max(0px, env(safe-area-inset-top));
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <p class="switcher">Langue : <strong>Français</strong> · <a href="/" hreflang="en">English</a> · <a href="/ar/" hreflang="ar">العربية</a> · <a href="/de/" hreflang="de">Deutsch</a> · <a href="/es/" hreflang="es">Español</a></p>
-    <header>
-      <h1>Mohamed Tarek — Ingénieur électronique : Arduino, conception PCB &amp; IoT</h1>
-      <p><strong>En résumé :</strong> Mohamed Tarek est ingénieur en communications et électronique : solutions intégrées matériel-logiciel avec Arduino, systèmes embarqués, conception PCB et technologies web. Idéal pour les fondateurs et équipes ayant besoin d'une carte contrôleur sur mesure ou d'un prototype IoT capteur-vers-cloud.</p>
-      <p>Contact : <a href="mailto:mohammed.tarek.abdelhady.ali@gmail.com">mohammed.tarek.abdelhady.ali@gmail.com</a> · +20 109 063 7406 · <a href="https://www.linkedin.com/in/mohamedtarek225">LinkedIn</a>. Mise à jour : 2026-09-16.</p>
-    </header>
-    <main>
-      <section class="card" aria-labelledby="svc">
-        <h2 id="svc">Services</h2>
-        <ul>
-          <li><strong>Conception PCB</strong> — schémas et routages KiCad/EAGLE, prêts pour prototypes et petites séries.</li>
-          <li><strong>Développement Arduino</strong> — systèmes IoT et automatisation avec Arduino et ESP.</li>
-          <li><strong>Systèmes embarqués</strong> — solutions ESP, PIC et ARM.</li>
-          <li><strong>Solutions IoT complètes</strong> — matériel, firmware et tableau de bord cloud.</li>
-          <li><strong>Développement web</strong> — apps responsives connectées au matériel.</li>
-        </ul>
-        <p>Idéal pour : carte contrôleur, prototype capteur-vers-cloud, domotique ESP32. Pas idéal pour : production de masse ou conceptions critiques certifiées — dit honnêtement.</p>
-      </section>
-      <section class="card" aria-labelledby="tools">
-        <h2 id="tools">Calculateurs gratuits en ligne</h2>
-        <p>Loi d'Ohm, résistances, LED, condensateurs, inductances, buck-boost, batteries, facteur de puissance, transformateurs et générateur de caractères LCD — dans le navigateur.</p>
-        <ul>
-          <li><a href="/sites/ohms-law-calculator.html">Calculateur loi d'Ohm</a></li>
-          <li><a href="/sites/capacitor-calculator.html">Calculateur condensateur</a></li>
-          <li><a href="/sites/LCD-Custom-Character-Generator.html">Générateur LCD</a></li>
-          <li><a href="/sites/ai-sites-list.html">Annuaire d'outils IA</a></li>
-        </ul>
-      </section>
-      <section class="card" aria-labelledby="faq-t">
-        <h2 id="faq-t">Questions fréquentes</h2>
-        <h3>Qui est Mohamed Tarek ?</h3>
-        <p>Ingénieur en communications et électronique : Arduino, systèmes embarqués, conception PCB et web. Basé en Égypte, disponible à distance.</p>
-        <h3>Combien coûte un projet PCB ou Arduino ?</h3>
-        <p>Selon complexité et quantités. Envoyez schéma ou exigences + planning — devis rapide, sans fausses certifications.</p>
-        <h3>Travaille-t-il hors d'Égypte ?</h3>
-        <p>Oui — en anglais ou arabe par e-mail, WhatsApp et LinkedIn, livraison à distance.</p>
-      </section>
-    </main>
-    <footer>
-      <p>© 2026 Mohamed Tarek · <a href="/">English version (English governs)</a> · <a href="/llms.txt">llms.txt</a></p>
-    </footer>
+  <!-- Loading Screen -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Loading...</p>
   </div>
+
+  <!-- Skip Link -->
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header" id="header" role="banner">
+    <div class="container">
+      <a href="#" class="logo" aria-label="Mohamed Tarek - Home">
+        <span class="logo-icon">MT</span>
+        <span>Mohamed Tarek</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="Mohamed - Certificates.html" class="nav-link">Certificates</a>
+        <a href="Mohamed - CV.html" class="nav-cta">My CV</a>
+        <span class="locale-switcher" id="localeSwitcher" aria-label="Language" style="display:inline-flex;gap:.35rem;margin-inline-start:.5rem;font-size:.8125rem;">
+          <a href="/" hreflang="en" aria-current="true" lang="en">EN</a> ·
+          <a href="/ar/" hreflang="ar" lang="ar">عربي</a> ·
+          <a href="/de/" hreflang="de" lang="de">DE</a> ·
+          <a href="/fr/" hreflang="fr" lang="fr">FR</a> ·
+          <a href="/es/" hreflang="es" lang="es">ES</a>
+        </span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main">
+    <!-- Hero Section -->
+    <section class="hero" id="home" aria-label="Introduction">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-gradient-orb"></div>
+        <div class="hero-gradient-orb"></div>
+        <div class="hero-gradient-orb"></div>
+        <div class="hero-grid"></div>
+      </div>
+
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-badge reveal">
+            <span class="dot"></span>
+            Available for opportunities
+          </div>
+
+          <h1 class="hero-title reveal reveal-delay-1">
+            Building the future<br>
+            with <span class="gradient-text">code & circuits</span>
+          </h1>
+
+          <p class="hero-subtitle reveal reveal-delay-2">
+            Communications Engineer and Developer crafting innovative solutions at the intersection of hardware and software.
+          </p>
+
+          <div class="hero-role reveal reveal-delay-2">
+            <span class="label">I'm a</span>
+            <span class="typed-text" id="typedText"></span>
+          </div>
+
+          <div class="hero-actions reveal reveal-delay-3">
+            <a href="Mohamed - social-media.html" class="btn btn-primary">
+              <i class="fas fa-share-nodes"></i> Social Media
+            </a>
+            <a href="Mohamed - my-sites.html" class="btn btn-secondary">
+              <i class="fas fa-arrow-up-right-from-square"></i> My Sites
+            </a>
+            <a href="#projects" class="btn btn-ghost">
+              <i class="fas fa-code"></i> View Work
+            </a>
+          </div>
+
+          <div class="hero-social reveal reveal-delay-4">
+            <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal reveal-delay-2">
+          <div class="hero-image-wrapper">
+            <div class="hero-image-ring" aria-hidden="true"></div>
+            <img src="photo.jpg" alt="Mohamed Tarek - Communications Engineer" class="hero-image" width="320" height="320" loading="eager">
+            <div class="hero-floating-card" aria-hidden="true">
+              <i class="fas fa-microchip"></i>
+              <span>Embedded Systems</span>
+            </div>
+            <div class="hero-floating-card" aria-hidden="true">
+              <i class="fas fa-code"></i>
+              <span>Web Development</span>
+            </div>
+            <div class="hero-floating-card" aria-hidden="true">
+              <i class="fas fa-circuit-board"></i>
+              <span>PCB Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GEO answer box: self-contained 40–60 word extractable passage (server-rendered). -->
+    <section class="geo-answer" id="tldr" aria-labelledby="tldr-title" style="padding:2rem 0;">
+      <div class="container">
+        <h2 id="tldr-title" style="font-size:1.125rem;margin-bottom:.5rem;">TL;DR — Who is Mohamed Tarek?</h2>
+        <p style="max-width:65ch;"><strong>Mohamed Tarek is a Communications &amp; Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.</strong> Based in Kafr el Sheikh, Egypt, he offers freelance PCB design (KiCad/EAGLE), Arduino and ESP-based IoT development, and responsive web apps — plus free browser-based engineering calculators.</p>
+        <p style="max-width:65ch;font-size:.9375rem;">Best for: founders and teams needing a custom controller board, sensor-to-cloud IoT prototype, or hardware-aware web dashboard. Contact: <a href="mailto:mohammed.tarek.abdelhady.ali@gmail.com">mohammed.tarek.abdelhady.ali@gmail.com</a> · +20 109 063 7406 · <a href="https://www.linkedin.com/in/mohamedtarek225" rel="noopener">LinkedIn</a>. Last updated: 2026-09-16.</p>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">About</span>
+          <h2 class="section-title" id="about-title">A little bit about me</h2>
+          <p class="section-subtitle">Passionate about creating technology that makes a difference.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-image-container reveal">
+            <img src="photo.jpg" alt="Mohamed Tarek working on engineering projects" class="about-image" width="480" height="560" loading="lazy">
+            <div class="about-image-accent" aria-hidden="true"></div>
+          </div>
+
+          <div class="about-content reveal reveal-delay-1">
+            <h3>Communications & Electronics Engineer</h3>
+            <p>
+              I'm Mohamed Tarek, a passionate Communications and Electronics Engineer with deep expertise in web development, Arduino projects, and PCB design. I thrive at the intersection of hardware and software, building solutions that bridge the digital and physical worlds.
+            </p>
+            <p>
+              From designing custom circuit boards to crafting responsive web applications, I bring a systems-level thinking approach to every project. My goal is to create technology that is both functional and elegant.
+            </p>
+
+            <div class="about-tags">
+              <span class="about-tag">Web Development</span>
+              <span class="about-tag">Arduino</span>
+              <span class="about-tag">PCB Design</span>
+              <span class="about-tag">Embedded Systems</span>
+              <span class="about-tag">IoT</span>
+              <span class="about-tag">PLC</span>
+            </div>
+
+            <div class="about-stats">
+              <div class="about-stat">
+                <div class="about-stat-number" data-count="200">0</div>
+                <div class="about-stat-label">Projects</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-number" data-count="50">0</div>
+                <div class="about-stat-label">Clients</div>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-number" data-count="13">0</div>
+                <div class="about-stat-label">Certificates</div>
+              </div>
+            </div>
+
+            <div class="about-actions">
+              <a href="Mohamed - CV.html" class="btn btn-primary">
+                <i class="fas fa-download"></i> Download CV
+              </a>
+              <a href="Mohamed - Personal Information.html" class="btn btn-secondary">
+                <i class="fas fa-user"></i> More About Me
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Expertise</span>
+          <h2 class="section-title" id="skills-title">Skills & Technologies</h2>
+          <p class="section-subtitle">The tools and technologies I use to bring ideas to life.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i class="fas fa-code"></i></div>
+            <h3>Web Development</h3>
+            <p>Building responsive, performant web applications with modern frameworks and clean architecture.</p>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Responsive Design</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal reveal-delay-1">
+            <div class="skill-icon"><i class="fas fa-microchip"></i></div>
+            <h3>Arduino & IoT</h3>
+            <p>Custom firmware and IoT solutions with real-time sensor networks and cloud integration.</p>
+            <div class="skill-tags">
+              <span class="skill-tag">Arduino</span>
+              <span class="skill-tag">ESP32</span>
+              <span class="skill-tag">C++</span>
+              <span class="skill-tag">IoT</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal reveal-delay-2">
+            <div class="skill-icon"><i class="fas fa-drafting-compass"></i></div>
+            <h3>PCB Design</h3>
+            <p>Professional schematic capture and board layout for high-integrity signal routing.</p>
+            <div class="skill-tags">
+              <span class="skill-tag">Eagle</span>
+              <span class="skill-tag">KiCad</span>
+              <span class="skill-tag">Proteus</span>
+              <span class="skill-tag">Altium</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal">
+            <div class="skill-icon"><i class="fas fa-server"></i></div>
+            <h3>Embedded Systems</h3>
+            <p>Firmware development for PIC, ARM, and AVR microcontrollers with real-time constraints.</p>
+            <div class="skill-tags">
+              <span class="skill-tag">PIC</span>
+              <span class="skill-tag">ARM</span>
+              <span class="skill-tag">AVR</span>
+              <span class="skill-tag">RTOS</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal reveal-delay-1">
+            <div class="skill-icon"><i class="fas fa-industry"></i></div>
+            <h3>PLC & Automation</h3>
+            <p>Industrial automation with PLC programming and classic control system design.</p>
+            <div class="skill-tags">
+              <span class="skill-tag">PLC</span>
+              <span class="skill-tag">Ladder Logic</span>
+              <span class="skill-tag">SCADA</span>
+            </div>
+          </div>
+
+          <div class="skill-card reveal reveal-delay-2">
+            <div class="skill-icon"><i class="fas fa-wifi"></i></div>
+            <h3>IoT Solutions</h3>
+            <p>End-to-end IoT systems from sensor nodes to cloud dashboards and mobile apps.</p>
+            <div class="skill-tags">
+              <span class="skill-tag">MQTT</span>
+              <span class="skill-tag">Firebase</span>
+              <span class="skill-tag">Blynk</span>
+              <span class="skill-tag">Node-RED</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Services</span>
+          <h2 class="section-title" id="services-title">What I can do for you</h2>
+          <p class="section-subtitle">Professional engineering services tailored to your needs.</p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-code"></i></div>
+            <h3>Web Development</h3>
+            <p>Professional websites and web applications using modern technologies. Responsive, fast, and accessible across all devices.</p>
+          </div>
+
+          <div class="service-card reveal reveal-delay-1">
+            <div class="service-icon"><i class="fas fa-microchip"></i></div>
+            <h3>Arduino Development</h3>
+            <p>Custom Arduino programming for IoT projects, automation systems, and embedded solutions. From sensors to complex networks.</p>
+          </div>
+
+          <div class="service-card reveal reveal-delay-2">
+            <div class="service-icon"><i class="fas fa-drafting-compass"></i></div>
+            <h3>PCB Design</h3>
+            <p>Professional PCB design from schematic capture to final board layout using Eagle, KiCad, and Altium Designer.</p>
+          </div>
+
+          <div class="service-card reveal">
+            <div class="service-icon"><i class="fas fa-robot"></i></div>
+            <h3>Embedded Systems</h3>
+            <p>Design and development of embedded systems using PIC, ARM, and AVR microcontrollers with real-time performance.</p>
+          </div>
+
+          <div class="service-card reveal reveal-delay-1">
+            <div class="service-icon"><i class="fas fa-flask"></i></div>
+            <h3>Circuit Simulation</h3>
+            <p>Professional circuit simulation using Proteus and TinkerCAD to verify designs before physical implementation.</p>
+          </div>
+
+          <div class="service-card reveal reveal-delay-2">
+            <div class="service-icon"><i class="fas fa-wifi"></i></div>
+            <h3>IoT Solutions</h3>
+            <p>Complete IoT solutions including hardware design, firmware development, and cloud integration for smart devices.</p>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: var(--space-3xl);" class="reveal">
+          <a href="Mohamed - Services.html" class="btn btn-primary">
+            <i class="fas fa-arrow-right"></i> View All Services
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Portfolio</span>
+          <h2 class="section-title" id="projects-title">Featured Projects</h2>
+          <p class="section-subtitle">A selection of projects I've worked on across different domains.</p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <article class="project-card reveal">
+            <div class="project-image">
+              <img src="Project/3.png" alt="Custom PCB Design project" loading="lazy" width="400" height="250">
+              <div class="project-overlay">
+                <div class="project-overlay-actions">
+                  <a href="Project/3.1.png" class="project-overlay-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-expand"></i> View
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-category">PCB Design</span>
+              <h3 class="project-title">Custom PCB Design</h3>
+              <p class="project-desc">Professional PCB design for a custom microcontroller board with optimized layout for signal integrity.</p>
+              <div class="project-tech">
+                <span>Eagle</span>
+                <span>FR4</span>
+                <span>SMD</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card reveal reveal-delay-1">
+            <div class="project-image">
+              <img src="Project/2.png" alt="Personal Portfolio Website" loading="lazy" width="400" height="250">
+              <div class="project-overlay">
+                <div class="project-overlay-actions">
+                  <a href="index.html" class="project-overlay-btn">
+                    <i class="fas fa-external-link-alt"></i> Live
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-category">Web Development</span>
+              <h3 class="project-title">Personal Portfolio</h3>
+              <p class="project-desc">Modern responsive portfolio website with PWA support, dark mode, and smooth animations.</p>
+              <div class="project-tech">
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>JavaScript</span>
+                <span>PWA</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card reveal reveal-delay-2">
+            <div class="project-image">
+              <img src="Project/4.png" alt="Circuit Simulation project" loading="lazy" width="400" height="250">
+              <div class="project-overlay">
+                <div class="project-overlay-actions">
+                  <a href="Project/4.png" class="project-overlay-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-expand"></i> View
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-category">Simulation</span>
+              <h3 class="project-title">Proteus & TinkerCAD</h3>
+              <p class="project-desc">Various circuit simulations for verification and testing before physical implementation.</p>
+              <div class="project-tech">
+                <span>Proteus</span>
+                <span>TinkerCAD</span>
+                <span>SPICE</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project-card reveal">
+            <div class="project-image">
+              <img src="Project/5.jpg" alt="Smart Blind Glasses Arduino project" loading="lazy" width="400" height="250">
+              <div class="project-overlay">
+                <div class="project-overlay-actions">
+                  <a href="https://fb.watch/ipRaFH0KIr/" class="project-overlay-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-play"></i> Video
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-category">Arduino Project</span>
+              <h3 class="project-title">Smart Blind Glasses</h3>
+              <p class="project-desc">Assistive device for visually impaired using ultrasonic sensors and haptic feedback.</p>
+              <div class="project-tech">
+                <span>Arduino</span>
+                <span>Ultrasonic</span>
+                <span>Haptic</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 5 -->
+          <article class="project-card reveal reveal-delay-1">
+            <div class="project-image">
+              <img src="Project/13.jpg" alt="Health Monitoring System" loading="lazy" width="400" height="250">
+              <div class="project-overlay">
+                <div class="project-overlay-actions">
+                  <a href="Project/13.jpg" class="project-overlay-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-expand"></i> View
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-category">Health Tech</span>
+              <h3 class="project-title">Health Monitoring System</h3>
+              <p class="project-desc">IoT-based system for remote patient monitoring with real-time data analytics.</p>
+              <div class="project-tech">
+                <span>ESP32</span>
+                <span>IoT</span>
+                <span>Firebase</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 6 -->
+          <article class="project-card reveal reveal-delay-2">
+            <div class="project-image">
+              <img src="Project/6.jpg" alt="Smart Home Automation System" loading="lazy" width="400" height="250">
+              <div class="project-overlay">
+                <div class="project-overlay-actions">
+                  <a href="#" class="project-overlay-btn">
+                    <i class="fas fa-external-link-alt"></i> Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="project-category">IoT</span>
+              <h3 class="project-title">Smart Home System</h3>
+              <p class="project-desc">Complete home automation system with ESP32 and custom mobile app control.</p>
+              <div class="project-tech">
+                <span>ESP32</span>
+                <span>Bluetooth</span>
+                <span>Relay</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div style="text-align: center; margin-top: var(--space-3xl);" class="reveal">
+          <a href="Mohamed - Project.html" class="btn btn-primary">
+            <i class="fas fa-arrow-right"></i> View All Projects
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section" aria-label="Achievements">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card reveal">
+            <div class="stat-number" data-count="200">0</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat-card reveal reveal-delay-1">
+            <div class="stat-number" data-count="50">0</div>
+            <div class="stat-label">Happy Clients</div>
+          </div>
+          <div class="stat-card reveal reveal-delay-2">
+            <div class="stat-number" data-count="2">0</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-card reveal reveal-delay-3">
+            <div class="stat-number" data-count="13">0</div>
+            <div class="stat-label">Certificates Earned</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Contact</span>
+          <h2 class="section-title" id="contact-title">Let's work together</h2>
+          <p class="section-subtitle">Have a project in mind? Get in touch and let's make it happen.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info reveal">
+            <h3>Get in touch</h3>
+            <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+
+            <div class="contact-cards">
+              <a href="mailto:mohammed.tarek.abdelhady.ali@gmail.com" class="contact-card">
+                <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+                <div class="contact-card-content">
+                  <h4>Email</h4>
+                  <p>mohammed.tarek.abdelhady.ali@gmail.com</p>
+                </div>
+              </a>
+
+              <a href="tel:+201090637406" class="contact-card">
+                <div class="contact-card-icon"><i class="fas fa-phone"></i></div>
+                <div class="contact-card-content">
+                  <h4>Phone</h4>
+                  <p>+20 109 063 7406</p>
+                </div>
+              </a>
+
+              <div class="contact-card">
+                <div class="contact-card-icon"><i class="fas fa-location-dot"></i></div>
+                <div class="contact-card-content">
+                  <h4>Location</h4>
+                  <p>Kafr el Sheikh, Egypt</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <form class="contact-form reveal reveal-delay-1" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" name="name" class="form-input" placeholder="Your name" required autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com" required autocomplete="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="subject" class="form-label">Subject</label>
+              <input type="text" id="subject" name="subject" class="form-input" placeholder="Project inquiry">
+            </div>
+            <div class="form-group">
+              <label for="message" class="form-label">Message</label>
+              <textarea id="message" name="message" class="form-textarea" placeholder="Tell me about your project..." required></textarea>
+            </div>
+            <button type="submit" class="form-submit" id="submitBtn">
+              <i class="fas fa-paper-plane"></i>
+              <span>Send Message</span>
+            </button>
+            <div class="form-status" id="formStatus" role="alert"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ: visible Q&A in raw HTML + matching FAQPage JSON-LD above (GEO extractability). -->
+    <section class="faq" id="faq" aria-labelledby="faq-title" style="padding:2rem 0 3rem;">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">FAQ</span>
+          <h2 class="section-title" id="faq-title">Frequently asked questions</h2>
+          <p class="section-subtitle">Direct answers for buyers and AI answer engines alike.</p>
+        </div>
+        <div style="max-width:70ch;display:grid;gap:1rem;">
+          <div>
+            <h3 style="font-size:1rem;">Who is Mohamed Tarek?</h3>
+            <p>Mohamed Tarek is a Communications &amp; Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies. He is based in Kafr el Sheikh, Egypt and works with clients worldwide.</p>
+          </div>
+          <div>
+            <h3 style="font-size:1rem;">What services does Mohamed Tarek offer?</h3>
+            <p>Web development, Arduino development for IoT and automation, PCB design with KiCad and EAGLE, embedded systems with ESP/PIC/ARM, circuit simulation, and complete IoT solutions including hardware, firmware, and cloud dashboards.</p>
+          </div>
+          <div>
+            <h3 style="font-size:1rem;">How can I contact Mohamed Tarek for a PCB or Arduino project?</h3>
+            <p>Email mohammed.tarek.abdelhady.ali@gmail.com, call or WhatsApp +20 109 063 7406, or connect on LinkedIn at linkedin.com/in/mohamedtarek225. Include your schematic or requirements, timeline, and target quantities for the fastest quote.</p>
+          </div>
+          <div>
+            <h3 style="font-size:1rem;">What engineering tools are free on this site?</h3>
+            <p>Free browser-based tools include Ohm's law, resistor, LED resistor, capacitor, inductance, buck-boost, battery capacity, power factor, transformer turns, and wire gauge calculators, plus an LCD character generator, Linux commands reference, and an AI sites directory.</p>
+          </div>
+          <div>
+            <h3 style="font-size:1rem;">What does Mohamed Tarek NOT do?</h3>
+            <p>No mass manufacturing at scale, no certified safety-critical or medical-device design claims, and no Meta Tech Provider or audited GDPR/SOC 2 claims. He designs prototypes and small-batch-ready boards and says so honestly.</p>
+          </div>
+        </div>
+        <p style="font-size:.875rem;margin-top:1rem;">También disponible en <a href="/es/">español</a> · Disponible en <a href="/fr/">français</a> · <a href="/de/">Deutsch</a> · <a href="/ar/" dir="rtl" lang="ar">العربية</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+      <a href="#home" class="logo" aria-label="Mohamed Tarek - Home">
+            <span class="logo-icon">MT</span>
+            <span>Mohamed Tarek</span>
+          </a>
+          <p>Communications Engineer and Developer creating innovative solutions that bridge hardware and software.</p>
+          <div class="footer-social">
+            <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/_m7md_tarek_/?igshid=YmMyMTA2M2Y%3D" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#services">Services</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Pages</h4>
+          <div class="footer-links">
+            <a href="Mohamed - CV.html">CV</a>
+            <a href="Mohamed - Certificates.html">Certificates</a>
+            <a href="Mohamed - Project.html">All Projects</a>
+            <a href="Mohamed - Services.html">All Services</a>
+            <a href="Mohamed - social-media.html">Social Media</a>
+            <a href="Mohamed - my-sites.html">My Sites</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <div class="footer-links">
+            <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href="mailto:mohammed.tarek.abdelhady.ali@gmail.com">Email</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="currentYear"></span> Mohamed Tarek. All rights reserved.</p>
+        <p>Designed & built with <i class="fas fa-heart" style="color: var(--color-error);"></i> by Mohamed Tarek</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- PWA Install Button -->
+  <button class="pwa-install-btn" id="pwaInstallBtn" aria-label="Install app">
+    <i class="fas fa-download"></i>
+    <span>Install App</span>
+  </button>
+
+  <!-- Offline Indicator -->
+  <div class="offline-indicator" id="offlineIndicator" role="alert">
+    <i class="fas fa-wifi-slash"></i> You are offline
+  </div>
+
+  <!-- ============================================
+       JAVASCRIPT
+       ============================================ -->
+  <script>
+    (() => {
+      'use strict';
+
+      /* ----------------------------------------
+         LOADING SCREEN
+         ---------------------------------------- */
+      const loader = document.getElementById('loader');
+      const hideLoader = () => {
+        if (loader && !loader.classList.contains('hidden')) {
+          loader.classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      };
+      window.addEventListener('load', () => setTimeout(hideLoader, 400));
+      setTimeout(hideLoader, 3000);
+
+      /* ----------------------------------------
+         SCROLL PROGRESS BAR
+         ---------------------------------------- */
+      const scrollProgress = document.getElementById('scrollProgress');
+      const updateScrollProgress = () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        scrollProgress.style.width = progress + '%';
+      };
+
+      /* ----------------------------------------
+         HEADER SCROLL STATE
+         ---------------------------------------- */
+      const header = document.getElementById('header');
+      const updateHeader = () => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      };
+
+      /* ----------------------------------------
+         BACK TO TOP
+         ---------------------------------------- */
+      const backToTop = document.getElementById('backToTop');
+      const updateBackToTop = () => {
+        backToTop.classList.toggle('visible', window.scrollY > 400);
+      };
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      /* ----------------------------------------
+         ACTIVE NAV LINK
+         ---------------------------------------- */
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const updateActiveLink = () => {
+        const scrollY = window.scrollY + 200;
+        let current = '';
+        sections.forEach(section => {
+          if (scrollY >= section.offsetTop) {
+            current = section.getAttribute('id');
+          }
+        });
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      };
+
+      /* ----------------------------------------
+         SCROLL EVENT (throttled)
+         ---------------------------------------- */
+      let ticking = false;
+      const onScroll = () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            updateScrollProgress();
+            updateHeader();
+            updateBackToTop();
+            updateActiveLink();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      /* ----------------------------------------
+         MOBILE MENU
+         ---------------------------------------- */
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+
+      const toggleMenu = () => {
+        const isActive = navMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+        menuToggle.setAttribute('aria-expanded', String(isActive));
+        mobileOverlay.classList.toggle('active');
+        document.body.style.overflow = isActive ? 'hidden' : '';
+      };
+
+      menuToggle.addEventListener('click', toggleMenu);
+      mobileOverlay.addEventListener('click', toggleMenu);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+          toggleMenu();
+          menuToggle.focus();
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (navMenu.classList.contains('active')) toggleMenu();
+        });
+      });
+
+      /* ----------------------------------------
+         THEME TOGGLE
+         ---------------------------------------- */
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('i');
+      const STORAGE_KEY = 'portfolio-theme';
+
+      const getPreferredTheme = () => {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) return saved;
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      };
+
+      const applyTheme = (theme) => {
+        document.documentElement.setAttribute('data-theme', theme);
+        themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+        themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        localStorage.setItem(STORAGE_KEY, theme);
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === 'dark' ? '#0a0e1a' : '#f8fafc');
+      };
+
+      applyTheme(getPreferredTheme());
+
+      themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+      });
+
+      /* ----------------------------------------
+         TYPEWRITER EFFECT
+         ---------------------------------------- */
+      const typedEl = document.getElementById('typedText');
+      const roles = [
+        'Communications Engineer',
+        'Electronics Engineer',
+        'PCBA',
+        'Arduino Expert',
+        'PCB Designer',
+        'Embedded Systems Engineer',
+        'IoT Specialist'
+      ];
+      let roleIdx = 0, charIdx = 0, isDeleting = false;
+
+      const typeStep = () => {
+        const current = roles[roleIdx];
+        if (isDeleting) {
+          charIdx--;
+          typedEl.textContent = current.substring(0, charIdx);
+        } else {
+          charIdx++;
+          typedEl.textContent = current.substring(0, charIdx);
+        }
+
+        let delay = isDeleting ? 40 : 80;
+
+        if (!isDeleting && charIdx === current.length) {
+          delay = 2000;
+          isDeleting = true;
+        } else if (isDeleting && charIdx === 0) {
+          isDeleting = false;
+          roleIdx = (roleIdx + 1) % roles.length;
+          delay = 500;
+        }
+
+        setTimeout(typeStep, delay);
+      };
+      setTimeout(typeStep, 1000);
+
+      /* ----------------------------------------
+         SCROLL REVEAL (Intersection Observer)
+         ---------------------------------------- */
+      const revealElements = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+
+      /* ----------------------------------------
+         ANIMATED COUNTERS
+         ---------------------------------------- */
+      const counters = document.querySelectorAll('[data-count]');
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.getAttribute('data-count'), 10);
+            const duration = 2000;
+            const start = performance.now();
+
+            const animate = (now) => {
+              const elapsed = now - start;
+              const progress = Math.min(elapsed / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              el.textContent = Math.floor(eased * target) + (progress >= 1 ? '+' : '');
+              if (progress < 1) requestAnimationFrame(animate);
+            };
+
+            requestAnimationFrame(animate);
+            counterObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      counters.forEach(el => counterObserver.observe(el));
+
+      /* ----------------------------------------
+         CONTACT FORM
+         ---------------------------------------- */
+      const contactForm = document.getElementById('contactForm');
+      const formStatus = document.getElementById('formStatus');
+      const submitBtn = document.getElementById('submitBtn');
+
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const subject = document.getElementById('subject').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        if (!name || !email || !message) {
+          formStatus.textContent = 'Please fill in all required fields.';
+          formStatus.className = 'form-status error';
+          formStatus.focus();
+          return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          formStatus.textContent = 'Please enter a valid email address.';
+          formStatus.className = 'form-status error';
+          formStatus.focus();
+          return;
+        }
+
+        if (message.length < 10) {
+          formStatus.textContent = 'Message must be at least 10 characters.';
+          formStatus.className = 'form-status error';
+          formStatus.focus();
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+        const mailtoLink = 'mailto:mohammed.tarek.abdelhady.ali@gmail.com'
+          + '?subject=' + encodeURIComponent(subject || 'Portfolio Contact from ' + name)
+          + '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+
+        setTimeout(() => {
+          window.location.href = mailtoLink;
+          formStatus.textContent = 'Opening your email client... If it didn\'t open, email me directly at mohammed.tarek.abdelhady.ali@gmail.com';
+          formStatus.className = 'form-status success';
+          contactForm.reset();
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> <span>Send Message</span>';
+
+          setTimeout(() => {
+            formStatus.className = 'form-status';
+          }, 8000);
+        }, 800);
+      });
+
+      /* ----------------------------------------
+         FOOTER YEAR
+         ---------------------------------------- */
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+      /* ----------------------------------------
+         PWA FUNCTIONALITY
+         ---------------------------------------- */
+      let deferredPrompt = null;
+      const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+      const offlineIndicator = document.getElementById('offlineIndicator');
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        pwaInstallBtn.classList.add('show');
+      });
+
+      pwaInstallBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          pwaInstallBtn.classList.remove('show');
+          showToast('App installed successfully!', 'success');
+        }
+        deferredPrompt = null;
+      });
+
+      window.addEventListener('appinstalled', () => {
+        pwaInstallBtn.classList.remove('show');
+        deferredPrompt = null;
+      });
+
+      /* ----------------------------------------
+         NETWORK STATUS
+         ---------------------------------------- */
+      window.addEventListener('online', () => {
+        offlineIndicator.classList.remove('show');
+        showToast('You are back online', 'success');
+      });
+
+      window.addEventListener('offline', () => {
+        offlineIndicator.classList.add('show');
+      });
+
+      /* ----------------------------------------
+         TOAST NOTIFICATIONS
+         ---------------------------------------- */
+      function showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = 'pwa-toast ' + type;
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        requestAnimationFrame(() => {
+          toast.classList.add('show');
+        });
+        setTimeout(() => {
+          toast.classList.remove('show');
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+
+      /* ----------------------------------------
+         SERVICE WORKER
+         ---------------------------------------- */
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js')
+            .then(reg => {
+              reg.addEventListener('updatefound', () => {
+                const newWorker = reg.installing;
+                newWorker.addEventListener('statechange', () => {
+                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    showUpdateNotification();
+                  }
+                });
+              });
+            })
+            .catch(err => console.error('SW registration failed:', err));
+        });
+      }
+
+      function showUpdateNotification() {
+        const el = document.createElement('div');
+        el.className = 'pwa-update-notification';
+        el.setAttribute('role', 'status');
+        el.setAttribute('aria-live', 'polite');
+        el.innerHTML = `
+          <p>New update available!</p>
+          <div class="btn-group">
+            <button class="btn btn-primary update-apply" style="padding:8px 16px;font-size:0.8125rem;">Update</button>
+            <button class="btn btn-ghost update-dismiss" style="padding:8px 16px;font-size:0.8125rem;color:var(--color-text-secondary);">Later</button>
+          </div>
+        `;
+        el.querySelector('.update-apply').addEventListener('click', () => window.location.reload());
+        el.querySelector('.update-dismiss').addEventListener('click', () => el.remove());
+        document.body.appendChild(el);
+        setTimeout(() => { if (el.parentNode) el.remove(); }, 15000);
+      }
+
+      /* ----------------------------------------
+         GLOW EFFECT ON CARDS (mouse tracking)
+         ---------------------------------------- */
+      document.querySelectorAll('.skill-card, .service-card, .project-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', ((e.clientX - rect.left) / rect.width * 100) + '%');
+          card.style.setProperty('--mouse-y', ((e.clientY - rect.top) / rect.height * 100) + '%');
+        });
+      });
+
+      /* ----------------------------------------
+         SMOOTH SCROLL FOR ANCHOR LINKS
+         ---------------------------------------- */
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+          const href = anchor.getAttribute('href');
+          if (href === '#') return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            const offset = 80;
+            const top = target.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        });
+      });
+
+      /* ----------------------------------------
+         IMAGE ERROR HANDLING
+         ---------------------------------------- */
+      document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', function() {
+          this.style.display = 'none';
+        }, { once: true });
+      });
+
+      /* ----------------------------------------
+         WebMCP — Expose tools to AI agents via browser
+         ---------------------------------------- */
+      if (navigator.modelContext) {
+        const _ac = new AbortController();
+        const _signal = _ac.signal;
+
+        navigator.modelContext.registerTool({
+          name: 'get_page_info',
+          description: 'Get information about the current portfolio page including title, description, and navigation links.',
+          inputSchema: { type: 'object', properties: {}, required: [] },
+          execute: async () => {
+            const meta = document.querySelector('meta[name="description"]');
+            const links = Array.from(document.querySelectorAll('.nav-link')).map(a => ({
+              text: a.textContent.trim(), href: a.getAttribute('href')
+            }));
+            return { title: document.title, description: meta ? meta.content : '', navigation: links, url: window.location.href };
+          }
+        }, { signal: _signal });
+
+        navigator.modelContext.registerTool({
+          name: 'navigate_to',
+          description: 'Navigate to a specific section or page on the portfolio site.',
+          inputSchema: {
+            type: 'object',
+            properties: { target: { type: 'string', description: 'Section ID (e.g. "projects") or page URL' } },
+            required: ['target']
+          },
+          execute: async ({ target }) => {
+            if (target.startsWith('/') || target.startsWith('http')) { window.location.href = target; return { success: true }; }
+            const el = document.getElementById(target) || document.querySelector('[href="#' + target + '"]');
+            if (el) { el.scrollIntoView({ behavior: 'smooth' }); return { success: true }; }
+            return { success: false, error: 'Target not found' };
+          }
+        }, { signal: _signal });
+
+        navigator.modelContext.registerTool({
+          name: 'get_projects',
+          description: 'List all featured projects from the portfolio.',
+          inputSchema: { type: 'object', properties: {}, required: [] },
+          execute: async () => {
+            return Array.from(document.querySelectorAll('.project-card')).map(card => ({
+              title: (card.querySelector('.card-title, h3') || {}).textContent?.trim() || '',
+              description: (card.querySelector('.card-text, p') || {}).textContent?.trim() || '',
+              url: (card.querySelector('a') || {}).href || ''
+            }));
+          }
+        }, { signal: _signal });
+
+        navigator.modelContext.registerTool({
+          name: 'get_services',
+          description: 'List all engineering services offered.',
+          inputSchema: { type: 'object', properties: {}, required: [] },
+          execute: async () => {
+            return Array.from(document.querySelectorAll('.service-card')).map(card => ({
+              title: (card.querySelector('.card-title, h3') || {}).textContent?.trim() || '',
+              description: (card.querySelector('.card-text, p') || {}).textContent?.trim() || ''
+            }));
+          }
+        }, { signal: _signal });
+
+        navigator.modelContext.registerTool({
+          name: 'get_tools_list',
+          description: 'List all available engineering calculators and tools on the site.',
+          inputSchema: { type: 'object', properties: {}, required: [] },
+          execute: async () => [
+            { name: "Ohm's Law Calculator", url: '/sites/ohms-law-calculator.html' },
+            { name: 'Resistor Calculator', url: '/sites/resistor-calculator.html' },
+            { name: 'Resistor for LED', url: '/sites/resistor-for-led.html' },
+            { name: 'Capacitor Calculator', url: '/sites/capacitor-calculator.html' },
+            { name: 'Inductance Calculator', url: '/sites/Indactance-calculator.html' },
+            { name: 'Buck-Boost Calculator', url: '/sites/buck-boost-calculator.html' },
+            { name: 'Battery Capacity Calculator', url: '/sites/Battery-Capacity-&-Runtime-Calculator.html' },
+            { name: 'Power Factor Calculator', url: '/sites/Power-Factor-Calculator.html' },
+            { name: 'Power Triangle Calculator', url: '/sites/Power-Triangle-Calculator.html' },
+            { name: 'RC Filter & LC Resonance Calculator', url: '/sites/RC-Filter-&-LC-Resonance-Calculator.html' },
+            { name: 'Transformer Turns Calculator', url: '/sites/Transformer-Turns-Calculator.html' },
+            { name: 'Wire Gauge Calculator', url: '/sites/Wire-Gauge-Calculator.html' },
+            { name: 'Length Converter', url: '/sites/Length-Converter.html' },
+            { name: 'LCD Custom Character Generator', url: '/sites/LCD-Custom-Character-Generator.html' },
+            { name: 'Electrical Calculation', url: '/sites/electrical-calculation.html' },
+            { name: 'AI Sites Directory', url: '/sites/ai-sites-list.html' },
+            { name: 'Linux Commands Reference', url: '/sites/Mastering%20Linux%20Commands.html' },
+            { name: 'To-Do List', url: '/sites/to-do-list.html' },
+            { name: 'Medication Reminder', url: '/sites/Medication-Reminder.html' }
+          ]
+        }, { signal: _signal });
+
+        navigator.modelContext.registerTool({
+          name: 'toggle_theme',
+          description: 'Toggle between dark and light theme on the portfolio site.',
+          inputSchema: { type: 'object', properties: {}, required: [] },
+          execute: async () => {
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) { toggle.click(); return { success: true, theme: document.documentElement.getAttribute('data-theme') }; }
+            return { success: false };
+          }
+        }, { signal: _signal });
+
+        navigator.modelContext.registerTool({
+          name: 'get_contact_info',
+          description: 'Get contact information and social media links.',
+          inputSchema: { type: 'object', properties: {}, required: [] },
+          execute: async () => {
+            const links = document.querySelectorAll('.social-link, .footer-social a, [href*="linkedin"], [href*="github"]');
+            return { social: Array.from(links).map(a => ({ platform: a.getAttribute('aria-label') || a.href.split('/')[2], url: a.href })), page_url: window.location.origin };
+          }
+        }, { signal: _signal });
+      }
+
+    })();
+  </script>
+  <script src="pwa.js"></script>
   <script src="/locale-router.js" defer></script>
 </body>
 </html>
