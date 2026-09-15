@@ -1,7 +1,7 @@
 # Engineering Calculator Skill
 
 ## Description
-Run engineering calculations using the tools at Mohamed Tarek's portfolio.
+Run engineering calculations using the tools at Mohamed Tarek Abdelhady's portfolio.
 
 ## When to Use
 - User asks to calculate Ohm's Law (V=IR, P=VI)
@@ -10,7 +10,7 @@ Run engineering calculations using the tools at Mohamed Tarek's portfolio.
 - User asks for electronics calculations
 
 ## How to Use
-1. Read `https://mohamedtarek.vercel.app/.well-known/mcp/server-card.json` for endpoint info
+1. Read `https://mohamed-tarek-abdelhady.vercel.app/.well-known/mcp/server-card.json` for endpoint info
 2. Use the MCP endpoint to call calculator tools
 3. Return formatted results
 

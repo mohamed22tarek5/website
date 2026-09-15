@@ -7,7 +7,7 @@
 ;    check you MUST use a custom domain (e.g. mohamedtarek.dev) with
 ;    Vercel + a DNS provider that supports SVCB/HTTPS (Cloudflare, etc.).
 ; 2) At your authoritative DNS provider, add the records below,
-;    replacing website-mohamed.vercel.app with your custom domain.
+;    replacing the example host with your custom domain.
 ; 3) Enable DNSSEC at your registrar / DNS provider (required: validating
 ;    resolvers must return authenticated data). On Cloudflare: Dashboard
 ;    -> DNS -> DNSSEC -> Enable. On Vercel custom domains: follow
@@ -28,13 +28,13 @@
 
 ; --- Replace DOMAIN below with your custom domain when you have one ---
 ; Agent index / discovery endpoint
-_index._agents.website-mohamed.vercel.app. 3600 IN HTTPS 1 website-mohamed.vercel.app. alpn="h2" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="index"
+_index._agents.mohamed-tarek-abdelhady.vercel.app. 3600 IN HTTPS 1 mohamed-tarek-abdelhady.vercel.app. alpn="h2" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="index"
 
 ; A2A protocol endpoint
-_a2a._agents.website-mohamed.vercel.app. 3600 IN SVCB 1 website-mohamed.vercel.app. alpn="a2a" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="a2a"
+_a2a._agents.mohamed-tarek-abdelhady.vercel.app. 3600 IN SVCB 1 mohamed-tarek-abdelhady.vercel.app. alpn="a2a" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="a2a"
 
 ; MCP protocol endpoint
-_mcp._agents.website-mohamed.vercel.app. 3600 IN SVCB 1 website-mohamed.vercel.app. alpn="mcp" port=443 mandatory=alpn,port key65280="/.well-known/mcp/server-card.json" key65281="mcp"
+_mcp._agents.mohamed-tarek-abdelhady.vercel.app. 3600 IN SVCB 1 mohamed-tarek-abdelhady.vercel.app. alpn="mcp" port=443 mandatory=alpn,port key65280="/.well-known/mcp/server-card.json" key65281="mcp"
 
 ; --- Generic BIND-style template for a custom domain (copy/paste) ---
 ; _index._agents.@ 3600 IN HTTPS 1 @ alpn="h2" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="index"

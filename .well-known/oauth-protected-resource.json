@@ -1,11 +1,11 @@
 {
-  "resource": "https://website-mohamed.vercel.app",
+  "resource": "https://mohamed-tarek-abdelhady.vercel.app",
   "authorization_servers": [
-    "https://website-mohamed.vercel.app"
+    "https://mohamed-tarek-abdelhady.vercel.app"
   ],
   "scopes_supported": ["read", "tools"],
   "bearer_methods_supported": ["header"],
-  "resource_name": "Mohamed Tarek Portfolio",
-  "resource_documentation": "https://website-mohamed.vercel.app/Mohamed%20-%20Services.html",
+  "resource_name": "Mohamed Tarek Abdelhady Portfolio",
+  "resource_documentation": "https://mohamed-tarek-abdelhady.vercel.app/Mohamed%20-%20Services.html",
   "resource_signing_alg_values_supported": ["RS256"]
 }

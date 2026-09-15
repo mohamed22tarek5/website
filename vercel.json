@@ -206,11 +206,11 @@
     },
     {
       "source": "/.well-known/oauth-authorization-server",
-      "destination": "/.well-known/oauth-authorization-server.json"
+      "destination": "/api/oauth-authorization-server"
     },
     {
       "source": "/.well-known/openid-configuration",
-      "destination": "/.well-known/openid-configuration.json"
+      "destination": "/api/oauth-authorization-server"
     },
     {
       "source": "/agent/identity",

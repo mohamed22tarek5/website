@@ -1,7 +1,7 @@
 {
-  "name": "Mohamed Tarek - Communications & Electronics Engineer",
+  "name": "Mohamed Tarek Abdelhady - Communication & Electronics Engineer",
   "short_name": "M. Tarek",
-  "description": "Professional portfolio of Mohamed Tarek — Communications Engineer, Web Developer, Arduino Expert, and PCB Designer showcasing innovative projects and solutions.",
+  "description": "Professional portfolio of Mohamed Tarek Abdelhady — Communication Engineer, Web Developer, Arduino Expert, and PCB Designer showcasing innovative projects and solutions.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -19,7 +19,7 @@
       "sizes": "1920x1080",
       "type": "image/jpeg",
       "form_factor": "wide",
-      "label": "Mohamed Tarek Portfolio"
+      "label": "Mohamed Tarek Abdelhady Portfolio"
     }
   ],
   "icons": [

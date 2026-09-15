@@ -1,6 +1,6 @@
 # Services
 
-Engineering services offered by Mohamed Tarek.
+Engineering services offered by Mohamed Tarek Abdelhady.
 
 ## Available Services
 
@@ -29,4 +29,4 @@ Free online tools for electronics calculations:
 
 For service inquiries, reach out via:
 - GitHub: [MohamedTarek20](https://github.com/MohamedTarek20)
-- LinkedIn: [Mohamed Tarek](https://www.linkedin.com/in/mohamedtarek20)
+- LinkedIn: [Mohamed Tarek Abdelhady](https://www.linkedin.com/in/mohamedtarek20)

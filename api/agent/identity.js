@@ -33,11 +33,22 @@ export default function handler(req, res) {
   const registrationId = `reg_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
   const assertionExpiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString();
 
+  // Derive issuer/audience from the request host so assertions validate
+  // on both production domains (mohamed-tarek-abdelhady.vercel.app and
+  // website-mohamed.vercel.app), which serve this same deployment.
+  const fwdHost = req.headers['x-forwarded-host'];
+  const host = (Array.isArray(fwdHost) ? fwdHost[0] : fwdHost) ||
+    req.headers.host ||
+    'mohamed-tarek-abdelhady.vercel.app';
+  const protoHeader = req.headers['x-forwarded-proto'];
+  const proto = (Array.isArray(protoHeader) ? protoHeader[0] : protoHeader) || 'https';
+  const issuer = `${proto}://${host}`;
+
   // In production, this would be a signed JWT from the identity provider
   const identityAssertion = `eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.${Buffer.from(JSON.stringify({
-    iss: 'https://mohamedtarek.vercel.app',
+    iss: issuer,
     sub: registrationId,
-    aud: 'https://mohamedtarek.vercel.app',
+    aud: issuer,
     exp: Math.floor(Date.now() / 1000) + 31536000,
     iat: Math.floor(Date.now() / 1000),
     type: 'anonymous',

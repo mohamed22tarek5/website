@@ -1,9 +1,9 @@
 {
   "serverInfo": {
-    "name": "Mohamed Tarek Portfolio",
+    "name": "Mohamed Tarek Abdelhady Portfolio",
     "version": "1.0.0"
   },
-  "description": "Portfolio and engineering tools for Mohamed Tarek - Communications Engineer, Web Developer, Arduino Expert, and PCB Designer. Provides calculators, tools, and project information.",
+  "description": "Portfolio and engineering tools for Mohamed Tarek Abdelhady - Communication Engineer, Web Developer, Arduino Expert, and PCB Designer. Provides calculators, tools, and project information.",
   "endpoint": "/mcp",
   "capabilities": {
     "tools": true,
@@ -12,7 +12,7 @@
     "sampling": false
   },
   "contact": {
-    "name": "Mohamed Tarek",
-    "url": "https://website-mohamed.vercel.app/Mohamed%20-%20social-media.html"
+    "name": "Mohamed Tarek Abdelhady",
+    "url": "https://mohamed-tarek-abdelhady.vercel.app/Mohamed%20-%20social-media.html"
   }
 }

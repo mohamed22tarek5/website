@@ -1,118 +1,118 @@
 {
   "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
   "version": "0.2.0",
-  "domain": "website-mohamed.vercel.app",
+  "domain": "mohamed-tarek-abdelhady.vercel.app",
   "skills": [
     {
       "name": "ohms-law-calculator",
       "type": "skill-md",
       "description": "Calculate voltage, current, resistance, or power using Ohm's Law. Enter any two values to compute the remaining two.",
-      "url": "https://website-mohamed.vercel.app/sites/ohms-law-calculator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/ohms-law-calculator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "resistor-calculator",
       "type": "skill-md",
       "description": "Calculate resistor values from color bands. Supports 4-band and 5-band resistor codes.",
-      "url": "https://website-mohamed.vercel.app/sites/resistor-calculator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/resistor-calculator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "resistor-for-led",
       "type": "skill-md",
       "description": "Calculate the correct resistor value for LED circuits based on supply voltage, LED forward voltage, and desired current.",
-      "url": "https://website-mohamed.vercel.app/sites/resistor-for-led.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/resistor-for-led.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "capacitor-calculator",
       "type": "skill-md",
       "description": "Calculate capacitor values including RC time constant, reactance, and energy storage.",
-      "url": "https://website-mohamed.vercel.app/sites/capacitor-calculator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/capacitor-calculator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "inductance-calculator",
       "type": "skill-md",
       "description": "Calculate inductor values including reactance, energy storage, and LC resonance frequency.",
-      "url": "https://website-mohamed.vercel.app/sites/Indactance-calculator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/Indactance-calculator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "buck-boost-calculator",
       "type": "skill-md",
       "description": "Design buck and boost converters. Calculate duty cycle, component values, and efficiency.",
-      "url": "https://website-mohamed.vercel.app/sites/buck-boost-calculator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/buck-boost-calculator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "battery-capacity-calculator",
       "type": "skill-md",
       "description": "Calculate battery capacity, runtime, and discharge rates for various battery configurations.",
-      "url": "https://website-mohamed.vercel.app/sites/Battery-Capacity-&-Runtime-Calculator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/Battery-Capacity-&-Runtime-Calculator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "power-factor-calculator",
       "type": "skill-md",
       "description": "Calculate power factor, real power, reactive power, and apparent power for AC circuits.",
-      "url": "https://website-mohamed.vercel.app/sites/Power-Factor-Calculator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/Power-Factor-Calculator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "lcd-custom-character-generator",
       "type": "skill-md",
       "description": "Generate custom character bitmaps for 16x2 and 20x4 LCD displays. Export as Arduino code.",
-      "url": "https://website-mohamed.vercel.app/sites/LCD-Custom-Character-Generator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/LCD-Custom-Character-Generator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "wire-gauge-calculator",
       "type": "skill-md",
       "description": "Calculate wire gauge (AWG) based on current, voltage drop, and wire length requirements.",
-      "url": "https://website-mohamed.vercel.app/sites/Wire-Gauge-Calculator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/Wire-Gauge-Calculator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "length-converter",
       "type": "skill-md",
       "description": "Convert between different length units including meters, feet, inches, centimeters, and more.",
-      "url": "https://website-mohamed.vercel.app/sites/Length-Converter.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/Length-Converter.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "ai-sites-list",
       "type": "skill-md",
       "description": "Curated directory of AI tools and websites for productivity, creativity, and development.",
-      "url": "https://website-mohamed.vercel.app/sites/ai-sites-list.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/ai-sites-list.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "linux-commands",
       "type": "skill-md",
       "description": "Interactive reference for mastering essential Linux commands with examples and explanations.",
-      "url": "https://website-mohamed.vercel.app/sites/Mastering%20Linux%20Commands.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/Mastering%20Linux%20Commands.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "portfolio-homepage",
       "type": "skill-md",
-      "description": "Main portfolio page for Mohamed Tarek - Communications Engineer, Web Developer, Arduino Expert, and PCB Designer.",
-      "url": "https://website-mohamed.vercel.app/",
+      "description": "Main portfolio page for Mohamed Tarek Abdelhady - Communication Engineer, Web Developer, Arduino Expert, and PCB Designer.",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "projects-showcase",
       "type": "skill-md",
       "description": "Showcase of featured engineering and web development projects.",
-      "url": "https://website-mohamed.vercel.app/Mohamed%20-%20Project.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/Mohamed%20-%20Project.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "services",
       "type": "skill-md",
       "description": "Engineering services offered including web development, Arduino programming, PCB design, and embedded systems.",
-      "url": "https://website-mohamed.vercel.app/Mohamed%20-%20Services.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/Mohamed%20-%20Services.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   ]

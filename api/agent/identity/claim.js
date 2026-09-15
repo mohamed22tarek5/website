@@ -38,8 +38,19 @@ export default function handler(req, res) {
     });
   }
 
-  // Validate resource
-  if (resource !== 'https://mohamedtarek.vercel.app') {
+  // Validate resource — accept the domain the agent actually called.
+  // Both production domains serve this same deployment; the primary
+  // canonical domain is always accepted as well.
+  const fwdHost = req.headers['x-forwarded-host'];
+  const host = (Array.isArray(fwdHost) ? fwdHost[0] : fwdHost) ||
+    req.headers.host ||
+    'mohamed-tarek-abdelhady.vercel.app';
+  const allowedResources = new Set([
+    `https://${host}`,
+    'https://mohamed-tarek-abdelhady.vercel.app',
+    'https://website-mohamed.vercel.app'
+  ]);
+  if (!allowedResources.has(resource)) {
     return res.status(400).json({
       error: 'invalid_request',
       error_description: 'Invalid resource'

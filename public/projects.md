@@ -1,6 +1,6 @@
 # Projects
 
-Engineering projects by Mohamed Tarek.
+Engineering projects by Mohamed Tarek Abdelhady.
 
 ## Featured Projects
 

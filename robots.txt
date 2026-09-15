@@ -1,14 +1,14 @@
 # robots.txt
-# Mohamed Tarek Portfolio
-# https://mohamedtarek.vercel.app
+# Mohamed Tarek Abdelhady Portfolio
+# https://mohamed-tarek-abdelhady.vercel.app
 
 User-agent: *
 Allow: /
 
-Sitemap: https://mohamedtarek.vercel.app/sitemap.xml
+Sitemap: https://mohamed-tarek-abdelhady.vercel.app/sitemap.xml
 
 # ARD manifest for agent discovery
-Agentmap: https://mohamedtarek.vercel.app/.well-known/ai-catalog.json
+Agentmap: https://mohamed-tarek-abdelhady.vercel.app/.well-known/ai-catalog.json
 
 # Content Signals — AI content usage preferences
 Content-Signal: ai-train=no, search=yes, ai-input=no

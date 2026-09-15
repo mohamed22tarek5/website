@@ -19,7 +19,7 @@ export default function handler(req, res) {
   const forwardedHost = req.headers['x-forwarded-host'];
   const host = (Array.isArray(forwardedHost) ? forwardedHost[0] : forwardedHost) ||
     req.headers.host ||
-    'website-mohamed.vercel.app';
+    'mohamed-tarek-abdelhady.vercel.app';
   const protoHeader = req.headers['x-forwarded-proto'];
   const proto = (Array.isArray(protoHeader) ? protoHeader[0] : protoHeader) || 'https';
   const base = `${proto}://${host}`;
@@ -28,7 +28,7 @@ export default function handler(req, res) {
 
   return res.status(200).json({
     resource: base,
-    resource_name: 'Mohamed Tarek Portfolio',
+    resource_name: 'Mohamed Tarek Abdelhady Portfolio',
     resource_documentation: `${base}/Mohamed%20-%20Services.html`,
     authorization_servers: [base],
     scopes_supported: ['read', 'tools'],

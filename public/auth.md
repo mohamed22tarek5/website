@@ -2,7 +2,9 @@
 
 You are an agent. This service supports **agentic registration**: discover → register → exchange for an access_token → call API. Follow the steps in order.
 
-This service is `https://mohamedtarek.vercel.app` (resource server) and `https://mohamedtarek.vercel.app` (authorization server). All content is publicly accessible — no authentication required.
+This service is `https://mohamed-tarek-abdelhady.vercel.app` (resource server) and `https://mohamed-tarek-abdelhady.vercel.app` (authorization server). All content is publicly accessible — no authentication required.
+
+Both production domains serve this same deployment and are valid: `https://mohamed-tarek-abdelhady.vercel.app` (primary, canonical) and `https://website-mohamed.vercel.app`. Token `resource`/`aud` values always match the host you called.
 
 ## Step 1 — Discover
 
@@ -16,9 +18,9 @@ Response:
 
 ```json
 {
-  "resource": "https://mohamedtarek.vercel.app",
-  "resource_name": "Mohamed Tarek Portfolio",
-  "authorization_servers": ["https://mohamedtarek.vercel.app"],
+  "resource": "https://mohamed-tarek-abdelhady.vercel.app",
+  "resource_name": "Mohamed Tarek Abdelhady Portfolio",
+  "authorization_servers": ["https://mohamed-tarek-abdelhady.vercel.app"],
   "scopes_supported": ["read", "tools"],
   "bearer_methods_supported": ["header"]
 }
@@ -34,13 +36,13 @@ Response includes standard OAuth fields plus the `agent_auth` block:
 
 ```json
 {
-  "issuer": "https://mohamedtarek.vercel.app",
-  "token_endpoint": "https://mohamedtarek.vercel.app/oauth2/token",
-  "revocation_endpoint": "https://mohamedtarek.vercel.app/oauth2/revoke",
+  "issuer": "https://mohamed-tarek-abdelhady.vercel.app",
+  "token_endpoint": "https://mohamed-tarek-abdelhady.vercel.app/oauth2/token",
+  "revocation_endpoint": "https://mohamed-tarek-abdelhady.vercel.app/oauth2/revoke",
   "grant_types_supported": ["urn:ietf:params:oauth:grant-type:jwt-bearer"],
   "agent_auth": {
-    "skill": "https://mohamedtarek.vercel.app/auth.md",
-    "identity_endpoint": "https://mohamedtarek.vercel.app/agent/identity",
+    "skill": "https://mohamed-tarek-abdelhady.vercel.app/auth.md",
+    "identity_endpoint": "https://mohamed-tarek-abdelhady.vercel.app/agent/identity",
     "identity_types_supported": ["anonymous"]
   }
 }
@@ -83,7 +85,7 @@ Content-Type: application/x-www-form-urlencoded
 
 grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer
 &assertion=<identity_assertion>
-&resource=https://mohamedtarek.vercel.app
+&resource=https://mohamed-tarek-abdelhady.vercel.app
 ```
 
 Response:
@@ -114,4 +116,4 @@ Authorization: Bearer <access_token>
 ## Contact
 
 - **GitHub**: [MohamedTarek20](https://github.com/MohamedTarek20)
-- **LinkedIn**: [Mohamed Tarek](https://www.linkedin.com/in/mohamedtarek20)
+- **LinkedIn**: [Mohamed Tarek Abdelhady](https://www.linkedin.com/in/mohamedtarek20)

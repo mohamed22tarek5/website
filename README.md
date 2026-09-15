@@ -1,16 +1,16 @@
-# Mohamed Tarek Portfolio
+# Mohamed Tarek Abdelhady Portfolio
 
 
-**Live Site:** [website-mohamed.vercel.app](https://website-mohamed.vercel.app/)
+**Live Site:** [mohamed-tarek-abdelhady.vercel.app](https://mohamed-tarek-abdelhady.vercel.app/)
 
 ---
 
 ## About Me
 
-I am a **Communications & Electronics Engineer** who builds integrated hardware–software solutions. I work with Arduino, embedded systems, PCB design, and full‑stack web technologies.
+I am a **Communication & Electronics Engineer** who builds integrated hardware–software solutions. I work with Arduino, embedded systems, PCB design, and full‑stack web technologies.
 
-- **Name:** Mohamed Tarek
-- **Title:** Communications & Electronics Engineer
+- **Name:** Mohamed Tarek Abdelhady
+- **Title:** Communication & Electronics Engineer
 - **Location:** Kafr el Sheikh, Egypt
 - **Phone:** +20 109 063 7406
 - **Email:** mohammed.tarek.abdelhady.ali@gmail.com
@@ -144,4 +144,4 @@ Every page includes:
 
 ## License
 
-© 2025 Mohamed Tarek. All Rights Reserved.
+© 2025 Mohamed Tarek Abdelhady. All Rights Reserved.

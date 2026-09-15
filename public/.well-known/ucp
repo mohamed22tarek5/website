@@ -5,18 +5,18 @@
     {
       "name": "portfolio",
       "description": "Mohamed Tarek Portfolio — engineering projects, tools, and calculators",
-      "base_url": "https://website-mohamed.vercel.app",
+      "base_url": "https://mohamed-tarek-abdelhady.vercel.app",
       "endpoints": {
-        "catalog": "https://website-mohamed.vercel.app/.well-known/ai-catalog.json",
-        "mcp": "https://website-mohamed.vercel.app/.well-known/mcp/server-card.json"
+        "catalog": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/ai-catalog.json",
+        "mcp": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/mcp/server-card.json"
       }
     },
     {
       "name": "calculators",
       "description": "Electronics and engineering calculators",
-      "base_url": "https://website-mohamed.vercel.app/sites/",
+      "base_url": "https://mohamed-tarek-abdelhady.vercel.app/sites/",
       "endpoints": {
-        "skills": "https://website-mohamed.vercel.app/.well-known/agent-skills/index.json"
+        "skills": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/agent-skills/index.json"
       }
     }
   ],
@@ -26,9 +26,9 @@
     "agent_registration": true
   },
   "endpoints": {
-    "catalog": "https://website-mohamed.vercel.app/.well-known/ai-catalog.json",
-    "mcp": "https://website-mohamed.vercel.app/.well-known/mcp/server-card.json",
-    "auth": "https://website-mohamed.vercel.app/auth.md",
-    "ucp": "https://website-mohamed.vercel.app/.well-known/ucp"
+    "catalog": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/ai-catalog.json",
+    "mcp": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/mcp/server-card.json",
+    "auth": "https://mohamed-tarek-abdelhady.vercel.app/auth.md",
+    "ucp": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/ucp"
   }
 }

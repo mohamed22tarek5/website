@@ -1,17 +1,17 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Mohamed Tarek Portfolio API",
+    "title": "Mohamed Tarek Abdelhady Portfolio API",
     "description": "Engineering tools, calculators, and portfolio API with x402 payment discovery.",
     "version": "1.0.0",
     "contact": {
-      "name": "Mohamed Tarek",
-      "url": "https://website-mohamed.vercel.app/"
+      "name": "Mohamed Tarek Abdelhady",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/"
     }
   },
   "servers": [
     {
-      "url": "https://website-mohamed.vercel.app",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app",
       "description": "Production"
     }
   ],
@@ -27,7 +27,7 @@
             "scheme": "exact",
             "network": "base-sepolia",
             "maxAmountRequired": "1000",
-            "resource": "https://website-mohamed.vercel.app/api/x402",
+            "resource": "https://mohamed-tarek-abdelhady.vercel.app/api/x402",
             "description": "Premium API resource access",
             "mimeType": "application/json",
             "payTo": "0x0000000000000000000000000000000000000000"

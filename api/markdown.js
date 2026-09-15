@@ -64,7 +64,7 @@ function estimateTokens(text) {
 
 /* Embedded homepage markdown — guarantees a useful text/markdown
  * response even if public/ files are not bundled with the function. */
-const HOMEPAGE_MD = `# Mohamed Tarek - Portfolio
+const HOMEPAGE_MD = `# Mohamed Tarek Abdelhady - Portfolio
 
 Electronics & Communication Engineering student passionate about embedded systems, PCB design, and full-stack development.
 
@@ -95,7 +95,7 @@ I'm a passionate engineering student focusing on:
 ## Contact
 
 - GitHub: [MohamedTarek20](https://github.com/MohamedTarek20)
-- LinkedIn: [Mohamed Tarek](https://www.linkedin.com/in/mohamedtarek20)
+- LinkedIn: [Mohamed Tarek Abdelhady](https://www.linkedin.com/in/mohamedtarek20)
 `;
 
 function normalizePath(raw) {
@@ -166,7 +166,7 @@ export default function handler(req, res) {
     return res.status(200).json({
       message: 'Markdown for Agents is supported',
       usage: 'Set Accept: text/markdown header to get markdown version',
-      example: 'curl -H "Accept: text/markdown" https://website-mohamed.vercel.app/'
+      example: 'curl -H "Accept: text/markdown" https://mohamed-tarek-abdelhady.vercel.app/'
     });
   }
 
@@ -221,9 +221,9 @@ export default function handler(req, res) {
     .replace(/[-_]/g, ' ')
     .replace(/\b\w/g, (c) => c.toUpperCase()) || 'Home';
 
-  const siteBase = `https://${req.headers.host || 'website-mohamed.vercel.app'}`;
+  const siteBase = `https://${req.headers.host || 'mohamed-tarek-abdelhady.vercel.app'}`;
   const pageUrl = `${siteBase}${normalized === '/index' ? '/' : normalized}`;
-  const fallbackMd = `# ${title}\n\nThis page is part of Mohamed Tarek's portfolio.\n\nVisit [${title}](${pageUrl}) for the full experience.\n`;
+  const fallbackMd = `# ${title}\n\nThis page is part of Mohamed Tarek Abdelhady's portfolio.\n\nVisit [${title}](${pageUrl}) for the full experience.\n`;
 
   return sendMarkdown(res, fallbackMd);
 }

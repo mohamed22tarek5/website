@@ -1,17 +1,17 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Mohamed Tarek Portfolio API",
+    "title": "Mohamed Tarek Abdelhady Portfolio API",
     "description": "Engineering tools, calculators, and portfolio API with MPP payment discovery.",
     "version": "1.0.0",
     "contact": {
-      "name": "Mohamed Tarek",
-      "url": "https://mohamedtarek.vercel.app/"
+      "name": "Mohamed Tarek Abdelhady",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/"
     }
   },
   "servers": [
     {
-      "url": "https://mohamedtarek.vercel.app",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app",
       "description": "Production"
     }
   ],

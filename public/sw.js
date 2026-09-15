@@ -1,6 +1,6 @@
 // ===============================
 //  Service Worker - sw.js
-//  Author: Mohamed Tarek
+//  Author: Mohamed Tarek Abdelhady
 //  Version: v1.0.3
 // ===============================
 

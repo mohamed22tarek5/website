@@ -1,4 +1,4 @@
-# Mohamed Tarek - Portfolio
+# Mohamed Tarek Abdelhady - Portfolio
 
 Electronics & Communication Engineering student passionate about embedded systems, PCB design, and full-stack development.
 
@@ -29,4 +29,4 @@ I'm a passionate engineering student focusing on:
 ## Contact
 
 - GitHub: [MohamedTarek20](https://github.com/MohamedTarek20)
-- LinkedIn: [Mohamed Tarek](https://www.linkedin.com/in/mohamedtarek20)
+- LinkedIn: [Mohamed Tarek Abdelhady](https://www.linkedin.com/in/mohamedtarek20)

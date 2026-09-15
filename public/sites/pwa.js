@@ -1,7 +1,7 @@
 // ===============================
 //  PWA Manager - pwa.js
 //  Premium PWA installation and management
-//  Author: Mohamed Tarek
+//  Author: Mohamed Tarek Abdelhady
 // ===============================
 
 class PWAManager {

@@ -1,6 +1,6 @@
 /* ============================================
    COMMON.JS — Shared JavaScript
-   Mohamed Tarek Portfolio
+   Mohamed Tarek Abdelhady Portfolio
    
    Extract shared functionality to eliminate
    code duplication across pages.
