@@ -190,25 +190,30 @@
       ]
     }
   ],
+  "functions": {
+    "api/markdown.js": {
+      "includeFiles": "public/**"
+    }
+  },
   "rewrites": [
     {
       "source": "/",
-      "has": [{ "type": "header", "key": "Accept", "value": ".*text/markdown.*" }],
+      "has": [{ "type": "header", "key": "accept", "value": { "re": "text/markdown" } }],
       "destination": "/api/markdown?path=/"
     },
     {
       "source": "/index.html",
-      "has": [{ "type": "header", "key": "Accept", "value": ".*text/markdown.*" }],
+      "has": [{ "type": "header", "key": "accept", "value": { "re": "text/markdown" } }],
       "destination": "/api/markdown?path=/"
     },
     {
       "source": "/sites/:slug.html",
-      "has": [{ "type": "header", "key": "Accept", "value": ".*text/markdown.*" }],
+      "has": [{ "type": "header", "key": "accept", "value": { "re": "text/markdown" } }],
       "destination": "/api/markdown?path=/sites/:slug.html"
     },
     {
       "source": "/:slug.html",
-      "has": [{ "type": "header", "key": "Accept", "value": ".*text/markdown.*" }],
+      "has": [{ "type": "header", "key": "accept", "value": { "re": "text/markdown" } }],
       "destination": "/api/markdown?path=/:slug.html"
     },
     {
