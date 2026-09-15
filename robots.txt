@@ -1,6 +1,7 @@
 # robots.txt
-# Mohamed Tarek Abdelhady Portfolio
-# https://mohamed-tarek-abdelhady.vercel.app
+# Mohamed Tarek Abdelhady — Communication Engineer
+# Primary (canonical): https://mohamed-tarek-abdelhady.vercel.app
+# Secondary (same deployment): https://website-mohamed.vercel.app
 
 User-agent: *
 Allow: /

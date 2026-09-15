@@ -12,7 +12,11 @@
   "servers": [
     {
       "url": "https://mohamed-tarek-abdelhady.vercel.app",
-      "description": "Production"
+      "description": "Production (primary canonical)"
+    },
+    {
+      "url": "https://website-mohamed.vercel.app",
+      "description": "Production (secondary domain — same deployment)"
     }
   ],
   "paths": {

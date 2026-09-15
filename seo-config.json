@@ -1,6 +1,9 @@
 {
   "PRODUCT_NAME": "Mohamed Tarek Abdelhady Portfolio",
+  "SITE_NAME": "Mohamed Tarek Abdelhady — Communication Engineer",
   "SITE_URL": "https://mohamed-tarek-abdelhady.vercel.app",
+  "PRIMARY_SITE_URL": "https://mohamed-tarek-abdelhady.vercel.app",
+  "SECONDARY_SITE_URL": "https://website-mohamed.vercel.app",
   "ONE_LINER": "Communication & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.",
   "CATEGORY_TERMS": ["embedded systems engineer", "PCB design services", "Arduino development", "IoT solutions", "electronics engineer Egypt", "hardware software integration"],
   "COMPETITOR_COMPARE": "none",
