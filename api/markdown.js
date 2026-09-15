@@ -5,7 +5,8 @@
  * Per https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/
  * and https://llmstxt.org/
  *
- * Vercel rewrites (see vercel.json) route:
+ * Routing Middleware (see /middleware.js) rewrites page requests
+ * carrying `Accept: text/markdown` here:
  *   GET / with Accept: text/markdown -> /api/markdown?path=/
  *   GET /index.html with Accept: text/markdown -> /api/markdown?path=/
  *   GET /:slug.html with Accept: text/markdown -> /api/markdown?path=/:slug.html

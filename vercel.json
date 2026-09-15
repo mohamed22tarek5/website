@@ -197,26 +197,6 @@
   },
   "rewrites": [
     {
-      "source": "/",
-      "has": [{ "type": "header", "key": "accept", "value": { "re": "text/markdown" } }],
-      "destination": "/api/markdown?path=/"
-    },
-    {
-      "source": "/index.html",
-      "has": [{ "type": "header", "key": "accept", "value": { "re": "text/markdown" } }],
-      "destination": "/api/markdown?path=/"
-    },
-    {
-      "source": "/sites/:slug.html",
-      "has": [{ "type": "header", "key": "accept", "value": { "re": "text/markdown" } }],
-      "destination": "/api/markdown?path=/sites/:slug.html"
-    },
-    {
-      "source": "/:slug.html",
-      "has": [{ "type": "header", "key": "accept", "value": { "re": "text/markdown" } }],
-      "destination": "/api/markdown?path=/:slug.html"
-    },
-    {
       "source": "/.well-known/api-catalog",
       "destination": "/.well-known/api-catalog/index.json"
     },
