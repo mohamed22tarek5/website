@@ -3088,24 +3088,10 @@
       }
 
       /* ----------------------------------------
-         SERVICE WORKER
+         SERVICE WORKER (registered once by pwa.js — see below)
          ---------------------------------------- */
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('sw.js')
-            .then(reg => {
-              reg.addEventListener('updatefound', () => {
-                const newWorker = reg.installing;
-                newWorker.addEventListener('statechange', () => {
-                  if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                    showUpdateNotification();
-                  }
-                });
-              });
-            })
-            .catch(err => console.error('SW registration failed:', err));
-        });
-      }
+      // Registration lives in pwa.js so every page registers the same
+      // worker exactly once. Kept here as a no-op note on purpose.
 
       function showUpdateNotification() {
         const el = document.createElement('div');

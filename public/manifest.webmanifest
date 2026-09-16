@@ -16,9 +16,8 @@
   "screenshots": [
     {
       "src": "photo.jpg",
-      "sizes": "1920x1080",
+      "sizes": "2053x2046",
       "type": "image/jpeg",
-      "form_factor": "wide",
       "label": "Mohamed Tarek Abdelhady Portfolio"
     }
   ],

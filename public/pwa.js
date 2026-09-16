@@ -8,6 +8,7 @@ class PWAManager {
   constructor() {
     this.deferredPrompt = null;
     this.stylesInjected = false;
+    this.isIOSDevice = this.detectIOS();
     this.init();
   }
 
@@ -16,6 +17,10 @@ class PWAManager {
     this.createInstallButton();
     this.registerServiceWorker();
     this.setupEventListeners();
+    // iOS Safari has no install prompt event — offer manual steps instead.
+    if (this.isIOSDevice && !this.isStandalone()) {
+      this.showInstallButton();
+    }
   }
 
   injectStyles() {
@@ -166,6 +171,44 @@ class PWAManager {
       .pwa-toast.warning { border-left: 3px solid #f59e0b; }
       .pwa-toast.error { border-left: 3px solid #ef4444; }
       .pwa-toast.info { border-left: 3px solid #3b82f6; }
+      .pwa-ios-install {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10002;
+        padding: 1.5rem;
+      }
+      .ios-install-card {
+        background: #161b2e;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 1.5rem;
+        max-width: 320px;
+        color: #f1f5f9;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      }
+      .ios-install-card p { font-size: 1rem; margin-bottom: 0.75rem; }
+      .ios-install-card ol {
+        margin: 0 0 1rem 1.25rem;
+        font-size: 0.875rem;
+        line-height: 1.7;
+        color: #94a3b8;
+      }
+      .ios-install-card .dismiss-btn {
+        padding: 0.5rem 1.25rem;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        color: white;
+        border: none;
+        border-radius: 9999px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+      }
       @media (prefers-reduced-motion: reduce) {
         .pwa-install-btn, .pwa-update-notification, .network-status, .pwa-toast {
           transition: none;
@@ -256,11 +299,43 @@ class PWAManager {
   }
 
   async installApp() {
+    // iOS has no beforeinstallprompt — guide the user instead.
+    if (this.isIOSDevice) {
+      this.showIOSInstallInstructions();
+      return;
+    }
     if (!this.deferredPrompt) return;
     this.deferredPrompt.prompt();
     const { outcome } = await this.deferredPrompt.userChoice;
     this.deferredPrompt = null;
     this.hideInstallButton();
+  }
+
+  detectIOS() {
+    const ua = navigator.userAgent || '';
+    if (/iphone|ipad|ipod/i.test(ua)) return true;
+    // iPadOS 13+ reports as MacIntel with touch support.
+    return navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+  }
+
+  showIOSInstallInstructions() {
+    if (document.querySelector('.pwa-ios-install')) return;
+    const el = document.createElement('div');
+    el.className = 'pwa-ios-install';
+    el.innerHTML = `
+      <div class="ios-install-card" role="dialog" aria-label="How to install this app">
+        <p><strong>Install this app</strong></p>
+        <ol>
+          <li>Tap the <strong>Share</strong> button in Safari</li>
+          <li>Choose <strong>Add to Home Screen</strong></li>
+          <li>Tap <strong>Add</strong></li>
+        </ol>
+        <button class="dismiss-btn">Got it</button>
+      </div>
+    `;
+    el.querySelector('.dismiss-btn').addEventListener('click', () => el.remove());
+    el.addEventListener('click', (e) => { if (e.target === el) el.remove(); });
+    document.body.appendChild(el);
   }
 
   showUpdateNotification() {
