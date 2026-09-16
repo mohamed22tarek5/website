@@ -121,7 +121,7 @@
        RESET & BASE
        ============================================ */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; overflow-x: hidden; overflow-x: clip; }
 
     body {
       font-family: var(--font-sans);
@@ -311,7 +311,7 @@
       .menu-toggle { display: flex; }
       .nav {
         position: fixed;
-        top: 0; right: -100%;
+        top: 0; right: 0;
         width: min(320px, 85vw);
         height: 100vh;
         background: var(--color-bg-secondary);
@@ -320,10 +320,12 @@
         justify-content: center;
         padding: 3rem;
         gap: 0.25rem;
-        transition: right var(--transition-slow);
+        transform: translateX(105%);
+        visibility: hidden;
+        transition: transform var(--transition-slow), visibility var(--transition-slow);
         border-left: 1px solid var(--color-border);
       }
-      .nav.active { right: 0; }
+      .nav.active { transform: none; visibility: visible; }
       .nav-link { font-size: 1.125rem; width: 100%; padding: 1rem; }
       .nav-cta { margin-left: 0; margin-top: 1rem; width: 100%; text-align: center; display: block; padding: 1rem; }
     }
