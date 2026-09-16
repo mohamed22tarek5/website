@@ -110,7 +110,7 @@
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; overflow-x: hidden; overflow-x: clip; }
     body { font-family: var(--font-sans); background: var(--color-bg-primary); color: var(--color-text-primary); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; transition: background var(--transition-slow), color var(--transition-slow); }
     img { max-width: 100%; height: auto; display: block; }
     a { text-decoration: none; color: inherit; transition: color var(--transition-fast); }
@@ -146,8 +146,8 @@
     .mobile-overlay.active { opacity: 1; pointer-events: auto; }
     @media (max-width: 768px) {
       .menu-toggle { display: flex; }
-      .nav { position: fixed; top: 0; right: -100%; width: min(320px, 85vw); height: 100vh; background: var(--color-bg-secondary); flex-direction: column; align-items: flex-start; justify-content: center; padding: 3rem; gap: 0.25rem; transition: right var(--transition-slow); border-left: 1px solid var(--color-border); }
-      .nav.active { right: 0; }
+      .nav { position: fixed; top: 0; right: 0; width: min(320px, 85vw); height: 100vh; background: var(--color-bg-secondary); flex-direction: column; align-items: flex-start; justify-content: center; padding: 3rem; gap: 0.25rem; transform: translateX(105%); visibility: hidden; transition: transform var(--transition-slow), visibility var(--transition-slow); border-left: 1px solid var(--color-border); }
+      .nav.active { transform: none; visibility: visible; }
       .nav-link { font-size: 1.125rem; width: 100%; padding: 1rem; }
       .nav-cta { margin-left: 0; margin-top: 1rem; width: 100%; text-align: center; display: block; padding: 1rem; }
     }
@@ -381,7 +381,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; <span id="current-year">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved.</p>
+        <p>&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved.</p>
       </div>
     </div>
   </footer>
@@ -394,14 +394,14 @@
     'use strict';
 
     const socialMediaData = [
-      { id:'facebook', name:'Facebook', icon:'fab fa-facebook-f', color:'#1877f2', url:'https://www.facebook.com/mohammed.tarek.5249349', description:'Connect with me personally and see my casual updates, life moments, and personal projects.', stats:{Followers:'500+',Posts:'100+',Engagement:'High'}, btnText:'Visit Profile', btnBg:'#1877f2', btnShadow:'rgba(24,119,242,0.3)' },
+      { id:'facebook', name:'Facebook', icon:'fab fa-facebook-f', color:'#1877f2', url:'https://www.facebook.com/mohammed.tarek.2252003', description:'Connect with me personally and see my casual updates, life moments, and personal projects.', stats:{Followers:'500+',Posts:'100+',Engagement:'High'}, btnText:'Visit Profile', btnBg:'#1877f2', btnShadow:'rgba(24,119,242,0.3)' },
       { id:'instagram', name:'Instagram', icon:'fab fa-instagram', color:'#e4405f', url:'https://instagram.com/_m7md_tarek_?igshid=YmMyMTA2M2Y=', description:'Follow my daily life, creative projects, and behind-the-scenes content.', stats:{Followers:'300+',Posts:'150+',Engagement:'Very High'}, btnText:'Follow Me', btnBg:'#e4405f', btnShadow:'rgba(228,64,95,0.3)' },
       { id:'whatsapp', name:'WhatsApp', icon:'fab fa-whatsapp', color:'#25d366', url:'https://wa.me/+201090637406', description:'Message me directly for quick conversations, project discussions, or technical queries.', stats:{Type:'Direct Chat',Response:'Within hours',Status:'Available'}, btnText:'Chat Now', btnBg:'#25d366', btnShadow:'rgba(37,211,102,0.3)' },
       { id:'linkedin', name:'LinkedIn', icon:'fab fa-linkedin-in', color:'#0a66c2', url:'https://www.linkedin.com/in/mohamedtarek225', description:'Connect professionally and view my career journey, technical skills, and achievements.', stats:{Connections:'500+',Endorsements:'50+',Recommendations:'10+'}, btnText:'Connect', btnBg:'#0a66c2', btnShadow:'rgba(10,102,194,0.3)' },
       { id:'twitter', name:'Twitter/X', icon:'fab fa-x-twitter', color:'#1da1f2', url:'https://twitter.com/m7mdtarek225?t=_Sw1B7eTRoajvKqqM3BsNA&s=09', description:'Follow my thoughts, quick tech updates, and industry insights.', stats:{Followers:'200+',Tweets:'50+',Engagement:'Active'}, btnText:'Follow Me', btnBg:'#1da1f2', btnShadow:'rgba(29,161,242,0.3)' },
       { id:'github', name:'GitHub', icon:'fab fa-github', color:'#f0f6fc', url:'https://github.com/mohamed22tarek5', description:'Explore my coding projects, open-source contributions, and technical repositories.', stats:{Repos:'30+',Stars:'50+',Contributions:'Active'}, btnText:'View Profile', btnBg:'#f0f6fc', btnShadow:'rgba(240,246,252,0.1)', btnColor:'#0f172a' },
       { id:'linktree', name:'All My Accounts', icon:'fas fa-link', color:'#39e09b', url:'https://linktr.ee/m7mdtarek22', description:'One convenient link to access all my social media profiles.', stats:{Platforms:'8+',Visits:'1000+',Convenience:'All-in-One'}, btnText:'Visit Linktree', btnBg:'#39e09b', btnShadow:'rgba(57,224,155,0.3)' },
-      { id:'skoon', name:'Skoon Team', icon:'fas fa-users', color:'#ff6b6b', url:'https://linktr.ee/skoon_team', description:'Check out our team projects, collaborations, and innovative solutions.', stats:{Members:'5+',Projects:'20+',Status:'Active'}, btnText:'Visit Team', btnBg:'#ff6b6b', btnShadow:'rgba(255,107,107,0.3)' }
+      { id:'tiktok', name:'TikTok', icon:'fab fa-tiktok', color:'#fe2c55', url:'https://www.tiktok.com/@m7md22tarek', description:'Watch my short videos on engineering projects, tech insights, and behind-the-scenes content.', stats:{Followers:'500+',Videos:'50+',Engagement:'Active'}, btnText:'Follow Me', btnBg:'#fe2c55', btnShadow:'rgba(254,44,85,0.3)' }
     ];
 
     // Loader
@@ -463,6 +463,18 @@
       applyTheme(current === 'dark' ? 'light' : 'dark');
     });
 
+    // Scroll reveal (same behavior as About page)
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
     // Render social cards
     const grid = document.getElementById('social-grid');
     socialMediaData.forEach((p, i) => {
@@ -488,6 +500,7 @@
         </a>
       `;
       grid.appendChild(card);
+      revealObserver.observe(card);
     });
 
     // QR code
@@ -520,7 +533,7 @@
     }, { threshold: 0.5 });
     counterObserver.observe(counterEl);
 
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
   })();
   </script>
   <script src="pwa.js"></script>
