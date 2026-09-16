@@ -61,10 +61,12 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
 
   <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -2105,7 +2107,7 @@
         <div class="hero-visual reveal reveal-delay-2">
           <div class="hero-image-wrapper">
             <div class="hero-image-ring" aria-hidden="true"></div>
-            <img src="photo.jpg" alt="Mohamed Tarek Abdelhady - Communication Engineer" class="hero-image" width="320" height="320" loading="eager">
+            <img src="photo.jpg" alt="Mohamed Tarek Abdelhady - Communication Engineer" class="hero-image" width="320" height="320" loading="eager" fetchpriority="high" decoding="async">
             <div class="hero-floating-card" aria-hidden="true">
               <i class="fas fa-microchip"></i>
               <span>Embedded Systems</span>
@@ -2366,7 +2368,7 @@
               <img src="Project/2.png" alt="Personal Portfolio Website" loading="lazy" width="400" height="250">
               <div class="project-overlay">
                 <div class="project-overlay-actions">
-                  <a href="index.html" class="project-overlay-btn">
+                  <a href="/" class="project-overlay-btn">
                     <i class="fas fa-external-link-alt"></i> Live
                   </a>
                 </div>
@@ -3205,6 +3207,6 @@
 
     })();
   </script>
-  <script src="pwa.js"></script>
+  <script src="pwa.js" defer></script>
 </body>
 </html>

@@ -192,7 +192,7 @@
 
   <!-- Sites - Dashboard -->
   <url>
-    <loc>https://mohamed-tarek-abdelhady.vercel.app/sites/</loc>
+    <loc>https://mohamed-tarek-abdelhady.vercel.app/sites</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

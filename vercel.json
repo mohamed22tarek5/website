@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "outputDirectory": "public",
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false,
   "headers": [
     {
@@ -41,7 +41,8 @@
           "key": "Link",
           "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </Mohamed%20-%20Services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
         },
-        { "key": "Vary", "value": "Accept" }
+        { "key": "Vary", "value": "Accept" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
       ]
     },
     {
@@ -51,7 +52,8 @@
           "key": "Link",
           "value": "</.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\""
         },
-        { "key": "Vary", "value": "Accept" }
+        { "key": "Vary", "value": "Accept" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
       ]
     },
     {
@@ -210,6 +212,26 @@
     }
   },
   "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "header", "key": "Accept", "value": ".*text/markdown.*" }],
+      "destination": "/api/markdown?path=/"
+    },
+    {
+      "source": "/index.html",
+      "has": [{ "type": "header", "key": "Accept", "value": ".*text/markdown.*" }],
+      "destination": "/api/markdown?path=/"
+    },
+    {
+      "source": "/sites/:slug.html",
+      "has": [{ "type": "header", "key": "Accept", "value": ".*text/markdown.*" }],
+      "destination": "/api/markdown?path=/sites/:slug.html"
+    },
+    {
+      "source": "/:slug.html",
+      "has": [{ "type": "header", "key": "Accept", "value": ".*text/markdown.*" }],
+      "destination": "/api/markdown?path=/:slug.html"
+    },
     {
       "source": "/.well-known/api-catalog",
       "destination": "/.well-known/api-catalog/index.json"
