@@ -273,8 +273,10 @@
      SERVICE WORKER
      ---------------------------------------- */
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
+    // Register ASAP instead of on window load (see pwa.js): until the
+    // worker is active, Chrome mobile only offers a browser shortcut
+    // instead of a full app install.
+    navigator.serviceWorker.register('sw.js', { scope: '/' })
         .then(reg => {
           reg.addEventListener('updatefound', () => {
             const newWorker = reg.installing;
@@ -286,7 +288,6 @@
           });
         })
         .catch(err => console.error('SW registration failed:', err));
-    });
   }
 
   function showUpdateNotification() {

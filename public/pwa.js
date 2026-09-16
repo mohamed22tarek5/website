@@ -235,16 +235,20 @@ class PWAManager {
   }
 
   registerServiceWorker() {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', async () => {
-        try {
-          const registration = await navigator.serviceWorker.register('/sw.js');
-          this.setupUpdateListener(registration);
-        } catch (err) {
-          console.log('SW registration failed:', err);
-        }
-      });
-    }
+    if (!('serviceWorker' in navigator)) return;
+    // Register ASAP instead of on window load: on slow mobile connections
+    // load fires seconds late, and until the worker is active Chrome only
+    // offers "Add to Home screen" (a browser shortcut) instead of a full
+    // app install. Deferred scripts already run right after parsing.
+    const register = async () => {
+      try {
+        const registration = await navigator.serviceWorker.register('/sw.js', { scope: '/' });
+        this.setupUpdateListener(registration);
+      } catch (err) {
+        console.log('SW registration failed:', err);
+      }
+    };
+    register();
   }
 
   setupUpdateListener(registration) {
