@@ -1,10 +1,10 @@
 // ===============================
 //  Service Worker - sw.js
 //  Author: Mohamed Tarek Abdelhady
-//  Version: v1.0.3
+//  Version: v1.0.5
 // ===============================
 
-const VERSION = 'v1.0.4';
+const VERSION = 'v1.0.5';
 const STATIC_CACHE = `static-${VERSION}`;
 const HTML_CACHE = `html-${VERSION}`;
 const OFFLINE_URL = './offline.html';
@@ -78,6 +78,10 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(req.url);
 
   if (req.method !== 'GET' || url.protocol === 'chrome-extension:') return;
+
+  // PDFs: always go to network, never serve from cache. A cached PDF can
+  // carry stale framing/security headers and break the embedded CV viewer.
+  if (url.pathname.toLowerCase().endsWith('.pdf')) return;
 
   if (req.mode === 'navigate' || acceptHeader.includes('text/html')) {
     event.respondWith(networkFirst(req));
