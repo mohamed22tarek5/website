@@ -1155,20 +1155,28 @@
           <div class="pdf-error hidden" id="pdfError">
             <i class="fas fa-exclamation-triangle"></i>
             <h3>Unable to load PDF</h3>
-            <p>The CV PDF could not be loaded. Please download it instead.</p>
-            <a href="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
+            <p>The CV PDF could not be loaded inline. Please open or download it instead.</p>
+            <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <i class="fas fa-arrow-up-right-from-square"></i> Open CV
+            </a>
+            <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
               <i class="fas fa-download"></i> Download CV
             </a>
           </div>
 
           <!-- PDF Frame -->
           <iframe
-            src="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf#toolbar=0&navpanes=0&scrollbar=0"
+            src="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf#toolbar=0&navpanes=0&scrollbar=0"
             class="pdf-frame"
             title="Mohamed Tarek Abdelhady's CV PDF Viewer"
             id="pdfViewer"
             loading="lazy"
-          ></iframe>
+          >
+            <p>Your browser cannot display the embedded PDF.
+              <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer">Open the CV</a>
+              or <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf">download it</a>.
+            </p>
+          </iframe>
 
           <!-- Controls -->
           <div class="pdf-controls" id="pdfControls">
@@ -1199,10 +1207,10 @@
     <section class="download-section">
       <div class="container">
         <div class="download-actions reveal">
-          <a href="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
+          <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
             <i class="fas fa-download"></i> Download Full CV
           </a>
-          <a href="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
             <i class="fas fa-arrow-up-right-from-square"></i> Open in New Tab
           </a>
           <button id="printCv" class="btn btn-secondary">
@@ -1424,6 +1432,7 @@
       const pdfViewer = document.getElementById('pdfViewer');
       const pdfLoading = document.getElementById('pdfLoading');
       const pdfError = document.getElementById('pdfError');
+      const PDF_URL = '/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf';
 
       if (pdfViewer) {
         pdfViewer.addEventListener('load', () => {
@@ -1432,6 +1441,21 @@
         });
 
         pdfViewer.addEventListener('error', () => {
+          pdfLoading.classList.add('hidden');
+          pdfError.classList.remove('hidden');
+        });
+
+        // Verify the PDF asset exists. If the file is missing (404/network
+        // error), show the Open/Download fallback instead of a grey frame.
+        // NOTE: this cannot detect X-Frame-Options/CSP framing blocks
+        // (blocked frames still fire `load`), so headers must allow
+        // same-origin framing — see vercel.json.
+        fetch(PDF_URL, { method: 'HEAD' }).then((res) => {
+          if (!res.ok) {
+            pdfLoading.classList.add('hidden');
+            pdfError.classList.remove('hidden');
+          }
+        }).catch(() => {
           pdfLoading.classList.add('hidden');
           pdfError.classList.remove('hidden');
         });
@@ -1480,7 +1504,7 @@
 
       // Print
       document.getElementById('printCv')?.addEventListener('click', () => {
-        window.open('Mohamed_Tarek_Abdelhady_Engineer_CV.pdf', '_blank')?.print();
+        window.open('/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf', '_blank')?.print();
       });
 
       /* ----------------------------------------
