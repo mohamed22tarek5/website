@@ -122,6 +122,8 @@ html {
   scroll-padding-top: 80px;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -378,7 +380,7 @@ section {
   .nav {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
     width: min(320px, 85vw);
     height: 100vh;
     background: var(--color-bg-secondary);
@@ -387,12 +389,15 @@ section {
     justify-content: center;
     padding: var(--space-3xl);
     gap: var(--space-sm);
-    transition: right var(--transition-slow);
+    transform: translateX(105%);
+    visibility: hidden;
+    transition: transform var(--transition-slow), visibility var(--transition-slow);
     border-left: 1px solid var(--color-border);
   }
 
   .nav.active {
-    right: 0;
+    transform: none;
+    visibility: visible;
   }
 
   .nav-link {
