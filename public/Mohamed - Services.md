@@ -19,14 +19,21 @@ Electronics and communication engineering consulting.
 ## Engineering Tools
 
 Free online tools for electronics calculations:
-- Ohm's Law Calculator
-- Resistor Color Code Calculator
-- LED Resistor Calculator
-- Voltage Divider Calculator
-- Capacitor Code Calculator
+
+- [Ohm's Law Calculator](/sites/ohms-law-calculator.html)
+- [Resistor Calculator](/sites/resistor-calculator.html)
+- [Resistor for LED](/sites/resistor-for-led.html)
+- [Voltage Divider Calculator](/sites/voltage-divider-calculator.html)
+- [Capacitor Calculator](/sites/capacitor-calculator.html)
+- [555 Timer Calculator](/sites/555-timer-calculator.html)
+- [PCB Trace Width Calculator](/sites/pcb-trace-width-calculator.html)
 
 ## Contact
 
 For service inquiries, reach out via:
-- GitHub: [MohamedTarek20](https://github.com/MohamedTarek20)
-- LinkedIn: [Mohamed Tarek Abdelhady](https://www.linkedin.com/in/mohamedtarek20)
+
+- **Email**: mohammed.tarek.abdelhady.ali@gmail.com
+- **Phone**: +20 109 063 7406
+- **LinkedIn**: https://www.linkedin.com/in/mohamedtarek225
+- **GitHub**: https://github.com/mohamed22tarek5
+- **WhatsApp**: https://wa.me/+201090637406

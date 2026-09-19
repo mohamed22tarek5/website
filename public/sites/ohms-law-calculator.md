@@ -15,6 +15,6 @@ Enter any two known values and the calculator will determine the remaining value
 
 ## Related Tools
 
-- [Resistor Color Code Calculator](/sites/resistor-color-calculator.html)
-- [LED Resistor Calculator](/sites/led-resistor-calculator.html)
+- [Resistor Calculator](/sites/resistor-calculator.html)
+- [Resistor for LED](/sites/resistor-for-led.html)
 - [Voltage Divider Calculator](/sites/voltage-divider-calculator.html)

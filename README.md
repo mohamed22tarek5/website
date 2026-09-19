@@ -96,12 +96,13 @@ Shared PWA assets in `sites/`: `common.css`, `common.js`, `sw.js`, `pwa.js`, `ma
 
 ### 3. Agent-Ready API (`api/` + `.well-known/`)
 - `openapi.json` — Portfolio API spec (homepage + calculators + x402 premium)
-- `api/markdown.js` — Content negotiation: `Accept: text/markdown` → Markdown version of any page (Cloudflare Markdown-for-Agents / llmstxt.org pattern)
+- `api/markdown.js` — Content negotiation: `Accept: text/markdown` → Markdown version of any page (Cloudflare Markdown-for-Agents / llmstxt.org pattern). Responds `Content-Type: text/markdown; charset=utf-8` + `x-markdown-tokens`; HTML stays default. Sources: `public/*.md` + HTML→Markdown fallback
 - `api/x402.js` — x402 payment-gated premium resource (Base Sepolia)
 - `api/agent/*` — Agent identity + claim endpoints
 - `api/oauth-*.js` — OAuth protected-resource + authorization-server discovery
 - `.well-known/agent-card.json`, `acp.json`, `mcp/server-card.json`, `api-catalog/`, `ai-catalog.json`, `agent-skills/`, `ucp`, `x402`, `http-message-signatures-directory`, `jwks.json`
 - `skills/engineering-calculators.md` — Skill definition for AI assistants (ohms-law, resistor-color-code, led-calculator)
+- `dns-aid.zone` — DNS-AID discovery records (`_index`/`_a2a`/`_mcp` under `_agents`, SVCB/HTTPS + `key65280`/`key65281`, DNSSEC required). **Not yet live:** `*.vercel.app` DNS can't host them — apply at a custom domain's provider, then enable DNSSEC
 
 ### 4. PWA Support
 - Offline support via `sw.js` service worker
