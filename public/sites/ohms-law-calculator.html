@@ -35,8 +35,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <script type="application/ld+json">
@@ -175,26 +175,7 @@
     }
     [data-theme="light"] .header.scrolled { background: rgba(248, 250, 252, 0.85); }
     .header .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
-
-    .logo { display: flex; align-items: center; gap: var(--space-sm); font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; }
-    .logo-icon {
-      width: 36px; height: 36px; background: var(--gradient-accent);
-      border-radius: var(--radius-sm); display: flex; align-items: center;
-      justify-content: center; color: white; font-size: 0.875rem; font-weight: 800;
-    }
-
-    .nav { display: flex; align-items: center; gap: var(--space-xs); }
-    .nav-link {
-      position: relative; padding: var(--space-sm) var(--space-md);
-      font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
-      border-radius: var(--radius-sm); transition: all var(--transition-fast);
-    }
     .nav-link:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
-
-    .menu-toggle {
-      display: none; flex-direction: column; gap: 5px; padding: var(--space-sm);
-      z-index: 1001; align-items: center; justify-content: center;
-    }
     .menu-toggle .bar {
       width: 22px; height: 2px; background: var(--color-text-primary);
       border-radius: 2px; transition: all var(--transition-base); transform-origin: center;
@@ -412,10 +393,6 @@
     .circuit-container { margin: var(--space-xl) 0; text-align: center; }
 
     .chart-container { height: 300px; margin-top: var(--space-xl); position: relative; }
-    .chart-title {
-      text-align: center; color: var(--color-accent);
-      margin-bottom: var(--space-lg); font-size: 1rem; font-weight: 600;
-    }
 
     .info-box {
       margin-top: var(--space-xl); padding: var(--space-xl);
@@ -432,21 +409,6 @@
       font-size: 0.875rem; color: var(--color-text-secondary);
     }
     .info-box li strong { color: var(--color-text-primary); }
-
-    .comparison-table {
-      width: 100%; border-collapse: collapse; margin-top: var(--space-lg);
-      background: var(--color-bg-card); border-radius: var(--radius-lg);
-      overflow: hidden; border: 1px solid var(--color-border);
-    }
-    .comparison-table th, .comparison-table td {
-      padding: var(--space-md) var(--space-lg); text-align: left;
-      border-bottom: 1px solid var(--color-border); font-size: 0.875rem;
-    }
-    .comparison-table th {
-      background: var(--color-bg-tertiary); color: var(--color-accent);
-      font-weight: 600; font-size: 0.8125rem; text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
     .comparison-table tr:last-child td { border-bottom: none; }
     .comparison-table tr:hover td { background: var(--color-accent-subtle); }
 
@@ -478,27 +440,8 @@
       margin: var(--space-md) 0; border-left: 3px solid var(--color-accent);
       color: var(--color-text-secondary);
     }
-
-    .back-to-top {
-      position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--color-bg-card); border: 1px solid var(--color-border);
-      border-radius: var(--radius-md); color: var(--color-text-secondary);
-      font-size: 1rem; z-index: 999; opacity: 0; visibility: hidden;
-      transform: translateY(12px); transition: all var(--transition-base);
-      box-shadow: var(--shadow-md);
-    }
     .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
     .back-to-top:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
-
-    .theme-toggle {
-      position: fixed; bottom: 32px; right: 90px; width: 48px; height: 48px;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--color-bg-card); border: 1px solid var(--color-border);
-      border-radius: var(--radius-md); color: var(--color-text-secondary);
-      font-size: 1rem; z-index: 999; transition: all var(--transition-base);
-      box-shadow: var(--shadow-md);
-    }
     .theme-toggle:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
 
     .toast {
@@ -516,20 +459,7 @@
       background: var(--color-bg-primary); border-top: 1px solid var(--color-border);
       padding: var(--space-3xl) 0 var(--space-xl);
     }
-    .footer-content {
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: var(--space-md);
-    }
-    .footer-social { display: flex; gap: var(--space-sm); }
-    .footer-social a {
-      width: 40px; height: 40px; display: flex; align-items: center;
-      justify-content: center; border-radius: var(--radius-md);
-      background: var(--color-bg-card); border: 1px solid var(--color-border);
-      color: var(--color-text-secondary); transition: all var(--transition-fast);
-    }
     .footer-social a:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
-    .footer-bottom { font-size: 0.875rem; color: var(--color-text-tertiary); }
-    .footer-bottom a { color: var(--color-accent); }
 
     .loader {
       position: fixed; inset: 0; background: var(--color-bg-primary);
@@ -594,7 +524,6 @@
 </header><div hidden aria-hidden="true"><button id="menuToggle" tabindex="-1"></button></div>
 <div hidden aria-hidden="true"><button id="navMenu" tabindex="-1"></button></div>
 
-
   <main id="main">
     <section class="page-hero" aria-label="Page header">
       <div class="page-hero-bg" aria-hidden="true">
@@ -633,7 +562,6 @@
             </div>
           </div>
 
-          <!-- Ohm's Law Tab -->
           <div class="tab-content active" id="basic-tab" role="tabpanel">
             <div class="calc-grid">
               <div class="calc-box">
@@ -778,7 +706,6 @@
             </div>
           </div>
 
-          <!-- Power Calculations Tab -->
           <div class="tab-content" id="power-tab" role="tabpanel">
             <div class="calc-grid">
               <div class="calc-box">
@@ -839,7 +766,6 @@
             </div>
           </div>
 
-          <!-- Circuit Analysis Tab -->
           <div class="tab-content" id="circuit-tab" role="tabpanel">
             <div class="calc-grid">
               <div class="calc-box">
@@ -921,7 +847,6 @@
             </div>
           </div>
 
-          <!-- Component Selection Tab -->
           <div class="tab-content" id="components-tab" role="tabpanel">
             <div class="calc-grid">
               <div class="calc-box">
@@ -972,7 +897,6 @@
             </div>
           </div>
 
-          <!-- Unit Converter Tab -->
           <div class="tab-content" id="converter-tab" role="tabpanel">
             <div class="calc-grid">
               <div class="calc-box">
@@ -1066,8 +990,6 @@
   </div>
 </footer>
 
-  
-  
   <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
 
   <script>

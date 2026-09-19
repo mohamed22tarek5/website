@@ -123,7 +123,6 @@
       margin-bottom: 1.5em;
     }
 
-    /* UI */
     .difficulty-select, .tutorial, .replay {
       top: 50%;
     }
@@ -212,7 +211,6 @@
       transform: translate(-50%,-50%);
     }
 
-    /* Animations */
     @keyframes fadeIn {
       from { opacity: 0 }
       to { opacity: 1 }
@@ -236,12 +234,12 @@
       }
     }
   </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <link rel="stylesheet" href="mta-chrome.css">
 </head>
 <body>
-<a class="mta-chip" href="../Mohamed%20-%20my-sites.html" aria-label="Back to all tools"><i class="fas fa-arrow-left"></i> All tools</a>
-  
+<a class="mta-chip" href="../Mohamed%20-%20my-sites.html" aria-label="Back to all tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg> All tools</a>
+
   <div class="difficulty-select">
     <h1>Select Difficulty</h1>
     <button type="button" data-difficulty="0" disabled>Easy</button>
@@ -302,7 +300,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
 
       class Game {
         constructor(args) {
-          // 0: easy, 1: medium (default), 2: hard, 3: brutal
           let d = args.difficulty;
           this.difficulty = d >= 0 && d <= 3 ? d : 1;
 
@@ -336,7 +333,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
             dotLines = 3;
 
           this.chunkSize = chunkSize;
-          // surface
           this.surfaceGeo = new THREE.PlaneBufferGeometry(chunkSize,chunkSize);
           this.surfaceMat = new THREE.MeshLambertMaterial({
             color: 0x575757
@@ -348,7 +344,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           this.surface.receiveShadow = true;
           scene.add(this.surface);
 
-          // shoulder lines
           let lineGeo = new THREE.PlaneBufferGeometry(lineWidth,chunkSize),
             lineMat = new THREE.MeshLambertMaterial({
               color: 0xffffff
@@ -364,7 +359,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           rightShoulder.position.set(chunkSize*0.375,0,0.01);
           this.surface.add(rightShoulder);
 
-          // dotted lines
           let dotLineGeo = new THREE.PlaneBufferGeometry(lineWidth,lineHeight),
             dotLineMat = new THREE.MeshLambertMaterial({
               color: 0xffffff
@@ -407,19 +401,17 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           this.crashed = false;
           this.deceleration = 0.01;
 
-          // 0: car, 1: truck, 2: tractor trailer
           let modelID = args.modelID;
 
           if (modelID === undefined)
             modelID = Math.round(Math.random() * 2)
 
-          // dimensions refer to hitbox
           switch (modelID) {
             case 1:
               this.width = 5;
               this.height = 5;
               this.depth = 10;
-              this.model = new Truck(this.color,this.x,this.z,this.name); 
+              this.model = new Truck(this.color,this.x,this.z,this.name);
               break;
             case 2:
               this.width = 5;
@@ -453,11 +445,9 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
         move() {
           let mesh = this.model.mesh;
 
-          // normal forward direction
           this.z -= this.speed;
           mesh.position.z = this.z;
 
-          // handle steering
           if (this.isSteering && !this.crashed) {
             if (this.steerDir == "left") {
               this.x -= this.steerSpeed;
@@ -472,7 +462,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
                 --this.steerAngle;
             }
 
-          // undo steering
           } else if (!this.crashed) {
             if (this.steerAngle > 0) {
               --this.steerAngle;
@@ -484,7 +473,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
             }
           }
 
-          // auto crash if out of bounds
           if (this.x < -this.xLimit || this.x > this.xLimit) {
             this.crashed = true;
             game.over = true;
@@ -509,14 +497,12 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
       }
       class Car {
         constructor(color,x,z,name) {
-          // I. Group
           this.mass = 3;
           this.mesh = new THREE.Object3D();
           this.mesh.name = name;
           this.mesh.position.set(x,2,z);
           scene.add(this.mesh);
 
-          // II. Body
           var carBodyBase = new THREE.Mesh(new THREE.BoxBufferGeometry(5,3,10)),
             cutFront = new THREE.Mesh(new THREE.BoxBufferGeometry(5,1,3)),
             cutBack = new THREE.Mesh(new THREE.BoxBufferGeometry(5,1,2)),
@@ -557,7 +543,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           carBody.castShadow = true;
           this.mesh.add(carBody);
 
-          // III. Wheels
           var wheelGeo = new THREE.CylinderBufferGeometry(1,1,0.5,24,24,false),
             wheelMat = new THREE.MeshLambertMaterial({
               color: 0x171717
@@ -579,7 +564,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
             this.mesh.add(w);
           }
 
-          // IV. Windows
           var windowMat = new THREE.MeshLambertMaterial({
               color: 0x171717
             }),
@@ -629,7 +613,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           backWindow.position.set(0,1.4,3.01);
           this.mesh.add(backWindow);
 
-          // V. Lights
           var lightGeo = new THREE.PlaneBufferGeometry(1,0.5),
             frontLightMat = new THREE.MeshLambertMaterial({
               color: 0xf1f1f1
@@ -661,14 +644,12 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
       }
       class Truck {
         constructor(color,x,z,name) {
-          // I. Group
           this.mass = 4;
           this.mesh = new THREE.Object3D();
           this.mesh.name = name;
           this.mesh.position.set(x,2.5,z);
           scene.add(this.mesh);
 
-          // II. Body
           var truckBodyBase = new THREE.Mesh(new THREE.BoxBufferGeometry(5,4,10)),
             cutFront = new THREE.Mesh(new THREE.BoxBufferGeometry(5,1.5,2.5)),
             cutBack = new THREE.Mesh(new THREE.BoxBufferGeometry(5,1.5,4.5)),
@@ -715,7 +696,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           truckBody.castShadow = true;
           this.mesh.add(truckBody);
 
-          // III. Wheels
           var wheelGeo = new THREE.CylinderBufferGeometry(1,1,0.5,24,24,false),
             wheelMat = new THREE.MeshLambertMaterial({
               color: 0x171717
@@ -737,7 +717,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
             this.mesh.add(w);
           }
 
-          // IV. Windows
           var windowMat = new THREE.MeshLambertMaterial({
               color: 0x171717
             }),
@@ -787,7 +766,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           backWindow.position.set(0,1.55,0.76);
           this.mesh.add(backWindow);
 
-          /// V. Lights
           var lightGeo = new THREE.PlaneBufferGeometry(0.75,1),
             frontLightMat = new THREE.MeshLambertMaterial({
               color: 0xf1f1f1
@@ -819,14 +797,12 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
       }
       class TractorTrailer {
         constructor(color,x,z,name) {
-          // I. Group
           this.mass = 12;
           this.mesh = new THREE.Object3D();
           this.mesh.name = name;
           this.mesh.position.set(x,4,z);
           scene.add(this.mesh);
 
-          // II. Cab
           var cabPt1Geo = new THREE.BoxBufferGeometry(5,4,5),
             cabPt1Mat = new THREE.MeshLambertMaterial({
               color: color
@@ -891,7 +867,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           rightLight.position.set(1.5,-1.5,-9.01);
           this.mesh.add(rightLight);
 
-          // III. Metal Cylinders
           var cabLeftCylinderGeo = new THREE.CylinderBufferGeometry(0.75,0.75,2.25,16,16,false),
             cabLeftCylinderMat = new THREE.MeshLambertMaterial({
               color: 0x7f7f7f
@@ -906,7 +881,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           cabRightCylinder.position.x = -cabLeftCylinder.position.x;
           this.mesh.add(cabRightCylinder);
 
-          // IV. Trailer
           var trailerGeo = new THREE.BoxBufferGeometry(5,5,12),
             trailerMat = new THREE.MeshLambertMaterial({
               color: 0xffffff
@@ -923,7 +897,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           trailerBottom.castShadow = true;
           this.mesh.add(trailerBottom);
 
-          // V. Wheels
           var wheelGeo = new THREE.CylinderBufferGeometry(1.5,1.5,1,24,24,false),
             wheelMat = new THREE.MeshLambertMaterial({
               color: 0x242424
@@ -958,7 +931,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           this.isHorz = isHorz;
           this.particles = [];
 
-          // populate particles
           let particleGeo = new THREE.SphereBufferGeometry(1,16,16),
             particleMat = new THREE.MeshBasicMaterial({
               color: 0xffff00
@@ -980,7 +952,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           }
         }
         moveParticles() {
-          // shrink particles as they move
           for (let p of this.particles) {
             if (p.size > 0) {
               p.size -= p.decay;
@@ -1006,7 +977,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
       }
 
       var init = () => {
-          // I. Setting Up Scene
           scene = new THREE.Scene();
           camera = new THREE.PerspectiveCamera(45,window.innerWidth / window.innerHeight,0.1,2000);
           renderer = new THREE.WebGLRenderer({
@@ -1016,19 +986,15 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           renderer.setSize(window.innerWidth, window.innerHeight);
           renderer.shadowMap.enabled = true;
 
-          // II. Lighting
-          // A. Ambient
           var ambientLight = new THREE.AmbientLight(0xffffff);
           ambientLight.name = "Ambient Light";
           scene.add(ambientLight);
 
-          // B. Hemisphere
           hemiLight = new THREE.HemisphereLight(0x0044ff, 0xffffff, 0.5);
           hemiLight.name = "Hemisphere Light";
           hemiLight.position.set(0,5,0);
           scene.add(hemiLight);
-          
-          // C. Point
+
           pointLight = new THREE.PointLight(0xffffff,0.5);
           pointLight.name = "Point Light";
           pointLight.position.set(0,60,pointLightZ);
@@ -1036,12 +1002,9 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           pointLight.shadow.mapSize = new THREE.Vector2(1024,1024);
           scene.add(pointLight);
 
-          // III. Scenery
-          // A. Road
           for (let r = 1; r > -renderDistance; --r)
             roadChunks.push(new RoadChunk(r));
 
-          // B. Grass
           var firstChunkSize = roadChunks[0].chunkSize,
             grassDepth = firstChunkSize * (renderDistance + 1),
             grassGeo = new THREE.PlaneBufferGeometry(400,grassDepth),
@@ -1056,14 +1019,11 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           grass.receiveShadow = true;
           scene.add(grass);
 
-          // C. Fog
           scene.fog = new THREE.Fog(skyColor, 0.01, grassDepth - firstChunkSize*2);
 
-          // IV. Camera
           camera.position.set(0,cameraYMin,30);
           camera.lookAt(scene.position);
-          
-          // V. Rendering
+
           document.body.appendChild(renderer.domElement);
         },
         checkCollision = (a,b) => {
@@ -1077,35 +1037,30 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
               B_front = b.z - b.depth/2,
               B_back = b.z + b.depth/2;
 
-            // right hits left, left hits right
             let touchedX_RL = (A_left <= B_right && A_left >= B_left),
               touchedX_LR = (A_right >= B_left && A_right <= B_right),
-            // front hits back, back hits front
               touchedZ_FB = (A_front <= B_back && A_front >= B_front),
               touchedZ_BF = (A_back >= B_front && A_back <= B_back);
-            
+
             if ((touchedX_RL || touchedX_LR) && (touchedZ_FB || touchedZ_BF)) {
               var newMomentum = (a.model.mass * a.speed + b.model.mass * b.speed)/(a.model.mass + b.model.mass);
 
               a.speed = newMomentum;
               b.speed = newMomentum;
-              
+
               let sx = 0,
                 sz = 0;
 
-              // x-center the spark between crashing ends
               if (A_left <= B_right)
                 sx = (A_left + B_right)/2;
               else if (A_right >= B_left)
                 sx = (A_right + B_left)/2;
 
-              // then z-center it
               if (A_front <= B_back)
                 sz = (A_front + B_back)/2;
               else if (A_back >= B_front)
                 sz = (A_back + B_front)/2;
 
-              // trigger spark for player vehicle
               if (a.name == "Vehicle 0") {
                 a.crashed = true;
                 game.over = true;
@@ -1170,19 +1125,16 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
         },
         startGame = difficulty => {
           if (game != null && game.over) {
-            // remove spark
             if (game.spark != null) {
               let sparkName = scene.getObjectByName(game.spark.name);
               scene.remove(sparkName);
             }
-            // remove all vehicles
             for (let v of game.vehicles) {
               let vehicleName = scene.getObjectByName(v.name);
               scene.remove(vehicleName);
             }
           }
 
-          // first time or starting anew
           if (game == null || game.over) {
             game = new Game({
               difficulty: difficulty,
@@ -1194,25 +1146,21 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           }
         },
         update = () => {
-          // intro sequence
           if (cameraY > cameraYMin) {
             cameraY -= 0.5;
             if (cameraY == cameraYMin)
               toggleDifMenu();
           }
 
-          // normal game function
           if (game != null && cameraY == cameraYMin) {
             let firstChunkSize = roadChunks[0].chunkSize,
               vehicleCtrld = game.vehicles[game.vehicleIDCtrld];
 
-            // push all vehicles forward one chunk when player reaches that distance
             if (vehicleCtrld.z <= -firstChunkSize) {
               let vehiclesBehind = [];
               game.vehicles.forEach((e,i) => {
                 e.z += firstChunkSize;
 
-                // mark for removal if no longer seen
                 if (e.z - e.depth/2 > vehicleCtrld.z + firstChunkSize/2) {
                   vehiclesBehind.push({
                     index: i,
@@ -1220,21 +1168,18 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
                   });
                 }
               });
-              // remove vehicles way behind, score
               vehiclesBehind.sort((a,b) => b.index - a.index);
               for (let v of vehiclesBehind) {
                 let objectName = scene.getObjectByName(v.name);
                 scene.remove(objectName);
                 game.vehicles.splice(v.index,1);
 
-                // score points for passing without using shoulder
                 if (Math.abs(vehicleCtrld.x) < game.noScoreXZone) {
                   ++game.score;
                   header.innerHTML = game.score;
                 }
               }
 
-              // and then spawn 0–3 new ones
               if (game.vehicles.length < game.vehicleLimit && !game.tutorial) {
                 let spawnTries = 3;
                 while (spawnTries--) {
@@ -1250,7 +1195,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
               }
             }
 
-            // move vehicles
             let vehiclesAhead = [];
             game.vehicles.forEach((e,i) => {
               e.move();
@@ -1264,15 +1208,13 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
                 else {
                   e.decelerate();
 
-                  // spinout if steering
                   if (e.steerAngle > 0)
                     e.steerAngle += e.speed * e.steerSpeed;
                   else if (e.steerAngle < 0)
                     e.steerAngle -= e.speed * e.steerSpeed;
                 }
               }
-              
-              // mark for removal if no longer seen
+
               if (e.z < (-renderDistance - 1.5) * firstChunkSize) {
                 vehiclesAhead.push({
                   index: i,
@@ -1280,7 +1222,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
                 });
               }
             });
-            // remove vehicles way ahead
             vehiclesAhead.sort((a,b) => b.index - a.index);
             for (let v of vehiclesAhead) {
               let objectName = scene.getObjectByName(v.name);
@@ -1288,17 +1229,14 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
               game.vehicles.splice(v.index,1);
             }
 
-            // spark from crash
             if (game.spark != null) {
               game.spark.moveParticles();
               game.spark.center.position.z = vehicleCtrld.z - (game.spark.isHorz ? vehicleCtrld.depth/2 : 0);
             }
 
-            // show difficulty menu on game over
             if (vehicleCtrld.speed <= 0 && game.over && !game.preparingNew && !replayBtnActive)
               toggleReplayBtn();
 
-            // center spotlight and camera on player vehicle
             pointLight.position.z = vehicleCtrld.z + pointLightZ;
             camera.position.set(0,cameraY,vehicleCtrld.z + 30);
 
@@ -1319,14 +1257,12 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
           if (game != null && !game.over && game.vehicles.length) {
             let playerVehicle = game.vehicles[game.vehicleIDCtrld];
 
-            // left arrow, A, or drag left
-            if ((e.keyCode && (e.keyCode == 37 || e.keyCode == 65)) || 
+            if ((e.keyCode && (e.keyCode == 37 || e.keyCode == 65)) ||
               (touch.hold && e.pageX < touch.x)) {
               playerVehicle.steer("left");
               hideTutorial();
 
-            // right arrow, D, or drag right
-            } else if ((e.keyCode && (e.keyCode == 39 || e.keyCode == 68)) || 
+            } else if ((e.keyCode && (e.keyCode == 39 || e.keyCode == 68)) ||
               (touch.hold && e.pageX > touch.x)) {
               playerVehicle.steer("right");
               hideTutorial();
@@ -1346,10 +1282,9 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
 
       init();
       update();
-      
+
       window.addEventListener("resize",adjustWindow);
 
-      // steering
       var downEvent = "ontouchstart" in document.documentElement ? "touchstart" : "mousedown",
         moveEvent = "ontouchmove" in document.documentElement ? "touchmove" : "mousemove",
         upEvent = "ontouchend" in document.documentElement ? "touchend" : "mouseup";
@@ -1360,7 +1295,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
       document.addEventListener(moveEvent,steerVehicle);
       document.addEventListener(upEvent,straightenVehicle);
 
-      // difficulty buttons
       for (let b of difButtons) {
         b.addEventListener("click",function(){
           toggleDifMenu();
@@ -1372,7 +1306,6 @@ c5.729-2.313,10.822-5.573,15.281-9.781l8.125,8.062c1.207,1.291,2.666,1.582,4.375
         });
       }
 
-      // replay button
       replayButton.addEventListener("click",function(){
         game.preparingNew = true;
         toggleScoreCounter();

@@ -28,8 +28,8 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebApplication","name":"Voltage Divider Calculator","description":"Voltage divider calculator with load compensation, power and E12 resistor suggestions.","url":"https://mohamed-tarek-abdelhady.vercel.app/sites/voltage-divider-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","author":{"@type":"Person","name":"Mohamed Tarek Abdelhady","url":"https://mohamed-tarek-abdelhady.vercel.app"}}
   </script>
@@ -38,9 +38,7 @@
     [data-theme="light"]{--bg:#f8fafc;--bg2:#f1f5f9;--card:#fff;--card2:#f8fafc;--txt:#0f172a;--mut:#475569;--mut2:#94a3b8;--br:rgba(0,0,0,.1)}
     *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65;min-height:100vh}
     .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem 4rem}
-    header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--br)}
-    .top-in{max-width:1080px;margin:0 auto;padding:.8rem 1.25rem;display:flex;align-items:center;gap:.8rem}
-    .back{display:inline-flex;align-items:center;gap:.5rem;color:var(--mut);font-size:.9rem;font-weight:600}.back:hover{color:var(--acc)}
+    header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--br)}.back:hover{color:var(--acc)}
     .theme{margin-left:auto;background:var(--card);border:1px solid var(--br);color:var(--mut);width:40px;height:40px;border-radius:10px;cursor:pointer}
     .hero{text-align:center;padding:2.6rem 0 1.6rem}.hero .pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);background:rgba(59,130,246,.12);padding:.3rem .9rem;border-radius:999px;margin-bottom:.9rem}
     .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800}.hero p{color:var(--mut);max-width:640px;margin:.6rem auto 0}
@@ -48,8 +46,7 @@
     .card{background:var(--card);border:1px solid var(--br);border-radius:var(--r);padding:1.5rem}
     .card h2{font-size:1.05rem;margin-bottom:1rem;display:flex;gap:.55rem;align-items:center}.card h2 i{color:var(--acc)}
     label.lbl{display:block;font-size:.8rem;font-weight:600;color:var(--mut);margin:.85rem 0 .35rem}
-    input,select{width:100%;background:var(--bg2);border:1px solid var(--br);color:var(--txt);border-radius:10px;padding:.7rem .85rem;font-size:.95rem;font-family:inherit}input:focus,select:focus{outline:none;border-color:var(--acc)}
-    .row{display:grid;grid-template-columns:1fr 110px;gap:.6rem}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem}@media(max-width:560px){.row3{grid-template-columns:1fr}}
+    input,select{width:100%;background:var(--bg2);border:1px solid var(--br);color:var(--txt);border-radius:10px;padding:.7rem .85rem;font-size:.95rem;font-family:inherit}input:focus,select:focus{outline:none;border-color:var(--acc)}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem}@media(max-width:560px){.row3{grid-template-columns:1fr}}
     .seg{display:flex;background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:4px;gap:4px;margin-bottom:.4rem}.seg button{flex:1;border:0;background:transparent;color:var(--mut);font-weight:700;font-size:.82rem;padding:.55rem;border-radius:8px;cursor:pointer}.seg button.on{background:var(--acc);color:#fff}
     .btn{width:100%;margin-top:1.1rem;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;font-weight:700;border:0;border-radius:10px;padding:.85rem;cursor:pointer;font-size:.95rem}
     .res{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1rem}.cell{background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:.8rem .95rem}.cell small{display:block;color:var(--mut2);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}.cell b{font-family:var(--mono);font-size:1.02rem}

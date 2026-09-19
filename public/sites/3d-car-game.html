@@ -30,11 +30,10 @@
         </script>
         <link rel="icon" href="icon.png" type="image/png">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <link rel="stylesheet" href="mta-chrome.css">
 </head>
     <style>
-        
 
 body{
     margin:0;
@@ -133,25 +132,12 @@ body{
     outline:none;
 }
 
-#gameConf {
-    width:50%;
-    height:100%;
-    background:red;
-}
-
 #gameDifficulty {
     width:100%;
     height:50%;
     background:blue;
     padding:0;
     margin:0;
-}
-
-.diffOpt {
-    background:green;
-    font-family:cursive;
-    font-size:20px;
-    text-align:center;
 }
 
 #loading {
@@ -176,7 +162,7 @@ body{
 }
     </style>
     <body onload="done()">
-<a class="mta-chip" href="../Mohamed%20-%20my-sites.html" aria-label="Back to all tools"><i class="fas fa-arrow-left"></i> All tools</a>
+<a class="mta-chip" href="../Mohamed%20-%20my-sites.html" aria-label="Back to all tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg> All tools</a>
         <div id="scoreDiv">
             <span id="score">0</span>
             <img src="https://image.ibb.co/jRAp0y/coin.png" id="cn">
@@ -202,8 +188,7 @@ body{
                 })();
             </script>
         </div>
-        
-        
+
         <div id="mainContainer" style="background:#0f0" >
             <img id="city" src="https://image.ibb.co/jCGU0y/cty.jpg">
             <canvas id="myCanvas"  ></canvas>
@@ -214,21 +199,21 @@ body{
         <img class="aImg" id="t4" src="https://image.ibb.co/ksy0nd/t4.png">
         <img class="aImg" id="c1" src="https://image.ibb.co/f4v7YJ/c2.png">
         <script>
-                   
+
         var ld;
         var loaded = false;
-        
+
         function done(){
             document.getElementById("ldc").innerHTML="";
             document.getElementById("ldc").style.display = "none";
             document.getElementById("playBtn").innerHTML = "PLAY";
             loaded = true;
         }
-        
+
         (function(){
             var w = window.innerWidth || 360;
             var h = window.innerHeight || 560;
-        
+
             if(h > w){
                 var nh = h;
                 h = w;
@@ -237,19 +222,19 @@ body{
             }
             document.getElementById("mainContainer").style.width = w+"px";
             document.getElementById("mainContainer").style.height = h+"px";
-            
+
             document.getElementById("city").style.height = h*.3+"px";
             document.getElementById("city").style.width = w+"px";
-            
+
             var c = document.getElementById("myCanvas");
             c.height = h;
             c.width = w;
-            
+
             var ctx = c.getContext("2d");
-        
+
         function loadGame(){
             "use strict";
-            
+
             var roadWidth = 5*w/36;
             var roadTop = h-h*0.7;
             var roadLeft = (w-roadWidth)/2;
@@ -261,7 +246,7 @@ body{
                 scoreC.textContent = score;
             }
             updateScore(0);
-            
+
             var rso = [];
             var ratio = 0.8;
             var totalRso = 20;
@@ -276,11 +261,9 @@ body{
             var stp = h-totalHeight;
             var tMaxH = h*20/36;
             var treeCnst = tMaxH/roadLeft;
-            
+
             var gameDifficulty = 100;
-            
-            
-            
+
             function TreeBuilder(src,src2,start,left){
                 this.src = treeSrc[src];
                 this.src2 = treeSrc[src2];
@@ -292,17 +275,17 @@ body{
                 this.r = 1.009;
                 this.left = left;
             }
-            
+
             TreeBuilder.prototype.draw = function(){
                 this.y += this.dy;
                 this.dy *= this.r;
                 this.x = (h-this.y)*roadConstant - this.w - this.w*this.left;
                 this.h = (roadLeft-this.x-this.w*this.left)*treeCnst;
                 this.w = this.h*2/3;
-                
+
                 ctx.drawImage(this.src,this.x,this.y-this.h,this.w,this.h);
                 ctx.drawImage(this.src2,w-this.x-this.w,this.y-this.h,this.w,this.h);
-            
+
                 if(this.y >= h){
                     this.y = stp;
                     this.h = 0;
@@ -311,22 +294,21 @@ body{
                     this.dy = 0.5;
                 }
             }
-            
+
             function _i(x){
                 return document.getElementById(x);
             }
             var treeSrc = [_i("t1"),_i("t2"),_i("t3"),_i("t4")];
-            
+
             var trees = [];
             for(var n = 0; n < ((h*0.7)/50-2); n++){
                 trees.push(new TreeBuilder(Math.floor(Math.random()*4),Math.floor(Math.random()*4),stp+n*50,2));
             }
-            
-            
+
             var carWCnst = roadLeft*2/totalHeight;
             var carW = (w > 560) ? 120 : 90;
             var carH = carW*2/3;
-            
+
             function CarBuilder(src,start,lane){
                 this.src = carSrc[src];
                 this.y = start;
@@ -336,14 +318,14 @@ body{
                 this.dy = 0.5;
                 this.lane = lane;
             }
-            
+
             CarBuilder.prototype.draw = function(){
                 this.dy *= 1.01;
                 this.y += this.dy;
                 this.x = (carWCnst/2)*(h-this.y)+(w-(carWCnst*(h-this.y)))*this.lane/8;
                 this.w = carW-carW*carWCnst*(h-this.y)/w;
                 this.h = 1.7*this.w/3;
-                
+
                 ctx.drawImage(this.src,this.x,this.y-this.h,this.w,this.h);
                 if(this.y >= h-20){
                     if(Math.abs(this.x-cx) <= carH && Math.abs(this.y-h+carH) <= carH){
@@ -363,15 +345,14 @@ body{
                     this.lane = 1+Math.random()*5;
                 }
             }
-            
+
             var carSrc = [_i("c1"),_i("c1"),_i("c1")];
-            
+
             var cars = [];
             for(var n = 0; n < ((h*0.7+100)/gameDifficulty); n++){
                 cars.push(new CarBuilder(Math.floor(Math.random()*3),stp+n*gameDifficulty,1));
             }
-            
-            //Coin.....
+
             var coinW = (w > 560) ? 75 : 60;
             function CoinBuilder(start,lane){
                 this.src = coinSrc;
@@ -382,14 +363,14 @@ body{
                 this.dy = 0.5;
                 this.lane = lane;
             }
-            
+
             CoinBuilder.prototype.draw = function(){
                 this.dy *= 1.01;
                 this.y += this.dy;
                 this.x = (carWCnst/2)*(h-this.y)+(w-(carWCnst*(h-this.y)))*this.lane/8;
                 this.w = coinW-coinW*carWCnst*(h-this.y)/w;
                 this.h = this.w;
-                
+
                 ctx.drawImage(this.src,this.x,this.y-this.h,this.w,this.h);
                 if(this.y >= h-20){
                     if(Math.abs(this.x-cx) <= coinW && Math.abs(this.y-h+coinW) <= coinW){
@@ -411,20 +392,14 @@ body{
                     this.lane = Math.floor(1+Math.random()*5);
                 }
             }
-            
+
             var coinSrc = _i("cn");
-            
+
             var coins = [];
             for(var n = 0; n < ((h*0.7+100)/(gameDifficulty-50)); n++){
                 coins.push(new CoinBuilder(stp+n*(gameDifficulty-50),6));
             }
-            
-            
-            
-            //End Coin...
-            
-            
-            
+
             function rectPoints(n,ho){
                 n = totalRso-n-1;
                 var y1 = stp+maxH*cnst1*(Math.pow(1/ratio,n)-1);
@@ -435,16 +410,15 @@ body{
                 var x3 = roadLeft-roadConstant*(y3-stp);
                 var y4 = y3;
                 var x4 = x3 + minWidth+(y3-stp)*dif/totalHeight;
-                
+
                 return [x1,y1,x2,y2,x4,y4,x3,y3];
             }
-            
-            
+
             for(var n = 0; n < totalRso; n++){
                 rso.push(rectPoints(n,h));
                 rso[n][8] = (n%2==0) ? "#000" : "#fff";
             }
-            
+
             function draw(){
                 ctx.beginPath();
                 ctx.moveTo((w-roadWidth)/2,stp);
@@ -465,7 +439,7 @@ body{
                     ctx.fillStyle = rso[n][8];//"rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
                     ctx.fill();
                     ctx.closePath();
-                    
+
                     ctx.beginPath();
                     ctx.moveTo(w-rso[n][0],rso[n][1]);
                     ctx.lineTo(w-rso[n][2],rso[n][3]);
@@ -476,12 +450,11 @@ body{
                     ctx.fillStyle = rso[n][8];//"rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
                     ctx.fill();
                     ctx.closePath();
-                    
-                    
+
                 }
-                
+
             }
-            
+
             var cx = (w-carW)/2;
             var cl = false, cr = false;
             var car = _i("c1");
@@ -491,8 +464,7 @@ body{
                 if(cr) if(cx-50 > 0) cx-=ms;
                 ctx.drawImage(car,cx,h-carH,carW,carH);
             }
-            
-            
+
             var m = 0;
             var intv = setInterval(function(){
                 try{
@@ -512,27 +484,22 @@ body{
                 for(var n = 0; n < trees.length; n++){
                     trees[n].draw();
                 }
-                
+
                 for(var n = 0; n < coins.length; n++){
                     coins[n].draw();
                 }
-                
+
                 for(var n = 0; n < cars.length; n++){
                     cars[n].draw();
                 }
-                
-                
+
                 drawCar();
                 }catch(err){
-                    
+
                 }
-                
+
             },10)
-            //draw();
-            
-            //Game Control
-            
-            //Touch
+
             function getTouch(e){
                 e.preventDefault();
                 var to = e.changedTouches[0];
@@ -548,12 +515,11 @@ body{
                 cl = false;
                 cr = false;
             }
-            
+
             c.removeEventListener("touchstart",getTouch);
             c.removeEventListener("touchend",getTouchEnd);
             c.addEventListener("touchstart",getTouch);
             c.addEventListener("touchend",getTouchEnd);
-            //Key..
             function getKey(e){
                 e.preventDefault();
                 var ty = e.keyCode;
@@ -571,16 +537,15 @@ body{
                 if(ty === 39) cl = false;
                 else if(ty === 37) cr = false;
             }
-            
+
             document.body.removeEventListener("keydown",getKey);
             document.body.removeEventListener("keyup",getKeyEnd);
             document.body.addEventListener("keydown",getKey);
             document.body.addEventListener("keyup",getKeyEnd);
-            //Accelarometre
-            
+
             function driveCar(e){
                 var y = e.accelerationIncludingGravity.y;
-            
+
                 if(y > 0){
                     if(cx+carW+50 < w) cx += y*ms;
                 }
@@ -588,12 +553,11 @@ body{
                     if(cx-50 > 0) cx += y*ms;
                 }
             }
-            
+
             if(window.DeviceMotionEvent){
                 window.removeEventListener("devicemotion",driveCar)
                    window.addEventListener("devicemotion",driveCar,false)
             }
-            //End
         }
         ld = function(){
             if(loaded){
@@ -603,7 +567,7 @@ body{
             }
         }
         })();
-        
+
         </script>
     <script src="mta-chrome.js" defer></script>
 </body>

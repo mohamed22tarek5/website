@@ -35,8 +35,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
   <script type="application/ld+json">
   {
@@ -174,30 +174,7 @@
     }
     [data-theme="light"] .header.scrolled { background: rgba(248, 250, 252, 0.85); }
     .header .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
-
-    .logo { display: flex; align-items: center; gap: var(--space-sm); font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; }
-    .logo-icon {
-      width: 36px; height: 36px; background: var(--gradient-accent);
-      border-radius: var(--radius-sm); display: flex; align-items: center;
-      justify-content: center; color: white; font-size: 0.875rem; font-weight: 800;
-    }
-
-    .nav { display: flex; align-items: center; gap: var(--space-xs); }
-    .nav-link {
-      position: relative; padding: var(--space-sm) var(--space-md);
-      font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
-      border-radius: var(--radius-sm); transition: all var(--transition-fast);
-    }
     .nav-link:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
-
-    .menu-toggle {
-      display: none; flex-direction: column; gap: 5px; padding: var(--space-sm);
-      z-index: 1001; align-items: center; justify-content: center;
-    }
-    .menu-toggle .bar {
-      width: 22px; height: 2px; background: var(--color-text-primary);
-      border-radius: 2px; transition: all var(--transition-base); transform-origin: center;
-    }
     .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
     .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
@@ -400,15 +377,7 @@
       box-shadow: 0 2px 12px rgba(34, 197, 94, 0.3);
     }
     .btn-success:hover { background-color: #16a34a; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(34, 197, 94, 0.4); }
-    .btn-warning {
-      background-color: var(--color-warning); color: white;
-      box-shadow: 0 2px 12px rgba(245, 158, 11, 0.3);
-    }
     .btn-warning:hover { background-color: #d97706; transform: translateY(-2px); }
-    .btn-danger {
-      background-color: var(--color-error); color: white;
-      box-shadow: 0 2px 12px rgba(239, 68, 68, 0.3);
-    }
     .btn-danger:hover { background-color: #dc2626; transform: translateY(-2px); }
 
     .color-legend {
@@ -604,41 +573,9 @@
       background: var(--color-bg-primary); border-top: 1px solid var(--color-border);
       padding: var(--space-3xl) 0 var(--space-xl);
     }
-    .footer-content {
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: var(--space-md);
-    }
-    .footer-social { display: flex; gap: var(--space-sm); }
-    .footer-social a {
-      width: 40px; height: 40px; display: flex; align-items: center;
-      justify-content: center; border-radius: var(--radius-md);
-      background: var(--color-bg-card); border: 1px solid var(--color-border);
-      color: var(--color-text-secondary); transition: all var(--transition-fast);
-    }
     .footer-social a:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
-    .footer-bottom { font-size: 0.875rem; color: var(--color-text-tertiary); }
-    .footer-bottom a { color: var(--color-accent); }
-
-    .back-to-top {
-      position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--color-bg-card); border: 1px solid var(--color-border);
-      border-radius: var(--radius-md); color: var(--color-text-secondary);
-      font-size: 1rem; z-index: 999; opacity: 0; visibility: hidden;
-      transform: translateY(12px); transition: all var(--transition-base);
-      box-shadow: var(--shadow-md);
-    }
     .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
     .back-to-top:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
-
-    .theme-toggle {
-      position: fixed; bottom: 32px; right: 90px; width: 48px; height: 48px;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--color-bg-card); border: 1px solid var(--color-border);
-      border-radius: var(--radius-md); color: var(--color-text-secondary);
-      font-size: 1rem; z-index: 999; transition: all var(--transition-base);
-      box-shadow: var(--shadow-md);
-    }
     .theme-toggle:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
 
     .toast {
@@ -720,7 +657,6 @@
 </header><div hidden aria-hidden="true"><button id="menuToggle" tabindex="-1"></button></div>
 <div hidden aria-hidden="true"><button id="navMenu" tabindex="-1"></button></div>
 
-
   <main id="main">
     <section class="page-hero" aria-label="Page header">
       <div class="page-hero-bg" aria-hidden="true">
@@ -763,7 +699,6 @@
           </button>
         </div>
 
-        <!-- Color Code Tab -->
         <div id="ColorCode" class="main-tabcontent" style="display:block;">
           <div class="sub-tabs">
             <button class="sub-tab-btn active" data-subtab="4band"><i class="fas fa-bars"></i> 4-Band</button>
@@ -827,7 +762,6 @@
           </div>
         </div>
 
-        <!-- Series/Parallel Tab -->
         <div id="SeriesParallel" class="main-tabcontent">
           <div class="sub-tabs">
             <button class="sub-tab-btn active" data-subtab="SeriesTab"><i class="fas fa-arrow-right"></i> Series</button>
@@ -947,7 +881,6 @@
           </div>
         </div>
 
-        <!-- Unit Converter Tab -->
         <div id="UnitConverter" class="main-tabcontent">
           <div class="calculator">
             <h2><i class="fas fa-exchange-alt"></i> Inductance Unit Converter</h2>
@@ -1008,7 +941,6 @@
           </div>
         </div>
 
-        <!-- Inductor Design Tab -->
         <div id="InductorDesign" class="main-tabcontent">
           <div class="calculator">
             <h2><i class="fas fa-cogs"></i> Inductor Design Calculator</h2>
@@ -1072,7 +1004,6 @@
           </div>
         </div>
 
-        <!-- Information Tab -->
         <div id="Info" class="main-tabcontent">
           <div class="info-section">
             <h3><i class="fas fa-table"></i> Inductor Color Code Chart</h3>
@@ -1167,19 +1098,15 @@
   </div>
 </footer>
 
-  
-  
   <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
 
   <script>
     (() => {
       'use strict';
 
-      /* ── Loader ── */
       const loader = document.getElementById('loader');
       window.addEventListener('load', () => { setTimeout(() => loader.classList.add('hidden'), 300); });
 
-      /* ── Scroll / Header ── */
       const scrollProgress = document.getElementById('scrollProgress');
       const header = document.getElementById('header');
       const backToTop = document.getElementById('backToTop');
@@ -1200,7 +1127,6 @@
 
       backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-      /* ── Mobile Menu ── */
       const menuToggle = document.getElementById('menuToggle');
       const navMenu = document.getElementById('navMenu');
       const mobileOverlay = document.getElementById('mobileOverlay');
@@ -1214,7 +1140,6 @@
       menuToggle.addEventListener('click', toggleMenu);
       mobileOverlay.addEventListener('click', toggleMenu);
 
-      /* ── Theme ── */
       const STORAGE_KEY = 'portfolio-theme';
       const themeToggle = document.getElementById('themeToggle');
       const themeIcon = themeToggle.querySelector('i');
@@ -1234,7 +1159,6 @@
         applyTheme(next);
       });
 
-      /* ── Toast ── */
       function showToast(message, type) {
         const toast = document.getElementById('toast');
         toast.textContent = message;
@@ -1245,7 +1169,6 @@
 
       document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-      /* ── Tab System ── */
       const mainTabs = document.querySelectorAll('.main-tab-btn');
       mainTabs.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -1267,9 +1190,6 @@
         });
       });
 
-      /* ══════════════════════════════════════════════
-         CALCULATOR LOGIC
-         ══════════════════════════════════════════════ */
       const calcCalc = (() => {
         const colors = [
           { name: "Black", code: "#000000", value: 0, multiplier: 1 },
@@ -1291,7 +1211,6 @@
         let activeBand = null;
         let calculationHistory = [];
 
-        /* ── Color Legend builders ── */
         function buildLegend(containerId, clickFn) {
           const c = document.getElementById(containerId);
           c.innerHTML = '';
@@ -1395,7 +1314,6 @@
             '<div class="result-details">Raw Value: ' + ind + ' uH | Color Code: ' + cn + '</div></div>';
         }
 
-        /* ── Band click events ── */
         ['band1','band2','band3','band4'].forEach(id => {
           const el = document.getElementById(id);
           if (el) el.addEventListener('click', () => selectBand(parseInt(id.replace('band',''))));
@@ -1408,7 +1326,6 @@
         buildLegend('colorLegend4', selectColorFromLegend);
         buildLegend('colorLegend5', selectColorFromLegend5);
 
-        /* ── Series / Parallel ── */
         function addInductor(type) {
           const container = document.getElementById(type + '-inductors');
           const count = container.children.length + 1;
@@ -1474,7 +1391,6 @@
           return (value * 1e12).toFixed(4) + ' pH';
         }
 
-        /* ── Unit Converter ── */
         function convertUnits() {
           const value = parseFloat(document.getElementById('converterValue').value);
           const fromUnit = parseFloat(document.getElementById('fromUnit').value);
@@ -1496,7 +1412,6 @@
           showToast('Conversion completed successfully!');
         }
 
-        /* ── Inductor Design ── */
         function calculateInductorDesign() {
           const wireDiameter = parseFloat(document.getElementById('wireDiameter').value) / 1000;
           const coilDiameter = parseFloat(document.getElementById('coilDiameter').value) / 1000;
@@ -1523,7 +1438,6 @@
           document.getElementById('qualityFactor').textContent = qualityFactor.toFixed(1);
         }
 
-        /* ── History ── */
         function saveCalculation(type) {
           let calc = { id: Date.now(), type: type, timestamp: new Date().toLocaleString(), details: '' };
           if (type.includes('color')) {
@@ -1592,7 +1506,6 @@
           return 'Calculation';
         }
 
-        /* ── Init ── */
         loadHistory();
         updateColorCodeResult();
         updateColorCodeResult5();

@@ -35,8 +35,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
   <script type="application/ld+json">
   {
@@ -174,30 +174,7 @@
     }
     [data-theme="light"] .header.scrolled { background: rgba(248, 250, 252, 0.85); }
     .header .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
-
-    .logo { display: flex; align-items: center; gap: var(--space-sm); font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; }
-    .logo-icon {
-      width: 36px; height: 36px; background: var(--gradient-accent);
-      border-radius: var(--radius-sm); display: flex; align-items: center;
-      justify-content: center; color: white; font-size: 0.875rem; font-weight: 800;
-    }
-
-    .nav { display: flex; align-items: center; gap: var(--space-xs); }
-    .nav-link {
-      position: relative; padding: var(--space-sm) var(--space-md);
-      font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
-      border-radius: var(--radius-sm); transition: all var(--transition-fast);
-    }
     .nav-link:hover { color: var(--color-text-primary); background: var(--color-accent-subtle); }
-
-    .menu-toggle {
-      display: none; flex-direction: column; gap: 5px; padding: var(--space-sm);
-      z-index: 1001; align-items: center; justify-content: center;
-    }
-    .menu-toggle .bar {
-      width: 22px; height: 2px; background: var(--color-text-primary);
-      border-radius: 2px; transition: all var(--transition-base); transform-origin: center;
-    }
     .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
     .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
@@ -614,41 +591,9 @@
       background: var(--color-bg-primary); border-top: 1px solid var(--color-border);
       padding: var(--space-3xl) 0 var(--space-xl);
     }
-    .footer-content {
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: var(--space-md);
-    }
-    .footer-social { display: flex; gap: var(--space-sm); }
-    .footer-social a {
-      width: 40px; height: 40px; display: flex; align-items: center;
-      justify-content: center; border-radius: var(--radius-md);
-      background: var(--color-bg-card); border: 1px solid var(--color-border);
-      color: var(--color-text-secondary); transition: all var(--transition-fast);
-    }
     .footer-social a:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
-    .footer-bottom { font-size: 0.875rem; color: var(--color-text-tertiary); }
-    .footer-bottom a { color: var(--color-accent); }
-
-    .back-to-top {
-      position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--color-bg-card); border: 1px solid var(--color-border);
-      border-radius: var(--radius-md); color: var(--color-text-secondary);
-      font-size: 1rem; z-index: 999; opacity: 0; visibility: hidden;
-      transform: translateY(12px); transition: all var(--transition-base);
-      box-shadow: var(--shadow-md);
-    }
     .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
     .back-to-top:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
-
-    .theme-toggle {
-      position: fixed; bottom: 32px; right: 90px; width: 48px; height: 48px;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--color-bg-card); border: 1px solid var(--color-border);
-      border-radius: var(--radius-md); color: var(--color-text-secondary);
-      font-size: 1rem; z-index: 999; transition: all var(--transition-base);
-      box-shadow: var(--shadow-md);
-    }
     .theme-toggle:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
 
     .toast {
@@ -719,7 +664,6 @@
 </header><div hidden aria-hidden="true"><button id="menuToggle" tabindex="-1"></button></div>
 <div hidden aria-hidden="true"><button id="navMenu" tabindex="-1"></button></div>
 
-
   <main id="main">
     <section class="page-hero" aria-label="Page header">
       <div class="page-hero-bg" aria-hidden="true">
@@ -740,7 +684,7 @@
     <section class="main-content" aria-label="Learning content">
       <div class="container">
         <div class="learning-grid">
-          <!-- Sidebar TOC -->
+
           <aside class="sidebar" aria-label="Table of contents">
             <div class="sidebar-title"><i class="fas fa-book-open"></i> Contents</div>
             <div id="toc"></div>
@@ -782,7 +726,6 @@
             </div>
           </aside>
 
-          <!-- Main content -->
           <div class="content-area">
             <div class="search-container">
               <i class="fas fa-search search-icon" aria-hidden="true"></i>
@@ -815,7 +758,7 @@
 
               <h3 id="pwd"><span class="cmd">pwd</span> &mdash; Print Working Directory</h3>
               <p>Show the absolute path of the current directory.</p>
-              <pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>pwd
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>pwd
 # Output: /home/user</code></pre>
               <div class="callout note">Displays the full path from the root to your current location.</div>
 
@@ -827,16 +770,16 @@
               </div>
 
               <h3 id="cd"><span class="cmd">cd [directory]</span> &mdash; Change Directory</h3>
-              <pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>cd /home/user/Documents
-cd ..    # Go up one level
-cd ~     # Go to home directory
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>cd /home/user/Documents
+cd ..    # Go up one level
+cd ~     # Go to home directory
 cd -     # Go to previous directory</code></pre>
               <div class="callout tip">Use <code>cd ..</code> to go up one level, <code>cd ~</code> for home directory.</div>
 
               <h3 id="ls"><span class="cmd">ls</span> &mdash; List Directory Contents</h3>
-              <pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>ls
-ls -la   # Long format with hidden files
-ls -lh   # Human readable file sizes
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>ls
+ls -la   # Long format with hidden files
+ls -lh   # Human readable file sizes
 ls -t    # Sort by modification time</code></pre>
 
               <div class="quiz-container">
@@ -864,21 +807,21 @@ ls -t    # Sort by modification time</code></pre>
               <p>Learn how to create, copy, move, and delete files and directories.</p>
 
               <h3 id="mkdir"><span class="cmd">mkdir [directory]</span> &mdash; Create Directory</h3>
-              <pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>mkdir new_folder
-mkdir -p parent/child/grandchild   # Create nested directories
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>mkdir new_folder
+mkdir -p parent/child/grandchild   # Create nested directories
 mkdir dir1 dir2 dir3   # Create multiple directories</code></pre>
 
               <h3 id="rm"><span class="cmd">rm [file]</span> &mdash; Remove Files/Directories</h3>
-              <pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>rm file.txt
-rm -r directory/      # Remove directory recursively
-rm -f file.txt        # Force remove without confirmation
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>rm file.txt
+rm -r directory/      # Remove directory recursively
+rm -f file.txt        # Force remove without confirmation
 rm -i file.txt        # Interactive mode (ask before removing)</code></pre>
               <div class="callout warn"><strong><i class="fas fa-exclamation-triangle"></i> Caution:</strong> Be careful with <code>rm -rf</code>! It can delete your entire system if used incorrectly.</div>
 
               <h3 id="cp"><span class="cmd">cp [src] [dest]</span> &mdash; Copy Files</h3>
-              <pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>cp file.txt backup/
-cp -r source/ destination/   # Copy directories recursively
-cp -i file.txt backup/       # Interactive (ask before overwrite)
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>cp file.txt backup/
+cp -r source/ destination/   # Copy directories recursively
+cp -i file.txt backup/       # Interactive (ask before overwrite)
 cp -v file.txt backup/       # Verbose (show what's being copied)</code></pre>
 
               <div class="practice-container">
@@ -897,14 +840,14 @@ cp -v file.txt backup/       # Verbose (show what's being copied)</code></pre>
               <p>Powerful commands for working with text files.</p>
 
               <h3 id="cat"><span class="cmd">cat [file]</span> &mdash; Concatenate and Display</h3>
-              <pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>cat file.txt
-cat file1.txt file2.txt > combined.txt   # Combine files
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>cat file.txt
+cat file1.txt file2.txt > combined.txt   # Combine files
 cat > newfile.txt   # Create new file (Ctrl+D to save)</code></pre>
 
               <h3 id="grep"><span class="cmd">grep [pattern] [file]</span> &mdash; Search Text</h3>
-              <pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>grep "error" logfile.txt
-grep -r "TODO" ./src/   # Recursive search
-grep -i "warning" log.txt   # Case-insensitive
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>grep "error" logfile.txt
+grep -r "TODO" ./src/   # Recursive search
+grep -i "warning" log.txt   # Case-insensitive
 grep -v "success" log.txt   # Invert match (show non-matching lines)</code></pre>
 
               <div class="terminal" id="terminal-2">
@@ -950,15 +893,15 @@ grep -v "success" log.txt   # Invert match (show non-matching lines)</code></pre
               </div>
 
               <h3 id="chmod"><span class="cmd">chmod [permissions] [file]</span> &mdash; Change Permissions</h3>
-              <pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>chmod 755 script.sh
-chmod u+x file.txt    # Add execute for user
-chmod go-w file.txt   # Remove write for group and others
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>chmod 755 script.sh
+chmod u+x file.txt    # Add execute for user
+chmod go-w file.txt   # Remove write for group and others
 chmod -R 644 dir/     # Recursive change</code></pre>
 
               <h3 id="chown"><span class="cmd">chown [user]:[group] [file]</span> &mdash; Change Ownership</h3>
-              <pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>chown user:group file.txt
-chown user file.txt    # Change user only
-chown :group file.txt  # Change group only
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>chown user:group file.txt
+chown user file.txt    # Change user only
+chown :group file.txt  # Change group only
 chown -R user:group dir/  # Recursive change</code></pre>
             </section>
 
@@ -970,13 +913,13 @@ chown -R user:group dir/  # Recursive change</code></pre>
               <p>Control and monitor running processes.</p>
 
               <h3 id="ps"><span class="cmd">ps</span> &mdash; Process Status</h3>
-              <pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>ps aux          # Show all processes
-ps -ef          # Full format listing
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>ps aux          # Show all processes
+ps -ef          # Full format listing
 ps aux | grep nginx  # Find specific process</code></pre>
 
               <h3 id="kill"><span class="cmd">kill [signal] [pid]</span> &mdash; Terminate Processes</h3>
-              <pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>kill 1234        # Send TERM signal (default)
-kill -9 1234    # Force kill (SIGKILL)
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>kill 1234        # Send TERM signal (default)
+kill -9 1234    # Force kill (SIGKILL)
 killall nginx   # Kill all processes named nginx</code></pre>
               <div class="callout warn"><strong><i class="fas fa-exclamation-triangle"></i> Caution:</strong> SIGKILL (-9) cannot be caught or ignored by the process. Use as last resort.</div>
             </section>
@@ -1052,8 +995,6 @@ killall nginx   # Kill all processes named nginx</code></pre>
   </div>
 </footer>
 
-  
-  
   <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
 
   <script>

@@ -35,8 +35,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
 
   <script type="application/ld+json">
   {
@@ -172,29 +172,8 @@
     .header .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
 
     .logo { display: flex; align-items: center; gap: var(--space-sm); font-size: 1.25rem; font-weight: 700; color: var(--color-text-primary); letter-spacing: -0.02em; }
-    .logo-icon {
-      width: 36px; height: 36px; background: var(--gradient-accent);
-      border-radius: var(--radius-sm); display: flex; align-items: center;
-      justify-content: center; color: white; font-size: 0.875rem; font-weight: 800;
-    }
-
-    .nav { display: flex; align-items: center; gap: var(--space-xs); }
-    .nav-link {
-      position: relative; padding: var(--space-sm) var(--space-md);
-      font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
-      border-radius: var(--radius-sm); transition: all var(--transition-fast);
-    }
     .nav-link:hover, .nav-link.active { color: var(--color-text-primary); background: var(--color-accent-subtle); }
     .nav-link.active { color: var(--color-accent); }
-
-    .menu-toggle {
-      display: none; flex-direction: column; gap: 5px; padding: var(--space-sm);
-      z-index: 1001; align-items: center; justify-content: center;
-    }
-    .menu-toggle .bar {
-      width: 22px; height: 2px; background: var(--color-text-primary);
-      border-radius: 2px; transition: all var(--transition-base); transform-origin: center;
-    }
     .menu-toggle.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
     .menu-toggle.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
@@ -413,41 +392,9 @@
       background: var(--color-bg-primary); border-top: 1px solid var(--color-border);
       padding: var(--space-3xl) 0 var(--space-xl);
     }
-    .footer-content {
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: var(--space-md);
-    }
-    .footer-social { display: flex; gap: var(--space-sm); }
-    .footer-social a {
-      width: 40px; height: 40px; display: flex; align-items: center;
-      justify-content: center; border-radius: var(--radius-md);
-      background: var(--color-bg-card); border: 1px solid var(--color-border);
-      color: var(--color-text-secondary); transition: all var(--transition-fast);
-    }
     .footer-social a:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
-    .footer-bottom { font-size: 0.875rem; color: var(--color-text-tertiary); }
-    .footer-bottom a { color: var(--color-accent); }
-
-    .back-to-top {
-      position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--color-bg-card); border: 1px solid var(--color-border);
-      border-radius: var(--radius-md); color: var(--color-text-secondary);
-      font-size: 1rem; z-index: 999; opacity: 0; visibility: hidden;
-      transform: translateY(12px); transition: all var(--transition-base);
-      box-shadow: var(--shadow-md);
-    }
     .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
     .back-to-top:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
-
-    .theme-toggle {
-      position: fixed; bottom: 32px; right: 90px; width: 48px; height: 48px;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--color-bg-card); border: 1px solid var(--color-border);
-      border-radius: var(--radius-md); color: var(--color-text-secondary);
-      font-size: 1rem; z-index: 999; transition: all var(--transition-base);
-      box-shadow: var(--shadow-md);
-    }
     .theme-toggle:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-2px); }
 
     .reveal {
@@ -529,7 +476,6 @@
   </div>
 </header><div hidden aria-hidden="true"><button id="menuToggle" tabindex="-1"></button></div>
 <div hidden aria-hidden="true"><button id="navMenu" tabindex="-1"></button></div>
-
 
   <main id="main">
     <section class="hero" aria-label="Introduction">
@@ -1445,9 +1391,6 @@
     </div>
   </div>
 </footer>
-
-  
-  
 
   <script>
     (() => {

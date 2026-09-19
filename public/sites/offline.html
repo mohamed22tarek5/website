@@ -8,8 +8,8 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#4e9eff">
   <title>Offline - Mohamed Tarek Abdelhady</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
   <style>
     :root {
       --primary-color: #4e9eff;
@@ -264,25 +264,24 @@
       font-size: 0.9em;
     }
 
-    /* Responsive Design */
     @media (max-width: 768px) {
       .offline-container {
         padding: 30px 20px;
       }
-      
+
       h1 {
         font-size: 1.8em;
       }
-      
+
       .content-grid {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       }
-      
+
       .action-buttons {
         flex-direction: column;
         align-items: center;
       }
-      
+
       .btn {
         width: 100%;
         max-width: 250px;
@@ -294,15 +293,15 @@
       .offline-container {
         padding: 25px 15px;
       }
-      
+
       .icon {
         font-size: 3em;
       }
-      
+
       h1 {
         font-size: 1.6em;
       }
-      
+
       .content-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -321,20 +320,20 @@
     <div class="logo">
       <i class="fas fa-code"></i> Mohamed Tarek Abdelhady
     </div>
-    
+
     <div class="icon">
       <i class="fas fa-wifi-slash"></i>
     </div>
-    
+
     <h1>You're Offline</h1>
-    
+
     <div class="connection-status">
       <div class="status-dot"></div>
       <span>No internet connection detected</span>
     </div>
-    
+
     <p>It seems you've lost your internet connection. Don't worry - you can still access cached content and tools while offline.</p>
-    
+
     <div class="available-content">
       <h3><i class="fas fa-download"></i> Available Offline Content</h3>
       <div class="content-grid">
@@ -400,7 +399,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="action-buttons">
       <button class="btn btn-primary" onclick="checkConnection()">
         <i class="fas fa-sync-alt"></i> Check Connection
@@ -409,7 +408,7 @@
         <i class="fas fa-home"></i> Go to Homepage
       </button>
     </div>
-    
+
     <div class="offline-features">
       <h3>Offline Features</h3>
       <div class="features-list">
@@ -449,17 +448,15 @@
   </div>
 </footer>
 <script>
-    // Connection status detection
     function checkConnection() {
       const statusDot = document.querySelector('.status-dot');
       const statusText = document.querySelector('.connection-status span');
-      
+
       if (navigator.onLine) {
         statusDot.style.backgroundColor = '#4caf50';
         statusDot.style.animation = 'none';
         statusText.textContent = 'Connection restored!';
-        
-        // Redirect to homepage after a brief delay
+
         setTimeout(() => {
           window.location.href = './index.html';
         }, 1500);
@@ -467,40 +464,34 @@
         statusDot.style.backgroundColor = '#ff9800';
         statusDot.style.animation = 'blink 1.5s infinite';
         statusText.textContent = 'Still offline - checking again...';
-        
-        // Try again after 3 seconds
+
         setTimeout(checkConnection, 3000);
       }
     }
-    
-    // Listen for online/offline events
+
     window.addEventListener('online', () => {
       checkConnection();
     });
-    
+
     window.addEventListener('offline', () => {
       const statusDot = document.querySelector('.status-dot');
       const statusText = document.querySelector('.connection-status span');
-      
+
       statusDot.style.backgroundColor = '#ff9800';
       statusDot.style.animation = 'blink 1.5s infinite';
       statusText.textContent = 'Connection lost';
     });
-    
-    // Service Worker Registration (if supported)
+
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
           .then(registration => {
-            console.log('SW registered: ', registration);
           })
           .catch(registrationError => {
-            console.log('SW registration failed: ', registrationError);
           });
       });
     }
-    
-    // Initialize connection status
+
     document.addEventListener('DOMContentLoaded', () => {
       checkConnection();
     });

@@ -16,17 +16,15 @@
   <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
   <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="../icon.png" type="image/png"><link rel="apple-touch-icon" href="../apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"555 Timer Calculator","description":"Astable and monostable NE555 calculator.","url":"https://mohamed-tarek-abdelhady.vercel.app/sites/555-timer-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","author":{"@type":"Person","name":"Mohamed Tarek Abdelhady","url":"https://mohamed-tarek-abdelhady.vercel.app"}}</script>
   <style>
     :root{--bg:#0a0e1a;--bg2:#0f1322;--card:#161b2e;--acc:#3b82f6;--txt:#f1f5f9;--mut:#94a3b8;--mut2:#64748b;--br:rgba(255,255,255,.08);--ok:#22c55e;--warn:#f59e0b;--err:#ef4444;--r:14px;--mono:'JetBrains Mono',monospace}
     [data-theme="light"]{--bg:#f8fafc;--bg2:#f1f5f9;--card:#fff;--txt:#0f172a;--mut:#475569;--mut2:#94a3b8;--br:rgba(0,0,0,.1)}
     *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65}
     .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem 4rem}
-    header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--br)}
-    .top-in{max-width:1080px;margin:0 auto;padding:.8rem 1.25rem;display:flex;align-items:center;gap:.8rem}
-    .back{color:var(--mut);font-size:.9rem;font-weight:600}.back:hover{color:var(--acc)}
+    header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--br)}.back:hover{color:var(--acc)}
     .theme{margin-left:auto;background:var(--card);border:1px solid var(--br);color:var(--mut);width:40px;height:40px;border-radius:10px;cursor:pointer}
     .hero{text-align:center;padding:2.6rem 0 1.4rem}.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);background:rgba(59,130,246,.12);padding:.3rem .9rem;border-radius:999px;margin-bottom:.9rem}
     .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800}.hero p{color:var(--mut);max-width:660px;margin:.6rem auto 0}
