@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/555-timer-calculator.html">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>555 Timer Calculator (Astable + Monostable) | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Free 555 timer calculator: astable frequency, duty cycle, HIGH/LOW times and monostable pulse width with E12 part suggestions.">
+  <meta name="keywords" content="555 timer calculator, astable calculator, monostable pulse width, 1.44 formula, duty cycle, NE555, Mohamed Tarek Abdelhady, Eng. Mohamed Tarek Abdelhady Ali, محمد طارق عبدالهادي علي">
+  <meta name="author" content="Mohamed Tarek Abdelhady"><meta name="robots" content="index, follow"><meta name="theme-color" content="#0a0e1a">
+  <meta property="og:type" content="website"><meta property="og:title" content="555 Timer Calculator | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Astable frequency + duty and monostable pulse width for NE555."><meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/555-timer-calculator.html"><meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="555 Timer Calculator | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Astable frequency + duty and monostable pulse width for NE555."><meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="../icon.png" type="image/png"><link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"555 Timer Calculator","description":"Astable and monostable NE555 calculator.","url":"https://mohamed-tarek-abdelhady.vercel.app/sites/555-timer-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","author":{"@type":"Person","name":"Mohamed Tarek Abdelhady","url":"https://mohamed-tarek-abdelhady.vercel.app"}}</script>
+  <style>
+    :root{--bg:#0a0e1a;--bg2:#0f1322;--card:#161b2e;--acc:#3b82f6;--txt:#f1f5f9;--mut:#94a3b8;--mut2:#64748b;--br:rgba(255,255,255,.08);--ok:#22c55e;--warn:#f59e0b;--err:#ef4444;--r:14px;--mono:'JetBrains Mono',monospace}
+    [data-theme="light"]{--bg:#f8fafc;--bg2:#f1f5f9;--card:#fff;--txt:#0f172a;--mut:#475569;--mut2:#94a3b8;--br:rgba(0,0,0,.1)}
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65}
+    .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem 4rem}
+    header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--br)}
+    .top-in{max-width:1080px;margin:0 auto;padding:.8rem 1.25rem;display:flex;align-items:center;gap:.8rem}
+    .back{color:var(--mut);font-size:.9rem;font-weight:600}.back:hover{color:var(--acc)}
+    .theme{margin-left:auto;background:var(--card);border:1px solid var(--br);color:var(--mut);width:40px;height:40px;border-radius:10px;cursor:pointer}
+    .hero{text-align:center;padding:2.6rem 0 1.4rem}.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);background:rgba(59,130,246,.12);padding:.3rem .9rem;border-radius:999px;margin-bottom:.9rem}
+    .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800}.hero p{color:var(--mut);max-width:660px;margin:.6rem auto 0}
+    .seg{display:flex;background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:4px;gap:4px;margin:1.2rem auto 0;max-width:420px}.seg button{flex:1;border:0;background:transparent;color:var(--mut);font-weight:700;font-size:.85rem;padding:.6rem;border-radius:8px;cursor:pointer}.seg button.on{background:var(--acc);color:#fff}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.2rem}@media(max-width:860px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--br);border-radius:var(--r);padding:1.5rem}
+    .card h2{font-size:1.05rem;margin-bottom:.6rem}.card h2 i{color:var(--acc);margin-right:.5rem}
+    label.lbl{display:block;font-size:.8rem;font-weight:600;color:var(--mut);margin:.85rem 0 .35rem}
+    input,select{width:100%;background:var(--bg2);border:1px solid var(--br);color:var(--txt);border-radius:10px;padding:.7rem .85rem;font-size:.95rem}input:focus{outline:none;border-color:var(--acc)}
+    .row{display:grid;grid-template-columns:1fr 100px;gap:.6rem}
+    .btn{width:100%;margin-top:1.1rem;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;font-weight:700;border:0;border-radius:10px;padding:.85rem;cursor:pointer}
+    .res{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1rem}.cell{background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:.8rem .95rem}.cell small{display:block;color:var(--mut2);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}.cell b{font-family:var(--mono);font-size:1rem}
+    .cell.hl{border-color:rgba(59,130,246,.45);background:rgba(59,130,246,.08)}
+    .bar{height:26px;border-radius:8px;overflow:hidden;display:flex;border:1px solid var(--br);margin-top:.8rem}.bar div{height:100%}.bh{background:var(--acc)}.bl{background:repeating-linear-gradient(45deg,#334155,#334155 6px,#1e293b 6px,#1e293b 12px)}
+    .note{margin-top:.9rem;font-size:.85rem;color:var(--mut);background:var(--bg2);border:1px dashed var(--br);border-radius:10px;padding:.75rem .9rem}
+    .formula{font-family:var(--mono);font-size:.82rem;background:var(--bg2);border:1px solid var(--br);padding:.7rem .9rem;border-radius:10px;margin-top:1rem;color:var(--mut)}
+    footer{text-align:center;color:var(--mut2);font-size:.82rem;margin-top:2.5rem}
+  </style>
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="back" href="../Mohamed%20-%20my-sites.html"><i class="fas fa-arrow-left"></i> All tools</a><button class="theme" id="th"><i class="fas fa-moon"></i></button></div></header>
+<div class="wrap">
+  <div class="hero"><span class="pill">Timers · NE555 / LM555</span><h1>555 Timer Calculator</h1><p>Design astable oscillators and monostable one-shots. Live frequency, duty, pulse width and practical checks.</p></div>
+  <div class="seg"><button class="on" id="bA">Astable</button><button id="bM">Monostable</button></div>
+  <div class="grid">
+    <div class="card">
+      <h2><i class="fas fa-sliders"></i> Inputs</h2>
+      <div id="ast">
+        <div class="row"><input id="r1" type="number" value="10" step="any" min="0"><select id="r1u"><option value="1e3" selected>kΩ</option><option value="1">Ω</option><option value="1e6">MΩ</option></select></div>
+        <label class="lbl">R1 (charge resistor)</label>
+        <div class="row"><input id="r2" type="number" value="10" step="any" min="0"><select id="r2u"><option value="1e3" selected>kΩ</option><option value="1">Ω</option><option value="1e6">MΩ</option></select></div>
+        <label class="lbl">R2 (discharge resistor)</label>
+        <div class="row"><input id="cap" type="number" value="10" step="any" min="0"><select id="capu"><option value="1e-6" selected>µF</option><option value="1e-9">nF</option><option value="1e-12">pF</option><option value="1e-3">mF</option></select></div>
+        <label class="lbl">C1 timing capacitor</label>
+      </div>
+      <div id="mon" style="display:none">
+        <div class="row"><input id="rm" type="number" value="10" step="any" min="0"><select id="rmu"><option value="1e3" selected>kΩ</option><option value="1">Ω</option><option value="1e6">MΩ</option></select></div>
+        <label class="lbl">R timing resistor</label>
+        <div class="row"><input id="cm" type="number" value="10" step="any" min="0"><select id="cmu"><option value="1e-6" selected>µF</option><option value="1e-9">nF</option><option value="1e-12">pF</option></select></div>
+        <label class="lbl">C timing capacitor</label>
+      </div>
+      <button class="btn" id="go"><i class="fas fa-bolt"></i> Calculate</button>
+      <div class="formula" id="fml">f = 1.44 / ((R1+2·R2)·C)</div>
+    </div>
+    <div class="card"><h2><i class="fas fa-wave-square"></i> Results</h2>
+      <div class="res" id="res"></div>
+      <div class="bar" id="dutybar" title="Duty visual"><div class="bh" id="dh"></div><div class="bl" id="dl"></div></div>
+      <div class="note" id="note"></div>
+    </div>
+  </div>
+  <footer>© 2026 Mohamed Tarek Abdelhady · 555 Timer Calculator</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+$('th').onclick=()=>{const h=document.documentElement;h.dataset.theme=h.dataset.theme==='light'?'dark':'light';};
+let mode='a';
+$('bA').onclick=()=>{mode='a';$('bA').classList.add('on');$('bM').classList.remove('on');$('ast').style.display='';$('mon').style.display='none';$('fml').textContent='f = 1.44 / ((R1+2·R2)·C)   ·   TH=0.693(R1+R2)C   ·   TL=0.693·R2·C';calc();};
+$('bM').onclick=()=>{mode='m';$('bM').classList.add('on');$('bA').classList.remove('on');$('ast').style.display='none';$('mon').style.display='';$('fml').textContent='T = 1.1 · R · C  (output HIGH pulse width)';calc();};
+function fmtT(s){if(!isFinite(s)||s<0)return'–';if(s<1e-6)return(s*1e9).toFixed(1)+' ns';if(s<1e-3)return(s*1e6).toFixed(2)+' µs';if(s<1)return(s*1e3).toFixed(2)+' ms';if(s<60)return s.toFixed(3)+' s';return (s/60).toFixed(2)+' min';}
+function fmtF(f){if(!isFinite(f)||f<0)return'–';if(f>=1e6)return(f/1e6).toFixed(4)+' MHz';if(f>=1e3)return(f/1e3).toFixed(4)+' kHz';return f.toFixed(3)+' Hz';}
+function calc(){
+  if(mode==='a'){
+    const R1=parseFloat($('r1').value)*parseFloat($('r1u').value),R2=parseFloat($('r2').value)*parseFloat($('r2u').value),C=parseFloat($('cap').value)*parseFloat($('capu').value);
+    if(!(R1>0&&R2>0&&C>0)){$('note').textContent='Enter R1, R2, C > 0.';$('res').innerHTML='';return;}
+    const TH=0.693*(R1+R2)*C,TL=0.693*R2*C,T=TH+TL,f=1.44/((R1+2*R2)*C),d=100*TH/T;
+    $('res').innerHTML=`<div class="cell hl"><small>Frequency</small><b>${fmtF(f)}</b></div><div class="cell"><small>Period</small><b>${fmtT(T)}</b></div><div class="cell"><small>T HIGH</small><b>${fmtT(TH)}</b></div><div class="cell"><small>T LOW</small><b>${fmtT(TL)}</b></div><div class="cell"><small>Duty cycle</small><b>${d.toFixed(2)} %</b></div><div class="cell"><small>Mark:Space</small><b>${(TH/TL).toFixed(2)} : 1</b></div>`;
+    $('dh').style.width=d+'%';$('dl').style.width=(100-d)+'%';$('dutybar').style.display='flex';
+    let w=[];if(R1<1000)w.push('R1 < 1kΩ — use ≥1kΩ to protect discharge pin.');if(d<=50)w.push('Standard astable cannot go below 50% duty — add diode across R2 for <50%.');if(f>100e3)w.push('f > 100kHz — use CMOS 7555 for accuracy.');if(C<1e-9)w.push('C < 1nF — stray capacitance will dominate.');
+    $('note').innerHTML=(w.length?'<span style="color:var(--warn)">⚠ '+w.join('<br>')+'</span><br>':'<span style="color:var(--ok)">✓ Practical values.</span><br>')+'T<sub>H</sub>=0.693(R1+R2)C · T<sub>L</sub>=0.693·R2·C · standard duty always >50%.';
+  }else{
+    const R=parseFloat($('rm').value)*parseFloat($('rmu').value),C=parseFloat($('cm').value)*parseFloat($('cmu').value);
+    if(!(R>0&&C>0)){$('note').textContent='Enter R, C > 0.';$('res').innerHTML='';return;}
+    const T=1.1*R*C;
+    $('res').innerHTML=`<div class="cell hl"><small>Pulse width</small><b>${fmtT(T)}</b></div><div class="cell"><small>Max retrigger rate</small><b>${fmtF(1/(T||1))}</b></div><div class="cell"><small>R</small><b>${R>=1e6?(R/1e6)+' MΩ':R>=1e3?(R/1e3)+' kΩ':R+' Ω'}</b></div><div class="cell"><small>C</small><b>${C>=1e-6?(C*1e6)+' µF':(C*1e9)+' nF'}</b></div>`;
+    $('dutybar').style.display='none';
+    $('note').innerHTML='Trigger with a <1/3 Vcc negative pulse. Add 10nF from pin 5 to GND for noise immunity.';
+  }
+}
+$('go').onclick=calc;document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',calc));calc();
+</script>
+</body>
+</html>

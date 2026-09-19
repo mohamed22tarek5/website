@@ -54,6 +54,78 @@
       ]
     },
     {
+      "identifier": "urn:air:mohamed-tarek-abdelhady.vercel.app:tool:voltage-divider",
+      "displayName": "Voltage Divider Calculator",
+      "description": "Solve Vout, R1 or R2 with optional load, power and E12 resistor suggestions.",
+      "type": "text/html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/voltage-divider-calculator.html",
+      "representativeQueries": [
+        "voltage divider calculator",
+        "calculate Vout from R1 R2",
+        "find R1 for voltage divider"
+      ]
+    },
+    {
+      "identifier": "urn:air:mohamed-tarek-abdelhady.vercel.app:tool:555-timer",
+      "displayName": "555 Timer Calculator",
+      "description": "Astable frequency and duty cycle plus monostable pulse width for NE555.",
+      "type": "text/html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/555-timer-calculator.html",
+      "representativeQueries": [
+        "555 astable frequency calculator",
+        "NE555 duty cycle formula",
+        "monostable pulse width 555"
+      ]
+    },
+    {
+      "identifier": "urn:air:mohamed-tarek-abdelhady.vercel.app:tool:pcb-trace",
+      "displayName": "PCB Trace Width Calculator",
+      "description": "IPC-2221 trace width for current and temperature rise, with via sizing.",
+      "type": "text/html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/pcb-trace-width-calculator.html",
+      "representativeQueries": [
+        "PCB trace width for 2 amps",
+        "IPC-2221 trace calculator",
+        "via current capacity calculator"
+      ]
+    },
+    {
+      "identifier": "urn:air:mohamed-tarek-abdelhady.vercel.app:tool:dbm",
+      "displayName": "dB dBm Calculator",
+      "description": "Convert power and voltage ratios to dB, dBm to Watt, and cascade gain.",
+      "type": "text/html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/decibel-dbm-calculator.html",
+      "representativeQueries": [
+        "convert dBm to watts",
+        "dB gain calculator",
+        "cascade gain calculator"
+      ]
+    },
+    {
+      "identifier": "urn:air:mohamed-tarek-abdelhady.vercel.app:tool:opamp",
+      "displayName": "Op-Amp Gain Calculator",
+      "description": "Inverting, non-inverting, differential and follower gain with clipping check.",
+      "type": "text/html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/op-amp-gain-calculator.html",
+      "representativeQueries": [
+        "op amp gain calculator",
+        "non-inverting amplifier gain",
+        "differential amplifier output"
+      ]
+    },
+    {
+      "identifier": "urn:air:mohamed-tarek-abdelhady.vercel.app:tool:battery-solar",
+      "displayName": "Battery Life and Solar Calculator",
+      "description": "Battery runtime from capacity and load plus solar panel and battery sizing.",
+      "type": "text/html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/battery-solar-calculator.html",
+      "representativeQueries": [
+        "battery life calculator mAh",
+        "solar panel sizing calculator",
+        "how long will ESP32 run on battery"
+      ]
+    },
+    {
       "identifier": "urn:air:mohamed-tarek-abdelhady.vercel.app:page:portfolio",
       "displayName": "Mohamed Tarek Abdelhady Portfolio",
       "description": "Main portfolio page showcasing engineering projects and skills.",

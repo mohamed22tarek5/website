@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/pcb-trace-width-calculator.html">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>PCB Trace Width & Via Calculator (IPC-2221) | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Free IPC-2221 PCB trace width calculator: required copper width for current + temperature rise, resistance, voltage drop and via current capacity.">
+  <meta name="keywords" content="PCB trace width calculator, IPC-2221, copper weight, via current capacity, trace resistance, voltage drop, Mohamed Tarek Abdelhady, محمد طارق عبدالهادي علي">
+  <meta name="author" content="Mohamed Tarek Abdelhady"><meta name="robots" content="index, follow"><meta name="theme-color" content="#0a0e1a">
+  <meta property="og:type" content="website"><meta property="og:title" content="PCB Trace Width & Via Calculator | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="IPC-2221 trace sizing, resistance, drop and via sizing."><meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/pcb-trace-width-calculator.html"><meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="PCB Trace Width & Via Calculator | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="IPC-2221 trace sizing, resistance, drop and via sizing."><meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="../icon.png" type="image/png"><link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"PCB Trace Width Calculator","description":"IPC-2221 trace width, resistance and via calculator.","url":"https://mohamed-tarek-abdelhady.vercel.app/sites/pcb-trace-width-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","author":{"@type":"Person","name":"Mohamed Tarek Abdelhady","url":"https://mohamed-tarek-abdelhady.vercel.app"}}</script>
+  <style>
+    :root{--bg:#0a0e1a;--bg2:#0f1322;--card:#161b2e;--acc:#22c55e;--acc2:#16a34a;--txt:#f1f5f9;--mut:#94a3b8;--mut2:#64748b;--br:rgba(255,255,255,.08);--warn:#f59e0b;--r:14px;--mono:'JetBrains Mono',monospace}
+    [data-theme="light"]{--bg:#f8fafc;--bg2:#f1f5f9;--card:#fff;--txt:#0f172a;--mut:#475569;--mut2:#94a3b8;--br:rgba(0,0,0,.1)}
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65}
+    .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem 4rem}
+    header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--br)}
+    .top-in{max-width:1080px;margin:0 auto;padding:.8rem 1.25rem;display:flex;align-items:center;gap:.8rem}
+    .back{color:var(--mut);font-size:.9rem;font-weight:600}.back:hover{color:var(--acc)}
+    .theme{margin-left:auto;background:var(--card);border:1px solid var(--br);color:var(--mut);width:40px;height:40px;border-radius:10px;cursor:pointer}
+    .hero{text-align:center;padding:2.6rem 0 1.4rem}.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);background:rgba(34,197,94,.12);padding:.3rem .9rem;border-radius:999px;margin-bottom:.9rem}
+    .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800}.hero p{color:var(--mut);max-width:660px;margin:.6rem auto 0}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.4rem}@media(max-width:860px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--br);border-radius:var(--r);padding:1.5rem}
+    .card h2{font-size:1.05rem;margin-bottom:.6rem}.card h2 i{color:var(--acc);margin-right:.5rem}
+    label.lbl{display:block;font-size:.8rem;font-weight:600;color:var(--mut);margin:.85rem 0 .35rem}
+    input,select{width:100%;background:var(--bg2);border:1px solid var(--br);color:var(--txt);border-radius:10px;padding:.7rem .85rem;font-size:.95rem}input:focus,select:focus{outline:none;border-color:var(--acc)}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+    .seg{display:flex;background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:4px;gap:4px}.seg button{flex:1;border:0;background:transparent;color:var(--mut);font-weight:700;font-size:.82rem;padding:.55rem;border-radius:8px;cursor:pointer}.seg button.on{background:var(--acc);color:#fff}
+    .btn{width:100%;margin-top:1.1rem;background:linear-gradient(135deg,#22c55e,#0ea5e9);color:#fff;font-weight:700;border:0;border-radius:10px;padding:.85rem;cursor:pointer}
+    .res{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1rem}.cell{background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:.8rem .95rem}.cell small{display:block;color:var(--mut2);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}.cell b{font-family:var(--mono);font-size:.98rem}
+    .cell.hl{border-color:rgba(34,197,94,.5);background:rgba(34,197,94,.08)}
+    .note{margin-top:.9rem;font-size:.85rem;color:var(--mut);background:var(--bg2);border:1px dashed var(--br);border-radius:10px;padding:.75rem .9rem}
+    .tracevis{height:26px;background:var(--bg2);border:1px solid var(--br);border-radius:8px;margin-top:.8rem;position:relative;overflow:hidden}.tracevis div{position:absolute;top:4px;bottom:4px;left:8px;background:linear-gradient(90deg,#b45309,#f59e0b);border-radius:5px;min-width:3px}
+    footer{text-align:center;color:var(--mut2);font-size:.82rem;margin-top:2.5rem}
+  </style>
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="back" href="../Mohamed%20-%20my-sites.html"><i class="fas fa-arrow-left"></i> All tools</a><button class="theme" id="th"><i class="fas fa-moon"></i></button></div></header>
+<div class="wrap">
+  <div class="hero"><span class="pill">PCB · IPC-2221</span><h1>PCB Trace Width & Via Calculator</h1><p>Required copper width for your current + allowed rise, plus resistance, drop, loss and via count.</p></div>
+  <div class="grid">
+    <div class="card"><h2><i class="fas fa-microchip"></i> Inputs</h2>
+      <label class="lbl">Current (A)</label><input id="cur" type="number" value="2" step="any" min="0">
+      <div class="row2"><div><label class="lbl">Allowed rise ΔT (°C)</label><input id="dt" type="number" value="10" step="any" min="1" max="100"></div>
+      <div><label class="lbl">Copper weight</label><select id="oz"><option value="0.5">0.5 oz (17µm)</option><option value="1" selected>1 oz (35µm)</option><option value="2">2 oz (70µm)</option></select></div></div>
+      <label class="lbl">Layer</label><div class="seg"><button class="on" id="bExt">External</button><button id="bInt">Internal</button></div>
+      <div class="row2"><div><label class="lbl">Trace length (mm, for R/drop)</label><input id="len" type="number" value="50" step="any" min="0"></div>
+      <div><label class="lbl">Via drill (mm)</label><select id="via"><option value="0.3">0.3 mm (~0.5A)</option><option value="0.5" selected>0.5 mm (~1A)</option><option value="0.8">0.8 mm (~2A)</option><option value="1.0">1.0 mm (~3A)</option></select></div></div>
+      <button class="btn" id="go"><i class="fas fa-bolt"></i> Calculate</button>
+    </div>
+    <div class="card"><h2><i class="fas fa-ruler-horizontal"></i> Results</h2>
+      <div class="res">
+        <div class="cell hl"><small>Min width</small><b id="oW">–</b></div>
+        <div class="cell"><small>Width (mm)</small><b id="oWmm">–</b></div>
+        <div class="cell"><small>Cross-section</small><b id="oA">–</b></div>
+        <div class="cell"><small>Resistance</small><b id="oR">–</b></div>
+        <div class="cell"><small>Voltage drop</small><b id="oV">–</b></div>
+        <div class="cell"><small>Power loss</small><b id="oP">–</b></div>
+      </div>
+      <div class="tracevis"><div id="tbar"></div></div>
+      <div class="note" id="note"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1.25rem"><h2><i class="fas fa-circle-info"></i> Via guidance</h2><div class="note" id="vianote"></div></div>
+  <footer>© 2026 Mohamed Tarek Abdelhady · PCB Trace Width Calculator (IPC-2221, conservative — verify with fab)</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+$('th').onclick=()=>{const h=document.documentElement;h.dataset.theme=h.dataset.theme==='light'?'dark':'light';};
+let layer='ext';
+$('bExt').onclick=()=>{layer='ext';$('bExt').classList.add('on');$('bInt').classList.remove('on');calc();};
+$('bInt').onclick=()=>{layer='int';$('bInt').classList.add('on');$('bExt').classList.remove('on');calc();};
+function calc(){
+  const I=parseFloat($('cur').value),dT=parseFloat($('dt').value),oz=parseFloat($('oz').value),Lmm=parseFloat($('len').value)||0;
+  if(!(I>0&&dT>0)){ $('note').textContent='Enter current and ΔT > 0.';return;}
+  const k=layer==='ext'?0.048:0.024,b=0.44,c=0.725;
+  const area=Math.pow(I/(k*Math.pow(dT,b)),1/c); // mils^2
+  const thickMils=oz*1.378, wMils=area/thickMils, wMm=wMils*0.0254;
+  const areaMm2=area*0.0005067; // 1 mil^2 = 0.0005067 mm^2? (0.0254^2)
+  const rho=1.68e-8, L=Lmm/1000, A=areaMm2*1e-6;
+  const R=A>0?rho*L/A:0, V=I*R, P=I*V;
+  $('oW').textContent=wMils.toFixed(1)+' mil';
+  $('oWmm').textContent=wMm.toFixed(3)+' mm';
+  $('oA').textContent=area.toFixed(1)+' mil² ('+areaMm2.toFixed(4)+' mm²)';
+  $('oR').textContent=R<0.001?(R*1000).toFixed(3)+' mΩ':R.toFixed(4)+' Ω';
+  $('oV').textContent=V<1?((V*1000).toFixed(2)+' mV'):V.toFixed(4)+' V';
+  $('oP').textContent=P<1?((P*1000).toFixed(2)+' mW'):P.toFixed(4)+' W';
+  $('tbar').style.width=Math.min(100,Math.max(4,wMm/5*100))+'%';
+  $('note').innerHTML='IPC-2221 '+(layer==='ext'?'external':'internal')+', '+oz+'oz, ΔT '+dT+'°C. Add 20–30% margin; use polygons/pours above ~5A.';
+  const vd=parseFloat($('via').value);
+  const cap=vd<=0.3?0.5:vd<=0.5?1:vd<=0.8?2:3;
+  const n=Math.max(1,Math.ceil(I/cap));
+  $('vianote').innerHTML='A '+vd+'mm via carries ≈'+cap+'A (conservative, 1.6mm board, 25°C rise). For '+I+'A use <b>'+n+' × '+vd+'mm via'+(n>1?'s':'')+'</b> in parallel. Tent small vias; stitch high-current paths with multiple vias + teardrops.';
+}
+$('go').onclick=calc;document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',calc));calc();
+</script>
+</body>
+</html>

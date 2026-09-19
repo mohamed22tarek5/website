@@ -87,6 +87,66 @@
           "200": { "description": "Calculator page" }
         }
       }
+    },
+    "/sites/voltage-divider-calculator.html": {
+      "get": {
+        "operationId": "voltageDividerCalculator",
+        "summary": "Voltage Divider Calculator",
+        "description": "Solve Vout, R1 or R2 with optional load, power and E12 suggestions.",
+        "responses": {
+          "200": { "description": "Calculator page" }
+        }
+      }
+    },
+    "/sites/555-timer-calculator.html": {
+      "get": {
+        "operationId": "timer555Calculator",
+        "summary": "555 Timer Calculator",
+        "description": "Astable frequency/duty and monostable pulse width for NE555.",
+        "responses": {
+          "200": { "description": "Calculator page" }
+        }
+      }
+    },
+    "/sites/pcb-trace-width-calculator.html": {
+      "get": {
+        "operationId": "pcbTraceCalculator",
+        "summary": "PCB Trace Width Calculator",
+        "description": "IPC-2221 trace width, resistance, drop and via sizing.",
+        "responses": {
+          "200": { "description": "Calculator page" }
+        }
+      }
+    },
+    "/sites/decibel-dbm-calculator.html": {
+      "get": {
+        "operationId": "decibelDbmCalculator",
+        "summary": "dB dBm Calculator",
+        "description": "Ratios to dB, dBm to power/voltage, cascade gain.",
+        "responses": {
+          "200": { "description": "Calculator page" }
+        }
+      }
+    },
+    "/sites/op-amp-gain-calculator.html": {
+      "get": {
+        "operationId": "opAmpGainCalculator",
+        "summary": "Op-Amp Gain Calculator",
+        "description": "Inverting, non-inverting, differential and follower gain with clipping check.",
+        "responses": {
+          "200": { "description": "Calculator page" }
+        }
+      }
+    },
+    "/sites/battery-solar-calculator.html": {
+      "get": {
+        "operationId": "batterySolarCalculator",
+        "summary": "Battery Life and Solar Calculator",
+        "description": "Battery runtime plus solar panel and battery sizing.",
+        "responses": {
+          "200": { "description": "Calculator page" }
+        }
+      }
     }
   },
   "x-service-info": {

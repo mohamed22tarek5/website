@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/battery-solar-calculator.html">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Battery Life & Solar Sizing Calculator | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Free battery runtime calculator and off-grid solar sizer: battery life from mAh/mA, solar panel watts and battery Ah for ESP32, Arduino and IoT loads.">
+  <meta name="keywords" content="battery life calculator, battery runtime, solar panel sizing, off-grid calculator, ESP32 power, IoT battery, Mohamed Tarek Abdelhady, محمد طارق عبدالهادي علي">
+  <meta name="author" content="Mohamed Tarek Abdelhady"><meta name="robots" content="index, follow"><meta name="theme-color" content="#0a0e1a">
+  <meta property="og:type" content="website"><meta property="og:title" content="Battery Life & Solar Sizing Calculator | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Runtime from capacity + solar/battery sizing for your daily load."><meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/battery-solar-calculator.html"><meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Battery Life & Solar Sizing Calculator | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Runtime from capacity + solar/battery sizing for your daily load."><meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="../icon.png" type="image/png"><link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Battery Life and Solar Calculator","description":"Battery runtime and solar sizing calculator.","url":"https://mohamed-tarek-abdelhady.vercel.app/sites/battery-solar-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","author":{"@type":"Person","name":"Mohamed Tarek Abdelhady","url":"https://mohamed-tarek-abdelhady.vercel.app"}}</script>
+  <style>
+    :root{--bg:#0a0e1a;--bg2:#0f1322;--card:#161b2e;--acc:#0ea5e9;--txt:#f1f5f9;--mut:#94a3b8;--mut2:#64748b;--br:rgba(255,255,255,.08);--ok:#22c55e;--warn:#f59e0b;--r:14px;--mono:'JetBrains Mono',monospace}
+    [data-theme="light"]{--bg:#f8fafc;--bg2:#f1f5f9;--card:#fff;--txt:#0f172a;--mut:#475569;--mut2:#94a3b8;--br:rgba(0,0,0,.1)}
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65}
+    .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem 4rem}
+    header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--br)}
+    .top-in{max-width:1080px;margin:0 auto;padding:.8rem 1.25rem;display:flex;align-items:center;gap:.8rem}
+    .back{color:var(--mut);font-size:.9rem;font-weight:600}.back:hover{color:var(--acc)}
+    .theme{margin-left:auto;background:var(--card);border:1px solid var(--br);color:var(--mut);width:40px;height:40px;border-radius:10px;cursor:pointer}
+    .hero{text-align:center;padding:2.6rem 0 1.4rem}.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);background:rgba(14,165,233,.12);padding:.3rem .9rem;border-radius:999px;margin-bottom:.9rem}
+    .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800}.hero p{color:var(--mut);max-width:680px;margin:.6rem auto 0}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.4rem}@media(max-width:860px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--br);border-radius:var(--r);padding:1.5rem}
+    .card h2{font-size:1.05rem;margin-bottom:.4rem}.card h2 i{color:var(--acc);margin-right:.5rem}
+    .sub{font-size:.82rem;color:var(--mut)}
+    label.lbl{display:block;font-size:.8rem;font-weight:600;color:var(--mut);margin:.85rem 0 .35rem}
+    input,select{width:100%;background:var(--bg2);border:1px solid var(--br);color:var(--txt);border-radius:10px;padding:.7rem .85rem;font-size:.95rem}input:focus,select:focus{outline:none;border-color:var(--acc)}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+    .chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.6rem}.chips button{background:var(--bg2);border:1px solid var(--br);color:var(--mut);border-radius:999px;padding:.35rem .8rem;font-size:.78rem;font-weight:600;cursor:pointer}.chips button:hover{border-color:var(--acc);color:var(--acc)}
+    .res{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1rem}.cell{background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:.8rem .95rem}.cell small{display:block;color:var(--mut2);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}.cell b{font-family:var(--mono);font-size:.95rem}
+    .cell.hl{border-color:rgba(14,165,233,.5);background:rgba(14,165,233,.08)}
+    .note{margin-top:.9rem;font-size:.85rem;color:var(--mut);background:var(--bg2);border:1px dashed var(--br);border-radius:10px;padding:.75rem .9rem}
+    footer{text-align:center;color:var(--mut2);font-size:.82rem;margin-top:2.5rem}
+  </style>
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="back" href="../Mohamed%20-%20my-sites.html"><i class="fas fa-arrow-left"></i> All tools</a><button class="theme" id="th"><i class="fas fa-moon"></i></button></div></header>
+<div class="wrap">
+  <div class="hero"><span class="pill">Power · Off-grid · IoT</span><h1>Battery Life & Solar Sizing</h1><p>How long will it run? What panel + battery do you need? Sized for Arduino, ESP32 and IoT loads.</p></div>
+  <div class="grid">
+    <div class="card"><h2><i class="fas fa-battery-full"></i> Battery runtime</h2><div class="sub">Life = Capacity / Load × efficiency</div>
+      <div class="chips"><button data-cap="1000" data-load="170">ESP32 avg ~170mA</button><button data-cap="2500" data-load="50">Arduino Uno ~50mA</button><button data-cap="3000" data-load="15">ESP32 deep-sleep avg</button></div>
+      <div class="row2"><div><label class="lbl">Capacity (mAh)</label><input id="cap" type="number" value="3000" step="any" min="0"></div>
+      <div><label class="lbl">Avg load (mA)</label><input id="load" type="number" value="170" step="any" min="0"></div></div>
+      <div class="row2"><div><label class="lbl">Usable / efficiency (%)</label><input id="eff" type="number" value="85" min="1" max="100"></div>
+      <div><label class="lbl">System voltage (V)</label><input id="volt" type="number" value="3.7" step="any" min="0"></div></div>
+      <div class="res"><div class="cell hl"><small>Runtime</small><b id="oLife">–</b></div><div class="cell"><small>Energy</small><b id="oWh">–</b></div></div>
+      <div class="note" id="nLife"></div>
+    </div>
+    <div class="card"><h2><i class="fas fa-solar-panel"></i> Solar + battery sizing</h2><div class="sub">Daily load → panel watts + battery Ah</div>
+      <label class="lbl">Daily energy need (Wh/day)</label><input id="wh" type="number" value="20" step="any" min="0">
+      <div class="row2"><div><label class="lbl">Peak sun hours</label><input id="sun" type="number" value="5" step="any" min="0.5" max="12"></div>
+      <div><label class="lbl">System losses (%)</label><input id="loss" type="number" value="25" min="0" max="60"></div></div>
+      <div class="row2"><div><label class="lbl">Battery voltage (V)</label><select id="bv"><option value="12" selected>12 V</option><option value="24">24 V</option><option value="3.7">3.7 V (Li-ion)</option><option value="5">5 V (USB bank)</option></select></div>
+      <div><label class="lbl">Autonomy (days)</label><input id="aut" type="number" value="2" step="any" min="1"></div></div>
+      <label class="lbl">Max depth of discharge (%)</label><input id="dod" type="number" value="80" min="10" max="100">
+      <div class="res"><div class="cell hl"><small>Panel needed</small><b id="oPanel">–</b></div><div class="cell"><small>Battery needed</small><b id="oBat">–</b></div></div>
+      <div class="note" id="nSolar"></div>
+    </div>
+  </div>
+  <footer>© 2026 Mohamed Tarek Abdelhady · Battery Life & Solar Sizing Calculator</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+$('th').onclick=()=>{const h=document.documentElement;h.dataset.theme=h.dataset.theme==='light'?'dark':'light';};
+document.querySelectorAll('.chips button').forEach(b=>b.onclick=()=>{$('cap').value=b.dataset.cap;$('load').value=b.dataset.load;calc();});
+function fmtH(h){if(!isFinite(h))return'–';if(h<1)return(h*60).toFixed(0)+' min';if(h<48)return h.toFixed(1)+' h';return(h/24).toFixed(2)+' days';}
+function calc(){
+  const C=parseFloat($('cap').value),L=parseFloat($('load').value),e=(parseFloat($('eff').value)||85)/100,V=parseFloat($('volt').value)||3.7;
+  if(C>0&&L>0){const h=C/L*e;$('oLife').textContent=fmtH(h)+'  ('+h.toFixed(1)+' h)';
+    $('oWh').textContent=(C/1000*V).toFixed(2)+' Wh';
+    $('nLife').innerHTML='At '+L+'mA average. Peukert/high-drain cuts real life 10–30% — measure sleep + TX peaks separately for ESP32/LoRa.';
+  }
+  const Wh=parseFloat($('wh').value),sun=parseFloat($('sun').value)||5,loss=(parseFloat($('loss').value)||25)/100;
+  const Bv=parseFloat($('bv').value)||12,aut=parseFloat($('aut').value)||1,dod=(parseFloat($('dod').value)||80)/100;
+  if(Wh>0&&sun>0){const panel=Wh/(sun*(1-loss));
+    const batAh=Wh*aut/(Bv*dod*0.9);
+    $('oPanel').textContent='≥ '+panel.toFixed(1)+' W  (≈'+(panel*1.3).toFixed(0)+'W with margin)';
+    $('oBat').textContent=batAh.toFixed(1)+' Ah @'+Bv+'V';
+    $('nSolar').innerHTML='Assumes MPPT controller. Pick next standard panel size up (20/50/100W…) + 30% margin for dust/heat. LiFePO4: DoD 80% ok; lead-acid: use 50%.';
+  }
+}
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',calc));calc();
+</script>
+</body>
+</html>

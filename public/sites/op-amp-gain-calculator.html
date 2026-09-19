@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/op-amp-gain-calculator.html">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Op-Amp Gain Calculator | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Free op-amp gain calculator: inverting, non-inverting, differential and follower with gain in dB, output swing and saturation check.">
+  <meta name="keywords" content="op-amp gain calculator, inverting non-inverting, differential amplifier, GBW, saturation, Mohamed Tarek Abdelhady, محمد طارق عبدالهادي علي">
+  <meta name="author" content="Mohamed Tarek Abdelhady"><meta name="robots" content="index, follow"><meta name="theme-color" content="#0a0e1a">
+  <meta property="og:type" content="website"><meta property="og:title" content="Op-Amp Gain Calculator | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Gain, dB, Vout and clipping check for 4 topologies."><meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/op-amp-gain-calculator.html"><meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Op-Amp Gain Calculator | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Gain, dB, Vout and clipping check for 4 topologies."><meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="../icon.png" type="image/png"><link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Op-Amp Gain Calculator","description":"Op-amp gain and output calculator.","url":"https://mohamed-tarek-abdelhady.vercel.app/sites/op-amp-gain-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","author":{"@type":"Person","name":"Mohamed Tarek Abdelhady","url":"https://mohamed-tarek-abdelhady.vercel.app"}}</script>
+  <style>
+    :root{--bg:#0a0e1a;--bg2:#0f1322;--card:#161b2e;--acc:#f59e0b;--txt:#f1f5f9;--mut:#94a3b8;--mut2:#64748b;--br:rgba(255,255,255,.08);--ok:#22c55e;--warn:#f59e0b;--err:#ef4444;--r:14px;--mono:'JetBrains Mono',monospace}
+    [data-theme="light"]{--bg:#f8fafc;--bg2:#f1f5f9;--card:#fff;--txt:#0f172a;--mut:#475569;--mut2:#94a3b8;--br:rgba(0,0,0,.1)}
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65}
+    .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem 4rem}
+    header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--br)}
+    .top-in{max-width:1080px;margin:0 auto;padding:.8rem 1.25rem;display:flex;align-items:center;gap:.8rem}
+    .back{color:var(--mut);font-size:.9rem;font-weight:600}.back:hover{color:var(--acc)}
+    .theme{margin-left:auto;background:var(--card);border:1px solid var(--br);color:var(--mut);width:40px;height:40px;border-radius:10px;cursor:pointer}
+    .hero{text-align:center;padding:2.6rem 0 1.4rem}.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);background:rgba(245,158,11,.13);padding:.3rem .9rem;border-radius:999px;margin-bottom:.9rem}
+    .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800}.hero p{color:var(--mut);max-width:660px;margin:.6rem auto 0}
+    .seg{display:flex;background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:4px;gap:4px;margin:1.2rem auto 0;max-width:640px;flex-wrap:wrap}.seg button{flex:1;min-width:140px;border:0;background:transparent;color:var(--mut);font-weight:700;font-size:.82rem;padding:.6rem;border-radius:8px;cursor:pointer}.seg button.on{background:var(--acc);color:#1a1005}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.2rem}@media(max-width:860px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--br);border-radius:var(--r);padding:1.5rem}
+    .card h2{font-size:1.05rem;margin-bottom:.6rem}.card h2 i{color:var(--acc);margin-right:.5rem}
+    label.lbl{display:block;font-size:.8rem;font-weight:600;color:var(--mut);margin:.85rem 0 .35rem}
+    input,select{width:100%;background:var(--bg2);border:1px solid var(--br);color:var(--txt);border-radius:10px;padding:.7rem .85rem;font-size:.95rem}input:focus{outline:none;border-color:var(--acc)}
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+    .btn{width:100%;margin-top:1.1rem;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-weight:700;border:0;border-radius:10px;padding:.85rem;cursor:pointer}
+    .res{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1rem}.cell{background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:.8rem .95rem}.cell small{display:block;color:var(--mut2);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em}.cell b{font-family:var(--mono);font-size:.98rem}
+    .cell.hl{border-color:rgba(245,158,11,.5);background:rgba(245,158,11,.08)}
+    .note{margin-top:.9rem;font-size:.85rem;color:var(--mut);background:var(--bg2);border:1px dashed var(--br);border-radius:10px;padding:.75rem .9rem}
+    .formula{font-family:var(--mono);font-size:.82rem;background:var(--bg2);border:1px solid var(--br);padding:.7rem .9rem;border-radius:10px;margin-top:1rem;color:var(--mut)}
+    footer{text-align:center;color:var(--mut2);font-size:.82rem;margin-top:2.5rem}
+  </style>
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="back" href="../Mohamed%20-%20my-sites.html"><i class="fas fa-arrow-left"></i> All tools</a><button class="theme" id="th"><i class="fas fa-moon"></i></button></div></header>
+<div class="wrap">
+  <div class="hero"><span class="pill">Analog · Op-amps</span><h1>Op-Amp Gain Calculator</h1><p>Inverting, non-inverting, differential and follower — gain, dB, output and rail-clipping check.</p></div>
+  <div class="seg"><button class="on" data-t="noninv">Non-inverting</button><button data-t="inv">Inverting</button><button data-t="diff">Differential</button><button data-t="follow">Follower</button></div>
+  <div class="grid">
+    <div class="card"><h2><i class="fas fa-sliders"></i> Inputs</h2>
+      <div class="row2"><div><label class="lbl">Rin / R1 (kΩ)</label><input id="rin" type="number" value="10" step="any" min="0"></div>
+      <div><label class="lbl">Rf / R2 (kΩ)</label><input id="rf" type="number" value="100" step="any" min="0"></div></div>
+      <div class="row2"><div><label class="lbl">Vin / V+ (V)</label><input id="vin" type="number" value="0.5" step="any"></div>
+      <div><label class="lbl">V− (diff only, V)</label><input id="vm" type="number" value="0" step="any"></div></div>
+      <div class="row2"><div><label class="lbl">Supply +V (V)</label><input id="vp" type="number" value="12" step="any"></div>
+      <div><label class="lbl">Supply −V (V)</label><input id="vn" type="number" value="-12" step="any"></div></div>
+      <button class="btn" id="go"><i class="fas fa-bolt"></i> Calculate</button>
+      <div class="formula" id="fml">G = 1 + Rf/Rin</div>
+    </div>
+    <div class="card"><h2><i class="fas fa-chart-line"></i> Results</h2>
+      <div class="res"><div class="cell hl"><small>Voltage gain</small><b id="oG">–</b></div><div class="cell"><small>Gain (dB)</small><b id="oDb">–</b></div>
+      <div class="cell"><small>Output Vout</small><b id="oV">–</b></div><div class="cell"><small>Status</small><b id="oS">–</b></div></div>
+      <div class="note" id="note"></div>
+    </div>
+  </div>
+  <footer>© 2026 Mohamed Tarek Abdelhady · Op-Amp Gain Calculator</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+$('th').onclick=()=>{const h=document.documentElement;h.dataset.theme=h.dataset.theme==='light'?'dark':'light';};
+let topo='noninv';
+const F={noninv:'G = 1 + Rf/Rin',inv:'G = −Rf/Rin',diff:'Vout = (Rf/R1)·(V+ − V−)  [matched]',follow:'G = 1  (buffer)'};
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));b.classList.add('on');topo=b.dataset.t;$('fml').textContent=F[topo];calc();});
+function calc(){
+  const Rin=parseFloat($('rin').value)*1000,Rf=parseFloat($('rf').value)*1000;
+  const Vin=parseFloat($('vin').value),Vm=parseFloat($('vm').value)||0;
+  const Vp=parseFloat($('vp').value),Vn=parseFloat($('vn').value);
+  let G=1,Vout=Vin;
+  if(topo==='noninv'){if(!(Rin>0)){note('Rin must be > 0');return;}G=1+Rf/Rin;Vout=G*Vin;}
+  if(topo==='inv'){if(!(Rin>0)){note('Rin must be > 0');return;}G=-Rf/Rin;Vout=G*Vin;}
+  if(topo==='diff'){const R1=Rin;if(!(R1>0)){note('R1 must be > 0');return;}G=Rf/R1;Vout=G*(Vin-Vm);}
+  if(topo==='follow'){G=1;Vout=Vin;}
+  $('oG').textContent=(G>=0?'+':'')+G.toFixed(4)+' V/V';
+  $('oDb').textContent=(G===0?'−∞':(20*Math.log10(Math.abs(G)||1e-12)).toFixed(2)+' dB');
+  $('oV').textContent=Vout.toFixed(4)+' V';
+  const head=1.5,hi=Vp-head,lo=Vn+head;
+  let s,msg;
+  if(Vout>hi||Vout<lo){s='⚠ CLIPPED';msg='Output '+Vout.toFixed(2)+'V exceeds usable swing ['+lo.toFixed(1)+'V … '+hi.toFixed(1)+'V] (≈ rails ∓1.5V). Lower gain/input or raise supplies. Rail-to-rail op-amps recover ~0.1V.';}
+  else{s='✓ Linear';msg='Within swing ['+lo.toFixed(1)+'V … '+hi.toFixed(1)+'V]. '+(topo==='noninv'?'Zin ≈ op-amp input (very high).':topo==='inv'?'Zin ≈ Rin = '+(Rin/1000)+'kΩ.':topo==='diff'?'Match R pairs (0.1%) for good CMRR.':'Ideal buffer: high Zin, low Zout.');}
+  $('oS').textContent=s;$('note').innerHTML=msg+'<br>Ideal model — check GBW: f<sub>max</sub> ≈ GBW/|G|.';
+  function note(m){$('note').textContent=m;}
+}
+$('go').onclick=calc;document.querySelectorAll('input').forEach(e=>e.addEventListener('input',calc));calc();
+</script>
+</body>
+</html>

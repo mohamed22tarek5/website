@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/decibel-dbm-calculator.html">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>dB / dBm Calculator — Gain, Power & Voltage | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Free decibel calculator: power/voltage ratios to dB, dBm to Watt/mW/Vrms, and cascaded stage gain — for RF, audio and communications.">
+  <meta name="keywords" content="dB calculator, dBm to watt, dBm to mW, voltage to dB, cascade gain, RF calculator, Mohamed Tarek Abdelhady, محمد طارق عبدالهادي علي">
+  <meta name="author" content="Mohamed Tarek Abdelhady"><meta name="robots" content="index, follow"><meta name="theme-color" content="#0a0e1a">
+  <meta property="og:type" content="website"><meta property="og:title" content="dB / dBm Calculator | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Ratios to dB, dBm to power/voltage, cascade gain."><meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/decibel-dbm-calculator.html"><meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="dB / dBm Calculator | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Ratios to dB, dBm to power/voltage, cascade gain."><meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="../icon.png" type="image/png"><link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"dB dBm Calculator","description":"Decibel, dBm power and cascade gain calculator.","url":"https://mohamed-tarek-abdelhady.vercel.app/sites/decibel-dbm-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","author":{"@type":"Person","name":"Mohamed Tarek Abdelhady","url":"https://mohamed-tarek-abdelhady.vercel.app"}}</script>
+  <style>
+    :root{--bg:#0a0e1a;--bg2:#0f1322;--card:#161b2e;--acc:#8b5cf6;--txt:#f1f5f9;--mut:#94a3b8;--mut2:#64748b;--br:rgba(255,255,255,.08);--r:14px;--mono:'JetBrains Mono',monospace}
+    [data-theme="light"]{--bg:#f8fafc;--bg2:#f1f5f9;--card:#fff;--txt:#0f172a;--mut:#475569;--mut2:#94a3b8;--br:rgba(0,0,0,.1)}
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65}
+    .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem 4rem}
+    header.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--br)}
+    .top-in{max-width:1080px;margin:0 auto;padding:.8rem 1.25rem;display:flex;align-items:center;gap:.8rem}
+    .back{color:var(--mut);font-size:.9rem;font-weight:600}.back:hover{color:var(--acc)}
+    .theme{margin-left:auto;background:var(--card);border:1px solid var(--br);color:var(--mut);width:40px;height:40px;border-radius:10px;cursor:pointer}
+    .hero{text-align:center;padding:2.6rem 0 1.4rem}.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);background:rgba(139,92,246,.13);padding:.3rem .9rem;border-radius:999px;margin-bottom:.9rem}
+    .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800}.hero p{color:var(--mut);max-width:660px;margin:.6rem auto 0}
+    .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-top:1.4rem}@media(max-width:960px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--br);border-radius:var(--r);padding:1.5rem}
+    .card h2{font-size:1rem;margin-bottom:.4rem}.card h2 i{color:var(--acc);margin-right:.5rem}
+    .sub{font-size:.82rem;color:var(--mut);margin-bottom:.4rem}
+    label.lbl{display:block;font-size:.78rem;font-weight:600;color:var(--mut);margin:.8rem 0 .3rem}
+    input,select{width:100%;background:var(--bg2);border:1px solid var(--br);color:var(--txt);border-radius:10px;padding:.68rem .8rem;font-size:.93rem}input:focus{outline:none;border-color:var(--acc)}
+    .out{font-family:var(--mono);background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:.7rem .85rem;margin-top:.7rem;font-size:.92rem;min-height:58px}
+    .out b{color:var(--acc)}.note{font-size:.8rem;color:var(--mut);margin-top:.6rem}
+    footer{text-align:center;color:var(--mut2);font-size:.82rem;margin-top:2.5rem}
+  </style>
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="back" href="../Mohamed%20-%20my-sites.html"><i class="fas fa-arrow-left"></i> All tools</a><button class="theme" id="th"><i class="fas fa-moon"></i></button></div></header>
+<div class="wrap">
+  <div class="hero"><span class="pill">RF · Audio · Comms</span><h1>dB / dBm Calculator</h1><p>Ratios → dB, dBm ⇄ Watt / mW / Vrms, and multi-stage cascade gain. Power uses 10·log, voltage uses 20·log.</p></div>
+  <div class="grid">
+    <div class="card"><h2><i class="fas fa-scale-balanced"></i> Ratio → dB</h2><div class="sub">P2/P1 (power) or V2/V1 (same-Z voltage)</div>
+      <label class="lbl">P2 (out)</label><input id="p2" type="number" value="2" step="any"><label class="lbl">P1 (in)</label><input id="p1" type="number" value="1" step="any">
+      <div class="out" id="oA">–</div>
+      <label class="lbl">V2 (out)</label><input id="v2" type="number" value="2" step="any"><label class="lbl">V1 (in)</label><input id="v1" type="number" value="1" step="any">
+      <div class="out" id="oAv">–</div>
+    </div>
+    <div class="card"><h2><i class="fas fa-bolt"></i> dBm ⇄ Power</h2><div class="sub">0 dBm = 1 mW · dBm = 10·log(P/1mW)</div>
+      <label class="lbl">Power (dBm)</label><input id="dbm" type="number" value="20" step="any">
+      <div class="out" id="oB">–</div>
+      <label class="lbl">Impedance for Vrms (Ω)</label><select id="zbm"><option value="50" selected>50 Ω (RF)</option><option value="75">75 Ω (video)</option><option value="600">600 Ω (audio)</option><option value="8">8 Ω (speaker)</option></select>
+      <div class="note">Also: 30 dBm = 1 W · 0 dBW = 30 dBm · dBW = dBm − 30.</div>
+      <label class="lbl">Power in Watt → dBm</label><input id="watt" type="number" value="0.1" step="any">
+      <div class="out" id="oB2">–</div>
+    </div>
+    <div class="card"><h2><i class="fas fa-layer-group"></i> Cascade gain</h2><div class="sub">Stages add in dB: G = Σgᵢ</div>
+      <label class="lbl">Input power (dBm)</label><input id="cin" type="number" value="-10" step="any">
+      <label class="lbl">Stage gains/losses, comma separated (dB)</label><input id="stages" type="text" value="20, -3, 15" inputmode="text">
+      <div class="out" id="oC">–</div>
+      <div class="note">Example: LNA +20dB, cable −3dB, PA +15dB → +32dB total.</div>
+    </div>
+  </div>
+  <footer>© 2026 Mohamed Tarek Abdelhady · dB / dBm Calculator</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+$('th').onclick=()=>{const h=document.documentElement;h.dataset.theme=h.dataset.theme==='light'?'dark':'light';};
+function fmtP(w){if(!isFinite(w)||w<0)return'–';if(w>=1000)return(w/1000).toFixed(3)+' kW';if(w>=1)return w.toFixed(4)+' W';if(w>=1e-3)return(w*1e3).toFixed(3)+' mW';if(w>=1e-6)return(w*1e6).toFixed(2)+' µW';return(w*1e9).toFixed(1)+' nW';}
+function calc(){
+  const P2=parseFloat($('p2').value),P1=parseFloat($('p1').value);
+  $('oA').innerHTML=(P2>0&&P1>0)?('Gain = <b>'+(10*Math.log10(P2/P1)).toFixed(3)+' dB</b>  (×'+(P2/P1).toFixed(4)+')'):'Enter P1,P2 > 0';
+  const V2=parseFloat($('v2').value),V1=parseFloat($('v1').value);
+  $('oAv').innerHTML=(V2>0&&V1>0)?('Gain = <b>'+(20*Math.log10(V2/V1)).toFixed(3)+' dB</b>  (×'+(V2/V1).toFixed(4)+')'):'Enter V1,V2 > 0';
+  const dBm=parseFloat($('dbm').value),Z=parseFloat($('zbm').value)||50;
+  if(isFinite(dBm)){const mW=Math.pow(10,dBm/10),W=mW/1000,V=Math.sqrt(W*Z);
+    $('oB').innerHTML='<b>'+mW.toPrecision(5)+' mW</b> · '+fmtP(W)+' · '+V.toPrecision(5)+' Vrms @'+Z+'Ω · '+(dBm-30).toFixed(2)+' dBW';}
+  const W2=parseFloat($('watt').value);
+  $('oB2').innerHTML=(W2>0)?('<b>'+(10*Math.log10(W2*1000)).toFixed(3)+' dBm</b> · '+(10*Math.log10(W2)).toFixed(3)+' dBW'):'Enter W > 0';
+  const cin=parseFloat($('cin').value);
+  const st=$('stages').value.split(',').map(s=>parseFloat(s.trim())).filter(isFinite);
+  const G=st.reduce((a,b)=>a+b,0);
+  if(isFinite(cin)&&st.length){const cout=cin+G,W=Math.pow(10,(cout-30)/10);
+    $('oC').innerHTML='Total gain <b>'+(G>=0?'+':'')+G.toFixed(2)+' dB</b> (×'+Math.pow(10,G/10).toPrecision(5)+' power)<br>Output <b>'+cout.toFixed(2)+' dBm</b> = '+fmtP(W);}
+  else $('oC').textContent='Enter input + stages.';
+}
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',calc));calc();
+</script>
+</body>
+</html>

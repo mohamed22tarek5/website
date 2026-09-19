@@ -87,8 +87,8 @@ I am a **Communication & Electronics Engineer** who builds integrated hardwareâ€
 ### 2. Engineering Tools (`public/sites/`)
 Interactive calculators, converters, and games:
 
-- Electrical: `electrical-calculation.html`, `ohms-law-calculator.html`, `Power-Factor-Calculator.html`, `Power-Triangle-Calculator.html`, `Transformer-Turns-Calculator.html`, `Wire-Gauge-Calculator.html`, `Battery-Capacity-&-Runtime-Calculator.html`, `buck-boost-calculator.html`, `RC-Filter-&-LC-Resonance-Calculator.html`
-- Electronics: `capacitor-calculator.html`, `Indactance-calculator.html`, `resistor-calculator.html`, `resistor-for-led.html`, `LCD-Custom-Character-Generator.html`
+- Electrical: `electrical-calculation.html`, `ohms-law-calculator.html`, `Power-Factor-Calculator.html`, `Power-Triangle-Calculator.html`, `Transformer-Turns-Calculator.html`, `Wire-Gauge-Calculator.html`, `Battery-Capacity-&-Runtime-Calculator.html`, `buck-boost-calculator.html`, `RC-Filter-&-LC-Resonance-Calculator.html`, `voltage-divider-calculator.html`, `decibel-dbm-calculator.html`, `battery-solar-calculator.html`
+- Electronics: `capacitor-calculator.html`, `Indactance-calculator.html`, `resistor-calculator.html`, `resistor-for-led.html`, `LCD-Custom-Character-Generator.html`, `555-timer-calculator.html`, `op-amp-gain-calculator.html`, `pcb-trace-width-calculator.html`
 - Utilities: `Length-Converter.html`, `to-do-list.html`, `Medication-Reminder.html`, `Mastering Linux Commands.html`, `ai-sites-list.html`, `dashboard.html`
 - Games: `3d-car-game.html`, `dino-game.html`, `Race-Game.html`
 
