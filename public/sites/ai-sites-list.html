@@ -510,6 +510,7 @@
     .loader-text { margin-top: var(--space-lg); font-size: 0.875rem; color: var(--color-text-tertiary); font-weight: 500; }
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
+<link rel="stylesheet" href="mta-chrome.css">
 </head>
 <body>
   <div class="loader" id="loader" aria-hidden="true">
@@ -521,24 +522,14 @@
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
 
-  <header class="header" id="header" role="banner">
-    <div class="container">
-      <a href="../index.html" class="logo" aria-label="Mohamed Tarek Abdelhady - Home">
-        <span class="logo-icon">MT</span>
-        <span>Mohamed Tarek Abdelhady</span>
-      </a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
-        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-      </button>
-      <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
-        <a href="../index.html" class="nav-link">Home</a>
-        <a href="../index.html#about" class="nav-link">About</a>
-        <a href="../index.html#skills" class="nav-link">Skills</a>
-        <a href="../index.html#projects" class="nav-link">Projects</a>
-        <a href="../index.html#contact" class="nav-link">Contact</a>
-      </nav>
-    </div>
-  </header>
+  <header class="mta-bar" id="header" role="banner">
+  <div class="mta-bar-in">
+    <a class="mta-all" href="../Mohamed%20-%20my-sites.html" aria-label="Back to all tools"><i class="fas fa-arrow-left"></i><u>All tools</u></a>
+    <button class="mta-btn" id="themeToggle" type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+  </div>
+</header><div hidden aria-hidden="true"><button id="menuToggle" tabindex="-1"></button></div>
+<div hidden aria-hidden="true"><button id="navMenu" tabindex="-1"></button></div>
+
 
   <main id="main">
     <section class="hero" aria-label="Introduction">
@@ -1439,24 +1430,24 @@
     </section>
   </main>
 
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-social">
-          <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-        </div>
-        <div class="footer-bottom">
-          &copy; <span id="currentYear"></span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="../index.html">Back to Portfolio</a>
-        </div>
-      </div>
+  <footer class="mta-foot" role="contentinfo">
+  <div class="mta-foot-in">
+    <div class="mta-social">
+      <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
     </div>
-  </footer>
+    <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="../index.html">Back to Portfolio</a></p>
+    <div class="mta-actions">
+      <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+      <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+    </div>
+  </div>
+</footer>
 
-  <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode"><i class="fas fa-moon"></i></button>
+  
+  
 
   <script>
     (() => {
@@ -1629,5 +1620,6 @@
       });
     })();
   </script>
+<script src="mta-chrome.js" defer></script>
 </body>
 </html>

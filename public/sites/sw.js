@@ -1,10 +1,10 @@
 // ===============================
 //  Service Worker - sw.js
 //  Author: Mohamed Tarek Abdelhady
-//  Version: v1.0.3
+//  Version: v1.0.5
 // ===============================
 
-const VERSION = 'v1.0.4';
+const VERSION = 'v1.0.5';
 const STATIC_CACHE = `static-${VERSION}`;
 const HTML_CACHE = `html-${VERSION}`;
 const OFFLINE_URL = './offline.html';
@@ -25,6 +25,8 @@ const STATIC_ASSETS = [
   './offline.html',
   './manifest.webmanifest',
   './pwa.js',
+  './mta-chrome.css',
+  './mta-chrome.js',
   './icon.png',
   './icon-192.png',
   './icon-512.png',

@@ -44,9 +44,15 @@
     .formula{font-family:var(--mono);font-size:.82rem;background:var(--bg2);border:1px solid var(--br);padding:.7rem .9rem;border-radius:10px;margin-top:1rem;color:var(--mut)}
     footer{text-align:center;color:var(--mut2);font-size:.82rem;margin-top:2.5rem}
   </style>
+<link rel="stylesheet" href="mta-chrome.css">
 </head>
 <body>
-<header class="top"><div class="top-in"><a class="back" href="../Mohamed%20-%20my-sites.html"><i class="fas fa-arrow-left"></i> All tools</a><button class="theme" id="th"><i class="fas fa-moon"></i></button></div></header>
+<header class="mta-bar" id="header" role="banner">
+  <div class="mta-bar-in">
+    <a class="mta-all" href="../Mohamed%20-%20my-sites.html" aria-label="Back to all tools"><i class="fas fa-arrow-left"></i><u>All tools</u></a>
+    <button class="mta-btn" id="th" type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+  </div>
+</header>
 <div class="wrap">
   <div class="hero"><span class="pill">Analog · Op-amps</span><h1>Op-Amp Gain Calculator</h1><p>Inverting, non-inverting, differential and follower — gain, dB, output and rail-clipping check.</p></div>
   <div class="seg"><button class="on" data-t="noninv">Non-inverting</button><button data-t="inv">Inverting</button><button data-t="diff">Differential</button><button data-t="follow">Follower</button></div>
@@ -67,7 +73,21 @@
       <div class="note" id="note"></div>
     </div>
   </div>
-  <footer>© 2026 Mohamed Tarek Abdelhady · Op-Amp Gain Calculator</footer>
+  <footer class="mta-foot" role="contentinfo">
+  <div class="mta-foot-in">
+    <div class="mta-social">
+      <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="../index.html">Back to Portfolio</a></p>
+    <div class="mta-actions">
+      <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+      <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+    </div>
+  </div>
+</footer>
 </div>
 <script>
 const $=id=>document.getElementById(id);
@@ -96,5 +116,6 @@ function calc(){
 }
 $('go').onclick=calc;document.querySelectorAll('input').forEach(e=>e.addEventListener('input',calc));calc();
 </script>
+<script src="mta-chrome.js" defer></script>
 </body>
 </html>

@@ -31,8 +31,15 @@
 
   function syncAllIcons() {
     var theme = currentTheme();
+    var seen = [];
     var icons = document.querySelectorAll('[data-mta-icon]');
-    for (var i = 0; i < icons.length; i++) paintIcon(icons[i], theme);
+    for (var i = 0; i < icons.length; i++) { paintIcon(icons[i], theme); seen.push(icons[i]); }
+    // Legacy per-page handlers rewrite icon className (dropping data-mta-icon),
+    // so also track header toggle icons by ID.
+    var extra = document.querySelectorAll('#themeToggle i, #th i');
+    for (var j = 0; j < extra.length; j++) {
+      if (seen.indexOf(extra[j]) === -1) paintIcon(extra[j], theme);
+    }
   }
 
   function applyTheme(theme, persist) {

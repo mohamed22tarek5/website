@@ -308,8 +308,15 @@
       }
     }
   </style>
+<link rel="stylesheet" href="mta-chrome.css">
 </head>
 <body>
+<header class="mta-bar" id="header" role="banner">
+  <div class="mta-bar-in">
+    <a class="mta-all" href="../Mohamed%20-%20my-sites.html" aria-label="Back to all tools"><i class="fas fa-arrow-left"></i><u>All tools</u></a>
+    <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+  </div>
+</header>
   <div class="offline-container">
     <div class="logo">
       <i class="fas fa-code"></i> Mohamed Tarek Abdelhady
@@ -426,7 +433,22 @@
     </div>
   </div>
 
-  <script>
+  <footer class="mta-foot" role="contentinfo">
+  <div class="mta-foot-in">
+    <div class="mta-social">
+      <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="../index.html">Back to Portfolio</a></p>
+    <div class="mta-actions">
+      <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+      <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+    </div>
+  </div>
+</footer>
+<script>
     // Connection status detection
     function checkConnection() {
       const statusDot = document.querySelector('.status-dot');
@@ -483,5 +505,6 @@
       checkConnection();
     });
   </script>
+<script src="mta-chrome.js" defer></script>
 </body>
 </html>
