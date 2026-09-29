@@ -6,7 +6,7 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/:path((?!.*\\.pdf$).*)",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "X-Content-Type-Options",
@@ -27,6 +27,10 @@
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
         }
       ]
     },
@@ -34,20 +38,8 @@
       "source": "/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf",
       "headers": [
         {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "Content-Security-Policy",
-          "value": "frame-ancestors 'self'"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
         }
       ]
     },
@@ -86,7 +78,7 @@
       ]
     },
     {
-      "source": "/sites/(.*)",
+      "source": "/sites/:path*",
       "headers": [
         {
           "key": "Link",
@@ -103,7 +95,7 @@
       ]
     },
     {
-      "source": "/.well-known/api-catalog(/.*)?",
+      "source": "/.well-known/api-catalog/:path*",
       "headers": [
         {
           "key": "Content-Type",
@@ -128,7 +120,7 @@
       ]
     },
     {
-      "source": "/.well-known/ai-catalog\\.json",
+      "source": "/.well-known/ai-catalog.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -170,7 +162,7 @@
       ]
     },
     {
-      "source": "/.well-known/oauth-protected-resource\\.json",
+      "source": "/.well-known/oauth-protected-resource.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -187,7 +179,7 @@
       ]
     },
     {
-      "source": "/.well-known/oauth-authorization-server\\.json",
+      "source": "/.well-known/oauth-authorization-server.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -204,7 +196,7 @@
       ]
     },
     {
-      "source": "/.well-known/mcp/server-card\\.json",
+      "source": "/.well-known/mcp/server-card.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -238,7 +230,7 @@
       ]
     },
     {
-      "source": "/openapi\\.json",
+      "source": "/openapi.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -272,6 +264,10 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
         }
       ]
     },
@@ -293,11 +289,15 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type, Authorization"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
         }
       ]
     },
     {
-      "source": "/.well-known/agent-card\\.json",
+      "source": "/.well-known/agent-card.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -314,7 +314,7 @@
       ]
     },
     {
-      "source": "/.well-known/acp\\.json",
+      "source": "/.well-known/acp.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -382,11 +382,15 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type, PAYMENT-SIGNATURE, PAYMENT-REQUIRED, PAYMENT-RESPONSE"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
         }
       ]
     },
     {
-      "source": "/.well-known/(.*)",
+      "source": "/.well-known/:path*",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
