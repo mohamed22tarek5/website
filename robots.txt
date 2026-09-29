@@ -1,0 +1,45 @@
+# robots.txt
+# Mohamed Tarek Abdelhady — Communication Engineer
+# Primary (canonical): https://mohamed-tarek-abdelhady.vercel.app
+# Secondary (same deployment): https://website-mohamed.vercel.app
+
+User-agent: *
+Allow: /
+
+Sitemap: https://mohamed-tarek-abdelhady.vercel.app/sitemap.xml
+
+# ARD manifest for agent discovery
+Agentmap: https://mohamed-tarek-abdelhady.vercel.app/.well-known/ai-catalog.json
+
+# Content Signals — AI content usage preferences
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
+# Blocked paths
+Disallow: /sw.js
+Disallow: /pwa.js
+Disallow: /cache/
+Disallow: /admin/
+
+# AI/ML training blocks
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+# Image-specific rules
+User-agent: Googlebot-Image
+Allow: /
+Disallow: /admin/

@@ -1,0 +1,8 @@
+{
+  "name": "website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "echo \"Static site - no build required\""
+  }
+}
