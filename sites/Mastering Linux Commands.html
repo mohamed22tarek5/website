@@ -1,0 +1,1322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mastering Linux Commands: Interactive Learning Platform</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #121831;
+      --ink: #e7ecf6;
+      --muted: #a8b1c7;
+      --accent: #7cc0ff;
+      --accent-2: #9be2b1;
+      --warning: #ff9b7c;
+      --border: #233056;
+      --code-bg: #0f1630;
+      --kbd-bg: #1a2347;
+      --search-bg: #0c142b;
+      --success: #4caf50;
+    }
+    
+    /* Light mode variables */
+    [data-theme="light"] {
+      --bg: #f5f7fa;
+      --card: #ffffff;
+      --ink: #2d3748;
+      --muted: #718096;
+      --accent: #3182ce;
+      --accent-2: #38a169;
+      --warning: #e53e3e;
+      --border: #e2e8f0;
+      --code-bg: #f7fafc;
+      --kbd-bg: #edf2f7;
+      --search-bg: #ffffff;
+      --success: #48bb78;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--ink);
+      background: var(--bg);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    
+    header { 
+      position: sticky; 
+      top: 0; 
+      backdrop-filter: blur(6px); 
+      background: rgba(11,16,32,0.6); 
+      border-bottom: 1px solid var(--border); 
+      z-index: 10; 
+    }
+    
+    [data-theme="light"] header {
+      background: rgba(245,247,250,0.6);
+    }
+    
+    header .wrap { 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
+      gap: 16px; 
+      padding-block: 12px; 
+    }
+    
+    h1 { font-size: 2rem; margin: 0; letter-spacing: .2px; }
+    .subtitle { color: var(--muted); font-size: .95rem; }
+    
+    .grid { display: grid; grid-template-columns: 290px 1fr; gap: 24px; align-items: start; }
+    @media (max-width: 960px) { .grid { grid-template-columns: 1fr; } nav { position: static; } }
+
+    nav { 
+      position: sticky; 
+      top: 64px; 
+      max-height: calc(100dvh - 96px); 
+      overflow: auto; 
+      padding: 16px; 
+      border: 1px solid var(--border); 
+      background: var(--card); 
+      border-radius: 14px; 
+    }
+    
+    nav h2 { margin-top: 0; font-size: 1.05rem; }
+    nav a { display: block; color: var(--ink); text-decoration: none; padding: 6px 8px; border-radius: 8px; }
+    nav a:hover { background: var(--kbd-bg); }
+    nav .toc-section { margin-bottom: 12px; }
+    nav .toc-section > a { font-weight: 600; color: var(--accent); }
+    nav .toc-sub a { color: var(--muted); font-size: .92rem; padding-left: 14px; }
+
+    main { border: 1px solid var(--border); background: var(--card); border-radius: 14px; padding: 24px; }
+    section { scroll-margin-top: 96px; margin-bottom: 32px; }
+    h2 { margin-top: 32px; border-bottom: 1px dashed var(--border); padding-bottom: 8px; }
+    h3 { color: var(--accent); margin-top: 20px; }
+    p { margin: 8px 0 14px; }
+    
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    pre { 
+      position: relative; 
+      background: var(--code-bg); 
+      border: 1px solid var(--border); 
+      border-radius: 12px; 
+      padding: 14px 14px 16px; 
+      overflow: auto; 
+    }
+    
+    pre code { color: var(--ink); }
+    
+    .copy { 
+      position: absolute; 
+      right: 10px; 
+      top: 10px; 
+      background: var(--search-bg); 
+      color: var(--ink); 
+      border: 1px solid var(--border); 
+      border-radius: 8px; 
+      padding: 6px 10px; 
+      font-size: .85rem; 
+      cursor: pointer; 
+      transition: all 0.2s ease;
+    }
+    
+    .copy:hover {
+      background: var(--accent);
+      color: white;
+    }
+    
+    .tip, .note, .warn { 
+      border: 1px solid var(--border); 
+      padding: 10px 12px; 
+      border-radius: 10px; 
+      margin: 10px 0 16px; 
+    }
+    
+    .tip { background: rgba(155,226,177,.06); }
+    .note { background: rgba(124,192,255,.06); }
+    .warn { background: rgba(255,137,124,.06); }
+    
+    kbd { 
+      background: var(--kbd-bg); 
+      border: 1px solid var(--border); 
+      border-bottom-width: 2px; 
+      border-radius: 6px; 
+      padding: 2px 6px; 
+      font-size: .9em; 
+    }
+    
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 18px; }
+    th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+    th { background: var(--kbd-bg); }
+    
+    .footer { color: var(--muted); font-size: .9rem; margin-top: 32px; }
+    
+    .chap-tag { 
+      display:inline-block; 
+      font-size:.78rem; 
+      letter-spacing:.3px; 
+      color:#0b1020; 
+      background: linear-gradient(90deg, var(--accent), var(--accent-2)); 
+      padding:2px 8px; 
+      border-radius:999px; 
+      margin-left:6px; 
+    }
+    
+    .cmd { color: var(--accent-2); font-weight: 600; }
+    
+    .explain { 
+      border: 1px solid var(--border); 
+      background: rgba(124,192,255,.06); 
+      padding: 12px 14px; 
+      border-radius: 10px; 
+      margin: 10px 0 18px; 
+    }
+    
+    .explain h4 { margin: 0 0 6px; font-size: 1rem; color: var(--accent); }
+    .explain ul { margin: 6px 0 0 18px; }
+    .explain li { margin: 4px 0; }
+    
+    /* Search functionality */
+    .search-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--search-bg);
+      color: var(--ink);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(124,192,255,0.2);
+    }
+    
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-top: 5px;
+      max-height: 300px;
+      overflow-y: auto;
+      z-index: 100;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      display: none;
+    }
+    
+    .search-result-item {
+      padding: 10px 15px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    
+    .search-result-item:hover {
+      background: var(--kbd-bg);
+    }
+    
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+    
+    .search-highlight {
+      background-color: rgba(124,192,255,0.3);
+      padding: 0 2px;
+      border-radius: 3px;
+    }
+    
+    /* Theme toggle */
+    .theme-toggle {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--ink);
+      transition: all 0.3s ease;
+    }
+    
+    .theme-toggle:hover {
+      background: var(--kbd-bg);
+      transform: scale(1.05);
+    }
+    
+    /* Header actions */
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    /* Bookmark functionality */
+    .bookmark-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      padding: 5px;
+    }
+    
+    .bookmark-btn:hover {
+      color: var(--accent);
+    }
+    
+    .bookmark-btn.bookmarked {
+      color: #ffd700;
+    }
+    
+    /* Terminal simulation */
+    .terminal {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 15px 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      color: #00ff00;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #333;
+    }
+    
+    .terminal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #333;
+    }
+    
+    .terminal-title {
+      color: #ccc;
+      font-weight: 600;
+    }
+    
+    .terminal-controls {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .terminal-btn {
+      background: #333;
+      border: none;
+      color: #ccc;
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .terminal-btn:hover {
+      background: #444;
+    }
+    
+    .terminal-content {
+      min-height: 100px;
+    }
+    
+    .terminal-prompt {
+      color: #7cc0ff;
+    }
+    
+    .terminal-command {
+      color: #ffffff;
+    }
+    
+    .terminal-output {
+      color: #cccccc;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+    
+    .run-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: background 0.3s ease;
+    }
+    
+    .run-btn:hover {
+      background: var(--accent-2);
+    }
+    
+    /* Progress tracker */
+    .progress-container {
+      margin: 20px 0;
+      background: var(--kbd-bg);
+      border-radius: 10px;
+      padding: 15px;
+    }
+    
+    .progress-bar {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: 4px;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+    
+    /* Quiz component */
+    .quiz-container {
+      background: rgba(124,192,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .quiz-question {
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+    
+    .quiz-options {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .quiz-option:hover {
+      background: var(--kbd-bg);
+    }
+    
+    .quiz-option.correct {
+      background: rgba(76,175,80,0.1);
+      border-color: var(--success);
+    }
+    
+    .quiz-option.incorrect {
+      background: rgba(244,67,54,0.1);
+      border-color: var(--warning);
+    }
+    
+    .quiz-feedback {
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    .quiz-feedback.correct {
+      background: rgba(76,175,80,0.1);
+      border: 1px solid var(--success);
+      color: var(--success);
+    }
+    
+    .quiz-feedback.incorrect {
+      background: rgba(244,67,54,0.1);
+      border: 1px solid var(--warning);
+      color: var(--warning);
+    }
+    
+    /* Practice area */
+    .practice-container {
+      background: rgba(155,226,177,0.06);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+    
+    .practice-prompt {
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--accent-2);
+    }
+    
+    .practice-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--card);
+      color: var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      margin-bottom: 10px;
+    }
+    
+    .practice-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    
+    .practice-feedback {
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    /* Challenge badges */
+    .challenge-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-left: 10px;
+      font-weight: 600;
+    }
+    
+    /* Command reference table */
+    .ref-table {
+      margin: 20px 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .ref-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+    }
+    
+    .ref-row:last-child {
+      border-bottom: none;
+    }
+    
+    .ref-cmd {
+      font-weight: 600;
+      color: var(--accent-2);
+    }
+    
+    .ref-desc {
+      color: var(--muted);
+    }
+    
+    /* Responsive improvements */
+    @media (max-width: 768px) {
+      .header .wrap {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .header-actions {
+        align-self: flex-end;
+      }
+      
+      .search-container {
+        width: 100%;
+      }
+      
+      .ref-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .wrap {
+        padding: 15px;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+      
+      main {
+        padding: 15px;
+      }
+      
+      .terminal {
+        padding: 15px;
+      }
+    }
+    
+    /* Section completion indicator */
+    .section-complete {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--success);
+      color: white;
+      text-align: center;
+      line-height: 20px;
+      margin-left: 10px;
+      font-size: 0.75rem;
+    }
+    
+    /* Quick reference cards */
+    .ref-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .ref-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 15px;
+      transition: transform 0.3s ease;
+    }
+    
+    .ref-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .ref-card-title {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .ref-card-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .ref-card-list li {
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .ref-card-list li:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div>
+        <h1>Mastering Linux Commands <span class="chap-tag">Interactive</span></h1>
+        <div class="subtitle">Learn by doing with interactive exercises and quizzes</div>
+      </div>
+      <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap grid">
+    <!-- TOC / Sidebar -->
+    <nav aria-label="Table of contents">
+      <h2>Contents</h2>
+      <div id="toc"></div>
+      
+      <!-- Progress tracker -->
+      <div class="progress-container">
+        <div>Learning Progress: <span id="progress-percent">0%</span></div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+      
+      <!-- Quick Reference -->
+      <div style="margin-top: 20px;">
+        <h3>Quick Reference</h3>
+        <div class="ref-cards">
+          <div class="ref-card">
+            <div class="ref-card-title">Essential Commands</div>
+            <ul class="ref-card-list">
+              <li><strong>ls</strong> - List files</li>
+              <li><strong>cd</strong> - Change directory</li>
+              <li><strong>pwd</strong> - Print working directory</li>
+              <li><strong>cp</strong> - Copy files</li>
+              <li><strong>mv</strong> - Move/rename files</li>
+            </ul>
+          </div>
+          <div class="ref-card">
+            <div class="ref-card-title">File Management</div>
+            <ul class="ref-card-list">
+              <li><strong>find</strong> - Search files</li>
+              <li><strong>grep</strong> - Search text</li>
+              <li><strong>tar</strong> - Archive files</li>
+              <li><strong>chmod</strong> - Change permissions</li>
+              <li><strong>chown</strong> - Change ownership</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main id="content">
+      <!-- Search functionality -->
+      <div class="search-container">
+        <input type="text" id="search-input" class="search-input" placeholder="🔍 Search commands (e.g., 'grep', 'find', 'permissions')">
+        <div class="search-results" id="search-results"></div>
+      </div>
+      
+      <section id="ch1">
+        <h2>Chapter 1: Navigating the Filesystem</h2>
+        <p>Learn the basics of moving around and understanding your Linux environment.</p>
+        
+        <!-- Terminal Simulation -->
+        <div class="terminal" id="terminal-1">
+          <div class="terminal-header">
+            <div class="terminal-title">Linux Terminal</div>
+            <div class="terminal-controls">
+              <button class="terminal-btn" onclick="runTerminalCommand('terminal-1', 'pwd')">Run pwd</button>
+              <button class="terminal-btn" onclick="runTerminalCommand('terminal-1', 'ls -la')">Run ls -la</button>
+              <button class="terminal-btn" onclick="resetTerminal('terminal-1')">Clear</button>
+            </div>
+          </div>
+          <div class="terminal-content">
+            <div class="terminal-output" id="output-1">
+              user@linux:~$ <span class="terminal-prompt">Type 'pwd' to see current directory</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 id="pwd"><span class="cmd">pwd</span> — Print Working Directory</h3>
+        <p>Show the absolute path of the current directory.</p>
+        <pre><button class="copy" data-clipboard>Copy</button><code>pwd
+# Output: /home/user</code></pre>
+        <div class="note">Displays the full path from the root to your current location.</div>
+        
+        <!-- Practice Exercise -->
+        <div class="practice-container">
+          <div class="practice-prompt">💡 Practice: What command would you use to display your current directory?</div>
+          <input type="text" class="practice-input" id="practice-pwd" placeholder="Type your answer here...">
+          <button class="run-btn" onclick="checkPractice('practice-pwd', 'pwd')">Check Answer</button>
+          <div class="practice-feedback" id="feedback-pwd"></div>
+        </div>
+
+        <h3 id="cd"><span class="cmd">cd [directory]</span> — Change Directory</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>cd /home/user/Documents
+cd ..    # Go up one level
+cd ~     # Go to home directory
+cd -     # Go to previous directory</code></pre>
+        <div class="tip">Use <code>cd ..</code> to go up one level, <code>cd ~</code> for home directory.</div>
+
+        <h3 id="ls"><span class="cmd">ls</span> — List Directory Contents</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>ls
+ls -la   # Long format with hidden files
+ls -lh   # Human readable file sizes
+ls -t    # Sort by modification time</code></pre>
+        
+        <!-- Quiz -->
+        <div class="quiz-container">
+          <div class="quiz-question">Which ls option shows hidden files?</div>
+          <div class="quiz-options">
+            <div class="quiz-option" data-correct="true" onclick="checkQuiz(this, 'Correct! -a shows hidden files')">
+              <span>A.</span> ls -a
+            </div>
+            <div class="quiz-option" onclick="checkQuiz(this, 'Incorrect. -l shows long format')">
+              <span>B.</span> ls -l
+            </div>
+            <div class="quiz-option" onclick="checkQuiz(this, 'Incorrect. -h shows human-readable sizes')">
+              <span>C.</span> ls -h
+            </div>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+      </section>
+
+      <section id="ch2">
+        <h2>Chapter 2: File Operations</h2>
+        <p>Learn how to create, copy, move, and delete files and directories.</p>
+
+        <h3 id="mkdir"><span class="cmd">mkdir [directory]</span> — Create Directory</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>mkdir new_folder
+mkdir -p parent/child/grandchild   # Create nested directories
+mkdir dir1 dir2 dir3   # Create multiple directories</code></pre>
+
+        <h3 id="rm"><span class="cmd">rm [file]</span> — Remove Files/Directories</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>rm file.txt
+rm -r directory/      # Remove directory recursively
+rm -f file.txt        # Force remove without confirmation
+rm -i file.txt        # Interactive mode (ask before removing)</code></pre>
+        <div class="warn">⚠️ Be careful with rm -rf! It can delete your entire system if used incorrectly.</div>
+
+        <h3 id="cp"><span class="cmd">cp [src] [dest]</span> — Copy Files</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>cp file.txt backup/
+cp -r source/ destination/   # Copy directories recursively
+cp -i file.txt backup/       # Interactive (ask before overwrite)
+cp -v file.txt backup/       # Verbose (show what's being copied)</code></pre>
+
+        <!-- Challenge Exercise -->
+        <div class="practice-container">
+          <div class="practice-prompt"><span class="challenge-badge">Challenge</span> Create a backup of a directory with all its contents</div>
+          <input type="text" class="practice-input" id="practice-cp" placeholder="Type your command here...">
+          <button class="run-btn" onclick="checkPractice('practice-cp', 'cp -r source backup')">Check Answer</button>
+          <div class="practice-feedback" id="feedback-cp"></div>
+        </div>
+      </section>
+
+      <section id="ch3">
+        <h2>Chapter 3: Text Processing</h2>
+        <p>Powerful commands for working with text files.</p>
+
+        <h3 id="cat"><span class="cmd">cat [file]</span> — Concatenate and Display</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>cat file.txt
+cat file1.txt file2.txt > combined.txt   # Combine files
+cat > newfile.txt   # Create new file (Ctrl+D to save)</code></pre>
+
+        <h3 id="grep"><span class="cmd">grep [pattern] [file]</span> — Search Text</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>grep "error" logfile.txt
+grep -r "TODO" ./src/   # Recursive search
+grep -i "warning" log.txt   # Case-insensitive
+grep -v "success" log.txt   # Invert match (show non-matching lines)</code></pre>
+
+        <!-- Terminal Simulation with grep -->
+        <div class="terminal" id="terminal-2">
+          <div class="terminal-header">
+            <div class="terminal-title">Search Practice</div>
+            <div class="terminal-controls">
+              <button class="terminal-btn" onclick="runGrepExample('terminal-2')">Run Example</button>
+              <button class="terminal-btn" onclick="resetTerminal('terminal-2')">Clear</button>
+            </div>
+          </div>
+          <div class="terminal-content">
+            <div class="terminal-output" id="output-2">
+              user@linux:~$ <span class="terminal-prompt">Let's search for errors in a log file</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="ch4">
+        <h2>Chapter 4: Permissions and Ownership</h2>
+        <p>Understand Linux file permissions and security.</p>
+
+        <!-- Permissions Reference Table -->
+        <div class="ref-table">
+          <div class="ref-row">
+            <div class="ref-cmd">Permission</div>
+            <div class="ref-desc">Description</div>
+          </div>
+          <div class="ref-row">
+            <div class="ref-cmd">r (4)</div>
+            <div class="ref-desc">Read permission</div>
+          </div>
+          <div class="ref-row">
+            <div class="ref-cmd">w (2)</div>
+            <div class="ref-desc">Write permission</div>
+          </div>
+          <div class="ref-row">
+            <div class="ref-cmd">x (1)</div>
+            <div class="ref-desc">Execute permission</div>
+          </div>
+        </div>
+
+        <h3 id="chmod"><span class="cmd">chmod [permissions] [file]</span> — Change Permissions</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>chmod 755 script.sh
+chmod u+x file.txt    # Add execute for user
+chmod go-w file.txt   # Remove write for group and others
+chmod -R 644 dir/     # Recursive change</code></pre>
+
+        <h3 id="chown"><span class="cmd">chown [user]:[group] [file]</span> — Change Ownership</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>chown user:group file.txt
+chown user file.txt    # Change user only
+chown :group file.txt  # Change group only
+chown -R user:group dir/  # Recursive change</code></pre>
+      </section>
+
+      <section id="ch5">
+        <h2>Chapter 5: Process Management</h2>
+        <p>Control and monitor running processes.</p>
+
+        <h3 id="ps"><span class="cmd">ps</span> — Process Status</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>ps aux          # Show all processes
+ps -ef          # Full format listing
+ps aux | grep nginx  # Find specific process</code></pre>
+
+        <h3 id="kill"><span class="cmd">kill [signal] [pid]</span> — Terminate Processes</h3>
+        <pre><button class="copy" data-clipboard>Copy</button><code>kill 1234        # Send TERM signal (default)
+kill -9 1234    # Force kill (SIGKILL)
+killall nginx   # Kill all processes named nginx</code></pre>
+        <div class="warn">⚠️ SIGKILL (-9) cannot be caught or ignored by the process. Use as last resort.</div>
+      </section>
+
+      <!-- Comprehensive Quiz -->
+      <section id="final-quiz">
+        <h2>Comprehensive Quiz</h2>
+        <p>Test your knowledge of Linux commands with this interactive quiz.</p>
+        
+        <div class="quiz-container">
+          <div class="quiz-question">1. Which command would you use to find files modified in the last 24 hours?</div>
+          <div class="quiz-options">
+            <div class="quiz-option" onclick="checkFinalQuiz(this, 1, 'Correct! find with -mtime is perfect for this')">
+              <span>A.</span> find . -mtime -1
+            </div>
+            <div class="quiz-option" onclick="checkFinalQuiz(this, 1, 'Incorrect. ls -l shows details but not based on time')">
+              <span>B.</span> ls -l
+            </div>
+            <div class="quiz-option" onclick="checkFinalQuiz(this, 1, 'Incorrect. This searches for text, not files by time')">
+              <span>C.</span> grep "24 hours"
+            </div>
+          </div>
+        </div>
+        
+        <div class="quiz-container">
+          <div class="quiz-question">2. How would you make a script executable for all users?</div>
+          <div class="quiz-options">
+            <div class="quiz-option" onclick="checkFinalQuiz(this, 2, 'Incorrect. This only allows user to execute')">
+              <span>A.</span> chmod u+x script.sh
+            </div>
+            <div class="quiz-option" onclick="checkFinalQuiz(this, 2, 'Correct! a+x adds execute for all (user, group, others)')">
+              <span>B.</span> chmod a+x script.sh
+            </div>
+            <div class="quiz-option" onclick="checkFinalQuiz(this, 2, 'Incorrect. This changes ownership, not permissions')">
+              <span>C.</span> chown user script.sh
+            </div>
+          </div>
+        </div>
+        
+        <button class="btn btn-primary" onclick="calculateQuizScore()" style="width: 100%; padding: 15px; margin: 20px 0;">
+          <i class="fas fa-chart-bar"></i> Calculate My Score
+        </button>
+        
+        <div id="quiz-score" style="text-align: center; font-size: 1.2rem; display: none;"></div>
+      </section>
+
+      <p class="footer">Tip: Practice these commands in a safe environment like a virtual machine or Docker container. Always use caution with system-level commands.</p>
+    </main>
+  </div>
+
+  <script>
+    // Build TOC automatically from h2/h3
+    (function buildTOC(){
+      const content = document.getElementById('content');
+      const toc = document.getElementById('toc');
+      const sections = content.querySelectorAll('section');
+      const frag = document.createDocumentFragment();
+      sections.forEach(sec => {
+        const h2 = sec.querySelector('h2');
+        if(!h2) return;
+        const secLink = document.createElement('a');
+        const secId = sec.id || h2.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-');
+        sec.id = secId;
+        secLink.href = '#' + secId;
+        secLink.textContent = h2.textContent;
+        const secWrap = document.createElement('div');
+        secWrap.className = 'toc-section';
+        secWrap.appendChild(secLink);
+
+        const h3s = sec.querySelectorAll('h3');
+        if(h3s.length){
+          const sub = document.createElement('div');
+          sub.className = 'toc-sub';
+          h3s.forEach(h3 => {
+            const id = h3.id || h3.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-');
+            h3.id = id;
+            const a = document.createElement('a');
+            a.href = '#' + id;
+            a.textContent = h3.textContent.replace(/\s+—.*/, '');
+            sub.appendChild(a);
+          });
+          secWrap.appendChild(sub);
+        }
+        frag.appendChild(secWrap);
+      });
+      toc.appendChild(frag);
+    })();
+
+    // Copy-to-clipboard for code blocks
+    document.querySelectorAll('[data-clipboard]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.nextElementSibling.innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          const old = btn.textContent; btn.textContent = 'Copied!';
+          setTimeout(()=> btn.textContent = old, 1200);
+        });
+      });
+    });
+    
+    // Dark/Light Mode Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Check for saved theme preference or use preferred color scheme
+    const currentTheme = localStorage.getItem('theme') || 
+                       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    if (currentTheme === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+      themeIcon.classList.replace('fa-moon', 'fa-sun');
+    } else {
+      document.body.setAttribute('data-theme', 'light');
+      themeIcon.classList.replace('fa-sun', 'fa-moon');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      if (document.body.getAttribute('data-theme') === 'light') {
+        document.body.setAttribute('data-theme', 'dark');
+        themeIcon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.body.setAttribute('data-theme', 'light');
+        themeIcon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+    
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+    
+    searchInput.addEventListener('input', function() {
+      const query = this.value.toLowerCase().trim();
+      
+      if (query.length < 2) {
+        searchResults.style.display = 'none';
+        return;
+      }
+      
+      // Clear previous results
+      searchResults.innerHTML = '';
+      
+      // Find matching commands
+      const commands = document.querySelectorAll('h3');
+      let hasResults = false;
+      
+      commands.forEach(command => {
+        const commandText = command.textContent.toLowerCase();
+        const commandId = command.id;
+        
+        if (commandText.includes(query)) {
+          hasResults = true;
+          const resultItem = document.createElement('div');
+          resultItem.className = 'search-result-item';
+          
+          // Highlight matching text
+          const highlightedText = commandText.replace(
+            new RegExp(query, 'gi'), 
+            match => `<span class="search-highlight">${match}</span>`
+          );
+          
+          resultItem.innerHTML = highlightedText;
+          resultItem.addEventListener('click', () => {
+            document.getElementById(commandId).scrollIntoView({ behavior: 'smooth' });
+            searchResults.style.display = 'none';
+            searchInput.value = '';
+          });
+          
+          searchResults.appendChild(resultItem);
+        }
+      });
+      
+      if (hasResults) {
+        searchResults.style.display = 'block';
+      } else {
+        searchResults.innerHTML = '<div class="search-result-item">No commands found</div>';
+        searchResults.style.display = 'block';
+      }
+    });
+    
+    // Close search results when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
+        searchResults.style.display = 'none';
+      }
+    });
+    
+    // Progress tracking
+    function updateProgress() {
+      const sections = document.querySelectorAll('section');
+      const completedSections = JSON.parse(localStorage.getItem('completedSections') || '[]');
+      const progressPercent = Math.round((completedSections.length / sections.length) * 100);
+      
+      document.getElementById('progress-percent').textContent = `${progressPercent}%`;
+      document.getElementById('progress-fill').style.width = `${progressPercent}%`;
+    }
+    
+    // Mark section as completed when scrolled into view and quiz taken
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id;
+          markSectionVisited(sectionId);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    function markSectionVisited(sectionId) {
+      const visitedSections = JSON.parse(localStorage.getItem('visitedSections') || '[]');
+      if (!visitedSections.includes(sectionId)) {
+        visitedSections.push(sectionId);
+        localStorage.setItem('visitedSections', JSON.stringify(visitedSections));
+        updateProgress();
+      }
+    }
+    
+    // Mark section as completed when quiz passed
+    function markSectionCompleted(sectionId) {
+      const completedSections = JSON.parse(localStorage.getItem('completedSections') || '[]');
+      if (!completedSections.includes(sectionId)) {
+        completedSections.push(sectionId);
+        localStorage.setItem('completedSections', JSON.stringify(completedSections));
+        updateProgress();
+      }
+    }
+    
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+    
+    // Initialize progress
+    updateProgress();
+    
+    // Terminal Simulation Functions
+    function runTerminalCommand(terminalId, command) {
+      const terminal = document.getElementById(terminalId);
+      const output = terminal.querySelector('.terminal-output');
+      const responses = {
+        'pwd': '/home/user/projects',
+        'ls -la': 'total 48\ndrwxr-xr-x 6 user user  4096 Jan 10 10:30 .\ndrwxr-xr-x 3 user user  4096 Jan  5 09:15 ..\n-rw-r--r-- 1 user user   220 Jan  5 09:15 .bash_logout\n-rw-r--r-- 1 user user  3771 Jan  5 09:15 .bashrc\n-rw-r--r-- 1 user user   807 Jan  5 09:15 .profile\ndrwxr-xr-x 2 user user  4096 Jan 10 10:30 Documents\ndrwxr-xr-x 2 user user  4096 Jan 10 10:30 Downloads\ndrwxr-xr-x 2 user user  4096 Jan 10 10:30 Pictures',
+        'cd Documents': 'Changing to Documents directory...',
+        'ls': 'file1.txt  file2.txt  report.pdf'
+      };
+      
+      const response = responses[command] || `Command executed: ${command}`;
+      output.innerHTML = `<span class="terminal-prompt">user@linux:~$</span> <span class="terminal-command">${command}</span>\n<span class="terminal-output">${response}</span>`;
+    }
+    
+    function runGrepExample(terminalId) {
+      const terminal = document.getElementById(terminalId);
+      const output = terminal.querySelector('.terminal-output');
+      output.innerHTML = `<span class="terminal-prompt">user@linux:~$</span> <span class="terminal-command">grep -i "error" /var/log/syslog</span>\n<span class="terminal-output">Jan 10 10:15:32 linux kernel: [ERROR] Disk I/O failure on sda1\nJan 10 10:16:45 linux systemd: [ERROR] Failed to start service</span>`;
+    }
+    
+    function resetTerminal(terminalId) {
+      const terminal = document.getElementById(terminalId);
+      const output = terminal.querySelector('.terminal-output');
+      output.innerHTML = '<span class="terminal-prompt">user@linux:~$</span> <span class="terminal-prompt">Terminal cleared. Ready for commands.</span>';
+    }
+    
+    // Quiz Functions
+    let correctAnswers = 0;
+    
+    function checkQuiz(element, feedback) {
+      const isCorrect = element.getAttribute('data-correct') === 'true';
+      const feedbackDiv = element.parentElement.nextElementSibling;
+      
+      // Clear all selections
+      element.parentElement.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+      });
+      
+      // Mark this option
+      if (isCorrect) {
+        element.classList.add('correct');
+        feedbackDiv.textContent = feedback;
+        feedbackDiv.className = 'quiz-feedback correct';
+        markSectionCompleted('ch1');
+      } else {
+        element.classList.add('incorrect');
+        feedbackDiv.textContent = feedback;
+        feedbackDiv.className = 'quiz-feedback incorrect';
+      }
+      
+      feedbackDiv.style.display = 'block';
+    }
+    
+    function checkFinalQuiz(element, questionNum, feedback) {
+      const isCorrect = element.textContent.includes('find . -mtime -1') || 
+                       element.textContent.includes('chmod a+x script.sh');
+      
+      // Clear other options for this question
+      const container = element.parentElement.parentElement;
+      container.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('correct', 'incorrect');
+      });
+      
+      if (isCorrect) {
+        element.classList.add('correct');
+        correctAnswers++;
+      } else {
+        element.classList.add('incorrect');
+      }
+      
+      // Show feedback
+      const feedbackDiv = container.querySelector('.quiz-feedback');
+      if (feedbackDiv) {
+        feedbackDiv.textContent = feedback;
+        feedbackDiv.className = 'quiz-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+        feedbackDiv.style.display = 'block';
+      }
+    }
+    
+    function calculateQuizScore() {
+      const totalQuestions = 2;
+      const score = Math.round((correctAnswers / totalQuestions) * 100);
+      const scoreDiv = document.getElementById('quiz-score');
+      
+      scoreDiv.innerHTML = `
+        <div style="background: rgba(124,192,255,0.1); padding: 20px; border-radius: 12px; margin: 20px 0;">
+          <h3 style="color: var(--accent); margin-top: 0;">Quiz Result: ${score}%</h3>
+          <p>You got ${correctAnswers} out of ${totalQuestions} correct!</p>
+          ${score >= 70 ? 
+            '<div style="color: var(--success); font-weight: bold;">🎉 Great job! You\'re mastering Linux commands!</div>' :
+            '<div style="color: var(--warning);">📚 Keep practicing! Review the chapters and try again.</div>'
+          }
+        </div>
+      `;
+      scoreDiv.style.display = 'block';
+      markSectionCompleted('final-quiz');
+    }
+    
+    // Practice Exercise Functions
+    function checkPractice(inputId, correctAnswer) {
+      const input = document.getElementById(inputId);
+      const feedback = document.getElementById('feedback-' + inputId.split('-')[1]);
+      const userAnswer = input.value.trim().toLowerCase();
+      
+      if (userAnswer === correctAnswer.toLowerCase()) {
+        feedback.textContent = '✅ Correct! Well done!';
+        feedback.style.backgroundColor = 'rgba(76,175,80,0.1)';
+        feedback.style.color = 'var(--success)';
+        feedback.style.border = '1px solid var(--success)';
+      } else {
+        feedback.textContent = `Try again! Hint: The command is "${correctAnswer}"`;
+        feedback.style.backgroundColor = 'rgba(244,67,54,0.1)';
+        feedback.style.color = 'var(--warning)';
+        feedback.style.border = '1px solid var(--warning)';
+      }
+      
+      feedback.style.display = 'block';
+    }
+    
+    // Explanations per command block
+    (function injectExplanations(){
+      const EXPLAINS = {
+        pwd: {
+          what: 'Prints the absolute path to your current working directory.',
+          when: ['You got lost in the tree and need to confirm where you are.', 'Scripting: emit current dir for logs.'],
+          pitfalls: ['In scripts, rely on $(pwd) rather than $PWD when portability is required.']
+        },
+        cd: {
+          what: 'Changes the current directory to the path you provide.',
+          when: ['Navigate to project folders quickly.', 'Use cd - to jump back to the previous directory.'],
+          pitfalls: ['cd .. moves one level up; watch for spaces in paths—quote them.']
+        },
+        ls: {
+          what: 'Lists files and directories in the current (or given) path.',
+          when: ['Quick overview of contents.', 'Use -la to include hidden files and metadata.'],
+          pitfalls: ['Color/format may differ by distro; use -h with -l for human sizes.']
+        },
+        mkdir: {
+          what: 'Creates new directories in the filesystem.',
+          when: ['Organizing project structure.', 'Creating temporary directories for scripts.'],
+          pitfalls: ['mkdir without -p fails if parent doesn\'t exist.']
+        },
+        rm: {
+          what: 'Removes files and directories permanently.',
+          when: ['Cleaning up temporary files.', 'Removing old backup directories.'],
+          pitfalls: ['rm -rf / will destroy your system! Always double-check paths.']
+        },
+        cp: {
+          what: 'Copies files and directories from source to destination.',
+          when: ['Creating backups.', 'Duplicating configuration files.'],
+          pitfalls: ['cp without -r won\'t copy directories. Use -i to prevent overwrites.']
+        },
+        grep: {
+          what: 'Searches for patterns in text files.',
+          when: ['Finding errors in logs.', 'Searching for specific code patterns.'],
+          pitfalls: ['Use -i for case-insensitive, -v to invert matches.']
+        },
+        chmod: {
+          what: 'Changes file permissions (read, write, execute).',
+          when: ['Making scripts executable.', 'Securing sensitive files.'],
+          pitfalls: ['Numeric mode (755) vs symbolic (u+x). Both are valid.']
+        },
+        ps: {
+          what: 'Displays information about running processes.',
+          when: ['Monitoring system resources.', 'Finding process IDs for termination.'],
+          pitfalls: ['ps aux shows all processes, ps -ef shows full format.']
+        },
+        kill: {
+          what: 'Sends signals to processes (default: TERM to terminate).',
+          when: ['Stopping unresponsive programs.', 'Reloading daemons with HUP signal.'],
+          pitfalls: ['SIGKILL (-9) bypasses cleanup. Try SIGTERM (15) first.']
+        }
+      };
+
+      // For each h3, attach an explanation box after the first following <pre>
+      document.querySelectorAll('h3').forEach(h3 => {
+        const id = h3.id;
+        const info = EXPLAINS[id];
+        const pre = h3.nextElementSibling && h3.nextElementSibling.tagName === 'PRE' ? h3.nextElementSibling : null;
+        if (!pre) return;
+        const box = document.createElement('div');
+        box.className = 'explain';
+        const what = info?.what || 'Explanation: This block demonstrates typical usage of the command above.';
+        const when = info?.when || ['Use the shown flags as a starting point.'];
+        const pitfalls = info?.pitfalls || [];
+        box.innerHTML = `<h4>Explanation</h4><p>${what}</p>` +
+          (when.length ? `<h4>Useful when</h4><ul>${when.map(x=>`<li>${x}</li>`).join('')}</ul>` : '') +
+          (pitfalls.length ? `<h4>Common pitfalls</h4><ul>${pitfalls.map(x=>`<li>${x}</li>`).join('')}</ul>` : '');
+        pre.insertAdjacentElement('afterend', box);
+      });
+    })();
+    
+    // Initialize with some visited sections
+    window.onload = function() {
+      // Mark first section as visited by default
+      markSectionVisited('ch1');
+      
+      // Add some completed sections if quizzes were done previously
+      const quizScore = localStorage.getItem('quizScore');
+      if (quizScore && quizScore > 70) {
+        markSectionCompleted('final-quiz');
+      }
+    };
+  </script>
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</body>
+</html>
