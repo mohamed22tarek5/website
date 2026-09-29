@@ -1,5 +1,6 @@
-{
+﻿{
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
   "outputDirectory": "public",
   "cleanUrls": false,
   "trailingSlash": false,
@@ -426,6 +427,15 @@
           "value": "public, max-age=86400, stale-while-revalidate=604800"
         }
       ]
+    },
+    {
+      "source": "/(.*)\\.(png|jpg|jpeg|webp|avif|gif|svg|ico|webmanifest|pdf)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
     }
   ],
   "functions": {
@@ -508,3 +518,4 @@
     }
   ]
 }
+
