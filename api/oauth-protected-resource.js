@@ -13,7 +13,8 @@ export default function handler(req, res) {
   res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    res.statusCode = 200;
+    return res.end();
   }
 
   const forwardedHost = req.headers['x-forwarded-host'];
@@ -26,12 +27,13 @@ export default function handler(req, res) {
 
   res.setHeader('Content-Type', 'application/json');
 
-  return res.status(200).json({
+  res.statusCode = 200;
+  return res.end(JSON.stringify({
     resource: base,
     resource_name: 'Mohamed Tarek Abdelhady Portfolio',
     resource_documentation: `${base}/Mohamed%20-%20Services.html`,
     authorization_servers: [base],
     scopes_supported: ['read', 'tools'],
     bearer_methods_supported: ['header']
-  });
+  }));
 }

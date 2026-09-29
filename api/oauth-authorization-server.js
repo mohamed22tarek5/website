@@ -18,7 +18,8 @@ export default function handler(req, res) {
   res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    res.statusCode = 200;
+    return res.end();
   }
 
   const forwardedHost = req.headers['x-forwarded-host'];
@@ -31,7 +32,8 @@ export default function handler(req, res) {
 
   res.setHeader('Content-Type', 'application/json');
 
-  return res.status(200).json({
+  res.statusCode = 200;
+  return res.end(JSON.stringify({
     issuer: base,
     authorization_endpoint: `${base}/authorize`,
     token_endpoint: `${base}/oauth2/token`,
@@ -61,5 +63,5 @@ export default function handler(req, res) {
         'https://schemas.workos.com/events/agent/auth/identity/assertion/revoked'
       ]
     }
-  });
+  }));
 }

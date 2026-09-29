@@ -6,36 +6,62 @@
  * Per AGENTIC.md Step 4 — Exchange the assertion.
  */
 
-export default function handler(req, res) {
+/**
+ * Vercel's Node runtime does not populate req.body, so parse the raw
+ * stream ourselves. Kept local (no cross-directory import) to match the
+ * self-contained style of the other functions in this project.
+ */
+function readJsonBody(req) {
+  return new Promise((resolve) => {
+    if (req.body && typeof req.body === 'object') return resolve(req.body);
+    const chunks = [];
+    req.on('data', (c) => chunks.push(c));
+    req.on('end', () => {
+      const raw = Buffer.concat(chunks).toString('utf-8');
+      if (!raw) return resolve({});
+      try {
+        resolve(JSON.parse(raw));
+      } catch {
+        resolve({});
+      }
+    });
+    req.on('error', () => resolve({}));
+  });
+}
+
+export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    res.statusCode = 200;
+    return res.end();
   }
 
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    res.setHeader('Content-Type', 'application/json');
+    res.statusCode = 405;
+    return res.end(JSON.stringify({ error: 'Method not allowed' }));
   }
 
-  const { grant_type, assertion, resource } = req.body || {};
+  const { grant_type, assertion, resource } = await readJsonBody(req);
+
+  const badRequest = (error_description) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.statusCode = 400;
+    return res.end(JSON.stringify({ error: 'invalid_request', error_description }));
+  };
 
   // Validate grant type
   if (grant_type !== 'urn:ietf:params:oauth:grant-type:jwt-bearer') {
-    return res.status(400).json({
-      error: 'invalid_request',
-      error_description: 'Unsupported grant type. Use urn:ietf:params:oauth:grant-type:jwt-bearer'
-    });
+    return badRequest('Unsupported grant type. Use urn:ietf:params:oauth:grant-type:jwt-bearer');
   }
 
   // Validate assertion
   if (!assertion) {
-    return res.status(400).json({
-      error: 'invalid_request',
-      error_description: 'assertion is required'
-    });
+    return badRequest('assertion is required');
   }
 
   // Validate resource — accept the domain the agent actually called.
@@ -51,20 +77,18 @@ export default function handler(req, res) {
     'https://website-mohamed.vercel.app'
   ]);
   if (!allowedResources.has(resource)) {
-    return res.status(400).json({
-      error: 'invalid_request',
-      error_description: 'Invalid resource'
-    });
+    return badRequest('Invalid resource');
   }
 
   // In production: verify the JWT signature, check expiry, validate claims
   // For now, return a demo access token
   const accessToken = `at_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
 
-  return res.status(200).json({
+  res.statusCode = 200;
+  return res.end(JSON.stringify({
     access_token: accessToken,
     token_type: 'Bearer',
     expires_in: 3600,
     scope: 'read'
-  });
+  }));
 }

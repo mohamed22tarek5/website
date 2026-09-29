@@ -138,7 +138,8 @@ function sendMarkdown(res, markdown) {
   res.setHeader('Vary', 'Accept');
   res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
   res.setHeader('Access-Control-Allow-Origin', '*');
-  return res.status(200).send(markdown);
+  res.statusCode = 200;
+  return res.end(markdown);
 }
 
 export default function handler(req, res) {
@@ -147,7 +148,8 @@ export default function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Accept, Content-Type');
-    return res.status(200).end();
+    res.statusCode = 200;
+    return res.end();
   }
 
   const accept = req.headers.accept || '';
@@ -173,11 +175,13 @@ export default function handler(req, res) {
   // If no explicit page requested and client doesn't want markdown,
   // return usage instructions (backwards compatible).
   if (!wantsMarkdown && !hasExplicitPath) {
-    return res.status(200).json({
+    res.setHeader('Content-Type', 'application/json');
+    res.statusCode = 200;
+    return res.end(JSON.stringify({
       message: 'Markdown for Agents is supported',
       usage: 'Set Accept: text/markdown header to get markdown version',
       example: 'curl -H "Accept: text/markdown" https://mohamed-tarek-abdelhady.vercel.app/'
-    });
+    }));
   }
 
   const normalized = normalizePath(rawPath);

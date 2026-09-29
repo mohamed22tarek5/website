@@ -6,27 +6,55 @@
  * Per AGENTIC.md Step 3 — Register.
  */
 
-export default function handler(req, res) {
+/**
+ * Vercel's Node runtime does not populate req.body, so parse the raw
+ * stream ourselves. Kept local (no cross-directory import) to match the
+ * self-contained style of the other functions in this project.
+ */
+function readJsonBody(req) {
+  return new Promise((resolve) => {
+    if (req.body && typeof req.body === 'object') return resolve(req.body);
+    const chunks = [];
+    req.on('data', (c) => chunks.push(c));
+    req.on('end', () => {
+      const raw = Buffer.concat(chunks).toString('utf-8');
+      if (!raw) return resolve({});
+      try {
+        resolve(JSON.parse(raw));
+      } catch {
+        resolve({});
+      }
+    });
+    req.on('error', () => resolve({}));
+  });
+}
+
+export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    res.statusCode = 200;
+    return res.end();
   }
 
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    res.setHeader('Content-Type', 'application/json');
+    res.statusCode = 405;
+    return res.end(JSON.stringify({ error: 'Method not allowed' }));
   }
 
-  const { type } = req.body || {};
+  const { type } = await readJsonBody(req);
 
   if (type !== 'anonymous') {
-    return res.status(400).json({
+    res.setHeader('Content-Type', 'application/json');
+    res.statusCode = 400;
+    return res.end(JSON.stringify({
       error: 'invalid_request',
       error_description: 'Only anonymous registration is supported'
-    });
+    }));
   }
 
   // Generate a registration ID and identity assertion
@@ -55,11 +83,12 @@ export default function handler(req, res) {
     scopes: ['read']
   })).toString('base64url')}.signature-placeholder`;
 
-  return res.status(200).json({
+  res.statusCode = 200;
+  return res.end(JSON.stringify({
     registration_id: registrationId,
     registration_type: 'anonymous',
     identity_assertion: identityAssertion,
     assertion_expires: assertionExpiry,
     pre_claim_scopes: ['read']
-  });
+  }));
 }

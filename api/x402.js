@@ -37,7 +37,8 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, PAYMENT-SIGNATURE');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    res.statusCode = 200;
+    return res.end();
   }
 
   const paymentSignature = req.headers['payment-signature'];
@@ -67,11 +68,12 @@ export default async function handler(req, res) {
 
         const settlement = await settleRes.json();
         res.setHeader('PAYMENT-RESPONSE', toBase64Url(settlement));
-        return res.status(200).json({
+        res.statusCode = 200;
+        return res.end(JSON.stringify({
           message: 'Payment verified and settled. Access granted.',
           resource: `${baseUrl(req)}/api/x402`,
           timestamp: new Date().toISOString()
-        });
+        }));
       }
     } catch (e) {
       // Facilitator unavailable or invalid payment — fall through to 402
@@ -81,7 +83,8 @@ export default async function handler(req, res) {
   const requirements = buildPaymentRequirements(req);
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('PAYMENT-REQUIRED', toBase64Url(requirements));
-  return res.status(402).json(requirements);
+  res.statusCode = 402;
+  return res.end(JSON.stringify(requirements));
 }
 
 function buildPaymentRequirements(req) {
