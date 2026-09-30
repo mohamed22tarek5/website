@@ -1,0 +1,279 @@
+# Netlify config for eng-mta — mirror of vercel.json
+# Docs: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  command = "npm run build"
+  publish = "public"
+
+# NOTE: Vercel serverless functions in /api/*.js do NOT run on Netlify as-is.
+# To enable /api/* on Netlify, port them to Netlify Functions (netlify/functions/*.mjs
+# using Request -> Response) and add:
+#   [[redirects]]
+#     from = "/api/*"
+#     to = "/.netlify/functions/:splat"
+#     status = 200
+# NOTE: Vercel `Accept: text/markdown` rewrites (-> /api/markdown?path=...) have no
+# netlify.toml equivalent (no header-based rewrites). Use a Netlify Edge Function
+# to check the Accept header if you need Markdown negotiation on Netlify.
+
+# --- Global security headers (vercel: /(.*)) ---
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Content-Security-Policy = "frame-ancestors 'self'"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+
+# --- Homepage ---
+[[headers]]
+  for = "/"
+  [headers.values]
+    Link = '</.well-known/api-catalog>; rel="api-catalog", </.well-known/api-catalog/index.json>; rel="api-catalog", </.well-known/agent-card.json>; rel="service-desc", </.well-known/acp.json>; rel="service-desc", </.well-known/mcp/server-card.json>; rel="service-desc", </Mohamed%20-%20Services.html>; rel="service-doc", </openapi.json>; rel="service-doc", </.well-known/ai-catalog.json>; rel="describedby", </auth.md>; rel="describedby", </.well-known/oauth-protected-resource>; rel="resource-metadata", </.well-known/agent-skills/index.json>; rel="linkset", </sitemap.xml>; rel="sitemap", </manifest.webmanifest>; rel="manifest", </api/x402>; rel="payment", </.well-known/http-message-signatures-directory>; rel="http-message-signatures-directory"'
+    Vary = "Accept"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Link = '</.well-known/api-catalog>; rel="api-catalog", </.well-known/api-catalog/index.json>; rel="api-catalog", </.well-known/agent-card.json>; rel="service-desc", </.well-known/acp.json>; rel="service-desc", </.well-known/mcp/server-card.json>; rel="service-desc", </Mohamed%20-%20Services.html>; rel="service-doc", </openapi.json>; rel="service-doc", </.well-known/ai-catalog.json>; rel="describedby", </auth.md>; rel="describedby", </.well-known/oauth-protected-resource>; rel="resource-metadata", </.well-known/agent-skills/index.json>; rel="linkset", </sitemap.xml>; rel="sitemap", </manifest.webmanifest>; rel="manifest", </api/x402>; rel="payment", </.well-known/http-message-signatures-directory>; rel="http-message-signatures-directory"'
+    Vary = "Accept"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+# --- Engineering tools ---
+[[headers]]
+  for = "/sites/*"
+  [headers.values]
+    Link = '</.well-known/agent-skills/index.json>; rel="linkset", </sitemap.xml>; rel="sitemap"'
+    Vary = "Accept"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+# --- CV (long cache) ---
+[[headers]]
+  for = "/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+# --- Agent / API discovery (CORS + JSON types) ---
+[[headers]]
+  for = "/.well-known/api-catalog/*"
+  [headers.values]
+    Content-Type = "application/linkset+json"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, OPTIONS"
+    Access-Control-Allow-Headers = "Accept, Accept-Type"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/.well-known/ai-catalog.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, OPTIONS"
+    Access-Control-Allow-Headers = "Accept, Accept-Type"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/.well-known/oauth-protected-resource"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/.well-known/oauth-protected-resource.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/.well-known/oauth-authorization-server.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/.well-known/mcp/server-card.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/.well-known/ucp"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/openapi.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/.well-known/agent-card.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/.well-known/acp.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/.well-known/x402"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "/.well-known/http-message-signatures-directory"
+  [headers.values]
+    Content-Type = "application/http-message-signatures-directory+json"
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=86400"
+
+# Generic CORS for remaining .well-known (must come after specifics)
+[[headers]]
+  for = "/.well-known/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, OPTIONS"
+    Access-Control-Allow-Headers = "Accept, Accept-Type"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
+# --- API routes (headers apply once functions are ported) ---
+[[headers]]
+  for = "/api/x402"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, PAYMENT-SIGNATURE, PAYMENT-REQUIRED, PAYMENT-RESPONSE"
+    Cache-Control = "no-store"
+
+[[headers]]
+  for = "/agent/identity"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
+    Cache-Control = "no-store"
+
+[[headers]]
+  for = "/agent/identity/claim"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Cache-Control = "no-store"
+
+# --- SEO ---
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml"
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+# --- Static assets (vercel regex split per-extension; Netlify has no alternation) ---
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/*.jpeg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/*.avif"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/*.gif"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/*.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/*.webmanifest"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/*.pdf"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+# --- Rewrites (vercel.json -> Netlify status=200) ---
+[[redirects]]
+  from = "/.well-known/api-catalog"
+  to = "/.well-known/api-catalog/index.json"
+  status = 200
+
+# API-backed paths below require ported Netlify Functions to return 200.
+# Kept here so they work as soon as netlify/functions/* exists.
+[[redirects]]
+  from = "/.well-known/oauth-protected-resource"
+  to = "/api/oauth-protected-resource"
+  status = 200
+
+[[redirects]]
+  from = "/.well-known/oauth-authorization-server"
+  to = "/api/oauth-authorization-server"
+  status = 200
+
+[[redirects]]
+  from = "/.well-known/openid-configuration"
+  to = "/api/oauth-authorization-server"
+  status = 200
+
+[[redirects]]
+  from = "/agent/identity"
+  to = "/api/agent/identity"
+  status = 200
+
+[[redirects]]
+  from = "/agent/identity/claim"
+  to = "/api/agent/identity/claim"
+  status = 200

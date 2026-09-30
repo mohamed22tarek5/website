@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f81a2a66-fcec-4acd-bff1-9ba0c4f34f08/deploy-status)](https://app.netlify.com/projects/eng-mta/deploys)
+
 # Mohamed Tarek Abdelhady Portfolio
 
 **Communication & Electronics Engineer — Hardware + Software + Web**
