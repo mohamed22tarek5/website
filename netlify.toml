@@ -5,13 +5,12 @@
   command = "npm run build"
   publish = "public"
 
-# NOTE: Vercel serverless functions in /api/*.js do NOT run on Netlify as-is.
-# To enable /api/* on Netlify, port them to Netlify Functions (netlify/functions/*.mjs
-# using Request -> Response) and add:
-#   [[redirects]]
-#     from = "/api/*"
-#     to = "/.netlify/functions/:splat"
-#     status = 200
+[functions]
+  directory = "netlify/functions"
+  included_files = ["public/**/*.md", "public/**/*.html"]
+
+# api/ (Vercel style) stays for Vercel. netlify/functions/*.mjs (Request -> Response)
+# serves the same routes on Netlify. See redirects below.
 # NOTE: Vercel `Accept: text/markdown` rewrites (-> /api/markdown?path=...) have no
 # netlify.toml equivalent (no header-based rewrites). Use a Netlify Edge Function
 # to check the Accept header if you need Markdown negotiation on Netlify.
@@ -251,29 +250,65 @@
   to = "/.well-known/api-catalog/index.json"
   status = 200
 
-# API-backed paths below require ported Netlify Functions to return 200.
-# Kept here so they work as soon as netlify/functions/* exists.
+# API routes -> Netlify Functions (dual-deploy with Vercel api/)
+[[redirects]]
+  from = "/api/markdown/*"
+  to = "/.netlify/functions/markdown?path=/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/markdown"
+  to = "/.netlify/functions/markdown"
+  status = 200
+
+[[redirects]]
+  from = "/api/x402"
+  to = "/.netlify/functions/x402"
+  status = 200
+
+[[redirects]]
+  from = "/api/oauth-protected-resource"
+  to = "/.netlify/functions/oauth-protected-resource"
+  status = 200
+
+[[redirects]]
+  from = "/api/oauth-authorization-server"
+  to = "/.netlify/functions/oauth-authorization-server"
+  status = 200
+
+# Specific before generic: claim before identity
+[[redirects]]
+  from = "/api/agent/identity/claim"
+  to = "/.netlify/functions/agent-identity-claim"
+  status = 200
+
+[[redirects]]
+  from = "/api/agent/identity"
+  to = "/.netlify/functions/agent-identity"
+  status = 200
+
+# Friendly paths (same as vercel.json rewrites)
 [[redirects]]
   from = "/.well-known/oauth-protected-resource"
-  to = "/api/oauth-protected-resource"
+  to = "/.netlify/functions/oauth-protected-resource"
   status = 200
 
 [[redirects]]
   from = "/.well-known/oauth-authorization-server"
-  to = "/api/oauth-authorization-server"
+  to = "/.netlify/functions/oauth-authorization-server"
   status = 200
 
 [[redirects]]
   from = "/.well-known/openid-configuration"
-  to = "/api/oauth-authorization-server"
-  status = 200
-
-[[redirects]]
-  from = "/agent/identity"
-  to = "/api/agent/identity"
+  to = "/.netlify/functions/oauth-authorization-server"
   status = 200
 
 [[redirects]]
   from = "/agent/identity/claim"
-  to = "/api/agent/identity/claim"
+  to = "/.netlify/functions/agent-identity-claim"
+  status = 200
+
+[[redirects]]
+  from = "/agent/identity"
+  to = "/.netlify/functions/agent-identity"
   status = 200
