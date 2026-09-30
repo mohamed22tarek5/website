@@ -5,9 +5,10 @@
 **Communication & Electronics Engineer — Hardware + Software + Web**
 
 Live Site (primary): [mohamed-tarek-abdelhady.vercel.app](https://mohamed-tarek-abdelhady.vercel.app/)  
-Mirror (same deployment): [website-mohamed.vercel.app](https://website-mohamed.vercel.app)
+Mirror (same deployment): [website-mohamed.vercel.app](https://website-mohamed.vercel.app)  
+Mirror (Netlify): [eng-mta.netlify.app](https://eng-mta.netlify.app/) — note: `*.netlify.app` currently times out from some Egyptian ISPs (TE AS8452); use Vercel in EG or VPN.
 
-Static HTML + Vercel. PWA-enabled portfolio, engineering calculators, and agent-ready API.
+Static HTML + Vercel + Netlify. PWA-enabled portfolio, engineering calculators, and agent-ready API.
 
 ---
 
@@ -154,7 +155,7 @@ website/
 
 ## Getting Started
 
-No build step — pure static + Vercel functions.
+No build step — pure static + functions (Vercel `api/`, Netlify `netlify/functions/`).
 
 ```bash
 # 1. Preview locally (any static server)
@@ -168,9 +169,11 @@ curl -H "Accept: text/markdown" http://localhost:8000/sites/ohms-law-calculator.
 
 # 3. Deploy
 vercel --prod
+# Netlify: git push (auto-build from netlify.toml) or netlify deploy --prod
 ```
 
 Vercel config: `outputDirectory: public`, `api/markdown.js` includes `public/**`, rewrites map `Accept: text/markdown` page requests to `/api/markdown?path=...`.
+Netlify config: `publish = "public"`, `functions = "netlify/functions"` (ports of `api/*` as Request→Response), `included_files = ["public/**/*.md", "public/**/*.html"]`. `Accept: text/markdown` auto-rewrite has no `netlify.toml` equivalent — call `/api/markdown?path=/...` directly on Netlify.
 
 ---
 
