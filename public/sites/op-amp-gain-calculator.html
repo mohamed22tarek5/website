@@ -49,11 +49,11 @@
 <body>
 <header class="mta-bar" id="header" role="banner">
   <div class="mta-bar-in">
-    <nav aria-label="Breadcrumb" class="mta-crumbs"><ol><li><a href="/">Home</a></li><li><a href="/tools.html">Tools</a></li><li aria-current="page">Op-Amp Gain Calculator</li></ol></nav><script type="application/ld+json">{"":"https://schema.org","":"BreadcrumbList","itemListElement":[{"":"ListItem","position":1,"name":"Home","item":"https://mohamed-tarek-abdelhady.vercel.app/"},{"":"ListItem","position":2,"name":"Tools","item":"https://mohamed-tarek-abdelhady.vercel.app/tools.html"},{"":"ListItem","position":3,"name":"Op-Amp Gain Calculator","item":"https://mohamed-tarek-abdelhady.vercel.app/sites/op-amp-gain-calculator.html"}]}</script>
+    <nav aria-label="Breadcrumb" class="mta-crumbs"><ol><li><a href="/">Home</a></li><li><a href="/tools.html">Tools</a></li><li aria-current="page">Op-Amp Gain Calculator</li></ol></nav><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohamed-tarek-abdelhady.vercel.app/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://mohamed-tarek-abdelhady.vercel.app/tools.html"},{"@type":"ListItem","position":3,"name":"Op-Amp Gain Calculator","item":"https://mohamed-tarek-abdelhady.vercel.app/sites/op-amp-gain-calculator.html"}]}</script>
     <button class="mta-btn" id="th" type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
   </div>
 </header>
-<div class="wrap">
+<main class="wrap" id="main">
   <div class="hero"><span class="pill">Analog · Op-amps</span><h1>Op-Amp Gain Calculator</h1><p>Inverting, non-inverting, differential and follower — gain, dB, output and rail-clipping check.</p></div>
   <div class="seg"><button class="on" data-t="noninv">Non-inverting</button><button data-t="inv">Inverting</button><button data-t="diff">Differential</button><button data-t="follow">Follower</button></div>
   <div class="grid">
@@ -88,7 +88,7 @@
     </div>
   </div>
 </footer>
-</div>
+</main>
 <script>
 const $=id=>document.getElementById(id);
 $('th').onclick=()=>{const h=document.documentElement;h.dataset.theme=h.dataset.theme==='light'?'dark':'light';};
@@ -116,7 +116,7 @@ function calc(){
 }
 $('go').onclick=calc;document.querySelectorAll('input').forEach(e=>e.addEventListener('input',calc));calc();
 </script>
-<script src="mta-chrome.js" defer></script>
+<script src="/sites/mta-chrome.js" defer></script>
 <!-- Vercel Speed Insights -->
 <script>
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };

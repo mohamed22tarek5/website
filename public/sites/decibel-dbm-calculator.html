@@ -45,11 +45,11 @@
 <body>
 <header class="mta-bar" id="header" role="banner">
   <div class="mta-bar-in">
-    <nav aria-label="Breadcrumb" class="mta-crumbs"><ol><li><a href="/">Home</a></li><li><a href="/tools.html">Tools</a></li><li aria-current="page">dB / dBm Calculator</li></ol></nav><script type="application/ld+json">{"":"https://schema.org","":"BreadcrumbList","itemListElement":[{"":"ListItem","position":1,"name":"Home","item":"https://mohamed-tarek-abdelhady.vercel.app/"},{"":"ListItem","position":2,"name":"Tools","item":"https://mohamed-tarek-abdelhady.vercel.app/tools.html"},{"":"ListItem","position":3,"name":"dB / dBm Calculator","item":"https://mohamed-tarek-abdelhady.vercel.app/sites/decibel-dbm-calculator.html"}]}</script>
+    <nav aria-label="Breadcrumb" class="mta-crumbs"><ol><li><a href="/">Home</a></li><li><a href="/tools.html">Tools</a></li><li aria-current="page">dB / dBm Calculator</li></ol></nav><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohamed-tarek-abdelhady.vercel.app/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://mohamed-tarek-abdelhady.vercel.app/tools.html"},{"@type":"ListItem","position":3,"name":"dB / dBm Calculator","item":"https://mohamed-tarek-abdelhady.vercel.app/sites/decibel-dbm-calculator.html"}]}</script>
     <button class="mta-btn" id="th" type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
   </div>
 </header>
-<div class="wrap">
+<main class="wrap" id="main">
   <div class="hero"><span class="pill">RF · Audio · Comms</span><h1>dB / dBm Calculator</h1><p>Ratios → dB, dBm ⇄ Watt / mW / Vrms, and multi-stage cascade gain. Power uses 10·log, voltage uses 20·log.</p></div>
   <div class="grid">
     <div class="card"><h2><i class="fas fa-scale-balanced"></i> Ratio → dB</h2><div class="sub">P2/P1 (power) or V2/V1 (same-Z voltage)</div>
@@ -88,7 +88,7 @@
     </div>
   </div>
 </footer>
-</div>
+</main>
 <script>
 const $=id=>document.getElementById(id);
 $('th').onclick=()=>{const h=document.documentElement;h.dataset.theme=h.dataset.theme==='light'?'dark':'light';};
@@ -112,7 +112,7 @@ function calc(){
 }
 document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',calc));calc();
 </script>
-<script src="mta-chrome.js" defer></script>
+<script src="/sites/mta-chrome.js" defer></script>
 <!-- Vercel Speed Insights -->
 <script>
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
