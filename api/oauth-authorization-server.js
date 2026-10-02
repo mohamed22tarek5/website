@@ -46,7 +46,7 @@ export default function handler(req, res) {
     scopes_supported: ['openid', 'profile', 'email', 'read', 'tools'],
     token_endpoint_auth_methods_supported: ['client_secret_basic', 'client_secret_post', 'none'],
     grant_types_supported: ['authorization_code', 'implicit', 'urn:ietf:params:oauth:grant-type:jwt-bearer'],
-    service_documentation: `${base}/Mohamed%20-%20Services.html`,
+    service_documentation: `${base}/services.html`,
     claims_supported: ['sub', 'iss', 'aud', 'exp', 'iat', 'name', 'email'],
     agent_auth: {
       skill: `${base}/auth.md`,

@@ -16,7 +16,7 @@
   "screenshots": [
     {
       "src": "photo.jpg",
-      "sizes": "960x957",
+      "sizes": "851x1134",
       "type": "image/jpeg",
       "label": "Mohamed Tarek Abdelhady Portfolio"
     }
@@ -46,14 +46,14 @@
       "name": "Projects",
       "short_name": "Projects",
       "description": "View my featured projects",
-      "url": "/Mohamed%20-%20Project.html",
+      "url": "/projects.html",
       "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "CV",
       "short_name": "CV",
       "description": "Download my professional CV",
-      "url": "/Mohamed%20-%20CV.html",
+      "url": "/cv.html",
       "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
     },
     {

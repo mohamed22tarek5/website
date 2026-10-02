@@ -63,12 +63,12 @@ Mirror: https://eng-mta.netlify.app/
 ## Pages
 
 - [Home](/) — Portfolio homepage
-- [CV](/Mohamed%20-%20CV.html) — Resume and qualifications
-- [Projects](/Mohamed%20-%20Project.html) — Engineering projects portfolio
-- [Services](/Mohamed%20-%20Services.html) — Available services and tools
-- [Certificates](/Mohamed%20-%20Certificates.html) — Professional certifications
-- [Social Media](/Mohamed%20-%20social-media.html) — Contact and social links
-- [Apps & Tools](/Mohamed%20-%20my-sites.html) — All engineering tools
+- [CV](/cv.html) — Resume and qualifications
+- [Projects](/projects.html) — Engineering projects portfolio
+- [Services](/services.html) — Available services and tools
+- [Certificates](/certificates.html) — Professional certifications
+- [Social Media](/social-media.html) — Contact and social links
+- [Apps & Tools](/tools.html) — All engineering tools
 
 ## Engineering Tools
 

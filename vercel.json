@@ -48,7 +48,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </Mohamed%20-%20Services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
         },
         {
           "key": "Vary",
@@ -65,7 +65,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </Mohamed%20-%20Services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
         },
         {
           "key": "Vary",
@@ -447,6 +447,28 @@
       "includeFiles": "public/**"
     }
   },
+  "redirects": [
+    { "source": "/Mohamed - CV.html", "destination": "/cv.html", "permanent": true },
+    { "source": "/Mohamed - Certificates.html", "destination": "/certificates.html", "permanent": true },
+    { "source": "/Mohamed - Personal Information.html", "destination": "/about.html", "permanent": true },
+    { "source": "/Mohamed - Project.html", "destination": "/projects.html", "permanent": true },
+    { "source": "/Mohamed - Services.html", "destination": "/services.html", "permanent": true },
+    { "source": "/Mohamed - my-sites.html", "destination": "/tools.html", "permanent": true },
+    { "source": "/Mohamed - social-media.html", "destination": "/social-media.html", "permanent": true },
+    { "source": "/sites/Battery-Capacity-&-Runtime-Calculator.html", "destination": "/sites/battery-capacity-runtime-calculator.html", "permanent": true },
+    { "source": "/sites/RC-Filter-&-LC-Resonance-Calculator.html", "destination": "/sites/rc-filter-lc-resonance-calculator.html", "permanent": true },
+    { "source": "/sites/Indactance-calculator.html", "destination": "/sites/inductance-calculator.html", "permanent": true },
+    { "source": "/sites/Mastering Linux Commands.html", "destination": "/sites/mastering-linux-commands.html", "permanent": true },
+    { "source": "/sites/LCD-Custom-Character-Generator.html", "destination": "/sites/lcd-custom-character-generator.html", "permanent": true },
+    { "source": "/sites/Length-Converter.html", "destination": "/sites/length-converter.html", "permanent": true },
+    { "source": "/sites/Medication-Reminder.html", "destination": "/sites/medication-reminder.html", "permanent": true },
+    { "source": "/sites/Power-Factor-Calculator.html", "destination": "/sites/power-factor-calculator.html", "permanent": true },
+    { "source": "/sites/Power-Triangle-Calculator.html", "destination": "/sites/power-triangle-calculator.html", "permanent": true },
+    { "source": "/sites/Transformer-Turns-Calculator.html", "destination": "/sites/transformer-turns-calculator.html", "permanent": true },
+    { "source": "/sites/Wire-Gauge-Calculator.html", "destination": "/sites/wire-gauge-calculator.html", "permanent": true },
+    { "source": "/sites/Race-Game.html", "destination": "/sites/race-game.html", "permanent": true },
+    { "source": "/sites/index.html", "destination": "/sites/", "permanent": true }
+  ],
   "rewrites": [
     {
       "source": "/",

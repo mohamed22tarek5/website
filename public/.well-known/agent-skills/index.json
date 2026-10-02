@@ -35,7 +35,7 @@
       "name": "inductance-calculator",
       "type": "skill-md",
       "description": "Calculate inductor values including reactance, energy storage, and LC resonance frequency.",
-      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/Indactance-calculator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/inductance-calculator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -49,35 +49,35 @@
       "name": "battery-capacity-calculator",
       "type": "skill-md",
       "description": "Calculate battery capacity, runtime, and discharge rates for various battery configurations.",
-      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/Battery-Capacity-&-Runtime-Calculator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/battery-capacity-runtime-calculator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "power-factor-calculator",
       "type": "skill-md",
       "description": "Calculate power factor, real power, reactive power, and apparent power for AC circuits.",
-      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/Power-Factor-Calculator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/power-factor-calculator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "lcd-custom-character-generator",
       "type": "skill-md",
       "description": "Generate custom character bitmaps for 16x2 and 20x4 LCD displays. Export as Arduino code.",
-      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/LCD-Custom-Character-Generator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/lcd-custom-character-generator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "wire-gauge-calculator",
       "type": "skill-md",
       "description": "Calculate wire gauge (AWG) based on current, voltage drop, and wire length requirements.",
-      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/Wire-Gauge-Calculator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/wire-gauge-calculator.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "length-converter",
       "type": "skill-md",
       "description": "Convert between different length units including meters, feet, inches, centimeters, and more.",
-      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/Length-Converter.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/length-converter.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -91,7 +91,7 @@
       "name": "linux-commands",
       "type": "skill-md",
       "description": "Interactive reference for mastering essential Linux commands with examples and explanations.",
-      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/Mastering%20Linux%20Commands.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/mastering-linux-commands.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -105,14 +105,14 @@
       "name": "projects-showcase",
       "type": "skill-md",
       "description": "Showcase of featured engineering and web development projects.",
-      "url": "https://mohamed-tarek-abdelhady.vercel.app/Mohamed%20-%20Project.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/projects.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "name": "services",
       "type": "skill-md",
       "description": "Engineering services offered including web development, Arduino programming, PCB design, and embedded systems.",
-      "url": "https://mohamed-tarek-abdelhady.vercel.app/Mohamed%20-%20Services.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/services.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   ]

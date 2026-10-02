@@ -444,21 +444,21 @@
           { name: 'Resistor Calculator', url: '/sites/resistor-calculator.html' },
           { name: 'Resistor for LED', url: '/sites/resistor-for-led.html' },
           { name: 'Capacitor Calculator', url: '/sites/capacitor-calculator.html' },
-          { name: 'Inductance Calculator', url: '/sites/Indactance-calculator.html' },
+          { name: 'Inductance Calculator', url: '/sites/inductance-calculator.html' },
           { name: 'Buck-Boost Calculator', url: '/sites/buck-boost-calculator.html' },
-          { name: 'Battery Capacity Calculator', url: '/sites/Battery-Capacity-&-Runtime-Calculator.html' },
-          { name: 'Power Factor Calculator', url: '/sites/Power-Factor-Calculator.html' },
-          { name: 'Power Triangle Calculator', url: '/sites/Power-Triangle-Calculator.html' },
-          { name: 'RC Filter & LC Resonance Calculator', url: '/sites/RC-Filter-&-LC-Resonance-Calculator.html' },
-          { name: 'Transformer Turns Calculator', url: '/sites/Transformer-Turns-Calculator.html' },
-          { name: 'Wire Gauge Calculator', url: '/sites/Wire-Gauge-Calculator.html' },
-          { name: 'Length Converter', url: '/sites/Length-Converter.html' },
-          { name: 'LCD Custom Character Generator', url: '/sites/LCD-Custom-Character-Generator.html' },
+          { name: 'Battery Capacity Calculator', url: '/sites/battery-capacity-runtime-calculator.html' },
+          { name: 'Power Factor Calculator', url: '/sites/power-factor-calculator.html' },
+          { name: 'Power Triangle Calculator', url: '/sites/power-triangle-calculator.html' },
+          { name: 'RC Filter & LC Resonance Calculator', url: '/sites/rc-filter-lc-resonance-calculator.html' },
+          { name: 'Transformer Turns Calculator', url: '/sites/transformer-turns-calculator.html' },
+          { name: 'Wire Gauge Calculator', url: '/sites/wire-gauge-calculator.html' },
+          { name: 'Length Converter', url: '/sites/length-converter.html' },
+          { name: 'LCD Custom Character Generator', url: '/sites/lcd-custom-character-generator.html' },
           { name: 'Electrical Calculation', url: '/sites/electrical-calculation.html' },
           { name: 'AI Sites Directory', url: '/sites/ai-sites-list.html' },
-          { name: 'Linux Commands Reference', url: '/sites/Mastering%20Linux%20Commands.html' },
+          { name: 'Linux Commands Reference', url: '/sites/mastering-linux-commands.html' },
           { name: 'To-Do List', url: '/sites/to-do-list.html' },
-          { name: 'Medication Reminder', url: '/sites/Medication-Reminder.html' }
+          { name: 'Medication Reminder', url: '/sites/medication-reminder.html' }
         ];
       }
     }, { signal });

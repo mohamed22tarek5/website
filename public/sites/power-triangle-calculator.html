@@ -3,25 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/Transformer-Turns-Calculator.html">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/power-triangle-calculator.html">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Transformer Turns Calculator | Mohamed Tarek Abdelhady</title>
-  <meta name="description" content="Calculate primary and secondary turns for transformer design with wire gauge selection, SVG formula visualization, and voltage ratio calculations.">
+  <title>Power Triangle Calculator | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Visualize and calculate AC power relationships. Real power, reactive power, apparent power, power factor, and phase angle calculator with SVG triangle visualization.">
   <meta name="author" content="Mohamed Tarek Abdelhady">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0a0e1a">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Transformer Turns Calculator | Mohamed Tarek Abdelhady">
-  <meta property="og:description" content="Calculate primary and secondary turns for transformer design with wire gauge selection and SVG formula visualization.">
+  <meta property="og:title" content="Power Triangle Calculator | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Visualize and calculate AC power relationships with interactive SVG triangle visualization.">
   <meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
-  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/Transformer-Turns-Calculator.html">
+  <meta property="og:image:width" content="851">
+  <meta property="og:image:height" content="1134">
+  <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/power-triangle-calculator.html">
   <meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Transformer Turns Calculator | Mohamed Tarek Abdelhady">
-  <meta name="twitter:description" content="Calculate primary and secondary turns for transformer design with wire gauge selection and SVG formula visualization.">
+  <meta name="twitter:title" content="Power Triangle Calculator | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Visualize and calculate AC power relationships with interactive SVG triangle visualization.">
   <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -29,8 +32,8 @@
   <meta name="mobile-web-app-capable" content="yes">
 
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="../icon.png" type="image/png" sizes="any">
-  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="icon" href="/icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,9 +44,9 @@
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Transformer Turns Calculator",
-    "description": "Calculate primary and secondary turns for transformer design with wire gauge selection and SVG formula visualization.",
-    "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/Transformer-Turns-Calculator.html",
+    "name": "Power Triangle Calculator",
+    "description": "Visualize and calculate AC power relationships with interactive SVG triangle visualization.",
+    "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/power-triangle-calculator.html",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web",
     "author": {
@@ -260,7 +263,7 @@
     @media (max-width: 992px) { .calc-grid { grid-template-columns: 1fr; } }
 
     .calc-box {
-      padding: var(--space-xl); background: var(--color-bg-card);
+      padding: var(--space-xl); background: var(--color-bg-secondary);
       border: 1px solid var(--color-border); border-radius: var(--radius-lg);
       transition: all var(--transition-base);
     }
@@ -287,7 +290,24 @@
     }
     .input-field:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-glow); }
     .input-field.error { border-color: var(--color-error); box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15); }
-    .input-field option { background: var(--color-bg-card); color: var(--color-text-primary); }
+
+    .mode-selector {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-sm); margin-bottom: var(--space-xl);
+    }
+    .mode-btn {
+      padding: var(--space-md) var(--space-lg); background: var(--color-bg-tertiary);
+      border: 1px solid var(--color-border); border-radius: var(--radius-md);
+      color: var(--color-text-secondary); cursor: pointer;
+      transition: all var(--transition-fast); text-align: center;
+      font-size: 0.875rem; font-weight: 500; font-family: var(--font-sans);
+    }
+    .mode-btn:hover { color: var(--color-text-primary); border-color: var(--color-border-hover); background: var(--color-bg-card-hover); }
+    .mode-btn.active {
+      background: var(--color-accent-subtle); color: var(--color-accent);
+      border-color: var(--color-border-accent); font-weight: 600;
+    }
+    .mode-btn i { margin-right: var(--space-sm); }
 
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
@@ -308,6 +328,30 @@
       margin-top: var(--space-lg);
     }
 
+    .triangle-container {
+      margin: var(--space-xl) 0; text-align: center;
+    }
+    .power-triangle {
+      max-width: 400px; margin: 0 auto; position: relative;
+    }
+    .triangle-svg {
+      width: 100%; height: 300px;
+    }
+    .triangle-side {
+      stroke-width: 3; fill: none;
+    }
+    .real-power { stroke: var(--color-success); }
+    .reactive-power { stroke: var(--color-warning); }
+    .apparent-power { stroke: var(--color-accent); }
+    .angle-arc {
+      stroke: var(--color-text-tertiary); stroke-width: 1.5; fill: none;
+    }
+    .power-label { font-size: 14px; font-weight: bold; font-family: var(--font-sans); }
+    .real-label { fill: var(--color-success); }
+    .reactive-label { fill: var(--color-warning); }
+    .apparent-label { fill: var(--color-accent); }
+    .angle-label { fill: var(--color-text-tertiary); font-size: 12px; }
+
     .results-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: var(--space-md); margin-top: var(--space-lg);
@@ -322,55 +366,10 @@
     .result-box.success { border-left-color: var(--color-success); background: rgba(34, 197, 94, 0.06); }
     .result-box.warning { border-left-color: var(--color-warning); background: rgba(245, 158, 11, 0.06); }
     .result-box.info { border-left-color: var(--color-info); background: rgba(59, 130, 246, 0.06); }
+    .result-box.error { border-left-color: var(--color-error); background: rgba(239, 68, 68, 0.06); }
     .result-label { font-size: 0.75rem; color: var(--color-text-tertiary); margin-bottom: var(--space-xs); font-weight: 500; }
     .result-value { font-size: 1.5rem; font-weight: 800; color: var(--color-text-primary); line-height: 1.2; }
     .result-unit { font-size: 0.8125rem; color: var(--color-text-tertiary); margin-left: 2px; font-weight: 400; }
-
-    .wire-table-wrapper {
-      margin-top: var(--space-xl); overflow-x: auto;
-    }
-    .wire-table {
-      width: 100%; border-collapse: collapse; margin-top: var(--space-md);
-      background: var(--color-bg-card); border-radius: var(--radius-lg);
-      overflow: hidden; border: 1px solid var(--color-border);
-    }
-    .wire-table th, .wire-table td {
-      padding: var(--space-md) var(--space-lg); text-align: left;
-      border-bottom: 1px solid var(--color-border); font-size: 0.875rem;
-    }
-    .wire-table th {
-      background: var(--color-bg-tertiary); color: var(--color-accent);
-      font-weight: 600; font-size: 0.8125rem; text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .wire-table tr:last-child td { border-bottom: none; }
-    .wire-table tr:hover td { background: var(--color-accent-subtle); }
-
-    .formula-box {
-      margin-top: var(--space-xl); padding: var(--space-xl);
-      background: var(--color-bg-card); border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-    }
-    .formula-box h3 {
-      color: var(--color-accent); margin-bottom: var(--space-lg);
-      font-size: 1rem; font-weight: 600; display: flex; align-items: center; gap: var(--space-sm);
-    }
-    .formula-svg-container {
-      display: flex; justify-content: center; margin-bottom: var(--space-lg);
-      padding: var(--space-lg); background: var(--color-bg-tertiary);
-      border-radius: var(--radius-md); border: 1px solid var(--color-border);
-    }
-    .formula-list {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: var(--space-sm);
-    }
-    .formula-list li {
-      padding: var(--space-sm) var(--space-md);
-      background: var(--color-bg-tertiary); border-radius: var(--radius-sm);
-      font-size: 0.875rem; color: var(--color-text-secondary);
-    }
-    .formula-list li strong { color: var(--color-text-primary); }
-    @media (max-width: 768px) { .formula-list { grid-template-columns: 1fr; } }
 
     .info-box {
       margin-top: var(--space-xl); padding: var(--space-xl);
@@ -437,12 +436,14 @@
 
     @media (max-width: 768px) {
       .calc-grid { grid-template-columns: 1fr; }
+      .mode-selector { grid-template-columns: 1fr 1fr; }
       .results-grid { grid-template-columns: 1fr 1fr; }
       .btn-group { grid-template-columns: 1fr; }
-      .wire-table th, .wire-table td { padding: var(--space-sm) var(--space-md); font-size: 0.8125rem; }
+      .power-triangle { max-width: 300px; }
     }
     @media (max-width: 480px) {
       .results-grid { grid-template-columns: 1fr; }
+      .mode-selector { grid-template-columns: 1fr; }
     }
   </style>
 <link rel="stylesheet" href="mta-chrome.css">
@@ -459,7 +460,7 @@
 
   <header class="mta-bar" id="header" role="banner">
   <div class="mta-bar-in">
-    <a class="mta-all" href="../Mohamed%20-%20my-sites.html" aria-label="Back to all tools"><i class="fas fa-arrow-left"></i><u>All tools</u></a>
+    <nav aria-label="Breadcrumb" class="mta-crumbs"><ol><li><a href="/">Home</a></li><li><a href="/tools.html">Tools</a></li><li aria-current="page">Power Triangle Calculator</li></ol></nav><script type="application/ld+json">{"":"https://schema.org","":"BreadcrumbList","itemListElement":[{"":"ListItem","position":1,"name":"Home","item":"https://mohamed-tarek-abdelhady.vercel.app/"},{"":"ListItem","position":2,"name":"Tools","item":"https://mohamed-tarek-abdelhady.vercel.app/tools.html"},{"":"ListItem","position":3,"name":"Power Triangle Calculator","item":"https://mohamed-tarek-abdelhady.vercel.app/sites/power-triangle-calculator.html"}]}</script>
     <button class="mta-btn" id="themeToggle" type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
   </div>
 </header><div hidden aria-hidden="true"><button id="menuToggle" tabindex="-1"></button></div>
@@ -477,171 +478,105 @@
           <span class="dot"></span>
           Engineering Tool
         </div>
-        <h1><i class="fas fa-bolt"></i> <span class="gradient-text">Transformer Turns</span> Calculator</h1>
-        <p>Calculate primary and secondary turns for your transformer design with wire gauge selection</p>
+        <h1><i class="fas fa-bolt"></i> <span class="gradient-text">Power Triangle</span> Calculator</h1>
+        <p>Visualize and calculate AC power relationships with interactive SVG triangle visualization</p>
       </div>
     </section>
 
     <section class="main-content" aria-label="Calculator">
       <div class="container">
+        <div class="mode-selector" role="radiogroup" aria-label="Input mode selection">
+          <button class="mode-btn active" role="radio" aria-checked="true" onclick="setInputMode('pq')">
+            <i class="fas fa-wave-square"></i> P & Q
+          </button>
+          <button class="mode-btn" role="radio" aria-checked="false" onclick="setInputMode('ps')">
+            <i class="fas fa-bolt"></i> P & S
+          </button>
+          <button class="mode-btn" role="radio" aria-checked="false" onclick="setInputMode('qs')">
+            <i class="fas fa-rotate"></i> Q & S
+          </button>
+          <button class="mode-btn" role="radio" aria-checked="false" onclick="setInputMode('pf')">
+            <i class="fas fa-gauge-high"></i> P & PF
+          </button>
+        </div>
+
         <div class="calc-grid">
           <div class="calc-box">
             <h3><i class="fas fa-sliders-h"></i> Input Parameters</h3>
 
-            <div class="input-group">
-              <label for="vin">Input Voltage (Vin) <span class="unit-display">Volts (V)</span></label>
-              <input type="number" id="vin" class="input-field" placeholder="e.g., 120" step="any" value="120">
-            </div>
-
-            <div class="input-group">
-              <label for="vout">Output Voltage (Vout) <span class="unit-display">Volts (V)</span></label>
-              <input type="number" id="vout" class="input-field" placeholder="e.g., 12" step="any" value="12">
-            </div>
-
-            <div class="input-group">
-              <label for="frequency">Frequency <span class="unit-display">Hertz (Hz)</span></label>
-              <input type="number" id="frequency" class="input-field" placeholder="e.g., 60" step="any" value="60">
-            </div>
-
-            <div class="input-group">
-              <label for="coreArea">Core Area <span class="unit-display">cm&sup2;</span></label>
-              <input type="number" id="coreArea" class="input-field" placeholder="e.g., 10" step="any" value="10">
-            </div>
-
-            <div class="input-group">
-              <label for="bmax">Max Flux Density (Bmax) <span class="unit-display">Tesla (T)</span></label>
-              <input type="number" id="bmax" class="input-field" placeholder="e.g., 1.2" step="any" value="1.2">
-            </div>
-
-            <div class="input-group">
-              <label for="current">Output Current <span class="unit-display">Amperes (A)</span></label>
-              <input type="number" id="current" class="input-field" placeholder="e.g., 2" step="any" value="2">
+            <div id="inputFields">
+              <div class="input-group">
+                <label for="realPower">Real Power (P) <span class="unit-display">Watts (W)</span></label>
+                <input type="number" id="realPower" class="input-field" placeholder="e.g., 800" step="0.1" min="0" value="800">
+              </div>
+              <div class="input-group">
+                <label for="reactivePower">Reactive Power (Q) <span class="unit-display">Volt-Amps Reactive (VAR)</span></label>
+                <input type="number" id="reactivePower" class="input-field" placeholder="e.g., 600" step="0.1" min="0" value="600">
+              </div>
             </div>
 
             <div class="btn-group">
-              <button class="btn btn-primary" onclick="calculateTurns()" aria-label="Calculate transformer turns">
+              <button class="btn btn-primary" onclick="calculatePowerTriangle()" aria-label="Calculate power triangle">
                 <i class="fas fa-calculator"></i> Calculate
               </button>
-              <button class="btn btn-primary" onclick="resetCalculator()" aria-label="Reset calculator" style="background: var(--color-bg-tertiary); color: var(--color-text-primary); border: 1px solid var(--color-border); box-shadow: none;">
+              <button class="btn btn-primary" onclick="resetCalculator()" style="background: var(--color-bg-tertiary); color: var(--color-text-primary); border: 1px solid var(--color-border);" aria-label="Reset calculator">
                 <i class="fas fa-redo"></i> Reset
               </button>
             </div>
           </div>
 
           <div class="calc-box">
-            <h3><i class="fas fa-chart-line"></i> Calculation Results</h3>
+            <h3><i class="fas fa-chart-line"></i> Results</h3>
+
+            <div class="triangle-container">
+              <div class="power-triangle">
+                <svg class="triangle-svg" viewBox="0 0 400 300" id="triangleSvg" aria-label="Power triangle visualization"></svg>
+              </div>
+            </div>
 
             <div class="results-grid">
-              <div class="result-box success">
-                <div class="result-label">Primary Turns</div>
-                <div class="result-value" id="primaryTurns">--</div>
+              <div class="result-box" id="apparentPowerBox">
+                <div class="result-label">Apparent Power (S)</div>
+                <div class="result-value" id="apparentPowerResult">-- VA</div>
               </div>
-              <div class="result-box info">
-                <div class="result-label">Secondary Turns</div>
-                <div class="result-value" id="secondaryTurns">--</div>
+              <div class="result-box success" id="powerFactorBox">
+                <div class="result-label">Power Factor</div>
+                <div class="result-value" id="powerFactorResult">--</div>
               </div>
-              <div class="result-box warning">
-                <div class="result-label">Turns Ratio</div>
-                <div class="result-value" id="turnsRatio">--</div>
+              <div class="result-box warning" id="phaseAngleBox">
+                <div class="result-label">Phase Angle</div>
+                <div class="result-value" id="phaseAngleResult">--</div>
+                <div class="result-unit">&deg;</div>
               </div>
-              <div class="result-box">
-                <div class="result-label">Primary Current</div>
-                <div class="result-value" id="primaryCurrent">--</div>
-                <div class="result-unit">A</div>
+              <div class="result-box info" id="reactiveFactorBox">
+                <div class="result-label">Reactive Factor</div>
+                <div class="result-value" id="reactiveFactorResult">--</div>
               </div>
-            </div>
-
-            <div class="wire-table-wrapper">
-              <h3 style="margin-top: var(--space-xl);"><i class="fas fa-project-diagram"></i> Recommended Wire Gauges</h3>
-              <table class="wire-table" role="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Winding</th>
-                    <th scope="col">Current (A)</th>
-                    <th scope="col">Wire Gauge</th>
-                    <th scope="col">Diameter (mm)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Primary</td>
-                    <td id="primaryCurrentValue">--</td>
-                    <td id="primaryGauge">--</td>
-                    <td id="primaryDiameter">--</td>
-                  </tr>
-                  <tr>
-                    <td>Secondary</td>
-                    <td id="secondaryCurrentValue">--</td>
-                    <td id="secondaryGauge">--</td>
-                    <td id="secondaryDiameter">--</td>
-                  </tr>
-                </tbody>
-              </table>
             </div>
           </div>
         </div>
 
-        <div class="formula-box">
-          <h3><i class="fas fa-square-root-variable"></i> Calculation Formula & Visualization</h3>
-          <div class="formula-svg-container">
-            <svg viewBox="0 0 720 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Transformer turns formula: N equals V times 10 to the power of 8 divided by 4.44 times frequency times flux density times core area" style="width: 100%; max-width: 700px;">
-              <defs>
-                <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
-                  <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
-                </linearGradient>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="2" result="blur"/>
-                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-              </defs>
-              <rect width="720" height="120" rx="12" fill="none"/>
-
-              <text x="30" y="55" fill="#60a5fa" font-family="Inter, sans-serif" font-size="22" font-weight="700" filter="url(#glow)">N</text>
-              <text x="55" y="55" fill="#94a3b8" font-family="Inter, sans-serif" font-size="22" font-weight="500">=</text>
-
-              <text x="80" y="55" fill="#22c55e" font-family="Inter, sans-serif" font-size="22" font-weight="700" filter="url(#glow)">V</text>
-
-              <text x="105" y="55" fill="#94a3b8" font-family="Inter, sans-serif" font-size="16" font-weight="500">&#215; 10</text>
-              <text x="155" y="42" fill="#f59e0b" font-family="Inter, sans-serif" font-size="13" font-weight="700">8</text>
-
-              <line x1="80" y1="68" x2="420" y2="68" stroke="url(#accentGrad)" stroke-width="2.5" stroke-linecap="round"/>
-
-              <text x="185" y="95" fill="#94a3b8" font-family="Inter, sans-serif" font-size="18" font-weight="500">4.44 &#215; </text>
-              <text x="295" y="95" fill="#60a5fa" font-family="Inter, sans-serif" font-size="18" font-weight="700">f</text>
-              <text x="315" y="95" fill="#94a3b8" font-family="Inter, sans-serif" font-size="18" font-weight="500"> &#215; </text>
-              <text x="345" y="95" fill="#22c55e" font-family="Inter, sans-serif" font-size="18" font-weight="700">B</text>
-              <text x="365" y="95" fill="#94a3b8" font-family="Inter, sans-serif" font-size="18" font-weight="500"> &#215; </text>
-              <text x="395" y="95" fill="#8b5cf6" font-family="Inter, sans-serif" font-size="18" font-weight="700">A</text>
-
-              <circle cx="470" cy="30" r="6" fill="#60a5fa"/>
-              <text x="485" y="35" fill="#94a3b8" font-family="Inter, sans-serif" font-size="13">N = Number of turns</text>
-              <circle cx="470" cy="55" r="6" fill="#22c55e"/>
-              <text x="485" y="60" fill="#94a3b8" font-family="Inter, sans-serif" font-size="13">V = Voltage (RMS)</text>
-              <circle cx="470" cy="80" r="6" fill="#60a5fa"/>
-              <text x="485" y="85" fill="#94a3b8" font-family="Inter, sans-serif" font-size="13">f = Frequency (Hz)</text>
-              <circle cx="470" cy="105" r="6" fill="#22c55e"/>
-              <text x="485" y="110" fill="#94a3b8" font-family="Inter, sans-serif" font-size="13">B = Flux density (T)</text>
-            </svg>
+        <div class="calc-grid" style="margin-top: var(--space-xl);">
+          <div class="info-box">
+            <h3><i class="fas fa-square-root-variable"></i> Power Triangle Theory</h3>
+            <ul>
+              <li><strong>Real Power (P)</strong>: Measured in Watts (W), represents useful work done by the circuit</li>
+              <li><strong>Reactive Power (Q)</strong>: Measured in Volt-Amps Reactive (VAR), represents energy stored and returned by inductors and capacitors</li>
+              <li><strong>Apparent Power (S)</strong>: Measured in Volt-Amps (VA), the vector sum of real and reactive power</li>
+              <li><strong>Power Factor (PF)</strong>: Ratio of real power to apparent power (P/S), ranges from 0 to 1</li>
+              <li><strong>Phase Angle</strong>: Angle between voltage and current waveforms, derived from the power triangle</li>
+            </ul>
           </div>
-          <ul class="formula-list">
-            <li><strong>N</strong> = Number of turns</li>
-            <li><strong>V</strong> = Voltage (RMS)</li>
-            <li><strong>f</strong> = Frequency (Hz)</li>
-            <li><strong>B</strong> = Flux density (Tesla)</li>
-            <li><strong>A</strong> = Core area (cm&sup2;)</li>
-          </ul>
-        </div>
-
-        <div class="info-box" style="margin-top: var(--space-xl);">
-          <h3><i class="fas fa-lightbulb"></i> Transformer Design Tips</h3>
-          <ul>
-            <li>Use <strong>Bmax</strong> values between 1.0-1.5T for silicon steel cores to avoid saturation</li>
-            <li>Add a <strong>20% safety margin</strong> to wire gauge for thermal headroom</li>
-            <li>Higher frequency transformers can use <strong>fewer turns</strong> and smaller cores</li>
-            <li>Always round turns <strong>up</strong> to the nearest whole number</li>
-            <li>Consider <strong>copper losses</strong> (I&sup2;R) when selecting wire gauge for high-current windings</li>
-          </ul>
+          <div class="info-box">
+            <h3><i class="fas fa-lightbulb"></i> Practical Applications</h3>
+            <ul>
+              <li><strong>Power Factor Correction</strong>: Add capacitors to reduce reactive power and improve efficiency</li>
+              <li><strong>Transformer Sizing</strong>: Apparent power determines transformer capacity requirements</li>
+              <li><strong>Energy Efficiency</strong>: Higher power factor reduces energy losses in transmission</li>
+              <li><strong>Motor Loads</strong>: Inductive loads like motors create lagging power factor</li>
+              <li><strong>Capacitor Banks</strong>: Used to improve power factor in industrial settings</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -655,7 +590,7 @@
       <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
     </div>
-    <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="../index.html">Back to Portfolio</a></p>
+    <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="/">Back to Portfolio</a></p>
     <div class="mta-actions">
       <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
       <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
@@ -668,6 +603,8 @@
   <script>
     (() => {
       'use strict';
+
+      let currentInputMode = 'pq';
 
       const loader = document.getElementById('loader');
       window.addEventListener('load', () => { setTimeout(() => { loader.classList.add('hidden'); }, 300); });
@@ -733,85 +670,235 @@
         setTimeout(() => toast.classList.remove('show'), 3000);
       }
 
-      const wireGauges = [
-        { awg: 10, current: 30, diameter: 2.588 },
-        { awg: 12, current: 20, diameter: 2.053 },
-        { awg: 14, current: 15, diameter: 1.628 },
-        { awg: 16, current: 10, diameter: 1.291 },
-        { awg: 18, current: 7, diameter: 1.024 },
-        { awg: 20, current: 5, diameter: 0.812 },
-        { awg: 22, current: 3, diameter: 0.644 },
-        { awg: 24, current: 2, diameter: 0.511 },
-        { awg: 26, current: 1.5, diameter: 0.405 },
-        { awg: 28, current: 1, diameter: 0.321 },
-        { awg: 30, current: 0.8, diameter: 0.255 }
-      ];
-
-      function findWireGauge(current) {
-        const currentWithMargin = current * 1.2;
-        for (let i = 0; i < wireGauges.length; i++) {
-          if (wireGauges[i].current >= currentWithMargin) {
-            return wireGauges[i];
-          }
-        }
-        return wireGauges[wireGauges.length - 1];
+      function setInputMode(mode) {
+        currentInputMode = mode;
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-checked', 'false');
+        });
+        event.currentTarget.classList.add('active');
+        event.currentTarget.setAttribute('aria-checked', 'true');
+        updateInputFields();
       }
 
-      window.calculateTurns = function() {
-        const vin = parseFloat(document.getElementById('vin').value);
-        const vout = parseFloat(document.getElementById('vout').value);
-        const frequency = parseFloat(document.getElementById('frequency').value);
-        const coreArea = parseFloat(document.getElementById('coreArea').value);
-        const bmax = parseFloat(document.getElementById('bmax').value);
-        const outputCurrent = parseFloat(document.getElementById('current').value);
+      function updateInputFields() {
+        const container = document.getElementById('inputFields');
+        let html = '';
 
-        if (isNaN(vin) || isNaN(vout) || isNaN(frequency) || isNaN(coreArea) || isNaN(bmax) || isNaN(outputCurrent) ||
-            vin <= 0 || vout <= 0 || frequency <= 0 || coreArea <= 0 || bmax <= 0 || outputCurrent <= 0) {
-          document.querySelectorAll('.input-field').forEach(f => {
-            f.classList.toggle('error', isNaN(parseFloat(f.value)) || parseFloat(f.value) <= 0);
-          });
-          showToast('Please fill in all fields with valid numbers!', 'error');
-          return;
+        switch (currentInputMode) {
+          case 'pq':
+            html = `
+              <div class="input-group">
+                <label for="realPower">Real Power (P) <span class="unit-display">Watts (W)</span></label>
+                <input type="number" id="realPower" class="input-field" placeholder="e.g., 800" step="0.1" min="0" value="800">
+              </div>
+              <div class="input-group">
+                <label for="reactivePower">Reactive Power (Q) <span class="unit-display">Volt-Amps Reactive (VAR)</span></label>
+                <input type="number" id="reactivePower" class="input-field" placeholder="e.g., 600" step="0.1" min="0" value="600">
+              </div>`;
+            break;
+          case 'ps':
+            html = `
+              <div class="input-group">
+                <label for="realPower">Real Power (P) <span class="unit-display">Watts (W)</span></label>
+                <input type="number" id="realPower" class="input-field" placeholder="e.g., 800" step="0.1" min="0" value="800">
+              </div>
+              <div class="input-group">
+                <label for="apparentPower">Apparent Power (S) <span class="unit-display">Volt-Amps (VA)</span></label>
+                <input type="number" id="apparentPower" class="input-field" placeholder="e.g., 1000" step="0.1" min="0" value="1000">
+              </div>`;
+            break;
+          case 'qs':
+            html = `
+              <div class="input-group">
+                <label for="reactivePower">Reactive Power (Q) <span class="unit-display">Volt-Amps Reactive (VAR)</span></label>
+                <input type="number" id="reactivePower" class="input-field" placeholder="e.g., 600" step="0.1" min="0" value="600">
+              </div>
+              <div class="input-group">
+                <label for="apparentPower">Apparent Power (S) <span class="unit-display">Volt-Amps (VA)</span></label>
+                <input type="number" id="apparentPower" class="input-field" placeholder="e.g., 1000" step="0.1" min="0" value="1000">
+              </div>`;
+            break;
+          case 'pf':
+            html = `
+              <div class="input-group">
+                <label for="realPower">Real Power (P) <span class="unit-display">Watts (W)</span></label>
+                <input type="number" id="realPower" class="input-field" placeholder="e.g., 800" step="0.1" min="0" value="800">
+              </div>
+              <div class="input-group">
+                <label for="powerFactor">Power Factor <span class="unit-display">0 to 1</span></label>
+                <input type="number" id="powerFactor" class="input-field" placeholder="e.g., 0.8" step="0.01" min="0" max="1" value="0.8">
+              </div>`;
+            break;
         }
+
+        container.innerHTML = html;
+      }
+
+      function validateInputs() {
+        let isValid = true;
         document.querySelectorAll('.input-field').forEach(f => f.classList.remove('error'));
 
-        const primaryTurns = Math.ceil((vin * 100000000) / (4.44 * frequency * bmax * coreArea));
-        const turnsRatio = vin / vout;
-        const secondaryTurns = Math.ceil(primaryTurns / turnsRatio);
-        const primaryCurrent = (vout * outputCurrent) / vin;
+        switch (currentInputMode) {
+          case 'pq': {
+            const p = parseFloat(document.getElementById('realPower').value);
+            const q = parseFloat(document.getElementById('reactivePower').value);
+            if (isNaN(p) || p <= 0) { document.getElementById('realPower').classList.add('error'); isValid = false; }
+            if (isNaN(q) || q < 0) { document.getElementById('reactivePower').classList.add('error'); isValid = false; }
+            break;
+          }
+          case 'ps': {
+            const p = parseFloat(document.getElementById('realPower').value);
+            const s = parseFloat(document.getElementById('apparentPower').value);
+            if (isNaN(p) || p <= 0) { document.getElementById('realPower').classList.add('error'); isValid = false; }
+            if (isNaN(s) || s <= 0) { document.getElementById('apparentPower').classList.add('error'); isValid = false; }
+            if (p > s) { showToast('Real power cannot exceed apparent power!', 'error'); isValid = false; }
+            break;
+          }
+          case 'qs': {
+            const q = parseFloat(document.getElementById('reactivePower').value);
+            const s = parseFloat(document.getElementById('apparentPower').value);
+            if (isNaN(q) || q < 0) { document.getElementById('reactivePower').classList.add('error'); isValid = false; }
+            if (isNaN(s) || s <= 0) { document.getElementById('apparentPower').classList.add('error'); isValid = false; }
+            if (q > s) { showToast('Reactive power cannot exceed apparent power!', 'error'); isValid = false; }
+            break;
+          }
+          case 'pf': {
+            const p = parseFloat(document.getElementById('realPower').value);
+            const pf = parseFloat(document.getElementById('powerFactor').value);
+            if (isNaN(p) || p <= 0) { document.getElementById('realPower').classList.add('error'); isValid = false; }
+            if (isNaN(pf) || pf <= 0 || pf > 1) { document.getElementById('powerFactor').classList.add('error'); isValid = false; }
+            break;
+          }
+        }
 
-        document.getElementById('primaryTurns').textContent = primaryTurns;
-        document.getElementById('secondaryTurns').textContent = secondaryTurns;
-        document.getElementById('turnsRatio').textContent = turnsRatio.toFixed(2) + ':1';
-        document.getElementById('primaryCurrent').textContent = primaryCurrent.toFixed(2);
+        return isValid;
+      }
 
-        document.getElementById('primaryCurrentValue').textContent = primaryCurrent.toFixed(2);
-        document.getElementById('secondaryCurrentValue').textContent = outputCurrent.toFixed(2);
+      function calculatePowerTriangle() {
+        if (!validateInputs()) { showToast('Please check your input values!', 'error'); return; }
 
-        const primaryGauge = findWireGauge(primaryCurrent);
-        const secondaryGauge = findWireGauge(outputCurrent);
+        let P, Q, S, PF, theta;
 
-        document.getElementById('primaryGauge').textContent = 'AWG ' + primaryGauge.awg;
-        document.getElementById('primaryDiameter').textContent = primaryGauge.diameter + ' mm';
-        document.getElementById('secondaryGauge').textContent = 'AWG ' + secondaryGauge.awg;
-        document.getElementById('secondaryDiameter').textContent = secondaryGauge.diameter + ' mm';
+        switch (currentInputMode) {
+          case 'pq':
+            P = parseFloat(document.getElementById('realPower').value);
+            Q = parseFloat(document.getElementById('reactivePower').value);
+            S = Math.sqrt(P * P + Q * Q);
+            PF = P / S;
+            theta = Math.atan2(Q, P) * (180 / Math.PI);
+            break;
+          case 'ps':
+            P = parseFloat(document.getElementById('realPower').value);
+            S = parseFloat(document.getElementById('apparentPower').value);
+            Q = Math.sqrt(S * S - P * P);
+            PF = P / S;
+            theta = Math.acos(PF) * (180 / Math.PI);
+            break;
+          case 'qs':
+            Q = parseFloat(document.getElementById('reactivePower').value);
+            S = parseFloat(document.getElementById('apparentPower').value);
+            P = Math.sqrt(S * S - Q * Q);
+            PF = P / S;
+            theta = Math.asin(Q / S) * (180 / Math.PI);
+            break;
+          case 'pf':
+            P = parseFloat(document.getElementById('realPower').value);
+            PF = parseFloat(document.getElementById('powerFactor').value);
+            S = P / PF;
+            theta = Math.acos(PF) * (180 / Math.PI);
+            Q = S * Math.sin(theta * Math.PI / 180);
+            break;
+        }
 
-        showToast('Transformer turns calculated successfully!');
-      };
+        document.getElementById('apparentPowerResult').textContent = S.toFixed(2) + ' VA';
+        document.getElementById('powerFactorResult').textContent = PF.toFixed(4);
+        document.getElementById('phaseAngleResult').textContent = theta.toFixed(2);
+        document.getElementById('reactiveFactorResult').textContent = (Q / S).toFixed(4);
+
+        drawPowerTriangle(P, Q, S, theta);
+        showToast('Power triangle calculated successfully!');
+      }
+
+      function drawPowerTriangle(P, Q, S, theta) {
+        const svg = document.getElementById('triangleSvg');
+        const scale = 150 / Math.max(P, Q, S);
+
+        const baseX = 100, baseY = 250;
+        const pX = baseX + P * scale;
+        const pY = baseY;
+        const qX = baseX;
+        const qY = baseY - Q * scale;
+        const sX = pX;
+        const sY = qY;
+
+        svg.innerHTML = '';
+
+        const triangle = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        triangle.setAttribute('points', baseX + ',' + baseY + ' ' + pX + ',' + pY + ' ' + sX + ',' + sY);
+        triangle.setAttribute('fill', 'rgba(59, 130, 246, 0.08)');
+        triangle.setAttribute('stroke', 'var(--color-accent)');
+        triangle.setAttribute('stroke-width', '1');
+        svg.appendChild(triangle);
+
+        const realLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        realLine.setAttribute('x1', baseX); realLine.setAttribute('y1', baseY);
+        realLine.setAttribute('x2', pX); realLine.setAttribute('y2', pY);
+        realLine.setAttribute('class', 'triangle-side real-power');
+        svg.appendChild(realLine);
+
+        const reactiveLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        reactiveLine.setAttribute('x1', baseX); reactiveLine.setAttribute('y1', baseY);
+        reactiveLine.setAttribute('x2', qX); reactiveLine.setAttribute('y2', qY);
+        reactiveLine.setAttribute('class', 'triangle-side reactive-power');
+        svg.appendChild(reactiveLine);
+
+        const apparentLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        apparentLine.setAttribute('x1', baseX); apparentLine.setAttribute('y1', baseY);
+        apparentLine.setAttribute('x2', sX); apparentLine.setAttribute('y2', sY);
+        apparentLine.setAttribute('class', 'triangle-side apparent-power');
+        svg.appendChild(apparentLine);
+
+        const arcRadius = 30;
+        const arc = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        arc.setAttribute('d', 'M' + (baseX + arcRadius) + ',' + baseY + ' A' + arcRadius + ',' + arcRadius + ' 0 0,1 ' + (baseX + arcRadius * Math.cos(theta * Math.PI / 180)) + ',' + (baseY - arcRadius * Math.sin(theta * Math.PI / 180)));
+        arc.setAttribute('class', 'angle-arc');
+        svg.appendChild(arc);
+
+        const realLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        realLabel.setAttribute('x', (baseX + pX) / 2); realLabel.setAttribute('y', baseY + 20);
+        realLabel.setAttribute('class', 'power-label real-label');
+        realLabel.textContent = 'P = ' + P.toFixed(1) + ' W';
+        svg.appendChild(realLabel);
+
+        const reactiveLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        reactiveLabel.setAttribute('x', baseX - 60); reactiveLabel.setAttribute('y', (baseY + qY) / 2);
+        reactiveLabel.setAttribute('class', 'power-label reactive-label');
+        reactiveLabel.textContent = 'Q = ' + Q.toFixed(1) + ' VAR';
+        svg.appendChild(reactiveLabel);
+
+        const apparentLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        apparentLabel.setAttribute('x', (baseX + sX) / 2 + 10); apparentLabel.setAttribute('y', (baseY + sY) / 2 - 10);
+        apparentLabel.setAttribute('class', 'power-label apparent-label');
+        apparentLabel.textContent = 'S = ' + S.toFixed(1) + ' VA';
+        svg.appendChild(apparentLabel);
+
+        const angleLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        angleLabel.setAttribute('x', baseX + 20); angleLabel.setAttribute('y', baseY - 15);
+        angleLabel.setAttribute('class', 'angle-label');
+        angleLabel.textContent = '\u03B8 = ' + theta.toFixed(1) + '\u00B0';
+        svg.appendChild(angleLabel);
+      }
 
       window.resetCalculator = function() {
-        document.getElementById('vin').value = 120;
-        document.getElementById('vout').value = 12;
-        document.getElementById('frequency').value = 60;
-        document.getElementById('coreArea').value = 10;
-        document.getElementById('bmax').value = 1.2;
-        document.getElementById('current').value = 2;
         document.querySelectorAll('.input-field').forEach(f => f.classList.remove('error'));
-        calculateTurns();
+        updateInputFields();
+        calculatePowerTriangle();
         showToast('Reset to defaults');
       };
 
-      calculateTurns();
+      updateInputFields();
+      calculatePowerTriangle();
       document.getElementById('currentYear').textContent = new Date().getFullYear();
     })();
   </script>

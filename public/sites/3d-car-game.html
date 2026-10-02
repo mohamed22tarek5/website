@@ -4,26 +4,29 @@
         <meta charset="UTF-8">
         <title>Super Car Drive 3D | Mohamed Tarek Abdelhady</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" >
-        <meta name="description" content="Super Car Drive — a 3D car driving browser game by Mohamed Tarek Abdelhady.">
+        <meta name="description" content="Super Car Drive 3D: drive, collect coins and chase your high score in this browser car game.">
         <meta name="author" content="Mohamed Tarek Abdelhady">
         <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/3d-car-game.html">
         <meta property="og:type" content="website">
         <meta property="og:title" content="Super Car Drive 3D | Mohamed Tarek Abdelhady">
-        <meta property="og:description" content="Super Car Drive — a 3D car driving browser game by Mohamed Tarek Abdelhady.">
+        <meta property="og:description" content="Super Car Drive 3D: drive, collect coins and chase your high score in this browser car game.">
         <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/3d-car-game.html">
         <meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="851">
+  <meta property="og:image:height" content="1134">
+  <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
         <meta property="og:site_name" content="Mohamed Tarek Abdelhady — Communication Engineer">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Super Car Drive 3D | Mohamed Tarek Abdelhady">
-        <meta name="twitter:description" content="Super Car Drive — a 3D car driving browser game by Mohamed Tarek Abdelhady.">
+        <meta name="twitter:description" content="Super Car Drive 3D: drive, collect coins and chase your high score in this browser car game.">
         <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
         <script type="application/ld+json">
         {
           "@context": "https://schema.org",
           "@type": "VideoGame",
           "name": "Super Car Drive 3D",
-          "description": "A 3D car driving browser game by Mohamed Tarek Abdelhady.",
+          "description": "Super Car Drive 3D: drive, collect coins and chase your high score in this browser car game.",
           "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/3d-car-game.html",
           "author": { "@type": "Person", "name": "Mohamed Tarek Abdelhady", "url": "https://mohamed-tarek-abdelhady.vercel.app" }
         }
@@ -176,7 +179,7 @@ body{
     <body onload="done()">
         <div id="scoreDiv">
             <span id="score">0</span>
-            <img src="https://image.ibb.co/jRAp0y/coin.png" id="cn">
+            <img src="https://image.ibb.co/jRAp0y/coin.png" id="cn" alt="Game coin collectible sprite" loading="lazy">
         </div>
         <div class="gameHome" id="startPage">
             <h1 id="gameTitle" style="margin-bottom:0;">3D Car Drive</h1>
@@ -202,14 +205,14 @@ body{
         
         
         <div id="mainContainer" style="background:#0f0" >
-            <img id="city" src="https://image.ibb.co/jCGU0y/cty.jpg">
+            <img id="city" src="https://image.ibb.co/jCGU0y/cty.jpg" alt="City background for 3D car game" loading="lazy">
             <canvas id="myCanvas"  ></canvas>
         </div>
-        <img class="aImg" id="t1" src="https://image.ibb.co/dZi5Ly/t1.png">
-        <img class="aImg" id="t2" src="https://image.ibb.co/jajjDJ/t2.png">
-        <img class="aImg" id="t3" src="https://image.ibb.co/it4jDJ/t5.png">
-        <img class="aImg" id="t4" src="https://image.ibb.co/ksy0nd/t4.png">
-        <img class="aImg" id="c1" src="https://image.ibb.co/f4v7YJ/c2.png">
+        <img class="aImg" id="t1" src="https://image.ibb.co/dZi5Ly/t1.png" alt="Racing car sprite 1" loading="lazy">
+        <img class="aImg" id="t2" src="https://image.ibb.co/jajjDJ/t2.png" alt="Racing car sprite 2" loading="lazy">
+        <img class="aImg" id="t3" src="https://image.ibb.co/it4jDJ/t5.png" alt="Racing car sprite 3" loading="lazy">
+        <img class="aImg" id="t4" src="https://image.ibb.co/ksy0nd/t4.png" alt="Racing car sprite 4" loading="lazy">
+        <img class="aImg" id="c1" src="https://image.ibb.co/f4v7YJ/c2.png" alt="Player car sprite" loading="lazy">
         <script>
                    
         var ld;
@@ -607,5 +610,12 @@ body{
       window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
+    <section aria-label="About this game" style="max-width:640px;margin:24px auto;padding:0 16px;font-family:sans-serif;">
+      <h2 style="font-size:1.1rem;">About Super Car Drive 3D</h2>
+      <p>Super Car Drive is a 3D car driving browser game. Hit PLAY, cruise the city road and collect coins to raise your score, shown next to the coin counter at the top of the screen.</p>
+      <h3 style="font-size:1rem;">How to play</h3>
+      <p>Press the on-screen PLAY button once assets finish loading. The game runs fullscreen and adapts to portrait and landscape screens. A stable connection is needed on first load while car and city graphics download; afterwards the run stays in your browser tab.</p>
+      <p><a href="/tools.html">More games and tools</a></p>
+    </section>
     </body>
   </html>

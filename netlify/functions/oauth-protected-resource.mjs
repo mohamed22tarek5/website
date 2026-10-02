@@ -24,7 +24,7 @@ export default async (req) => {
     JSON.stringify({
       resource: base,
       resource_name: 'Mohamed Tarek Abdelhady Portfolio',
-      resource_documentation: `${base}/Mohamed%20-%20Services.html`,
+      resource_documentation: `${base}/services.html`,
       authorization_servers: [base],
       scopes_supported: ['read', 'tools'],
       bearer_methods_supported: ['header'],

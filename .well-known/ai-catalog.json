@@ -34,7 +34,7 @@
       "displayName": "LCD Custom Character Generator",
       "description": "Generate custom character bitmaps for LCD displays.",
       "type": "text/html",
-      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/LCD-Custom-Character-Generator.html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/lcd-custom-character-generator.html",
       "representativeQueries": [
         "generate custom LCD character",
         "create bitmap for 16x2 LCD",

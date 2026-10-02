@@ -31,14 +31,14 @@
 [[headers]]
   for = "/"
   [headers.values]
-    Link = '</.well-known/api-catalog>; rel="api-catalog", </.well-known/api-catalog/index.json>; rel="api-catalog", </.well-known/agent-card.json>; rel="service-desc", </.well-known/acp.json>; rel="service-desc", </.well-known/mcp/server-card.json>; rel="service-desc", </Mohamed%20-%20Services.html>; rel="service-doc", </openapi.json>; rel="service-doc", </.well-known/ai-catalog.json>; rel="describedby", </auth.md>; rel="describedby", </.well-known/oauth-protected-resource>; rel="resource-metadata", </.well-known/agent-skills/index.json>; rel="linkset", </sitemap.xml>; rel="sitemap", </manifest.webmanifest>; rel="manifest", </api/x402>; rel="payment", </.well-known/http-message-signatures-directory>; rel="http-message-signatures-directory"'
+    Link = '</.well-known/api-catalog>; rel="api-catalog", </.well-known/api-catalog/index.json>; rel="api-catalog", </.well-known/agent-card.json>; rel="service-desc", </.well-known/acp.json>; rel="service-desc", </.well-known/mcp/server-card.json>; rel="service-desc", </services.html>; rel="service-doc", </openapi.json>; rel="service-doc", </.well-known/ai-catalog.json>; rel="describedby", </auth.md>; rel="describedby", </.well-known/oauth-protected-resource>; rel="resource-metadata", </.well-known/agent-skills/index.json>; rel="linkset", </sitemap.xml>; rel="sitemap", </manifest.webmanifest>; rel="manifest", </api/x402>; rel="payment", </.well-known/http-message-signatures-directory>; rel="http-message-signatures-directory"'
     Vary = "Accept"
     Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
 
 [[headers]]
   for = "/index.html"
   [headers.values]
-    Link = '</.well-known/api-catalog>; rel="api-catalog", </.well-known/api-catalog/index.json>; rel="api-catalog", </.well-known/agent-card.json>; rel="service-desc", </.well-known/acp.json>; rel="service-desc", </.well-known/mcp/server-card.json>; rel="service-desc", </Mohamed%20-%20Services.html>; rel="service-doc", </openapi.json>; rel="service-doc", </.well-known/ai-catalog.json>; rel="describedby", </auth.md>; rel="describedby", </.well-known/oauth-protected-resource>; rel="resource-metadata", </.well-known/agent-skills/index.json>; rel="linkset", </sitemap.xml>; rel="sitemap", </manifest.webmanifest>; rel="manifest", </api/x402>; rel="payment", </.well-known/http-message-signatures-directory>; rel="http-message-signatures-directory"'
+    Link = '</.well-known/api-catalog>; rel="api-catalog", </.well-known/api-catalog/index.json>; rel="api-catalog", </.well-known/agent-card.json>; rel="service-desc", </.well-known/acp.json>; rel="service-desc", </.well-known/mcp/server-card.json>; rel="service-desc", </services.html>; rel="service-doc", </openapi.json>; rel="service-doc", </.well-known/ai-catalog.json>; rel="describedby", </auth.md>; rel="describedby", </.well-known/oauth-protected-resource>; rel="resource-metadata", </.well-known/agent-skills/index.json>; rel="linkset", </sitemap.xml>; rel="sitemap", </manifest.webmanifest>; rel="manifest", </api/x402>; rel="payment", </.well-known/http-message-signatures-directory>; rel="http-message-signatures-directory"'
     Vary = "Accept"
     Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
 
@@ -313,3 +313,104 @@
   from = "/agent/identity"
   to = "/.netlify/functions/agent-identity"
   status = 200
+
+# --- SEO URL migration (old -> new, permanent) ---
+[[redirects]]
+  from = "/Mohamed - CV.html"
+  to = "/cv.html"
+  status = 301
+
+[[redirects]]
+  from = "/Mohamed - Certificates.html"
+  to = "/certificates.html"
+  status = 301
+
+[[redirects]]
+  from = "/Mohamed - Personal Information.html"
+  to = "/about.html"
+  status = 301
+
+[[redirects]]
+  from = "/Mohamed - Project.html"
+  to = "/projects.html"
+  status = 301
+
+[[redirects]]
+  from = "/Mohamed - Services.html"
+  to = "/services.html"
+  status = 301
+
+[[redirects]]
+  from = "/Mohamed - my-sites.html"
+  to = "/tools.html"
+  status = 301
+
+[[redirects]]
+  from = "/Mohamed - social-media.html"
+  to = "/social-media.html"
+  status = 301
+
+[[redirects]]
+  from = "/sites/Battery-Capacity-&-Runtime-Calculator.html"
+  to = "/sites/battery-capacity-runtime-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/sites/RC-Filter-&-LC-Resonance-Calculator.html"
+  to = "/sites/rc-filter-lc-resonance-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/sites/Indactance-calculator.html"
+  to = "/sites/inductance-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/sites/Mastering Linux Commands.html"
+  to = "/sites/mastering-linux-commands.html"
+  status = 301
+
+[[redirects]]
+  from = "/sites/LCD-Custom-Character-Generator.html"
+  to = "/sites/lcd-custom-character-generator.html"
+  status = 301
+
+[[redirects]]
+  from = "/sites/Length-Converter.html"
+  to = "/sites/length-converter.html"
+  status = 301
+
+[[redirects]]
+  from = "/sites/Medication-Reminder.html"
+  to = "/sites/medication-reminder.html"
+  status = 301
+
+[[redirects]]
+  from = "/sites/Power-Factor-Calculator.html"
+  to = "/sites/power-factor-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/sites/Power-Triangle-Calculator.html"
+  to = "/sites/power-triangle-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/sites/Transformer-Turns-Calculator.html"
+  to = "/sites/transformer-turns-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/sites/Wire-Gauge-Calculator.html"
+  to = "/sites/wire-gauge-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/sites/Race-Game.html"
+  to = "/sites/race-game.html"
+  status = 301
+
+[[redirects]]
+  from = "/sites/index.html"
+  to = "/sites/"
+  status = 301

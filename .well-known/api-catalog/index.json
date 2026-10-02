@@ -4,14 +4,14 @@
       "anchor": "https://mohamed-tarek-abdelhady.vercel.app/",
       "service-desc": [
         {
-          "href": "https://mohamed-tarek-abdelhady.vercel.app/Mohamed%20-%20CV.html",
+          "href": "https://mohamed-tarek-abdelhady.vercel.app/cv.html",
           "title": "CV & Resume",
           "type": "text/html"
         }
       ],
       "service-doc": [
         {
-          "href": "https://mohamed-tarek-abdelhady.vercel.app/Mohamed%20-%20Services.html",
+          "href": "https://mohamed-tarek-abdelhady.vercel.app/services.html",
           "title": "Services Documentation",
           "type": "text/html"
         }
@@ -35,7 +35,7 @@
       ],
       "service-doc": [
         {
-          "href": "https://mohamed-tarek-abdelhady.vercel.app/sites/Mastering%20Linux%20Commands.html",
+          "href": "https://mohamed-tarek-abdelhady.vercel.app/sites/mastering-linux-commands.html",
           "title": "Engineering Tools Documentation",
           "type": "text/html"
         }

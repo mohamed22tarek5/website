@@ -2,7 +2,7 @@
 
 Engineering projects by Mohamed Tarek Abdelhady.
 
-Full portfolio: [/Mohamed - Project.html](/Mohamed%20-%20Project.html)
+Full portfolio: [/projects.html](/projects.html)
 
 ## Featured Projects
 
