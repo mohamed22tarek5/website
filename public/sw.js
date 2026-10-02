@@ -1,10 +1,10 @@
 // ===============================
 //  Service Worker - sw.js
 //  Author: Mohamed Tarek Abdelhady
-//  Version: v1.0.6
+//  Version: v1.0.7
 // ===============================
 
-const VERSION = 'v1.0.6';
+const VERSION = 'v1.0.7';
 const STATIC_CACHE = `static-${VERSION}`;
 const HTML_CACHE = `html-${VERSION}`;
 const OFFLINE_URL = './offline.html';

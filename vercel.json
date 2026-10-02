@@ -38,6 +38,14 @@
       "source": "/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf",
       "headers": [
         {
+          "key": "Content-Type",
+          "value": "application/pdf"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline; filename=\"Mohamed_Tarek_Abdelhady_Engineer_CV.pdf\""
+        },
+        {
           "key": "Cache-Control",
           "value": "public, max-age=86400, stale-while-revalidate=604800"
         }

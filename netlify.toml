@@ -54,6 +54,8 @@
 [[headers]]
   for = "/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf"
   [headers.values]
+    Content-Type = "application/pdf"
+    Content-Disposition = "inline; filename=\"Mohamed_Tarek_Abdelhady_Engineer_CV.pdf\""
     Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
 
 # --- Agent / API discovery (CORS + JSON types) ---
@@ -243,6 +245,8 @@
 [[headers]]
   for = "/*.pdf"
   [headers.values]
+    Content-Type = "application/pdf"
+    Content-Disposition = "inline"
     Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
 
 # --- Rewrites (vercel.json -> Netlify status=200) ---

@@ -467,6 +467,39 @@
       width: 100%;
       height: 100%;
       border: none;
+      background: #fff;
+    }
+
+    .pdf-frame.hidden { display: none; }
+
+    .pdf-canvas-wrap {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 1.5rem 1rem 4.5rem;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(59,130,246,0.08), transparent 60%),
+        var(--color-bg-card);
+    }
+
+    .pdf-canvas-wrap.hidden { display: none; }
+
+    #pdfCanvas {
+      max-width: 100%;
+      height: auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .pdf-error-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
     }
 
     .pdf-loading {
@@ -1158,18 +1191,32 @@
             <i class="fas fa-exclamation-triangle"></i>
             <h3>Unable to load PDF</h3>
             <p>The CV PDF could not be loaded inline. Please open or download it instead.</p>
-            <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-              <i class="fas fa-arrow-up-right-from-square"></i> Open CV
-            </a>
-            <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
-              <i class="fas fa-download"></i> Download CV
-            </a>
+            <div class="pdf-error-actions">
+              <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                <i class="fas fa-arrow-up-right-from-square"></i> Open CV
+              </a>
+              <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
+                <i class="fas fa-download"></i> Download CV
+              </a>
+            </div>
+            <noscript>
+              <p style="margin-top:1rem">
+                <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer">Open the CV</a>
+                or <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf">download it</a>.
+              </p>
+            </noscript>
           </div>
 
-          <!-- PDF Frame -->
+          <!-- PDF.js canvas (primary viewer — works on mobile where iframes fail) -->
+          <div class="pdf-canvas-wrap" id="pdfCanvasWrap">
+            <canvas id="pdfCanvas" role="img" aria-label="CV preview"></canvas>
+          </div>
+
+          <!-- Native fallback (used only if PDF.js CDN is blocked) -->
           <iframe
-            src="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf#toolbar=0&navpanes=0&scrollbar=0"
-            class="pdf-frame"
+            src="about:blank"
+            data-src="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf"
+            class="pdf-frame hidden"
             title="Mohamed Tarek Abdelhady's CV PDF Viewer"
             id="pdfViewer"
             loading="lazy"
@@ -1293,6 +1340,9 @@
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
     <i class="fas fa-moon"></i>
   </button>
+
+  <!-- PDF.js (primary CV renderer — with native iframe fallback if blocked) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
   <script>
     (() => {
@@ -1430,71 +1480,200 @@
       document.querySelectorAll('.skills-grid').forEach(el => skillObserver.observe(el));
 
       /* ----------------------------------------
-         PDF VIEWER
+         PDF VIEWER (PDF.js + native fallback)
+         Why: plain <iframe src="*.pdf"> fails on iOS Safari, Android
+         Chrome in-app browsers, and when the native viewer is disabled —
+         leaving a grey frame or the "Unable to load PDF" error. Rendering
+         with PDF.js works everywhere; the native iframe is kept only as a
+         fallback if the PDF.js CDN is blocked.
          ---------------------------------------- */
       const pdfViewer = document.getElementById('pdfViewer');
+      const pdfCanvas = document.getElementById('pdfCanvas');
+      const pdfCanvasWrap = document.getElementById('pdfCanvasWrap');
       const pdfLoading = document.getElementById('pdfLoading');
       const pdfError = document.getElementById('pdfError');
+      const pdfPrev = document.getElementById('pdfPrev');
+      const pdfNext = document.getElementById('pdfNext');
+      const pdfPageInfo = document.getElementById('pdfPageInfo');
       const PDF_URL = '/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf';
 
-      if (pdfViewer) {
-        pdfViewer.addEventListener('load', () => {
-          pdfLoading.classList.add('hidden');
-          pdfError.classList.add('hidden');
-        });
+      let pdfDoc = null;
+      let pageNum = 1;
+      let pageCount = 0;
+      let pdfScale = 1.3;
+      let rendering = false;
+      let pendingPage = null;
 
-        pdfViewer.addEventListener('error', () => {
-          pdfLoading.classList.add('hidden');
-          pdfError.classList.remove('hidden');
-        });
+      const showPdfError = () => {
+        pdfLoading.classList.add('hidden');
+        pdfError.classList.remove('hidden');
+        if (pdfCanvasWrap) pdfCanvasWrap.classList.add('hidden');
+        if (pdfViewer) pdfViewer.classList.add('hidden');
+      };
 
-        // Verify the PDF asset exists. If the file is missing (404/network
-        // error), show the Open/Download fallback instead of a grey frame.
-        // NOTE: this cannot detect X-Frame-Options/CSP framing blocks
-        // (blocked frames still fire `load`), so headers must allow
-        // same-origin framing — see vercel.json.
-        fetch(PDF_URL, { method: 'HEAD' }).then((res) => {
-          if (!res.ok) {
-            pdfLoading.classList.add('hidden');
-            pdfError.classList.remove('hidden');
+      const showPdfContent = () => {
+        pdfLoading.classList.add('hidden');
+        pdfError.classList.add('hidden');
+      };
+
+      const updatePageInfo = () => {
+        if (pdfPageInfo) pdfPageInfo.textContent = `${pageNum} / ${pageCount || 1}`;
+        if (pdfPrev) pdfPrev.disabled = !(pdfDoc && pageNum > 1);
+        if (pdfNext) pdfNext.disabled = !(pdfDoc && pageNum < pageCount);
+      };
+
+      const queueRenderPage = (num) => {
+        if (rendering) {
+          pendingPage = num;
+        } else {
+          renderPdfPage(num);
+        }
+      };
+
+      async function renderPdfPage(num) {
+        if (!pdfDoc || !pdfCanvas) return;
+        rendering = true;
+        try {
+          const page = await pdfDoc.getPage(num);
+          const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+          const viewport = page.getViewport({ scale: pdfScale });
+          const canvasCtx = pdfCanvas.getContext('2d');
+          pdfCanvas.height = Math.floor(viewport.height * dpr);
+          pdfCanvas.width = Math.floor(viewport.width * dpr);
+          pdfCanvas.style.width = Math.floor(viewport.width) + 'px';
+          pdfCanvas.style.height = Math.floor(viewport.height) + 'px';
+          await page.render({
+            canvasContext: canvasCtx,
+            viewport: page.getViewport({ scale: pdfScale * dpr })
+          }).promise;
+          pageNum = num;
+          updatePageInfo();
+          showPdfContent();
+        } catch (err) {
+          console.warn('PDF page render failed:', err);
+          showPdfError();
+        } finally {
+          rendering = false;
+          if (pendingPage !== null) {
+            const next = pendingPage;
+            pendingPage = null;
+            renderPdfPage(next);
           }
-        }).catch(() => {
-          pdfLoading.classList.add('hidden');
-          pdfError.classList.remove('hidden');
-        });
-
-        // Fallback: check if PDF loads after timeout
-        setTimeout(() => {
-          if (!pdfLoading.classList.contains('hidden')) {
-            // Try to detect if iframe has content
-            try {
-              const doc = pdfViewer.contentDocument || pdfViewer.contentWindow.document;
-              if (doc && doc.body && doc.body.children.length > 0) {
-                pdfLoading.classList.add('hidden');
-              }
-            } catch (e) {
-              // Cross-origin or still loading — leave loading state
-            }
-          }
-        }, 3000);
+        }
       }
 
-      // PDF Controls (basic — iframe-based, no PDF.js dependency)
-      let currentZoom = 100;
+      const fitPdfToWidth = async () => {
+        if (!pdfDoc) return;
+        try {
+          const page = await pdfDoc.getPage(pageNum);
+          const unscaled = page.getViewport({ scale: 1 });
+          const available = (pdfCanvasWrap ? pdfCanvasWrap.clientWidth : 800) - 32;
+          if (unscaled.width > 0 && available > 0) {
+            pdfScale = Math.min(Math.max(available / unscaled.width, 0.6), 2.5);
+          }
+        } catch (e) { /* keep default scale */ }
+      };
+
+      // Native iframe fallback — only used when PDF.js cannot load
+      // (e.g. CDN blocked offline). Uses the browser viewer with controls.
+      const useNativeFallback = () => {
+        if (!pdfViewer) {
+          showPdfError();
+          return;
+        }
+        if (pdfCanvasWrap) pdfCanvasWrap.classList.add('hidden');
+        pdfViewer.classList.remove('hidden');
+        if (!pdfViewer.src || pdfViewer.src === 'about:blank') {
+          pdfViewer.src = pdfViewer.getAttribute('data-src') || PDF_URL;
+        }
+        const hideLoading = () => showPdfContent();
+        pdfViewer.addEventListener('load', hideLoading, { once: true });
+        // If the file itself is missing (404/offline), show Open/Download.
+        fetch(PDF_URL, { method: 'HEAD' }).then((res) => {
+          if (!res.ok) {
+            showPdfError();
+          } else {
+            // Some mobile browsers fire `load` without rendering the PDF.
+            // Give it a moment, then assume success if no error surfaced.
+            setTimeout(() => {
+              if (!pdfLoading.classList.contains('hidden')) showPdfContent();
+            }, 2500);
+          }
+        }).catch(showPdfError);
+      };
+
+      const initPdfViewer = async () => {
+        updatePageInfo();
+        if (typeof window.pdfjsLib === 'undefined') {
+          useNativeFallback();
+          return;
+        }
+        try {
+          window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+          const loadingTask = window.pdfjsLib.getDocument({ url: PDF_URL });
+          pdfDoc = await loadingTask.promise;
+          pageCount = pdfDoc.numPages;
+          pageNum = 1;
+          await fitPdfToWidth();
+          updatePageInfo();
+          await renderPdfPage(pageNum);
+        } catch (err) {
+          console.warn('PDF.js load failed, falling back to native viewer:', err);
+          pdfDoc = null;
+          useNativeFallback();
+        }
+      };
+
+      if (pdfCanvasWrap || pdfViewer) {
+        initPdfViewer();
+      }
+
+      pdfPrev?.addEventListener('click', () => {
+        if (pdfDoc && pageNum > 1) queueRenderPage(pageNum - 1);
+      });
+
+      pdfNext?.addEventListener('click', () => {
+        if (pdfDoc && pageNum < pageCount) queueRenderPage(pageNum + 1);
+      });
 
       document.getElementById('pdfZoomIn')?.addEventListener('click', () => {
-        currentZoom = Math.min(currentZoom + 20, 200);
-        pdfViewer.style.transform = `scale(${currentZoom / 100})`;
-        pdfViewer.style.transformOrigin = 'top center';
-        pdfViewer.style.height = (100 / (currentZoom / 100)) + '%';
+        if (pdfDoc) {
+          pdfScale = Math.min(pdfScale + 0.2, 3.0);
+          queueRenderPage(pageNum);
+        } else if (pdfViewer && !pdfViewer.classList.contains('hidden')) {
+          // Native fallback has its own viewer controls; nudge via CSS.
+          const cur = parseFloat(pdfViewer.dataset.zoom || '1');
+          const next = Math.min(cur + 0.15, 2);
+          pdfViewer.dataset.zoom = String(next);
+          pdfViewer.style.transform = `scale(${next})`;
+          pdfViewer.style.transformOrigin = 'top center';
+        }
       });
 
       document.getElementById('pdfZoomOut')?.addEventListener('click', () => {
-        currentZoom = Math.max(currentZoom - 20, 60);
-        pdfViewer.style.transform = `scale(${currentZoom / 100})`;
-        pdfViewer.style.transformOrigin = 'top center';
-        pdfViewer.style.height = (100 / (currentZoom / 100)) + '%';
+        if (pdfDoc) {
+          pdfScale = Math.max(pdfScale - 0.2, 0.6);
+          queueRenderPage(pageNum);
+        } else if (pdfViewer && !pdfViewer.classList.contains('hidden')) {
+          const cur = parseFloat(pdfViewer.dataset.zoom || '1');
+          const next = Math.max(cur - 0.15, 0.6);
+          pdfViewer.dataset.zoom = String(next);
+          pdfViewer.style.transform = `scale(${next})`;
+          pdfViewer.style.transformOrigin = 'top center';
+        }
       });
+
+      // Re-fit on resize (debounced) so the page never overflows mobile.
+      let pdfResizeTimer = null;
+      window.addEventListener('resize', () => {
+        if (!pdfDoc) return;
+        clearTimeout(pdfResizeTimer);
+        pdfResizeTimer = setTimeout(async () => {
+          await fitPdfToWidth();
+          queueRenderPage(pageNum);
+        }, 250);
+      }, { passive: true });
 
       document.getElementById('pdfFullscreen')?.addEventListener('click', () => {
         const wrapper = document.getElementById('pdfWrapper');
@@ -1505,9 +1684,11 @@
         }
       });
 
-      // Print
+      // Print — open in a new tab and let the native viewer handle printing.
+      // Calling .print() on the just-opened window is unreliable (popup
+      // blockers + print-before-load), so just open it.
       document.getElementById('printCv')?.addEventListener('click', () => {
-        window.open('/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf', '_blank')?.print();
+        window.open(PDF_URL, '_blank', 'noopener');
       });
 
       /* ----------------------------------------
