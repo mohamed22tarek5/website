@@ -444,7 +444,9 @@
   ],
   "functions": {
     "api/markdown.js": {
-      "includeFiles": "public/**"
+      "includeFiles": [
+        "public/**"
+      ]
     }
   },
   "redirects": [
