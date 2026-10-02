@@ -315,6 +315,10 @@
   status = 200
 
 # --- SEO URL migration (old -> new, permanent) ---
+# NOTE: Secondary Vercel host website-mohamed.vercel.app → primary
+# mohamed-tarek-abdelhady.vercel.app is enforced via vercel.json host-based
+# 301 + self-referencing canonicals. Netlify never serves the secondary
+# Vercel host, so no Netlify host redirect is required here.
 [[redirects]]
   from = "/Mohamed - CV.html"
   to = "/cv.html"
