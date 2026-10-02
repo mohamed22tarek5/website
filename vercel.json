@@ -450,6 +450,12 @@
     }
   },
   "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "website-mohamed.vercel.app" }],
+      "destination": "https://mohamed-tarek-abdelhady.vercel.app/$1",
+      "permanent": true
+    },
     { "source": "/Mohamed - CV.html", "destination": "/cv.html", "permanent": true },
     { "source": "/Mohamed - Certificates.html", "destination": "/certificates.html", "permanent": true },
     { "source": "/Mohamed - Personal Information.html", "destination": "/about.html", "permanent": true },

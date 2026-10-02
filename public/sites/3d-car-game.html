@@ -31,8 +31,11 @@
           "author": { "@type": "Person", "name": "Mohamed Tarek Abdelhady", "url": "https://mohamed-tarek-abdelhady.vercel.app" }
         }
         </script>
-        <link rel="icon" href="icon.png" type="image/png">
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohamed-tarek-abdelhady.vercel.app/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://mohamed-tarek-abdelhady.vercel.app/tools.html"},{"@type":"ListItem","position":3,"name":"3D Car Drive","item":"https://mohamed-tarek-abdelhady.vercel.app/sites/3d-car-game.html"}]}</script>
+        <meta name="theme-color" content="#0a0e1a">
+        <link rel="manifest" href="/sites/manifest.webmanifest">
+        <link rel="icon" href="/sites/icon.png" type="image/png">
+        <link rel="apple-touch-icon" href="/sites/apple-touch-icon.png">
     </head>
     <style>
         
@@ -177,6 +180,7 @@ body{
 }
     </style>
     <body onload="done()">
+        <nav aria-label="Breadcrumb" style="max-width:640px;margin:12px auto;padding:0 16px;font-family:sans-serif;font-size:0.85rem;"><ol style="list-style:none;display:flex;gap:8px;margin:0;padding:0;"><li><a href="/">Home</a></li><li aria-hidden="true">/</li><li><a href="/tools.html">Tools</a></li><li aria-hidden="true">/</li><li aria-current="page">3D Car Drive</li></ol></nav>
         <div id="scoreDiv">
             <span id="score">0</span>
             <img src="https://image.ibb.co/jRAp0y/coin.png" id="cn" alt="Game coin collectible sprite" loading="lazy">
@@ -612,10 +616,10 @@ body{
     <script defer src="/_vercel/speed-insights/script.js"></script>
     <section aria-label="About this game" style="max-width:640px;margin:24px auto;padding:0 16px;font-family:sans-serif;">
       <h2 style="font-size:1.1rem;">About Super Car Drive 3D</h2>
-      <p>Super Car Drive is a 3D car driving browser game. Hit PLAY, cruise the city road and collect coins to raise your score, shown next to the coin counter at the top of the screen.</p>
+      <p>Super Car Drive is a 3D car driving browser game by Mohamed Tarek Abdelhady. Hit PLAY, cruise the city road and collect coins to raise your score, shown next to the coin counter at the top of the screen.</p>
       <h3 style="font-size:1rem;">How to play</h3>
-      <p>Press the on-screen PLAY button once assets finish loading. The game runs fullscreen and adapts to portrait and landscape screens. A stable connection is needed on first load while car and city graphics download; afterwards the run stays in your browser tab.</p>
-      <p><a href="/tools.html">More games and tools</a></p>
+      <p>Press the on-screen PLAY button once assets finish loading. Steer to stay on the road and collect coins for points. The game runs fullscreen and adapts to portrait and landscape screens. A stable connection is needed on first load while car and city graphics download; afterwards the run stays in your browser tab. No download required.</p>
+      <p><a href="/">Home</a> · <a href="/tools.html">More games and tools</a> · <a href="/sites/">SmartEnergy project dashboard</a></p>
     </section>
     </body>
   </html>
