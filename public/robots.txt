@@ -15,8 +15,6 @@ Agentmap: https://mohamed-tarek-abdelhady.vercel.app/.well-known/ai-catalog.json
 Content-Signal: ai-train=no, search=yes, ai-input=no
 
 # Blocked paths
-Disallow: /sw.js
-Disallow: /pwa.js
 Disallow: /cache/
 Disallow: /admin/
 
