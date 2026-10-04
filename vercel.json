@@ -1,12 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
   "outputDirectory": "public",
   "cleanUrls": false,
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/:path((?!.*\\.pdf$).*)",
       "headers": [
         {
           "key": "X-Content-Type-Options",
@@ -27,10 +26,6 @@
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=()"
-        },
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=63072000; includeSubDomains; preload"
         }
       ]
     },
@@ -38,16 +33,20 @@
       "source": "/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf",
       "headers": [
         {
-          "key": "Content-Type",
-          "value": "application/pdf"
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
         },
         {
-          "key": "Content-Disposition",
-          "value": "inline; filename=\"Mohamed_Tarek_Abdelhady_Engineer_CV.pdf\""
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self'"
         },
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
         }
       ]
     },
@@ -56,7 +55,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </Mohamed%20-%20Services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
         },
         {
           "key": "Vary",
@@ -73,7 +72,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </Mohamed%20-%20Services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
         },
         {
           "key": "Vary",
@@ -86,7 +85,7 @@
       ]
     },
     {
-      "source": "/sites/:path*",
+      "source": "/sites/(.*)",
       "headers": [
         {
           "key": "Link",
@@ -103,7 +102,7 @@
       ]
     },
     {
-      "source": "/.well-known/api-catalog/:path*",
+      "source": "/.well-known/api-catalog(/.*)?",
       "headers": [
         {
           "key": "Content-Type",
@@ -128,7 +127,7 @@
       ]
     },
     {
-      "source": "/.well-known/ai-catalog.json",
+      "source": "/.well-known/ai-catalog\\.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -170,7 +169,7 @@
       ]
     },
     {
-      "source": "/.well-known/oauth-protected-resource.json",
+      "source": "/.well-known/oauth-protected-resource\\.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -187,7 +186,7 @@
       ]
     },
     {
-      "source": "/.well-known/oauth-authorization-server.json",
+      "source": "/.well-known/oauth-authorization-server\\.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -204,7 +203,7 @@
       ]
     },
     {
-      "source": "/.well-known/mcp/server-card.json",
+      "source": "/.well-known/mcp/server-card\\.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -238,7 +237,7 @@
       ]
     },
     {
-      "source": "/openapi.json",
+      "source": "/openapi\\.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -272,10 +271,6 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "no-store"
         }
       ]
     },
@@ -297,15 +292,11 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type, Authorization"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "no-store"
         }
       ]
     },
     {
-      "source": "/.well-known/agent-card.json",
+      "source": "/.well-known/agent-card\\.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -322,7 +313,7 @@
       ]
     },
     {
-      "source": "/.well-known/acp.json",
+      "source": "/.well-known/acp\\.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -390,15 +381,11 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type, PAYMENT-SIGNATURE, PAYMENT-REQUIRED, PAYMENT-RESPONSE"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "no-store"
         }
       ]
     },
     {
-      "source": "/.well-known/:path*",
+      "source": "/.well-known/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
@@ -439,58 +426,7 @@
           "value": "public, max-age=86400, stale-while-revalidate=604800"
         }
       ]
-    },
-    {
-      "source": "/(.*)\\.(png|jpg|jpeg|webp|avif|gif|svg|ico|webmanifest|pdf)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
-        }
-      ]
     }
-  ],
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "website-mohamed.vercel.app" }],
-      "destination": "https://mohamed-tarek-abdelhady.vercel.app/$1",
-      "permanent": true
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.mohamed-tarek-abdelhady.vercel.app" }],
-      "destination": "https://mohamed-tarek-abdelhady.vercel.app/$1",
-      "permanent": true
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.website-mohamed.vercel.app" }],
-      "destination": "https://mohamed-tarek-abdelhady.vercel.app/$1",
-      "permanent": true
-    },
-    { "source": "/Mohamed - CV.html", "destination": "/cv.html", "permanent": true },
-    { "source": "/Mohamed - Certificates.html", "destination": "/certificates.html", "permanent": true },
-    { "source": "/Mohamed - Personal Information.html", "destination": "/about.html", "permanent": true },
-    { "source": "/Mohamed - Project.html", "destination": "/projects.html", "permanent": true },
-    { "source": "/Mohamed - Services.html", "destination": "/services.html", "permanent": true },
-    { "source": "/Mohamed - my-sites.html", "destination": "/tools.html", "permanent": true },
-    { "source": "/Mohamed - social-media.html", "destination": "/social-media.html", "permanent": true },
-    { "source": "/sites/Battery-Capacity-&-Runtime-Calculator.html", "destination": "/sites/battery-capacity-runtime-calculator.html", "permanent": true },
-    { "source": "/sites/RC-Filter-&-LC-Resonance-Calculator.html", "destination": "/sites/rc-filter-lc-resonance-calculator.html", "permanent": true },
-    { "source": "/sites/Indactance-calculator.html", "destination": "/sites/inductance-calculator.html", "permanent": true },
-    { "source": "/sites/Mastering Linux Commands.html", "destination": "/sites/mastering-linux-commands.html", "permanent": true },
-    { "source": "/sites/LCD-Custom-Character-Generator.html", "destination": "/sites/lcd-custom-character-generator.html", "permanent": true },
-    { "source": "/sites/Length-Converter.html", "destination": "/sites/length-converter.html", "permanent": true },
-    { "source": "/sites/Medication-Reminder.html", "destination": "/sites/medication-reminder.html", "permanent": true },
-    { "source": "/sites/Power-Factor-Calculator.html", "destination": "/sites/power-factor-calculator.html", "permanent": true },
-    { "source": "/sites/Power-Triangle-Calculator.html", "destination": "/sites/power-triangle-calculator.html", "permanent": true },
-    { "source": "/sites/Transformer-Turns-Calculator.html", "destination": "/sites/transformer-turns-calculator.html", "permanent": true },
-    { "source": "/sites/Wire-Gauge-Calculator.html", "destination": "/sites/wire-gauge-calculator.html", "permanent": true },
-    { "source": "/sites/Race-Game.html", "destination": "/sites/race-game.html", "permanent": true },
-    { "source": "/sites/index.html", "destination": "/sites/", "permanent": true },
-    { "source": "/index.html", "destination": "/", "permanent": true },
-    { "source": "/sites", "destination": "/sites/", "permanent": true }
   ],
   "rewrites": [
     {
@@ -567,4 +503,3 @@
     }
   ]
 }
-
