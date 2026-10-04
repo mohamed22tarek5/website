@@ -483,7 +483,9 @@
     { "source": "/sites/Transformer-Turns-Calculator.html", "destination": "/sites/transformer-turns-calculator.html", "permanent": true },
     { "source": "/sites/Wire-Gauge-Calculator.html", "destination": "/sites/wire-gauge-calculator.html", "permanent": true },
     { "source": "/sites/Race-Game.html", "destination": "/sites/race-game.html", "permanent": true },
-    { "source": "/sites/index.html", "destination": "/sites/", "permanent": true }
+    { "source": "/sites/index.html", "destination": "/sites/", "permanent": true },
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/sites", "destination": "/sites/", "permanent": true }
   ],
   "rewrites": [
     {

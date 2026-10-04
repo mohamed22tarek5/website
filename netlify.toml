@@ -422,3 +422,13 @@
   from = "/sites/index.html"
   to = "/sites/"
   status = 301
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/sites"
+  to = "/sites/"
+  status = 301
