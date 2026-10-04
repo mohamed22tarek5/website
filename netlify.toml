@@ -323,6 +323,24 @@
 # mohamed-tarek-abdelhady.vercel.app is enforced via vercel.json host-based
 # 301 + self-referencing canonicals. Netlify never serves the secondary
 # Vercel host, so no Netlify host redirect is required here.
+# --- WWW canonicalization (www -> apex, permanent) ---
+# Netlify supports absolute-URL `from` with a host. These fire only when the
+# www host resolves to this site; apex hosts have no www counterpart otherwise.
+[[redirects]]
+  from = "https://www.eng-mta.netlify.app/*"
+  to = "https://eng-mta.netlify.app/:splat"
+  status = 301
+
+[[redirects]]
+  from = "https://www.mohamed-tarek-abdelhady.vercel.app/*"
+  to = "https://mohamed-tarek-abdelhady.vercel.app/:splat"
+  status = 301
+
+[[redirects]]
+  from = "https://www.website-mohamed.vercel.app/*"
+  to = "https://mohamed-tarek-abdelhady.vercel.app/:splat"
+  status = 301
+
 [[redirects]]
   from = "/Mohamed - CV.html"
   to = "/cv.html"
