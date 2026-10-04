@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
+  <script>if(location.hostname.slice(0,4)==='www.'){location.replace(location.protocol+'//'+location.hostname.slice(4)+location.pathname+location.search+location.hash);}</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/mastering-linux-commands.html">
@@ -20,6 +21,8 @@
   <meta property="og:image:height" content="1134">
   <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
   <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/mastering-linux-commands.html">
+  <meta property="og:updated_time" content="2026-10-04T00:00:00+03:00">
+  <meta property="article:modified_time" content="2026-10-04T00:00:00+03:00">
   <meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
 
   <meta name="twitter:card" content="summary_large_image">
@@ -760,7 +763,8 @@
 
               <h3 id="pwd"><span class="cmd">pwd</span> &mdash; Print Working Directory</h3>
               <p>Show the absolute path of the current directory.</p>
-<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>pwd
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>pwd
+
 # Output: /home/user</code></pre>
               <div class="callout note">Displays the full path from the root to your current location.</div>
 
@@ -772,16 +776,22 @@
               </div>
 
               <h3 id="cd"><span class="cmd">cd [directory]</span> &mdash; Change Directory</h3>
-<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>cd /home/user/Documents
-cd ..    # Go up one level
-cd ~     # Go to home directory
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>cd /home/user/Documents
+
+cd ..    # Go up one level
+
+cd ~     # Go to home directory
+
 cd -     # Go to previous directory</code></pre>
               <div class="callout tip">Use <code>cd ..</code> to go up one level, <code>cd ~</code> for home directory.</div>
 
               <h3 id="ls"><span class="cmd">ls</span> &mdash; List Directory Contents</h3>
-<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>ls
-ls -la   # Long format with hidden files
-ls -lh   # Human readable file sizes
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>ls
+
+ls -la   # Long format with hidden files
+
+ls -lh   # Human readable file sizes
+
 ls -t    # Sort by modification time</code></pre>
 
               <div class="quiz-container">
@@ -809,21 +819,29 @@ ls -t    # Sort by modification time</code></pre>
               <p>Learn how to create, copy, move, and delete files and directories.</p>
 
               <h3 id="mkdir"><span class="cmd">mkdir [directory]</span> &mdash; Create Directory</h3>
-<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>mkdir new_folder
-mkdir -p parent/child/grandchild   # Create nested directories
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>mkdir new_folder
+
+mkdir -p parent/child/grandchild   # Create nested directories
+
 mkdir dir1 dir2 dir3   # Create multiple directories</code></pre>
 
               <h3 id="rm"><span class="cmd">rm [file]</span> &mdash; Remove Files/Directories</h3>
-<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>rm file.txt
-rm -r directory/      # Remove directory recursively
-rm -f file.txt        # Force remove without confirmation
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>rm file.txt
+
+rm -r directory/      # Remove directory recursively
+
+rm -f file.txt        # Force remove without confirmation
+
 rm -i file.txt        # Interactive mode (ask before removing)</code></pre>
               <div class="callout warn"><strong><i class="fas fa-exclamation-triangle"></i> Caution:</strong> Be careful with <code>rm -rf</code>! It can delete your entire system if used incorrectly.</div>
 
               <h3 id="cp"><span class="cmd">cp [src] [dest]</span> &mdash; Copy Files</h3>
-<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>cp file.txt backup/
-cp -r source/ destination/   # Copy directories recursively
-cp -i file.txt backup/       # Interactive (ask before overwrite)
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>cp file.txt backup/
+
+cp -r source/ destination/   # Copy directories recursively
+
+cp -i file.txt backup/       # Interactive (ask before overwrite)
+
 cp -v file.txt backup/       # Verbose (show what's being copied)</code></pre>
 
               <div class="practice-container">
@@ -842,14 +860,19 @@ cp -v file.txt backup/       # Verbose (show what's being copied)</code></pre>
               <p>Powerful commands for working with text files.</p>
 
               <h3 id="cat"><span class="cmd">cat [file]</span> &mdash; Concatenate and Display</h3>
-<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>cat file.txt
-cat file1.txt file2.txt > combined.txt   # Combine files
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>cat file.txt
+
+cat file1.txt file2.txt > combined.txt   # Combine files
+
 cat > newfile.txt   # Create new file (Ctrl+D to save)</code></pre>
 
               <h3 id="grep"><span class="cmd">grep [pattern] [file]</span> &mdash; Search Text</h3>
-<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>grep "error" logfile.txt
-grep -r "TODO" ./src/   # Recursive search
-grep -i "warning" log.txt   # Case-insensitive
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>grep "error" logfile.txt
+
+grep -r "TODO" ./src/   # Recursive search
+
+grep -i "warning" log.txt   # Case-insensitive
+
 grep -v "success" log.txt   # Invert match (show non-matching lines)</code></pre>
 
               <div class="terminal" id="terminal-2">
@@ -895,15 +918,21 @@ grep -v "success" log.txt   # Invert match (show non-matching lines)</code></pre
               </div>
 
               <h3 id="chmod"><span class="cmd">chmod [permissions] [file]</span> &mdash; Change Permissions</h3>
-<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>chmod 755 script.sh
-chmod u+x file.txt    # Add execute for user
-chmod go-w file.txt   # Remove write for group and others
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>chmod 755 script.sh
+
+chmod u+x file.txt    # Add execute for user
+
+chmod go-w file.txt   # Remove write for group and others
+
 chmod -R 644 dir/     # Recursive change</code></pre>
 
               <h3 id="chown"><span class="cmd">chown [user]:[group] [file]</span> &mdash; Change Ownership</h3>
-<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>chown user:group file.txt
-chown user file.txt    # Change user only
-chown :group file.txt  # Change group only
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>chown user:group file.txt
+
+chown user file.txt    # Change user only
+
+chown :group file.txt  # Change group only
+
 chown -R user:group dir/  # Recursive change</code></pre>
             </section>
 
@@ -915,13 +944,17 @@ chown -R user:group dir/  # Recursive change</code></pre>
               <p>Control and monitor running processes.</p>
 
               <h3 id="ps"><span class="cmd">ps</span> &mdash; Process Status</h3>
-<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>ps aux          # Show all processes
-ps -ef          # Full format listing
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>ps aux          # Show all processes
+
+ps -ef          # Full format listing
+
 ps aux | grep nginx  # Find specific process</code></pre>
 
               <h3 id="kill"><span class="cmd">kill [signal] [pid]</span> &mdash; Terminate Processes</h3>
-<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>kill 1234        # Send TERM signal (default)
-kill -9 1234    # Force kill (SIGKILL)
+<pre><button class="copy-btn" data-clipboard aria-label="Copy code">Copy</button><code>kill 1234        # Send TERM signal (default)
+
+kill -9 1234    # Force kill (SIGKILL)
+
 killall nginx   # Kill all processes named nginx</code></pre>
               <div class="callout warn"><strong><i class="fas fa-exclamation-triangle"></i> Caution:</strong> SIGKILL (-9) cannot be caught or ignored by the process. Use as last resort.</div>
             </section>

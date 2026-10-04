@@ -85,7 +85,7 @@ I am a **Communication & Electronics Engineer** who builds integrated hardware�
 - `index.html` — Main portfolio (dark theme, SEO + JSON-LD + Open Graph)
 - `cv.html`, `services.html`, `projects.html`, `about.html`, `social-media.html`, `certificates.html`, `tools.html`
 - `Mohamed_Tarek_Abdelhady_Engineer_CV.pdf` — Downloadable CV
-- `photo.jpg`, `icon.png`, `manifest.webmanifest`, `sw.js`, `pwa.js`, `offline.html`
+- `photo.jpg`, `icon.png`, `manifest.webmanifest`, `sw.js`, `pwa.js`
 
 ### 2. Engineering Tools (`public/sites/`)
 Interactive calculators, converters, and games:
@@ -95,7 +95,7 @@ Interactive calculators, converters, and games:
 - Utilities: `length-converter.html`, `to-do-list.html`, `medication-reminder.html`, `mastering-linux-commands.html`, `ai-sites-list.html`, `dashboard.html`
 - Games: `3d-car-game.html`, `dino-game.html`, `race-game.html`
 
-Shared PWA assets in `sites/`: `common.css`, `common.js`, `sw.js`, `pwa.js`, `manifest.webmanifest`, `offline.html`
+Shared PWA assets in `sites/`: `common.css`, `common.js`, `manifest.webmanifest`
 
 ### 3. Agent-Ready API (`api/` + `.well-known/`)
 - `openapi.json` — Portfolio API spec (homepage + calculators + x402 premium)
@@ -108,9 +108,8 @@ Shared PWA assets in `sites/`: `common.css`, `common.js`, `sw.js`, `pwa.js`, `ma
 - `dns-aid.zone` — DNS-AID discovery records (`_index`/`_a2a`/`_mcp` under `_agents`, SVCB/HTTPS + `key65280`/`key65281`, DNSSEC required). **Not yet live:** `*.vercel.app` DNS can't host them — apply at a custom domain's provider, then enable DNSSEC
 
 ### 4. PWA Support
-- Offline support via `sw.js` service worker
+- Caching via `sw.js` service worker
 - Installable on mobile and desktop via `manifest.webmanifest`
-- Offline fallback: `offline.html`
 - Icons: `icon.png`, `icon-192.png`, `icon-512.png`, `apple-touch-icon.png`
 
 ### 5. SEO / GEO / Meta
@@ -129,7 +128,7 @@ website/
 │   ├── index.html              # Main portfolio page
 │   ├── Mohamed - *.html        # CV / Services / Projects / Info / Social / Certificates / Sites
 │   ├── common.css / common.js  # Shared design system
-│   ├── sw.js / pwa.js / manifest.webmanifest / offline.html
+│   ├── sw.js / pwa.js / manifest.webmanifest
 │   ├── sitemap.xml / robots.txt / openapi.json / auth.md
 │   ├── index.md / projects.md / Mohamed - Services.md
 │   ├── Project/ / Certificates/ # Static assets

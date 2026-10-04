@@ -324,22 +324,58 @@
 # 301 + self-referencing canonicals. Netlify never serves the secondary
 # Vercel host, so no Netlify host redirect is required here.
 # --- WWW canonicalization (www -> apex, permanent) ---
-# Netlify supports absolute-URL `from` with a host. These fire only when the
-# www host resolves to this site; apex hosts have no www counterpart otherwise.
+# Canonical choice: apex (non-www). All www variants 301 to apex to
+# consolidate PageRank. Netlify supports absolute-URL `from` with a host.
+# These fire only when the www host resolves to this site; apex hosts have
+# no www counterpart otherwise. Both http and https variants are covered
+# (http upgrades to https + strips www in one 301).
 [[redirects]]
   from = "https://www.eng-mta.netlify.app/*"
   to = "https://eng-mta.netlify.app/:splat"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.eng-mta.netlify.app/*"
+  to = "https://eng-mta.netlify.app/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://eng-mta.netlify.app/*"
+  to = "https://eng-mta.netlify.app/:splat"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "https://www.mohamed-tarek-abdelhady.vercel.app/*"
   to = "https://mohamed-tarek-abdelhady.vercel.app/:splat"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.mohamed-tarek-abdelhady.vercel.app/*"
+  to = "https://mohamed-tarek-abdelhady.vercel.app/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://mohamed-tarek-abdelhady.vercel.app/*"
+  to = "https://mohamed-tarek-abdelhady.vercel.app/:splat"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "https://www.website-mohamed.vercel.app/*"
   to = "https://mohamed-tarek-abdelhady.vercel.app/:splat"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.website-mohamed.vercel.app/*"
+  to = "https://mohamed-tarek-abdelhady.vercel.app/:splat"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/Mohamed - CV.html"
