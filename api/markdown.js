@@ -3,22 +3,13 @@
  * Serves markdown versions of pages when Accept: text/markdown is requested.
  *
  * Per https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/
- * and https://llmstxt.org/
- *
- * Routing Middleware (see /middleware.js) rewrites page requests
- * carrying `Accept: text/markdown` here:
- *   GET / with Accept: text/markdown -> /api/markdown?path=/
- *   GET /index.html with Accept: text/markdown -> /api/markdown?path=/
- *   GET /:slug.html with Accept: text/markdown -> /api/markdown?path=/:slug.html
- *   GET /sites/:slug.html with Accept: text/markdown -> /api/markdown?path=/sites/:slug.html
+ * and https://isitagentready.com/.well-known/agent-skills/markdown-negotiation/SKILL.md
  */
 
 import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
-/* Self-contained HTML->Markdown (inlined so the function has zero
- * cross-directory imports that could break bundling). Keep in sync
- * with /html-to-markdown.js. */
+/* Self-contained HTML->Markdown converter */
 function htmlToMarkdown(html) {
   let md = String(html || '');
   md = md.replace(/<script[\s\S]*?<\/script>/gi, '');
@@ -62,83 +53,118 @@ function estimateTokens(text) {
   return Math.ceil(String(text || '').length / 4);
 }
 
-/* Embedded homepage markdown — guarantees a useful text/markdown
- * response even if public/ files are not bundled with the function. */
-const HOMEPAGE_MD = `# Mohamed Tarek Abdelhady — Communication Engineer
+const EMBEDDED_PAGES = {
+  '/index': `# Mohamed Tarek Abdelhady — Communication Engineer
 
 Communication & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.
 
 Live site: https://mohamed-tarek-abdelhady.vercel.app/
 
 ## Pages
-
 - [Home](/) — Portfolio homepage
-- [CV](/cv.html) — Resume and qualifications
+- [About](/about.html) — Personal information, engineering skills, and affiliations
+- [CV](/cv.html) — Resume and technical competencies
 - [Projects](/projects.html) — Engineering projects portfolio
 - [Services](/services.html) — Available services and tools
 - [Certificates](/certificates.html) — Professional certifications
 - [Social Media](/social-media.html) — Contact and social links
 - [Apps & Tools](/tools.html) — All engineering tools
 
-## Engineering Tools
-
-- [Ohm's Law Calculator](/sites/ohms-law-calculator.html)
-- [Resistor Calculator](/sites/resistor-calculator.html)
-- [Resistor for LED](/sites/resistor-for-led.html)
-- [Voltage Divider Calculator](/sites/voltage-divider-calculator.html)
+## Engineering Calculators
+- [Ohm's Law Calculator](/sites/ohms-law-calculator.html) — V=IR, P=VI
+- [Resistor Calculator](/sites/resistor-calculator.html) — Color codes and values
+- [Resistor for LED](/sites/resistor-for-led.html) — LED current-limiting resistor
+- [Voltage Divider Calculator](/sites/voltage-divider-calculator.html) — Vout, R1, R2 with load
 - [Capacitor Calculator](/sites/capacitor-calculator.html)
-- [555 Timer Calculator](/sites/555-timer-calculator.html)
-- [PCB Trace Width Calculator](/sites/pcb-trace-width-calculator.html)
+- [555 Timer Calculator](/sites/555-timer-calculator.html) — Astable and monostable
+- [PCB Trace Width Calculator](/sites/pcb-trace-width-calculator.html) — IPC-2221
 - [dB / dBm Calculator](/sites/decibel-dbm-calculator.html)
 - [Op-Amp Gain Calculator](/sites/op-amp-gain-calculator.html)
 - [Battery Life & Solar Calculator](/sites/battery-solar-calculator.html)
 
-## About
+## Contact
+- Email: mohammed.tarek.abdelhady.ali@gmail.com
+- Phone: +20 109 063 7406
+- LinkedIn: https://www.linkedin.com/in/mohamedtarek225
+- GitHub: https://github.com/mohamed22tarek5
+`,
+  '/about': `# Mohamed Tarek Abdelhady Ali — About
 
-- **Skills**: Arduino (95%), PCB Design (85%), Classic Control & PLC (60%), Embedded Systems (58%)
-- **Location**: Kafr el Sheikh, Egypt
+Communication & Embedded Systems Engineer based in Kafr el Sheikh, Egypt. Specializing in Arduino development, embedded systems, PCB design, IoT solutions, and hardware–software integration.
+
+Live page: https://mohamed-tarek-abdelhady.vercel.app/about.html
+
+## Technical Skills
+- Arduino (95%), PCB Design (85%), Classic Control & PLC (60%), Embedded Systems (58%)
+- KiCad, EasyEDA, Proteus, Multisim
+- C, C++, Python, JavaScript (ES6+), HTML5, CSS3, REST APIs, JSON-LD
 
 ## Contact
+- Email: mohammed.tarek.abdelhady.ali@gmail.com
+- Phone: +20 109 063 7406
+- LinkedIn: https://www.linkedin.com/in/mohamedtarek225
+`,
+  '/cv': `# Mohamed Tarek Abdelhady Ali — Curriculum Vitae
 
-- **Email**: mohammed.tarek.abdelhady.ali@gmail.com
-- **Phone**: +20 109 063 7406
-- **LinkedIn**: https://www.linkedin.com/in/mohamedtarek225
-- **GitHub**: https://github.com/mohamed22tarek5
-- **Instagram**: https://www.instagram.com/_m7md_tarek_/
-- **WhatsApp**: https://wa.me/+201090637406
-`;
+Communication & Embedded Systems Engineer.
+PDF CV: https://mohamed-tarek-abdelhady.vercel.app/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf
+
+## Education
+B.Sc. in Communication and Electronics Engineering, Faculty of Engineering.
+
+## Core Competencies
+- Microcontrollers: Arduino, ESP32, ESP8266, STM32
+- Hardware Design: Schematic capture, PCB layout, Gerber generation
+- Protocols: UART, SPI, I2C, Modbus, MQTT, HTTP
+- Web & Software: Vanilla JS, REST APIs, PWAs, JSON-LD
+`,
+  '/services': `# Services — Mohamed Tarek Abdelhady
+
+Engineering services and free calculation tools.
+
+## Services
+- PCB Design: KiCad, EasyEDA schematic capture and multi-layer layout
+- Embedded Systems: Arduino, ESP32, STM32 firmware and IoT prototyping
+- Web Development: Vanilla ES6+, responsive sites, PWAs
+- Technical Consulting: Circuit analysis and electronics consulting
+`,
+  '/tools': `# Engineering Tools & Calculators — Mohamed Tarek Abdelhady
+
+Collection of 11+ client-side electronics calculators.
+Live suite: https://mohamed-tarek-abdelhady.vercel.app/tools.html
+`
+};
 
 function normalizePath(raw) {
-  if (!raw) return '/';
+  if (!raw) return '/index';
   let p = String(raw);
-  // Strip query string / hash
   p = p.split('?')[0].split('#')[0];
-  // URL-decode (handles %20 etc.), tolerate malformed input
   try {
     p = decodeURIComponent(p);
   } catch {
     // keep as-is
   }
   if (!p.startsWith('/')) p = '/' + p;
-  // Map homepage variants to /index
   if (p === '/' || p === '/index' || p === '/index.html' || p === '/index.md') {
     return '/index';
   }
-  // Strip trailing .html / .md for lookup (we try both extensions)
   p = p.replace(/\.html?$/i, '').replace(/\.md$/i, '');
-  // Remove trailing slash (except root, already handled)
   if (p.length > 1 && p.endsWith('/')) p = p.slice(0, -1);
   return p;
 }
 
-function sendMarkdown(res, markdown) {
+function sendMarkdown(res, markdown, isHead = false) {
   const tokens = estimateTokens(markdown);
   res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
   res.setHeader('x-markdown-tokens', String(tokens));
   res.setHeader('Vary', 'Accept');
   res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Expose-Headers', 'x-markdown-tokens, Content-Type');
   res.statusCode = 200;
+  if (isHead) {
+    return res.end();
+  }
   return res.end(markdown);
 }
 
@@ -146,25 +172,21 @@ export default function handler(req, res) {
   // CORS preflight
   if (req.method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Accept, Content-Type');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Accept, Content-Type, Authorization');
     res.statusCode = 200;
     return res.end();
   }
 
+  const isHead = req.method === 'HEAD';
   const accept = req.headers.accept || '';
 
-  // Get path from query params (from rewrite) or URL
-  // Vercel rewrite passes ?path=/ ; direct calls may use ?path=/sites/x.html
-  // or /api/markdown/:path* style (req.query.path may be array).
   let rawPath = req.query && req.query.path;
   if (Array.isArray(rawPath)) rawPath = '/' + rawPath.join('/');
   if (!rawPath) {
-    // Fall back to parsing URL: /api/markdown?path=X already handled;
-    // /api/markdown/<subpath> style
     const urlPath = (req.url || '').split('?')[0];
     const m = urlPath.match(/^\/api\/markdown(\/.*)?$/);
-    rawPath = (m && m[1]) || '/';
+    rawPath = (m && m[1]) || '/index';
   }
 
   const wantsMarkdown = accept.includes('text/markdown');
@@ -172,43 +194,47 @@ export default function handler(req, res) {
     (req.query && typeof req.query.path !== 'undefined') ||
     (req.url && req.url.includes('path='));
 
-  // If no explicit page requested and client doesn't want markdown,
-  // return usage instructions (backwards compatible).
-  if (!wantsMarkdown && !hasExplicitPath) {
-    res.setHeader('Content-Type', 'application/json');
+  // If no explicit page requested and client doesn't want markdown, return guidance
+  if (!wantsMarkdown && !hasExplicitPath && req.method === 'GET') {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.setHeader('Vary', 'Accept');
     res.statusCode = 200;
     return res.end(JSON.stringify({
-      message: 'Markdown for Agents is supported',
-      usage: 'Set Accept: text/markdown header to get markdown version',
+      message: 'Markdown for Agents is supported on this site',
+      protocol: 'https://developers.cloudflare.com/fundamentals/reference/markdown-for-agents/',
+      usage: 'Send Accept: text/markdown header on any page URL to receive markdown',
       example: 'curl -H "Accept: text/markdown" https://mohamed-tarek-abdelhady.vercel.app/'
-    }));
+    }, null, 2));
   }
 
   const normalized = normalizePath(rawPath);
   const publicDir = join(process.cwd(), 'public');
 
-  // 1) Try pre-generated markdown: public/<normalized>.md
-  //    e.g. /index -> public/index.md, /services -> public/services.md
-  const candidates = [
+  // 1) Try pre-generated markdown in public/<normalized>.md
+  const mdCandidates = [
     join(publicDir, `${normalized}.md`),
     join(publicDir, `${normalized}.MD`),
+    join(process.cwd(), `${normalized}.md`)
   ];
 
-  for (const mdPath of candidates) {
+  for (const mdPath of mdCandidates) {
     if (existsSync(mdPath)) {
       try {
         const content = readFileSync(mdPath, 'utf-8');
-        return sendMarkdown(res, content);
+        if (content && content.trim()) {
+          return sendMarkdown(res, content, isHead);
+        }
       } catch {
-        // fall through to HTML conversion
+        // fall through
       }
     }
   }
 
-  // 2) Convert HTML -> markdown: public/<normalized>.html
+  // 2) Try converting HTML in public/<normalized>.html
   const htmlCandidates = [
     join(publicDir, `${normalized}.html`),
     join(publicDir, `${normalized}.HTML`),
+    join(process.cwd(), `${normalized}.html`)
   ];
 
   for (const htmlPath of htmlCandidates) {
@@ -217,19 +243,20 @@ export default function handler(req, res) {
         const html = readFileSync(htmlPath, 'utf-8');
         const md = htmlToMarkdown(html);
         if (md && md.trim().length > 0) {
-          return sendMarkdown(res, md);
+          return sendMarkdown(res, md, isHead);
         }
       } catch {
-        // fall through to fallback
+        // fall through
       }
     }
   }
 
-  // 3) Fallback: homepage gets embedded copy; other pages get a minimal
-  // page so agents still receive text/markdown with HTTP 200.
-  if (normalized === '/index') {
-    return sendMarkdown(res, HOMEPAGE_MD);
+  // 3) Try embedded static page fallbacks
+  if (EMBEDDED_PAGES[normalized]) {
+    return sendMarkdown(res, EMBEDDED_PAGES[normalized], isHead);
   }
+
+  // 4) Clean dynamic fallback for any other route
   const title = normalized
     .replace(/^\//, '')
     .replace(/[-_]/g, ' ')
@@ -237,7 +264,7 @@ export default function handler(req, res) {
 
   const siteBase = `https://${req.headers.host || 'mohamed-tarek-abdelhady.vercel.app'}`;
   const pageUrl = `${siteBase}${normalized === '/index' ? '/' : normalized}`;
-  const fallbackMd = `# ${title}\n\nThis page is part of Mohamed Tarek Abdelhady's portfolio.\n\nVisit [${title}](${pageUrl}) for the full experience.\n`;
+  const fallbackMd = `# ${title}\n\nEngineering portfolio resource by Mohamed Tarek Abdelhady.\n\nFull page: [${title}](${pageUrl})\n\nContact: mohammed.tarek.abdelhady.ali@gmail.com\n`;
 
-  return sendMarkdown(res, fallbackMd);
+  return sendMarkdown(res, fallbackMd, isHead);
 }

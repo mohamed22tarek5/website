@@ -20,7 +20,7 @@
           "scheme": "exact",
           "network": "eip155:84532",
           "maxAmountRequired": "1000",
-          "description": "Access to premium API endpoint",
+          "description": "Mohamed Tarek Abdelhady Engineering API Access",
           "mimeType": "application/json",
           "payTo": "0x0000000000000000000000000000000000000000"
         }

@@ -136,6 +136,42 @@
         "communication engineer web developer",
         "Arduino expert PCB designer"
       ]
+    },
+    {
+      "identifier": "urn:air:mohamed-tarek-abdelhady.vercel.app:endpoint:x402",
+      "displayName": "x402 HTTP Payment Protocol Endpoint",
+      "description": "Agent-native HTTP payments via x402 protocol returning HTTP 402.",
+      "type": "application/json",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/api/x402",
+      "representativeQueries": [
+        "x402 payment protocol",
+        "agent native http payment",
+        "pay for api access 402"
+      ]
+    },
+    {
+      "identifier": "urn:air:mohamed-tarek-abdelhady.vercel.app:endpoint:ucp",
+      "displayName": "Universal Commerce Protocol (UCP) Endpoint",
+      "description": "UCP merchant profile and dev.ucp.shopping transport definition.",
+      "type": "application/json",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/ucp",
+      "representativeQueries": [
+        "universal commerce protocol",
+        "ucp profile",
+        "dev ucp shopping endpoint"
+      ]
+    },
+    {
+      "identifier": "urn:air:mohamed-tarek-abdelhady.vercel.app:endpoint:markdown",
+      "displayName": "Markdown for Agents Content Negotiation Endpoint",
+      "description": "Serves markdown versions of site pages when requested with Accept: text/markdown.",
+      "type": "text/markdown",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/api/markdown",
+      "representativeQueries": [
+        "markdown for agents",
+        "content negotiation markdown",
+        "text markdown endpoint"
+      ]
     }
   ]
 }

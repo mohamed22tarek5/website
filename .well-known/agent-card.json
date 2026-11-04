@@ -61,6 +61,24 @@
       "name": "Services Information",
       "description": "Learn about engineering services offered: web development, Arduino programming, PCB design, embedded systems.",
       "tags": ["services", "engineering"]
+    },
+    {
+      "id": "x402-payment",
+      "name": "x402 HTTP Payment Protocol",
+      "description": "Agent-native HTTP payments via x402 protocol on Base Sepolia. Protected routes return HTTP 402.",
+      "tags": ["x402", "micropayments", "protocol"]
+    },
+    {
+      "id": "ucp-commerce",
+      "name": "Universal Commerce Protocol (UCP)",
+      "description": "UCP merchant profile and dev.ucp.shopping transport at /.well-known/ucp and /api/ucp.",
+      "tags": ["ucp", "commerce", "protocol"]
+    },
+    {
+      "id": "markdown-negotiation",
+      "name": "Markdown for Agents",
+      "description": "Content negotiation returning text/markdown when Accept: text/markdown is requested.",
+      "tags": ["markdown", "agents", "content-negotiation"]
     }
   ]
 }

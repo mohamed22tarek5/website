@@ -4,5 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "echo \"Static site - no build required\""
+  },
+  "dependencies": {
+    "@vercel/functions": "^1.4.0"
   }
 }

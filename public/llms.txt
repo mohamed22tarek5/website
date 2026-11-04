@@ -33,6 +33,10 @@ Based in Egypt, specializing in custom circuit design, embedded firmware, IoT ha
 - [AI Discovery Catalog](https://mohamed-tarek-abdelhady.vercel.app/.well-known/ai-catalog.json): Autonomous agent resource discovery directory.
 - [Agent Card](https://mohamed-tarek-abdelhady.vercel.app/.well-known/agent-card.json): Agent capabilities, skills, and invocation protocols.
 - [OAuth Protected Resource Metadata](https://mohamed-tarek-abdelhady.vercel.app/.well-known/oauth-protected-resource): RFC 9728 metadata for secure agent interaction.
+- [Universal Commerce Protocol (UCP)](https://mohamed-tarek-abdelhady.vercel.app/.well-known/ucp): UCP profile and shopping capability endpoint per ucp.dev.
+- [x402 Payment Protocol](https://mohamed-tarek-abdelhady.vercel.app/api/x402): Agent-native HTTP micropayments with HTTP 402 challenge per x402.org.
+- [x402 Protocol Metadata](https://mohamed-tarek-abdelhady.vercel.app/.well-known/x402): Supported networks, schemes, and payment endpoints.
+- [Markdown for Agents](https://mohamed-tarek-abdelhady.vercel.app/): Full content negotiation supported on all pages via `Accept: text/markdown`.
 
 ## Verified Profiles
 - LinkedIn: https://www.linkedin.com/in/mohamedtarek225

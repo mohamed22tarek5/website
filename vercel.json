@@ -3,6 +3,11 @@
   "outputDirectory": "public",
   "cleanUrls": false,
   "trailingSlash": false,
+  "functions": {
+    "api/**/*.js": {
+      "includeFiles": "public/**"
+    }
+  },
   "headers": [
     {
       "source": "/:path((?!.*\\.pdf$).*)",
@@ -59,7 +64,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </llms.txt>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </llms.txt>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/x402>; rel=\"payment-meta\", </.well-known/ucp>; rel=\"ucp\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
         },
         {
           "key": "Vary",
@@ -76,7 +81,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </llms.txt>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </llms.txt>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/x402>; rel=\"payment-meta\", </.well-known/ucp>; rel=\"ucp\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
         },
         {
           "key": "Vary",
@@ -228,11 +233,15 @@
       "headers": [
         {
           "key": "Content-Type",
-          "value": "application/json"
+          "value": "application/json; charset=utf-8"
         },
         {
           "key": "Access-Control-Allow-Origin",
           "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, HEAD, OPTIONS"
         },
         {
           "key": "Cache-Control",
@@ -338,11 +347,15 @@
       "headers": [
         {
           "key": "Content-Type",
-          "value": "application/json"
+          "value": "application/json; charset=utf-8"
         },
         {
           "key": "Access-Control-Allow-Origin",
           "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, HEAD, OPTIONS"
         },
         {
           "key": "Cache-Control",
@@ -372,7 +385,7 @@
       "headers": [
         {
           "key": "Content-Type",
-          "value": "application/json"
+          "value": "application/json; charset=utf-8"
         },
         {
           "key": "Access-Control-Allow-Origin",
@@ -380,11 +393,73 @@
         },
         {
           "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, OPTIONS"
+          "value": "GET, POST, OPTIONS, HEAD"
         },
         {
           "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, PAYMENT-SIGNATURE, PAYMENT-REQUIRED, PAYMENT-RESPONSE"
+          "value": "Content-Type, Authorization, PAYMENT-SIGNATURE, PAYMENT-REQUIRED, PAYMENT-RESPONSE, Accept"
+        },
+        {
+          "key": "Access-Control-Expose-Headers",
+          "value": "PAYMENT-REQUIRED, PAYMENT-RESPONSE"
+        },
+        {
+          "key": "Vary",
+          "value": "PAYMENT-SIGNATURE, Accept"
+        }
+      ]
+    },
+    {
+      "source": "/api/ucp",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json; charset=utf-8"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, OPTIONS, HEAD"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization, Accept"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        },
+        {
+          "key": "Vary",
+          "value": "Accept"
+        }
+      ]
+    },
+    {
+      "source": "/api/markdown",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Expose-Headers",
+          "value": "x-markdown-tokens, Content-Type"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        },
+        {
+          "key": "Vary",
+          "value": "Accept"
         }
       ]
     },
@@ -493,6 +568,14 @@
         }
       ],
       "destination": "/api/markdown?path=/:slug.html"
+    },
+    {
+      "source": "/api/payment",
+      "destination": "/api/x402"
+    },
+    {
+      "source": "/api/ucp/shopping",
+      "destination": "/api/ucp"
     },
     {
       "source": "/.well-known/api-catalog",

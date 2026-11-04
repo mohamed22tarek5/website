@@ -1,5 +1,50 @@
 {
-  "protocol_version": "1.0.0",
+  "ucp": {
+    "version": "2026-08-25",
+    "services": {
+      "dev.ucp.shopping": [
+        {
+          "version": "2026-08-25",
+          "spec": "https://ucp.dev/2026-08-25/specification/overview",
+          "transport": "rest",
+          "schema": "https://ucp.dev/2026-08-25/services/shopping/rest.openapi.json",
+          "endpoint": "https://mohamed-tarek-abdelhady.vercel.app/api/ucp"
+        }
+      ],
+      "shopping": {
+        "transport": "rest",
+        "endpoint": "https://mohamed-tarek-abdelhady.vercel.app/api/ucp"
+      }
+    },
+    "capabilities": {
+      "dev.ucp.shopping.checkout": [
+        {
+          "version": "2026-08-25",
+          "spec": "https://ucp.dev/2026-08-25/specification/shopping/checkout",
+          "schema": "https://ucp.dev/2026-08-25/schemas/shopping/checkout.json"
+        }
+      ],
+      "content_access": true,
+      "micropayments": true,
+      "agent_registration": true
+    },
+    "payment_handlers": [
+      {
+        "id": "x402",
+        "name": "x402 HTTP Payment Protocol",
+        "spec": "https://x402.org",
+        "endpoint": "https://mohamed-tarek-abdelhady.vercel.app/api/x402"
+      }
+    ],
+    "endpoints": {
+      "catalog": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/ai-catalog.json",
+      "mcp": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/mcp/server-card.json",
+      "auth": "https://mohamed-tarek-abdelhady.vercel.app/auth.md",
+      "ucp": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/ucp",
+      "x402": "https://mohamed-tarek-abdelhady.vercel.app/api/x402"
+    }
+  },
+  "protocol_version": "2026-08-25",
   "protocol": "ucp",
   "services": [
     {
@@ -25,6 +70,14 @@
     "micropayments": true,
     "agent_registration": true
   },
+  "payment_handlers": [
+    {
+      "id": "x402",
+      "name": "x402 HTTP Payment Protocol",
+      "spec": "https://x402.org",
+      "endpoint": "https://mohamed-tarek-abdelhady.vercel.app/api/x402"
+    }
+  ],
   "endpoints": {
     "catalog": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/ai-catalog.json",
     "mcp": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/mcp/server-card.json",
