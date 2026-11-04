@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   
@@ -1170,21 +1170,37 @@ killall nginx   # Kill all processes named nginx</code></pre>
         searchResults.innerHTML = '';
         const commands = document.querySelectorAll('h3');
         let hasResults = false;
+        function escapeHtml(str) {
+          if (str == null) return '';
+          return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+        }
+        function escapeRegExp(string) {
+          return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
         commands.forEach(command => {
-          const commandText = command.textContent.toLowerCase();
+          const rawText = command.textContent;
+          const commandText = rawText.toLowerCase();
           const commandId = command.id;
           if (commandText.includes(query)) {
             hasResults = true;
             const resultItem = document.createElement('div');
             resultItem.className = 'search-result-item';
             resultItem.setAttribute('role', 'option');
-            const highlightedText = commandText.replace(
-              new RegExp(query, 'gi'),
-              match => `<span class="search-highlight">${match}</span>`
+            const safeQueryRegex = new RegExp(escapeRegExp(query), 'gi');
+            const highlightedText = escapeHtml(rawText).replace(
+              safeQueryRegex,
+              match => `<span class="search-highlight">${escapeHtml(match)}</span>`
             );
             resultItem.innerHTML = highlightedText;
             resultItem.addEventListener('click', () => {
-              document.getElementById(commandId).scrollIntoView({ behavior: 'smooth' });
+              const target = document.getElementById(commandId);
+              if (target) target.scrollIntoView({ behavior: 'smooth' });
               searchResults.style.display = 'none';
               searchInput.value = '';
             });
@@ -1251,8 +1267,17 @@ killall nginx   # Kill all processes named nginx</code></pre>
           'cd Documents': 'Changing to Documents directory...',
           'ls': 'file1.txt  file2.txt  report.pdf'
         };
+        function escapeHtml(str) {
+          if (str == null) return '';
+          return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+        }
         const response = responses[command] || 'Command executed: ' + command;
-        output.innerHTML = '<span class="terminal-prompt">user@linux:~$</span> <span class="terminal-command">' + command + '</span>\n<span class="terminal-output">' + response + '</span>';
+        output.innerHTML = '<span class="terminal-prompt">user@linux:~$</span> <span class="terminal-command">' + escapeHtml(command) + '</span>\n<span class="terminal-output">' + escapeHtml(response) + '</span>';
       };
 
       window.runGrepExample = function (terminalId) {

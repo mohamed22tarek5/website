@@ -1,6 +1,6 @@
-# Mohamed Tarek Abdelhady Portfolio
+﻿# Mohamed Tarek Abdelhady Portfolio
 
-> Communication & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.
+> Communication & Electronics Engineer building integrated hardwareâ€“software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.
 
 Based in Egypt, specializing in custom circuit design, embedded firmware, IoT hardware-software integration, and online engineering calculation tools.
 
@@ -21,12 +21,23 @@ Based in Egypt, specializing in custom circuit design, embedded firmware, IoT ha
 - [Inductance Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/inductance-calculator.html): Air-core coil inductance, inductive reactance, and resonance calculations.
 - [Buck-Boost Converter Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/buck-boost-calculator.html): Design DC-DC switching regulator components, inductor sizing, and duty cycles.
 - [Battery Capacity & Runtime Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/battery-capacity-runtime-calculator.html): Battery life estimator with Peukert's law and discharge efficiencies.
-- [Wire Gauge (AWG) Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/wire-gauge-calculator.html): Current capacity, voltage drop, and conductor resistance for wiring.
-- [Power Factor Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/power-factor-calculator.html): Real, reactive, and apparent power analysis with power triangle calculations.
+- [Battery Solar Sizing Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/battery-solar-calculator.html): Solar panel wattage and battery bank sizing for off-grid IoT deployments.
+- [555 Timer Astable & Monostable Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/555-timer-calculator.html): Pulse width, frequency, and duty cycle calculations for NE555 timers.
+- [Voltage Divider Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/voltage-divider-calculator.html): Resistor divider outputs with loaded and unloaded circuit modeling.
+- [Decibel & dBm RF Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/decibel-dbm-calculator.html): Power and voltage gain in dB, dBm to watts conversion, and cascaded RF stages.
+- [Op-Amp Gain Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/op-amp-gain-calculator.html): Inverting, non-inverting, differential, and summing operational amplifier circuits.
+- [PCB Trace Width Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/pcb-trace-width-calculator.html): IPC-2221 conductor current capacity, temperature rise, and trace width.
+- [Power Factor Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/power-factor-calculator.html): Real, reactive, and apparent power analysis with power factor correction.
+- [Power Triangle Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/power-triangle-calculator.html): Apparent power (kVA), active power (kW), and reactive power (kVAR) trigonometry.
 - [RC Filter & LC Resonance Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/rc-filter-lc-resonance-calculator.html): Cutoff frequencies, resonant frequencies, and bode response estimations.
 - [Transformer Turns Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/transformer-turns-calculator.html): Primary/secondary turns, voltage ratios, and core sizing parameters.
+- [Wire Gauge (AWG) Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/wire-gauge-calculator.html): Current capacity, voltage drop, and conductor resistance for wiring.
+- [Length & Unit Converter](https://mohamed-tarek-abdelhady.vercel.app/sites/length-converter.html): Engineering unit conversion for imperial and metric dimensions.
+- [Electrical Calculation](https://mohamed-tarek-abdelhady.vercel.app/sites/electrical-calculation.html): Comprehensive single-phase and three-phase AC/DC circuit analysis.
 - [LCD Custom Character Generator](https://mohamed-tarek-abdelhady.vercel.app/sites/lcd-custom-character-generator.html): 5x8 pixel bitmap matrix designer generating C/C++ byte arrays for HD44780 displays.
 - [Linux Commands Reference](https://mohamed-tarek-abdelhady.vercel.app/sites/mastering-linux-commands.html): Command-line reference guide for embedded Linux and system administration.
+- [Interactive To-Do List](https://mohamed-tarek-abdelhady.vercel.app/sites/to-do-list.html): Client-side productivity manager with priority tagging and local persistence.
+- [Medication Reminder App](https://mohamed-tarek-abdelhady.vercel.app/sites/medication-reminder.html): Standalone schedule manager with audio alerts and compliance history.
 
 ## APIs & Machine-Readable Catalogs
 - [OpenAPI Specification](https://mohamed-tarek-abdelhady.vercel.app/openapi.json): Machine-readable documentation of portfolio endpoints and tools.

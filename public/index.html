@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
 
@@ -184,10 +184,18 @@
     }
 
     @keyframes orbFloat {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      25% { transform: translate(30px, -30px) scale(1.05); }
-      50% { transform: translate(-20px, 20px) scale(0.95); }
-      75% { transform: translate(20px, 10px) scale(1.02); }
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      25% { transform: translate3d(30px, -30px, 0) scale(1.05); }
+      50% { transform: translate3d(-20px, 20px, 0) scale(0.95); }
+      75% { transform: translate3d(20px, 10px, 0) scale(1.02); }
+    }
+
+    /* Pause animations when hero is off-screen */
+    .hero.is-paused .hero-gradient-orb,
+    .hero.is-paused .hero-image-ring,
+    .hero.is-paused .hero-floating-card,
+    .hero.is-paused .hero-badge .dot {
+      animation-play-state: paused !important;
     }
 
     /* Grid pattern overlay */
@@ -297,58 +305,7 @@
       margin-bottom: var(--space-2xl);
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--space-sm);
-      padding: 14px 28px;
-      font-size: 0.9375rem;
-      font-weight: 600;
-      border-radius: var(--radius-md);
-      transition: all var(--transition-fast);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary {
-      background: var(--color-accent);
-      color: white;
-      box-shadow: 0 2px 12px rgba(59, 130, 246, 0.3);
-    }
-
-    .btn-primary:hover {
-      background: var(--color-accent-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(59, 130, 246, 0.4);
-    }
-
-    .btn-primary:active {
-      transform: translateY(0);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--color-text-primary);
-      border: 1px solid var(--color-border-hover);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--color-accent);
-      color: var(--color-accent);
-      background: var(--color-accent-subtle);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--color-text-secondary);
-      padding: 14px 20px;
-    }
-
-    .btn-ghost:hover {
-      color: var(--color-text-primary);
-      background: var(--color-accent-subtle);
-    }
+    /* Button styles inherited from /common.css */
 
     .hero-social {
       display: flex;
@@ -463,8 +420,8 @@
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(0, -10px, 0); }
     }
 
     @media (max-width: 992px) {
@@ -513,50 +470,7 @@
       }
     }
 
-    /* ============================================
-       SECTION HEADERS
-       ============================================ */
-    .section-header {
-      text-align: center;
-      margin-bottom: var(--space-3xl);
-    }
-
-    .section-label {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-sm);
-      font-family: var(--font-mono);
-      font-size: 0.8125rem;
-      font-weight: 500;
-      color: var(--color-accent);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: var(--space-md);
-    }
-
-    .section-label::before,
-    .section-label::after {
-      content: '';
-      width: 24px;
-      height: 1px;
-      background: var(--color-accent);
-      opacity: 0.4;
-    }
-
-    .section-title {
-      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      margin-bottom: var(--space-md);
-    }
-
-    .section-subtitle {
-      font-size: 1.0625rem;
-      color: var(--color-text-secondary);
-      max-width: 560px;
-      margin: 0 auto;
-    }
+    /* Section header styles inherited from /common.css */
 
     /* ============================================
        ABOUT SECTION
@@ -2026,6 +1940,7 @@
           const heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
               isPaused = !entry.isIntersecting;
+              heroSection.classList.toggle('is-paused', !entry.isIntersecting);
             });
           }, { threshold: 0.1 });
           heroObserver.observe(heroSection);
