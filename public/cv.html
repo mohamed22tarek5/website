@@ -719,17 +719,17 @@
             <h3>Unable to load PDF</h3>
             <p>The CV PDF could not be loaded inline. Please open or download it instead.</p>
             <div class="pdf-error-actions">
-              <a href="public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <a href="/public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                 <i class="fas fa-arrow-up-right-from-square"></i> Open CV
               </a>
-              <a href="public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
+              <a href="/public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="/public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
                 <i class="fas fa-download"></i> Download CV
               </a>
             </div>
             <noscript>
               <p style="margin-top:1rem">
-                <a href="public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer">Open the CV</a>
-                or <a href="public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf">download it</a>.
+                <a href="/public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer">Open the CV</a>
+                or <a href="/public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="/public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf">download it</a>.
               </p>
             </noscript>
           </div>
@@ -742,15 +742,15 @@
           <!-- Native fallback (used only if PDF.js CDN is blocked) -->
           <iframe
             src="about:blank"
-            data-src="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf"
+            data-src="/public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf"
             class="pdf-frame hidden"
             title="Mohamed Tarek Abdelhady's CV PDF Viewer"
             id="pdfViewer"
             loading="lazy"
           >
             <p>Your browser cannot display the embedded PDF.
-              <a href="public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer">Open the CV</a>
-              or <a href="public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf">download it</a>.
+              <a href="/public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer">Open the CV</a>
+              or <a href="/public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="/public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf">download it</a>.
             </p>
           </iframe>
 
@@ -784,10 +784,10 @@
       <div class="container">
         <h2 id="cv-download-heading" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Download CV</h2>
         <div class="download-actions reveal">
-          <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
+          <a href="//public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" download="/public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" class="btn btn-primary">
             <i class="fas fa-download"></i> Download Full CV
           </a>
-          <a href="/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <a href="//public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
             <i class="fas fa-arrow-up-right-from-square"></i> view CV
           </a>
           <button id="printCv" class="btn btn-secondary">
@@ -890,7 +890,7 @@
       const pdfPrev = document.getElementById('pdfPrev');
       const pdfNext = document.getElementById('pdfNext');
       const pdfPageInfo = document.getElementById('pdfPageInfo');
-      const PDF_URL = '/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf';
+      const PDF_URL = '//public/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf';
 
       let pdfDoc = null;
       let pageNum = 1;
