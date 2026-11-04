@@ -1,4 +1,47 @@
+# Dependencies
 node_modules/
+.pnp
+.pnp.js
+
+# Vercel & Hosting
 .vercel/
+.vercel_build_output/
+
+# Environment and secrets (CRITICAL: Never commit credentials)
+.env
 .env*.local
+.env.development
+.env.test
+.env.production
+*.pem
+*.key
+*.cert
+*.crt
+id_rsa*
+secrets.*
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs and runtime diagnostics
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# Backups and temporary files
+*.bak
+*.tmp
+*.temp
+*~

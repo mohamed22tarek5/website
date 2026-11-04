@@ -8,6 +8,10 @@
       "source": "/:path((?!.*\\.pdf$).*)",
       "headers": [
         {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
+        },
+        {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
         },
@@ -55,7 +59,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </Mohamed%20-%20Services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </llms.txt>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
         },
         {
           "key": "Vary",
@@ -72,7 +76,7 @@
       "headers": [
         {
           "key": "Link",
-          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </Mohamed%20-%20Services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
+          "value": "</.well-known/api-catalog>; rel=\"api-catalog\", </.well-known/api-catalog/index.json>; rel=\"api-catalog\", </.well-known/agent-card.json>; rel=\"service-desc\", </.well-known/acp.json>; rel=\"service-desc\", </.well-known/mcp/server-card.json>; rel=\"service-desc\", </services.html>; rel=\"service-doc\", </openapi.json>; rel=\"service-doc\", </.well-known/ai-catalog.json>; rel=\"describedby\", </llms.txt>; rel=\"describedby\", </auth.md>; rel=\"describedby\", </.well-known/oauth-protected-resource>; rel=\"resource-metadata\", </.well-known/agent-skills/index.json>; rel=\"linkset\", </sitemap.xml>; rel=\"sitemap\", </manifest.webmanifest>; rel=\"manifest\", </api/x402>; rel=\"payment\", </.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\""
         },
         {
           "key": "Vary",
@@ -421,6 +425,23 @@
     {
       "source": "/robots.txt",
       "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
         {
           "key": "Cache-Control",
           "value": "public, max-age=86400, stale-while-revalidate=604800"

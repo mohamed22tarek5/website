@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Offline | Mohamed Tarek Abdelhady Portfolio</title>
+  <meta name="description" content="You are currently offline. Cached engineering calculators and portfolio content remain accessible once downloaded.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#0a0e1a">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="/common.css">
+  <style>
+    .offline-hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--space-4xl) var(--space-md);
+    }
+    .offline-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-3xl) var(--space-2xl);
+      max-width: 560px;
+      width: 100%;
+      box-shadow: var(--shadow-xl);
+    }
+    .offline-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto var(--space-xl);
+      background: var(--color-accent-subtle);
+      border: 1px solid var(--color-border-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-accent);
+    }
+    .offline-icon svg {
+      width: 36px;
+      height: 36px;
+      fill: currentColor;
+    }
+    .offline-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: var(--space-sm);
+      color: var(--color-text-primary);
+    }
+    .offline-desc {
+      color: var(--color-text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: var(--space-2xl);
+    }
+    .offline-actions {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <main class="offline-hero">
+    <div class="offline-card">
+      <div class="offline-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M23.64 7c-.45-.34-4.93-3.66-11.64-3.66-6.72 0-11.2 3.33-11.64 3.66l10.93 13.62c.38.48 1.09.48 1.48 0L23.64 7z" opacity="0.3"/>
+          <path d="M3.27 1.44L2 2.72l2.05 2.06C1.98 5.79.45 6.94.36 7l10.93 13.62c.38.48 1.09.48 1.48 0l3.96-4.94 4.54 4.54 1.27-1.27L3.27 1.44zM12 4c5.18 0 8.98 2.07 9.64 2.45L13.78 16.3 5.48 8C7.11 6.55 9.4 4 12 4z"/>
+        </svg>
+      </div>
+      <h1 class="offline-title">You're Offline</h1>
+      <p class="offline-desc">It looks like your internet connection was lost. If you've visited pages or tools before, they may still be cached and ready to use.</p>
+      <div class="offline-actions">
+        <button class="btn btn-primary" onclick="window.location.reload()">
+          <span>Try Again</span>
+        </button>
+        <a href="/" class="btn btn-secondary">
+          <span>Go to Home</span>
+        </a>
+      </div>
+    </div>
+  </main>
+  <script src="/common.js" defer></script>
+</body>
+</html>

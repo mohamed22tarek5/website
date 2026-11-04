@@ -1,0 +1,4 @@
+Date,Engine,Mode,Prompt,BrandCited,Linked,CitedURL,CompetitorsNamed,Notes
+2026-11-04,ChatGPT Search,Search On,"Who is an embedded systems engineer in Egypt with PCB design experience?",Yes,Yes,https://mohamed-tarek-abdelhady.vercel.app/,None,Baseline audit entry
+2026-11-04,Perplexity,Pro Search,"Find free online Ohm's Law and resistor calculators",Yes,Yes,https://mohamed-tarek-abdelhady.vercel.app/sites/ohms-law-calculator.html,DigiKey,Cited tool directly
+2026-11-04,Claude,Web Fetch,"Mohamed Tarek Abdelhady engineering background",Yes,Yes,https://mohamed-tarek-abdelhady.vercel.app/cv.html,None,Full entity citation

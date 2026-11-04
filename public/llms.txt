@@ -1,0 +1,42 @@
+# Mohamed Tarek Abdelhady Portfolio
+
+> Communication & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.
+
+Based in Egypt, specializing in custom circuit design, embedded firmware, IoT hardware-software integration, and online engineering calculation tools.
+
+## Core Pages
+- [About Mohamed Tarek Abdelhady](https://mohamed-tarek-abdelhady.vercel.app/about.html): Background, engineering philosophy, and technical skills overview.
+- [Curriculum Vitae (CV)](https://mohamed-tarek-abdelhady.vercel.app/cv.html): Education, professional timeline, technical proficiencies, and downloadable PDF resume.
+- [Engineering Services](https://mohamed-tarek-abdelhady.vercel.app/services.html): Embedded systems design, schematic & PCB layout, Arduino programming, and IoT product prototyping.
+- [Engineering Projects](https://mohamed-tarek-abdelhady.vercel.app/projects.html): Hardware prototypes, automation systems, smart IoT monitors, and full-stack applications.
+- [Certificates](https://mohamed-tarek-abdelhady.vercel.app/certificates.html): Verified credentials in CCNA, Linux administration, IoT, embedded systems, and electronics.
+- [Online Engineering Tools](https://mohamed-tarek-abdelhady.vercel.app/tools.html): Interactive suite of calculators for electrical, electronics, and embedded systems engineering.
+- [Contact & Profiles](https://mohamed-tarek-abdelhady.vercel.app/social-media.html): Direct contact via email, WhatsApp, LinkedIn, and GitHub.
+
+## Online Engineering Calculators & Tools
+- [Ohm's Law Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/ohms-law-calculator.html): Compute voltage, current, resistance, and electrical power with circuit analysis.
+- [Resistor Color Code Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/resistor-calculator.html): Decode 4-band and 5-band standard resistor color values and tolerances.
+- [LED Current Limiting Resistor Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/resistor-for-led.html): Calculate series resistor values and power dissipation for LED circuits.
+- [Capacitor Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/capacitor-calculator.html): Determine capacitance, RC time constants, reactance, and energy storage.
+- [Inductance Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/inductance-calculator.html): Air-core coil inductance, inductive reactance, and resonance calculations.
+- [Buck-Boost Converter Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/buck-boost-calculator.html): Design DC-DC switching regulator components, inductor sizing, and duty cycles.
+- [Battery Capacity & Runtime Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/battery-capacity-runtime-calculator.html): Battery life estimator with Peukert's law and discharge efficiencies.
+- [Wire Gauge (AWG) Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/wire-gauge-calculator.html): Current capacity, voltage drop, and conductor resistance for wiring.
+- [Power Factor Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/power-factor-calculator.html): Real, reactive, and apparent power analysis with power triangle calculations.
+- [RC Filter & LC Resonance Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/rc-filter-lc-resonance-calculator.html): Cutoff frequencies, resonant frequencies, and bode response estimations.
+- [Transformer Turns Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/transformer-turns-calculator.html): Primary/secondary turns, voltage ratios, and core sizing parameters.
+- [LCD Custom Character Generator](https://mohamed-tarek-abdelhady.vercel.app/sites/lcd-custom-character-generator.html): 5x8 pixel bitmap matrix designer generating C/C++ byte arrays for HD44780 displays.
+- [Linux Commands Reference](https://mohamed-tarek-abdelhady.vercel.app/sites/mastering-linux-commands.html): Command-line reference guide for embedded Linux and system administration.
+
+## APIs & Machine-Readable Catalogs
+- [OpenAPI Specification](https://mohamed-tarek-abdelhady.vercel.app/openapi.json): Machine-readable documentation of portfolio endpoints and tools.
+- [AI Discovery Catalog](https://mohamed-tarek-abdelhady.vercel.app/.well-known/ai-catalog.json): Autonomous agent resource discovery directory.
+- [Agent Card](https://mohamed-tarek-abdelhady.vercel.app/.well-known/agent-card.json): Agent capabilities, skills, and invocation protocols.
+- [OAuth Protected Resource Metadata](https://mohamed-tarek-abdelhady.vercel.app/.well-known/oauth-protected-resource): RFC 9728 metadata for secure agent interaction.
+
+## Verified Profiles
+- LinkedIn: https://www.linkedin.com/in/mohamedtarek225
+- GitHub: https://github.com/mohamed22tarek5
+- Instagram: https://www.instagram.com/_m7md_tarek_/
+- Direct Email: mohammed.tarek.abdelhady.ali@gmail.com
+- Location: Kafr el Sheikh, Egypt

@@ -11,6 +11,9 @@ Sitemap: https://mohamed-tarek-abdelhady.vercel.app/sitemap.xml
 # ARD manifest for agent discovery
 Agentmap: https://mohamed-tarek-abdelhady.vercel.app/.well-known/ai-catalog.json
 
+# LLMs.txt for AI agents and LLM search
+# https://mohamed-tarek-abdelhady.vercel.app/llms.txt
+
 # Content Signals — AI content usage preferences
 Content-Signal: ai-train=no, search=yes, ai-input=no
 
@@ -18,11 +21,27 @@ Content-Signal: ai-train=no, search=yes, ai-input=no
 Disallow: /cache/
 Disallow: /admin/
 
-# AI/ML training blocks
-User-agent: GPTBot
-Disallow: /
+# AI Search & Retrieval Crawlers (Allowed for real-time citations & search)
+User-agent: OAI-SearchBot
+Allow: /
 
 User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI/ML Model Training Crawlers (Blocked — training without attribution prohibited)
+User-agent: GPTBot
 Disallow: /
 
 User-agent: CCBot
@@ -32,9 +51,6 @@ User-agent: Google-Extended
 Disallow: /
 
 User-agent: anthropic-ai
-Disallow: /
-
-User-agent: ClaudeBot
 Disallow: /
 
 # Image-specific rules

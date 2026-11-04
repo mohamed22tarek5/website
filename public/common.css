@@ -917,3 +917,21 @@ section {
     padding-top: max(0px, env(safe-area-inset-top));
   }
 }
+
+
+/* ============================================
+   INLINE SVG ICONS
+   ============================================ */
+.fa-svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  fill: currentColor;
+  overflow: visible;
+}
+.fa-spin {
+  animation: fa-spin 2s linear infinite;
+}
+@keyframes fa-spin {
+  to { transform: rotate(360deg); }
+}
