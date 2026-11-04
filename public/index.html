@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
 
@@ -249,10 +249,22 @@
       50% { opacity: 0.5; transform: scale(0.8); }
     }
 
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
     .hero-title {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 300;
-      line-height: 0.71;
+      font-size: clamp(2rem, 3.8vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.15;
       letter-spacing: -0.03em;
       margin-bottom: var(--space-lg);
     }
@@ -1216,7 +1228,7 @@
           </div>
 
           <h1 class="hero-title reveal reveal-delay-1">
-            <span class="sr-only">Mohamed Tarek Abdelhady — Communication & Embedded Systems Engineer specializing in Arduino, PCB Design & IoT: </span>Building the future<br>
+            <span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Mohamed Tarek Abdelhady — Communication & Embedded Systems Engineer specializing in Arduino, PCB Design & IoT: </span>Building the future<br>
             with <span class="gradient-text">code & circuits</span>
           </h1>
 
