@@ -313,7 +313,7 @@
         <button class="cert-modal-close" id="cert-modal-close" aria-label="Close modal">&times;</button>
       </div>
       <div class="cert-modal-body">
-        <img id="modal-cert-img" src="/photo.jpg" alt="Certificate preview">
+        <img id="modal-cert-img" src="/photo.jpg" alt="Certificate preview" loading="lazy" decoding="async" width="800" height="600">
       </div>
       <div class="cert-modal-footer">
         <a id="modal-cert-download" href="/certificates.html" download class="btn-primary" style="display:inline-flex;align-items:center;gap:var(--space-sm);padding:var(--space-sm) var(--space-lg);background:var(--gradient-accent);color:white;border-radius:var(--radius-full);font-size:0.85rem;font-weight:600;">
@@ -395,75 +395,6 @@
       { id:11, title:"Webinar Participation", description:"Professional development webinar series", category:"internship", issuer:"Summer Internship", image:"Certificates/11.jpg", date:"2023", isRecent:true },
       { id:12, title:"Python & Machine Learning", description:"Python programming with machine learning basics", category:"internship", issuer:"Summer Training", image:"Certificates/12.jpg", date:"2023", isRecent:true }
     ];
-
-    // Loader
-    const loader = document.getElementById('loader');
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        loader.classList.add('hidden');
-        document.body.style.overflow = '';
-      }, 300);
-    });
-
-    // Scroll progress + header + back-to-top (combined & throttled)
-    const scrollProgress = document.getElementById('scroll-progress');
-    const header = document.getElementById('header');
-    const backToTop = document.getElementById('backToTop');
-    let scrollTicking = false;
-
-    const onScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      scrollProgress.style.width = docHeight > 0 ? (scrollTop / docHeight * 100) + '%' : '0%';
-      header.classList.toggle('scrolled', scrollTop > 50);
-      backToTop.classList.toggle('visible', scrollTop > 400);
-      scrollTicking = false;
-    };
-
-    window.addEventListener('scroll', () => {
-      if (!scrollTicking) { requestAnimationFrame(onScroll); scrollTicking = true; }
-    }, { passive: true });
-
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    const menuToggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
-    const mobileOverlay = document.getElementById('mobileOverlay');
-    const toggleMenu = () => {
-      const isActive = navMenu.classList.toggle('active');
-      menuToggle.classList.toggle('active');
-      menuToggle.setAttribute('aria-expanded', String(isActive));
-      mobileOverlay.classList.toggle('active');
-      document.body.style.overflow = isActive ? 'hidden' : '';
-    };
-    menuToggle.addEventListener('click', toggleMenu);
-    mobileOverlay.addEventListener('click', toggleMenu);
-
-    // Scroll handling is consolidated in the combined throttled handler above.
-
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle.querySelector('i');
-    const STORAGE_KEY = 'portfolio-theme';
-
-    const getPreferredTheme = () => {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) return saved;
-      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    };
-
-    const applyTheme = (theme) => {
-      document.documentElement.setAttribute('data-theme', theme);
-      themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-      themeToggle.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-      localStorage.setItem(STORAGE_KEY, theme);
-    };
-
-    applyTheme(getPreferredTheme());
-
-    themeToggle.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      applyTheme(current === 'dark' ? 'light' : 'dark');
-    });
 
     const certsGrid = document.getElementById('certs-grid');
     const searchInput = document.getElementById('cert-search');
@@ -585,25 +516,10 @@
     certModal.addEventListener('click', e => { if (e.target === certModal) closeCertModal(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCertModal(); });
 
-    const revealObserver = 'IntersectionObserver' in window
-      ? new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('revealed');
-              revealObserver.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' })
-      : null;
-
     renderCertificates();
-    document.querySelectorAll('.reveal').forEach(el => {
-      if (revealObserver) revealObserver.observe(el);
-      else el.classList.add('revealed');
-    });
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
   </script>
-  <script src="/pwa.min.js" defer></script>
+  <script src="/common.js" defer></script>
+
 <!-- Vercel Speed Insights -->
 <script>
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };

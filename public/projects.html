@@ -254,7 +254,7 @@
   <div class="modal-overlay" id="modalOverlay" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
     <div class="modal">
       <button class="modal-close" id="modalClose" aria-label="Close modal"><i class="fas fa-xmark"></i></button>
-      <div class="modal-image"><img id="modalImg" src="/photo.jpg" alt="Project preview"></div>
+      <div class="modal-image"><img id="modalImg" src="/photo.jpg" alt="Project preview" loading="lazy" decoding="async" width="800" height="600"></div>
       <div class="modal-body">
         <span class="modal-category" id="modalCategory"></span>
         <h2 id="modalTitle"></h2>
@@ -319,58 +319,6 @@
 
     const categoryLabels = { arduino:'Arduino', web:'Web Dev', pcb:'PCB', electronics:'Electronics', iot:'IoT' };
 
-    // Loader
-    const loader = document.getElementById('loader');
-    window.addEventListener('load', () => setTimeout(() => { loader.classList.add('hidden'); document.body.style.overflow = ''; }, 300));
-
-    // Scroll
-    const scrollProgress = document.getElementById('scrollProgress');
-    const header = document.getElementById('header');
-    const backToTop = document.getElementById('backToTop');
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const scrollTop = window.scrollY;
-          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-          scrollProgress.style.width = docHeight > 0 ? (scrollTop / docHeight) * 100 + '%' : '0%';
-          header.classList.toggle('scrolled', scrollTop > 50);
-          backToTop.classList.toggle('visible', scrollTop > 400);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    // Mobile Menu
-    const menuToggle = document.getElementById('menuToggle');
-    const navMenu = document.getElementById('navMenu');
-    const mobileOverlay = document.getElementById('mobileOverlay');
-    const toggleMenu = () => {
-      const isActive = navMenu.classList.toggle('active');
-      menuToggle.classList.toggle('active');
-      menuToggle.setAttribute('aria-expanded', String(isActive));
-      mobileOverlay.classList.toggle('active');
-      document.body.style.overflow = isActive ? 'hidden' : '';
-    };
-    menuToggle.addEventListener('click', toggleMenu);
-    mobileOverlay.addEventListener('click', toggleMenu);
-    document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => { if (navMenu.classList.contains('active')) toggleMenu(); }));
-
-    // Theme
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle.querySelector('i');
-    const STORAGE_KEY = 'portfolio-theme';
-    const getPreferredTheme = () => localStorage.getItem(STORAGE_KEY) || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-    const applyTheme = (t) => { document.documentElement.setAttribute('data-theme', t); themeIcon.className = t === 'dark' ? 'fas fa-moon' : 'fas fa-sun'; localStorage.setItem(STORAGE_KEY, t); };
-    applyTheme(getPreferredTheme());
-    themeToggle.addEventListener('click', () => applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
-
-    // Reveal
-    const revealObserver = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); revealObserver.unobserve(e.target); } }); }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
     // Projects
     const projectsGrid = document.getElementById('projectsGrid');
     const projectCount = document.getElementById('projectCount');
@@ -400,7 +348,7 @@
 
         card.innerHTML = `
           <div class="project-image">
-            <img src="${project.image}" alt="${project.title}" loading="lazy" onerror="this.style.display='none'">
+            <img src="${project.image}" alt="${project.title}" loading="lazy" decoding="async" width="400" height="250" onerror="this.style.display='none'">
             <div class="project-image-overlay">
               <div class="overlay-actions">
                 <button class="overlay-btn view-details" data-project="${project.id}"><i class="fas fa-expand"></i> Details</button>
@@ -476,11 +424,9 @@
     modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal(); });
 
-    // Footer
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
-  })();
+    })();
   </script>
-  <script src="/pwa.min.js" defer></script>
+  <script src="/common.js" defer></script>
 <!-- Vercel Speed Insights -->
 <script>
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };

@@ -957,120 +957,6 @@
       'use strict';
 
       /* ----------------------------------------
-         LOADING SCREEN
-         ---------------------------------------- */
-      const loader = document.getElementById('loader');
-      window.addEventListener('load', () => {
-        setTimeout(() => {
-          loader.classList.add('hidden');
-          document.body.style.overflow = '';
-        }, 300);
-      });
-
-      /* ----------------------------------------
-         SCROLL PROGRESS
-         ---------------------------------------- */
-      const scrollProgress = document.getElementById('scrollProgress');
-      const updateScrollProgress = () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        scrollProgress.style.width = docHeight > 0 ? (scrollTop / docHeight) * 100 + '%' : '0%';
-      };
-
-      /* ----------------------------------------
-         HEADER
-         ---------------------------------------- */
-      const header = document.getElementById('header');
-      const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 50);
-
-      /* ----------------------------------------
-         BACK TO TOP
-         ---------------------------------------- */
-      const backToTop = document.getElementById('backToTop');
-      const updateBackToTop = () => backToTop.classList.toggle('visible', window.scrollY > 400);
-      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-      /* ----------------------------------------
-         SCROLL EVENT
-         ---------------------------------------- */
-      let ticking = false;
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            updateScrollProgress();
-            updateHeader();
-            updateBackToTop();
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }, { passive: true });
-
-      /* ----------------------------------------
-         MOBILE MENU
-         ---------------------------------------- */
-      const menuToggle = document.getElementById('menuToggle');
-      const navMenu = document.getElementById('navMenu');
-      const mobileOverlay = document.getElementById('mobileOverlay');
-
-      const toggleMenu = () => {
-        const isActive = navMenu.classList.toggle('active');
-        menuToggle.classList.toggle('active');
-        menuToggle.setAttribute('aria-expanded', String(isActive));
-        mobileOverlay.classList.toggle('active');
-        document.body.style.overflow = isActive ? 'hidden' : '';
-      };
-
-      menuToggle.addEventListener('click', toggleMenu);
-      mobileOverlay.addEventListener('click', toggleMenu);
-
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          if (navMenu.classList.contains('active')) toggleMenu();
-        });
-      });
-
-      /* ----------------------------------------
-         THEME TOGGLE
-         ---------------------------------------- */
-      const themeToggle = document.getElementById('themeToggle');
-      const themeIcon = themeToggle.querySelector('i');
-      const STORAGE_KEY = 'portfolio-theme';
-
-      const getPreferredTheme = () => {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) return saved;
-        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-      };
-
-      const applyTheme = (theme) => {
-        document.documentElement.setAttribute('data-theme', theme);
-        themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-        localStorage.setItem(STORAGE_KEY, theme);
-      };
-
-      applyTheme(getPreferredTheme());
-
-      themeToggle.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme');
-        applyTheme(current === 'dark' ? 'light' : 'dark');
-      });
-
-      /* ----------------------------------------
-         SCROLL REVEAL
-         ---------------------------------------- */
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
-
-      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-      /* ----------------------------------------
          SEARCH & FILTER
          ---------------------------------------- */
       const searchInput = document.getElementById('searchInput');
@@ -1131,14 +1017,9 @@
         });
       });
 
-      /* ----------------------------------------
-         FOOTER YEAR
-         ---------------------------------------- */
-      document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-    })();
+      })();
   </script>
-  <script src="/pwa.min.js" defer></script>
+  <script src="/common.js" defer></script>
 <!-- Vercel Speed Insights -->
 <script>
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
