@@ -3,6 +3,7 @@
 Communication & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.
 
 Live site: https://mohamed-tarek-abdelhady.vercel.app/
+Mirrors: https://website-mohamed.vercel.app/ | https://eng-mta.netlify.app/
 
 ## Pages
 

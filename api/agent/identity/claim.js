@@ -65,14 +65,16 @@ export default async function handler(req, res) {
   }
 
   // Validate resource — accept the domain the agent actually called,
-  // and always accept the primary canonical domain.
+  // as well as the primary canonical domain and secondary mirrors.
   const fwdHost = req.headers['x-forwarded-host'];
   const host = (Array.isArray(fwdHost) ? fwdHost[0] : fwdHost) ||
     req.headers.host ||
     'mohamed-tarek-abdelhady.vercel.app';
   const allowedResources = new Set([
     `https://${host}`,
-    'https://mohamed-tarek-abdelhady.vercel.app'
+    'https://mohamed-tarek-abdelhady.vercel.app',
+    'https://website-mohamed.vercel.app',
+    'https://eng-mta.netlify.app'
   ]);
   if (!allowedResources.has(resource)) {
     return badRequest('Invalid resource');

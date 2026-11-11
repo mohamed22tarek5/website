@@ -4,9 +4,9 @@
  * /.well-known/openid-configuration via rewrites in vercel.json.
  *
  * Host-aware: issuer and all endpoint URLs are derived from the request
- * host (defaulting to mohamed-tarek-abdelhady.vercel.app) so deployments
- * validate consistently. Static JSON files remain as fallbacks with
- * primary-canonical URLs.
+ * host so primary (mohamed-tarek-abdelhady.vercel.app) and secondary
+ * domains (website-mohamed.vercel.app, eng-mta.netlify.app) validate
+ * consistently. Static JSON files remain as fallbacks with primary-canonical URLs.
  */
 
 const PRIMARY_HOST = 'mohamed-tarek-abdelhady.vercel.app';

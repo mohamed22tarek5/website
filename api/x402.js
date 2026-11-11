@@ -11,8 +11,9 @@ const RECEIVER_WALLET = '0x0000000000000000000000000000000000000000';
 const NETWORK = 'eip155:84532';
 const PRIMARY_HOST = 'mohamed-tarek-abdelhady.vercel.app';
 
-// Derive resource base from the request host so payment requirements always
-// reference the domain called (defaulting to PRIMARY_HOST).
+// All production domains (primary + secondary mirrors website-mohamed.vercel.app
+// and eng-mta.netlify.app) serve this site. Derive resource base from the request
+// host so payment requirements always reference the domain called.
 function baseUrl(req) {
   const fwd = req && req.headers && req.headers['x-forwarded-host'];
   const host = (Array.isArray(fwd) ? fwd[0] : fwd) ||

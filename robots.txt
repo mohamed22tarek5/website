@@ -1,6 +1,8 @@
 # robots.txt
 # Mohamed Tarek Abdelhady — Communication Engineer
 # Primary (canonical): https://mohamed-tarek-abdelhady.vercel.app
+# Secondary (same deployment): https://website-mohamed.vercel.app
+# Secondary (Netlify mirror): https://eng-mta.netlify.app
 
 User-agent: *
 Allow: /

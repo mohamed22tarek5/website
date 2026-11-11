@@ -47,6 +47,7 @@ export default async (req) => {
   const allowedResources = new Set([
     `https://${host}`,
     'https://mohamed-tarek-abdelhady.vercel.app',
+    'https://website-mohamed.vercel.app',
     'https://eng-mta.netlify.app',
   ]);
   if (!allowedResources.has(resource)) {

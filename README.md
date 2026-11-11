@@ -5,6 +5,7 @@
 **Communication & Electronics Engineer — Hardware + Software + Web**
 
 Live Site (primary): [mohamed-tarek-abdelhady.vercel.app](https://mohamed-tarek-abdelhady.vercel.app/)  
+Mirror (same deployment): [website-mohamed.vercel.app](https://website-mohamed.vercel.app/)  
 Mirror (Netlify): [eng-mta.netlify.app](https://eng-mta.netlify.app/) — note: `*.netlify.app` currently times out from some Egyptian ISPs (TE AS8452); use Vercel in EG or VPN.
 
 Static HTML + Vercel + Netlify. PWA-enabled portfolio, engineering calculators, and agent-ready API.
