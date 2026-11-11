@@ -318,11 +318,6 @@
   to = "/.netlify/functions/agent-identity"
   status = 200
 
-# --- SEO URL migration (old -> new, permanent) ---
-# NOTE: Secondary Vercel host website-mohamed.vercel.app → primary
-# mohamed-tarek-abdelhady.vercel.app is enforced via vercel.json host-based
-# 301 + self-referencing canonicals. Netlify never serves the secondary
-# Vercel host, so no Netlify host redirect is required here.
 # --- WWW canonicalization (www -> apex, permanent) ---
 # Canonical choice: apex (non-www). All www variants 301 to apex to
 # consolidate PageRank. Netlify supports absolute-URL `from` with a host.
@@ -365,18 +360,7 @@
   status = 301
   force = true
 
-[[redirects]]
-  from = "https://www.website-mohamed.vercel.app/*"
-  to = "https://mohamed-tarek-abdelhady.vercel.app/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "http://www.website-mohamed.vercel.app/*"
-  to = "https://mohamed-tarek-abdelhady.vercel.app/:splat"
-  status = 301
-  force = true
-
+# --- SEO URL migration (old -> new, permanent) ---
 [[redirects]]
   from = "/Mohamed - CV.html"
   to = "/cv.html"

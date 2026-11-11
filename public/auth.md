@@ -4,7 +4,7 @@ You are an agent. This service supports **agentic registration**: discover → r
 
 This service is `https://mohamed-tarek-abdelhady.vercel.app` (resource server) and `https://mohamed-tarek-abdelhady.vercel.app` (authorization server). All content is publicly accessible — no authentication required.
 
-Both production domains serve this same deployment and are valid: `https://mohamed-tarek-abdelhady.vercel.app` (primary, canonical) and `https://website-mohamed.vercel.app`. Token `resource`/`aud` values always match the host you called.
+The canonical production domain is `https://mohamed-tarek-abdelhady.vercel.app`. Token `resource`/`aud` values always match the host you called.
 
 ## Step 1 — Discover
 

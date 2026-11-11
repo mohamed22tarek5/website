@@ -2,7 +2,6 @@
 
 **Entity:** Mohamed Tarek Abdelhady  
 **Primary Canonical URL:** https://mohamed-tarek-abdelhady.vercel.app  
-**Secondary Domain:** https://website-mohamed.vercel.app  
 **One-Liner:** Communication & Electronics Engineer building integrated hardware–software solutions with Arduino, embedded systems, PCB design, and full-stack web technologies.
 
 ---

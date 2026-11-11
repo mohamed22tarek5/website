@@ -61,9 +61,8 @@ export default async function handler(req, res) {
   const registrationId = `reg_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
   const assertionExpiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString();
 
-  // Derive issuer/audience from the request host so assertions validate
-  // on both production domains (mohamed-tarek-abdelhady.vercel.app and
-  // website-mohamed.vercel.app), which serve this same deployment.
+  // Derive issuer/audience from the request host (defaulting to
+  // mohamed-tarek-abdelhady.vercel.app) so assertions validate consistently.
   const fwdHost = req.headers['x-forwarded-host'];
   const host = (Array.isArray(fwdHost) ? fwdHost[0] : fwdHost) ||
     req.headers.host ||

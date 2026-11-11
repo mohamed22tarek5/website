@@ -64,17 +64,15 @@ export default async function handler(req, res) {
     return badRequest('assertion is required');
   }
 
-  // Validate resource — accept the domain the agent actually called.
-  // Both production domains serve this same deployment; the primary
-  // canonical domain is always accepted as well.
+  // Validate resource — accept the domain the agent actually called,
+  // and always accept the primary canonical domain.
   const fwdHost = req.headers['x-forwarded-host'];
   const host = (Array.isArray(fwdHost) ? fwdHost[0] : fwdHost) ||
     req.headers.host ||
     'mohamed-tarek-abdelhady.vercel.app';
   const allowedResources = new Set([
     `https://${host}`,
-    'https://mohamed-tarek-abdelhady.vercel.app',
-    'https://website-mohamed.vercel.app'
+    'https://mohamed-tarek-abdelhady.vercel.app'
   ]);
   if (!allowedResources.has(resource)) {
     return badRequest('Invalid resource');
