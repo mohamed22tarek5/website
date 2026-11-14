@@ -588,13 +588,13 @@
               <div class="input-group">
                 <label>Days of the Week</label>
                 <div class="days-selector" role="group" aria-label="Select days">
-                  <label class="day-checkbox"><input type="checkbox" name="days" value="0"> Sun</label>
-                  <label class="day-checkbox"><input type="checkbox" name="days" value="1"> Mon</label>
-                  <label class="day-checkbox"><input type="checkbox" name="days" value="2"> Tue</label>
-                  <label class="day-checkbox"><input type="checkbox" name="days" value="3"> Wed</label>
-                  <label class="day-checkbox"><input type="checkbox" name="days" value="4"> Thu</label>
-                  <label class="day-checkbox"><input type="checkbox" name="days" value="5"> Fri</label>
-                  <label class="day-checkbox"><input type="checkbox" name="days" value="6"> Sat</label>
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="0" aria-label="Sunday"> Sun</label>
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="1" aria-label="Monday"> Mon</label>
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="2" aria-label="Tuesday"> Tue</label>
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="3" aria-label="Wednesday"> Wed</label>
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="4" aria-label="Thursday"> Thu</label>
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="5" aria-label="Friday"> Fri</label>
+                  <label class="day-checkbox"><input type="checkbox" name="days" value="6" aria-label="Saturday"> Sat</label>
                 </div>
               </div>
               <div class="input-group">
@@ -636,8 +636,8 @@
                 <input type="number" id="reminderBefore" class="input-field" value="5" min="0" max="60" aria-label="Reminder before minutes">
               </div>
               <div class="input-group">
-                <label class="day-checkbox" style="cursor:pointer;">
-                  <input type="checkbox" id="enableNotifications" checked> Enable Browser Notifications
+                <label class="day-checkbox" for="enableNotifications" style="cursor:pointer;">
+                  <input type="checkbox" id="enableNotifications" checked aria-label="Enable Browser Notifications"> Enable Browser Notifications
                 </label>
               </div>
               <div class="btn-group">
@@ -919,17 +919,17 @@
           reminderItem.innerHTML =
             '<div class="reminder-header">' +
               '<div style="flex:1;">' +
-                '<div class="reminder-name">' + medication.name + '</div>' +
-                (medication.dosage ? '<div class="medication-details">Dosage: ' + medication.dosage + '</div>' : '') +
-                '<div class="reminder-time"><i class="far fa-clock"></i> ' + medication.time + '</div>' +
-                '<div class="medication-details">Frequency: ' + medication.frequency + ' &bull; ' + dayDisplay + '</div>' +
-                (medication.instructions ? '<div class="medication-details">Instructions: ' + medication.instructions + '</div>' : '') +
-                '<div style="margin-top:var(--space-sm);">Next dose in: <span class="remaining-time" id="remainingTime' + medication.id + '">' + formatRemainingTime(remainingTime) + '</span></div>' +
+                '<div class="reminder-name">' + escapeHtml(medication.name) + '</div>' +
+                (medication.dosage ? '<div class="medication-details">Dosage: ' + escapeHtml(medication.dosage) + '</div>' : '') +
+                '<div class="reminder-time"><i class="far fa-clock"></i> ' + escapeHtml(medication.time) + '</div>' +
+                '<div class="medication-details">Frequency: ' + escapeHtml(medication.frequency) + ' &bull; ' + escapeHtml(dayDisplay) + '</div>' +
+                (medication.instructions ? '<div class="medication-details">Instructions: ' + escapeHtml(medication.instructions) + '</div>' : '') +
+                '<div style="margin-top:var(--space-sm);">Next dose in: <span class="remaining-time" id="remainingTime' + parseInt(medication.id, 10) + '">' + formatRemainingTime(remainingTime) + '</span></div>' +
               '</div>' +
             '</div>' +
             '<div class="medication-actions">' +
-              '<button onclick="markAsTaken(' + medication.id + ')" class="btn btn-success" aria-label="Mark as taken"><i class="fas fa-check"></i> Mark as Taken</button>' +
-              '<button onclick="removeMedication(' + medication.id + ')" class="btn btn-danger" aria-label="Remove medication"><i class="fas fa-trash"></i> Remove</button>' +
+              '<button onclick="markAsTaken(' + parseInt(medication.id, 10) + ')" class="btn btn-success" aria-label="Mark as taken"><i class="fas fa-check"></i> Mark as Taken</button>' +
+              '<button onclick="removeMedication(' + parseInt(medication.id, 10) + ')" class="btn btn-danger" aria-label="Remove medication"><i class="fas fa-trash"></i> Remove</button>' +
             '</div>';
 
           remindersContainer.appendChild(reminderItem);
@@ -1048,11 +1048,11 @@
 
           historyItem.innerHTML =
             '<div style="flex:1;">' +
-              '<strong style="color:var(--color-text-primary);">' + item.medicationName + '</strong>' +
-              (item.dosage ? '<div class="medication-details">' + item.dosage + '</div>' : '') +
-              '<div class="medication-details">Taken at: ' + formattedDate + '</div>' +
+              '<strong style="color:var(--color-text-primary);">' + escapeHtml(item.medicationName) + '</strong>' +
+              (item.dosage ? '<div class="medication-details">' + escapeHtml(item.dosage) + '</div>' : '') +
+              '<div class="medication-details">Taken at: ' + escapeHtml(formattedDate) + '</div>' +
             '</div>' +
-            '<span class="history-status ' + item.status + '">' + (item.status === 'taken' ? 'Taken' : 'Missed') + '</span>';
+            '<span class="history-status ' + (item.status === 'taken' ? 'taken' : 'missed') + '">' + (item.status === 'taken' ? 'Taken' : 'Missed') + '</span>';
 
           historyContainer.appendChild(historyItem);
         });

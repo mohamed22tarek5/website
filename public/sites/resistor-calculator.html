@@ -810,18 +810,18 @@
 
                   <div id="series-resistors" class="resistors-container">
                     <div class="resistor-input">
-                      <label>R1:</label>
-                      <input type="number" min="0" step="0.01" value="100">
-                      <select class="unit-selector">
+                      <label for="series-r1">R1:</label>
+                      <input type="number" id="series-r1" min="0" step="0.01" value="100" aria-label="Series resistor R1 value">
+                      <select class="unit-selector" aria-label="Series resistor R1 unit">
                         <option value="1">&#937;</option>
                         <option value="1000" selected>k&#937;</option>
                         <option value="1000000">M&#937;</option>
                       </select>
                     </div>
                     <div class="resistor-input">
-                      <label>R2:</label>
-                      <input type="number" min="0" step="0.01" value="220">
-                      <select class="unit-selector">
+                      <label for="series-r2">R2:</label>
+                      <input type="number" id="series-r2" min="0" step="0.01" value="220" aria-label="Series resistor R2 value">
+                      <select class="unit-selector" aria-label="Series resistor R2 unit">
                         <option value="1">&#937;</option>
                         <option value="1000" selected>k&#937;</option>
                         <option value="1000000">M&#937;</option>
@@ -888,18 +888,18 @@
 
                   <div id="parallel-resistors" class="resistors-container">
                     <div class="resistor-input">
-                      <label>R1:</label>
-                      <input type="number" min="0" step="0.01" value="100">
-                      <select class="unit-selector">
+                      <label for="parallel-r1">R1:</label>
+                      <input type="number" id="parallel-r1" min="0" step="0.01" value="100" aria-label="Parallel resistor R1 value">
+                      <select class="unit-selector" aria-label="Parallel resistor R1 unit">
                         <option value="1">&#937;</option>
                         <option value="1000" selected>k&#937;</option>
                         <option value="1000000">M&#937;</option>
                       </select>
                     </div>
                     <div class="resistor-input">
-                      <label>R2:</label>
-                      <input type="number" min="0" step="0.01" value="220">
-                      <select class="unit-selector">
+                      <label for="parallel-r2">R2:</label>
+                      <input type="number" id="parallel-r2" min="0" step="0.01" value="220" aria-label="Parallel resistor R2 value">
+                      <select class="unit-selector" aria-label="Parallel resistor R2 unit">
                         <option value="1">&#937;</option>
                         <option value="1000" selected>k&#937;</option>
                         <option value="1000000">M&#937;</option>
@@ -1443,10 +1443,11 @@
 
         const resistorInput = document.createElement('div');
         resistorInput.className = 'resistor-input';
+        const rId = type + '-r' + count;
         resistorInput.innerHTML =
-          '<label>R' + count + ':</label>' +
-          '<input type="number" min="0" step="0.01" value="100">' +
-          '<select class="unit-selector">' +
+          '<label for="' + rId + '">R' + count + ':</label>' +
+          '<input type="number" id="' + rId + '" min="0" step="0.01" value="100" aria-label="' + type + ' resistor R' + count + ' value">' +
+          '<select class="unit-selector" aria-label="' + type + ' resistor R' + count + ' unit">' +
             '<option value="1">&#937;</option>' +
             '<option value="1000" selected>k&#937;</option>' +
             '<option value="1000000">M&#937;</option>' +

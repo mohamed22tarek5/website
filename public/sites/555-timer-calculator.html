@@ -65,18 +65,18 @@
     <div class="card">
       <h2><i class="fas fa-sliders"></i> Inputs</h2>
       <div id="ast">
-        <div class="row"><input id="r1" type="number" value="10" step="any" min="0"><select id="r1u"><option value="1e3" selected>kΩ</option><option value="1">Ω</option><option value="1e6">MΩ</option></select></div>
-        <label class="lbl">R1 (charge resistor)</label>
-        <div class="row"><input id="r2" type="number" value="10" step="any" min="0"><select id="r2u"><option value="1e3" selected>kΩ</option><option value="1">Ω</option><option value="1e6">MΩ</option></select></div>
-        <label class="lbl">R2 (discharge resistor)</label>
-        <div class="row"><input id="cap" type="number" value="10" step="any" min="0"><select id="capu"><option value="1e-6" selected>µF</option><option value="1e-9">nF</option><option value="1e-12">pF</option><option value="1e-3">mF</option></select></div>
-        <label class="lbl">C1 timing capacitor</label>
+        <label class="lbl" for="r1">R1 (charge resistor)</label>
+        <div class="row"><input id="r1" type="number" value="10" step="any" min="0" aria-label="R1 charge resistance value"><select id="r1u" aria-label="R1 resistance unit"><option value="1e3" selected>kΩ</option><option value="1">Ω</option><option value="1e6">MΩ</option></select></div>
+        <label class="lbl" for="r2">R2 (discharge resistor)</label>
+        <div class="row"><input id="r2" type="number" value="10" step="any" min="0" aria-label="R2 discharge resistance value"><select id="r2u" aria-label="R2 resistance unit"><option value="1e3" selected>kΩ</option><option value="1">Ω</option><option value="1e6">MΩ</option></select></div>
+        <label class="lbl" for="cap">C1 timing capacitor</label>
+        <div class="row"><input id="cap" type="number" value="10" step="any" min="0" aria-label="C1 timing capacitance value"><select id="capu" aria-label="C1 capacitance unit"><option value="1e-6" selected>µF</option><option value="1e-9">nF</option><option value="1e-12">pF</option><option value="1e-3">mF</option></select></div>
       </div>
       <div id="mon" style="display:none">
-        <div class="row"><input id="rm" type="number" value="10" step="any" min="0"><select id="rmu"><option value="1e3" selected>kΩ</option><option value="1">Ω</option><option value="1e6">MΩ</option></select></div>
-        <label class="lbl">R timing resistor</label>
-        <div class="row"><input id="cm" type="number" value="10" step="any" min="0"><select id="cmu"><option value="1e-6" selected>µF</option><option value="1e-9">nF</option><option value="1e-12">pF</option></select></div>
-        <label class="lbl">C timing capacitor</label>
+        <label class="lbl" for="rm">R timing resistor</label>
+        <div class="row"><input id="rm" type="number" value="10" step="any" min="0" aria-label="R timing resistance value"><select id="rmu" aria-label="R resistance unit"><option value="1e3" selected>kΩ</option><option value="1">Ω</option><option value="1e6">MΩ</option></select></div>
+        <label class="lbl" for="cm">C timing capacitor</label>
+        <div class="row"><input id="cm" type="number" value="10" step="any" min="0" aria-label="C timing capacitance value"><select id="cmu" aria-label="C capacitance unit"><option value="1e-6" selected>µF</option><option value="1e-9">nF</option><option value="1e-12">pF</option></select></div>
       </div>
       <button class="btn" id="go"><i class="fas fa-bolt"></i> Calculate</button>
       <div class="formula" id="fml">f = 1.44 / ((R1+2·R2)·C)</div>

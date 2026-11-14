@@ -57,22 +57,24 @@
   <div class="hero"><span class="pill">RF · Audio · Comms</span><h1>dB / dBm Calculator</h1><p>Ratios → dB, dBm ⇄ Watt / mW / Vrms, and multi-stage cascade gain. Power uses 10·log, voltage uses 20·log.</p></div>
   <div class="grid">
     <div class="card"><h2><i class="fas fa-scale-balanced"></i> Ratio → dB</h2><div class="sub">P2/P1 (power) or V2/V1 (same-Z voltage)</div>
-      <label class="lbl">P2 (out)</label><input id="p2" type="number" value="2" step="any"><label class="lbl">P1 (in)</label><input id="p1" type="number" value="1" step="any">
+      <label class="lbl" for="p2">P2 (out)</label><input id="p2" type="number" value="2" step="any" aria-label="Output power P2">
+      <label class="lbl" for="p1">P1 (in)</label><input id="p1" type="number" value="1" step="any" aria-label="Input power P1">
       <div class="out" id="oA">–</div>
-      <label class="lbl">V2 (out)</label><input id="v2" type="number" value="2" step="any"><label class="lbl">V1 (in)</label><input id="v1" type="number" value="1" step="any">
+      <label class="lbl" for="v2">V2 (out)</label><input id="v2" type="number" value="2" step="any" aria-label="Output voltage V2">
+      <label class="lbl" for="v1">V1 (in)</label><input id="v1" type="number" value="1" step="any" aria-label="Input voltage V1">
       <div class="out" id="oAv">–</div>
     </div>
     <div class="card"><h2><i class="fas fa-bolt"></i> dBm ⇄ Power</h2><div class="sub">0 dBm = 1 mW · dBm = 10·log(P/1mW)</div>
-      <label class="lbl">Power (dBm)</label><input id="dbm" type="number" value="20" step="any">
+      <label class="lbl" for="dbm">Power (dBm)</label><input id="dbm" type="number" value="20" step="any" aria-label="Power in decibel-milliwatts">
       <div class="out" id="oB">–</div>
-      <label class="lbl">Impedance for Vrms (Ω)</label><select id="zbm"><option value="50" selected>50 Ω (RF)</option><option value="75">75 Ω (video)</option><option value="600">600 Ω (audio)</option><option value="8">8 Ω (speaker)</option></select>
+      <label class="lbl" for="zbm">Impedance for Vrms (Ω)</label><select id="zbm" aria-label="Circuit impedance in ohms"><option value="50" selected>50 Ω (RF)</option><option value="75">75 Ω (video)</option><option value="600">600 Ω (audio)</option><option value="8">8 Ω (speaker)</option></select>
       <div class="note">Also: 30 dBm = 1 W · 0 dBW = 30 dBm · dBW = dBm − 30.</div>
-      <label class="lbl">Power in Watt → dBm</label><input id="watt" type="number" value="0.1" step="any">
+      <label class="lbl" for="watt">Power in Watt → dBm</label><input id="watt" type="number" value="0.1" step="any" aria-label="Power in watts">
       <div class="out" id="oB2">–</div>
     </div>
     <div class="card"><h2><i class="fas fa-layer-group"></i> Cascade gain</h2><div class="sub">Stages add in dB: G = Σgᵢ</div>
-      <label class="lbl">Input power (dBm)</label><input id="cin" type="number" value="-10" step="any">
-      <label class="lbl">Stage gains/losses, comma separated (dB)</label><input id="stages" type="text" value="20, -3, 15" inputmode="text">
+      <label class="lbl" for="cin">Input power (dBm)</label><input id="cin" type="number" value="-10" step="any" aria-label="Cascade input power in decibel-milliwatts">
+      <label class="lbl" for="stages">Stage gains/losses, comma separated (dB)</label><input id="stages" type="text" value="20, -3, 15" inputmode="text" aria-label="Stage gains and losses in decibels separated by comma">
       <div class="out" id="oC">–</div>
       <div class="note">Example: LNA +20dB, cable −3dB, PA +15dB → +32dB total.</div>
     </div>

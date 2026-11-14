@@ -84,15 +84,15 @@
         <button data-m="r1">Find R1</button>
         <button data-m="r2">Find R2</button>
       </div>
-      <label class="lbl">Input voltage Vin (V)</label>
-      <input id="vin" type="number" value="12" step="any" min="0">
+      <label class="lbl" for="vin">Input voltage Vin (V)</label>
+      <input id="vin" type="number" value="12" step="any" min="0" aria-label="Input voltage Vin in volts">
       <div class="row3">
-        <div><label class="lbl">R1 (Ω)</label><input id="r1" type="number" value="10000" step="any" min="0"></div>
-        <div><label class="lbl">R2 (Ω)</label><input id="r2" type="number" value="5000" step="any" min="0"></div>
-        <div><label class="lbl">Vout (V)</label><input id="vout" type="number" value="4" step="any" min="0" disabled></div>
+        <div><label class="lbl" for="r1">R1 (Ω)</label><input id="r1" type="number" value="10000" step="any" min="0" aria-label="Upper resistor R1 in ohms"></div>
+        <div><label class="lbl" for="r2">R2 (Ω)</label><input id="r2" type="number" value="5000" step="any" min="0" aria-label="Lower resistor R2 in ohms"></div>
+        <div><label class="lbl" for="vout">Vout (V)</label><input id="vout" type="number" value="4" step="any" min="0" disabled aria-label="Output voltage Vout in volts"></div>
       </div>
-      <label class="lbl">Optional load RL across R2 (Ω, blank = no load)</label>
-      <input id="rl" type="number" placeholder="e.g. 10000" step="any" min="0">
+      <label class="lbl" for="rl">Optional load RL across R2 (Ω, blank = no load)</label>
+      <input id="rl" type="number" placeholder="e.g. 10000" step="any" min="0" aria-label="Optional load resistance RL in ohms">
       <button class="btn" id="go"><i class="fas fa-bolt"></i> Calculate</button>
       <div class="formula">Unloaded: Vout = Vin·R₂/(R₁+R₂) &nbsp;·&nbsp; Loaded: R₂′ = R₂‖R<sub>L</sub></div>
     </div>

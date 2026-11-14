@@ -7,7 +7,7 @@
  */
 
 import { readFileSync, existsSync } from 'fs';
-import { join } from 'path';
+import { join, resolve } from 'path';
 
 /* Self-contained HTML->Markdown converter */
 function htmlToMarkdown(html) {
@@ -145,6 +145,9 @@ function normalizePath(raw) {
   } catch {
     // keep as-is
   }
+  // Sanitize path traversal sequences
+  p = p.replace(/\.\./g, '').replace(/[\\]/g, '/');
+  p = p.replace(/[^a-zA-Z0-9_\-\.\/]/g, '');
   if (!p.startsWith('/')) p = '/' + p;
   if (p === '/' || p === '/index' || p === '/index.html' || p === '/index.md') {
     return '/index';
@@ -209,16 +212,17 @@ export default function handler(req, res) {
   }
 
   const normalized = normalizePath(rawPath);
-  const publicDir = join(process.cwd(), 'public');
+  const publicDir = resolve(process.cwd(), 'public');
+  const safeRel = normalized.replace(/^\/+/, '');
 
   // 1) Try pre-generated markdown in public/<normalized>.md
   const mdCandidates = [
-    join(publicDir, `${normalized}.md`),
-    join(publicDir, `${normalized}.MD`),
-    join(process.cwd(), `${normalized}.md`)
+    resolve(publicDir, `${safeRel}.md`),
+    resolve(publicDir, `${safeRel}.MD`)
   ];
 
   for (const mdPath of mdCandidates) {
+    if (!mdPath.startsWith(publicDir)) continue;
     if (existsSync(mdPath)) {
       try {
         const content = readFileSync(mdPath, 'utf-8');
@@ -233,12 +237,12 @@ export default function handler(req, res) {
 
   // 2) Try converting HTML in public/<normalized>.html
   const htmlCandidates = [
-    join(publicDir, `${normalized}.html`),
-    join(publicDir, `${normalized}.HTML`),
-    join(process.cwd(), `${normalized}.html`)
+    resolve(publicDir, `${safeRel}.html`),
+    resolve(publicDir, `${safeRel}.HTML`)
   ];
 
   for (const htmlPath of htmlCandidates) {
+    if (!htmlPath.startsWith(publicDir)) continue;
     if (existsSync(htmlPath)) {
       try {
         const html = readFileSync(htmlPath, 'utf-8');

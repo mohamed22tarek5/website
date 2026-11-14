@@ -61,20 +61,20 @@
   <div class="grid">
     <div class="card"><h2><i class="fas fa-battery-full"></i> Battery runtime</h2><div class="sub">Life = Capacity / Load × efficiency</div>
       <div class="chips"><button data-cap="1000" data-load="170">ESP32 avg ~170mA</button><button data-cap="2500" data-load="50">Arduino Uno ~50mA</button><button data-cap="3000" data-load="15">ESP32 deep-sleep avg</button></div>
-      <div class="row2"><div><label class="lbl">Capacity (mAh)</label><input id="cap" type="number" value="3000" step="any" min="0"></div>
-      <div><label class="lbl">Avg load (mA)</label><input id="load" type="number" value="170" step="any" min="0"></div></div>
-      <div class="row2"><div><label class="lbl">Usable / efficiency (%)</label><input id="eff" type="number" value="85" min="1" max="100"></div>
-      <div><label class="lbl">System voltage (V)</label><input id="volt" type="number" value="3.7" step="any" min="0"></div></div>
+      <div class="row2"><div><label class="lbl" for="cap">Capacity (mAh)</label><input id="cap" type="number" value="3000" step="any" min="0" aria-label="Battery capacity in milliampere hours"></div>
+      <div><label class="lbl" for="load">Avg load (mA)</label><input id="load" type="number" value="170" step="any" min="0" aria-label="Average load current in milliamperes"></div></div>
+      <div class="row2"><div><label class="lbl" for="eff">Usable / efficiency (%)</label><input id="eff" type="number" value="85" min="1" max="100" aria-label="Battery usable efficiency percentage"></div>
+      <div><label class="lbl" for="volt">System voltage (V)</label><input id="volt" type="number" value="3.7" step="any" min="0" aria-label="System voltage in volts"></div></div>
       <div class="res"><div class="cell hl"><small>Runtime</small><b id="oLife">–</b></div><div class="cell"><small>Energy</small><b id="oWh">–</b></div></div>
       <div class="note" id="nLife"></div>
     </div>
     <div class="card"><h2><i class="fas fa-solar-panel"></i> Solar + battery sizing</h2><div class="sub">Daily load → panel watts + battery Ah</div>
-      <label class="lbl">Daily energy need (Wh/day)</label><input id="wh" type="number" value="20" step="any" min="0">
-      <div class="row2"><div><label class="lbl">Peak sun hours</label><input id="sun" type="number" value="5" step="any" min="0.5" max="12"></div>
-      <div><label class="lbl">System losses (%)</label><input id="loss" type="number" value="25" min="0" max="60"></div></div>
-      <div class="row2"><div><label class="lbl">Battery voltage (V)</label><select id="bv"><option value="12" selected>12 V</option><option value="24">24 V</option><option value="3.7">3.7 V (Li-ion)</option><option value="5">5 V (USB bank)</option></select></div>
-      <div><label class="lbl">Autonomy (days)</label><input id="aut" type="number" value="2" step="any" min="1"></div></div>
-      <label class="lbl">Max depth of discharge (%)</label><input id="dod" type="number" value="80" min="10" max="100">
+      <label class="lbl" for="wh">Daily energy need (Wh/day)</label><input id="wh" type="number" value="20" step="any" min="0" aria-label="Daily energy requirement in watt-hours per day">
+      <div class="row2"><div><label class="lbl" for="sun">Peak sun hours</label><input id="sun" type="number" value="5" step="any" min="0.5" max="12" aria-label="Peak sun hours per day"></div>
+      <div><label class="lbl" for="loss">System losses (%)</label><input id="loss" type="number" value="25" min="0" max="60" aria-label="System losses percentage"></div></div>
+      <div class="row2"><div><label class="lbl" for="bv">Battery voltage (V)</label><select id="bv" aria-label="Battery nominal voltage"><option value="12" selected>12 V</option><option value="24">24 V</option><option value="3.7">3.7 V (Li-ion)</option><option value="5">5 V (USB bank)</option></select></div>
+      <div><label class="lbl" for="aut">Autonomy (days)</label><input id="aut" type="number" value="2" step="any" min="1" aria-label="Days of autonomy"></div></div>
+      <label class="lbl" for="dod">Max depth of discharge (%)</label><input id="dod" type="number" value="80" min="10" max="100" aria-label="Maximum depth of discharge percentage">
       <div class="res"><div class="cell hl"><small>Panel needed</small><b id="oPanel">–</b></div><div class="cell"><small>Battery needed</small><b id="oBat">–</b></div></div>
       <div class="note" id="nSolar"></div>
     </div>

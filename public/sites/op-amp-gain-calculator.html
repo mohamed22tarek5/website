@@ -62,12 +62,12 @@
   <div class="seg"><button class="on" data-t="noninv">Non-inverting</button><button data-t="inv">Inverting</button><button data-t="diff">Differential</button><button data-t="follow">Follower</button></div>
   <div class="grid">
     <div class="card"><h2><i class="fas fa-sliders"></i> Inputs</h2>
-      <div class="row2"><div><label class="lbl">Rin / R1 (kΩ)</label><input id="rin" type="number" value="10" step="any" min="0"></div>
-      <div><label class="lbl">Rf / R2 (kΩ)</label><input id="rf" type="number" value="100" step="any" min="0"></div></div>
-      <div class="row2"><div><label class="lbl">Vin / V+ (V)</label><input id="vin" type="number" value="0.5" step="any"></div>
-      <div><label class="lbl">V− (diff only, V)</label><input id="vm" type="number" value="0" step="any"></div></div>
-      <div class="row2"><div><label class="lbl">Supply +V (V)</label><input id="vp" type="number" value="12" step="any"></div>
-      <div><label class="lbl">Supply −V (V)</label><input id="vn" type="number" value="-12" step="any"></div></div>
+      <div class="row2"><div><label class="lbl" for="rin">Rin / R1 (kΩ)</label><input id="rin" type="number" value="10" step="any" min="0" aria-label="Input resistance Rin in kilo-ohms"></div>
+      <div><label class="lbl" for="rf">Rf / R2 (kΩ)</label><input id="rf" type="number" value="100" step="any" min="0" aria-label="Feedback resistance Rf in kilo-ohms"></div></div>
+      <div class="row2"><div><label class="lbl" for="vin">Vin / V+ (V)</label><input id="vin" type="number" value="0.5" step="any" aria-label="Input voltage Vin in volts"></div>
+      <div><label class="lbl" for="vm">V− (diff only, V)</label><input id="vm" type="number" value="0" step="any" aria-label="Inverting input voltage for differential mode"></div></div>
+      <div class="row2"><div><label class="lbl" for="vp">Supply +V (V)</label><input id="vp" type="number" value="12" step="any" aria-label="Positive supply rail voltage in volts"></div>
+      <div><label class="lbl" for="vn">Supply −V (V)</label><input id="vn" type="number" value="-12" step="any" aria-label="Negative supply rail voltage in volts"></div></div>
       <button class="btn" id="go"><i class="fas fa-bolt"></i> Calculate</button>
       <div class="formula" id="fml">G = 1 + Rf/Rin</div>
     </div>

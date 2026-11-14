@@ -988,19 +988,24 @@
           ? '<span class="task-tag' + (overdue ? ' overdue' : '') + '"><i class="fas fa-calendar"></i> ' + formatDate(task.dueDate) + (overdue ? ' (Overdue)' : '') + '</span>'
           : '';
 
+        const safeContent = escapeHtml(task.content);
+        const safeId = parseInt(task.id, 10);
+        const safePriority = escapeHtml(task.priority);
+        const safeCategory = escapeHtml(task.category);
+
         item.innerHTML =
-          '<div class="task-checkbox' + (task.completed ? ' checked' : '') + '" data-id="' + task.id + '" role="checkbox" aria-checked="' + task.completed + '" tabindex="0" aria-label="Toggle completion for ' + task.content.replace(/"/g, '&quot;') + '"></div>' +
+          '<div class="task-checkbox' + (task.completed ? ' checked' : '') + '" data-id="' + safeId + '" role="checkbox" aria-checked="' + task.completed + '" tabindex="0" aria-label="Toggle completion for ' + safeContent + '"></div>' +
           '<div class="task-body">' +
-            '<div class="task-text">' + task.content.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>' +
+            '<div class="task-text">' + safeContent + '</div>' +
             '<div class="task-meta">' +
-              '<span class="task-tag"><i class="fas fa-flag"></i> ' + task.priority.charAt(0).toUpperCase() + task.priority.slice(1) + '</span>' +
-              '<span class="task-tag"><i class="fas fa-folder"></i> ' + task.category.charAt(0).toUpperCase() + task.category.slice(1) + '</span>' +
+              '<span class="task-tag"><i class="fas fa-flag"></i> ' + safePriority.charAt(0).toUpperCase() + safePriority.slice(1) + '</span>' +
+              '<span class="task-tag"><i class="fas fa-folder"></i> ' + safeCategory.charAt(0).toUpperCase() + safeCategory.slice(1) + '</span>' +
               dueDateHtml +
             '</div>' +
           '</div>' +
           '<div class="task-actions">' +
-            '<button class="btn btn-secondary btn-small" data-edit="' + task.id + '" aria-label="Edit task"><i class="fas fa-edit"></i></button>' +
-            '<button class="btn btn-danger btn-small" data-delete="' + task.id + '" aria-label="Delete task"><i class="fas fa-trash"></i></button>' +
+            '<button class="btn btn-secondary btn-small" data-edit="' + safeId + '" aria-label="Edit task"><i class="fas fa-edit"></i></button>' +
+            '<button class="btn btn-danger btn-small" data-delete="' + safeId + '" aria-label="Delete task"><i class="fas fa-trash"></i></button>' +
           '</div>';
 
         container.appendChild(item);
