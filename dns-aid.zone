@@ -10,13 +10,12 @@
 ;    replacing the example host with your custom domain.
 ; 3) Enable DNSSEC at your registrar / DNS provider (required: validating
 ;    resolvers must return authenticated data). On Cloudflare: Dashboard
-;    -> DNS -> DNSSEC -> Enable. On Vercel custom domains: follow
-;    Vercel Docs "Enabling DNSSEC" and add the DS record at your registrar.
+;    -> DNS -> Settings -> DNSSEC -> Enable DNSSEC. Add the provided DS
+;    record at your domain registrar.
 ; 4) Verify via DoH (same resolvers the scanner uses):
-;    https://cloudflare-dns.com/dns-query?name=_index._agents.YOUR-DOMAIN&type=HTTPS
-;    https://cloudflare-dns.com/dns-query?name=_a2a._agents.YOUR-DOMAIN&type=SVCB
+;    node scripts/verify-dns-aid.mjs YOUR-DOMAIN.com
 ;    curl -H 'accept: application/dns-json' \
-;      'https://cloudflare-dns.com/dns-query?name=_index._agents.YOUR-DOMAIN&type=HTTPS'
+;      'https://cloudflare-dns.com/dns-query?name=_index._agents.YOUR-DOMAIN.com&type=HTTPS&do=1'
 ;
 ; NOTES
 ; - ServiceMode (priority 1) with target = your HTTPS host.
@@ -26,22 +25,54 @@
 ;   key65281 carries the protocol label.
 ; - TTL 3600 is a sane default; adjust as needed.
 
-; --- Replace DOMAIN below with your custom domain when you have one ---
-; Agent index / discovery endpoint
-_index._agents.mohamed-tarek-abdelhady.vercel.app. 3600 IN HTTPS 1 mohamed-tarek-abdelhady.vercel.app. alpn="h2" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="index"
+; ====================================================================
+; 1. CLOUDFLARE DASHBOARD (Easiest: full SVCB/HTTPS + 1-Click DNSSEC)
+; ====================================================================
+; Go to Cloudflare Dashboard -> [Your Domain] -> DNS -> Records -> Add Record:
+;
+; [Record 1: Agent Index (HTTPS)]
+;   Type: HTTPS
+;   Name: _index._agents
+;   Priority: 1
+;   Target: @ (or your root domain)
+;   Value / Parameters: alpn="h2" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="index"
+;   TTL: Auto
+;
+; [Record 2: Agent Index (SVCB)]
+;   Type: SVCB
+;   Name: _index._agents
+;   Priority: 1
+;   Target: @ (or your root domain)
+;   Value / Parameters: alpn="h2" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="index"
+;   TTL: Auto
+;
+; [Record 3: A2A Protocol Endpoint (SVCB)]
+;   Type: SVCB
+;   Name: _a2a._agents
+;   Priority: 1
+;   Target: @
+;   Value / Parameters: alpn="a2a" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="a2a"
+;   TTL: Auto
+;
+; [Record 4: MCP Protocol Endpoint (SVCB)]
+;   Type: SVCB
+;   Name: _mcp._agents
+;   Priority: 1
+;   Target: @
+;   Value / Parameters: alpn="mcp" port=443 mandatory=alpn,port key65280="/.well-known/mcp/server-card.json" key65281="mcp"
+;   TTL: Auto
+;
+; [Record 5: Fallback TXT Index]
+;   Type: TXT
+;   Name: _index._agents
+;   Content: v=dnsaid1;uri=https://YOUR-DOMAIN.com/.well-known/agent-card.json;proto=a2a,mcp
+;   TTL: Auto
 
-; A2A protocol endpoint
-_a2a._agents.mohamed-tarek-abdelhady.vercel.app. 3600 IN SVCB 1 mohamed-tarek-abdelhady.vercel.app. alpn="a2a" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="a2a"
-
-; MCP protocol endpoint
-_mcp._agents.mohamed-tarek-abdelhady.vercel.app. 3600 IN SVCB 1 mohamed-tarek-abdelhady.vercel.app. alpn="mcp" port=443 mandatory=alpn,port key65280="/.well-known/mcp/server-card.json" key65281="mcp"
-
-; --- Generic BIND-style template for a custom domain (copy/paste) ---
-; _index._agents.@ 3600 IN HTTPS 1 @ alpn="h2" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="index"
-; _a2a._agents.@ 3600 IN SVCB 1 @ alpn="a2a" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="a2a"
-; _mcp._agents.@ 3600 IN SVCB 1 @ alpn="mcp" port=443 mandatory=alpn,port key65280="/.well-known/mcp/server-card.json" key65281="mcp"
-
-; --- Cloudflare Dashboard equivalent (Type HTTPS/SVCB, Name, Priority, Target, Params) ---
-; Type: HTTPS | Name: _index._agents | Priority: 1 | Target: @ | Params: alpn="h2" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="index"
-; Type: SVCB  | Name: _a2a._agents   | Priority: 1 | Target: @ | Params: alpn="a2a" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="a2a"
-; Type: SVCB  | Name: _mcp._agents   | Priority: 1 | Target: @ | Params: alpn="mcp" port=443 mandatory=alpn,port key65280="/.well-known/mcp/server-card.json" key65281="mcp"
+; ====================================================================
+; 2. BIND / RFC 9460 ZONE FILE FORMAT (For custom BIND or PowerDNS)
+; ====================================================================
+_index._agents.YOUR-DOMAIN.com. 3600 IN HTTPS 1 YOUR-DOMAIN.com. alpn="h2" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="index"
+_index._agents.YOUR-DOMAIN.com. 3600 IN SVCB  1 YOUR-DOMAIN.com. alpn="h2" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="index"
+_a2a._agents.YOUR-DOMAIN.com.   3600 IN SVCB  1 YOUR-DOMAIN.com. alpn="a2a" port=443 mandatory=alpn,port key65280="/.well-known/agent-card.json" key65281="a2a"
+_mcp._agents.YOUR-DOMAIN.com.   3600 IN SVCB  1 YOUR-DOMAIN.com. alpn="mcp" port=443 mandatory=alpn,port key65280="/.well-known/mcp/server-card.json" key65281="mcp"
+_index._agents.YOUR-DOMAIN.com. 3600 IN TXT   "v=dnsaid1;uri=https://YOUR-DOMAIN.com/.well-known/agent-card.json;proto=a2a,mcp"

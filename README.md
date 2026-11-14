@@ -98,14 +98,14 @@ Interactive calculators, converters, and games:
 Shared PWA assets in `sites/`: `common.css`, `common.js`, `manifest.webmanifest`
 
 ### 3. Agent-Ready API (`api/` + `.well-known/`)
-- `openapi.json` — Portfolio API spec (homepage + calculators + x402 premium)
+- `openapi.json` — Portfolio API spec (homepage + calculators + x402 and Machine Payment Protocol [MPP] discovery)
 - `api/markdown.js` — Content negotiation: `Accept: text/markdown` → Markdown version of any page (Cloudflare Markdown-for-Agents / llmstxt.org pattern). Responds `Content-Type: text/markdown; charset=utf-8` + `x-markdown-tokens`; HTML stays default. Sources: `public/*.md` + HTML→Markdown fallback
-- `api/x402.js` — x402 payment-gated premium resource (Base Sepolia)
+- `api/x402.js`, `api/index.js`, `api/v1.js` — Agent-native HTTP payments via x402 protocol (Base Sepolia) and Machine Payment Protocol (MPP) on `/api`, `/api/v1`, and `/api/x402`, returning HTTP 402 with `PAYMENT-REQUIRED` and `WWW-Authenticate: MPP` headers
 - `api/agent/*` — Agent identity + claim endpoints
 - `api/oauth-*.js` — OAuth protected-resource + authorization-server discovery
 - `.well-known/agent-card.json`, `acp.json`, `mcp/server-card.json`, `api-catalog/`, `ai-catalog.json`, `agent-skills/`, `ucp`, `x402`, `http-message-signatures-directory`, `jwks.json`
 - `skills/engineering-calculators.md` — Skill definition for AI assistants (ohms-law, resistor-color-code, led-calculator)
-- `dns-aid.zone` — DNS-AID discovery records (`_index`/`_a2a`/`_mcp` under `_agents`, SVCB/HTTPS + `key65280`/`key65281`, DNSSEC required). **Not yet live:** `*.vercel.app` DNS can't host them — apply at a custom domain's provider, then enable DNSSEC
+- `dns-aid.zone` & `scripts/verify-dns-aid.mjs` — DNS-AID discovery records (`_index`/`_a2a`/`_mcp` under `_agents`, SVCB/HTTPS + `key65280`/`key65281`, DNSSEC required) and automated DoH verification tool. **Note:** `*.vercel.app` DNS can't host them — apply at a custom domain's provider, then enable DNSSEC
 
 ### 4. PWA Support
 - Caching via `sw.js` service worker

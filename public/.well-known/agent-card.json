@@ -69,6 +69,18 @@
       "tags": ["x402", "micropayments", "protocol"]
     },
     {
+      "id": "mpp-payment",
+      "name": "Machine Payment Protocol (MPP)",
+      "description": "MPP payment discovery via /openapi.json x-payment-info extensions. Protected routes return HTTP 402.",
+      "tags": ["mpp", "micropayments", "protocol"]
+    },
+    {
+      "id": "dns-aid",
+      "name": "DNS for AI Discovery (DNS-AID)",
+      "description": "DNS-based agent discovery via ServiceMode SVCB and HTTPS records under _agents namespace.",
+      "tags": ["dns", "dns-aid", "discovery", "rfc9460"]
+    },
+    {
       "id": "ucp-commerce",
       "name": "Universal Commerce Protocol (UCP)",
       "description": "UCP merchant profile and dev.ucp.shopping transport at /.well-known/ucp and /api/ucp.",

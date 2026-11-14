@@ -30,6 +30,7 @@ function toBase64Url(obj) {
 
 export function buildPaymentRequirements(req) {
   const siteUrl = req ? baseUrl(req) : `https://${PRIMARY_HOST}`;
+  const resourcePath = (req && req.url) ? req.url.split('?')[0] : '/api/x402';
   return {
     x402Version: 1,
     accepts: [
@@ -37,7 +38,7 @@ export function buildPaymentRequirements(req) {
         scheme: 'exact',
         network: NETWORK,
         maxAmountRequired: '1000',
-        resource: `${siteUrl}/api/x402`,
+        resource: `${siteUrl}${resourcePath}`,
         description: 'Mohamed Tarek Abdelhady Engineering API Access',
         mimeType: 'application/json',
         payTo: RECEIVER_WALLET,
@@ -45,16 +46,24 @@ export function buildPaymentRequirements(req) {
       }
     ],
     ordering: 'cheap-first',
-    maxTimeoutSeconds: 60
+    maxTimeoutSeconds: 60,
+    mpp: {
+      intent: 'charge',
+      method: 'tempo',
+      amount: '0.01',
+      currency: 'USD',
+      description: 'Mohamed Tarek Abdelhady Engineering API Access via Machine Payment Protocol'
+    }
   };
 }
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, HEAD');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, PAYMENT-SIGNATURE, PAYMENT-REQUIRED, PAYMENT-RESPONSE');
-  res.setHeader('Access-Control-Expose-Headers', 'PAYMENT-REQUIRED, PAYMENT-RESPONSE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, PAYMENT-SIGNATURE, PAYMENT-REQUIRED, PAYMENT-RESPONSE, WWW-Authenticate, X-Payment-Info');
+  res.setHeader('Access-Control-Expose-Headers', 'PAYMENT-REQUIRED, PAYMENT-RESPONSE, WWW-Authenticate, X-Payment-Info');
   res.setHeader('Vary', 'PAYMENT-SIGNATURE, Accept');
+  res.setHeader('Link', '</openapi.json>; rel="service-desc"');
 
   if (req.method === 'OPTIONS') {
     res.statusCode = 200;
@@ -107,6 +116,8 @@ export default async function handler(req, res) {
   const requirements = buildPaymentRequirements(req);
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.setHeader('PAYMENT-REQUIRED', toBase64Url(requirements));
+  res.setHeader('WWW-Authenticate', 'MPP intent="charge", method="tempo", amount="0.01", currency="USD"');
+  res.setHeader('X-Payment-Info', JSON.stringify(requirements.mpp));
   res.statusCode = 402;
 
   if (req.method === 'HEAD') {

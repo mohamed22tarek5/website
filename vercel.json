@@ -381,7 +381,7 @@
       ]
     },
     {
-      "source": "/api/x402",
+      "source": "/api/(x402|v1|payment)?",
       "headers": [
         {
           "key": "Content-Type",
@@ -397,11 +397,11 @@
         },
         {
           "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization, PAYMENT-SIGNATURE, PAYMENT-REQUIRED, PAYMENT-RESPONSE, Accept"
+          "value": "Content-Type, Authorization, PAYMENT-SIGNATURE, PAYMENT-REQUIRED, PAYMENT-RESPONSE, WWW-Authenticate, X-Payment-Info, Accept"
         },
         {
           "key": "Access-Control-Expose-Headers",
-          "value": "PAYMENT-REQUIRED, PAYMENT-RESPONSE"
+          "value": "PAYMENT-REQUIRED, PAYMENT-RESPONSE, WWW-Authenticate, X-Payment-Info"
         },
         {
           "key": "Vary",
@@ -572,6 +572,14 @@
     {
       "source": "/api/payment",
       "destination": "/api/x402"
+    },
+    {
+      "source": "/api/v1",
+      "destination": "/api/v1"
+    },
+    {
+      "source": "/api/v1/:path*",
+      "destination": "/api/v1"
     },
     {
       "source": "/api/ucp/shopping",

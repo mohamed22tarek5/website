@@ -24,11 +24,48 @@
     }
   ],
   "paths": {
+    "/api": {
+      "get": {
+        "operationId": "getApiRoot",
+        "summary": "Engineering API root with agent payment discovery",
+        "description": "Agent-payable API root supporting x402 and Machine Payment Protocol (MPP).",
+        "x-payment-info": {
+          "intent": "charge",
+          "method": "tempo",
+          "amount": "0.01",
+          "currency": "USD",
+          "description": "Access engineering API via Machine Payment Protocol"
+        },
+        "x402-version": 1,
+        "x402-accepts": [
+          {
+            "scheme": "exact",
+            "network": "base-sepolia",
+            "maxAmountRequired": "1000",
+            "resource": "https://mohamed-tarek-abdelhady.vercel.app/api",
+            "description": "Engineering API access",
+            "mimeType": "application/json",
+            "payTo": "0x0000000000000000000000000000000000000000"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Payment verified access granted" },
+          "402": { "description": "Payment Required (x402 / MPP)" }
+        }
+      }
+    },
     "/api/x402": {
       "get": {
         "operationId": "getPremiumResource",
         "summary": "Access premium API resource",
-        "description": "Returns premium content. Payment required via x402 protocol.",
+        "description": "Returns premium content. Payment required via x402 protocol or Machine Payment Protocol (MPP).",
+        "x-payment-info": {
+          "intent": "charge",
+          "method": "tempo",
+          "amount": "0.01",
+          "currency": "USD",
+          "description": "Access premium engineering API resource and calculators via Machine Payment Protocol"
+        },
         "x402-version": 1,
         "x402-accepts": [
           {
@@ -179,6 +216,6 @@
   },
   "x-service-info": {
     "categories": ["engineering", "calculators", "portfolio"],
-    "payment_protocols": ["x402"]
+    "payment_protocols": ["x402", "mpp"]
   }
 }
