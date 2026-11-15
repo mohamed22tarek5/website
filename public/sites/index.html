@@ -3,7 +3,7 @@
 <head>
   
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="SmartEnergy graduation project dashboard — energy monitoring tools and apps by Mohamed Tarek Abdelhady.">
 <meta name="author" content="Mohamed Tarek Abdelhady">
 <meta name="robots" content="index, follow">
@@ -262,6 +262,17 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:50px 5% 3
 .reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 </style>
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M. Tarek">
+  <meta name="application-name" content="M. Tarek">
+  <meta name="msapplication-TileColor" content="#0a0e1a">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
 </head>
 <body>
 
@@ -858,5 +869,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script src="/pwa.js" defer></script>
 </body>
 </html>

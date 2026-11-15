@@ -3,7 +3,7 @@
 <head>
   
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/resistor-calculator.html">
   <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,9 +31,14 @@
   <meta name="twitter:description" content="Advanced resistor calculator with color code, SMD code, series/parallel, and voltage divider.">
   <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
 
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="M. Tarek">
+  <meta name="application-name" content="M. Tarek">
+  <meta name="msapplication-TileColor" content="#0a0e1a">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
 
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="/icon.png" type="image/png" sizes="any">
@@ -617,6 +622,8 @@
     }
   </style>
 <link rel="stylesheet" href="mta-chrome.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
 </head>
 <body>
   <div class="loader" id="loader" aria-hidden="true">
@@ -1611,7 +1618,8 @@
       init();
     })();
   </script>
-<script src="mta-chrome.js" defer></script>
+<script src="/pwa.js" defer></script>
+  <script src="mta-chrome.js" defer></script>
 <!-- Vercel Speed Insights -->
 <script>
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };

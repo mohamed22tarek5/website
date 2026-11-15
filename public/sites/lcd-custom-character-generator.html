@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/lcd-custom-character-generator.html">
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"LCD Custom Character Generator","description":"Design custom 5x8 graphics for Arduino 16x2 character LCD and generate C++ code automatically.","url":"https://mohamed-tarek-abdelhady.vercel.app/sites/lcd-custom-character-generator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","author":{"@type":"Person","name":"Mohamed Tarek Abdelhady","url":"https://mohamed-tarek-abdelhady.vercel.app"}}</script>
@@ -134,6 +134,17 @@
       /* Set saved theme before first paint (same pattern as reference site) */
       (function () { try { document.documentElement.setAttribute('data-theme', localStorage.getItem('lcd-designer-theme') || 'dark'); } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); } })();
     </script>
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M. Tarek">
+  <meta name="application-name" content="M. Tarek">
+  <meta name="msapplication-TileColor" content="#0a0e1a">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
 </head>
 <body style="margin:0;background:#020617;">
     <a class="mta-skip" href="#root">Skip to content</a>
@@ -587,5 +598,6 @@ Error generating stack: `+e.message+`
         } catch (e) {}
       })();
     </script>
+  <script src="/pwa.js" defer></script>
 </body>
 </html>

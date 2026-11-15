@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "echo \"Static site - no build required\""
+    "build": "echo \"Static site - no build required\"",
+    "generate:pwa": "node scripts/generate-pwa-assets.mjs && node scripts/update-html-pwa.mjs"
   },
   "dependencies": {
     "@vercel/functions": "^1.4.0"
