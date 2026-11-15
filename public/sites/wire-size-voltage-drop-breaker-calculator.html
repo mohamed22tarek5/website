@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/wire-size-voltage-drop-breaker-calculator.html">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Wire Size, Voltage Drop & Circuit Breaker Calculator (IEC & AWG) | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Calculate electrical wire cross-sectional area, voltage drop, and circuit breaker sizing per IEC 60364 and NEC standards for Single-Phase, Three-Phase AC, and DC circuits.">
+  <meta name="author" content="Mohamed Tarek Abdelhady">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Wire Size, Voltage Drop & Circuit Breaker Calculator (IEC & AWG) | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Sizing tool for conductor cross-section, voltage drop, and circuit breaker selection per IEC and NEC standards.">
+  <meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="851">
+  <meta property="og:image:height" content="1134">
+  <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/wire-size-voltage-drop-breaker-calculator.html">
+  <meta property="og:updated_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="article:modified_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wire Size, Voltage Drop & Circuit Breaker Calculator (IEC & AWG) | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Sizing tool for conductor cross-section, voltage drop, and circuit breaker selection per IEC and NEC standards.">
+  <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+
+  <!-- PWA & Mobile Icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M. Tarek">
+  <meta name="application-name" content="M. Tarek">
+  <meta name="msapplication-TileColor" content="#0a0e1a">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
+  <link rel="stylesheet" href="mta-chrome.css">
+
+  <!-- Schema.org WebApplication & BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Wire Size, Voltage Drop & Circuit Breaker Calculator",
+    "description": "Calculate electrical wire cross-sectional area, voltage drop, and circuit breaker sizing per IEC 60364 and NEC standards for Single-Phase, Three-Phase AC, and DC circuits.",
+    "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/wire-size-voltage-drop-breaker-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek Abdelhady",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tools",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/tools.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Wire Size & Breaker Calculator",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/sites/wire-size-voltage-drop-breaker-calculator.html"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1322;
+      --bg3: #141829;
+      --card: #161b2e;
+      --card2: #1c2240;
+      --acc: #3b82f6;
+      --acc-hover: #2563eb;
+      --acc-subtle: rgba(59, 130, 246, 0.1);
+      --acc-border: rgba(59, 130, 246, 0.35);
+      --txt: #f1f5f9;
+      --mut: #94a3b8;
+      --mut2: #64748b;
+      --br: rgba(255, 255, 255, 0.08);
+      --br-hover: rgba(255, 255, 255, 0.16);
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --err: #ef4444;
+      --cyan: #06b6d4;
+      --purple: #a855f7;
+      --r: 14px;
+      --r-sm: 8px;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      --gradient-glow: radial-gradient(circle at top center, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --bg3: #e2e8f0;
+      --card: #ffffff;
+      --card2: #f8fafc;
+      --acc: #2563eb;
+      --acc-hover: #1d4ed8;
+      --acc-subtle: rgba(37, 99, 235, 0.08);
+      --acc-border: rgba(37, 99, 235, 0.25);
+      --txt: #0f172a;
+      --mut: #475569;
+      --mut2: #94a3b8;
+      --br: rgba(0, 0, 0, 0.08);
+      --br-hover: rgba(0, 0, 0, 0.15);
+      --gradient-glow: radial-gradient(circle at top center, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.65;
+      min-height: 100vh;
+      background-image: var(--gradient-glow);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 1.8rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      background: var(--acc-subtle);
+      border: 1px solid var(--acc-border);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--acc);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.9rem;
+    }
+
+    .pill .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--ok);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--ok);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.75rem, 3.8vw, 2.65rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 .grad {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--mut);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* In Brief / Summary Card */
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-left: 4px solid var(--ok);
+      border-radius: var(--r);
+      padding: 1.15rem 1.4rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .summary-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ok);
+      margin-bottom: 0.45rem;
+    }
+
+    .summary-card p {
+      color: var(--mut);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .summary-card strong {
+      color: var(--txt);
+    }
+
+    /* Disclaimer Alert */
+    .alert-box {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: var(--r);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      font-size: 0.88rem;
+      color: var(--txt);
+      line-height: 1.55;
+    }
+
+    .alert-box i {
+      color: var(--warn);
+      font-size: 1.1rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    /* Segmented Controls */
+    .seg-group {
+      margin-bottom: 1rem;
+    }
+
+    .seg-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .seg {
+      display: flex;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 3px;
+      gap: 3px;
+    }
+
+    .seg button {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      color: var(--mut);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.55rem 0.4rem;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 150ms ease;
+      white-space: nowrap;
+    }
+
+    .seg button.on {
+      background: var(--acc);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+    }
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--txt);
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .card h2 i {
+      color: var(--acc);
+      font-size: 1.05rem;
+    }
+
+    /* Form Inputs */
+    .lbl {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin-bottom: 0.35rem;
+      margin-top: 0.85rem;
+    }
+
+    .lbl:first-of-type {
+      margin-top: 0;
+    }
+
+    .lbl span.opt {
+      font-size: 0.74rem;
+      font-weight: 400;
+      color: var(--mut2);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .input-row input {
+      flex: 1;
+    }
+
+    .input-row select {
+      min-width: 95px;
+    }
+
+    input[type="number"], select {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--txt);
+      padding: 0.7rem 0.85rem;
+      border-radius: var(--r-sm);
+      font-family: var(--mono);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    input[type="number"]:focus, select:focus {
+      border-color: var(--acc);
+      box-shadow: 0 0 0 3px var(--acc-subtle);
+    }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1rem;
+      padding: 0.65rem 0.85rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      font-size: 0.85rem;
+      color: var(--txt);
+      cursor: pointer;
+    }
+
+    .check-row input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--acc);
+      cursor: pointer;
+    }
+
+    /* Action Buttons Toolbar */
+    .btn-toolbar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 520px) {
+      .btn-toolbar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.75rem 0.6rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      color: var(--txt);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 150ms ease;
+      text-decoration: none;
+    }
+
+    .action-btn:hover {
+      background: var(--card2);
+      border-color: var(--acc-border);
+      color: var(--acc);
+      transform: translateY(-1px);
+    }
+
+    .action-btn.primary {
+      background: var(--gradient-accent);
+      border: none;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+    }
+
+    .action-btn.primary:hover {
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.45);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Results Grid */
+    .res-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .res-cell {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.85rem 1rem;
+      transition: border-color 150ms ease;
+      position: relative;
+    }
+
+    .res-cell.highlight {
+      border-color: var(--acc-border);
+      background: var(--acc-subtle);
+    }
+
+    .res-cell small {
+      display: block;
+      color: var(--mut2);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+
+    .res-cell b {
+      font-family: var(--mono);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--txt);
+      display: block;
+      word-break: break-word;
+    }
+
+    .res-cell.highlight b {
+      color: var(--acc);
+    }
+
+    .res-cell .sub-val {
+      font-size: 0.75rem;
+      color: var(--mut);
+      margin-top: 0.2rem;
+      font-family: var(--mono);
+    }
+
+    /* Drop Bar Gauge */
+    .drop-bar-wrap {
+      margin-top: 1rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.85rem 1rem;
+    }
+
+    .drop-bar-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin-bottom: 0.4rem;
+    }
+
+    .drop-track {
+      height: 10px;
+      background: var(--bg3);
+      border-radius: 9999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .drop-fill {
+      height: 100%;
+      background: var(--ok);
+      border-radius: 9999px;
+      transition: width 200ms ease, background-color 200ms ease;
+    }
+
+    .drop-fill.warn {
+      background: var(--warn);
+    }
+
+    .drop-fill.err {
+      background: var(--err);
+    }
+
+    /* Candidate Comparison Table */
+    .content-card {
+      margin-top: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .content-card h2 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+      color: var(--txt);
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 0.85rem;
+    }
+
+    table.calc-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.86rem;
+    }
+
+    table.calc-table th {
+      padding: 0.75rem 0.9rem;
+      background: var(--bg2);
+      color: var(--mut);
+      font-weight: 600;
+      border-bottom: 1px solid var(--br);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    table.calc-table td {
+      padding: 0.75rem 0.9rem;
+      border-bottom: 1px solid var(--br);
+      color: var(--txt);
+      font-family: var(--mono);
+      font-size: 0.86rem;
+    }
+
+    table.calc-table tr:hover td {
+      background: var(--acc-subtle);
+    }
+
+    table.calc-table tr.selected td {
+      background: rgba(59, 130, 246, 0.15);
+      border-top: 1px solid var(--acc-border);
+      border-bottom: 1px solid var(--acc-border);
+      font-weight: 600;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .status-badge.optimal {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--ok);
+    }
+
+    .status-badge.pass {
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--acc);
+    }
+
+    .status-badge.fail {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--err);
+    }
+
+    /* Formulas Grid */
+    .formula-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .formula-box {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1.1rem;
+    }
+
+    .formula-box h4 {
+      font-size: 0.85rem;
+      color: var(--mut);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .formula-code {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--acc);
+      background: var(--bg3);
+      padding: 0.6rem 0.85rem;
+      border-radius: 6px;
+      border: 1px solid var(--br);
+      margin-bottom: 0.5rem;
+      word-break: break-all;
+    }
+
+    .formula-box p {
+      font-size: 0.82rem;
+      color: var(--mut2);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Example Card */
+    .example-box {
+      background: var(--bg2);
+      border: 1px solid var(--acc-border);
+      border-radius: var(--r-sm);
+      padding: 1.25rem;
+      margin-top: 0.85rem;
+    }
+
+    .example-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .example-header h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--txt);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .example-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .step-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+    }
+
+    .step-card span {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--mut2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.2rem;
+    }
+
+    .step-card strong {
+      font-family: var(--mono);
+      font-size: 0.98rem;
+      color: var(--txt);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .close-modal-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .close-modal-btn:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .tool-tile {
+      display: block;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1rem;
+      text-decoration: none;
+      color: var(--txt);
+      transition: all 150ms ease;
+    }
+
+    .tool-tile:hover {
+      border-color: var(--acc-border);
+      background: var(--card2);
+      transform: translateY(-2px);
+    }
+
+    .tool-tile-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+      color: var(--acc);
+    }
+
+    .tool-tile p {
+      font-size: 0.82rem;
+      color: var(--mut);
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* History */
+    .history-card {
+      margin-top: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.75rem 1rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .history-details {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--txt);
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .history-meta {
+      font-size: 0.75rem;
+      color: var(--mut2);
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--bg3);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      transition: all 150ms ease;
+    }
+
+    .btn-sm:hover {
+      color: var(--txt);
+      border-color: var(--acc);
+    }
+
+    .btn-sm.del:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 1.75rem 1rem;
+      color: var(--mut2);
+      font-size: 0.88rem;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--card2);
+      border: 1px solid var(--acc-border);
+      color: var(--txt);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--r-sm);
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transform: translateY(100px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 250ms ease, opacity 250ms ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11pt;
+      }
+
+      .mta-bar, .mta-foot, .btn-toolbar, .modal-overlay, .toast, .btn-sm, #th, [data-mta-top], .example-header button, .seg {
+        display: none !important;
+      }
+
+      .wrap {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .card, .summary-card, .content-card, .history-card {
+        background: #ffffff !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+        color: #000000 !important;
+        page-break-inside: avoid;
+        margin-bottom: 1rem !important;
+        padding: 1rem !important;
+      }
+
+      .print-header {
+        display: block !important;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+      }
+
+      .print-header h1 {
+        font-size: 18pt;
+        margin: 0;
+      }
+
+      .res-cell {
+        background: #f8f8f8 !important;
+        border: 1px solid #ddd !important;
+        color: #000 !important;
+      }
+
+      .res-cell b {
+        color: #000 !important;
+      }
+
+      table.calc-table th {
+        background: #eee !important;
+        color: #000 !important;
+      }
+
+      table.calc-table td {
+        color: #000 !important;
+        border-bottom: 1px solid #ddd !important;
+      }
+    }
+
+    .print-header {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header Chrome -->
+<header class="mta-bar" id="header" role="banner">
+  <div class="mta-bar-in">
+    <nav aria-label="Breadcrumb" class="mta-crumbs">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools.html">Tools</a></li>
+        <li aria-current="page">Wire Size &amp; Breaker Calculator</li>
+      </ol>
+    </nav>
+    <button class="mta-btn" id="th" type="button" aria-label="Toggle dark/light mode">
+      <i class="fas fa-moon" data-mta-icon></i>
+    </button>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <!-- Print Header -->
+  <div class="print-header">
+    <h1>Mohamed Tarek Abdelhady — Electrical Engineering Calculation Report</h1>
+    <p><strong>Tool:</strong> Conductor Sizing, Voltage Drop &amp; Circuit Breaker Selection (IEC 60364 &amp; NEC 310.16)</p>
+    <p><strong>Date Generated:</strong> <span id="printDate"></span></p>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <span class="pill"><span class="dot"></span> Electrical Installation &middot; IEC &amp; NEC</span>
+    <h1><span class="grad">Wire Size, Voltage Drop</span> &amp; Breaker Calculator</h1>
+    <p>Dual-criteria conductor cross-section selection, voltage drop estimation, and coordinated circuit breaker sizing.</p>
+  </div>
+
+  <!-- In Brief -->
+  <div class="summary-card" role="region" aria-label="Summary">
+    <div class="summary-card-header">
+      <i class="fas fa-circle-check"></i> In Brief
+    </div>
+    <p>
+      Wire cross-sectional area is governed by two essential conditions: <strong>thermal current-carrying capacity (ampacity)</strong> according to standard installation tables, and <strong>voltage drop</strong>, which is recommended not to exceed <strong>3%</strong> for lighting circuits and <strong>5%</strong> for general feeder and branch power loads. This tool computes the smallest standard wire size satisfying both criteria and suggests the appropriate circuit breaker rating.
+    </p>
+  </div>
+
+  <!-- Disclaimer Alert -->
+  <div class="alert-box">
+    <i class="fas fa-triangle-exclamation"></i>
+    <div>
+      <strong>Engineering Notice:</strong> Results are provided for educational and preliminary estimation purposes. Electrical installations and real-world distribution boards must be engineered, verified, and stamped by a licensed electrical engineer in accordance with local and national electrical codes (e.g., IEC 60364 or NFPA 70 NEC).
+    </div>
+  </div>
+
+  <!-- Calculator Grid -->
+  <div class="grid">
+    <!-- Left Card: Inputs -->
+    <div class="card" id="calcForm">
+      <h2><i class="fas fa-sliders"></i> Installation Inputs</h2>
+
+      <!-- Standard Selection -->
+      <div class="seg-group">
+        <span class="seg-label">Electrical Standard</span>
+        <div class="seg" id="segStd" role="tablist">
+          <button type="button" class="on" data-std="iec" id="btnIec">IEC (mm²) — Metric</button>
+          <button type="button" data-std="awg" id="btnAwg">AWG / NEC — American</button>
+        </div>
+      </div>
+
+      <!-- System Type Selection -->
+      <div class="seg-group">
+        <span class="seg-label">System Type</span>
+        <div class="seg" id="segSys" role="tablist">
+          <button type="button" class="on" data-sys="1ac" id="btnSys1ac">1-Phase AC</button>
+          <button type="button" data-sys="3ac" id="btnSys3ac">3-Phase AC</button>
+          <button type="button" data-sys="dc" id="btnSysDc">Direct Current (DC)</button>
+        </div>
+      </div>
+
+      <!-- Voltage V -->
+      <label class="lbl" for="inpVolt">
+        <span>Nominal Voltage (V)</span>
+        <span class="opt">Line-to-Neutral / Line-to-Line</span>
+      </label>
+      <div class="input-row">
+        <input id="inpVolt" type="number" value="230" step="any" min="1" placeholder="e.g. 230" aria-label="System voltage in volts">
+        <select id="selVoltPreset" aria-label="Voltage Presets">
+          <option value="230" selected>230 V (1φ)</option>
+          <option value="400">400 V (3φ)</option>
+          <option value="120">120 V (1φ)</option>
+          <option value="208">208 V (3φ)</option>
+          <option value="48">48 V (DC)</option>
+          <option value="24">24 V (DC)</option>
+          <option value="12">12 V (DC)</option>
+        </select>
+      </div>
+
+      <!-- Current or Power -->
+      <label class="lbl" for="inpCurrent">
+        <span>Load Current (A)</span>
+        <span class="opt">or leave blank and enter Power</span>
+      </label>
+      <div class="input-row">
+        <input id="inpCurrent" type="number" value="16" step="any" min="0" placeholder="e.g. 16" aria-label="Load current in amperes">
+      </div>
+
+      <!-- Power W -->
+      <label class="lbl" for="inpPower">
+        <span>Load Power (W / kW)</span>
+        <span class="opt">Optional</span>
+      </label>
+      <div class="input-row">
+        <input id="inpPower" type="number" step="any" min="0" placeholder="e.g. 3000" aria-label="Load power in watts">
+        <select id="selPowerUnit" aria-label="Power unit">
+          <option value="1" selected>W</option>
+          <option value="1000">kW</option>
+        </select>
+      </div>
+
+      <!-- Power Factor cos φ -->
+      <label class="lbl" for="inpPf" id="lblPf">
+        <span>Power Factor (cos &phi;)</span>
+        <span class="opt">AC only &middot; typically 0.8 – 1.0</span>
+      </label>
+      <div class="input-row">
+        <input id="inpPf" type="number" value="0.9" step="0.01" min="0.1" max="1" placeholder="0.9" aria-label="Power factor">
+      </div>
+
+      <!-- Cable Length L -->
+      <label class="lbl" for="inpLength">
+        <span>One-Way Cable Length (m)</span>
+        <span class="opt">Source to load</span>
+      </label>
+      <div class="input-row">
+        <input id="inpLength" type="number" value="25" step="any" min="0.1" placeholder="e.g. 25" aria-label="Cable length in meters">
+      </div>
+
+      <!-- Max Voltage Drop % -->
+      <label class="lbl" for="inpMaxDrop">
+        <span>Max Allowed Voltage Drop (%)</span>
+        <span class="opt">3% lighting / 5% general</span>
+      </label>
+      <div class="input-row">
+        <input id="inpMaxDrop" type="number" value="3" step="0.1" min="0.1" max="25" placeholder="e.g. 3" aria-label="Maximum allowed voltage drop percentage">
+        <select id="selDropPreset" aria-label="Drop presets">
+          <option value="3" selected>3% (Lighting)</option>
+          <option value="5">5% (General)</option>
+          <option value="2">2% (Critical / Solar)</option>
+        </select>
+      </div>
+
+      <!-- Continuous Load Checkbox -->
+      <label class="check-row">
+        <input id="chkContinuous" type="checkbox">
+        <span><strong>Continuous Load (&ge; 3 hours):</strong> Multiply current by 1.25 per NEC 80% rule</span>
+      </label>
+
+      <!-- Action Toolbar -->
+      <div class="btn-toolbar">
+        <button class="action-btn primary" id="btnSaveCalc" type="button" aria-label="Save calculation">
+          <i class="fas fa-floppy-disk"></i> Save Calc
+        </button>
+        <button class="action-btn" id="btnPrintPdf" type="button" aria-label="Export PDF report">
+          <i class="fas fa-file-pdf"></i> PDF Report
+        </button>
+        <button class="action-btn" id="btnAdvTools" type="button" aria-label="Open advanced tools">
+          <i class="fas fa-star"></i> Adv. Tools
+        </button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:1rem; font-size:0.8rem;">
+        <button type="button" id="btnReset" style="color:var(--mut2); text-decoration:underline; background:none; border:none; cursor:pointer;">
+          <i class="fas fa-rotate-left"></i> Reset Defaults
+        </button>
+        <button type="button" id="btnLoadExample" style="color:var(--acc); background:none; border:none; cursor:pointer; font-weight:600;">
+          <i class="fas fa-lightbulb"></i> Load 3 kW Heater Example
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Card: Results -->
+    <div class="card">
+      <h2><i class="fas fa-chart-line"></i> Sizing &amp; Protection Results</h2>
+
+      <div class="res-grid">
+        <!-- Recommended Wire Size -->
+        <div class="res-cell highlight">
+          <small>Recommended Wire Size</small>
+          <b id="outWireSize">2.5 mm²</b>
+          <div class="sub-val" id="outMinArea">Min area for &Delta;V: 2.12 mm²</div>
+        </div>
+
+        <!-- Suggested Circuit Breaker -->
+        <div class="res-cell highlight">
+          <small>Suggested Circuit Breaker (I<sub>n</sub>)</small>
+          <b id="outBreaker">16 A (MCB)</b>
+          <div class="sub-val" id="outBreakerRule">Coordination: I<sub>b</sub> &le; I<sub>n</sub> &le; I<sub>z</sub></div>
+        </div>
+
+        <!-- Voltage Drop Delta V -->
+        <div class="res-cell">
+          <small>Actual Voltage Drop (&Delta;V)</small>
+          <b id="outVoltDrop">5.87 V</b>
+          <div class="sub-val" id="outVoltDropPct">2.55% (Limit: 3.0%)</div>
+        </div>
+
+        <!-- Voltage at Load -->
+        <div class="res-cell">
+          <small>Voltage at Load End</small>
+          <b id="outVoltLoad">224.13 V</b>
+          <div class="sub-val" id="outVoltNominal">Nominal: 230 V</div>
+        </div>
+
+        <!-- Cable Ampacity Iz -->
+        <div class="res-cell">
+          <small>Cable Ampacity (I<sub>z</sub>)</small>
+          <b id="outAmpacity">27 A</b>
+          <div class="sub-val" id="outLoadingPct">Load: 59.3% of capacity</div>
+        </div>
+
+        <!-- Power Dissipation in Cable -->
+        <div class="res-cell">
+          <small>Cable Power Dissipation (P<sub>loss</sub>)</small>
+          <b id="outPowerLoss">76.5 W</b>
+          <div class="sub-val" id="outDesignCurrent">Design Current: 16.0 A</div>
+        </div>
+      </div>
+
+      <!-- Voltage Drop Progress Gauge -->
+      <div class="drop-bar-wrap">
+        <div class="drop-bar-header">
+          <span>Voltage Drop Compliance</span>
+          <span id="dropStatusLabel" style="color:var(--ok);">2.55% &le; 3.0% (Pass)</span>
+        </div>
+        <div class="drop-track">
+          <div class="drop-fill" id="dropFillBar" style="width: 85%;"></div>
+        </div>
+      </div>
+
+      <div id="resultNote" style="margin-top:1rem; font-size:0.85rem; color:var(--mut); background:var(--bg2); border:1px dashed var(--br); border-radius:10px; padding:0.75rem 0.95rem;">
+        Sizing determined by <strong>Voltage Drop</strong>. Conductor selected provides adequate thermal ampacity and maintains drop below 3.0%.
+      </div>
+    </div>
+  </div>
+
+  <!-- Candidate Comparison Table -->
+  <div class="content-card">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+      <h2 style="margin:0; border:none; padding:0;">
+        <i class="fas fa-table" style="color:var(--acc);"></i> Conductor Size Evaluation Table
+      </h2>
+      <span style="font-size:0.8rem; color:var(--mut2);" id="tableStandardLabel">IEC 60364-5-52 Method C (PVC Copper, 30°C)</span>
+    </div>
+
+    <div class="table-responsive">
+      <table class="calc-table">
+        <thead>
+          <tr>
+            <th>Conductor Size</th>
+            <th>Ampacity (I<sub>z</sub>)</th>
+            <th>Voltage Drop (&Delta;V)</th>
+            <th>Drop %</th>
+            <th>Load Voltage</th>
+            <th>Breaker (I<sub>n</sub>)</th>
+            <th>Compliance Status</th>
+          </tr>
+        </thead>
+        <tbody id="candidateTableBody">
+          <!-- Populated by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Theory & Governing Formulas -->
+  <div class="content-card">
+    <h2><i class="fas fa-calculator" style="color:var(--acc);"></i> Calculation Method &amp; Governing Standards</h2>
+    <p style="color:var(--mut); font-size:0.92rem; line-height:1.6;">
+      Conductor sizing combines electrical thermodynamics with Ohm's law. In both IEC and NEC frameworks, a cable must satisfy both thermal steady-state heating and maximum permissible voltage drop limits:
+    </p>
+
+    <div class="formula-grid">
+      <!-- 1-Phase / DC Formula -->
+      <div class="formula-box">
+        <h4>1-Phase AC &amp; DC Voltage Drop</h4>
+        <div class="formula-code">&Delta;V = (2 &times; &rho; &times; L &times; I &times; cos&phi;) / A</div>
+        <p>The factor <strong>2</strong> accounts for the loop length (live and neutral/return conductors). For DC, cos&phi; = 1.0.</p>
+      </div>
+
+      <!-- 3-Phase Formula -->
+      <div class="formula-box">
+        <h4>3-Phase AC Balanced Voltage Drop</h4>
+        <div class="formula-code">&Delta;V = (&radic;3 &times; &rho; &times; L &times; I &times; cos&phi;) / A</div>
+        <p>The factor <strong>&radic;3 &approx; 1.732</strong> reflects balanced line-to-line voltage in three-phase symmetric loads.</p>
+      </div>
+
+      <!-- Copper Resistivity -->
+      <div class="formula-box">
+        <h4>Conductor Resistivity (&rho;)</h4>
+        <div class="formula-code">&rho; &approx; 0.0225 &Omega;&middot;mm² / m</div>
+        <p>Resistivity of electrolytic copper adjusted for conductor operating temperature (~55°C–70°C) according to IEC standards.</p>
+      </div>
+
+      <!-- Breaker Coordination -->
+      <div class="formula-box">
+        <h4>Circuit Breaker Coordination</h4>
+        <div class="formula-code">I<sub>b</sub> &le; I<sub>n</sub> &le; I<sub>z</sub></div>
+        <p>Load current <strong>I<sub>b</sub></strong> must not exceed breaker rating <strong>I<sub>n</sub></strong>, which in turn must not exceed cable ampacity <strong>I<sub>z</sub></strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Benchmark Example -->
+  <div class="content-card">
+    <h2><i class="fas fa-lightbulb" style="color:var(--warn);"></i> Practical Benchmark Example</h2>
+    <div class="example-box">
+      <div class="example-header">
+        <h3><i class="fas fa-plug" style="color:var(--acc);"></i> 3 kW Electric Water Heater on 230 V Supply (L = 25 m, &Delta;V &le; 3%)</h3>
+        <button class="btn-sm" id="btnLoadExample2" type="button">
+          <i class="fas fa-arrow-up-right-from-square"></i> Load This Example
+        </button>
+      </div>
+      <p style="color:var(--mut); font-size:0.9rem; line-height:1.6;">
+        A single-phase resistive heating element of <strong>3 kW</strong> (cos&phi; = 1.0) connected to a <strong>230 V</strong> line at a one-way distance of <strong>25 meters</strong> with a <strong>3%</strong> voltage drop allowance:
+      </p>
+
+      <div class="example-steps">
+        <div class="step-card">
+          <span>1. Load Current (I)</span>
+          <strong>3000 W / 230 V &approx; 13.04 A</strong>
+        </div>
+        <div class="step-card">
+          <span>2. Max Drop (&Delta;V<sub>max</sub>)</span>
+          <strong>230 V &times; 3% = 6.90 V</strong>
+        </div>
+        <div class="step-card">
+          <span>3. Required Min Area</span>
+          <strong>(2 &times; 0.0225 &times; 25 &times; 13.04) / 6.9 = 2.12 mm²</strong>
+        </div>
+        <div class="step-card">
+          <span>4. Selected Conductor</span>
+          <strong>2.5 mm² (Ampacity = 27 A)</strong>
+        </div>
+        <div class="step-card">
+          <span>5. Coordinated Breaker</span>
+          <strong>16 A MCB (13.04 &le; 16 &le; 27 A)</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Saved Calculations History -->
+  <div class="history-card" id="historyCard">
+    <div class="history-header">
+      <h3 style="font-size:1.1rem; font-weight:700; display:flex; align-items:center; gap:0.5rem;">
+        <i class="fas fa-clock-rotate-left" style="color:var(--acc);"></i> Saved Calculations History
+      </h3>
+      <div style="display:flex; gap:0.5rem;">
+        <button class="btn-sm" id="btnExportJson" type="button" title="Export as JSON">
+          <i class="fas fa-download"></i> Export JSON
+        </button>
+        <button class="btn-sm del" id="btnClearHistory" type="button" title="Clear History">
+          <i class="fas fa-trash"></i> Clear All
+        </button>
+      </div>
+    </div>
+    <div class="history-list" id="historyList">
+      <div class="empty-state">No calculations saved yet. Click "Save Calc" to store current values.</div>
+    </div>
+  </div>
+</main>
+
+<!-- Advanced Tools Modal -->
+<div class="modal-overlay" id="advToolsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="modalTitle" style="font-size:1.2rem; font-weight:700; display:flex; align-items:center; gap:0.5rem; color:var(--txt);">
+        <i class="fas fa-star" style="color:var(--acc);"></i> Related Electrical Calculators
+      </h3>
+      <button class="close-modal-btn" id="btnCloseModal" type="button" aria-label="Close dialog">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+    <div class="tools-grid">
+      <a href="/sites/wire-gauge-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-ruler"></i> AWG Wire Gauge Table</div>
+        <p>Complete American Wire Gauge reference table with metric equivalents and resistances.</p>
+      </a>
+      <a href="/sites/ohms-law-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-calculator"></i> Ohm's Law Calculator</div>
+        <p>Calculate voltage, current, resistance, and electrical power with circuit analysis.</p>
+      </a>
+      <a href="/sites/power-triangle-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-shapes"></i> Power Triangle &amp; Factor</div>
+        <p>Real (P), reactive (Q), and apparent power (S) AC power calculations.</p>
+      </a>
+      <a href="/sites/transformer-turns-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-right-left"></i> Transformer Calculator</div>
+        <p>Transformer turns ratio, primary/secondary voltages, and load currents.</p>
+      </a>
+      <a href="/sites/voltage-divider-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-arrows-split-up-and-left"></i> Voltage Divider</div>
+        <p>Compute output voltages with load compensation and standard E12 resistor values.</p>
+      </a>
+      <a href="/sites/rc-time-constant-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-stopwatch"></i> RC Time Constant</div>
+        <p>Time constant (&tau; = R&times;C), charging voltages, and -3dB cutoff frequencies.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Feedback -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <i class="fas fa-circle-check" style="color:var(--ok);"></i>
+  <span id="toastMsg">Calculation saved successfully!</span>
+</div>
+
+<!-- Footer Chrome -->
+<footer class="mta-foot" role="contentinfo">
+  <div class="mta-foot-in">
+    <div class="mta-social">
+      <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="/">Back to Portfolio</a></p>
+    <div class="mta-actions">
+      <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+      <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+    </div>
+  </div>
+</footer>
+
+<!-- Interactive Logic -->
+<script>
+(function() {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  // Copper resistivity at ~55°C - 70°C operating temp (Ohm·mm²/m)
+  const RHO_CU = 0.0225;
+
+  // IEC 60364-5-52 Table B.52.4 (Method C: Clipped direct / surface on wall, PVC Copper, 30°C ambient)
+  // Standard metric cross sections in mm² with ampacities
+  const IEC_CABLES = [
+    { name: '1.5 mm²', area: 1.5, ampacity: 19.5, mcb: 16 },
+    { name: '2.5 mm²', area: 2.5, ampacity: 27, mcb: 20 },
+    { name: '4 mm²', area: 4.0, ampacity: 36, mcb: 32 },
+    { name: '6 mm²', area: 6.0, ampacity: 46, mcb: 40 },
+    { name: '10 mm²', area: 10.0, ampacity: 63, mcb: 63 },
+    { name: '16 mm²', area: 16.0, ampacity: 85, mcb: 80 },
+    { name: '25 mm²', area: 25.0, ampacity: 112, mcb: 100 },
+    { name: '35 mm²', area: 35.0, ampacity: 138, mcb: 125 },
+    { name: '50 mm²', area: 50.0, ampacity: 168, mcb: 160 },
+    { name: '70 mm²', area: 70.0, ampacity: 213, mcb: 200 },
+    { name: '95 mm²', area: 95.0, ampacity: 258, mcb: 250 },
+    { name: '120 mm²', area: 120.0, ampacity: 299, mcb: 315 }
+  ];
+
+  // Standard IEC MCB Ratings (Amperes)
+  const IEC_MCB_RATINGS = [6, 10, 16, 20, 25, 32, 40, 50, 63, 80, 100, 125, 160, 200, 250];
+
+  // NEC Table 310.16 (Copper conductors at 75°C, e.g. THHN/THWN-2)
+  // With NEC 240.4(D) small conductor overcurrent protection limits
+  const AWG_CABLES = [
+    { name: '14 AWG', area: 2.08, ampacity: 20, maxOcpd: 15 },
+    { name: '12 AWG', area: 3.31, ampacity: 25, maxOcpd: 20 },
+    { name: '10 AWG', area: 5.26, ampacity: 35, maxOcpd: 30 },
+    { name: '8 AWG', area: 8.37, ampacity: 50, maxOcpd: 40 },
+    { name: '6 AWG', area: 13.3, ampacity: 65, maxOcpd: 60 },
+    { name: '4 AWG', area: 21.2, ampacity: 85, maxOcpd: 70 },
+    { name: '3 AWG', area: 26.7, ampacity: 100, maxOcpd: 90 },
+    { name: '2 AWG', area: 33.6, ampacity: 115, maxOcpd: 100 },
+    { name: '1 AWG', area: 42.4, ampacity: 130, maxOcpd: 125 },
+    { name: '1/0 AWG', area: 53.5, ampacity: 150, maxOcpd: 150 },
+    { name: '2/0 AWG', area: 67.4, ampacity: 175, maxOcpd: 175 },
+    { name: '3/0 AWG', area: 85.0, ampacity: 200, maxOcpd: 200 },
+    { name: '4/0 AWG', area: 107.2, ampacity: 230, maxOcpd: 225 }
+  ];
+
+  // Standard NEC OCPD Breaker Ratings (Amperes)
+  const NEC_BREAKER_RATINGS = [15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 110, 125, 150, 175, 200, 225];
+
+  const STORAGE_KEY = 'mta_wire_drop_calc_history';
+
+  let currentStandard = 'iec'; // 'iec' | 'awg'
+  let currentSystem = '1ac';   // '1ac' | '3ac' | 'dc'
+  let currentCalcState = null;
+
+  // Elements
+  const inpVolt = $('inpVolt');
+  const selVoltPreset = $('selVoltPreset');
+  const inpCurrent = $('inpCurrent');
+  const inpPower = $('inpPower');
+  const selPowerUnit = $('selPowerUnit');
+  const inpPf = $('inpPf');
+  const lblPf = $('lblPf');
+  const inpLength = $('inpLength');
+  const inpMaxDrop = $('inpMaxDrop');
+  const selDropPreset = $('selDropPreset');
+  const chkContinuous = $('chkContinuous');
+
+  // Outputs
+  const outWireSize = $('outWireSize');
+  const outMinArea = $('outMinArea');
+  const outBreaker = $('outBreaker');
+  const outBreakerRule = $('outBreakerRule');
+  const outVoltDrop = $('outVoltDrop');
+  const outVoltDropPct = $('outVoltDropPct');
+  const outVoltLoad = $('outVoltLoad');
+  const outVoltNominal = $('outVoltNominal');
+  const outAmpacity = $('outAmpacity');
+  const outLoadingPct = $('outLoadingPct');
+  const outPowerLoss = $('outPowerLoss');
+  const outDesignCurrent = $('outDesignCurrent');
+  const dropStatusLabel = $('dropStatusLabel');
+  const dropFillBar = $('dropFillBar');
+  const resultNote = $('resultNote');
+  const candidateTableBody = $('candidateTableBody');
+  const tableStandardLabel = $('tableStandardLabel');
+
+  // Mode Switchers
+  $('btnIec').onclick = () => {
+    currentStandard = 'iec';
+    $('btnIec').classList.add('on');
+    $('btnAwg').classList.remove('on');
+    tableStandardLabel.textContent = 'IEC 60364-5-52 Method C (PVC Copper, 30°C Ambient)';
+    calculate();
+  };
+
+  $('btnAwg').onclick = () => {
+    currentStandard = 'awg';
+    $('btnAwg').classList.add('on');
+    $('btnIec').classList.remove('on');
+    tableStandardLabel.textContent = 'NEC Table 310.16 (75°C Copper, THHN/THWN-2)';
+    calculate();
+  };
+
+  function setSystem(sys) {
+    currentSystem = sys;
+    $('btnSys1ac').classList.toggle('on', sys === '1ac');
+    $('btnSys3ac').classList.toggle('on', sys === '3ac');
+    $('btnSysDc').classList.toggle('on', sys === 'dc');
+
+    if (sys === 'dc') {
+      inpPf.value = '1.0';
+      inpPf.disabled = true;
+      lblPf.style.opacity = '0.5';
+    } else {
+      inpPf.disabled = false;
+      lblPf.style.opacity = '1.0';
+      if (parseFloat(inpPf.value) === 1 && sys !== 'dc') inpPf.value = '0.9';
+    }
+
+    // Default voltage updates if using default
+    if (sys === '3ac' && (inpVolt.value === '230' || inpVolt.value === '120')) {
+      inpVolt.value = '400';
+    } else if (sys === '1ac' && (inpVolt.value === '400' || inpVolt.value === '48')) {
+      inpVolt.value = '230';
+    } else if (sys === 'dc' && (inpVolt.value === '230' || inpVolt.value === '400')) {
+      inpVolt.value = '48';
+    }
+
+    calculate();
+  }
+
+  $('btnSys1ac').onclick = () => setSystem('1ac');
+  $('btnSys3ac').onclick = () => setSystem('3ac');
+  $('btnSysDc').onclick = () => setSystem('dc');
+
+  selVoltPreset.onchange = () => {
+    inpVolt.value = selVoltPreset.value;
+    calculate();
+  };
+
+  selDropPreset.onchange = () => {
+    inpMaxDrop.value = selDropPreset.value;
+    calculate();
+  };
+
+  // Sync Power & Current
+  let powerUpdating = false;
+  inpPower.addEventListener('input', () => {
+    powerUpdating = true;
+    const p = parseFloat(inpPower.value) * parseFloat(selPowerUnit.value);
+    const v = parseFloat(inpVolt.value);
+    let pf = parseFloat(inpPf.value) || 0.9;
+    if (currentSystem === 'dc') pf = 1.0;
+
+    if (p > 0 && v > 0 && pf > 0) {
+      let i = 0;
+      if (currentSystem === '1ac' || currentSystem === 'dc') {
+        i = p / (v * pf);
+      } else {
+        i = p / (Math.sqrt(3) * v * pf);
+      }
+      inpCurrent.value = i.toFixed(2);
+    }
+    calculate();
+    powerUpdating = false;
+  });
+
+  selPowerUnit.addEventListener('change', () => {
+    if (inpPower.value) {
+      inpPower.dispatchEvent(new Event('input'));
+    }
+  });
+
+  inpCurrent.addEventListener('input', () => {
+    if (!powerUpdating && inpPower.value) {
+      // Clear power to avoid confusion if current changed directly
+      inpPower.value = '';
+    }
+    calculate();
+  });
+
+  // Calculate Function
+  function calculate() {
+    const v = parseFloat(inpVolt.value) || 230;
+    let iLoad = parseFloat(inpCurrent.value);
+    if (isNaN(iLoad) || iLoad < 0) iLoad = 16;
+
+    let pf = parseFloat(inpPf.value) || 0.9;
+    if (currentSystem === 'dc') pf = 1.0;
+
+    const l = parseFloat(inpLength.value) || 25;
+    const maxDropPct = parseFloat(inpMaxDrop.value) || 3.0;
+    const isContinuous = chkContinuous.checked;
+
+    // Design current: 1.25 multiplier for continuous load
+    const iDesign = isContinuous ? (iLoad * 1.25) : iLoad;
+
+    // Phase factor k: 2 for 1-phase AC / DC, sqrt(3) for 3-phase AC
+    const k = (currentSystem === '3ac') ? Math.sqrt(3) : 2.0;
+
+    // Maximum allowed voltage drop in Volts
+    const deltaVMax = (maxDropPct / 100) * v;
+
+    // Minimum area required purely to satisfy voltage drop:
+    // deltaV = (k * rho * L * I * cosphi) / A  =>  A_min = (k * rho * L * I * cosphi) / deltaVMax
+    const minAreaForDrop = (k * RHO_CU * l * iLoad * pf) / deltaVMax;
+
+    // Conductor table
+    const table = currentStandard === 'iec' ? IEC_CABLES : AWG_CABLES;
+
+    // Find the candidate wires and the selected recommended wire
+    let recommendedCable = null;
+    let controllingCriterion = 'Ampacity';
+
+    const evaluatedCables = table.map(cable => {
+      // Actual drop for this wire size
+      const actualDeltaV = (k * RHO_CU * l * iLoad * pf) / cable.area;
+      const actualDropPct = (actualDeltaV / v) * 100;
+      const loadVolt = Math.max(0, v - actualDeltaV);
+
+      // Check Ampacity: does cable carry design current?
+      const passAmpacity = cable.ampacity >= iDesign;
+
+      // Check Voltage Drop: is drop <= maxDropPct?
+      const passDrop = actualDropPct <= (maxDropPct + 0.05); // slight tolerance for rounding
+
+      const isPass = passAmpacity && passDrop;
+
+      // Select circuit breaker
+      let breakerRating = 0;
+      if (currentStandard === 'iec') {
+        // Breaker must satisfy: I_load <= I_n <= I_z
+        // Find smallest standard rating >= iDesign, up to cable.ampacity
+        const validRatings = IEC_MCB_RATINGS.filter(r => r >= Math.floor(iDesign) && r <= cable.ampacity);
+        if (validRatings.length > 0) {
+          breakerRating = validRatings[0];
+        } else {
+          // If none strictly in between, closest <= ampacity
+          const lower = IEC_MCB_RATINGS.filter(r => r <= cable.ampacity);
+          breakerRating = lower.length > 0 ? lower[lower.length - 1] : cable.mcb;
+        }
+      } else {
+        // NEC: respect max OCPD small conductor rule
+        const maxOcpd = cable.maxOcpd || cable.ampacity;
+        const validRatings = NEC_BREAKER_RATINGS.filter(r => r >= Math.floor(iDesign) && r <= maxOcpd);
+        if (validRatings.length > 0) {
+          breakerRating = validRatings[0];
+        } else {
+          const lower = NEC_BREAKER_RATINGS.filter(r => r <= maxOcpd);
+          breakerRating = lower.length > 0 ? lower[lower.length - 1] : 15;
+        }
+      }
+
+      return {
+        ...cable,
+        actualDeltaV,
+        actualDropPct,
+        loadVolt,
+        passAmpacity,
+        passDrop,
+        isPass,
+        breakerRating
+      };
+    });
+
+    // Find smallest compliant cable
+    for (const c of evaluatedCables) {
+      if (c.isPass) {
+        recommendedCable = c;
+        break;
+      }
+    }
+
+    // If none passed, take the largest available
+    if (!recommendedCable) {
+      recommendedCable = evaluatedCables[evaluatedCables.length - 1];
+    }
+
+    // Determine what sized it
+    if (recommendedCable.area >= minAreaForDrop && minAreaForDrop > table[0].area) {
+      controllingCriterion = 'Voltage Drop';
+    } else {
+      controllingCriterion = 'Current Ampacity';
+    }
+
+    // Power dissipation in cable:
+    // P_loss = k_wires * I^2 * R_cable
+    // For single phase/DC (2 wires): 2 * I^2 * (rho * L / A) = deltaV * I
+    // For 3-phase (3 wires): 3 * I^2 * (rho * L / A) = sqrt(3) * deltaV * I
+    let pLoss = 0;
+    if (currentSystem === '3ac') {
+      pLoss = 3 * (iLoad * iLoad) * (RHO_CU * l / recommendedCable.area);
+    } else {
+      pLoss = 2 * (iLoad * iLoad) * (RHO_CU * l / recommendedCable.area);
+    }
+
+    // Render Main Outputs
+    outWireSize.textContent = recommendedCable.name;
+    outMinArea.textContent = `Min area for ΔV (${maxDropPct}%): ${minAreaForDrop.toFixed(2)} mm²`;
+
+    const breakerText = currentStandard === 'iec' 
+      ? `${recommendedCable.breakerRating} A (MCB Type B/C)` 
+      : `${recommendedCable.breakerRating} A (OCPD Breaker)`;
+    outBreaker.textContent = breakerText;
+    outBreakerRule.textContent = currentStandard === 'iec' 
+      ? `Rule: ${iDesign.toFixed(1)}A (I_b) ≤ ${recommendedCable.breakerRating}A (I_n) ≤ ${recommendedCable.ampacity}A (I_z)` 
+      : `NEC: Small conductor & 75°C rating rules applied`;
+
+    outVoltDrop.textContent = `${recommendedCable.actualDeltaV.toFixed(2)} V`;
+    outVoltDropPct.textContent = `${recommendedCable.actualDropPct.toFixed(2)}% (Max Limit: ${maxDropPct}%)`;
+
+    outVoltLoad.textContent = `${recommendedCable.loadVolt.toFixed(2)} V`;
+    outVoltNominal.textContent = `Supply: ${v} V · Net Drop: -${recommendedCable.actualDeltaV.toFixed(2)} V`;
+
+    outAmpacity.textContent = `${recommendedCable.ampacity} A`;
+    const loadPct = (iDesign / recommendedCable.ampacity) * 100;
+    outLoadingPct.textContent = `Load Loading: ${loadPct.toFixed(1)}% of rating`;
+
+    outPowerLoss.textContent = pLoss < 1000 ? `${pLoss.toFixed(1)} W` : `${(pLoss / 1000).toFixed(2)} kW`;
+    outDesignCurrent.textContent = isContinuous ? `Design Current: ${iDesign.toFixed(2)} A (1.25×)` : `Operating Current: ${iLoad.toFixed(2)} A`;
+
+    // Drop Bar Gauge
+    const dropPct = recommendedCable.actualDropPct;
+    const barFillWidth = Math.min(100, (dropPct / maxDropPct) * 85);
+    dropFillBar.style.width = barFillWidth + '%';
+
+    if (dropPct <= maxDropPct) {
+      dropFillBar.className = 'drop-fill';
+      dropStatusLabel.innerHTML = `<span style="color:var(--ok);"><i class="fas fa-check"></i> ${dropPct.toFixed(2)}% ≤ ${maxDropPct}% (Compliant)</span>`;
+    } else {
+      dropFillBar.className = 'drop-fill err';
+      dropStatusLabel.innerHTML = `<span style="color:var(--err);"><i class="fas fa-xmark"></i> ${dropPct.toFixed(2)}% > ${maxDropPct}% (Exceeds Limit)</span>`;
+    }
+
+    resultNote.innerHTML = `
+      Recommended sizing governed by <strong>${controllingCriterion}</strong>. 
+      The selected <strong>${recommendedCable.name}</strong> cable carries ${iDesign.toFixed(1)} A safely (rated for ${recommendedCable.ampacity} A) 
+      while keeping the voltage drop at <strong>${recommendedCable.actualDropPct.toFixed(2)}%</strong> (under the ${maxDropPct}% ceiling).
+    `;
+
+    // Populate Evaluation Table
+    let tableHtml = '';
+    evaluatedCables.forEach(c => {
+      const isSelected = (c.name === recommendedCable.name);
+      let statusBadge = '';
+      if (isSelected) {
+        statusBadge = `<span class="status-badge optimal"><i class="fas fa-star"></i> Selected</span>`;
+      } else if (c.isPass) {
+        statusBadge = `<span class="status-badge pass"><i class="fas fa-check"></i> Compliant</span>`;
+      } else if (!c.passAmpacity) {
+        statusBadge = `<span class="status-badge fail"><i class="fas fa-fire"></i> Fails Ampacity</span>`;
+      } else {
+        statusBadge = `<span class="status-badge fail"><i class="fas fa-arrow-down"></i> Fails &Delta;V</span>`;
+      }
+
+      tableHtml += `
+        <tr class="${isSelected ? 'selected' : ''}">
+          <td><strong>${c.name}</strong></td>
+          <td>${c.ampacity} A</td>
+          <td>${c.actualDeltaV.toFixed(2)} V</td>
+          <td>${c.actualDropPct.toFixed(2)}%</td>
+          <td>${c.loadVolt.toFixed(1)} V</td>
+          <td>${c.breakerRating} A</td>
+          <td>${statusBadge}</td>
+        </tr>
+      `;
+    });
+    candidateTableBody.innerHTML = tableHtml;
+
+    // Cache state
+    currentCalcState = {
+      standard: currentStandard.toUpperCase(),
+      system: currentSystem.toUpperCase(),
+      voltage: v,
+      current: iLoad,
+      power: inpPower.value ? inpPower.value + ' ' + selPowerUnit.options[selPowerUnit.selectedIndex].text : '–',
+      length: l,
+      maxDrop: maxDropPct,
+      selectedWire: recommendedCable.name,
+      breaker: breakerText,
+      actualDropV: recommendedCable.actualDeltaV.toFixed(2) + ' V',
+      actualDropPct: recommendedCable.actualDropPct.toFixed(2) + '%',
+      loadVolt: recommendedCable.loadVolt.toFixed(2) + ' V',
+      ampacity: recommendedCable.ampacity + ' A',
+      controllingFactor: controllingCriterion,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+  }
+
+  // Toast
+  function showToast(msg) {
+    const toast = $('toast');
+    $('toastMsg').textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2800);
+  }
+
+  // History Management
+  function getHistory() {
+    try {
+      const d = localStorage.getItem(STORAGE_KEY);
+      return d ? JSON.parse(d) : [];
+    } catch(e) { return []; }
+  }
+
+  function saveHistory(list) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch(e) {}
+  }
+
+  function renderHistory() {
+    const list = getHistory();
+    const container = $('historyList');
+    if (!list || list.length === 0) {
+      container.innerHTML = '<div class="empty-state">No calculations saved yet. Click "Save Calc" to store current values.</div>';
+      return;
+    }
+
+    let html = '';
+    list.forEach((item, index) => {
+      html += `
+        <div class="history-item">
+          <div class="history-details">
+            <strong>${item.selectedWire}</strong> &middot; Breaker: <strong>${item.breaker}</strong>
+            <span class="history-meta">${item.system} &middot; ${item.voltage}V &middot; ${item.current}A &middot; L=${item.length}m &middot; Drop=${item.actualDropPct} (${item.actualDropV}) [${item.timestamp}]</span>
+          </div>
+          <div style="display:flex; gap:0.45rem;">
+            <button class="btn-sm btn-load" data-idx="${index}" type="button"><i class="fas fa-folder-open"></i> Load</button>
+            <button class="btn-sm del btn-del" data-idx="${index}" type="button"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+
+    container.querySelectorAll('.btn-load').forEach(b => {
+      b.onclick = function() {
+        const item = list[parseInt(this.getAttribute('data-idx'))];
+        if (!item) return;
+        if (item.standard === 'IEC') $('btnIec').click();
+        else $('btnAwg').click();
+
+        if (item.system === '3AC') setSystem('3ac');
+        else if (item.system === 'DC') setSystem('dc');
+        else setSystem('1ac');
+
+        inpVolt.value = item.voltage;
+        inpCurrent.value = item.current;
+        inpLength.value = item.length;
+        inpMaxDrop.value = item.maxDrop;
+        calculate();
+        showToast('Loaded calculation from history!');
+        window.scrollTo({ top: $('calcForm').offsetTop - 80, behavior: 'smooth' });
+      };
+    });
+
+    container.querySelectorAll('.btn-del').forEach(b => {
+      b.onclick = function() {
+        const idx = parseInt(this.getAttribute('data-idx'));
+        list.splice(idx, 1);
+        saveHistory(list);
+        renderHistory();
+        showToast('Removed from history.');
+      };
+    });
+  }
+
+  // Button Listeners
+  $('btnSaveCalc').onclick = () => {
+    if (!currentCalcState) return;
+    const list = getHistory();
+    list.unshift(currentCalcState);
+    if (list.length > 20) list.pop();
+    saveHistory(list);
+    renderHistory();
+    showToast('Calculation saved to history!');
+  };
+
+  $('btnPrintPdf').onclick = () => {
+    $('printDate').textContent = new Date().toLocaleString();
+    window.print();
+  };
+
+  // Modal Advanced Tools
+  const modal = $('advToolsModal');
+  $('btnAdvTools').onclick = () => modal.classList.add('active');
+  $('btnCloseModal').onclick = () => modal.classList.remove('active');
+  modal.onclick = (e) => {
+    if (e.target === modal) modal.classList.remove('active');
+  };
+
+  // Reset
+  $('btnReset').onclick = () => {
+    $('btnIec').click();
+    setSystem('1ac');
+    inpVolt.value = '230';
+    inpCurrent.value = '16';
+    inpPower.value = '';
+    inpPf.value = '0.9';
+    inpLength.value = '25';
+    inpMaxDrop.value = '3';
+    chkContinuous.checked = false;
+    calculate();
+    showToast('Reset to default values.');
+  };
+
+  // Load Benchmark Example (3kW Heater)
+  function loadHeaterExample() {
+    $('btnIec').click();
+    setSystem('1ac');
+    inpVolt.value = '230';
+    inpPower.value = '3000';
+    selPowerUnit.value = '1';
+    inpPf.value = '1.0';
+    inpLength.value = '25';
+    inpMaxDrop.value = '3';
+    chkContinuous.checked = false;
+    inpPower.dispatchEvent(new Event('input'));
+    showToast('Loaded 3 kW Heater benchmark example!');
+    window.scrollTo({ top: $('calcForm').offsetTop - 80, behavior: 'smooth' });
+  }
+
+  $('btnLoadExample').onclick = loadHeaterExample;
+  $('btnLoadExample2').onclick = loadHeaterExample;
+
+  $('btnExportJson').onclick = () => {
+    const list = getHistory();
+    if (list.length === 0) {
+      showToast('No history records to export.');
+      return;
+    }
+    const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'wire-drop-breaker-history.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Exported history as JSON!');
+  };
+
+  $('btnClearHistory').onclick = () => {
+    if (confirm('Clear all saved calculations?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      renderHistory();
+      showToast('Cleared calculation history.');
+    }
+  };
+
+  // Live input events
+  const inputList = [inpVolt, inpCurrent, inpPf, inpLength, inpMaxDrop, chkContinuous];
+  inputList.forEach(el => {
+    el.addEventListener('input', calculate);
+    el.addEventListener('change', calculate);
+  });
+
+  // Initial calculation
+  calculate();
+  renderHistory();
+})();
+</script>
+
+<script src="/pwa.js" defer></script>
+<script src="mta-chrome.js" defer></script>
+<!-- Vercel Speed Insights -->
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+
+</body>
+</html>

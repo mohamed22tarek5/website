@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/solar-inverter-sizing-calculator.html">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Solar Inverter Sizing Calculator with Motor Starting Surge | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Calculate continuous inverter wattage (W), motor starting surge power (W), apparent power (kVA), and DC battery current for off-grid and hybrid solar inverters.">
+  <meta name="author" content="Mohamed Tarek Abdelhady">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Solar Inverter Sizing Calculator with Motor Starting Surge | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Calculate continuous inverter power, motor surge wattage, apparent power (kVA), and DC battery current with safety margins.">
+  <meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="851">
+  <meta property="og:image:height" content="1134">
+  <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/solar-inverter-sizing-calculator.html">
+  <meta property="og:updated_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="article:modified_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Solar Inverter Sizing Calculator with Motor Starting Surge | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Calculate continuous inverter power, motor surge wattage, apparent power (kVA), and DC battery current with safety margins.">
+  <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+
+  <!-- PWA & Mobile Icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M. Tarek">
+  <meta name="application-name" content="M. Tarek">
+  <meta name="msapplication-TileColor" content="#0a0e1a">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
+  <link rel="stylesheet" href="mta-chrome.css">
+
+  <!-- Schema.org WebApplication & BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Solar Inverter Sizing Calculator",
+    "description": "Calculate continuous inverter wattage, motor starting surge power, apparent power (kVA), and DC battery current with safety margins.",
+    "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/solar-inverter-sizing-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek Abdelhady",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tools",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/tools.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Solar Inverter Sizing Calculator",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/sites/solar-inverter-sizing-calculator.html"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1322;
+      --bg3: #141829;
+      --card: #161b2e;
+      --card2: #1c2240;
+      --acc: #06b6d4; /* Inverter Cyan / Electric Teal */
+      --acc-hover: #0891b2;
+      --acc-subtle: rgba(6, 182, 212, 0.1);
+      --acc-border: rgba(6, 182, 212, 0.35);
+      --amber: #f59e0b;
+      --blue: #3b82f6;
+      --txt: #f1f5f9;
+      --mut: #94a3b8;
+      --mut2: #64748b;
+      --br: rgba(255, 255, 255, 0.08);
+      --br-hover: rgba(255, 255, 255, 0.16);
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --err: #ef4444;
+      --r: 14px;
+      --r-sm: 8px;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      --gradient-glow: radial-gradient(circle at top center, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --bg3: #e2e8f0;
+      --card: #ffffff;
+      --card2: #f8fafc;
+      --acc: #0891b2;
+      --acc-hover: #0e7490;
+      --acc-subtle: rgba(8, 145, 178, 0.08);
+      --acc-border: rgba(8, 145, 178, 0.25);
+      --txt: #0f172a;
+      --mut: #475569;
+      --mut2: #94a3b8;
+      --br: rgba(0, 0, 0, 0.08);
+      --br-hover: rgba(0, 0, 0, 0.15);
+      --gradient-glow: radial-gradient(circle at top center, rgba(8, 145, 178, 0.08) 0%, transparent 70%);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.65;
+      min-height: 100vh;
+      background-image: var(--gradient-glow);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 1.8rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      background: var(--acc-subtle);
+      border: 1px solid var(--acc-border);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--acc);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.9rem;
+    }
+
+    .pill .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--acc);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--acc);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.75rem, 3.8vw, 2.65rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 .grad {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--mut);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* In Brief / Summary Card */
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-left: 4px solid var(--acc);
+      border-radius: var(--r);
+      padding: 1.15rem 1.4rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .summary-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--acc);
+      margin-bottom: 0.45rem;
+    }
+
+    .summary-card p {
+      color: var(--mut);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .summary-card strong {
+      color: var(--txt);
+    }
+
+    /* Disclaimer Alert */
+    .alert-box {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: var(--r);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      font-size: 0.88rem;
+      color: var(--txt);
+      line-height: 1.55;
+    }
+
+    .alert-box i {
+      color: var(--warn);
+      font-size: 1.1rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    /* Layout Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--txt);
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .card h2 i {
+      color: var(--acc);
+      font-size: 1.05rem;
+    }
+
+    /* Form Inputs */
+    .lbl {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin-bottom: 0.35rem;
+      margin-top: 0.85rem;
+    }
+
+    .lbl:first-of-type {
+      margin-top: 0;
+    }
+
+    .lbl span.opt {
+      font-size: 0.74rem;
+      font-weight: 400;
+      color: var(--mut2);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .input-row input {
+      flex: 1;
+    }
+
+    .input-row select {
+      min-width: 105px;
+    }
+
+    input[type="number"], select {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--txt);
+      padding: 0.7rem 0.85rem;
+      border-radius: var(--r-sm);
+      font-family: var(--mono);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    input[type="number"]:focus, select:focus {
+      border-color: var(--acc);
+      box-shadow: 0 0 0 3px var(--acc-subtle);
+    }
+
+    /* Action Buttons Toolbar */
+    .btn-toolbar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 520px) {
+      .btn-toolbar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.75rem 0.6rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      color: var(--txt);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 150ms ease;
+      text-decoration: none;
+    }
+
+    .action-btn:hover {
+      background: var(--card2);
+      border-color: var(--acc-border);
+      color: var(--acc);
+      transform: translateY(-1px);
+    }
+
+    .action-btn.primary {
+      background: var(--gradient-accent);
+      border: none;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(6, 182, 212, 0.3);
+    }
+
+    .action-btn.primary:hover {
+      box-shadow: 0 6px 20px rgba(6, 182, 212, 0.45);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Results Grid */
+    .res-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .res-cell {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.85rem 1rem;
+      transition: border-color 150ms ease;
+      position: relative;
+    }
+
+    .res-cell.highlight {
+      border-color: var(--acc-border);
+      background: var(--acc-subtle);
+    }
+
+    .res-cell small {
+      display: block;
+      color: var(--mut2);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+
+    .res-cell b {
+      font-family: var(--mono);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--txt);
+      display: block;
+      word-break: break-word;
+    }
+
+    .res-cell.highlight b {
+      color: var(--acc);
+    }
+
+    .res-cell .sub-val {
+      font-size: 0.75rem;
+      color: var(--mut);
+      margin-top: 0.2rem;
+      font-family: var(--mono);
+    }
+
+    /* Surge Bar Indicator */
+    .power-bar-wrap {
+      margin-top: 1.15rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.95rem 1.05rem;
+    }
+
+    .power-bar-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin-bottom: 0.5rem;
+    }
+
+    .power-track {
+      height: 12px;
+      background: var(--bg3);
+      border-radius: 9999px;
+      overflow: hidden;
+      display: flex;
+      position: relative;
+    }
+
+    .bar-seg-cont {
+      height: 100%;
+      background: var(--acc);
+      transition: width 200ms ease;
+    }
+
+    .bar-seg-surge {
+      height: 100%;
+      background: var(--amber);
+      transition: width 200ms ease;
+    }
+
+    /* Content Cards & Theory */
+    .content-card {
+      margin-top: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .content-card h2 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+      color: var(--txt);
+    }
+
+    .formula-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .formula-box {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1.1rem;
+    }
+
+    .formula-box h4 {
+      font-size: 0.85rem;
+      color: var(--mut);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .formula-code {
+      font-family: var(--mono);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--acc);
+      background: var(--bg3);
+      padding: 0.6rem 0.85rem;
+      border-radius: 6px;
+      border: 1px solid var(--br);
+      margin-bottom: 0.5rem;
+      word-break: break-all;
+    }
+
+    .formula-box p {
+      font-size: 0.82rem;
+      color: var(--mut2);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Example Card */
+    .example-box {
+      background: var(--bg2);
+      border: 1px solid var(--acc-border);
+      border-radius: var(--r-sm);
+      padding: 1.25rem;
+      margin-top: 0.85rem;
+    }
+
+    .example-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .example-header h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--txt);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .example-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .step-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+    }
+
+    .step-card span {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--mut2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.2rem;
+    }
+
+    .step-card strong {
+      font-family: var(--mono);
+      font-size: 0.98rem;
+      color: var(--txt);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .close-modal-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .close-modal-btn:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .tool-tile {
+      display: block;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1rem;
+      text-decoration: none;
+      color: var(--txt);
+      transition: all 150ms ease;
+    }
+
+    .tool-tile:hover {
+      border-color: var(--acc-border);
+      background: var(--card2);
+      transform: translateY(-2px);
+    }
+
+    .tool-tile-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+      color: var(--acc);
+    }
+
+    .tool-tile p {
+      font-size: 0.82rem;
+      color: var(--mut);
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* History */
+    .history-card {
+      margin-top: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.75rem 1rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .history-details {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--txt);
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .history-meta {
+      font-size: 0.75rem;
+      color: var(--mut2);
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--bg3);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      transition: all 150ms ease;
+    }
+
+    .btn-sm:hover {
+      color: var(--txt);
+      border-color: var(--acc);
+    }
+
+    .btn-sm.del:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 1.75rem 1rem;
+      color: var(--mut2);
+      font-size: 0.88rem;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--card2);
+      border: 1px solid var(--acc-border);
+      color: var(--txt);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--r-sm);
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transform: translateY(100px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 250ms ease, opacity 250ms ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11pt;
+      }
+
+      .mta-bar, .mta-foot, .btn-toolbar, .modal-overlay, .toast, .btn-sm, #th, [data-mta-top], .example-header button {
+        display: none !important;
+      }
+
+      .wrap {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .card, .summary-card, .content-card, .history-card {
+        background: #ffffff !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+        color: #000000 !important;
+        page-break-inside: avoid;
+        margin-bottom: 1rem !important;
+        padding: 1rem !important;
+      }
+
+      .print-header {
+        display: block !important;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+      }
+
+      .print-header h1 {
+        font-size: 18pt;
+        margin: 0;
+      }
+
+      .res-cell {
+        background: #f8f8f8 !important;
+        border: 1px solid #ddd !important;
+        color: #000 !important;
+      }
+
+      .res-cell b {
+        color: #000 !important;
+      }
+    }
+
+    .print-header {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header Chrome -->
+<header class="mta-bar" id="header" role="banner">
+  <div class="mta-bar-in">
+    <nav aria-label="Breadcrumb" class="mta-crumbs">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools.html">Tools</a></li>
+        <li aria-current="page">Solar Inverter Sizing Calculator</li>
+      </ol>
+    </nav>
+    <button class="mta-btn" id="th" type="button" aria-label="Toggle dark/light mode">
+      <i class="fas fa-moon" data-mta-icon></i>
+    </button>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <!-- Print Header -->
+  <div class="print-header">
+    <h1>Mohamed Tarek Abdelhady — Electrical Engineering Inverter Sizing Report</h1>
+    <p><strong>Tool:</strong> Solar Inverter Sizing &amp; Motor Starting Surge Calculator</p>
+    <p><strong>Date Generated:</strong> <span id="printDate"></span></p>
+  </div>
+
+  <!-- Hero Header -->
+  <div class="hero">
+    <span class="pill"><span class="dot"></span> Solar Power Inverters &middot; Motor Surge</span>
+    <h1><span class="grad">Solar Inverter Sizing</span> Calculator</h1>
+    <p>Size continuous wattage (W), motor locked-rotor surge (W), apparent power (kVA), and full-load DC battery current with safety margins.</p>
+  </div>
+
+  <!-- In Brief -->
+  <div class="summary-card" role="region" aria-label="Summary">
+    <div class="summary-card-header">
+      <i class="fas fa-circle-check"></i> In Brief
+    </div>
+    <p>
+      Continuous inverter power rating is chosen approximately <strong>25% higher</strong> than the total simultaneous running load, while the inverter's peak surge rating must withstand the starting inrush current of the <strong>largest motor or compressor</strong>, which typically reaches <strong>3&times; or more</strong> of its rated power.
+    </p>
+  </div>
+
+  <!-- Disclaimer Alert -->
+  <div class="alert-box">
+    <i class="fas fa-triangle-exclamation"></i>
+    <div>
+      <strong>Engineering Notice:</strong> Results are provided for educational and preliminary estimation purposes. Electrical installations, high-voltage PV strings, and power electronics must be designed, protected, and installed by a certified electrical engineer in accordance with local safety standards.
+    </div>
+  </div>
+
+  <!-- Calculator Grid -->
+  <div class="grid">
+    <!-- Left Card: Inputs -->
+    <div class="card" id="calcForm">
+      <h2><i class="fas fa-sliders"></i> Electrical Load &amp; Inverter Inputs</h2>
+
+      <!-- Total Simultaneous Load -->
+      <label class="lbl" for="inpTotalLoad">
+        <span>Total Simultaneous Running Loads (W)</span>
+        <span class="opt">Sum of active devices</span>
+      </label>
+      <div class="input-row">
+        <input id="inpTotalLoad" type="number" value="1500" step="50" min="50" placeholder="e.g. 1500" aria-label="Total simultaneous running loads in watts">
+        <select id="selLoadPreset" aria-label="Load presets">
+          <option value="1500" selected>1,500 W (Typical Home)</option>
+          <option value="800">800 W (Small Cabin)</option>
+          <option value="3000">3,000 W (Heavy Kitchen)</option>
+          <option value="5000">5,000 W (Villa / Workshop)</option>
+        </select>
+      </div>
+
+      <!-- Largest Motor / Compressor Load -->
+      <label class="lbl" for="inpMotorLoad">
+        <span>Largest Motor or Compressor Power (W)</span>
+        <span class="opt">Within total load</span>
+      </label>
+      <div class="input-row">
+        <input id="inpMotorLoad" type="number" value="400" step="25" min="0" placeholder="e.g. 400" aria-label="Largest motor load in watts">
+        <select id="selMotorPreset" aria-label="Motor presets">
+          <option value="400" selected>400 W (Deep Freezer / Pump)</option>
+          <option value="150">150 W (Domestic Refrigerator)</option>
+          <option value="750">750 W (1 HP Water Pump)</option>
+          <option value="1200">1,200 W (1.5 HP Inverter AC)</option>
+          <option value="0">0 W (No Motors / Resistive)</option>
+        </select>
+      </div>
+
+      <!-- Motor Surge Multiplier k -->
+      <label class="lbl" for="selSurgeFactor">
+        <span>Largest Load Type (Surge Factor k)</span>
+        <span class="opt">Starting inrush multiple</span>
+      </label>
+      <select id="selSurgeFactor" aria-label="Motor starting surge multiplier">
+        <option value="3.0" selected>Refrigerator / AC / Water Pump — 3× surge</option>
+        <option value="5.0">Heavy Induction Motor / Submersible Pump — 5× surge</option>
+        <option value="7.0">Air Compressor / High Starting Torque — 7× surge</option>
+        <option value="2.0">Inverter Soft-start Motor — 2× surge</option>
+        <option value="1.2">Non-motor Electronic / Resistive Load — 1.2×</option>
+      </select>
+
+      <!-- Safety Margin m -->
+      <label class="lbl" for="inpSafetyMargin">
+        <span>Continuous Safety Margin (%)</span>
+        <span class="opt">Standard 20% – 30%</span>
+      </label>
+      <div class="input-row">
+        <input id="inpSafetyMargin" type="number" value="25" step="5" min="0" max="60" placeholder="e.g. 25" aria-label="Safety margin percentage">
+        <select id="selMarginPreset" aria-label="Margin presets">
+          <option value="25" selected>25% (Standard Recommendation)</option>
+          <option value="20">20% (Minimum Recommended)</option>
+          <option value="30">30% (High Reliability)</option>
+        </select>
+      </div>
+
+      <!-- Power Factor cos phi -->
+      <label class="lbl" for="inpPf">
+        <span>Load Power Factor (cos &phi;)</span>
+        <span class="opt">Motors: 0.8 &middot; Resistive: 1.0</span>
+      </label>
+      <div class="input-row">
+        <input id="inpPf" type="number" value="0.8" step="0.05" min="0.5" max="1.0" placeholder="e.g. 0.8" aria-label="Power factor">
+        <select id="selPfPreset" aria-label="Power factor presets">
+          <option value="0.8" selected>0.80 (Mixed Motors / Inductive)</option>
+          <option value="0.9">0.90 (Modern Inverter Loads)</option>
+          <option value="1.0">1.00 (Pure Resistive Heaters/Bulbs)</option>
+        </select>
+      </div>
+
+      <!-- Battery System Voltage -->
+      <label class="lbl" for="selBattVolt">
+        <span>Battery DC Voltage (V)</span>
+        <span class="opt">DC Bus Input</span>
+      </label>
+      <select id="selBattVolt" aria-label="Battery nominal voltage">
+        <option value="24" selected>24 V (Standard Home 1kW–3kW)</option>
+        <option value="12">12 V (Small Systems &le; 1kW)</option>
+        <option value="48">48 V (High Efficiency &ge; 3kW)</option>
+      </select>
+
+      <!-- Action Toolbar -->
+      <div class="btn-toolbar">
+        <button class="action-btn primary" id="btnSaveCalc" type="button" aria-label="Save calculation">
+          <i class="fas fa-floppy-disk"></i> Save Calc
+        </button>
+        <button class="action-btn" id="btnPrintPdf" type="button" aria-label="Export PDF report">
+          <i class="fas fa-file-pdf"></i> PDF Report
+        </button>
+        <button class="action-btn" id="btnAdvTools" type="button" aria-label="Open advanced tools">
+          <i class="fas fa-star"></i> Adv. Tools
+        </button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:1rem; font-size:0.8rem;">
+        <button type="button" id="btnReset" style="color:var(--mut2); text-decoration:underline; background:none; border:none; cursor:pointer;">
+          <i class="fas fa-rotate-left"></i> Reset Defaults
+        </button>
+        <button type="button" id="btnLoadExample" style="color:var(--acc); background:none; border:none; cursor:pointer; font-weight:600;">
+          <i class="fas fa-lightbulb"></i> Load Benchmark (1500W + 400W Motor)
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Card: Outputs -->
+    <div class="card">
+      <h2><i class="fas fa-bolt"></i> Inverter Sizing Results</h2>
+
+      <div class="res-grid">
+        <!-- Continuous Power Required -->
+        <div class="res-cell highlight">
+          <small>Continuous Power Required</small>
+          <b id="outContPower">1,875 W</b>
+          <div class="sub-val" id="outContCalc">1,500 W &times; 1.25 (+25% margin)</div>
+        </div>
+
+        <!-- Surge Power at Start -->
+        <div class="res-cell highlight">
+          <small>Peak Surge at Motor Start</small>
+          <b id="outSurgePower">2,300 W</b>
+          <div class="sub-val" id="outSurgeCalc">(1,500 - 400) + (3 &times; 400 W)</div>
+        </div>
+
+        <!-- Apparent Power in kVA -->
+        <div class="res-cell highlight">
+          <small>Apparent Power (kVA / VA)</small>
+          <b id="outApparentPower">2.34 kVA</b>
+          <div class="sub-val" id="outVaCalc">2,344 VA (at 0.8 PF)</div>
+        </div>
+
+        <!-- Suggested Commercial Inverter -->
+        <div class="res-cell highlight">
+          <small>Suggested Inverter Model</small>
+          <b id="outInverterSize">2 kW (2.5 kVA)</b>
+          <div class="sub-val" id="outInverterType">Pure Sine Wave Inverter</div>
+        </div>
+
+        <!-- Battery DC Current Full Load -->
+        <div class="res-cell">
+          <small>Full-Load Battery Current</small>
+          <b id="outBatteryCurrent">69 A</b>
+          <div class="sub-val" id="outCurrentCalc">1,500 W / (0.90 &times; 24 V)</div>
+        </div>
+
+        <!-- Design Current at Max Continuous -->
+        <div class="res-cell">
+          <small>Peak Battery Surge Current</small>
+          <b id="outSurgeCurrent">106 A</b>
+          <div class="sub-val" id="outSurgeCurrentCalc">2,300 W / (0.90 &times; 24 V)</div>
+        </div>
+      </div>
+
+      <!-- Power vs Surge Visual Comparison -->
+      <div class="power-bar-wrap">
+        <div class="power-bar-header">
+          <span>Continuous vs. Motor Starting Surge</span>
+          <span id="powerRatioLabel">Surge is 1.23&times; Continuous</span>
+        </div>
+        <div class="power-track">
+          <div class="bar-seg-cont" id="barCont" style="width: 81%;" title="Continuous Power: 1,875 W"></div>
+          <div class="bar-seg-surge" id="barSurge" style="width: 19%;" title="Motor Starting Inrush Surge: 2,300 W"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:0.4rem; font-size:0.75rem; color:var(--mut2);">
+          <span><i class="fas fa-square" style="color:var(--acc); margin-right:3px;"></i> Continuous: <strong id="lblBarCont">1,875 W</strong></span>
+          <span><i class="fas fa-square" style="color:var(--amber); margin-right:3px;"></i> Surge Demand: <strong id="lblBarSurge">2,300 W</strong></span>
+        </div>
+      </div>
+
+      <!-- Inverter Specification Advisory Note -->
+      <div style="margin-top:1rem; font-size:0.85rem; color:var(--mut); background:var(--bg2); border:1px dashed var(--br); border-radius:10px; padding:0.85rem 1rem; line-height:1.55;">
+        <i class="fas fa-circle-info" style="color:var(--acc); margin-right:0.35rem;"></i>
+        <strong>Commercial Sizing Rule:</strong> This sizing assumes that the inverter can deliver a surge power of at least <strong>2&times; its continuous rating</strong> for several seconds (e.g. a 2 kW inverter handles 4 kW surge); always verify the peak surge specification in the manufacturer's datasheet.
+      </div>
+
+      <!-- DC Cable & Fuse Recommendation -->
+      <div style="margin-top:0.85rem; padding:0.75rem 0.95rem; background:var(--bg2); border:1px solid var(--br); border-radius:8px; font-size:0.83rem; color:var(--txt);">
+        <i class="fas fa-shield" style="color:var(--ok); margin-right:0.4rem;"></i>
+        <strong>DC Wiring Recommendation:</strong> For <strong>69 A</strong> continuous running current at 24V, use minimum <strong>25 mm² (4 AWG)</strong> flexible copper cable and a <strong>100 A – 125 A DC ANL / Class-T fuse</strong> within 30 cm of the battery terminal.
+      </div>
+    </div>
+  </div>
+
+  <!-- Theory & Governing Sizing Equations -->
+  <div class="content-card">
+    <h2><i class="fas fa-calculator" style="color:var(--acc);"></i> Engineering Calculation Methodology</h2>
+    <p style="color:var(--mut); font-size:0.92rem; line-height:1.6;">
+      Solar inverters convert direct current (DC) from batteries or solar panels into alternating current (AC). Sizing requires accommodating both steady-state thermal loads and short-duration inductive motor inrush currents:
+    </p>
+
+    <div class="formula-grid">
+      <!-- 1. Continuous Power -->
+      <div class="formula-box">
+        <h4>1. Continuous Power with Safety Margin (m)</h4>
+        <div class="formula-code">P<sub>cont</sub> = P &times; (1 + m)</div>
+        <p>Continuous wattage rating with safety headroom (typically <strong>m = 25%</strong>) prevents the inverter from operating at thermal maximum capacity.</p>
+      </div>
+
+      <!-- 2. Surge Power -->
+      <div class="formula-box">
+        <h4>2. Peak Motor Starting Surge</h4>
+        <div class="formula-code">P<sub>surge</sub> = (P &minus; P<sub>m</sub>) + (k &times; P<sub>m</sub>)</div>
+        <p>Where <strong>P<sub>m</sub></strong> is the wattage of the largest motor and <strong>k</strong> is its starting locked-rotor inrush multiplier (typically 3× to 7×).</p>
+      </div>
+
+      <!-- 3. Apparent Power -->
+      <div class="formula-box">
+        <h4>3. Apparent Power Rating (S)</h4>
+        <div class="formula-code">S = P<sub>cont</sub> / cos&phi;</div>
+        <p>Many commercial inverters are rated in <strong>Volt-Amps (VA)</strong> or <strong>kVA</strong>. For inductive loads with power factor cos&phi; = 0.8, VA exceeds Watts by 25%.</p>
+      </div>
+
+      <!-- 4. Battery DC Current -->
+      <div class="formula-box">
+        <h4>4. Full-Load DC Battery Current (I<sub>dc</sub>)</h4>
+        <div class="formula-code">I<sub>dc</sub> = P / (0.90 &times; V<sub>batt</sub>)</div>
+        <p>Current drawn from the DC battery bank assuming typical 90% inverter power conversion efficiency.</p>
+      </div>
+    </div>
+
+    <!-- Waveform Comparison Note -->
+    <div style="margin-top:1.25rem; background:var(--bg2); border:1px solid var(--br); border-radius:var(--r-sm); padding:1rem 1.15rem; font-size:0.88rem; color:var(--mut); line-height:1.65;">
+      <h4 style="color:var(--txt); margin-bottom:0.4rem; font-size:0.95rem;"><i class="fas fa-wave-square" style="color:var(--acc); margin-right:0.4rem;"></i> Pure Sine Wave vs. Modified Sine Wave:</h4>
+      <p style="margin:0;">
+        Always select a <strong>Pure Sine Wave Inverter</strong> for domestic, off-grid, and commercial installations. Modified sine wave (square wave) inverters cause high harmonic distortion, excessive overheating, buzzing noises, and premature motor failure in refrigerators, pumps, fans, compressors, and sensitive electronic controllers.
+      </p>
+    </div>
+  </div>
+
+  <!-- Benchmark Practical Example -->
+  <div class="content-card">
+    <h2><i class="fas fa-lightbulb" style="color:var(--warn);"></i> Practical Benchmark Problem</h2>
+    <div class="example-box">
+      <div class="example-header">
+        <h3><i class="fas fa-microchip" style="color:var(--acc);"></i> Benchmark: 1,500 W Total Running &middot; 400 W Fridge Compressor (3&times; Surge) &middot; 24 V DC</h3>
+        <button class="btn-sm" id="btnLoadExample2" type="button">
+          <i class="fas fa-arrow-up-right-from-square"></i> Load This Example
+        </button>
+      </div>
+      <p style="color:var(--mut); font-size:0.9rem; line-height:1.6;">
+        A home system running <strong>1,500 W</strong> of simultaneous appliances, with a <strong>400 W refrigerator compressor</strong> having a <strong>3×</strong> starting multiplier, powered from a <strong>24 V</strong> battery bank at <strong>0.8</strong> power factor:
+      </p>
+
+      <div class="example-steps">
+        <div class="step-card">
+          <span>1. Continuous Demand</span>
+          <strong>1500 &times; 1.25 = 1,875 W</strong>
+        </div>
+        <div class="step-card">
+          <span>2. Motor Surge Peak</span>
+          <strong>(1500 − 400) + (3 &times; 400) = 2,300 W</strong>
+        </div>
+        <div class="step-card">
+          <span>3. Apparent Power</span>
+          <strong>1875 / 0.8 = 2.34 kVA (2,344 VA)</strong>
+        </div>
+        <div class="step-card">
+          <span>4. Inverter Model</span>
+          <strong>2 kW (2.5 kVA) Pure Sine Wave</strong>
+        </div>
+        <div class="step-card">
+          <span>5. Battery Full Load</span>
+          <strong>1500 / (0.90 &times; 24) = 69 A</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Saved Calculations History -->
+  <div class="history-card" id="historyCard">
+    <div class="history-header">
+      <h3 style="font-size:1.1rem; font-weight:700; display:flex; align-items:center; gap:0.5rem;">
+        <i class="fas fa-clock-rotate-left" style="color:var(--acc);"></i> Saved Calculations History
+      </h3>
+      <div style="display:flex; gap:0.5rem;">
+        <button class="btn-sm" id="btnExportJson" type="button" title="Export as JSON">
+          <i class="fas fa-download"></i> Export JSON
+        </button>
+        <button class="btn-sm del" id="btnClearHistory" type="button" title="Clear History">
+          <i class="fas fa-trash"></i> Clear All
+        </button>
+      </div>
+    </div>
+    <div class="history-list" id="historyList">
+      <div class="empty-state">No calculations saved yet. Click "Save Calc" to store current values.</div>
+    </div>
+  </div>
+</main>
+
+<!-- Advanced Tools Modal -->
+<div class="modal-overlay" id="advToolsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="modalTitle" style="font-size:1.2rem; font-weight:700; display:flex; align-items:center; gap:0.5rem; color:var(--txt);">
+        <i class="fas fa-star" style="color:var(--acc);"></i> Related Solar &amp; Electrical Calculators
+      </h3>
+      <button class="close-modal-btn" id="btnCloseModal" type="button" aria-label="Close dialog">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+    <div class="tools-grid">
+      <a href="/sites/solar-system-sizing-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-solar-panel"></i> Solar System Sizing</div>
+        <p>Complete solar PV array wattage, battery storage, and inverter wattage sizing.</p>
+      </a>
+      <a href="/sites/solar-battery-series-parallel-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-car-battery"></i> Battery Bank Wiring</div>
+        <p>Series strings (Ns), parallel branches (Np), and matrix wiring schematic.</p>
+      </a>
+      <a href="/sites/wire-size-voltage-drop-breaker-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-plug-circle-bolt"></i> Wire Size &amp; Breaker</div>
+        <p>Conductor cross-section and breaker selection by ampacity and voltage drop.</p>
+      </a>
+      <a href="/sites/battery-capacity-runtime-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-battery-half"></i> Battery Runtime &amp; Peukert</div>
+        <p>Deep-cycle discharge rates, runtime curves, and Peukert capacity loss.</p>
+      </a>
+      <a href="/sites/ohms-law-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-calculator"></i> Ohm's Law Calculator</div>
+        <p>Calculate voltage, current, resistance, and electrical power with circuit analysis.</p>
+      </a>
+      <a href="/sites/transformer-turns-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-right-left"></i> Transformer Calculator</div>
+        <p>Transformer turns ratio, primary/secondary voltages, and load currents.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Feedback -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <i class="fas fa-circle-check" style="color:var(--ok);"></i>
+  <span id="toastMsg">Calculation saved successfully!</span>
+</div>
+
+<!-- Footer Chrome -->
+<footer class="mta-foot" role="contentinfo">
+  <div class="mta-foot-in">
+    <div class="mta-social">
+      <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="/">Back to Portfolio</a></p>
+    <div class="mta-actions">
+      <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+      <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+    </div>
+  </div>
+</footer>
+
+<!-- Interactive Logic -->
+<script>
+(function() {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  const STORAGE_KEY = 'mta_solar_inverter_sizing_history';
+
+  // Standard commercial inverter continuous ratings (Watts)
+  const COMMERCIAL_INVERTERS = [
+    { w: 500, kva: 0.6 },
+    { w: 1000, kva: 1.2 },
+    { w: 1500, kva: 1.8 },
+    { w: 2000, kva: 2.5 },
+    { w: 3000, kva: 3.5 },
+    { w: 4000, kva: 5.0 },
+    { w: 5000, kva: 6.0 },
+    { w: 6000, kva: 7.2 },
+    { w: 8000, kva: 10.0 },
+    { w: 10000, kva: 12.0 },
+    { w: 12000, kva: 15.0 }
+  ];
+
+  // Inputs
+  const inpTotalLoad = $('inpTotalLoad');
+  const selLoadPreset = $('selLoadPreset');
+  const inpMotorLoad = $('inpMotorLoad');
+  const selMotorPreset = $('selMotorPreset');
+  const selSurgeFactor = $('selSurgeFactor');
+  const inpSafetyMargin = $('inpSafetyMargin');
+  const selMarginPreset = $('selMarginPreset');
+  const inpPf = $('inpPf');
+  const selPfPreset = $('selPfPreset');
+  const selBattVolt = $('selBattVolt');
+
+  // Outputs
+  const outContPower = $('outContPower');
+  const outContCalc = $('outContCalc');
+  const outSurgePower = $('outSurgePower');
+  const outSurgeCalc = $('outSurgeCalc');
+  const outApparentPower = $('outApparentPower');
+  const outVaCalc = $('outVaCalc');
+  const outInverterSize = $('outInverterSize');
+  const outInverterType = $('outInverterType');
+  const outBatteryCurrent = $('outBatteryCurrent');
+  const outCurrentCalc = $('outCurrentCalc');
+  const outSurgeCurrent = $('outSurgeCurrent');
+  const outSurgeCurrentCalc = $('outSurgeCurrentCalc');
+  const powerRatioLabel = $('powerRatioLabel');
+  const barCont = $('barCont');
+  const barSurge = $('barSurge');
+  const lblBarCont = $('lblBarCont');
+  const lblBarSurge = $('lblBarSurge');
+
+  let currentCalcState = null;
+
+  // Preset Handlers
+  selLoadPreset.onchange = () => {
+    inpTotalLoad.value = selLoadPreset.value;
+    calculate();
+  };
+
+  selMotorPreset.onchange = () => {
+    inpMotorLoad.value = selMotorPreset.value;
+    calculate();
+  };
+
+  selMarginPreset.onchange = () => {
+    inpSafetyMargin.value = selMarginPreset.value;
+    calculate();
+  };
+
+  selPfPreset.onchange = () => {
+    inpPf.value = selPfPreset.value;
+    calculate();
+  };
+
+  // Main Calculation Function
+  function calculate() {
+    let totalP = parseFloat(inpTotalLoad.value) || 1500;
+    let motorP = parseFloat(inpMotorLoad.value);
+    if (isNaN(motorP) || motorP < 0) motorP = 0;
+    if (motorP > totalP) {
+      motorP = totalP;
+      inpMotorLoad.value = totalP;
+    }
+
+    const k = parseFloat(selSurgeFactor.value) || 3.0;
+    const m = (parseFloat(inpSafetyMargin.value) || 25) / 100;
+    const pf = parseFloat(inpPf.value) || 0.8;
+    const vBatt = parseFloat(selBattVolt.value) || 24;
+
+    // 1. Continuous Power: P_cont = P * (1 + m)
+    const pCont = Math.round(totalP * (1 + m));
+
+    // 2. Surge Power: P_surge = (P - P_m) + (k * P_m)
+    const pSurge = Math.round((totalP - motorP) + (k * motorP));
+
+    // 3. Apparent Power in kVA: S = P_cont / PF
+    const sVa = pCont / pf;
+    const sKva = sVa / 1000;
+
+    // 4. Commercial Inverter Model Selection
+    // Must satisfy: Continuous >= pCont, AND (2x continuous rating >= pSurge)
+    let selectedInv = COMMERCIAL_INVERTERS[COMMERCIAL_INVERTERS.length - 1];
+    for (const inv of COMMERCIAL_INVERTERS) {
+      if (inv.w >= pCont && (inv.w * 2.0) >= pSurge) {
+        selectedInv = inv;
+        break;
+      }
+    }
+
+    // 5. Battery DC Current: I_dc = P / (0.90 * V_batt)
+    const iContRunning = Math.round(totalP / (0.90 * vBatt));
+    const iSurgePeak = Math.round(pSurge / (0.90 * vBatt));
+
+    // Render Outputs
+    outContPower.textContent = `${pCont.toLocaleString()} W`;
+    outContCalc.textContent = `${totalP.toLocaleString()} W × ${(1 + m).toFixed(2)} (+${Math.round(m * 100)}% margin)`;
+
+    outSurgePower.textContent = `${pSurge.toLocaleString()} W`;
+    outSurgeCalc.textContent = `(${totalP} - ${motorP}) + (${k} × ${motorP} W)`;
+
+    outApparentPower.textContent = `${sKva.toFixed(2)} kVA`;
+    outVaCalc.textContent = `${Math.round(sVa).toLocaleString()} VA (at ${pf.toFixed(2)} PF)`;
+
+    const kwLabel = selectedInv.w >= 1000 ? `${(selectedInv.w / 1000)} kW` : `${selectedInv.w} W`;
+    outInverterSize.textContent = `${kwLabel} (${selectedInv.kva} kVA)`;
+    outInverterType.textContent = `Handles ${pCont}W continuous / ${(selectedInv.w * 2)}W surge`;
+
+    outBatteryCurrent.textContent = `${iContRunning} A`;
+    outCurrentCalc.textContent = `${totalP} W / (0.90 × ${vBatt} V)`;
+
+    outSurgeCurrent.textContent = `${iSurgePeak} A`;
+    outSurgeCurrentCalc.textContent = `${pSurge} W / (0.90 × ${vBatt} V)`;
+
+    // Power vs Surge Comparison Bar
+    const ratio = (pSurge / pCont).toFixed(2);
+    powerRatioLabel.textContent = `Surge Demand is ${ratio}× Continuous`;
+
+    const totalBar = Math.max(pCont, pSurge);
+    const contPct = Math.round((pCont / totalBar) * 100);
+    const surgePct = 100 - contPct;
+
+    barCont.style.width = contPct + '%';
+    barSurge.style.width = surgePct + '%';
+    lblBarCont.textContent = `${pCont.toLocaleString()} W`;
+    lblBarSurge.textContent = `${pSurge.toLocaleString()} W`;
+
+    // Cache State for history saving
+    currentCalcState = {
+      totalP: totalP,
+      motorP: motorP,
+      surgeFactor: k + '×',
+      safetyMargin: Math.round(m * 100) + '%',
+      pf: pf,
+      vBatt: vBatt,
+      pCont: pCont,
+      pSurge: pSurge,
+      sKva: sKva.toFixed(2),
+      inverterSize: `${kwLabel} (${selectedInv.kva} kVA)`,
+      iRunning: iContRunning,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+  }
+
+  // Toast
+  function showToast(msg) {
+    const toast = $('toast');
+    $('toastMsg').textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2800);
+  }
+
+  // History Management
+  function getHistory() {
+    try {
+      const d = localStorage.getItem(STORAGE_KEY);
+      return d ? JSON.parse(d) : [];
+    } catch(e) { return []; }
+  }
+
+  function saveHistory(list) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch(e) {}
+  }
+
+  function renderHistory() {
+    const list = getHistory();
+    const container = $('historyList');
+    if (!list || list.length === 0) {
+      container.innerHTML = '<div class="empty-state">No calculations saved yet. Click "Save Calc" to store current values.</div>';
+      return;
+    }
+
+    let html = '';
+    list.forEach((item, index) => {
+      html += `
+        <div class="history-item">
+          <div class="history-details">
+            <strong>${item.inverterSize}</strong> &middot; Cont: <strong>${item.pCont} W</strong> &middot; Surge: <strong>${item.pSurge} W</strong>
+            <span class="history-meta">Load: ${item.totalP}W (Motor: ${item.motorP}W @ ${item.surgeFactor}) &middot; ${item.sKva} kVA &middot; ${item.iRunning}A @ ${item.vBatt}V [${item.timestamp}]</span>
+          </div>
+          <div style="display:flex; gap:0.45rem;">
+            <button class="btn-sm btn-load" data-idx="${index}" type="button"><i class="fas fa-folder-open"></i> Load</button>
+            <button class="btn-sm del btn-del" data-idx="${index}" type="button"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+
+    container.querySelectorAll('.btn-load').forEach(b => {
+      b.onclick = function() {
+        const item = list[parseInt(this.getAttribute('data-idx'))];
+        if (!item) return;
+        inpTotalLoad.value = item.totalP;
+        inpMotorLoad.value = item.motorP;
+        inpPf.value = item.pf;
+        selBattVolt.value = item.vBatt;
+        calculate();
+        showToast('Loaded calculation from history!');
+        window.scrollTo({ top: $('calcForm').offsetTop - 80, behavior: 'smooth' });
+      };
+    });
+
+    container.querySelectorAll('.btn-del').forEach(b => {
+      b.onclick = function() {
+        const idx = parseInt(this.getAttribute('data-idx'));
+        list.splice(idx, 1);
+        saveHistory(list);
+        renderHistory();
+        showToast('Removed calculation from history.');
+      };
+    });
+  }
+
+  // Button Listeners
+  $('btnSaveCalc').onclick = () => {
+    if (!currentCalcState) return;
+    const list = getHistory();
+    list.unshift(currentCalcState);
+    if (list.length > 20) list.pop();
+    saveHistory(list);
+    renderHistory();
+    showToast('Calculation saved to history!');
+  };
+
+  $('btnPrintPdf').onclick = () => {
+    $('printDate').textContent = new Date().toLocaleString();
+    window.print();
+  };
+
+  // Modal Advanced Tools
+  const modal = $('advToolsModal');
+  $('btnAdvTools').onclick = () => modal.classList.add('active');
+  $('btnCloseModal').onclick = () => modal.classList.remove('active');
+  modal.onclick = (e) => {
+    if (e.target === modal) modal.classList.remove('active');
+  };
+
+  // Reset
+  $('btnReset').onclick = () => {
+    inpTotalLoad.value = '1500';
+    inpMotorLoad.value = '400';
+    selSurgeFactor.value = '3.0';
+    inpSafetyMargin.value = '25';
+    inpPf.value = '0.8';
+    selBattVolt.value = '24';
+    calculate();
+    showToast('Reset to default values.');
+  };
+
+  // Load Benchmark
+  function loadBenchmark() {
+    inpTotalLoad.value = '1500';
+    inpMotorLoad.value = '400';
+    selSurgeFactor.value = '3.0';
+    inpSafetyMargin.value = '25';
+    inpPf.value = '0.8';
+    selBattVolt.value = '24';
+    calculate();
+    showToast('Loaded 1,500 W benchmark example!');
+    window.scrollTo({ top: $('calcForm').offsetTop - 80, behavior: 'smooth' });
+  }
+
+  $('btnLoadExample').onclick = loadBenchmark;
+  $('btnLoadExample2').onclick = loadBenchmark;
+
+  $('btnExportJson').onclick = () => {
+    const list = getHistory();
+    if (list.length === 0) {
+      showToast('No history records to export.');
+      return;
+    }
+    const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'solar-inverter-sizing-history.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Exported history as JSON!');
+  };
+
+  $('btnClearHistory').onclick = () => {
+    if (confirm('Clear all saved calculations?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      renderHistory();
+      showToast('Cleared calculation history.');
+    }
+  };
+
+  // Input Listeners
+  const inputList = [inpTotalLoad, inpMotorLoad, selSurgeFactor, inpSafetyMargin, inpPf, selBattVolt];
+  inputList.forEach(el => {
+    el.addEventListener('input', calculate);
+    el.addEventListener('change', calculate);
+  });
+
+  // Initial Run
+  calculate();
+  renderHistory();
+})();
+</script>
+
+<script src="/pwa.js" defer></script>
+<script src="mta-chrome.js" defer></script>
+<!-- Vercel Speed Insights -->
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+
+</body>
+</html>

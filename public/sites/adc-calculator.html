@@ -1,0 +1,2394 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/adc-calculator.html">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>ADC (Analog to Digital Converter) Calculator | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Calculate ADC resolution, step size (LSB in mV), analog voltage from raw digital reading, and source voltage through a voltage divider. Supports Arduino, ESP32, STM32, PIC, and Raspberry Pi Pico.">
+  <meta name="author" content="Mohamed Tarek Abdelhady">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ADC (Analog to Digital Converter) Calculator | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Calculate ADC bit resolution, LSB voltage step size, raw counts to analog voltage, and input voltage divider ratios for Arduino, ESP32, and microcontrollers.">
+  <meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="851">
+  <meta property="og:image:height" content="1134">
+  <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/adc-calculator.html">
+  <meta property="og:updated_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="article:modified_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ADC (Analog to Digital Converter) Calculator | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Calculate ADC bit resolution, LSB voltage step size, raw counts to analog voltage, and input voltage divider ratios for Arduino, ESP32, and microcontrollers.">
+  <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+
+  <!-- PWA & Mobile Icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M. Tarek">
+  <meta name="application-name" content="M. Tarek">
+  <meta name="msapplication-TileColor" content="#0a0e1a">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
+  <link rel="stylesheet" href="mta-chrome.css">
+
+  <!-- Schema.org WebApplication & BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ADC (Analog to Digital Converter) Calculator",
+    "description": "Calculate ADC resolution, step size (LSB in mV), analog voltage from raw digital reading, and source voltage through a voltage divider. Supports Arduino, ESP32, STM32, PIC, and Raspberry Pi Pico.",
+    "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/adc-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek Abdelhady",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tools",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/tools.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "ADC Calculator",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/sites/adc-calculator.html"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1322;
+      --bg3: #141829;
+      --card: #161b2e;
+      --card2: #1c2240;
+      --acc: #8b5cf6;
+      --acc-hover: #7c3aed;
+      --acc-subtle: rgba(139, 92, 246, 0.12);
+      --acc-border: rgba(139, 92, 246, 0.35);
+      --txt: #f1f5f9;
+      --mut: #94a3b8;
+      --mut2: #64748b;
+      --br: rgba(255, 255, 255, 0.08);
+      --br-hover: rgba(255, 255, 255, 0.16);
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --err: #ef4444;
+      --cyan: #06b6d4;
+      --indigo: #6366f1;
+      --r: 14px;
+      --r-sm: 8px;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+      --gradient-glow: radial-gradient(circle at top center, rgba(139, 92, 246, 0.18) 0%, transparent 70%);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --bg3: #e2e8f0;
+      --card: #ffffff;
+      --card2: #f8fafc;
+      --acc: #7c3aed;
+      --acc-hover: #6d28d9;
+      --acc-subtle: rgba(124, 58, 237, 0.08);
+      --acc-border: rgba(124, 58, 237, 0.25);
+      --txt: #0f172a;
+      --mut: #475569;
+      --mut2: #94a3b8;
+      --br: rgba(0, 0, 0, 0.08);
+      --br-hover: rgba(0, 0, 0, 0.15);
+      --gradient-glow: radial-gradient(circle at top center, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.65;
+      min-height: 100vh;
+      background-image: var(--gradient-glow);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      background: var(--acc-subtle);
+      border: 1px solid var(--acc-border);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--acc);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+    }
+
+    .pill .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--ok);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--ok);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.85rem, 4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero h1 .grad {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--mut);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Brief / Summary Card */
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-left: 4px solid var(--ok);
+      border-radius: var(--r);
+      padding: 1.15rem 1.4rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .summary-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ok);
+      margin-bottom: 0.45rem;
+    }
+
+    .summary-card p {
+      color: var(--mut);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .summary-card strong {
+      color: var(--txt);
+    }
+
+    /* Grid layout */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+      position: relative;
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--txt);
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .card h2 i {
+      color: var(--acc);
+      font-size: 1.05rem;
+    }
+
+    /* Form Inputs */
+    .lbl {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin-bottom: 0.4rem;
+      margin-top: 0.9rem;
+    }
+
+    .lbl:first-of-type {
+      margin-top: 0;
+    }
+
+    .lbl span.opt {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--mut2);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .input-row input {
+      flex: 1;
+    }
+
+    .input-row select {
+      min-width: 110px;
+    }
+
+    input[type="number"], input[type="text"], select {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--txt);
+      padding: 0.75rem 0.95rem;
+      border-radius: var(--r-sm);
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    input[type="number"]:focus, input[type="text"]:focus, select:focus {
+      border-color: var(--acc);
+      box-shadow: 0 0 0 3px var(--acc-subtle);
+    }
+
+    /* Presets Pills */
+    .preset-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.45rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .preset-btn {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 120ms ease;
+      font-family: var(--mono);
+    }
+
+    .preset-btn:hover {
+      background: var(--card2);
+      border-color: var(--acc-border);
+      color: var(--acc);
+    }
+
+    .preset-btn.active {
+      background: var(--acc-subtle);
+      border-color: var(--acc);
+      color: var(--acc);
+    }
+
+    /* Divider Section Details */
+    .divider-box {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.95rem;
+      margin-top: 1rem;
+    }
+
+    .divider-toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .divider-toggle-row span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--txt);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--br);
+      transition: .2s;
+      border-radius: 22px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .2s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--acc);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(18px);
+    }
+
+    .divider-fields {
+      display: none;
+      margin-top: 0.85rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed var(--br);
+    }
+
+    .divider-fields.open {
+      display: block;
+    }
+
+    /* Action Buttons Row */
+    .btn-toolbar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 500px) {
+      .btn-toolbar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.75rem 0.6rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      color: var(--txt);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 150ms ease;
+      text-decoration: none;
+    }
+
+    .action-btn:hover {
+      background: var(--card2);
+      border-color: var(--acc-border);
+      color: var(--acc);
+      transform: translateY(-1px);
+    }
+
+    .action-btn.primary {
+      background: var(--gradient-accent);
+      border: none;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+    }
+
+    .action-btn.primary:hover {
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Results Grid */
+    .res-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .res-cell {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.85rem 1rem;
+      transition: border-color 150ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .res-cell:hover {
+      border-color: var(--br-hover);
+    }
+
+    .res-cell.highlight {
+      border-color: var(--acc-border);
+      background: var(--acc-subtle);
+    }
+
+    .res-cell.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .res-cell small {
+      display: block;
+      color: var(--mut2);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+
+    .res-cell b {
+      font-family: var(--mono);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--txt);
+      display: block;
+      word-break: break-word;
+    }
+
+    .res-cell.highlight b {
+      color: var(--acc);
+    }
+
+    .res-cell .sub-val {
+      font-size: 0.75rem;
+      color: var(--mut);
+      margin-top: 0.25rem;
+      font-family: var(--mono);
+    }
+
+    /* Transfer Scale Bar */
+    .transfer-bar-card {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1rem 1.15rem;
+      margin-top: 1.25rem;
+    }
+
+    .transfer-bar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.65rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+    }
+
+    .scale-bar-track {
+      width: 100%;
+      height: 14px;
+      background: var(--bg3);
+      border-radius: 9999px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--br);
+    }
+
+    .scale-bar-fill {
+      height: 100%;
+      width: 50%;
+      background: var(--gradient-accent);
+      border-radius: 9999px;
+      transition: width 150ms ease;
+    }
+
+    .scale-bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--mut2);
+      font-family: var(--mono);
+      margin-top: 0.35rem;
+    }
+
+    /* SVG Schematic Section */
+    .schematic-box {
+      margin-top: 1.25rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .schematic-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin-bottom: 0.65rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .schematic-svg {
+      width: 100%;
+      max-height: 175px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* Disclaimer Alert */
+    .alert-box {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: var(--r);
+      padding: 1rem 1.25rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      color: var(--txt);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .alert-box.info {
+      background: rgba(139, 92, 246, 0.08);
+      border-color: rgba(139, 92, 246, 0.35);
+    }
+
+    .alert-box i {
+      color: var(--warn);
+      font-size: 1.25rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    .alert-box.info i {
+      color: var(--acc);
+    }
+
+    .alert-box strong {
+      color: var(--txt);
+    }
+
+    /* Code Snippets Section */
+    .content-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .content-card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--txt);
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .code-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.5rem;
+    }
+
+    .code-tab-btn {
+      background: none;
+      border: none;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--mut);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 120ms ease;
+    }
+
+    .code-tab-btn:hover {
+      color: var(--txt);
+      background: var(--bg2);
+    }
+
+    .code-tab-btn.active {
+      color: var(--acc);
+      background: var(--acc-subtle);
+    }
+
+    .code-container {
+      position: relative;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+    }
+
+    .code-container pre {
+      padding: 1.1rem;
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--txt);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .code-copy-btn {
+      position: absolute;
+      top: 0.65rem;
+      right: 0.65rem;
+      background: var(--bg3);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 120ms ease;
+    }
+
+    .code-copy-btn:hover {
+      color: var(--txt);
+      border-color: var(--acc);
+    }
+
+    /* Theory and Formulas */
+    .formula-box {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-left: 3px solid var(--acc);
+      border-radius: var(--r-sm);
+      padding: 1rem 1.25rem;
+      margin: 0.85rem 0;
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      color: var(--txt);
+      overflow-x: auto;
+    }
+
+    .formula-box code {
+      font-family: inherit;
+    }
+
+    /* Comparison Table */
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+
+    table.calc-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    table.calc-table th {
+      padding: 0.75rem 0.95rem;
+      background: var(--bg2);
+      color: var(--mut);
+      font-weight: 600;
+      border-bottom: 1px solid var(--br);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    table.calc-table td {
+      padding: 0.75rem 0.95rem;
+      border-bottom: 1px solid var(--br);
+      color: var(--txt);
+    }
+
+    table.calc-table tr:hover td {
+      background: var(--bg2);
+    }
+
+    /* FAQ Accordion */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .faq-item {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      transition: border-color 150ms ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--br-hover);
+    }
+
+    .faq-question {
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      color: var(--txt);
+    }
+
+    .faq-question i {
+      color: var(--acc);
+      transition: transform 200ms ease;
+      font-size: 0.85rem;
+    }
+
+    .faq-item[open] .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0 1.25rem 1rem;
+      color: var(--mut);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* Saved Calculations Drawer / Card */
+    .history-card {
+      margin-top: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .history-header h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .history-actions {
+      display: flex;
+      gap: 0.45rem;
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--bg3);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      transition: all 150ms ease;
+    }
+
+    .btn-sm:hover {
+      color: var(--txt);
+      border-color: var(--acc);
+    }
+
+    .btn-sm.del:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0.95rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      font-size: 0.85rem;
+    }
+
+    .history-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .history-meta strong {
+      color: var(--txt);
+      font-family: var(--mono);
+    }
+
+    .history-meta span {
+      color: var(--mut2);
+      font-size: 0.75rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 1.75rem 1rem;
+      color: var(--mut2);
+      font-size: 0.88rem;
+    }
+
+    /* Modal Dialog */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease;
+      padding: 1rem;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: var(--card);
+      border: 1px solid var(--br-hover);
+      border-radius: var(--r);
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .modal-header h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--txt);
+    }
+
+    .close-modal-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .close-modal-btn:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .tool-tile {
+      display: block;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1rem;
+      text-decoration: none;
+      color: var(--txt);
+      transition: all 150ms ease;
+    }
+
+    .tool-tile:hover {
+      border-color: var(--acc-border);
+      background: var(--card2);
+      transform: translateY(-2px);
+    }
+
+    .tool-tile-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+      color: var(--acc);
+    }
+
+    .tool-tile p {
+      font-size: 0.82rem;
+      color: var(--mut);
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--card2);
+      border: 1px solid var(--acc-border);
+      color: var(--txt);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--r-sm);
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transform: translateY(100px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 250ms ease, opacity 250ms ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Print Specific Styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11pt;
+      }
+
+      .mta-bar, .mta-foot, .btn-toolbar, .modal-overlay, .toast, .btn-sm, #th, [data-mta-top], .code-copy-btn, .preset-pills, .divider-toggle-row {
+        display: none !important;
+      }
+
+      .wrap {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .card, .summary-card, .content-card, .history-card {
+        background: #ffffff !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+        color: #000000 !important;
+        page-break-inside: avoid;
+        margin-bottom: 1rem !important;
+        padding: 1rem !important;
+      }
+
+      .print-header {
+        display: block !important;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+      }
+
+      .print-header h1 {
+        font-size: 18pt;
+        margin: 0;
+      }
+
+      .res-cell {
+        background: #f8f8f8 !important;
+        border: 1px solid #ddd !important;
+        color: #000 !important;
+      }
+
+      .res-cell b {
+        color: #000 !important;
+      }
+
+      .formula-box, .faq-item {
+        border: 1px solid #ddd !important;
+        background: #fff !important;
+      }
+
+      .faq-item details {
+        display: block !important;
+      }
+
+      .faq-item[open] .faq-answer {
+        display: block !important;
+      }
+    }
+
+    .print-header {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header Chrome -->
+<header class="mta-bar" id="header" role="banner">
+  <div class="mta-bar-in">
+    <nav aria-label="Breadcrumb" class="mta-crumbs">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools.html">Tools</a></li>
+        <li aria-current="page">ADC Calculator</li>
+      </ol>
+    </nav>
+    <button class="mta-btn" id="th" type="button" aria-label="Toggle dark/light mode">
+      <i class="fas fa-moon" data-mta-icon></i>
+    </button>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <!-- Print Only Header -->
+  <div class="print-header">
+    <h1>Mohamed Tarek Abdelhady — Engineering Calculation Report</h1>
+    <p><strong>Tool:</strong> Analog to Digital Converter (ADC) Resolution & Voltage Divider Calculator</p>
+    <p><strong>Date Generated:</strong> <span id="printDate"></span></p>
+  </div>
+
+  <!-- Hero Header -->
+  <div class="hero">
+    <div class="pill">
+      <span class="dot"></span>
+      Embedded Electronics & Signal Processing
+    </div>
+    <h1>ADC <span class="grad">Resolution & Voltage</span> Calculator</h1>
+    <p>
+      Convert raw ADC digital readings to exact analog pin voltages and pre-divider source potentials. Supports Arduino, ESP32, STM32, PIC, and Raspberry Pi Pico with LSB step sizing.
+    </p>
+  </div>
+
+  <!-- Quick Overview / In a Nutshell -->
+  <div class="summary-card">
+    <div class="summary-card-header">
+      <i class="fas fa-circle-check"></i>
+      <span>In a Nutshell</span>
+    </div>
+    <p>
+      The voltage is calculated by dividing the raw ADC digital reading by the maximum full-scale count (<strong>2<sup>n</sup> &minus; 1</strong>) and multiplying by the reference voltage (<strong>V<sub>ref</sub></strong>). For example, on an <strong>Arduino Uno</strong> (10-bit, 5V), a reading of <strong>512</strong> corresponds to approximately <strong>2.50 V</strong>. On an <strong>ESP32</strong> (12-bit, 3.3V), a reading of <strong>2048</strong> corresponds to approximately <strong>1.65 V</strong>.
+    </p>
+  </div>
+
+  <!-- Main Calculator Grid -->
+  <div class="grid">
+    <!-- Left Card: Input Controls -->
+    <div class="card">
+      <h2><i class="fas fa-sliders"></i> Converter Parameters</h2>
+
+      <!-- ADC Resolution Dropdown -->
+      <label class="lbl" for="selResolution">
+        <span>ADC Resolution (Bits)</span>
+        <span class="opt" id="lblMaxBits">10-bit (1023 counts)</span>
+      </label>
+      <select id="selResolution">
+        <option value="8">8-bit (Max 255) — ATtiny / Microchip PIC</option>
+        <option value="10" selected>10-bit (Max 1023) — Arduino Uno, Nano, Mega</option>
+        <option value="12">12-bit (Max 4095) — ESP32, STM32, RP2040, Due</option>
+        <option value="14">14-bit (Max 16383) — High-Resolution MCUs</option>
+        <option value="16">16-bit (Max 65535) — ADS1115 Precision ADC</option>
+        <option value="24">24-bit (Max 16777215) — HX711 Load Cell / Audio</option>
+        <option value="custom">Custom Bit Depth...</option>
+      </select>
+
+      <!-- Custom Bit Depth Input (Hidden unless Custom is selected) -->
+      <div id="customBitsRow" style="display: none; margin-top: 0.5rem;">
+        <label class="lbl" for="inpCustomBits">
+          <span>Enter Custom Bit Depth (n)</span>
+        </label>
+        <input type="number" id="inpCustomBits" min="1" max="32" value="10" placeholder="e.g. 10">
+      </div>
+
+      <!-- Reference Voltage Input & Presets -->
+      <label class="lbl" for="inpVref" style="margin-top: 0.9rem;">
+        <span>Reference Voltage V<sub>ref</sub> (Volts)</span>
+        <span class="opt">Analog full-scale span</span>
+      </label>
+      <div class="input-row">
+        <input type="number" id="inpVref" step="0.001" min="0.01" max="100" value="5.0" placeholder="e.g. 5.0">
+      </div>
+      <div class="preset-pills">
+        <button type="button" class="preset-btn active" data-vref="5.0">5.0V (Uno/5V)</button>
+        <button type="button" class="preset-btn" data-vref="3.3">3.3V (ESP32/Pico)</button>
+        <button type="button" class="preset-btn" data-vref="1.1">1.1V (AVR Bandgap)</button>
+        <button type="button" class="preset-btn" data-vref="2.56">2.56V (Mega Int)</button>
+        <button type="button" class="preset-btn" data-vref="2.048">2.048V (Ref IC)</button>
+        <button type="button" class="preset-btn" data-vref="4.096">4.096V (Ref IC)</button>
+      </div>
+
+      <!-- Raw Reading Input (Primary) -->
+      <label class="lbl" for="inpRawCount" style="margin-top: 0.9rem;">
+        <span>Raw Digital Reading (Counts)</span>
+        <span class="opt" id="lblRawPct">50.0% of span</span>
+      </label>
+      <input type="number" id="inpRawCount" min="0" max="1023" step="1" value="512" placeholder="0 to 1023">
+
+      <!-- Bidirectional Voltage Input -->
+      <label class="lbl" for="inpVpin" style="margin-top: 0.9rem;">
+        <span>OR Pin Input Voltage (V)</span>
+        <span class="opt">Updates raw counts live</span>
+      </label>
+      <input type="number" id="inpVpin" min="0" step="0.001" value="2.502" placeholder="e.g. 2.50">
+
+      <!-- Voltage Divider Option Accordion -->
+      <div class="divider-box">
+        <div class="divider-toggle-row" id="dividerToggleRow">
+          <span><i class="fas fa-network-wired" style="color:var(--acc);"></i> Input Voltage Divider Stage</span>
+          <label class="switch" onclick="event.stopPropagation();">
+            <input type="checkbox" id="chkDivider">
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="divider-fields" id="dividerFields">
+          <label class="lbl" for="inpRatio">
+            <span>Divider Ratio (V<sub>source</sub> / V<sub>pin</sub>)</span>
+            <span class="opt">Multiplier (Default 1.0)</span>
+          </label>
+          <input type="number" id="inpRatio" step="0.01" min="1" value="1.0" placeholder="1.0 = direct wire">
+
+          <div style="margin-top:0.65rem; font-size:0.75rem; color:var(--mut2); text-align:center;">
+            &horiz; OR Calculate from Resistors &horiz;
+          </div>
+
+          <div class="input-row" style="margin-top: 0.5rem;">
+            <div style="flex:1;">
+              <label class="lbl" for="inpR1"><span>Top R<sub>1</sub> (k&Omega;)</span></label>
+              <input type="number" id="inpR1" min="0" step="0.1" value="0" placeholder="0">
+            </div>
+            <div style="flex:1;">
+              <label class="lbl" for="inpR2"><span>Bottom R<sub>2</sub> to GND (k&Omega;)</span></label>
+              <input type="number" id="inpR2" min="0.01" step="0.1" value="10" placeholder="10">
+            </div>
+          </div>
+          <div style="margin-top:0.4rem; font-size:0.75rem; color:var(--mut);">
+            Ratio formula: <code>(R1 + R2) / R2</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Toolbar -->
+      <div class="btn-toolbar">
+        <button class="action-btn primary" id="btnSaveCalc" type="button" aria-label="Save calculation">
+          <i class="fas fa-floppy-disk"></i> Save Calc
+        </button>
+        <button class="action-btn" id="btnPrintPdf" type="button" aria-label="Export PDF report">
+          <i class="fas fa-file-pdf"></i> PDF Report
+        </button>
+        <button class="action-btn" id="btnAdvTools" type="button" aria-label="Open advanced tools">
+          <i class="fas fa-star"></i> Adv. Tools
+        </button>
+      </div>
+
+      <div style="margin-top: 0.85rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
+        <button type="button" id="btnReset" style="color:var(--mut2); text-decoration:underline; background:none; border:none; cursor:pointer;">
+          <i class="fas fa-rotate-left"></i> Reset Defaults
+        </button>
+        <button type="button" id="btnLoadExample" style="color:var(--acc); background:none; border:none; cursor:pointer; font-weight:600;">
+          <i class="fas fa-lightbulb"></i> Load Benchmark (30k/10k Divider)
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Card: Calculated Results -->
+    <div class="card">
+      <h2><i class="fas fa-chart-simple"></i> Conversion Results</h2>
+
+      <div class="res-grid">
+        <!-- 1. Max Digital Count -->
+        <div class="res-cell">
+          <small>Max Count (Full-Scale)</small>
+          <b id="outMaxCount">1023</b>
+          <div class="sub-val" id="outMaxFormula">2<sup>10</sup> &minus; 1 levels</div>
+        </div>
+
+        <!-- 2. Step Size (LSB) -->
+        <div class="res-cell highlight">
+          <small>Step Size / Resolution (LSB)</small>
+          <b id="outLsb">4.88 mV</b>
+          <div class="sub-val" id="outLsbFormula">V<sub>ref</sub> / 2<sup>10</sup></div>
+        </div>
+
+        <!-- 3. ADC Pin Voltage -->
+        <div class="res-cell highlight full-width">
+          <small>Voltage at ADC Pin (V<sub>pin</sub>)</small>
+          <b id="outVpin" style="font-size:1.6rem; color:var(--acc);">2.50 V</b>
+          <div class="sub-val" id="outVpinFormula">512 / 1023 &times; 5.0 V</div>
+        </div>
+
+        <!-- 4. Original Source Voltage Before Divider -->
+        <div class="res-cell full-width">
+          <small>Original Source Voltage (Before Divider)</small>
+          <b id="outVreal" style="font-size:1.4rem;">2.50 V</b>
+          <div class="sub-val" id="outVrealFormula">V<sub>pin</sub> &times; 1.00 (No divider)</div>
+        </div>
+
+        <!-- 5. Quantization Uncertainty -->
+        <div class="res-cell">
+          <small>Quantization Error (&plusmn;0.5 LSB)</small>
+          <b id="outQuantError">&plusmn;2.44 mV</b>
+          <div class="sub-val">Ideal quantization band</div>
+        </div>
+
+        <!-- 6. Theoretical Dynamic Range -->
+        <div class="res-cell">
+          <small>Theoretical SNR / Dynamic Range</small>
+          <b id="outSnr">61.96 dB</b>
+          <div class="sub-val">6.02 &times; n + 1.76 dB</div>
+        </div>
+      </div>
+
+      <!-- Transfer Scale Bar -->
+      <div class="transfer-bar-card">
+        <div class="transfer-bar-header">
+          <span>ADC Span Utilization</span>
+          <span id="lblTransferPct" style="font-family:var(--mono); color:var(--acc); font-weight:700;">50.0%</span>
+        </div>
+        <div class="scale-bar-track">
+          <div class="scale-bar-fill" id="barFill" style="width: 50%;"></div>
+        </div>
+        <div class="scale-bar-labels">
+          <span>0 V (0)</span>
+          <span id="lblBarMid">2.50 V (512)</span>
+          <span id="lblBarMax">5.0 V (1023)</span>
+        </div>
+      </div>
+
+      <!-- Interactive SVG Schematic -->
+      <div class="schematic-box">
+        <div class="schematic-title">
+          <span><i class="fas fa-microchip"></i> Circuit Interface Model</span>
+          <span id="lblSchematicRatio" style="font-family:var(--mono); font-size:0.75rem; color:var(--acc);">Ratio: 1.00&times;</span>
+        </div>
+        <svg class="schematic-svg" viewBox="0 0 460 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background Grid line -->
+          <line x1="20" y1="70" x2="110" y2="70" stroke="#64748b" stroke-width="2.5" />
+          
+          <!-- Source Node -->
+          <circle cx="20" cy="70" r="5" fill="#a855f7" />
+          <text x="20" y="55" fill="#f1f5f9" font-size="11" font-weight="700" text-anchor="middle" id="svgVsource">2.50V</text>
+          <text x="20" y="92" fill="#94a3b8" font-size="10" text-anchor="middle">V_source</text>
+
+          <!-- Resistor R1 -->
+          <rect x="110" y="60" width="60" height="20" rx="3" fill="#1c2240" stroke="#8b5cf6" stroke-width="2" />
+          <text x="140" y="74" fill="#f1f5f9" font-size="10" font-family="monospace" text-anchor="middle" id="svgR1">R1 (0k)</text>
+
+          <!-- Mid Node (ADC Input) -->
+          <line x1="170" y1="70" x2="250" y2="70" stroke="#64748b" stroke-width="2.5" />
+          <circle cx="250" cy="70" r="5" fill="#06b6d4" />
+          <text x="250" y="55" fill="#06b6d4" font-size="11" font-weight="700" text-anchor="middle" id="svgVpin">2.50V</text>
+          <text x="250" y="92" fill="#94a3b8" font-size="10" text-anchor="middle">ADC Pin</text>
+
+          <!-- Branch to MCU ADC -->
+          <line x1="250" y1="70" x2="330" y2="70" stroke="#06b6d4" stroke-width="2.5" stroke-dasharray="4 2" />
+
+          <!-- Resistor R2 going down to GND -->
+          <line x1="250" y1="70" x2="250" y2="95" stroke="#64748b" stroke-width="2" />
+          <rect x="240" y="95" width="20" height="25" rx="3" fill="#1c2240" stroke="#8b5cf6" stroke-width="1.5" />
+          <text x="268" y="112" fill="#94a3b8" font-size="9" font-family="monospace" id="svgR2">R2 (10k)</text>
+          <line x1="250" y1="120" x2="250" y2="130" stroke="#64748b" stroke-width="2" />
+          <line x1="242" y1="130" x2="258" y2="130" stroke="#64748b" stroke-width="2" />
+          <line x1="245" y1="134" x2="255" y2="134" stroke="#64748b" stroke-width="1.5" />
+          <line x1="248" y1="138" x2="252" y2="138" stroke="#64748b" stroke-width="1" />
+
+          <!-- MCU Box -->
+          <rect x="330" y="35" width="115" height="70" rx="8" fill="#141829" stroke="#06b6d4" stroke-width="2" />
+          <text x="387" y="60" fill="#f1f5f9" font-size="11" font-weight="700" text-anchor="middle">ADC Core</text>
+          <text x="387" y="78" fill="#06b6d4" font-size="11" font-family="monospace" font-weight="700" text-anchor="middle" id="svgCounts">512 / 1023</text>
+          <text x="387" y="93" fill="#94a3b8" font-size="9" text-anchor="middle" id="svgBitsLabel">10-Bit &bull; 5.0V Vref</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESP32 & Hardware Engineering Notice -->
+  <div class="alert-box">
+    <i class="fas fa-triangle-exclamation"></i>
+    <div>
+      <strong>ESP32 Non-Linearity Notice:</strong> The integrated SAR ADC on the ESP32 is famously non-linear below ~0.1V and above ~3.1V (at 11dB attenuation), with notable offset drift. For precision applications on ESP32, use <code>analogReadMilliVolts()</code> with factory calibration (eFuse), apply multi-point calibration curves, or interface an external I<sup>2</sup>C ADC such as the <strong>ADS1115</strong>.
+    </div>
+  </div>
+
+  <!-- Microcontroller Source Code Snippets -->
+  <div class="content-card">
+    <h2><i class="fas fa-code"></i> Ready-to-Use Code Snippets</h2>
+    <p style="color:var(--mut); font-size:0.9rem; margin-bottom:1rem;">
+      Copy calibrated code snippets directly into your firmware project for your selected microcontroller architecture:
+    </p>
+
+    <div class="code-tabs">
+      <button class="code-tab-btn active" data-tab="arduino" type="button">Arduino (C/C++)</button>
+      <button class="code-tab-btn" data-tab="esp32" type="button">ESP32 (Arduino Core)</button>
+      <button class="code-tab-btn" data-tab="pico" type="button">RP2040 / Pico (MicroPython)</button>
+    </div>
+
+    <div class="code-container">
+      <button class="code-copy-btn" id="btnCopyCode" type="button"><i class="fas fa-copy"></i> Copy Code</button>
+      <pre><code id="codeBlock">// Arduino Uno / Nano ADC Example
+const int ADC_PIN = A0;
+const float V_REF = 5.0;            // Reference voltage in Volts
+const float DIVIDER_RATIO = 1.0;    // (R1 + R2) / R2 (Set 1.0 if no divider)
+
+void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  int raw = analogRead(ADC_PIN);    // 0 to 1023 (10-bit)
+  float vPin = (raw / 1023.0) * V_REF;
+  float vSource = vPin * DIVIDER_RATIO;
+
+  Serial.print("Raw: "); Serial.print(raw);
+  Serial.print(" | V_pin: "); Serial.print(vPin, 3);
+  Serial.print(" V | V_source: "); Serial.print(vSource, 2); Serial.println(" V");
+  delay(500);
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- Theory & Mathematical Method of Calculation -->
+  <div class="content-card">
+    <h2><i class="fas fa-square-root-variable"></i> Method of Calculation & Mathematical Formulas</h2>
+    <p style="color:var(--mut); font-size:0.92rem; line-height:1.65;">
+      An Analog-to-Digital Converter (ADC) quantizes an analog continuous voltage between <strong>0 V</strong> and a known reference voltage (<strong>V<sub>ref</sub></strong>) into a discrete digital integer representation across <strong>2<sup>n</sup></strong> discrete levels (from <code>0</code> to <code>2<sup>n</sup> &minus; 1</code>).
+    </p>
+
+    <h3 style="font-size:1.05rem; margin-top:1.15rem; color:var(--txt);">1. Quantization Resolution & Step Size (LSB)</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      The voltage value represented by the Least Significant Bit (LSB) is the theoretical quantization step size:
+    </p>
+    <div class="formula-box">
+      LSB = V<sub>ref</sub> &divide; 2<sup>n</sup>
+    </div>
+    <p style="color:var(--mut2); font-size:0.82rem;">
+      Note: For an Arduino Uno (n = 10, V<sub>ref</sub> = 5V): <code>LSB = 5 / 1024 = 4.8828 mV</code>.
+    </p>
+
+    <h3 style="font-size:1.05rem; margin-top:1.15rem; color:var(--txt);">2. Voltage From Raw Digital Reading</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      Because 0 represents 0V and (2<sup>n</sup> &minus; 1) represents full scale V<sub>ref</sub>, the voltage at the microcontroller analog pin is:
+    </p>
+    <div class="formula-box">
+      V<sub>pin</sub> = (raw &divide; (2<sup>n</sup> &minus; 1)) &times; V<sub>ref</sub>
+    </div>
+
+    <h3 style="font-size:1.05rem; margin-top:1.15rem; color:var(--txt);">3. Converting Target Voltage to Raw Digital Count</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      Conversely, to determine the expected integer register reading for a known input pin voltage:
+    </p>
+    <div class="formula-box">
+      raw = round((V<sub>pin</sub> &divide; V<sub>ref</sub>) &times; (2<sup>n</sup> &minus; 1))
+    </div>
+
+    <h3 style="font-size:1.05rem; margin-top:1.15rem; color:var(--txt);">4. Restoring High Source Voltage via Voltage Divider</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      When measuring voltages exceeding the microcontroller's V<sub>ref</sub> (e.g. measuring a 12V battery on a 5V Arduino), an input resistor divider step-down is required:
+    </p>
+    <div class="formula-box">
+      V<sub>source</sub> = V<sub>pin</sub> &times; ((R<sub>1</sub> + R<sub>2</sub>) &divide; R<sub>2</sub>) = V<sub>pin</sub> &times; Ratio
+    </div>
+    <p style="color:var(--mut2); font-size:0.82rem;">
+      Where <strong>R<sub>1</sub></strong> is connected between V<sub>source</sub> and the ADC pin, and <strong>R<sub>2</sub></strong> is connected between the ADC pin and Ground.
+    </p>
+  </div>
+
+  <!-- Common Microcontroller ADC Comparison Table -->
+  <div class="content-card">
+    <h2><i class="fas fa-table"></i> Popular Microcontroller ADC Specifications</h2>
+    <div class="table-responsive">
+      <table class="calc-table">
+        <thead>
+          <tr>
+            <th>Microcontroller / Board</th>
+            <th>Resolution</th>
+            <th>Max Counts</th>
+            <th>Default V<sub>ref</sub></th>
+            <th>LSB Resolution</th>
+            <th>Architecture & Key Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Arduino Uno / Nano (ATmega328P)</strong></td>
+            <td>10-bit</td>
+            <td>1023</td>
+            <td>5.0 V</td>
+            <td>4.88 mV</td>
+            <td>SAR ADC &bull; Clean 10-bit accuracy, &le;10k&Omega; source impedance</td>
+          </tr>
+          <tr>
+            <td><strong>Arduino Mega (ATmega2560)</strong></td>
+            <td>10-bit</td>
+            <td>1023</td>
+            <td>5.0 V</td>
+            <td>4.88 mV</td>
+            <td>Internal 1.1V and 2.56V bandgap references available</td>
+          </tr>
+          <tr>
+            <td><strong>ESP32 (ESP-WROOM-32)</strong></td>
+            <td>12-bit</td>
+            <td>4095</td>
+            <td>3.3 V</td>
+            <td>0.806 mV</td>
+            <td>SAR ADC &bull; Non-linear ends; use <code>analogReadMilliVolts()</code></td>
+          </tr>
+          <tr>
+            <td><strong>Raspberry Pi Pico (RP2040)</strong></td>
+            <td>12-bit</td>
+            <td>4095</td>
+            <td>3.3 V</td>
+            <td>0.806 mV</td>
+            <td>SAR ADC &bull; Some DNL spikes; external filtering on ADC_VREF recommended</td>
+          </tr>
+          <tr>
+            <td><strong>STM32 Blue Pill (STM32F103)</strong></td>
+            <td>12-bit</td>
+            <td>4095</td>
+            <td>3.3 V</td>
+            <td>0.806 mV</td>
+            <td>Fast SAR (1 MSPS) &bull; DMA support for continuous scanning</td>
+          </tr>
+          <tr>
+            <td><strong>ADS1115 (External I<sup>2</sup>C ADC)</strong></td>
+            <td>16-bit</td>
+            <td>32767 / 65535</td>
+            <td>Variable (PGA)</td>
+            <td>0.1875 mV (at 6.144V)</td>
+            <td>Delta-Sigma (&Delta;&Sigma;) &bull; Extremely low noise, internal PGA reference</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Worked Practical Examples -->
+  <div class="content-card">
+    <h2><i class="fas fa-book-open"></i> Practical Worked Engineering Examples</h2>
+
+    <!-- Example 1 -->
+    <div style="background:var(--bg2); border:1px solid var(--br); border-radius:var(--r-sm); padding:1.15rem; margin-bottom:1rem;">
+      <h3 style="font-size:1rem; color:var(--txt); margin-bottom:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+        <span><strong>Example 1:</strong> Standard Arduino Uno 5V Reading</span>
+        <button class="btn-sm" id="btnLoadEx1" type="button"><i class="fas fa-arrow-up-right-from-square"></i> Load This</button>
+      </h3>
+      <p style="color:var(--mut); font-size:0.88rem; line-height:1.55;">
+        An analog potentiometer on an Arduino Uno (10-bit, V<sub>ref</sub> = 5V) yields a raw reading of <strong>512</strong>. What is the measured voltage?
+      </p>
+      <div style="margin-top:0.5rem; font-family:var(--mono); font-size:0.82rem; color:var(--acc);">
+        V = 512 &divide; 1023 &times; 5.0V = <strong>2.502 V (&asymp; 2.50 V)</strong> &bull; LSB step = 4.88 mV
+      </div>
+    </div>
+
+    <!-- Example 2 -->
+    <div style="background:var(--bg2); border:1px solid var(--br); border-radius:var(--r-sm); padding:1.15rem; margin-bottom:1rem;">
+      <h3 style="font-size:1rem; color:var(--txt); margin-bottom:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+        <span><strong>Example 2:</strong> 12V Car Battery Monitor via Voltage Divider</span>
+        <button class="btn-sm" id="btnLoadEx2" type="button"><i class="fas fa-arrow-up-right-from-square"></i> Load This</button>
+      </h3>
+      <p style="color:var(--mut); font-size:0.88rem; line-height:1.55;">
+        A 12V automotive battery is measured via a divider with <strong>R<sub>1</sub> = 30 k&Omega;</strong> and <strong>R<sub>2</sub> = 10 k&Omega;</strong> on an Arduino Uno (10-bit, 5V). The ADC register returns <strong>600</strong>.
+      </p>
+      <div style="margin-top:0.5rem; font-family:var(--mono); font-size:0.82rem; color:var(--acc);">
+        1. Pin Voltage: V<sub>pin</sub> = (600 / 1023) &times; 5.0 V = <strong>2.9325 V (&asymp; 2.93 V)</strong><br>
+        2. Divider Ratio: (30 + 10) / 10 = <strong>4.0&times;</strong><br>
+        3. Battery Voltage: V<sub>battery</sub> = 2.9325 &times; 4.0 = <strong>11.73 V (&asymp; 11.7 V)</strong>
+      </div>
+    </div>
+
+    <!-- Example 3 -->
+    <div style="background:var(--bg2); border:1px solid var(--br); border-radius:var(--r-sm); padding:1.15rem;">
+      <h3 style="font-size:1rem; color:var(--txt); margin-bottom:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+        <span><strong>Example 3:</strong> ESP32 12-Bit Sensor Reading</span>
+        <button class="btn-sm" id="btnLoadEx3" type="button"><i class="fas fa-arrow-up-right-from-square"></i> Load This</button>
+      </h3>
+      <p style="color:var(--mut); font-size:0.88rem; line-height:1.55;">
+        An analog humidity sensor connected to an ESP32 (12-bit, V<sub>ref</sub> = 3.3V) reports a raw reading of <strong>2048</strong> (half-scale).
+      </p>
+      <div style="margin-top:0.5rem; font-family:var(--mono); font-size:0.82rem; color:var(--acc);">
+        V = 2048 &divide; 4095 &times; 3.3 V = <strong>1.652 V (&asymp; 1.65 V)</strong> &bull; LSB step = 0.806 mV
+      </div>
+    </div>
+  </div>
+
+  <!-- Frequently Asked Questions (FAQ) -->
+  <div class="content-card">
+    <h2><i class="fas fa-circle-question"></i> Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary class="faq-question">
+          <span>Should I divide by 1023 or 1024 on a 10-bit ADC?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          In theoretical DSP theory, an ideal ADC divides the range into <code>2<sup>n</sup></code> (1024) equal quantization bins, with each step equal to <code>V<sub>ref</sub> / 1024</code>. However, because the maximum integer count returned by the hardware register is <code>1023</code> (when V<sub>in</sub> = V<sub>ref</sub>), dividing by 1023 ensures that full-scale reading maps exactly to 100% of V<sub>ref</sub>. In standard embedded firmware practice, dividing by <code>(2<sup>n</sup> &minus; 1)</code> is widely accepted for mapping to physical engineering units.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What is the source impedance rule for microcontrollers?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          Successive Approximation Register (SAR) ADCs (like those on the ATmega328P and STM32) use an internal sample-and-hold capacitor (typically 14 pF). During sampling, the external signal source must fully charge this capacitor within a few microseconds. The datasheet recommends that the analog source impedance (the Thevenin equivalent resistance <code>R1 || R2</code>) should not exceed <strong>10 k&Omega;</strong>. If using high-value resistors (e.g. 100k / 100k), add a 100 nF ceramic capacitor in parallel with R<sub>2</sub> or buffer with an op-amp follower.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>How can I improve ADC accuracy on Arduino and ESP32?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          To achieve maximum accuracy:
+          <ol style="margin-left:1.25rem; margin-top:0.35rem;">
+            <li><strong>Use a stable reference:</strong> On Arduino, switch from noisy USB 5V to the internal 1.1V bandgap (<code>analogReference(INTERNAL)</code>) or an external reference on the AREF pin.</li>
+            <li><strong>Oversampling & Decimation:</strong> Averaging 16 samples can increase effective resolution by 2 bits while reducing Gaussian noise.</li>
+            <li><strong>Decoupling capacitor:</strong> Place a 100 nF ceramic capacitor right next to the AREF pin and the analog input pin.</li>
+            <li><strong>Discard the first sample:</strong> Discard the very first reading after switching analog multiplexer channels.</li>
+          </ol>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What is the AREF pin and how do I use it?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          The <strong>AREF</strong> pin allows you to supply an external, highly regulated reference voltage to the ADC. For example, if your sensor only outputs between 0V and 2.5V, applying a precision 2.5V reference to AREF and executing <code>analogReference(EXTERNAL)</code> allows all 1024 digital counts to span 0 to 2.5V, doubling your measurement resolution. <em>Warning:</em> Never apply voltage to AREF without first setting <code>analogReference(EXTERNAL)</code> in code, or you risk shorting the internal reference to your external source!
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Saved Calculations History -->
+  <div class="history-card">
+    <div class="history-header">
+      <h3><i class="fas fa-clock-rotate-left"></i> Saved Calculations</h3>
+      <div class="history-actions">
+        <button class="btn-sm" id="btnExportJson" type="button" title="Export as JSON">
+          <i class="fas fa-download"></i> Export JSON
+        </button>
+        <button class="btn-sm del" id="btnClearHistory" type="button" title="Clear History">
+          <i class="fas fa-trash"></i> Clear All
+        </button>
+      </div>
+    </div>
+    <div class="history-list" id="historyList">
+      <div class="empty-state">No saved calculations yet. Click "Save Calc" above to store your readings.</div>
+    </div>
+  </div>
+</main>
+
+<!-- Advanced Tools Modal -->
+<div class="modal-overlay" id="advToolsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="modalTitle"><i class="fas fa-star" style="color:var(--acc);"></i> Advanced Engineering Tools</h3>
+      <button class="close-modal-btn" id="btnCloseModal" type="button" aria-label="Close dialog">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+    <p style="color:var(--mut); font-size:0.88rem; margin-bottom:1.25rem;">
+      Explore related electronics, microcontroller interfacing, and solar power calculators:
+    </p>
+    <div class="tools-grid">
+      <a href="/sites/voltage-divider-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-divide"></i> Voltage Divider Calculator</div>
+        <p>Design precision resistor dividers, loaded attenuation networks, and potentiometer circuits.</p>
+      </a>
+      <a href="/sites/rc-time-constant-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-stopwatch"></i> RC Time Constant Calculator</div>
+        <p>Calculate RC circuit charging/discharging times, &tau; time constant, and -3dB cutoff frequency.</p>
+      </a>
+      <a href="/sites/op-amp-gain-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-wave-square"></i> Op-Amp Gain Calculator</div>
+        <p>Buffer high-impedance sensor signals with non-inverting, inverting, and differential amplifier stages.</p>
+      </a>
+      <a href="/sites/decibel-dbm-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-signal"></i> Decibel & dBm RF Calculator</div>
+        <p>Convert dB, dBm, and voltage gain for RF instrumentation and ADC dynamic range analysis.</p>
+      </a>
+      <a href="/sites/wire-size-voltage-drop-breaker-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-plug-circle-bolt"></i> Wire Size & Breaker Calculator</div>
+        <p>Determine conductor gauge, ampacity, and circuit breakers per IEC 60364 and NEC codes.</p>
+      </a>
+      <a href="/sites/solar-system-sizing-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-solar-panel"></i> Solar System Sizing Calculator</div>
+        <p>Full PV energy audit: solar panels (Wp), battery bank (Ah), inverter wattage, and MPPT sizing.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"><i class="fas fa-check-circle" style="color:var(--ok);"></i> <span id="toastMsg">Calculation saved!</span></div>
+
+<!-- Footer Chrome -->
+<footer class="mta-foot" role="contentinfo">
+  <div class="mta-foot-in">
+    <div class="mta-social">
+      <a href="https://github.com/Mohamed-Tarek-Abdelhady" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/mohamed-tarek-abdelhady/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="/">Back to Portfolio</a></p>
+    <div class="mta-actions">
+      <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+      <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+    </div>
+  </div>
+</footer>
+
+<!-- Interactive Logic -->
+<script>
+(function() {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  // Form Elements
+  const selResolution = $('selResolution');
+  const customBitsRow = $('customBitsRow');
+  const inpCustomBits = $('inpCustomBits');
+  const lblMaxBits = $('lblMaxBits');
+  const inpVref = $('inpVref');
+  const inpRawCount = $('inpRawCount');
+  const lblRawPct = $('lblRawPct');
+  const inpVpin = $('inpVpin');
+
+  // Divider Elements
+  const chkDivider = $('chkDivider');
+  const dividerToggleRow = $('dividerToggleRow');
+  const dividerFields = $('dividerFields');
+  const inpRatio = $('inpRatio');
+  const inpR1 = $('inpR1');
+  const inpR2 = $('inpR2');
+
+  // Output Elements
+  const outMaxCount = $('outMaxCount');
+  const outMaxFormula = $('outMaxFormula');
+  const outLsb = $('outLsb');
+  const outLsbFormula = $('outLsbFormula');
+  const outVpin = $('outVpin');
+  const outVpinFormula = $('outVpinFormula');
+  const outVreal = $('outVreal');
+  const outVrealFormula = $('outVrealFormula');
+  const outQuantError = $('outQuantError');
+  const outSnr = $('outSnr');
+
+  // Scale Bar
+  const lblTransferPct = $('lblTransferPct');
+  const barFill = $('barFill');
+  const lblBarMid = $('lblBarMid');
+  const lblBarMax = $('lblBarMax');
+
+  // SVG Elements
+  const svgVsource = $('svgVsource');
+  const svgVpin = $('svgVpin');
+  const svgR1 = $('svgR1');
+  const svgR2 = $('svgR2');
+  const svgCounts = $('svgCounts');
+  const svgBitsLabel = $('svgBitsLabel');
+  const lblSchematicRatio = $('lblSchematicRatio');
+
+  // Buttons
+  const btnSaveCalc = $('btnSaveCalc');
+  const btnPrintPdf = $('btnPrintPdf');
+  const btnAdvTools = $('btnAdvTools');
+  const btnReset = $('btnReset');
+  const btnLoadExample = $('btnLoadExample');
+  const btnLoadEx1 = $('btnLoadEx1');
+  const btnLoadEx2 = $('btnLoadEx2');
+  const btnLoadEx3 = $('btnLoadEx3');
+  const btnCloseModal = $('btnCloseModal');
+  const advToolsModal = $('advToolsModal');
+  const toast = $('toast');
+  const toastMsg = $('toastMsg');
+  const historyList = $('historyList');
+  const btnExportJson = $('btnExportJson');
+  const btnClearHistory = $('btnClearHistory');
+  const btnCopyCode = $('btnCopyCode');
+  const codeBlock = $('codeBlock');
+
+  const STORAGE_KEY = 'mta_adc_calc_history';
+  let currentCalcState = null;
+  let activeInput = 'raw'; // 'raw' or 'vpin'
+
+  // Helper to show Toast
+  function showToast(msg) {
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2600);
+  }
+
+  // Get active bit depth
+  function getBitDepth() {
+    if (selResolution.value === 'custom') {
+      const b = parseInt(inpCustomBits.value, 10);
+      return (isNaN(b) || b < 1) ? 10 : Math.min(b, 32);
+    }
+    return parseInt(selResolution.value, 10) || 10;
+  }
+
+  // Main Calculation Routine
+  function calculate() {
+    const bits = getBitDepth();
+    const maxCount = Math.pow(2, bits) - 1;
+    let vref = parseFloat(inpVref.value);
+    if (isNaN(vref) || vref <= 0) vref = 5.0;
+
+    // Update max count display and limits
+    lblMaxBits.textContent = `${bits}-bit (${maxCount} counts)`;
+    inpRawCount.max = maxCount;
+
+    // Calculate LSB (step size)
+    const lsbVolt = vref / Math.pow(2, bits);
+    const lsbMv = lsbVolt * 1000;
+
+    // Determine current raw count and pin voltage based on which was edited
+    let raw = 0;
+    let vPin = 0;
+
+    if (activeInput === 'vpin') {
+      vPin = parseFloat(inpVpin.value);
+      if (isNaN(vPin) || vPin < 0) vPin = 0;
+      if (vPin > vref) vPin = vref;
+      raw = Math.round((vPin / vref) * maxCount);
+      inpRawCount.value = raw;
+    } else {
+      raw = parseFloat(inpRawCount.value);
+      if (isNaN(raw) || raw < 0) raw = 0;
+      if (raw > maxCount) {
+        raw = maxCount;
+        inpRawCount.value = maxCount;
+      }
+      vPin = maxCount > 0 ? (raw / maxCount) * vref : 0;
+      inpVpin.value = vPin.toFixed(4);
+    }
+
+    // Divider calculation
+    let ratio = 1.0;
+    if (chkDivider.checked) {
+      ratio = parseFloat(inpRatio.value);
+      if (isNaN(ratio) || ratio < 1) ratio = 1.0;
+    }
+    const vReal = vPin * ratio;
+
+    // Percentage of Span
+    const pct = maxCount > 0 ? (raw / maxCount) * 100 : 0;
+    lblRawPct.textContent = `${pct.toFixed(1)}% of span`;
+
+    // Quantization Uncertainty & SNR
+    const quantErrorMv = lsbMv / 2;
+    const snrDb = (6.02 * bits + 1.76).toFixed(2);
+
+    // Format LSB
+    let lsbStr = '';
+    if (lsbMv >= 1000) {
+      lsbStr = `${(lsbMv / 1000).toFixed(3)} V`;
+    } else if (lsbMv >= 1) {
+      lsbStr = `${lsbMv.toFixed(2)} mV`;
+    } else {
+      lsbStr = `${(lsbMv * 1000).toFixed(2)} µV`;
+    }
+
+    // Render Results
+    outMaxCount.textContent = maxCount.toLocaleString();
+    outMaxFormula.textContent = `2^${bits} - 1 (0 to ${maxCount})`;
+
+    outLsb.textContent = lsbStr;
+    outLsbFormula.textContent = `${vref}V / 2^${bits} levels`;
+
+    outVpin.textContent = `${vPin.toFixed(3)} V`;
+    outVpinFormula.textContent = `${raw} / ${maxCount} × ${vref.toFixed(2)} V`;
+
+    outVreal.textContent = `${vReal.toFixed(2)} V`;
+    outVrealFormula.textContent = ratio > 1
+      ? `${vPin.toFixed(3)}V × ${ratio.toFixed(2)} ratio`
+      : `${vPin.toFixed(3)}V (1.0× direct input)`;
+
+    outQuantError.textContent = `±${quantErrorMv >= 1 ? quantErrorMv.toFixed(2) + ' mV' : (quantErrorMv * 1000).toFixed(1) + ' µV'}`;
+    outSnr.textContent = `${snrDb} dB`;
+
+    // Transfer Scale Bar Update
+    barFill.style.width = `${Math.min(Math.max(pct, 0), 100)}%`;
+    lblTransferPct.textContent = `${pct.toFixed(1)}% (${raw} / ${maxCount})`;
+    lblBarMid.textContent = `${(vref / 2).toFixed(2)} V (${Math.round(maxCount / 2)})`;
+    lblBarMax.textContent = `${vref.toFixed(2)} V (${maxCount})`;
+
+    // SVG Schematic Update
+    svgVsource.textContent = `${vReal.toFixed(2)}V`;
+    svgVpin.textContent = `${vPin.toFixed(2)}V`;
+    const r1Val = parseFloat(inpR1.value) || 0;
+    const r2Val = parseFloat(inpR2.value) || 10;
+    svgR1.textContent = chkDivider.checked ? `R1 (${r1Val}k)` : `R1 (0k)`;
+    svgR2.textContent = chkDivider.checked ? `R2 (${r2Val}k)` : `R2 (10k)`;
+    svgCounts.textContent = `${raw} / ${maxCount}`;
+    svgBitsLabel.textContent = `${bits}-Bit • ${vref.toFixed(1)}V Vref`;
+    lblSchematicRatio.textContent = `Ratio: ${ratio.toFixed(2)}×`;
+
+    // Update code snippets if active
+    updateCodeSnippet(bits, vref, ratio);
+
+    // Cache calculation state
+    currentCalcState = {
+      bits: bits,
+      maxCount: maxCount,
+      vref: vref,
+      raw: raw,
+      vPin: vPin.toFixed(3),
+      ratio: ratio.toFixed(2),
+      vReal: vReal.toFixed(2),
+      lsbStr: lsbStr,
+      pct: pct.toFixed(1),
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+  }
+
+  // Code Snippet Generator
+  function updateCodeSnippet(bits, vref, ratio) {
+    const activeTab = document.querySelector('.code-tab-btn.active');
+    const tabName = activeTab ? activeTab.getAttribute('data-tab') : 'arduino';
+    const maxCount = Math.pow(2, bits) - 1;
+
+    let code = '';
+    if (tabName === 'arduino') {
+      code = `// Arduino C/C++ ADC Read\n` +
+             `const int ADC_PIN = A0;\n` +
+             `const float V_REF = ${vref.toFixed(2)};            // ADC Reference Voltage\n` +
+             `const float DIVIDER_RATIO = ${ratio.toFixed(2)};    // (R1 + R2) / R2\n` +
+             `const int MAX_COUNT = ${maxCount};         // ${bits}-bit resolution\n\n` +
+             `void setup() {\n` +
+             `  Serial.begin(115200);\n` +
+             `}\n\n` +
+             `void loop() {\n` +
+             `  int raw = analogRead(ADC_PIN);        // Read digital count\n` +
+             `  float vPin = (raw / (float)MAX_COUNT) * V_REF;\n` +
+             `  float vSource = vPin * DIVIDER_RATIO;\n\n` +
+             `  Serial.print("Raw: "); Serial.print(raw);\n` +
+             `  Serial.print(" | V_pin: "); Serial.print(vPin, 3); Serial.print(" V");\n` +
+             `  Serial.print(" | V_source: "); Serial.print(vSource, 2); Serial.println(" V");\n` +
+             `  delay(500);\n` +
+             `}`;
+    } else if (tabName === 'esp32') {
+      code = `// ESP32 Arduino Core ADC Read\n` +
+             `// Recommended: uses factory eFuse calibration for superior linearity\n` +
+             `const int ADC_PIN = 34;               // GPIO 34 (ADC1_CH6, input only)\n` +
+             `const float DIVIDER_RATIO = ${ratio.toFixed(2)};    // (R1 + R2) / R2\n\n` +
+             `void setup() {\n` +
+             `  Serial.begin(115200);\n` +
+             `  analogSetAttenuation(ADC_11db);      // Full range ~0 to 3.1V\n` +
+             `}\n\n` +
+             `void loop() {\n` +
+             `  // Returns calibrated voltage directly in millivolts:\n` +
+             `  uint32_t mvPin = analogReadMilliVolts(ADC_PIN);\n` +
+             `  float vPin = mvPin / 1000.0;\n` +
+             `  float vSource = vPin * DIVIDER_RATIO;\n\n` +
+             `  Serial.printf("Pin: %.3f V | Source: %.2f V\\n", vPin, vSource);\n` +
+             `  delay(500);\n` +
+             `}`;
+    } else if (tabName === 'pico') {
+      code = `# Raspberry Pi Pico / RP2040 (MicroPython)\n` +
+             `import machine\n` +
+             `import time\n\n` +
+             `adc = machine.ADC(26)                 # ADC0 on GP26\n` +
+             `V_REF = ${vref.toFixed(2)}                         # Reference Voltage\n` +
+             `DIVIDER_RATIO = ${ratio.toFixed(2)}                 # (R1 + R2) / R2\n\n` +
+             `while True:\n` +
+             `    raw_u16 = adc.read_u16()          # 16-bit integer (0 to 65535)\n` +
+             `    v_pin = (raw_u16 / 65535.0) * V_REF\n` +
+             `    v_source = v_pin * DIVIDER_RATIO\n` +
+             `    print(f"Raw16: {raw_u16} | V_pin: {v_pin:.3f}V | V_source: {v_source:.2f}V")\n` +
+             `    time.sleep(0.5)`;
+    }
+
+    codeBlock.textContent = code;
+  }
+
+  // Code Tab Click Handlers
+  document.querySelectorAll('.code-tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.code-tab-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const bits = getBitDepth();
+      const vref = parseFloat(inpVref.value) || 5.0;
+      let ratio = 1.0;
+      if (chkDivider.checked) {
+        ratio = parseFloat(inpRatio.value) || 1.0;
+      }
+      updateCodeSnippet(bits, vref, ratio);
+    });
+  });
+
+  // Copy Code Button
+  btnCopyCode.addEventListener('click', () => {
+    navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+      showToast('Code copied to clipboard!');
+    }).catch(() => {
+      showToast('Failed to copy code.');
+    });
+  });
+
+  // Event Listeners for Inputs
+  selResolution.addEventListener('change', () => {
+    if (selResolution.value === 'custom') {
+      customBitsRow.style.display = 'block';
+    } else {
+      customBitsRow.style.display = 'none';
+    }
+    calculate();
+  });
+
+  inpCustomBits.addEventListener('input', calculate);
+
+  inpVref.addEventListener('input', calculate);
+
+  inpRawCount.addEventListener('input', () => {
+    activeInput = 'raw';
+    calculate();
+  });
+
+  inpVpin.addEventListener('input', () => {
+    activeInput = 'vpin';
+    calculate();
+  });
+
+  // Vref Preset Buttons
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      inpVref.value = this.getAttribute('data-vref');
+      calculate();
+    });
+  });
+
+  // Divider Accordion Toggle
+  dividerToggleRow.addEventListener('click', () => {
+    chkDivider.checked = !chkDivider.checked;
+    chkDivider.dispatchEvent(new Event('change'));
+  });
+
+  chkDivider.addEventListener('change', () => {
+    if (chkDivider.checked) {
+      dividerFields.classList.add('open');
+      if (parseFloat(inpRatio.value) === 1 && (parseFloat(inpR1.value) > 0)) {
+        computeRatioFromResistors();
+      }
+    } else {
+      dividerFields.classList.remove('open');
+    }
+    calculate();
+  });
+
+  // Resistor Inputs update ratio
+  function computeRatioFromResistors() {
+    const r1 = parseFloat(inpR1.value) || 0;
+    const r2 = parseFloat(inpR2.value) || 10;
+    if (r2 > 0) {
+      const ratio = (r1 + r2) / r2;
+      inpRatio.value = ratio.toFixed(2);
+    }
+  }
+
+  inpR1.addEventListener('input', () => {
+    computeRatioFromResistors();
+    calculate();
+  });
+
+  inpR2.addEventListener('input', () => {
+    computeRatioFromResistors();
+    calculate();
+  });
+
+  inpRatio.addEventListener('input', () => {
+    calculate();
+  });
+
+  // Reset to Defaults
+  btnReset.addEventListener('click', () => {
+    selResolution.value = '10';
+    customBitsRow.style.display = 'none';
+    inpVref.value = '5.0';
+    inpRawCount.value = '512';
+    chkDivider.checked = false;
+    dividerFields.classList.remove('open');
+    inpRatio.value = '1.0';
+    inpR1.value = '0';
+    inpR2.value = '10';
+    activeInput = 'raw';
+
+    document.querySelectorAll('.preset-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-vref') === '5.0');
+    });
+
+    calculate();
+    showToast('Reset to default values (10-bit, 5V, 512 raw).');
+  });
+
+  // Load Benchmark: Example 2 (30k/10k Divider, Arduino 10-bit 5V, 600 raw)
+  function loadBenchmarkExample() {
+    selResolution.value = '10';
+    customBitsRow.style.display = 'none';
+    inpVref.value = '5.0';
+    inpRawCount.value = '600';
+    chkDivider.checked = true;
+    dividerFields.classList.add('open');
+    inpR1.value = '30';
+    inpR2.value = '10';
+    inpRatio.value = '4.0';
+    activeInput = 'raw';
+
+    document.querySelectorAll('.preset-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-vref') === '5.0');
+    });
+
+    calculate();
+    showToast('Loaded benchmark: 30k/10k divider (ratio 4), 600 raw -> 11.7V.');
+  }
+
+  btnLoadExample.addEventListener('click', loadBenchmarkExample);
+  btnLoadEx2.addEventListener('click', loadBenchmarkExample);
+
+  // Load Example 1: Arduino Uno standard 512 raw
+  btnLoadEx1.addEventListener('click', () => {
+    selResolution.value = '10';
+    customBitsRow.style.display = 'none';
+    inpVref.value = '5.0';
+    inpRawCount.value = '512';
+    chkDivider.checked = false;
+    dividerFields.classList.remove('open');
+    inpRatio.value = '1.0';
+    inpR1.value = '0';
+    inpR2.value = '10';
+    activeInput = 'raw';
+
+    document.querySelectorAll('.preset-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-vref') === '5.0');
+    });
+
+    calculate();
+    showToast('Loaded Example 1: 10-bit, 5V, raw 512 -> 2.5V.');
+  });
+
+  // Load Example 3: ESP32 12-bit, 3.3V, 2048 raw
+  btnLoadEx3.addEventListener('click', () => {
+    selResolution.value = '12';
+    customBitsRow.style.display = 'none';
+    inpVref.value = '3.3';
+    inpRawCount.value = '2048';
+    chkDivider.checked = false;
+    dividerFields.classList.remove('open');
+    inpRatio.value = '1.0';
+    inpR1.value = '0';
+    inpR2.value = '10';
+    activeInput = 'raw';
+
+    document.querySelectorAll('.preset-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-vref') === '3.3');
+    });
+
+    calculate();
+    showToast('Loaded Example 3: ESP32 12-bit, 3.3V, raw 2048 -> 1.65V.');
+  });
+
+  // Advanced Tools Modal
+  btnAdvTools.addEventListener('click', () => advToolsModal.classList.add('open'));
+  btnCloseModal.addEventListener('click', () => advToolsModal.classList.remove('open'));
+  advToolsModal.addEventListener('click', (e) => {
+    if (e.target === advToolsModal) advToolsModal.classList.remove('open');
+  });
+
+  // PDF Report
+  btnPrintPdf.addEventListener('click', () => {
+    const printDate = $('printDate');
+    if (printDate) printDate.textContent = new Date().toLocaleString();
+    window.print();
+  });
+
+  // History Management
+  function getHistory() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch(e) {
+      return [];
+    }
+  }
+
+  function renderHistory() {
+    const list = getHistory();
+    if (!list.length) {
+      historyList.innerHTML = '<div class="empty-state">No saved calculations yet. Click "Save Calc" above to store your readings.</div>';
+      return;
+    }
+
+    let html = '';
+    list.forEach((item, index) => {
+      html += `
+        <div class="history-item">
+          <div class="history-meta">
+            <strong>${item.vReal}V (${item.bits}-bit • Count ${item.raw} / ${item.maxCount})</strong>
+            <span>V_pin: ${item.vPin}V • V_ref: ${item.vref}V • LSB: ${item.lsbStr} • Saved: ${item.timestamp}</span>
+          </div>
+          <div style="display:flex; gap:0.4rem;">
+            <button class="btn-sm" onclick="window.mtaLoadHistoryItem(${index})"><i class="fas fa-arrow-rotate-left"></i> Load</button>
+            <button class="btn-sm del" onclick="window.mtaDeleteHistoryItem(${index})"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      `;
+    });
+    historyList.innerHTML = html;
+  }
+
+  window.mtaLoadHistoryItem = function(index) {
+    const list = getHistory();
+    const item = list[index];
+    if (!item) return;
+
+    if ([8, 10, 12, 14, 16, 24].includes(item.bits)) {
+      selResolution.value = item.bits.toString();
+      customBitsRow.style.display = 'none';
+    } else {
+      selResolution.value = 'custom';
+      customBitsRow.style.display = 'block';
+      inpCustomBits.value = item.bits;
+    }
+
+    inpVref.value = item.vref;
+    inpRawCount.value = item.raw;
+    inpRatio.value = item.ratio;
+
+    const rRatio = parseFloat(item.ratio);
+    if (rRatio > 1) {
+      chkDivider.checked = true;
+      dividerFields.classList.add('open');
+    } else {
+      chkDivider.checked = false;
+      dividerFields.classList.remove('open');
+    }
+
+    activeInput = 'raw';
+    calculate();
+    showToast(`Loaded ${item.vReal}V calculation.`);
+  };
+
+  window.mtaDeleteHistoryItem = function(index) {
+    let list = getHistory();
+    list.splice(index, 1);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    renderHistory();
+    showToast('Record deleted.');
+  };
+
+  btnSaveCalc.addEventListener('click', () => {
+    if (!currentCalcState) return;
+    let list = getHistory();
+    list.unshift(currentCalcState);
+    if (list.length > 25) list = list.slice(0, 25);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    renderHistory();
+    showToast(`Saved ${currentCalcState.vReal}V (${currentCalcState.raw} counts) to history.`);
+  });
+
+  btnExportJson.addEventListener('click', () => {
+    const list = getHistory();
+    if (!list.length) {
+      showToast('No saved calculations to export.');
+      return;
+    }
+    const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'adc-calculations-history.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Exported history as JSON!');
+  });
+
+  btnClearHistory.addEventListener('click', () => {
+    if (confirm('Are you sure you want to clear all saved calculations?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      renderHistory();
+      showToast('Cleared calculation history.');
+    }
+  });
+
+  // Initial Calculation & Render
+  calculate();
+  renderHistory();
+})();
+</script>
+
+<script src="/pwa.js" defer></script>
+<script src="mta-chrome.js" defer></script>
+<!-- Vercel Speed Insights -->
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+
+</body>
+</html>

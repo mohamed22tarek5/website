@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/solar-system-sizing-calculator.html">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Solar System Sizing Calculator (Panels, Batteries & Inverter) | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Free off-grid and hybrid solar system sizing calculator: calculate daily energy consumption, required solar panels (Wp), battery storage capacity (Ah), inverter wattage, and MPPT charge controller sizing.">
+  <meta name="author" content="Mohamed Tarek Abdelhady">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Solar System Sizing Calculator (Panels, Batteries & Inverter) | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Calculate solar array wattage (Wp), battery bank capacity (Ah), inverter rating, and MPPT controller sizing from appliance energy audit.">
+  <meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="851">
+  <meta property="og:image:height" content="1134">
+  <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/solar-system-sizing-calculator.html">
+  <meta property="og:updated_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="article:modified_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Solar System Sizing Calculator (Panels, Batteries & Inverter) | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Calculate solar array wattage (Wp), battery bank capacity (Ah), inverter rating, and MPPT controller sizing from appliance energy audit.">
+  <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+
+  <!-- PWA & Mobile Icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M. Tarek">
+  <meta name="application-name" content="M. Tarek">
+  <meta name="msapplication-TileColor" content="#0a0e1a">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
+  <link rel="stylesheet" href="mta-chrome.css">
+
+  <!-- Schema.org WebApplication & BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Solar System Sizing Calculator",
+    "description": "Calculate daily load energy (kWh), solar PV array power (Wp), number of panels, battery storage capacity (Ah), inverter wattage, and MPPT charge controller rating.",
+    "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/solar-system-sizing-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek Abdelhady",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tools",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/tools.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Solar System Sizing Calculator",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/sites/solar-system-sizing-calculator.html"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1322;
+      --bg3: #141829;
+      --card: #161b2e;
+      --card2: #1c2240;
+      --acc: #f59e0b; /* Solar Amber/Gold */
+      --acc-hover: #d97706;
+      --acc-subtle: rgba(245, 158, 11, 0.1);
+      --acc-border: rgba(245, 158, 11, 0.35);
+      --blue: #3b82f6;
+      --txt: #f1f5f9;
+      --mut: #94a3b8;
+      --mut2: #64748b;
+      --br: rgba(255, 255, 255, 0.08);
+      --br-hover: rgba(255, 255, 255, 0.16);
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --err: #ef4444;
+      --r: 14px;
+      --r-sm: 8px;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+      --gradient-glow: radial-gradient(circle at top center, rgba(245, 158, 11, 0.12) 0%, transparent 70%);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --bg3: #e2e8f0;
+      --card: #ffffff;
+      --card2: #f8fafc;
+      --acc: #d97706;
+      --acc-hover: #b45309;
+      --acc-subtle: rgba(217, 119, 6, 0.08);
+      --acc-border: rgba(217, 119, 6, 0.25);
+      --blue: #2563eb;
+      --txt: #0f172a;
+      --mut: #475569;
+      --mut2: #94a3b8;
+      --br: rgba(0, 0, 0, 0.08);
+      --br-hover: rgba(0, 0, 0, 0.15);
+      --gradient-glow: radial-gradient(circle at top center, rgba(217, 119, 6, 0.08) 0%, transparent 70%);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.65;
+      min-height: 100vh;
+      background-image: var(--gradient-glow);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 1.8rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      background: var(--acc-subtle);
+      border: 1px solid var(--acc-border);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--acc);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.9rem;
+    }
+
+    .pill .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--acc);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--acc);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.75rem, 3.8vw, 2.65rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 .grad {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--mut);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* In Brief / Summary Card */
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-left: 4px solid var(--acc);
+      border-radius: var(--r);
+      padding: 1.15rem 1.4rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .summary-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--acc);
+      margin-bottom: 0.45rem;
+    }
+
+    .summary-card p {
+      color: var(--mut);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .summary-card strong {
+      color: var(--txt);
+    }
+
+    /* Disclaimer Alert */
+    .alert-box {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: var(--r);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      font-size: 0.88rem;
+      color: var(--txt);
+      line-height: 1.55;
+    }
+
+    .alert-box i {
+      color: var(--warn);
+      font-size: 1.1rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    /* Layout Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--txt);
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .card h2 i {
+      color: var(--acc);
+      font-size: 1.05rem;
+    }
+
+    /* Appliances Table */
+    .table-container {
+      overflow-x: auto;
+      margin-bottom: 1rem;
+    }
+
+    table.app-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      text-align: left;
+    }
+
+    table.app-table th {
+      padding: 0.65rem 0.6rem;
+      background: var(--bg2);
+      color: var(--mut);
+      font-weight: 600;
+      border-bottom: 1px solid var(--br);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    table.app-table td {
+      padding: 0.5rem 0.6rem;
+      border-bottom: 1px solid var(--br);
+      vertical-align: middle;
+    }
+
+    table.app-table input[type="text"],
+    table.app-table input[type="number"] {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--txt);
+      padding: 0.45rem 0.55rem;
+      border-radius: 6px;
+      font-family: var(--mono);
+      font-size: 0.86rem;
+      outline: none;
+    }
+
+    table.app-table input:focus {
+      border-color: var(--acc);
+    }
+
+    .btn-del-row {
+      background: transparent;
+      border: none;
+      color: var(--mut2);
+      font-size: 0.95rem;
+      cursor: pointer;
+      padding: 0.3rem 0.5rem;
+      border-radius: 6px;
+      transition: all 150ms ease;
+    }
+
+    .btn-del-row:hover {
+      color: var(--err);
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    .app-toolbar {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn-add {
+      background: var(--acc-subtle);
+      border: 1px solid var(--acc-border);
+      color: var(--acc);
+      padding: 0.5rem 0.85rem;
+      border-radius: var(--r-sm);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 150ms ease;
+    }
+
+    .btn-add:hover {
+      background: var(--acc);
+      color: #ffffff;
+    }
+
+    /* Form Inputs */
+    .lbl {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin-bottom: 0.35rem;
+      margin-top: 0.85rem;
+    }
+
+    .lbl:first-of-type {
+      margin-top: 0;
+    }
+
+    .lbl span.opt {
+      font-size: 0.74rem;
+      font-weight: 400;
+      color: var(--mut2);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .input-row input {
+      flex: 1;
+    }
+
+    .input-row select {
+      min-width: 95px;
+    }
+
+    input[type="number"], select {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--txt);
+      padding: 0.7rem 0.85rem;
+      border-radius: var(--r-sm);
+      font-family: var(--mono);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    input[type="number"]:focus, select:focus {
+      border-color: var(--acc);
+      box-shadow: 0 0 0 3px var(--acc-subtle);
+    }
+
+    /* Action Buttons Toolbar */
+    .btn-toolbar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 520px) {
+      .btn-toolbar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.75rem 0.6rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      color: var(--txt);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 150ms ease;
+      text-decoration: none;
+    }
+
+    .action-btn:hover {
+      background: var(--card2);
+      border-color: var(--acc-border);
+      color: var(--acc);
+      transform: translateY(-1px);
+    }
+
+    .action-btn.primary {
+      background: var(--gradient-accent);
+      border: none;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+    }
+
+    .action-btn.primary:hover {
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Results Grid */
+    .res-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .res-cell {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.85rem 1rem;
+      transition: border-color 150ms ease;
+      position: relative;
+    }
+
+    .res-cell.highlight {
+      border-color: var(--acc-border);
+      background: var(--acc-subtle);
+    }
+
+    .res-cell small {
+      display: block;
+      color: var(--mut2);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+
+    .res-cell b {
+      font-family: var(--mono);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--txt);
+      display: block;
+      word-break: break-word;
+    }
+
+    .res-cell.highlight b {
+      color: var(--acc);
+    }
+
+    .res-cell .sub-val {
+      font-size: 0.75rem;
+      color: var(--mut);
+      margin-top: 0.2rem;
+      font-family: var(--mono);
+    }
+
+    /* Content Cards & Theory */
+    .content-card {
+      margin-top: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .content-card h2 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+      color: var(--txt);
+    }
+
+    .formula-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .formula-box {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1.1rem;
+    }
+
+    .formula-box h4 {
+      font-size: 0.85rem;
+      color: var(--mut);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .formula-code {
+      font-family: var(--mono);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--acc);
+      background: var(--bg3);
+      padding: 0.6rem 0.85rem;
+      border-radius: 6px;
+      border: 1px solid var(--br);
+      margin-bottom: 0.5rem;
+      word-break: break-all;
+    }
+
+    .formula-box p {
+      font-size: 0.82rem;
+      color: var(--mut2);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Example Card */
+    .example-box {
+      background: var(--bg2);
+      border: 1px solid var(--acc-border);
+      border-radius: var(--r-sm);
+      padding: 1.25rem;
+      margin-top: 0.85rem;
+    }
+
+    .example-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .example-header h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--txt);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .example-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .step-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+    }
+
+    .step-card span {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--mut2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.2rem;
+    }
+
+    .step-card strong {
+      font-family: var(--mono);
+      font-size: 0.98rem;
+      color: var(--txt);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .close-modal-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .close-modal-btn:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .tool-tile {
+      display: block;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1rem;
+      text-decoration: none;
+      color: var(--txt);
+      transition: all 150ms ease;
+    }
+
+    .tool-tile:hover {
+      border-color: var(--acc-border);
+      background: var(--card2);
+      transform: translateY(-2px);
+    }
+
+    .tool-tile-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+      color: var(--acc);
+    }
+
+    .tool-tile p {
+      font-size: 0.82rem;
+      color: var(--mut);
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* History */
+    .history-card {
+      margin-top: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.75rem 1rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .history-details {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--txt);
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .history-meta {
+      font-size: 0.75rem;
+      color: var(--mut2);
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--bg3);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      transition: all 150ms ease;
+    }
+
+    .btn-sm:hover {
+      color: var(--txt);
+      border-color: var(--acc);
+    }
+
+    .btn-sm.del:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 1.75rem 1rem;
+      color: var(--mut2);
+      font-size: 0.88rem;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--card2);
+      border: 1px solid var(--acc-border);
+      color: var(--txt);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--r-sm);
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transform: translateY(100px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 250ms ease, opacity 250ms ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11pt;
+      }
+
+      .mta-bar, .mta-foot, .btn-toolbar, .modal-overlay, .toast, .btn-sm, #th, [data-mta-top], .example-header button, .btn-add, .btn-del-row {
+        display: none !important;
+      }
+
+      .wrap {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .card, .summary-card, .content-card, .history-card {
+        background: #ffffff !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+        color: #000000 !important;
+        page-break-inside: avoid;
+        margin-bottom: 1rem !important;
+        padding: 1rem !important;
+      }
+
+      .print-header {
+        display: block !important;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+      }
+
+      .print-header h1 {
+        font-size: 18pt;
+        margin: 0;
+      }
+
+      .res-cell {
+        background: #f8f8f8 !important;
+        border: 1px solid #ddd !important;
+        color: #000 !important;
+      }
+
+      .res-cell b {
+        color: #000 !important;
+      }
+    }
+
+    .print-header {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header Chrome -->
+<header class="mta-bar" id="header" role="banner">
+  <div class="mta-bar-in">
+    <nav aria-label="Breadcrumb" class="mta-crumbs">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools.html">Tools</a></li>
+        <li aria-current="page">Solar System Sizing Calculator</li>
+      </ol>
+    </nav>
+    <button class="mta-btn" id="th" type="button" aria-label="Toggle dark/light mode">
+      <i class="fas fa-moon" data-mta-icon></i>
+    </button>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <!-- Print Header -->
+  <div class="print-header">
+    <h1>Mohamed Tarek Abdelhady — Solar PV Engineering Sizing Report</h1>
+    <p><strong>Tool:</strong> Solar Photovoltaic System Sizing (Panels, Batteries &amp; Inverter)</p>
+    <p><strong>Date Generated:</strong> <span id="printDate"></span></p>
+  </div>
+
+  <!-- Hero Header -->
+  <div class="hero">
+    <span class="pill"><span class="dot"></span> Renewable Energy &middot; Solar PV</span>
+    <h1><span class="grad">Solar System Sizing</span> Calculator</h1>
+    <p>Complete off-grid and backup sizing: Solar PV array wattage, battery storage bank, inverter rating, and MPPT charge controller.</p>
+  </div>
+
+  <!-- In Brief -->
+  <div class="summary-card" role="region" aria-label="Quick Summary">
+    <div class="summary-card-header">
+      <i class="fas fa-circle-check"></i> In Brief
+    </div>
+    <p>
+      The system is sized starting from <strong>total daily energy consumption in watt-hours (Wh)</strong>: required solar panel capacity is computed by dividing daily energy by <strong>peak sun hours (PSH)</strong> and system efficiency; battery storage capacity is sized by multiplying daily consumption by <strong>days of autonomy</strong> and dividing by battery voltage and <strong>depth of discharge (DoD)</strong>; and continuous inverter rating is sized with a <strong>25% safety margin</strong> above simultaneous peak load.
+    </p>
+  </div>
+
+  <!-- Disclaimer Alert -->
+  <div class="alert-box">
+    <i class="fas fa-triangle-exclamation"></i>
+    <div>
+      <strong>Engineering Notice:</strong> Results are provided for educational and preliminary estimation purposes. Electrical installations, high-voltage PV strings, and battery energy storage systems must be engineered, verified, and installed by a certified solar/electrical engineer in accordance with local national electrical codes.
+    </div>
+  </div>
+
+  <!-- Calculator Grid -->
+  <div class="grid">
+    <!-- Left Card: Inputs & Appliances Audit -->
+    <div class="card" id="calcForm">
+      <h2><i class="fas fa-plug"></i> 1. Appliances Energy Audit</h2>
+
+      <div class="table-container">
+        <table class="app-table" id="appTable">
+          <thead>
+            <tr>
+              <th style="min-width:140px;">Appliance</th>
+              <th style="width:75px;">Power (W)</th>
+              <th style="width:55px;">Qty</th>
+              <th style="width:65px;">Hours/Day</th>
+              <th style="width:30px;"></th>
+            </tr>
+          </thead>
+          <tbody id="appTableBody">
+            <!-- Populated with initial 4 appliances -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="app-toolbar">
+        <button type="button" class="btn-add" id="btnAddApp">
+          <i class="fas fa-plus"></i> Add Appliance
+        </button>
+        <select id="selPresetApp" style="width:auto; flex:1; min-width:180px; padding:0.45rem 0.6rem; font-size:0.84rem;">
+          <option value="" disabled selected>+ Quick Add Appliance Preset</option>
+          <option value="TV,80,1,5">Smart TV (80W, 5h)</option>
+          <option value="Ceiling Fan,60,2,8">Ceiling Fan (60W, 8h)</option>
+          <option value="Water Pump,750,1,1">Water Pump 1HP (750W, 1h)</option>
+          <option value="Washing Machine,400,1,1">Washing Machine (400W, 1h)</option>
+          <option value="Air Conditioner,1200,1,6">Inverter AC (1200W, 6h)</option>
+          <option value="Desktop PC,200,1,6">Desktop Computer (200W, 6h)</option>
+          <option value="Microwave,1000,1,0.3">Microwave (1000W, 0.3h)</option>
+        </select>
+      </div>
+
+      <h2 style="margin-top:1.5rem;"><i class="fas fa-sun"></i> 2. Solar &amp; Battery Parameters</h2>
+
+      <!-- Peak Sun Hours -->
+      <label class="lbl" for="inpPsh">
+        <span>Peak Sun Hours (PSH)</span>
+        <span class="opt">Hours/day equivalent full sun</span>
+      </label>
+      <div class="input-row">
+        <input id="inpPsh" type="number" value="5" step="0.1" min="1" max="10" placeholder="e.g. 5" aria-label="Peak sun hours per day">
+        <select id="selPshPreset" aria-label="PSH presets">
+          <option value="5" selected>5.0 h (Sunny / Mediterranean)</option>
+          <option value="3.5">3.5 h (Winter / Moderate)</option>
+          <option value="4.2">4.2 h (Annual Average)</option>
+          <option value="6.0">6.0 h (Desert / High Sun)</option>
+        </select>
+      </div>
+
+      <!-- System Efficiency -->
+      <label class="lbl" for="inpEff">
+        <span>Solar Panels &amp; System Efficiency (%)</span>
+        <span class="opt">Dust, wiring, temperature (~80%)</span>
+      </label>
+      <div class="input-row">
+        <input id="inpEff" type="number" value="80" step="1" min="50" max="98" placeholder="e.g. 80" aria-label="System efficiency percentage">
+      </div>
+
+      <!-- Single Panel Wattage -->
+      <label class="lbl" for="inpPanelW">
+        <span>Single Solar Panel Wattage (W<sub>p</sub>)</span>
+        <span class="opt">Commercial rating</span>
+      </label>
+      <div class="input-row">
+        <input id="inpPanelW" type="number" value="550" step="5" min="50" max="800" placeholder="e.g. 550" aria-label="Single panel wattage">
+        <select id="selPanelPreset" aria-label="Panel wattage presets">
+          <option value="550" selected>550 W (Half-cell Mono)</option>
+          <option value="600">600 W (High Power)</option>
+          <option value="450">450 W (Standard)</option>
+          <option value="400">400 W (Residential)</option>
+        </select>
+      </div>
+
+      <!-- Autonomy Days -->
+      <label class="lbl" for="inpAutonomy">
+        <span>Days of Autonomy (No Sun)</span>
+        <span class="opt">Battery backup days</span>
+      </label>
+      <div class="input-row">
+        <input id="inpAutonomy" type="number" value="1" step="0.5" min="0.5" max="7" placeholder="e.g. 1" aria-label="Days of autonomy">
+      </div>
+
+      <!-- Battery Chemistry / DoD -->
+      <label class="lbl" for="selBatteryType">
+        <span>Battery Type &amp; Depth of Discharge (DoD)</span>
+        <span class="opt">Safe discharge cycle</span>
+      </label>
+      <select id="selBatteryType" aria-label="Battery chemistry type">
+        <option value="0.80" selected>Lithium Iron Phosphate (LiFePO4) — 80% DoD</option>
+        <option value="0.90">Lithium-ion (NMC) — 90% DoD</option>
+        <option value="0.50">Deep Cycle Sealed Lead-Acid (AGM / Gel) — 50% DoD</option>
+        <option value="0.50">Flooded Lead-Acid (FLA) — 50% DoD</option>
+      </select>
+
+      <!-- Battery System Voltage -->
+      <label class="lbl" for="selBattVolt">
+        <span>Battery System Voltage</span>
+        <span class="opt">Recommended: Auto</span>
+      </label>
+      <select id="selBattVolt" aria-label="Battery system voltage">
+        <option value="auto" selected>Auto (Recommended by consumption)</option>
+        <option value="12">12 V (Small Systems)</option>
+        <option value="24">24 V (Medium Systems)</option>
+        <option value="48">48 V (Large Systems)</option>
+      </select>
+
+      <!-- Action Toolbar -->
+      <div class="btn-toolbar">
+        <button class="action-btn primary" id="btnSaveCalc" type="button" aria-label="Save calculation">
+          <i class="fas fa-floppy-disk"></i> Save Calc
+        </button>
+        <button class="action-btn" id="btnPrintPdf" type="button" aria-label="Export PDF report">
+          <i class="fas fa-file-pdf"></i> PDF Report
+        </button>
+        <button class="action-btn" id="btnAdvTools" type="button" aria-label="Open advanced tools">
+          <i class="fas fa-star"></i> Adv. Tools
+        </button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:1rem; font-size:0.8rem;">
+        <button type="button" id="btnReset" style="color:var(--mut2); text-decoration:underline; background:none; border:none; cursor:pointer;">
+          <i class="fas fa-rotate-left"></i> Reset Defaults
+        </button>
+        <button type="button" id="btnLoadExample" style="color:var(--acc); background:none; border:none; cursor:pointer; font-weight:600;">
+          <i class="fas fa-lightbulb"></i> Load 2.3 kWh Benchmark
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Card: Sizing Results -->
+    <div class="card">
+      <h2><i class="fas fa-solar-panel"></i> System Sizing Results</h2>
+
+      <div class="res-grid">
+        <!-- Daily Consumption -->
+        <div class="res-cell highlight">
+          <small>Daily Energy Consumption</small>
+          <b id="outDailyEnergy">2.47 kWh</b>
+          <div class="sub-val" id="outDailyEnergyWh">2,473 Wh / day</div>
+        </div>
+
+        <!-- Max Instantaneous Load -->
+        <div class="res-cell highlight">
+          <small>Peak Simultaneous Load</small>
+          <b id="outPeakLoad">287 W</b>
+          <div class="sub-val">Sum of all active device ratings</div>
+        </div>
+
+        <!-- Required Solar Array Capacity -->
+        <div class="res-cell highlight">
+          <small>Required Solar PV Capacity</small>
+          <b id="outSolarArrayWp">687 Wp</b>
+          <div class="sub-val" id="outSolarArrayCalc">2,473 Wh / (0.9 × 5h × 80%)</div>
+        </div>
+
+        <!-- Number of Solar Panels -->
+        <div class="res-cell highlight">
+          <small>Number of Panels (550 W)</small>
+          <b id="outPanelCount">2 Panels</b>
+          <div class="sub-val" id="outInstalledPvPower">Total Installed: 1,100 Wp</div>
+        </div>
+
+        <!-- Battery System Voltage -->
+        <div class="res-cell">
+          <small>Battery Voltage (Suggested)</small>
+          <b id="outBatteryVolt">24 V</b>
+          <div class="sub-val" id="outBatteryVoltReason">Selected for 2.47 kWh daily load</div>
+        </div>
+
+        <!-- Battery Storage Capacity -->
+        <div class="res-cell">
+          <small>Battery Bank Capacity</small>
+          <b id="outBatteryCapacity">143 Ah @ 24 V</b>
+          <div class="sub-val" id="outBatteryEnergyKwh">Stored Energy: 3.43 kWh (80% DoD)</div>
+        </div>
+
+        <!-- Inverter Continuous Power -->
+        <div class="res-cell">
+          <small>Inverter Continuous Power (+25%)</small>
+          <b id="outInverterWatts">359 W</b>
+          <div class="sub-val" id="outInverterSurge">Surge motor capacity: &ge; 800 W</div>
+        </div>
+
+        <!-- Charge Controller Current -->
+        <div class="res-cell">
+          <small>MPPT Charge Controller</small>
+          <b id="outControllerCurrent">&ge; 57 A</b>
+          <div class="sub-val" id="outControllerCalc">Installed: 1,100 Wp / 24 V &times; 1.25</div>
+        </div>
+      </div>
+
+      <!-- System Summary Box -->
+      <div style="margin-top:1.15rem; background:var(--bg2); border:1px dashed var(--br); border-radius:10px; padding:0.9rem 1.05rem; font-size:0.86rem; color:var(--mut); line-height:1.55;">
+        <i class="fas fa-circle-info" style="color:var(--acc); margin-right:0.35rem;"></i>
+        <strong>Sizing Advisory:</strong> Preliminary estimation based on 90% inverter efficiency. For inductive loads featuring electric motors (such as refrigerators, water pumps, or air conditioners), choose a pure sine wave inverter capable of handling <strong>2&times; to 3&times;</strong> surge starting current, and verify solar panel Voc and battery charging voltage with manufacturer specifications.
+      </div>
+
+      <!-- Quick Summary List -->
+      <div style="margin-top:1rem; display:flex; flex-direction:column; gap:0.45rem; font-size:0.83rem; color:var(--txt);">
+        <div style="display:flex; justify-content:space-between; padding:0.45rem 0.75rem; background:var(--bg2); border-radius:6px;">
+          <span style="color:var(--mut);">Solar PV Coverage Ratio:</span>
+          <strong id="outCoverageRatio" style="color:var(--ok);">160% (1,100 Wp installed / 687 Wp required)</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:0.45rem 0.75rem; background:var(--bg2); border-radius:6px;">
+          <span style="color:var(--mut);">Full Battery Recharge Time:</span>
+          <strong id="outRechargeTime">~3.5 Peak Sun Hours</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Theory & Governing Sizing Equations -->
+  <div class="content-card">
+    <h2><i class="fas fa-calculator" style="color:var(--acc);"></i> Engineering Calculation Methodology</h2>
+    <p style="color:var(--mut); font-size:0.92rem; line-height:1.6;">
+      Off-grid and hybrid solar PV systems are mathematically balanced to achieve energy equilibrium across seasonal solar irradiance and daily consumption:
+    </p>
+
+    <div class="formula-grid">
+      <!-- 1. Daily Consumption -->
+      <div class="formula-box">
+        <h4>1. Daily Energy Consumption (E)</h4>
+        <div class="formula-code">E = &Sigma; (P &times; N &times; h)</div>
+        <p>Calculated in Watt-hours (Wh). The sum of each device's rated power <strong>P</strong> multiplied by quantity <strong>N</strong> and daily operational hours <strong>h</strong>.</p>
+      </div>
+
+      <!-- 2. Solar PV Capacity -->
+      <div class="formula-box">
+        <h4>2. Required Solar Array (W<sub>p</sub>)</h4>
+        <div class="formula-code">W<sub>p</sub> = E / [ 0.90 &times; (PSH &times; &eta;) ]</div>
+        <p>Where <strong>0.90</strong> is typical inverter efficiency, <strong>PSH</strong> is peak sun hours (worst-month recommended), and <strong>&eta;</strong> is system performance ratio (~80%).</p>
+      </div>
+
+      <!-- 3. Battery Capacity -->
+      <div class="formula-box">
+        <h4>3. Battery Capacity (Ah)</h4>
+        <div class="formula-code">Ah = (E / 0.90 &times; Days) / (V &times; DoD)</div>
+        <p>Where <strong>V</strong> is battery bank voltage, <strong>Days</strong> is autonomy without sun, and <strong>DoD</strong> is depth of discharge (80% for LiFePO4, 50% for Lead-Acid).</p>
+      </div>
+
+      <!-- 4. Inverter Rating -->
+      <div class="formula-box">
+        <h4>4. Inverter Power Rating</h4>
+        <div class="formula-code">P<sub>inv</sub> = P<sub>peak</sub> &times; 1.25</div>
+        <p>Continuous inverter wattage must exceed total simultaneous peak load by at least <strong>25%</strong>, with high surge capability for motor inrush.</p>
+      </div>
+
+      <!-- 5. Charge Controller Rating -->
+      <div class="formula-box">
+        <h4>5. MPPT Charge Controller</h4>
+        <div class="formula-code">I<sub>cc</sub> &ge; (P<sub>array</sub> / V<sub>batt</sub>) &times; 1.25</div>
+        <p>Current rating of the solar charge controller must safely convey full array power with an extra 25% safety headroom.</p>
+      </div>
+
+      <!-- 6. System Voltage Rules -->
+      <div class="formula-box">
+        <h4>6. Recommended System Voltage</h4>
+        <div class="formula-code">12V (&lt;1.5 kWh) &middot; 24V (1.5–4 kWh) &middot; 48V (&gt;4 kWh)</div>
+        <p>Higher DC voltage substantially reduces circuit current, conductor thickness, line voltage drop, and electrical power losses.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Benchmark Practical Example -->
+  <div class="content-card">
+    <h2><i class="fas fa-lightbulb" style="color:var(--warn);"></i> Practical Benchmark Example</h2>
+    <div class="example-box">
+      <div class="example-header">
+        <h3><i class="fas fa-house-chimney" style="color:var(--acc);"></i> Small Household Benchmark: 2.3 kWh/day Consumption &middot; 5 PSH</h3>
+        <button class="btn-sm" id="btnLoadExample2" type="button">
+          <i class="fas fa-arrow-up-right-from-square"></i> Load This Example
+        </button>
+      </div>
+      <p style="color:var(--mut); font-size:0.9rem; line-height:1.6;">
+        A typical energy-efficient rural home with a daily consumption of <strong>2.3 kWh/day (2,300 Wh)</strong> located in an area with <strong>5 Peak Sun Hours</strong>:
+      </p>
+
+      <div class="example-steps">
+        <div class="step-card">
+          <span>1. Daily Demand</span>
+          <strong>2.3 kWh / day</strong>
+        </div>
+        <div class="step-card">
+          <span>2. Solar PV Required</span>
+          <strong>2300 / (0.9 &times; 5 &times; 0.8) &approx; 639 W<sub>p</sub></strong>
+        </div>
+        <div class="step-card">
+          <span>3. Panels Installed</span>
+          <strong>2 &times; 550 W Panels (1,100 W<sub>p</sub>)</strong>
+        </div>
+        <div class="step-card">
+          <span>4. 24V Lithium Storage</span>
+          <strong>(2300 / 0.9 &times; 1) / (24 &times; 0.8) &approx; 133 Ah @ 24V</strong>
+        </div>
+        <div class="step-card">
+          <span>5. Inverter Recommendation</span>
+          <strong>&ge; 500 W – 1000 W Pure Sine Wave</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Saved Calculations History -->
+  <div class="history-card" id="historyCard">
+    <div class="history-header">
+      <h3 style="font-size:1.1rem; font-weight:700; display:flex; align-items:center; gap:0.5rem;">
+        <i class="fas fa-clock-rotate-left" style="color:var(--acc);"></i> Saved Calculations History
+      </h3>
+      <div style="display:flex; gap:0.5rem;">
+        <button class="btn-sm" id="btnExportJson" type="button" title="Export as JSON">
+          <i class="fas fa-download"></i> Export JSON
+        </button>
+        <button class="btn-sm del" id="btnClearHistory" type="button" title="Clear History">
+          <i class="fas fa-trash"></i> Clear All
+        </button>
+      </div>
+    </div>
+    <div class="history-list" id="historyList">
+      <div class="empty-state">No calculations saved yet. Click "Save Calc" to store current values.</div>
+    </div>
+  </div>
+</main>
+
+<!-- Advanced Tools Modal -->
+<div class="modal-overlay" id="advToolsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="modalTitle" style="font-size:1.2rem; font-weight:700; display:flex; align-items:center; gap:0.5rem; color:var(--txt);">
+        <i class="fas fa-star" style="color:var(--acc);"></i> Related Electrical &amp; Solar Calculators
+      </h3>
+      <button class="close-modal-btn" id="btnCloseModal" type="button" aria-label="Close dialog">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+    <div class="tools-grid">
+      <a href="/sites/wire-size-voltage-drop-breaker-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-plug-circle-bolt"></i> Wire Size &amp; Breaker</div>
+        <p>Conductor cross-section and breaker selection by ampacity and voltage drop.</p>
+      </a>
+      <a href="/sites/battery-capacity-runtime-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-battery-half"></i> Battery Capacity &amp; Runtime</div>
+        <p>Deep-cycle battery runtime, Peukert effect, and discharge C-rate curves.</p>
+      </a>
+      <a href="/sites/battery-solar-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-microchip"></i> IoT Battery &amp; Solar Sizer</div>
+        <p>Sizing micro panels and Li-ion cells for ESP32, Arduino, and IoT sensors.</p>
+      </a>
+      <a href="/sites/ohms-law-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-calculator"></i> Ohm's Law Calculator</div>
+        <p>Calculate voltage, current, resistance, and electrical power with circuit analysis.</p>
+      </a>
+      <a href="/sites/power-triangle-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-shapes"></i> Power Triangle &amp; Factor</div>
+        <p>Real (P), reactive (Q), and apparent power (S) AC power calculations.</p>
+      </a>
+      <a href="/sites/transformer-turns-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-right-left"></i> Transformer Calculator</div>
+        <p>Transformer turns ratio, primary/secondary voltages, and load currents.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Feedback -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <i class="fas fa-circle-check" style="color:var(--ok);"></i>
+  <span id="toastMsg">Calculation saved successfully!</span>
+</div>
+
+<!-- Footer Chrome -->
+<footer class="mta-foot" role="contentinfo">
+  <div class="mta-foot-in">
+    <div class="mta-social">
+      <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="/">Back to Portfolio</a></p>
+    <div class="mta-actions">
+      <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+      <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+    </div>
+  </div>
+</footer>
+
+<!-- Interactive Logic -->
+<script>
+(function() {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  const STORAGE_KEY = 'mta_solar_sizing_history';
+
+  // Inverter efficiency constant
+  const INV_EFF = 0.90;
+
+  // Initial Appliances Audit from user prompt:
+  // LED Bulbs: 10W x 6 x 6h = 360 Wh
+  // Refrigerator: 150W x 1 x 10h = 1500 Wh
+  // Wi-Fi Router: 12W x 1 x 24h = 288 Wh
+  // Laptop Charger: 65W x 1 x 5h = 325 Wh
+  let appliances = [
+    { name: 'LED Bulbs', power: 10, qty: 6, hours: 6 },
+    { name: 'Refrigerator', power: 150, qty: 1, hours: 10 },
+    { name: 'Wi-Fi Router', power: 12, qty: 1, hours: 24 },
+    { name: 'Laptop Charger', power: 65, qty: 1, hours: 5 }
+  ];
+
+  // DOM Elements
+  const appTableBody = $('appTableBody');
+  const btnAddApp = $('btnAddApp');
+  const selPresetApp = $('selPresetApp');
+
+  const inpPsh = $('inpPsh');
+  const selPshPreset = $('selPshPreset');
+  const inpEff = $('inpEff');
+  const inpPanelW = $('inpPanelW');
+  const selPanelPreset = $('selPanelPreset');
+  const inpAutonomy = $('inpAutonomy');
+  const selBatteryType = $('selBatteryType');
+  const selBattVolt = $('selBattVolt');
+
+  // Output Elements
+  const outDailyEnergy = $('outDailyEnergy');
+  const outDailyEnergyWh = $('outDailyEnergyWh');
+  const outPeakLoad = $('outPeakLoad');
+  const outSolarArrayWp = $('outSolarArrayWp');
+  const outSolarArrayCalc = $('outSolarArrayCalc');
+  const outPanelCount = $('outPanelCount');
+  const outInstalledPvPower = $('outInstalledPvPower');
+  const outBatteryVolt = $('outBatteryVolt');
+  const outBatteryVoltReason = $('outBatteryVoltReason');
+  const outBatteryCapacity = $('outBatteryCapacity');
+  const outBatteryEnergyKwh = $('outBatteryEnergyKwh');
+  const outInverterWatts = $('outInverterWatts');
+  const outInverterSurge = $('outInverterSurge');
+  const outControllerCurrent = $('outControllerCurrent');
+  const outControllerCalc = $('outControllerCalc');
+  const outCoverageRatio = $('outCoverageRatio');
+  const outRechargeTime = $('outRechargeTime');
+
+  let currentCalcState = null;
+
+  // Render Appliance Rows
+  function renderAppliances() {
+    let html = '';
+    appliances.forEach((app, index) => {
+      html += `
+        <tr data-index="${index}">
+          <td>
+            <input type="text" class="app-name" value="${app.name}" placeholder="Appliance" aria-label="Appliance Name">
+          </td>
+          <td>
+            <input type="number" class="app-power" value="${app.power}" min="1" step="any" aria-label="Power in Watts">
+          </td>
+          <td>
+            <input type="number" class="app-qty" value="${app.qty}" min="1" step="1" aria-label="Quantity">
+          </td>
+          <td>
+            <input type="number" class="app-hours" value="${app.hours}" min="0.1" max="24" step="0.1" aria-label="Hours per day">
+          </td>
+          <td>
+            <button type="button" class="btn-del-row" data-index="${index}" title="Remove appliance">
+              <i class="fas fa-xmark"></i>
+            </button>
+          </td>
+        </tr>
+      `;
+    });
+    appTableBody.innerHTML = html;
+
+    // Attach row events
+    appTableBody.querySelectorAll('tr').forEach(row => {
+      const idx = parseInt(row.getAttribute('data-index'));
+      row.querySelector('.app-name').addEventListener('input', e => {
+        appliances[idx].name = e.target.value;
+        calculate();
+      });
+      row.querySelector('.app-power').addEventListener('input', e => {
+        appliances[idx].power = parseFloat(e.target.value) || 0;
+        calculate();
+      });
+      row.querySelector('.app-qty').addEventListener('input', e => {
+        appliances[idx].qty = parseFloat(e.target.value) || 0;
+        calculate();
+      });
+      row.querySelector('.app-hours').addEventListener('input', e => {
+        appliances[idx].hours = parseFloat(e.target.value) || 0;
+        calculate();
+      });
+      row.querySelector('.btn-del-row').addEventListener('click', () => {
+        appliances.splice(idx, 1);
+        renderAppliances();
+        calculate();
+      });
+    });
+  }
+
+  // Add Custom Appliance
+  btnAddApp.onclick = () => {
+    appliances.push({ name: 'New Appliance', power: 50, qty: 1, hours: 4 });
+    renderAppliances();
+    calculate();
+  };
+
+  // Preset Add
+  selPresetApp.onchange = () => {
+    const val = selPresetApp.value;
+    if (!val) return;
+    const parts = val.split(',');
+    appliances.push({
+      name: parts[0],
+      power: parseFloat(parts[1]) || 50,
+      qty: parseInt(parts[2]) || 1,
+      hours: parseFloat(parts[3]) || 4
+    });
+    selPresetApp.selectedIndex = 0;
+    renderAppliances();
+    calculate();
+  };
+
+  // Presets Listeners
+  selPshPreset.onchange = () => {
+    inpPsh.value = selPshPreset.value;
+    calculate();
+  };
+
+  selPanelPreset.onchange = () => {
+    inpPanelW.value = selPanelPreset.value;
+    calculate();
+  };
+
+  // Sizing Calculation Function
+  function calculate() {
+    // 1. Calculate Daily Consumption & Peak Load
+    let totalWh = 0;
+    let peakW = 0;
+
+    appliances.forEach(app => {
+      const p = app.power || 0;
+      const q = app.qty || 0;
+      const h = app.hours || 0;
+      totalWh += p * q * h;
+      peakW += p * q;
+    });
+
+    const psh = parseFloat(inpPsh.value) || 5.0;
+    const sysEff = (parseFloat(inpEff.value) || 80) / 100;
+    const panelW = parseFloat(inpPanelW.value) || 550;
+    const days = parseFloat(inpAutonomy.value) || 1.0;
+    const dod = parseFloat(selBatteryType.value) || 0.80;
+
+    // 2. Select Battery System Voltage
+    let battVolt = 24;
+    const selV = selBattVolt.value;
+    if (selV === 'auto') {
+      if (totalWh < 1500) {
+        battVolt = 12;
+      } else if (totalWh <= 4000) {
+        battVolt = 24;
+      } else {
+        battVolt = 48;
+      }
+    } else {
+      battVolt = parseInt(selV) || 24;
+    }
+
+    // 3. Required Solar PV Capacity
+    // Wp = E / 0.9 / (PSH * sysEff)
+    const requiredWp = (totalWh / INV_EFF) / (psh * sysEff);
+
+    // Number of Panels
+    const numPanels = Math.max(1, Math.ceil(requiredWp / panelW));
+    const installedWp = numPanels * panelW;
+
+    // 4. Battery Storage Capacity in Ah
+    // Ah = (E / 0.9 * Days) / (V * DoD)
+    const batteryAh = (totalWh / INV_EFF * days) / (battVolt * dod);
+    const batteryKwh = (batteryAh * battVolt) / 1000;
+
+    // 5. Inverter Continuous Rating (+25% safety margin)
+    const inverterW = Math.round(peakW * 1.25);
+    const surgeW = Math.round(peakW * 2.5);
+
+    // 6. MPPT Charge Controller Current Rating
+    // I_cc >= (P_installed / V_batt) * 1.25
+    const controllerA = Math.ceil((installedWp / battVolt) * 1.25);
+
+    // Render Outputs
+    const totalKwh = totalWh / 1000;
+    outDailyEnergy.textContent = `${totalKwh.toFixed(2)} kWh`;
+    outDailyEnergyWh.textContent = `${Math.round(totalWh).toLocaleString()} Wh / day`;
+
+    outPeakLoad.textContent = `${Math.round(peakW)} W`;
+
+    outSolarArrayWp.textContent = `${Math.round(requiredWp)} Wp`;
+    outSolarArrayCalc.textContent = `${Math.round(totalWh).toLocaleString()} Wh / (0.9 × ${psh}h × ${Math.round(sysEff * 100)}%)`;
+
+    outPanelCount.textContent = `${numPanels} ${numPanels === 1 ? 'Panel' : 'Panels'}`;
+    outInstalledPvPower.textContent = `Total Installed: ${installedWp.toLocaleString()} Wp (${numPanels} × ${panelW} W)`;
+
+    outBatteryVolt.textContent = `${battVolt} V`;
+    outBatteryVoltReason.textContent = selV === 'auto' ? `Auto-suggested for ${totalKwh.toFixed(2)} kWh load` : 'Manual selection';
+
+    outBatteryCapacity.textContent = `${Math.round(batteryAh)} Ah @ ${battVolt} V`;
+    outBatteryEnergyKwh.textContent = `Stored Energy: ${batteryKwh.toFixed(2)} kWh (${Math.round(dod * 100)}% DoD)`;
+
+    outInverterWatts.textContent = `${inverterW} W`;
+    outInverterSurge.textContent = `Surge motor capacity: ≥ ${surgeW} W`;
+
+    outControllerCurrent.textContent = `≥ ${controllerA} A`;
+    outControllerCalc.textContent = `Installed: ${installedWp} Wp / ${battVolt} V × 1.25`;
+
+    const coverageRatio = Math.round((installedWp / requiredWp) * 100);
+    outCoverageRatio.textContent = `${coverageRatio}% (${installedWp} Wp installed / ${Math.round(requiredWp)} Wp required)`;
+
+    const rechargeHours = (batteryKwh * 1000 / (installedWp * sysEff)).toFixed(1);
+    outRechargeTime.textContent = `~${rechargeHours} Peak Sun Hours`;
+
+    // Cache state for saving
+    currentCalcState = {
+      dailyEnergyKwh: totalKwh.toFixed(2),
+      dailyEnergyWh: Math.round(totalWh),
+      peakWatts: Math.round(peakW),
+      requiredWp: Math.round(requiredWp),
+      numPanels: numPanels,
+      panelWattage: panelW,
+      installedWp: installedWp,
+      batteryVolt: battVolt,
+      batteryAh: Math.round(batteryAh),
+      batteryKwh: batteryKwh.toFixed(2),
+      inverterWatts: inverterW,
+      controllerCurrent: controllerA,
+      psh: psh,
+      autonomyDays: days,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+  }
+
+  // Toast
+  function showToast(msg) {
+    const toast = $('toast');
+    $('toastMsg').textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2800);
+  }
+
+  // History Management
+  function getHistory() {
+    try {
+      const d = localStorage.getItem(STORAGE_KEY);
+      return d ? JSON.parse(d) : [];
+    } catch(e) { return []; }
+  }
+
+  function saveHistory(list) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch(e) {}
+  }
+
+  function renderHistory() {
+    const list = getHistory();
+    const container = $('historyList');
+    if (!list || list.length === 0) {
+      container.innerHTML = '<div class="empty-state">No calculations saved yet. Click "Save Calc" to store current values.</div>';
+      return;
+    }
+
+    let html = '';
+    list.forEach((item, index) => {
+      html += `
+        <div class="history-item">
+          <div class="history-details">
+            <strong>${item.dailyEnergyKwh} kWh/day</strong> &middot; PV: <strong>${item.numPanels} &times; ${item.panelWattage}W (${item.installedWp} Wp)</strong> &middot; Batt: <strong>${item.batteryAh} Ah @ ${item.batteryVolt}V</strong>
+            <span class="history-meta">Inverter: ${item.inverterWatts}W &middot; Controller: &ge;${item.controllerCurrent}A &middot; PSH: ${item.psh}h [Saved at ${item.timestamp}]</span>
+          </div>
+          <div style="display:flex; gap:0.45rem;">
+            <button class="btn-sm btn-load" data-idx="${index}" type="button"><i class="fas fa-folder-open"></i> Load</button>
+            <button class="btn-sm del btn-del" data-idx="${index}" type="button"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+
+    container.querySelectorAll('.btn-load').forEach(b => {
+      b.onclick = function() {
+        const item = list[parseInt(this.getAttribute('data-idx'))];
+        if (!item) return;
+        inpPsh.value = item.psh;
+        inpPanelW.value = item.panelWattage;
+        inpAutonomy.value = item.autonomyDays;
+        selBattVolt.value = item.batteryVolt;
+        calculate();
+        showToast('Loaded system sizing from history!');
+        window.scrollTo({ top: $('calcForm').offsetTop - 80, behavior: 'smooth' });
+      };
+    });
+
+    container.querySelectorAll('.btn-del').forEach(b => {
+      b.onclick = function() {
+        const idx = parseInt(this.getAttribute('data-idx'));
+        list.splice(idx, 1);
+        saveHistory(list);
+        renderHistory();
+        showToast('Removed calculation from history.');
+      };
+    });
+  }
+
+  // Button Listeners
+  $('btnSaveCalc').onclick = () => {
+    if (!currentCalcState) return;
+    const list = getHistory();
+    list.unshift(currentCalcState);
+    if (list.length > 20) list.pop();
+    saveHistory(list);
+    renderHistory();
+    showToast('Calculation saved to history!');
+  };
+
+  $('btnPrintPdf').onclick = () => {
+    $('printDate').textContent = new Date().toLocaleString();
+    window.print();
+  };
+
+  // Modal Advanced Tools
+  const modal = $('advToolsModal');
+  $('btnAdvTools').onclick = () => modal.classList.add('active');
+  $('btnCloseModal').onclick = () => modal.classList.remove('active');
+  modal.onclick = (e) => {
+    if (e.target === modal) modal.classList.remove('active');
+  };
+
+  // Reset to default 4 appliances
+  $('btnReset').onclick = () => {
+    appliances = [
+      { name: 'LED Bulbs', power: 10, qty: 6, hours: 6 },
+      { name: 'Refrigerator', power: 150, qty: 1, hours: 10 },
+      { name: 'Wi-Fi Router', power: 12, qty: 1, hours: 24 },
+      { name: 'Laptop Charger', power: 65, qty: 1, hours: 5 }
+    ];
+    inpPsh.value = '5';
+    inpEff.value = '80';
+    inpPanelW.value = '550';
+    inpAutonomy.value = '1';
+    selBatteryType.value = '0.80';
+    selBattVolt.value = 'auto';
+    renderAppliances();
+    calculate();
+    showToast('Reset to default appliances & parameters.');
+  };
+
+  // Load 2.3 kWh Benchmark Example
+  function loadBenchmarkExample() {
+    appliances = [
+      { name: 'LED Lighting', power: 10, qty: 8, hours: 5 },       // 400 Wh
+      { name: 'DC/AC Fridge', power: 120, qty: 1, hours: 10 },     // 1200 Wh
+      { name: 'TV & Receiver', power: 75, qty: 1, hours: 4 },      // 300 Wh
+      { name: 'Router & Phones', power: 25, qty: 1, hours: 16 }    // 400 Wh = 2,300 Wh
+    ];
+    inpPsh.value = '5';
+    inpEff.value = '80';
+    inpPanelW.value = '550';
+    inpAutonomy.value = '1';
+    selBatteryType.value = '0.80';
+    selBattVolt.value = 'auto';
+    renderAppliances();
+    calculate();
+    showToast('Loaded 2.3 kWh/day benchmark example!');
+    window.scrollTo({ top: $('calcForm').offsetTop - 80, behavior: 'smooth' });
+  }
+
+  $('btnLoadExample').onclick = loadBenchmarkExample;
+  $('btnLoadExample2').onclick = loadBenchmarkExample;
+
+  $('btnExportJson').onclick = () => {
+    const list = getHistory();
+    if (list.length === 0) {
+      showToast('No history records to export.');
+      return;
+    }
+    const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'solar-system-sizing-history.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Exported history as JSON!');
+  };
+
+  $('btnClearHistory').onclick = () => {
+    if (confirm('Clear all saved calculations?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      renderHistory();
+      showToast('Cleared calculation history.');
+    }
+  };
+
+  // Input Listeners
+  const paramInputs = [inpPsh, inpEff, inpPanelW, inpAutonomy, selBatteryType, selBattVolt];
+  paramInputs.forEach(el => {
+    el.addEventListener('input', calculate);
+    el.addEventListener('change', calculate);
+  });
+
+  // Initial Run
+  renderAppliances();
+  calculate();
+  renderHistory();
+})();
+</script>
+
+<script src="/pwa.js" defer></script>
+<script src="mta-chrome.js" defer></script>
+<!-- Vercel Speed Insights -->
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+
+</body>
+</html>

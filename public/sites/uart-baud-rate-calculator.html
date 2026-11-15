@@ -1,0 +1,2336 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/uart-baud-rate-calculator.html">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>UART Baud Rate & Error Calculator | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Calculate UART UBRR register values, actual baud rate, and percentage timing error for AVR (Arduino Uno), STM32, and PIC microcontrollers. Includes Double Speed (U2X) mode and magic crystals.">
+  <meta name="author" content="Mohamed Tarek Abdelhady">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="UART Baud Rate & Error Calculator | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Calculate UART UBRR register values, actual baud rates, and percentage error for AVR, Arduino Uno, and microcontrollers with U2X Double Speed mode.">
+  <meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="851">
+  <meta property="og:image:height" content="1134">
+  <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/uart-baud-rate-calculator.html">
+  <meta property="og:updated_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="article:modified_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="UART Baud Rate & Error Calculator | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Calculate UART UBRR register values, actual baud rates, and percentage error for AVR, Arduino Uno, and microcontrollers with U2X Double Speed mode.">
+  <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+
+  <!-- PWA & Mobile Icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M. Tarek">
+  <meta name="application-name" content="M. Tarek">
+  <meta name="msapplication-TileColor" content="#0a0e1a">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
+  <link rel="stylesheet" href="mta-chrome.css">
+
+  <!-- Schema.org WebApplication & BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "UART Baud Rate & Error Calculator",
+    "description": "Calculate UART UBRR register values, actual baud rate, and percentage timing error for AVR (Arduino Uno), STM32, and PIC microcontrollers. Includes Double Speed (U2X) mode and magic crystals.",
+    "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/uart-baud-rate-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek Abdelhady",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tools",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/tools.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "UART Baud Rate Calculator",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/sites/uart-baud-rate-calculator.html"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1322;
+      --bg3: #141829;
+      --card: #161b2e;
+      --card2: #1c2240;
+      --acc: #6366f1;
+      --acc-hover: #4f46e5;
+      --acc-subtle: rgba(99, 102, 241, 0.12);
+      --acc-border: rgba(99, 102, 241, 0.35);
+      --txt: #f1f5f9;
+      --mut: #94a3b8;
+      --mut2: #64748b;
+      --br: rgba(255, 255, 255, 0.08);
+      --br-hover: rgba(255, 255, 255, 0.16);
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --err: #ef4444;
+      --cyan: #06b6d4;
+      --r: 14px;
+      --r-sm: 8px;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --gradient-accent: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+      --gradient-glow: radial-gradient(circle at top center, rgba(99, 102, 241, 0.18) 0%, transparent 70%);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --bg3: #e2e8f0;
+      --card: #ffffff;
+      --card2: #f8fafc;
+      --acc: #4f46e5;
+      --acc-hover: #4338ca;
+      --acc-subtle: rgba(79, 70, 229, 0.08);
+      --acc-border: rgba(79, 70, 229, 0.25);
+      --txt: #0f172a;
+      --mut: #475569;
+      --mut2: #94a3b8;
+      --br: rgba(0, 0, 0, 0.08);
+      --br-hover: rgba(0, 0, 0, 0.15);
+      --gradient-glow: radial-gradient(circle at top center, rgba(79, 70, 229, 0.08) 0%, transparent 70%);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.65;
+      min-height: 100vh;
+      background-image: var(--gradient-glow);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      background: var(--acc-subtle);
+      border: 1px solid var(--acc-border);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--acc);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+    }
+
+    .pill .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--ok);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--ok);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.85rem, 4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero h1 .grad {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--mut);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Brief / Summary Card */
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-left: 4px solid var(--ok);
+      border-radius: var(--r);
+      padding: 1.15rem 1.4rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .summary-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ok);
+      margin-bottom: 0.45rem;
+    }
+
+    .summary-card p {
+      color: var(--mut);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .summary-card strong {
+      color: var(--txt);
+    }
+
+    /* Grid layout */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+      position: relative;
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--txt);
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .card h2 i {
+      color: var(--acc);
+      font-size: 1.05rem;
+    }
+
+    /* Form Inputs */
+    .lbl {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin-bottom: 0.4rem;
+      margin-top: 0.9rem;
+    }
+
+    .lbl:first-of-type {
+      margin-top: 0;
+    }
+
+    .lbl span.opt {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--mut2);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .input-row input {
+      flex: 1;
+    }
+
+    .input-row select {
+      min-width: 130px;
+    }
+
+    input[type="number"], select {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--txt);
+      padding: 0.75rem 0.95rem;
+      border-radius: var(--r-sm);
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    input[type="number"]:focus, select:focus {
+      border-color: var(--acc);
+      box-shadow: 0 0 0 3px var(--acc-subtle);
+    }
+
+    /* Toggle Switch Row */
+    .toggle-box {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.85rem 1rem;
+      margin-top: 1.1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-box-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .toggle-box-text strong {
+      font-size: 0.85rem;
+      color: var(--txt);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .toggle-box-text span {
+      font-size: 0.75rem;
+      color: var(--mut);
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: var(--br);
+      transition: .2s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .2s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: var(--acc);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Presets Pills */
+    .preset-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.45rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .preset-btn {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 120ms ease;
+      font-family: var(--mono);
+    }
+
+    .preset-btn:hover {
+      background: var(--card2);
+      border-color: var(--acc-border);
+      color: var(--acc);
+    }
+
+    .preset-btn.active {
+      background: var(--acc-subtle);
+      border-color: var(--acc);
+      color: var(--acc);
+    }
+
+    .preset-btn.magic {
+      border-color: rgba(6, 182, 212, 0.4);
+      color: var(--cyan);
+    }
+
+    .preset-btn.magic:hover {
+      background: rgba(6, 182, 212, 0.15);
+      border-color: var(--cyan);
+    }
+
+    /* Action Buttons Row */
+    .btn-toolbar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 500px) {
+      .btn-toolbar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.75rem 0.6rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      color: var(--txt);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 150ms ease;
+      text-decoration: none;
+    }
+
+    .action-btn:hover {
+      background: var(--card2);
+      border-color: var(--acc-border);
+      color: var(--acc);
+      transform: translateY(-1px);
+    }
+
+    .action-btn.primary {
+      background: var(--gradient-accent);
+      border: none;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    }
+
+    .action-btn.primary:hover {
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.45);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Results Grid */
+    .res-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .res-cell {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.85rem 1rem;
+      transition: border-color 150ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .res-cell:hover {
+      border-color: var(--br-hover);
+    }
+
+    .res-cell.highlight {
+      border-color: var(--acc-border);
+      background: var(--acc-subtle);
+    }
+
+    .res-cell.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .res-cell small {
+      display: block;
+      color: var(--mut2);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+
+    .res-cell b {
+      font-family: var(--mono);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--txt);
+      display: block;
+      word-break: break-word;
+    }
+
+    .res-cell.highlight b {
+      color: var(--acc);
+    }
+
+    .res-cell .sub-val {
+      font-size: 0.75rem;
+      color: var(--mut);
+      margin-top: 0.25rem;
+      font-family: var(--mono);
+    }
+
+    /* Status Badge Banner */
+    .status-banner {
+      border-radius: var(--r-sm);
+      padding: 0.95rem 1.15rem;
+      margin-top: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .status-banner.ok {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      color: var(--txt);
+    }
+
+    .status-banner.ok i {
+      color: var(--ok);
+      font-size: 1.25rem;
+    }
+
+    .status-banner.warn {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: var(--txt);
+    }
+
+    .status-banner.warn i {
+      color: var(--warn);
+      font-size: 1.25rem;
+    }
+
+    .status-banner.err {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: var(--txt);
+    }
+
+    .status-banner.err i {
+      color: var(--err);
+      font-size: 1.25rem;
+    }
+
+    /* Frame Timing Visualizer (SVG) */
+    .timing-card {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1rem 1.15rem;
+      margin-top: 1.25rem;
+    }
+
+    .timing-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.65rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+    }
+
+    .timing-svg {
+      width: 100%;
+      height: 110px;
+      display: block;
+    }
+
+    /* Alert Notice Box */
+    .alert-box {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: var(--r);
+      padding: 1rem 1.25rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      color: var(--txt);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .alert-box i {
+      color: var(--warn);
+      font-size: 1.25rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    .alert-box strong {
+      color: var(--txt);
+    }
+
+    /* Content Cards */
+    .content-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .content-card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--txt);
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    /* Code Tabs & Pre */
+    .code-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.5rem;
+    }
+
+    .code-tab-btn {
+      background: none;
+      border: none;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--mut);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 120ms ease;
+    }
+
+    .code-tab-btn:hover {
+      color: var(--txt);
+      background: var(--bg2);
+    }
+
+    .code-tab-btn.active {
+      color: var(--acc);
+      background: var(--acc-subtle);
+    }
+
+    .code-container {
+      position: relative;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+    }
+
+    .code-container pre {
+      padding: 1.1rem;
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--txt);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .code-copy-btn {
+      position: absolute;
+      top: 0.65rem;
+      right: 0.65rem;
+      background: var(--bg3);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 120ms ease;
+    }
+
+    .code-copy-btn:hover {
+      color: var(--txt);
+      border-color: var(--acc);
+    }
+
+    /* Formulas */
+    .formula-box {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-left: 3px solid var(--acc);
+      border-radius: var(--r-sm);
+      padding: 1rem 1.25rem;
+      margin: 0.85rem 0;
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      color: var(--txt);
+      overflow-x: auto;
+    }
+
+    /* Comparison Table */
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+
+    table.calc-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    table.calc-table th {
+      padding: 0.75rem 0.85rem;
+      background: var(--bg2);
+      color: var(--mut);
+      font-weight: 600;
+      border-bottom: 1px solid var(--br);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    table.calc-table td {
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--br);
+      color: var(--txt);
+      white-space: nowrap;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+    }
+
+    table.calc-table tr:hover td {
+      background: var(--bg2);
+    }
+
+    table.calc-table tr.selected td {
+      background: var(--acc-subtle);
+      border-color: var(--acc-border);
+      font-weight: 700;
+    }
+
+    .badge-error {
+      display: inline-block;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-error.ok {
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--ok);
+    }
+
+    .badge-error.warn {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--warn);
+    }
+
+    .badge-error.err {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--err);
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .faq-item {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      transition: border-color 150ms ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--br-hover);
+    }
+
+    .faq-question {
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      color: var(--txt);
+    }
+
+    .faq-question i {
+      color: var(--acc);
+      transition: transform 200ms ease;
+      font-size: 0.85rem;
+    }
+
+    .faq-item[open] .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0 1.25rem 1rem;
+      color: var(--mut);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* Saved Calculations Drawer / Card */
+    .history-card {
+      margin-top: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .history-header h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .history-actions {
+      display: flex;
+      gap: 0.45rem;
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--bg3);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      transition: all 150ms ease;
+    }
+
+    .btn-sm:hover {
+      color: var(--txt);
+      border-color: var(--acc);
+    }
+
+    .btn-sm.del:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0.95rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      font-size: 0.85rem;
+    }
+
+    .history-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .history-meta strong {
+      color: var(--txt);
+      font-family: var(--mono);
+    }
+
+    .history-meta span {
+      color: var(--mut2);
+      font-size: 0.75rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 1.75rem 1rem;
+      color: var(--mut2);
+      font-size: 0.88rem;
+    }
+
+    /* Modal Dialog */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease;
+      padding: 1rem;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: var(--card);
+      border: 1px solid var(--br-hover);
+      border-radius: var(--r);
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .modal-header h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--txt);
+    }
+
+    .close-modal-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .close-modal-btn:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .tool-tile {
+      display: block;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1rem;
+      text-decoration: none;
+      color: var(--txt);
+      transition: all 150ms ease;
+    }
+
+    .tool-tile:hover {
+      border-color: var(--acc-border);
+      background: var(--card2);
+      transform: translateY(-2px);
+    }
+
+    .tool-tile-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+      color: var(--acc);
+    }
+
+    .tool-tile p {
+      font-size: 0.82rem;
+      color: var(--mut);
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--card2);
+      border: 1px solid var(--acc-border);
+      color: var(--txt);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--r-sm);
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transform: translateY(100px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 250ms ease, opacity 250ms ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Print Specific Styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11pt;
+      }
+
+      .mta-bar, .mta-foot, .btn-toolbar, .modal-overlay, .toast, .btn-sm, #th, [data-mta-top], .code-copy-btn, .preset-pills, .toggle-box {
+        display: none !important;
+      }
+
+      .wrap {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .card, .summary-card, .content-card, .history-card {
+        background: #ffffff !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+        color: #000000 !important;
+        page-break-inside: avoid;
+        margin-bottom: 1rem !important;
+        padding: 1rem !important;
+      }
+
+      .print-header {
+        display: block !important;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+      }
+
+      .print-header h1 {
+        font-size: 18pt;
+        margin: 0;
+      }
+
+      .res-cell {
+        background: #f8f8f8 !important;
+        border: 1px solid #ddd !important;
+        color: #000 !important;
+      }
+
+      .res-cell b {
+        color: #000 !important;
+      }
+
+      .formula-box, .faq-item {
+        border: 1px solid #ddd !important;
+        background: #fff !important;
+      }
+
+      .faq-item details {
+        display: block !important;
+      }
+
+      .faq-item[open] .faq-answer {
+        display: block !important;
+      }
+    }
+
+    .print-header {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header Chrome -->
+<header class="mta-bar" id="header" role="banner">
+  <div class="mta-bar-in">
+    <nav aria-label="Breadcrumb" class="mta-crumbs">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools.html">Tools</a></li>
+        <li aria-current="page">UART Baud Rate Calculator</li>
+      </ol>
+    </nav>
+    <button class="mta-btn" id="th" type="button" aria-label="Toggle dark/light mode">
+      <i class="fas fa-moon" data-mta-icon></i>
+    </button>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <!-- Print Only Header -->
+  <div class="print-header">
+    <h1>Mohamed Tarek Abdelhady — Engineering Calculation Report</h1>
+    <p><strong>Tool:</strong> UART Baud Rate Register (UBRR) & Timing Error Calculator</p>
+    <p><strong>Date Generated:</strong> <span id="printDate"></span></p>
+  </div>
+
+  <!-- Hero Header -->
+  <div class="hero">
+    <div class="pill">
+      <span class="dot"></span>
+      Serial Telemetry & Embedded Comms
+    </div>
+    <h1>UART <span class="grad">Baud Rate & Error</span> Calculator</h1>
+    <p>
+      Calculate AVR UBRR register values, actual baud rates, and percentage timing error. Includes Double Speed (U2X) mode analysis and magic crystal recommendations for Arduino Uno and MCUs.
+    </p>
+  </div>
+
+  <!-- Quick Overview / In a Nutshell -->
+  <div class="summary-card">
+    <div class="summary-card-header">
+      <i class="fas fa-circle-check"></i>
+      <span>In a Nutshell</span>
+    </div>
+    <p>
+      In AVR microcontrollers, the <strong>UBRR</strong> register is calculated from the CPU clock frequency (F<sub>CPU</sub>) and the desired baud rate. Asynchronous serial communication requires the timing error to stay within <strong>&plusmn;2%</strong> to prevent framing errors. For example, a standard <strong>16 MHz</strong> clock at <strong>115,200 baud</strong> produces a <strong>&minus;3.55%</strong> error, which drops into an acceptable <strong>+2.12%</strong> by enabling Double Speed Mode (<strong>U2X</strong>).
+    </p>
+  </div>
+
+  <!-- Main Calculator Grid -->
+  <div class="grid">
+    <!-- Left Card: Input Controls -->
+    <div class="card">
+      <h2><i class="fas fa-sliders"></i> Clock & Serial Parameters</h2>
+
+      <!-- CPU Clock Frequency (F_CPU) -->
+      <label class="lbl" for="inpFcpu">
+        <span>CPU Clock Frequency F<sub>CPU</sub> (MHz)</span>
+        <span class="opt">System / Crystal Oscillator</span>
+      </label>
+      <div class="input-row">
+        <input type="number" id="inpFcpu" step="0.0001" min="0.1" max="500" value="16" placeholder="e.g. 16.0">
+      </div>
+
+      <!-- Clock Presets Pills -->
+      <div class="preset-pills">
+        <button type="button" class="preset-btn active" data-fcpu="16">16 MHz (Uno/Mega)</button>
+        <button type="button" class="preset-btn" data-fcpu="8">8 MHz (Pro Mini/RC)</button>
+        <button type="button" class="preset-btn" data-fcpu="20">20 MHz (AVR Max)</button>
+        <button type="button" class="preset-btn magic" data-fcpu="14.7456" title="0.00% Error on all standard bauds">14.7456 MHz (Magic)</button>
+        <button type="button" class="preset-btn magic" data-fcpu="11.0592" title="0.00% Error crystal">11.0592 MHz (Magic)</button>
+        <button type="button" class="preset-btn magic" data-fcpu="18.4320" title="0.00% Error crystal">18.4320 MHz (Magic)</button>
+      </div>
+
+      <!-- Target Baud Rate -->
+      <label class="lbl" for="selBaud" style="margin-top: 0.9rem;">
+        <span>Target Baud Rate (bps)</span>
+        <span class="opt">Standard Serial Speed</span>
+      </label>
+      <div class="input-row">
+        <select id="selBaud">
+          <option value="300">300 bps</option>
+          <option value="1200">1,200 bps</option>
+          <option value="2400">2,400 bps</option>
+          <option value="4800">4,800 bps</option>
+          <option value="9600">9,600 bps (Standard)</option>
+          <option value="14400">14,400 bps</option>
+          <option value="19200">19,200 bps</option>
+          <option value="28800">28,800 bps</option>
+          <option value="38400">38,400 bps</option>
+          <option value="57600">57,600 bps</option>
+          <option value="76800">76,800 bps</option>
+          <option value="115200" selected>115,200 bps (Fast / Default)</option>
+          <option value="230400">230,400 bps</option>
+          <option value="250000">250,000 bps (DMX512)</option>
+          <option value="500000">500,000 bps</option>
+          <option value="1000000">1,000,000 bps (1 Mbps)</option>
+          <option value="2000000">2,000,000 bps (2 Mbps)</option>
+          <option value="custom">Custom Baud Rate...</option>
+        </select>
+      </div>
+
+      <!-- Custom Baud Rate Input (Hidden unless Custom is selected) -->
+      <div id="customBaudRow" style="display: none; margin-top: 0.5rem;">
+        <label class="lbl" for="inpCustomBaud">
+          <span>Enter Custom Baud Rate</span>
+        </label>
+        <input type="number" id="inpCustomBaud" min="1" max="10000000" value="115200" placeholder="e.g. 115200">
+      </div>
+
+      <!-- Double Speed Mode (U2X) Switch -->
+      <div class="toggle-box" id="u2xToggleBox">
+        <div class="toggle-box-text">
+          <strong><i class="fas fa-bolt" style="color:var(--acc);"></i> Double Speed Mode (U2X)</strong>
+          <span>Reduces prescaler divisor from 16 to 8 (8x oversampling)</span>
+        </div>
+        <label class="switch" onclick="event.stopPropagation();">
+          <input type="checkbox" id="chkU2x">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Action Toolbar -->
+      <div class="btn-toolbar">
+        <button class="action-btn primary" id="btnSaveCalc" type="button" aria-label="Save calculation">
+          <i class="fas fa-floppy-disk"></i> Save Calc
+        </button>
+        <button class="action-btn" id="btnPrintPdf" type="button" aria-label="Export PDF report">
+          <i class="fas fa-file-pdf"></i> PDF Report
+        </button>
+        <button class="action-btn" id="btnAdvTools" type="button" aria-label="Open advanced tools">
+          <i class="fas fa-star"></i> Adv. Tools
+        </button>
+      </div>
+
+      <div style="margin-top: 0.85rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
+        <button type="button" id="btnReset" style="color:var(--mut2); text-decoration:underline; background:none; border:none; cursor:pointer;">
+          <i class="fas fa-rotate-left"></i> Reset Defaults
+        </button>
+        <button type="button" id="btnLoadExample" style="color:var(--acc); background:none; border:none; cursor:pointer; font-weight:600;">
+          <i class="fas fa-lightbulb"></i> Load Benchmark (16 MHz @ 115200)
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Card: Calculated Results -->
+    <div class="card">
+      <h2><i class="fas fa-chart-simple"></i> Register & Timing Error</h2>
+
+      <div class="res-grid">
+        <!-- 1. UBRR Register Value -->
+        <div class="res-cell highlight">
+          <small>UBRR Register Value</small>
+          <b id="outUbrr" style="font-size:1.6rem; color:var(--acc);">8</b>
+          <div class="sub-val" id="outUbrrFormula">Exact: 7.68 (Divisor: 16)</div>
+        </div>
+
+        <!-- 2. Actual Resulting Baud Rate -->
+        <div class="res-cell">
+          <small>Actual Resulting Baud</small>
+          <b id="outBaudReal">111,111.1</b>
+          <div class="sub-val" id="outBaudFormula">F_CPU / (16 &times; (8 + 1))</div>
+        </div>
+
+        <!-- 3. Percentage Error -->
+        <div class="res-cell highlight">
+          <small>Baud Rate Error (%)</small>
+          <b id="outError" style="font-size:1.5rem; color:var(--warn);">-3.55 %</b>
+          <div class="sub-val" id="outErrorFormula">(Actual - Target) / Target</div>
+        </div>
+
+        <!-- 4. Bit Period Time -->
+        <div class="res-cell">
+          <small>Bit Duration (Period)</small>
+          <b id="outBitTime">9.00 µs</b>
+          <div class="sub-val" id="outTargetBitTime">Target: 8.68 µs (&plusmn;0.32 µs)</div>
+        </div>
+      </div>
+
+      <!-- Status Alert Banner -->
+      <div class="status-banner warn" id="statusBanner">
+        <i class="fas fa-triangle-exclamation" id="statusIcon"></i>
+        <div id="statusText">
+          <strong>Significant Error (&gt; &plusmn;2%):</strong> Risk of framing errors. Enable Double Speed (U2X) or use a UART-friendly crystal.
+        </div>
+      </div>
+
+      <!-- Timing & Frame Sampling Visualizer -->
+      <div class="timing-card">
+        <div class="timing-header">
+          <span><i class="fas fa-barcode" style="color:var(--acc);"></i> 10-Bit UART Frame Drift (8-N-1)</span>
+          <span id="lblFrameDrift" style="font-family:var(--mono); font-size:0.75rem; color:var(--warn);">Stop Bit Drift: &minus;32% of bit</span>
+        </div>
+        <svg class="timing-svg" viewBox="0 0 460 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background track -->
+          <rect x="10" y="20" width="440" height="35" rx="4" fill="#141829" stroke="rgba(255,255,255,0.08)" />
+
+          <!-- Bit Grid (10 bits) -->
+          <!-- Start bit (0 to 44) -->
+          <rect x="10" y="20" width="44" height="35" fill="rgba(99, 102, 241, 0.15)" stroke="rgba(99, 102, 241, 0.4)" />
+          <text x="32" y="42" fill="#818cf8" font-size="10" font-weight="700" text-anchor="middle">START</text>
+
+          <!-- 8 Data bits (D0 to D7) -->
+          <g id="svgDataBits">
+            <!-- 8 cells each 44px wide -->
+            <line x1="54" y1="20" x2="54" y2="55" stroke="rgba(255,255,255,0.1)" />
+            <text x="76" y="42" fill="#94a3b8" font-size="10" text-anchor="middle">D0</text>
+
+            <line x1="98" y1="20" x2="98" y2="55" stroke="rgba(255,255,255,0.1)" />
+            <text x="120" y="42" fill="#94a3b8" font-size="10" text-anchor="middle">D1</text>
+
+            <line x1="142" y1="20" x2="142" y2="55" stroke="rgba(255,255,255,0.1)" />
+            <text x="164" y="42" fill="#94a3b8" font-size="10" text-anchor="middle">D2</text>
+
+            <line x1="186" y1="20" x2="186" y2="55" stroke="rgba(255,255,255,0.1)" />
+            <text x="208" y="42" fill="#94a3b8" font-size="10" text-anchor="middle">D3</text>
+
+            <line x1="230" y1="20" x2="230" y2="55" stroke="rgba(255,255,255,0.1)" />
+            <text x="252" y="42" fill="#94a3b8" font-size="10" text-anchor="middle">D4</text>
+
+            <line x1="274" y1="20" x2="274" y2="55" stroke="rgba(255,255,255,0.1)" />
+            <text x="296" y="42" fill="#94a3b8" font-size="10" text-anchor="middle">D5</text>
+
+            <line x1="318" y1="20" x2="318" y2="55" stroke="rgba(255,255,255,0.1)" />
+            <text x="340" y="42" fill="#94a3b8" font-size="10" text-anchor="middle">D6</text>
+
+            <line x1="362" y1="20" x2="362" y2="55" stroke="rgba(255,255,255,0.1)" />
+            <text x="384" y="42" fill="#94a3b8" font-size="10" text-anchor="middle">D7</text>
+          </g>
+
+          <!-- Stop bit -->
+          <line x1="406" y1="20" x2="406" y2="55" stroke="rgba(255,255,255,0.1)" />
+          <rect x="406" y="20" width="44" height="35" fill="rgba(34, 197, 94, 0.15)" stroke="rgba(34, 197, 94, 0.4)" />
+          <text x="428" y="42" fill="#4ade80" font-size="10" font-weight="700" text-anchor="middle">STOP</text>
+
+          <!-- Ideal mid-point tick indicators -->
+          <circle cx="32" cy="65" r="2" fill="#64748b" />
+          <circle cx="76" cy="65" r="2" fill="#64748b" />
+          <circle cx="120" cy="65" r="2" fill="#64748b" />
+          <circle cx="164" cy="65" r="2" fill="#64748b" />
+          <circle cx="208" cy="65" r="2" fill="#64748b" />
+          <circle cx="252" cy="65" r="2" fill="#64748b" />
+          <circle cx="296" cy="65" r="2" fill="#64748b" />
+          <circle cx="340" cy="65" r="2" fill="#64748b" />
+          <circle cx="384" cy="65" r="2" fill="#64748b" />
+          <circle cx="428" cy="65" r="2" fill="#64748b" />
+
+          <!-- Dynamic Drifting Sampling Point Cursor -->
+          <g id="svgDriftMarker">
+            <line x1="428" y1="12" x2="428" y2="60" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2 2" id="svgDriftLine" />
+            <polygon points="424,8 432,8 428,14" fill="#f59e0b" id="svgDriftArrow" />
+            <text x="428" y="77" fill="#f59e0b" font-size="9" font-family="monospace" text-anchor="middle" id="svgDriftText">Sample 10</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Comparison Matrix Table -->
+  <div class="content-card">
+    <h2><i class="fas fa-table-list"></i> Standard Baud Rates Comparison Matrix for <span id="lblMatrixFcpu" style="color:var(--acc);">16.0 MHz</span></h2>
+    <p style="color:var(--mut); font-size:0.9rem; margin-bottom:1rem;">
+      Full lookup table comparing Normal Speed (U2X = 0) vs. Double Speed (U2X = 1) across all industry standard serial communication speeds:
+    </p>
+
+    <div class="table-responsive">
+      <table class="calc-table" id="matrixTable">
+        <thead>
+          <tr>
+            <th>Baud Rate</th>
+            <th>Normal UBRR</th>
+            <th>Normal Actual</th>
+            <th>Normal Error</th>
+            <th>U2X UBRR</th>
+            <th>U2X Actual</th>
+            <th>U2X Error</th>
+            <th>Recommended Mode</th>
+          </tr>
+        </thead>
+        <tbody id="matrixTableBody">
+          <!-- Dynamically populated -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Microcontroller Firmware Code Generator -->
+  <div class="content-card">
+    <h2><i class="fas fa-code"></i> Ready-to-Use Serial Initialization Code</h2>
+    <p style="color:var(--mut); font-size:0.9rem; margin-bottom:1rem;">
+      Copy hardware register initialization code directly into your firmware project:
+    </p>
+
+    <div class="code-tabs">
+      <button class="code-tab-btn active" data-tab="avrc" type="button">AVR Bare-Metal (C/C++)</button>
+      <button class="code-tab-btn" data-tab="arduino" type="button">Arduino Framework</button>
+      <button class="code-tab-btn" data-tab="stm32" type="button">STM32 (HAL C)</button>
+      <button class="code-tab-btn" data-tab="esp32" type="button">ESP32 (Hardware UART)</button>
+    </div>
+
+    <div class="code-container">
+      <button class="code-copy-btn" id="btnCopyCode" type="button"><i class="fas fa-copy"></i> Copy Code</button>
+      <pre><code id="codeBlock">// Loading code snippet...</code></pre>
+    </div>
+  </div>
+
+  <!-- Theory & Mathematical Method of Calculation -->
+  <div class="content-card">
+    <h2><i class="fas fa-square-root-variable"></i> Method of Calculation & Mathematical Formulas</h2>
+    <p style="color:var(--mut); font-size:0.92rem; line-height:1.65;">
+      In asynchronous serial communication (UART), both transmitting and receiving devices run on independent local clock oscillators without sharing a dedicated synchronous clock wire. The receiver detects the falling edge of the <strong>START</strong> bit and samples each subsequent bit at the expected mid-point.
+    </p>
+
+    <h3 style="font-size:1.05rem; margin-top:1.15rem; color:var(--txt);">1. UBRR Register Calculation</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      The 12-bit hardware baud rate divider register <strong>UBRR</strong> (USART Baud Rate Register) divides the master CPU oscillator frequency:
+    </p>
+    <div class="formula-box">
+      Normal Mode (U2X = 0): &nbsp;UBRR = round( F<sub>CPU</sub> &divide; (16 &times; Baud) &minus; 1 )<br>
+      Double Speed (U2X = 1): UBRR = round( F<sub>CPU</sub> &divide; (8 &times; Baud) &minus; 1 )
+    </div>
+
+    <h3 style="font-size:1.05rem; margin-top:1.15rem; color:var(--txt);">2. Resulting Actual Baud Rate</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      Because UBRR is strictly an integer, the actual synthesized baud rate will slightly deviate from the nominal target:
+    </p>
+    <div class="formula-box">
+      Normal Mode: &nbsp;Baud<sub>real</sub> = F<sub>CPU</sub> &divide; (16 &times; (UBRR + 1))<br>
+      Double Speed: Baud<sub>real</sub> = F<sub>CPU</sub> &divide; (8 &times; (UBRR + 1))
+    </div>
+
+    <h3 style="font-size:1.05rem; margin-top:1.15rem; color:var(--txt);">3. Percentage Timing Error</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      The percentage mismatch between actual and nominal baud rate:
+    </p>
+    <div class="formula-box">
+      Error (%) = ((Baud<sub>real</sub> &minus; Baud) &divide; Baud) &times; 100%
+    </div>
+
+    <h3 style="font-size:1.05rem; margin-top:1.15rem; color:var(--txt);">4. Why is &plusmn;2% the Critical Threshold?</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      A standard 8-N-1 packet has 10 bits. The receiver re-synchronizes only at the leading edge of the Start bit. Any percentage mismatch causes the internal sampling strobe to drift across each successive bit cell. By the 10th bit (the Stop bit), an error greater than <strong>&plusmn;2% to &plusmn;3%</strong> will cause the receiver to sample the adjacent bit or edge transition, producing <strong>Framing Errors</strong> and corrupted characters.
+    </p>
+  </div>
+
+  <!-- Magic Crystals Section -->
+  <div class="content-card">
+    <h2><i class="fas fa-gem" style="color:var(--cyan);"></i> "Magic" Baud-Rate Crystals (0.00% Error)</h2>
+    <p style="color:var(--mut); font-size:0.92rem; line-height:1.65;">
+      In professional embedded electronics where high-speed serial reliability is mission-critical (e.g. bootloaders, RS-485 Modbus networks, telemetry radios), engineers intentionally avoid round integer crystals (like 8 MHz or 16 MHz) in favor of specialized <strong>baud-rate harmonic crystals</strong>:
+    </p>
+    <div class="table-responsive">
+      <table class="calc-table">
+        <thead>
+          <tr>
+            <th>Crystal Frequency</th>
+            <th>Primary Benefit</th>
+            <th>Max Baud at 0.00% Error</th>
+            <th>Common Application</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>14.7456 MHz</strong></td>
+            <td>0.00% error across ALL standard baud rates</td>
+            <td>921,600 bps</td>
+            <td>High-speed industrial AVR/8051 controllers</td>
+          </tr>
+          <tr>
+            <td><strong>11.0592 MHz</strong></td>
+            <td>Classic 0.00% harmonic for 115,200 baud</td>
+            <td>115,200 bps</td>
+            <td>Low-voltage 3.3V systems, classic 8051</td>
+          </tr>
+          <tr>
+            <td><strong>18.4320 MHz</strong></td>
+            <td>Fastest 0.00% crystal within AVR 20 MHz limit</td>
+            <td>1,152,000 bps</td>
+            <td>Maximum compute performance + zero serial error</td>
+          </tr>
+          <tr>
+            <td><strong>7.3728 MHz</strong></td>
+            <td>Ultra low power consumption</td>
+            <td>460,800 bps</td>
+            <td>Battery-powered remote telemetry nodes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Worked Practical Examples -->
+  <div class="content-card">
+    <h2><i class="fas fa-book-open"></i> Practical Worked Engineering Examples</h2>
+
+    <!-- Example 1 -->
+    <div style="background:var(--bg2); border:1px solid var(--br); border-radius:var(--r-sm); padding:1.15rem; margin-bottom:1rem;">
+      <h3 style="font-size:1rem; color:var(--txt); margin-bottom:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+        <span><strong>Example 1:</strong> Arduino Uno 16 MHz at 115,200 Baud</span>
+        <button class="btn-sm" id="btnLoadEx1" type="button"><i class="fas fa-arrow-up-right-from-square"></i> Load This</button>
+      </h3>
+      <p style="color:var(--mut); font-size:0.88rem; line-height:1.55;">
+        Standard Arduino Uno (16 MHz) communicating with a PC terminal at 115,200 baud:
+      </p>
+      <div style="margin-top:0.5rem; font-family:var(--mono); font-size:0.82rem; color:var(--acc);">
+        &bull; Normal Mode (U2X=0): UBRR = 8 &bull; Actual = 111,111 bps &bull; <strong>Error = &minus;3.55% (High Risk!)</strong><br>
+        &bull; Double Speed (U2X=1): UBRR = 16 &bull; Actual = 117,647 bps &bull; <strong>Error = +2.12% (Acceptable)</strong>
+      </div>
+    </div>
+
+    <!-- Example 2 -->
+    <div style="background:var(--bg2); border:1px solid var(--br); border-radius:var(--r-sm); padding:1.15rem; margin-bottom:1rem;">
+      <h3 style="font-size:1rem; color:var(--txt); margin-bottom:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+        <span><strong>Example 2:</strong> Arduino Uno 16 MHz at 9,600 Baud</span>
+        <button class="btn-sm" id="btnLoadEx2" type="button"><i class="fas fa-arrow-up-right-from-square"></i> Load This</button>
+      </h3>
+      <p style="color:var(--mut); font-size:0.88rem; line-height:1.55;">
+        Standard default Arduino <code>Serial.begin(9600)</code>:
+      </p>
+      <div style="margin-top:0.5rem; font-family:var(--mono); font-size:0.82rem; color:var(--acc);">
+        &bull; Normal Mode: UBRR = 103 &bull; Actual = 9,615.4 bps &bull; <strong>Error = +0.16% (Extremely Reliable)</strong>
+      </div>
+    </div>
+
+    <!-- Example 3 -->
+    <div style="background:var(--bg2); border:1px solid var(--br); border-radius:var(--r-sm); padding:1.15rem;">
+      <h3 style="font-size:1rem; color:var(--txt); margin-bottom:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+        <span><strong>Example 3:</strong> Magic 14.7456 MHz Crystal at 115,200 Baud</span>
+        <button class="btn-sm" id="btnLoadEx3" type="button"><i class="fas fa-arrow-up-right-from-square"></i> Load This</button>
+      </h3>
+      <p style="color:var(--mut); font-size:0.88rem; line-height:1.55;">
+        Industrial board equipped with a 14.7456 MHz crystal oscillator:
+      </p>
+      <div style="margin-top:0.5rem; font-family:var(--mono); font-size:0.82rem; color:var(--acc);">
+        &bull; Normal Mode: UBRR = 7 &bull; Actual = 115,200.0 bps &bull; <strong>Error = 0.00% (Zero Drift)</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Frequently Asked Questions (FAQ) -->
+  <div class="content-card">
+    <h2><i class="fas fa-circle-question"></i> Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary class="faq-question">
+          <span>What is U2X (Double Speed Mode) and when should I use it?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          In normal UART mode, the receiver samples each incoming bit 16 times per bit period (16x oversampling) to filter noise. Setting the <strong>U2X0</strong> bit in the <code>UCSR0A</code> register cuts the baud divider in half, reducing oversampling to 8x. This doubles the maximum baud rate and frequently halves the rounding error (e.g. from &minus;3.55% down to +2.12% on a 16 MHz Uno at 115200 baud).
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Why does 115,200 baud fail on a standard 16 MHz Arduino?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          Because 16,000,000 divided by (16 &times; 115,200) equals <strong>8.68</strong>. Since UBRR must be an integer, rounding to 8 yields an actual baud rate of 111,111 bps (&minus;3.55% error). When paired with a PC serial adapter that also has a minor clock drift (&plusmn;1%), the total mismatch exceeds &plusmn;4.5%, leading to dropped bytes and gibberish characters. Setting <code>UCSR0A |= (1 &lt;&lt; U2X0)</code> reduces the error to +2.12%, restoring reliable communication.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Does the Arduino library automatically enable U2X mode?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          Yes! In modern Arduino AVR core versions, the <code>HardwareSerial.cpp</code> library internally tests whether enabling U2X provides a lower baud error than normal mode, and automatically sets the <code>U2X0</code> bit for speeds like 115,200 baud on 16 MHz boards. However, in bare-metal AVR GCC programming, you must configure <code>UCSR0A</code> manually.
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Saved Calculations History -->
+  <div class="history-card">
+    <div class="history-header">
+      <h3><i class="fas fa-clock-rotate-left"></i> Saved Calculations</h3>
+      <div class="history-actions">
+        <button class="btn-sm" id="btnExportJson" type="button" title="Export as JSON">
+          <i class="fas fa-download"></i> Export JSON
+        </button>
+        <button class="btn-sm del" id="btnClearHistory" type="button" title="Clear History">
+          <i class="fas fa-trash"></i> Clear All
+        </button>
+      </div>
+    </div>
+    <div class="history-list" id="historyList">
+      <div class="empty-state">No saved calculations yet. Click "Save Calc" above to store your readings.</div>
+    </div>
+  </div>
+</main>
+
+<!-- Advanced Tools Modal -->
+<div class="modal-overlay" id="advToolsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="modalTitle"><i class="fas fa-star" style="color:var(--acc);"></i> Advanced Engineering Tools</h3>
+      <button class="close-modal-btn" id="btnCloseModal" type="button" aria-label="Close dialog">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+    <p style="color:var(--mut); font-size:0.88rem; margin-bottom:1.25rem;">
+      Explore related microcontroller interfacing, signal processing, and electronics calculators:
+    </p>
+    <div class="tools-grid">
+      <a href="/sites/pwm-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-wave-square"></i> PWM Calculator</div>
+        <p>Calculate PWM average voltage, pulse durations, timer resolution, and duty cycle registers.</p>
+      </a>
+      <a href="/sites/adc-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-microchip"></i> ADC Calculator</div>
+        <p>Convert ADC digital counts to analog voltages, calculate LSB step size, and size input voltage dividers.</p>
+      </a>
+      <a href="/sites/rc-time-constant-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-stopwatch"></i> RC Time Constant Calculator</div>
+        <p>Calculate RC charging/discharging times, &tau; time constant, and -3dB cutoff frequency.</p>
+      </a>
+      <a href="/sites/555-timer-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-clock"></i> 555 Timer Calculator</div>
+        <p>Astable frequencies, monostable pulse widths, and bistable latch simulation with duty cycle control.</p>
+      </a>
+      <a href="/sites/voltage-divider-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-divide"></i> Voltage Divider Calculator</div>
+        <p>Calculate precision resistor networks, potentiometer settings, and loaded voltage drops.</p>
+      </a>
+      <a href="/sites/wire-size-voltage-drop-breaker-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-plug-circle-bolt"></i> Wire Size & Breaker Calculator</div>
+        <p>Determine conductor gauge, ampacity, and circuit breakers per IEC 60364 and NEC codes.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"><i class="fas fa-check-circle" style="color:var(--ok);"></i> <span id="toastMsg">Calculation saved!</span></div>
+
+<!-- Footer Chrome -->
+<footer class="mta-foot" role="contentinfo">
+  <div class="mta-foot-in">
+    <div class="mta-social">
+      <a href="https://github.com/Mohamed-Tarek-Abdelhady" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/mohamed-tarek-abdelhady/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="/">Back to Portfolio</a></p>
+    <div class="mta-actions">
+      <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+      <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+    </div>
+  </div>
+</footer>
+
+<!-- Interactive Logic -->
+<script>
+(function() {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  // Form Elements
+  const inpFcpu = $('inpFcpu');
+  const selBaud = $('selBaud');
+  const customBaudRow = $('customBaudRow');
+  const inpCustomBaud = $('inpCustomBaud');
+  const chkU2x = $('chkU2x');
+  const u2xToggleBox = $('u2xToggleBox');
+
+  // Outputs
+  const outUbrr = $('outUbrr');
+  const outUbrrFormula = $('outUbrrFormula');
+  const outBaudReal = $('outBaudReal');
+  const outBaudFormula = $('outBaudFormula');
+  const outError = $('outError');
+  const outErrorFormula = $('outErrorFormula');
+  const outBitTime = $('outBitTime');
+  const outTargetBitTime = $('outTargetBitTime');
+
+  // Status Banner
+  const statusBanner = $('statusBanner');
+  const statusIcon = $('statusIcon');
+  const statusText = $('statusText');
+
+  // Timing SVG Elements
+  const svgDriftLine = $('svgDriftLine');
+  const svgDriftArrow = $('svgDriftArrow');
+  const svgDriftText = $('svgDriftText');
+  const lblFrameDrift = $('lblFrameDrift');
+
+  // Matrix Table
+  const lblMatrixFcpu = $('lblMatrixFcpu');
+  const matrixTableBody = $('matrixTableBody');
+
+  // Code Block
+  const codeBlock = $('codeBlock');
+  const btnCopyCode = $('btnCopyCode');
+
+  // Buttons & Dialogs
+  const btnSaveCalc = $('btnSaveCalc');
+  const btnPrintPdf = $('btnPrintPdf');
+  const btnAdvTools = $('btnAdvTools');
+  const btnReset = $('btnReset');
+  const btnLoadExample = $('btnLoadExample');
+  const btnLoadEx1 = $('btnLoadEx1');
+  const btnLoadEx2 = $('btnLoadEx2');
+  const btnLoadEx3 = $('btnLoadEx3');
+  const btnCloseModal = $('btnCloseModal');
+  const advToolsModal = $('advToolsModal');
+  const toast = $('toast');
+  const toastMsg = $('toastMsg');
+  const historyList = $('historyList');
+  const btnExportJson = $('btnExportJson');
+  const btnClearHistory = $('btnClearHistory');
+
+  const STORAGE_KEY = 'mta_uart_calc_history';
+  let currentCalcState = null;
+
+  const STANDARD_BAUDS = [
+    300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 76800, 115200, 230400, 250000, 500000, 1000000
+  ];
+
+  function showToast(msg) {
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2600);
+  }
+
+  function getTargetBaud() {
+    if (selBaud.value === 'custom') {
+      const b = parseFloat(inpCustomBaud.value);
+      return (isNaN(b) || b <= 0) ? 115200 : b;
+    }
+    return parseFloat(selBaud.value) || 115200;
+  }
+
+  // Core Math Calculation
+  function calculateBaud(fcpuHz, baud, u2x) {
+    const divisor = u2x ? 8 : 16;
+    const exact = (fcpuHz / (divisor * baud)) - 1;
+    let ubrr = Math.round(exact);
+    if (ubrr < 0) ubrr = 0;
+    if (ubrr > 4095) ubrr = 4095; // 12-bit AVR UBRR limit
+
+    const baudReal = fcpuHz / (divisor * (ubrr + 1));
+    const errorPct = ((baudReal - baud) / baud) * 100;
+
+    return {
+      ubrr: ubrr,
+      exact: exact,
+      baudReal: baudReal,
+      errorPct: errorPct,
+      divisor: divisor
+    };
+  }
+
+  // Main Calculation Function
+  function calculate() {
+    let fcpuMhz = parseFloat(inpFcpu.value);
+    if (isNaN(fcpuMhz) || fcpuMhz <= 0) fcpuMhz = 16.0;
+    const fcpuHz = fcpuMhz * 1e6;
+
+    const targetBaud = getTargetBaud();
+    const u2x = chkU2x.checked;
+
+    const res = calculateBaud(fcpuHz, targetBaud, u2x);
+
+    // 1. Render UBRR
+    outUbrr.textContent = res.ubrr.toLocaleString();
+    outUbrrFormula.textContent = `Exact: ${res.exact.toFixed(2)} (Divisor: ${res.divisor})`;
+
+    // 2. Render Actual Baud
+    outBaudReal.textContent = res.baudReal.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    outBaudFormula.textContent = `${fcpuMhz}M / (${res.divisor} × (${res.ubrr} + 1))`;
+
+    // 3. Render Error
+    const errSign = res.errorPct > 0 ? '+' : '';
+    outError.textContent = `${errSign}${res.errorPct.toFixed(2)} %`;
+    outErrorFormula.textContent = `(${res.baudReal.toFixed(1)} - ${targetBaud}) / ${targetBaud}`;
+
+    // 4. Bit Durations
+    const tBitActual = (1 / res.baudReal) * 1e6; // µs
+    const tBitTarget = (1 / targetBaud) * 1e6;   // µs
+    const diffUs = tBitActual - tBitTarget;
+    outBitTime.textContent = `${tBitActual.toFixed(2)} µs`;
+    outTargetBitTime.textContent = `Target: ${tBitTarget.toFixed(2)} µs (${diffUs >= 0 ? '+' : ''}${diffUs.toFixed(3)} µs)`;
+
+    // 5. Status Banner & Colors
+    const absErr = Math.abs(res.errorPct);
+    statusBanner.className = 'status-banner';
+
+    if (absErr <= 1.0) {
+      statusBanner.classList.add('ok');
+      statusIcon.className = 'fas fa-circle-check';
+      statusText.innerHTML = `<strong>Excellent Connection (&le; 1%):</strong> Clock synchronization is extremely stable with near-zero risk of framing errors.`;
+      outError.style.color = 'var(--ok)';
+    } else if (absErr <= 2.0) {
+      statusBanner.classList.add('ok');
+      statusIcon.className = 'fas fa-circle-check';
+      statusText.innerHTML = `<strong>Reliable Communication (&le; 2%):</strong> Within standard asynchronous tolerance. Acceptable for short cable runs and clean signals.`;
+      outError.style.color = 'var(--ok)';
+    } else if (absErr <= 3.5) {
+      statusBanner.classList.add('warn');
+      statusIcon.className = 'fas fa-triangle-exclamation';
+      if (!u2x) {
+        statusText.innerHTML = `<strong>⚠️ High Error Risk (${errSign}${res.errorPct.toFixed(2)}%):</strong> May cause occasional framing errors and corrupted bytes. <strong>Enable Double Speed (U2X)</strong> or use a UART-friendly crystal.`;
+      } else {
+        statusText.innerHTML = `<strong>⚠️ Marginal Error (${errSign}${res.errorPct.toFixed(2)}%):</strong> Communication may work between identical boards, but may fail with strict PC USB-UART bridges. Consider a magic crystal.`;
+      }
+      outError.style.color = 'var(--warn)';
+    } else {
+      statusBanner.classList.add('err');
+      statusIcon.className = 'fas fa-circle-xmark';
+      statusText.innerHTML = `<strong>⛔ Unusable Communication (${errSign}${res.errorPct.toFixed(2)}%):</strong> Communication will fail with persistent framing errors. Double Speed (U2X) or a different crystal is mandatory.`;
+      outError.style.color = 'var(--err)';
+    }
+
+    // 6. SVG Timing Drift Marker Update
+    // In a 10-bit frame (Start + 8 Data + Stop), cumulative drift at bit 10 is:
+    // 9.5 bit times from center of Start bit to center of Stop bit.
+    // Total drift percentage of 1 bit width = 9.5 * errorPct.
+    const stopBitCenter = 428;
+    const bitWidthPx = 44;
+    const driftFractionOfBit = (9.5 * res.errorPct) / 100;
+    const driftOffsetPx = Math.max(Math.min(driftFractionOfBit * bitWidthPx, 35), -35);
+    const actualSampleX = stopBitCenter + driftOffsetPx;
+
+    svgDriftLine.setAttribute('x1', actualSampleX);
+    svgDriftLine.setAttribute('x2', actualSampleX);
+    svgDriftArrow.setAttribute('points', `${actualSampleX - 4},8 ${actualSampleX + 4},8 ${actualSampleX},14`);
+    svgDriftText.setAttribute('x', actualSampleX);
+
+    const driftPctStr = (driftFractionOfBit * 100).toFixed(1);
+    lblFrameDrift.textContent = `Stop Bit Strobe Drift: ${driftPctStr > 0 ? '+' : ''}${driftPctStr}% of bit cell`;
+    if (Math.abs(driftFractionOfBit) > 0.40) {
+      lblFrameDrift.style.color = 'var(--err)';
+      svgDriftLine.setAttribute('stroke', '#ef4444');
+      svgDriftArrow.setAttribute('fill', '#ef4444');
+      svgDriftText.setAttribute('fill', '#ef4444');
+    } else if (Math.abs(driftFractionOfBit) > 0.15) {
+      lblFrameDrift.style.color = 'var(--warn)';
+      svgDriftLine.setAttribute('stroke', '#f59e0b');
+      svgDriftArrow.setAttribute('fill', '#f59e0b');
+      svgDriftText.setAttribute('fill', '#f59e0b');
+    } else {
+      lblFrameDrift.style.color = 'var(--ok)';
+      svgDriftLine.setAttribute('stroke', '#22c55e');
+      svgDriftArrow.setAttribute('fill', '#22c55e');
+      svgDriftText.setAttribute('fill', '#22c55e');
+    }
+
+    // 7. Update Full Matrix Table
+    lblMatrixFcpu.textContent = `${fcpuMhz.toFixed(4).replace(/\.?0+$/, '')} MHz`;
+    renderMatrixTable(fcpuHz, targetBaud);
+
+    // 8. Update Firmware Snippet
+    updateCodeSnippet(fcpuHz, targetBaud, res.ubrr, u2x);
+
+    // 9. Cache calculation state
+    currentCalcState = {
+      fcpuMhz: fcpuMhz,
+      targetBaud: targetBaud,
+      u2x: u2x,
+      ubrr: res.ubrr,
+      baudReal: res.baudReal.toFixed(1),
+      errorPct: res.errorPct.toFixed(2),
+      statusText: absErr <= 2.0 ? 'Acceptable' : 'High Error',
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+  }
+
+  // Populate Dynamic Matrix Table
+  function renderMatrixTable(fcpuHz, selectedBaud) {
+    let rowsHtml = '';
+    STANDARD_BAUDS.forEach(b => {
+      const norm = calculateBaud(fcpuHz, b, false);
+      const dbl = calculateBaud(fcpuHz, b, true);
+
+      const isCurrent = b === selectedBaud;
+      const rowCls = isCurrent ? 'class="selected"' : '';
+
+      // Error badges
+      const normBadge = getErrorBadgeHtml(norm.errorPct);
+      const dblBadge = getErrorBadgeHtml(dbl.errorPct);
+
+      // Best recommendation
+      let rec = '';
+      if (Math.abs(norm.errorPct) <= 1.5) {
+        rec = '<span style="color:var(--ok); font-weight:600;">Normal (1x)</span>';
+      } else if (Math.abs(dbl.errorPct) < Math.abs(norm.errorPct)) {
+        rec = '<span style="color:var(--acc); font-weight:600;">Double Speed (U2X)</span>';
+      } else {
+        rec = '<span style="color:var(--warn);">Change Crystal</span>';
+      }
+
+      rowsHtml += `
+        <tr ${rowCls}>
+          <td><strong>${b.toLocaleString()}</strong></td>
+          <td>${norm.ubrr}</td>
+          <td>${norm.baudReal.toLocaleString(undefined, { maximumFractionDigits: 1 })}</td>
+          <td>${normBadge}</td>
+          <td>${dbl.ubrr}</td>
+          <td>${dbl.baudReal.toLocaleString(undefined, { maximumFractionDigits: 1 })}</td>
+          <td>${dblBadge}</td>
+          <td>${rec}</td>
+        </tr>
+      `;
+    });
+    matrixTableBody.innerHTML = rowsHtml;
+  }
+
+  function getErrorBadgeHtml(err) {
+    const abs = Math.abs(err);
+    const sign = err > 0 ? '+' : '';
+    let cls = 'ok';
+    if (abs > 3.0) cls = 'err';
+    else if (abs > 1.5) cls = 'warn';
+    return `<span class="badge-error ${cls}">${sign}${err.toFixed(2)}%</span>`;
+  }
+
+  // Code Snippet Generator
+  function updateCodeSnippet(fcpuHz, baud, ubrr, u2x) {
+    const activeTab = document.querySelector('.code-tab-btn.active');
+    const tabName = activeTab ? activeTab.getAttribute('data-tab') : 'avrc';
+
+    let code = '';
+    if (tabName === 'avrc') {
+      code = `// AVR Bare-Metal C (ATmega328P / Arduino Uno)\n` +
+             `#define F_CPU ${Math.round(fcpuHz)}UL\n` +
+             `#define BAUD  ${baud}\n` +
+             `#define UBRR_VAL ${ubrr}\n\n` +
+             `void uart_init(void) {\n` +
+             `    // Set Baud Rate Register UBRR0:\n` +
+             `    UBRR0H = (unsigned char)(UBRR_VAL >> 8);\n` +
+             `    UBRR0L = (unsigned char)(UBRR_VAL);\n\n` +
+             (u2x ? `    // Enable Double Speed Mode (U2X0):\n    UCSR0A = (1 << U2X0);\n\n` : `    // Normal Speed Mode (U2X0 = 0):\n    UCSR0A = 0;\n\n`) +
+             `    // Enable Receiver and Transmitter:\n` +
+             `    UCSR0B = (1 << RXEN0) | (1 << TXEN0);\n\n` +
+             `    // Frame Format: 8 Data bits, No parity, 1 Stop bit (8-N-1):\n` +
+             `    UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);\n` +
+             `}`;
+    } else if (tabName === 'arduino') {
+      code = `// Arduino C++ Framework\n` +
+             `// Note: Arduino's HardwareSerial automatically enables U2X if needed.\n\n` +
+             `void setup() {\n` +
+             `  Serial.begin(${baud});\n` +
+             `  while (!Serial) { ; } // wait for serial port\n` +
+             `  Serial.println("UART initialized at ${baud} baud");\n` +
+             (u2x ? `  // Note: U2X0 bit is active in hardware for optimal timing\n` : '') +
+             `}\n\n` +
+             `void loop() {\n` +
+             `  Serial.println("Telemetry heartbeat: OK");\n` +
+             `  delay(1000);\n` +
+             `}`;
+    } else if (tabName === 'stm32') {
+      code = `/* STM32 HAL USART Configuration */\n` +
+             `// Generated for STM32CubeMX / HAL\n` +
+             `UART_HandleTypeDef huart1;\n\n` +
+             `void MX_USART1_UART_Init(void) {\n` +
+             `  huart1.Instance = USART1;\n` +
+             `  huart1.Init.BaudRate = ${baud};\n` +
+             `  huart1.Init.WordLength = UART_WORDLENGTH_8B;\n` +
+             `  huart1.Init.StopBits = UART_STOPBITS_1;\n` +
+             `  huart1.Init.Parity = UART_PARITY_NONE;\n` +
+             `  huart1.Init.Mode = UART_MODE_TX_RX;\n` +
+             `  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;\n` +
+             `  huart1.Init.OverSampling = ${u2x ? 'UART_OVERSAMPLING_8' : 'UART_OVERSAMPLING_16'};\n` +
+             `  HAL_UART_Init(&huart1);\n` +
+             `}`;
+    } else if (tabName === 'esp32') {
+      code = `// ESP32 Hardware UART Initialization\n` +
+             `// ESP32 uses an APB 80 MHz clock with a fractional baud rate generator\n\n` +
+             `void setup() {\n` +
+             `  // HardwareSerial Serial2(2):\n` +
+             `  // GPIO 16 (RX2), GPIO 17 (TX2)\n` +
+             `  Serial2.begin(${baud}, SERIAL_8N1, 16, 17);\n` +
+             `  Serial.begin(115200);\n` +
+             `  Serial.println("ESP32 Serial2 active");\n` +
+             `}\n\n` +
+             `void loop() {\n` +
+             `  if (Serial2.available()) {\n` +
+             `    Serial.write(Serial2.read());\n` +
+             `  }\n` +
+             `}`;
+    }
+
+    codeBlock.textContent = code;
+  }
+
+  // Code Tab Handlers
+  document.querySelectorAll('.code-tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.code-tab-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      calculate();
+    });
+  });
+
+  btnCopyCode.addEventListener('click', () => {
+    navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+      showToast('Code copied to clipboard!');
+    }).catch(() => {
+      showToast('Failed to copy code.');
+    });
+  });
+
+  // Event Listeners for Inputs
+  inpFcpu.addEventListener('input', calculate);
+
+  selBaud.addEventListener('change', () => {
+    if (selBaud.value === 'custom') {
+      customBaudRow.style.display = 'block';
+    } else {
+      customBaudRow.style.display = 'none';
+    }
+    calculate();
+  });
+
+  inpCustomBaud.addEventListener('input', calculate);
+
+  u2xToggleBox.addEventListener('click', () => {
+    chkU2x.checked = !chkU2x.checked;
+    calculate();
+  });
+
+  chkU2x.addEventListener('change', calculate);
+
+  // Crystal Preset Buttons
+  document.querySelectorAll('.preset-btn[data-fcpu]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.preset-btn[data-fcpu]').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      inpFcpu.value = this.getAttribute('data-fcpu');
+      calculate();
+    });
+  });
+
+  // Reset to Defaults (16 MHz, 115200, U2X off)
+  btnReset.addEventListener('click', () => {
+    inpFcpu.value = '16';
+    selBaud.value = '115200';
+    customBaudRow.style.display = 'none';
+    chkU2x.checked = false;
+
+    document.querySelectorAll('.preset-btn[data-fcpu]').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-fcpu') === '16');
+    });
+
+    calculate();
+    showToast('Reset defaults (16 MHz @ 115200 baud, Normal mode).');
+  });
+
+  // Load Benchmark Example 1 (16 MHz @ 115200)
+  function loadBenchmarkEx1() {
+    inpFcpu.value = '16';
+    selBaud.value = '115200';
+    customBaudRow.style.display = 'none';
+    chkU2x.checked = false;
+
+    document.querySelectorAll('.preset-btn[data-fcpu]').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-fcpu') === '16');
+    });
+
+    calculate();
+    showToast('Loaded benchmark: 16 MHz @ 115200 (UBRR=8, -3.55% error).');
+  }
+
+  btnLoadExample.addEventListener('click', loadBenchmarkEx1);
+  btnLoadEx1.addEventListener('click', loadBenchmarkEx1);
+
+  // Load Example 2 (16 MHz @ 9600)
+  btnLoadEx2.addEventListener('click', () => {
+    inpFcpu.value = '16';
+    selBaud.value = '9600';
+    customBaudRow.style.display = 'none';
+    chkU2x.checked = false;
+
+    document.querySelectorAll('.preset-btn[data-fcpu]').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-fcpu') === '16');
+    });
+
+    calculate();
+    showToast('Loaded Example 2: 16 MHz @ 9600 (UBRR=103, +0.16% error).');
+  });
+
+  // Load Example 3 (Magic 14.7456 MHz @ 115200)
+  btnLoadEx3.addEventListener('click', () => {
+    inpFcpu.value = '14.7456';
+    selBaud.value = '115200';
+    customBaudRow.style.display = 'none';
+    chkU2x.checked = false;
+
+    document.querySelectorAll('.preset-btn[data-fcpu]').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-fcpu') === '14.7456');
+    });
+
+    calculate();
+    showToast('Loaded Example 3: Magic 14.7456 MHz (UBRR=7, 0.00% error).');
+  });
+
+  // Advanced Tools Modal
+  btnAdvTools.addEventListener('click', () => advToolsModal.classList.add('open'));
+  btnCloseModal.addEventListener('click', () => advToolsModal.classList.remove('open'));
+  advToolsModal.addEventListener('click', (e) => {
+    if (e.target === advToolsModal) advToolsModal.classList.remove('open');
+  });
+
+  // PDF Report
+  btnPrintPdf.addEventListener('click', () => {
+    const printDate = $('printDate');
+    if (printDate) printDate.textContent = new Date().toLocaleString();
+    window.print();
+  });
+
+  // History Management
+  function getHistory() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch(e) {
+      return [];
+    }
+  }
+
+  function renderHistory() {
+    const list = getHistory();
+    if (!list.length) {
+      historyList.innerHTML = '<div class="empty-state">No saved calculations yet. Click "Save Calc" above to store your readings.</div>';
+      return;
+    }
+
+    let html = '';
+    list.forEach((item, index) => {
+      const errSign = parseFloat(item.errorPct) > 0 ? '+' : '';
+      html += `
+        <div class="history-item">
+          <div class="history-meta">
+            <strong>${item.targetBaud.toLocaleString()} Baud @ ${item.fcpuMhz} MHz (${item.u2x ? 'U2X 2x' : '1x Normal'})</strong>
+            <span>UBRR: ${item.ubrr} • Actual: ${parseFloat(item.baudReal).toLocaleString()} • Error: ${errSign}${item.errorPct}% (${item.statusText}) • Saved: ${item.timestamp}</span>
+          </div>
+          <div style="display:flex; gap:0.4rem;">
+            <button class="btn-sm" onclick="window.mtaLoadHistoryItem(${index})"><i class="fas fa-arrow-rotate-left"></i> Load</button>
+            <button class="btn-sm del" onclick="window.mtaDeleteHistoryItem(${index})"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      `;
+    });
+    historyList.innerHTML = html;
+  }
+
+  window.mtaLoadHistoryItem = function(index) {
+    const list = getHistory();
+    const item = list[index];
+    if (!item) return;
+
+    inpFcpu.value = item.fcpuMhz;
+    chkU2x.checked = item.u2x;
+
+    if (STANDARD_BAUDS.includes(item.targetBaud)) {
+      selBaud.value = item.targetBaud.toString();
+      customBaudRow.style.display = 'none';
+    } else {
+      selBaud.value = 'custom';
+      customBaudRow.style.display = 'block';
+      inpCustomBaud.value = item.targetBaud;
+    }
+
+    calculate();
+    showToast(`Loaded ${item.targetBaud} baud calculation.`);
+  };
+
+  window.mtaDeleteHistoryItem = function(index) {
+    let list = getHistory();
+    list.splice(index, 1);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    renderHistory();
+    showToast('Record deleted.');
+  };
+
+  btnSaveCalc.addEventListener('click', () => {
+    if (!currentCalcState) return;
+    let list = getHistory();
+    list.unshift(currentCalcState);
+    if (list.length > 25) list = list.slice(0, 25);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    renderHistory();
+    showToast(`Saved ${currentCalcState.targetBaud} baud (${currentCalcState.errorPct}%) to history.`);
+  });
+
+  btnExportJson.addEventListener('click', () => {
+    const list = getHistory();
+    if (!list.length) {
+      showToast('No saved calculations to export.');
+      return;
+    }
+    const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'uart-baud-rate-history.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Exported history as JSON!');
+  });
+
+  btnClearHistory.addEventListener('click', () => {
+    if (confirm('Are you sure you want to clear all saved calculations?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      renderHistory();
+      showToast('Cleared calculation history.');
+    }
+  });
+
+  // Initial Calculation & Render
+  calculate();
+  renderHistory();
+})();
+</script>
+
+<script src="/pwa.js" defer></script>
+<script src="mta-chrome.js" defer></script>
+<!-- Vercel Speed Insights -->
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,2314 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/pwm-calculator.html">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>PWM (Pulse Width Modulation) Calculator | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Calculate PWM average voltage, period, HIGH/LOW pulse durations, maximum bit resolution, and timer duty register values. Supports ESP32 LEDC, Arduino analogWrite, STM32, and RP2040.">
+  <meta name="author" content="Mohamed Tarek Abdelhady">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PWM (Pulse Width Modulation) Calculator | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Calculate PWM average voltage, pulse durations, maximum bit resolution, and timer register counts for ESP32, Arduino, and microcontrollers.">
+  <meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="851">
+  <meta property="og:image:height" content="1134">
+  <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/pwm-calculator.html">
+  <meta property="og:updated_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="article:modified_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PWM (Pulse Width Modulation) Calculator | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Calculate PWM average voltage, pulse durations, maximum bit resolution, and timer register counts for ESP32, Arduino, and microcontrollers.">
+  <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+
+  <!-- PWA & Mobile Icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M. Tarek">
+  <meta name="application-name" content="M. Tarek">
+  <meta name="msapplication-TileColor" content="#0a0e1a">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
+  <link rel="stylesheet" href="mta-chrome.css">
+
+  <!-- Schema.org WebApplication & BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PWM (Pulse Width Modulation) Calculator",
+    "description": "Calculate PWM average voltage, period, HIGH/LOW pulse durations, maximum bit resolution, and timer duty register values. Supports ESP32 LEDC, Arduino analogWrite, STM32, and RP2040.",
+    "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/pwm-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek Abdelhady",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tools",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/tools.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "PWM Calculator",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/sites/pwm-calculator.html"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1322;
+      --bg3: #141829;
+      --card: #161b2e;
+      --card2: #1c2240;
+      --acc: #06b6d4;
+      --acc-hover: #0891b2;
+      --acc-subtle: rgba(6, 182, 212, 0.12);
+      --acc-border: rgba(6, 182, 212, 0.35);
+      --txt: #f1f5f9;
+      --mut: #94a3b8;
+      --mut2: #64748b;
+      --br: rgba(255, 255, 255, 0.08);
+      --br-hover: rgba(255, 255, 255, 0.16);
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --err: #ef4444;
+      --purple: #8b5cf6;
+      --r: 14px;
+      --r-sm: 8px;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      --gradient-glow: radial-gradient(circle at top center, rgba(6, 182, 212, 0.18) 0%, transparent 70%);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --bg3: #e2e8f0;
+      --card: #ffffff;
+      --card2: #f8fafc;
+      --acc: #0284c7;
+      --acc-hover: #0369a1;
+      --acc-subtle: rgba(2, 132, 199, 0.08);
+      --acc-border: rgba(2, 132, 199, 0.25);
+      --txt: #0f172a;
+      --mut: #475569;
+      --mut2: #94a3b8;
+      --br: rgba(0, 0, 0, 0.08);
+      --br-hover: rgba(0, 0, 0, 0.15);
+      --gradient-glow: radial-gradient(circle at top center, rgba(2, 132, 199, 0.08) 0%, transparent 70%);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.65;
+      min-height: 100vh;
+      background-image: var(--gradient-glow);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      background: var(--acc-subtle);
+      border: 1px solid var(--acc-border);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--acc);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+    }
+
+    .pill .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--ok);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--ok);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.85rem, 4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero h1 .grad {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--mut);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Brief / Summary Card */
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-left: 4px solid var(--ok);
+      border-radius: var(--r);
+      padding: 1.15rem 1.4rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .summary-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ok);
+      margin-bottom: 0.45rem;
+    }
+
+    .summary-card p {
+      color: var(--mut);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .summary-card strong {
+      color: var(--txt);
+    }
+
+    /* Grid layout */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+      position: relative;
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--txt);
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .card h2 i {
+      color: var(--acc);
+      font-size: 1.05rem;
+    }
+
+    /* Form Inputs */
+    .lbl {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin-bottom: 0.4rem;
+      margin-top: 0.9rem;
+    }
+
+    .lbl:first-of-type {
+      margin-top: 0;
+    }
+
+    .lbl span.opt {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--mut2);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .input-row input {
+      flex: 1;
+    }
+
+    .input-row select {
+      min-width: 105px;
+    }
+
+    input[type="number"], select {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--txt);
+      padding: 0.75rem 0.95rem;
+      border-radius: var(--r-sm);
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    input[type="number"]:focus, select:focus {
+      border-color: var(--acc);
+      box-shadow: 0 0 0 3px var(--acc-subtle);
+    }
+
+    /* Range Slider Styling */
+    .range-box {
+      margin-top: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    input[type="range"] {
+      flex: 1;
+      accent-color: var(--acc);
+      cursor: pointer;
+      height: 6px;
+      background: var(--bg3);
+      border-radius: 4px;
+      outline: none;
+    }
+
+    /* Presets Pills */
+    .preset-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.45rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .preset-btn {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 120ms ease;
+      font-family: var(--mono);
+    }
+
+    .preset-btn:hover {
+      background: var(--card2);
+      border-color: var(--acc-border);
+      color: var(--acc);
+    }
+
+    .preset-btn.active {
+      background: var(--acc-subtle);
+      border-color: var(--acc);
+      color: var(--acc);
+    }
+
+    /* Action Buttons Row */
+    .btn-toolbar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 500px) {
+      .btn-toolbar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.75rem 0.6rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      color: var(--txt);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 150ms ease;
+      text-decoration: none;
+    }
+
+    .action-btn:hover {
+      background: var(--card2);
+      border-color: var(--acc-border);
+      color: var(--acc);
+      transform: translateY(-1px);
+    }
+
+    .action-btn.primary {
+      background: var(--gradient-accent);
+      border: none;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(6, 182, 212, 0.3);
+    }
+
+    .action-btn.primary:hover {
+      box-shadow: 0 6px 20px rgba(6, 182, 212, 0.45);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Results Grid */
+    .res-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .res-cell {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.85rem 1rem;
+      transition: border-color 150ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .res-cell:hover {
+      border-color: var(--br-hover);
+    }
+
+    .res-cell.highlight {
+      border-color: var(--acc-border);
+      background: var(--acc-subtle);
+    }
+
+    .res-cell.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .res-cell small {
+      display: block;
+      color: var(--mut2);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+
+    .res-cell b {
+      font-family: var(--mono);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--txt);
+      display: block;
+      word-break: break-word;
+    }
+
+    .res-cell.highlight b {
+      color: var(--acc);
+    }
+
+    .res-cell .sub-val {
+      font-size: 0.75rem;
+      color: var(--mut);
+      margin-top: 0.25rem;
+      font-family: var(--mono);
+    }
+
+    /* Oscilloscope Live Waveform Card */
+    .waveform-card {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1rem 1.15rem;
+      margin-top: 1.25rem;
+      position: relative;
+    }
+
+    .waveform-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.65rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+    }
+
+    .waveform-legend {
+      display: flex;
+      gap: 0.85rem;
+      font-size: 0.75rem;
+    }
+
+    .legend-tag {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .legend-line {
+      width: 14px;
+      height: 3px;
+      border-radius: 2px;
+    }
+
+    #waveCanvas {
+      width: 100%;
+      height: 180px;
+      display: block;
+      background: #080c18;
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      border-radius: 6px;
+    }
+
+    /* PWM Low-Pass Filter DAC Box */
+    .filter-box {
+      margin-top: 1.25rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1rem 1.15rem;
+    }
+
+    .filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin-bottom: 0.5rem;
+    }
+
+    .filter-body {
+      font-size: 0.84rem;
+      color: var(--txt);
+      line-height: 1.5;
+    }
+
+    /* Disclaimer Alert */
+    .alert-box {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: var(--r);
+      padding: 1rem 1.25rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      color: var(--txt);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .alert-box i {
+      color: var(--warn);
+      font-size: 1.25rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    .alert-box strong {
+      color: var(--txt);
+    }
+
+    /* Content Cards */
+    .content-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .content-card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--txt);
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    /* Code Tabs & Pre */
+    .code-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.5rem;
+    }
+
+    .code-tab-btn {
+      background: none;
+      border: none;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--mut);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 120ms ease;
+    }
+
+    .code-tab-btn:hover {
+      color: var(--txt);
+      background: var(--bg2);
+    }
+
+    .code-tab-btn.active {
+      color: var(--acc);
+      background: var(--acc-subtle);
+    }
+
+    .code-container {
+      position: relative;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+    }
+
+    .code-container pre {
+      padding: 1.1rem;
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--txt);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .code-copy-btn {
+      position: absolute;
+      top: 0.65rem;
+      right: 0.65rem;
+      background: var(--bg3);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 120ms ease;
+    }
+
+    .code-copy-btn:hover {
+      color: var(--txt);
+      border-color: var(--acc);
+    }
+
+    /* Formulas */
+    .formula-box {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-left: 3px solid var(--acc);
+      border-radius: var(--r-sm);
+      padding: 1rem 1.25rem;
+      margin: 0.85rem 0;
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      color: var(--txt);
+      overflow-x: auto;
+    }
+
+    /* Comparison Table */
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+
+    table.calc-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    table.calc-table th {
+      padding: 0.75rem 0.95rem;
+      background: var(--bg2);
+      color: var(--mut);
+      font-weight: 600;
+      border-bottom: 1px solid var(--br);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    table.calc-table td {
+      padding: 0.75rem 0.95rem;
+      border-bottom: 1px solid var(--br);
+      color: var(--txt);
+    }
+
+    table.calc-table tr:hover td {
+      background: var(--bg2);
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .faq-item {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      transition: border-color 150ms ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--br-hover);
+    }
+
+    .faq-question {
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      color: var(--txt);
+    }
+
+    .faq-question i {
+      color: var(--acc);
+      transition: transform 200ms ease;
+      font-size: 0.85rem;
+    }
+
+    .faq-item[open] .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0 1.25rem 1rem;
+      color: var(--mut);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* Saved Calculations Drawer / Card */
+    .history-card {
+      margin-top: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .history-header h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .history-actions {
+      display: flex;
+      gap: 0.45rem;
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--bg3);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      transition: all 150ms ease;
+    }
+
+    .btn-sm:hover {
+      color: var(--txt);
+      border-color: var(--acc);
+    }
+
+    .btn-sm.del:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0.95rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      font-size: 0.85rem;
+    }
+
+    .history-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .history-meta strong {
+      color: var(--txt);
+      font-family: var(--mono);
+    }
+
+    .history-meta span {
+      color: var(--mut2);
+      font-size: 0.75rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 1.75rem 1rem;
+      color: var(--mut2);
+      font-size: 0.88rem;
+    }
+
+    /* Modal Dialog */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease;
+      padding: 1rem;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: var(--card);
+      border: 1px solid var(--br-hover);
+      border-radius: var(--r);
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .modal-header h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--txt);
+    }
+
+    .close-modal-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .close-modal-btn:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .tool-tile {
+      display: block;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1rem;
+      text-decoration: none;
+      color: var(--txt);
+      transition: all 150ms ease;
+    }
+
+    .tool-tile:hover {
+      border-color: var(--acc-border);
+      background: var(--card2);
+      transform: translateY(-2px);
+    }
+
+    .tool-tile-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+      color: var(--acc);
+    }
+
+    .tool-tile p {
+      font-size: 0.82rem;
+      color: var(--mut);
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--card2);
+      border: 1px solid var(--acc-border);
+      color: var(--txt);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--r-sm);
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transform: translateY(100px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 250ms ease, opacity 250ms ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Print Specific Styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11pt;
+      }
+
+      .mta-bar, .mta-foot, .btn-toolbar, .modal-overlay, .toast, .btn-sm, #th, [data-mta-top], .code-copy-btn, .preset-pills, .range-box {
+        display: none !important;
+      }
+
+      .wrap {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .card, .summary-card, .content-card, .history-card {
+        background: #ffffff !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+        color: #000000 !important;
+        page-break-inside: avoid;
+        margin-bottom: 1rem !important;
+        padding: 1rem !important;
+      }
+
+      .print-header {
+        display: block !important;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+      }
+
+      .print-header h1 {
+        font-size: 18pt;
+        margin: 0;
+      }
+
+      .res-cell {
+        background: #f8f8f8 !important;
+        border: 1px solid #ddd !important;
+        color: #000 !important;
+      }
+
+      .res-cell b {
+        color: #000 !important;
+      }
+
+      .formula-box, .faq-item {
+        border: 1px solid #ddd !important;
+        background: #fff !important;
+      }
+
+      .faq-item details {
+        display: block !important;
+      }
+
+      .faq-item[open] .faq-answer {
+        display: block !important;
+      }
+    }
+
+    .print-header {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header Chrome -->
+<header class="mta-bar" id="header" role="banner">
+  <div class="mta-bar-in">
+    <nav aria-label="Breadcrumb" class="mta-crumbs">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools.html">Tools</a></li>
+        <li aria-current="page">PWM Calculator</li>
+      </ol>
+    </nav>
+    <button class="mta-btn" id="th" type="button" aria-label="Toggle dark/light mode">
+      <i class="fas fa-moon" data-mta-icon></i>
+    </button>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <!-- Print Only Header -->
+  <div class="print-header">
+    <h1>Mohamed Tarek Abdelhady — Engineering Calculation Report</h1>
+    <p><strong>Tool:</strong> Pulse Width Modulation (PWM) Signal & Timer Resolution Calculator</p>
+    <p><strong>Date Generated:</strong> <span id="printDate"></span></p>
+  </div>
+
+  <!-- Hero Header -->
+  <div class="hero">
+    <div class="pill">
+      <span class="dot"></span>
+      Signal Processing & Motor Control
+    </div>
+    <h1>PWM <span class="grad">Pulse Width & Resolution</span> Calculator</h1>
+    <p>
+      Calculate average voltage, period, HIGH/LOW pulse durations, maximum bit resolution, and timer register counts. Built for ESP32 LEDC, Arduino analogWrite, STM32, and RP2040.
+    </p>
+  </div>
+
+  <!-- Quick Overview / In a Nutshell -->
+  <div class="summary-card">
+    <div class="summary-card-header">
+      <i class="fas fa-circle-check"></i>
+      <span>In a Nutshell</span>
+    </div>
+    <p>
+      The average output voltage of a PWM signal equals the HIGH logic level voltage multiplied by the duty cycle (<strong>V<sub>avg</sub> = V<sub>high</sub> &times; D</strong>). The maximum timer bit resolution is the floor of the binary logarithm of the clock-to-PWM frequency ratio (<strong>bits = &lfloor;log<sub>2</sub>(f<sub>clk</sub> / f<sub>pwm</sub>)&rfloor;</strong>). For instance, an <strong>ESP32</strong> (80 MHz timer clock) at <strong>5 kHz</strong> yields up to <strong>13-bit</strong> resolution (4096 of 8191).
+    </p>
+  </div>
+
+  <!-- Main Calculator Grid -->
+  <div class="grid">
+    <!-- Left Card: Input Controls -->
+    <div class="card">
+      <h2><i class="fas fa-sliders"></i> Signal & Timer Inputs</h2>
+
+      <!-- HIGH Logic Level Voltage -->
+      <label class="lbl" for="inpVhigh">
+        <span>HIGH Logic Level Voltage V<sub>high</sub> (V)</span>
+        <span class="opt">Peak output amplitude</span>
+      </label>
+      <div class="input-row">
+        <input type="number" id="inpVhigh" step="0.1" min="0.1" max="100" value="3.3" placeholder="e.g. 3.3">
+      </div>
+      <div class="preset-pills">
+        <button type="button" class="preset-btn active" data-vhigh="3.3">3.3V (ESP32/ARM)</button>
+        <button type="button" class="preset-btn" data-vhigh="5.0">5.0V (Uno/TTL)</button>
+        <button type="button" class="preset-btn" data-vhigh="12.0">12V (PC Fan/LED)</button>
+        <button type="button" class="preset-btn" data-vhigh="24.0">24V (Industrial/PLC)</button>
+      </div>
+
+      <!-- Duty Cycle Input with Range Slider -->
+      <label class="lbl" for="inpDuty" style="margin-top: 0.9rem;">
+        <span>Duty Cycle D (%)</span>
+        <span class="opt" id="lblDutyFraction">0.500 ratio</span>
+      </label>
+      <div class="input-row">
+        <input type="number" id="inpDuty" step="0.1" min="0" max="100" value="50" placeholder="0 to 100">
+      </div>
+      <div class="range-box">
+        <span style="font-size:0.75rem; color:var(--mut2); font-family:var(--mono);">0%</span>
+        <input type="range" id="rangeDuty" min="0" max="100" step="0.1" value="50" aria-label="Duty cycle slider">
+        <span style="font-size:0.75rem; color:var(--mut2); font-family:var(--mono);">100%</span>
+      </div>
+      <div class="preset-pills" style="margin-top:0.45rem;">
+        <button type="button" class="preset-btn" data-duty="10">10%</button>
+        <button type="button" class="preset-btn" data-duty="25">25%</button>
+        <button type="button" class="preset-btn active" data-duty="50">50% (Square)</button>
+        <button type="button" class="preset-btn" data-duty="75">75%</button>
+        <button type="button" class="preset-btn" data-duty="90">90%</button>
+      </div>
+
+      <!-- Timer Clock Frequency -->
+      <label class="lbl" for="inpFclk" style="margin-top: 0.9rem;">
+        <span>Timer Clock Frequency f<sub>clk</sub></span>
+        <span class="opt">Base hardware clock</span>
+      </label>
+      <div class="input-row">
+        <input type="number" id="inpFclk" step="1" min="1" value="80" placeholder="e.g. 80">
+        <select id="selFclkUnit">
+          <option value="1e6" selected>MHz</option>
+          <option value="1e3">kHz</option>
+          <option value="1">Hz</option>
+        </select>
+      </div>
+      <div class="preset-pills">
+        <button type="button" class="preset-btn active" data-fclk="80" data-fclk-unit="1e6">80 MHz (ESP32)</button>
+        <button type="button" class="preset-btn" data-fclk="16" data-fclk-unit="1e6">16 MHz (Uno/Mega)</button>
+        <button type="button" class="preset-btn" data-fclk="72" data-fclk-unit="1e6">72 MHz (STM32F1)</button>
+        <button type="button" class="preset-btn" data-fclk="125" data-fclk-unit="1e6">125 MHz (RP2040)</button>
+      </div>
+
+      <!-- PWM Frequency Input -->
+      <label class="lbl" for="inpFpwm" style="margin-top: 0.9rem;">
+        <span>PWM Output Frequency f<sub>pwm</sub></span>
+        <span class="opt">Switching carrier rate</span>
+      </label>
+      <div class="input-row">
+        <input type="number" id="inpFpwm" step="1" min="0.1" value="5000" placeholder="e.g. 5000">
+        <select id="selFpwmUnit">
+          <option value="1" selected>Hz</option>
+          <option value="1e3">kHz</option>
+        </select>
+      </div>
+      <div class="preset-pills">
+        <button type="button" class="preset-btn" data-fpwm="490" data-fpwm-unit="1">490 Hz (Uno)</button>
+        <button type="button" class="preset-btn" data-fpwm="980" data-fpwm-unit="1">980 Hz (Uno 5/6)</button>
+        <button type="button" class="preset-btn" data-fpwm="1" data-fpwm-unit="1e3">1 kHz (LED)</button>
+        <button type="button" class="preset-btn active" data-fpwm="5000" data-fpwm-unit="1">5 kHz (Benchmark)</button>
+        <button type="button" class="preset-btn" data-fpwm="20" data-fpwm-unit="1e3">20 kHz (Silent Motor)</button>
+        <button type="button" class="preset-btn" data-fpwm="25" data-fpwm-unit="1e3">25 kHz (PC Fan)</button>
+        <button type="button" class="preset-btn" data-fpwm="50" data-fpwm-unit="1">50 Hz (RC Servo)</button>
+      </div>
+
+      <!-- Action Toolbar -->
+      <div class="btn-toolbar">
+        <button class="action-btn primary" id="btnSaveCalc" type="button" aria-label="Save calculation">
+          <i class="fas fa-floppy-disk"></i> Save Calc
+        </button>
+        <button class="action-btn" id="btnPrintPdf" type="button" aria-label="Export PDF report">
+          <i class="fas fa-file-pdf"></i> PDF Report
+        </button>
+        <button class="action-btn" id="btnAdvTools" type="button" aria-label="Open advanced tools">
+          <i class="fas fa-star"></i> Adv. Tools
+        </button>
+      </div>
+
+      <div style="margin-top: 0.85rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
+        <button type="button" id="btnReset" style="color:var(--mut2); text-decoration:underline; background:none; border:none; cursor:pointer;">
+          <i class="fas fa-rotate-left"></i> Reset Defaults
+        </button>
+        <button type="button" id="btnLoadExample" style="color:var(--acc); background:none; border:none; cursor:pointer; font-weight:600;">
+          <i class="fas fa-lightbulb"></i> Load Benchmark (20 kHz Silent Motor)
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Card: Calculated Results -->
+    <div class="card">
+      <h2><i class="fas fa-chart-simple"></i> Signal Output & Resolution</h2>
+
+      <div class="res-grid">
+        <!-- 1. Average Voltage -->
+        <div class="res-cell highlight">
+          <small>Average Voltage (V<sub>avg</sub>)</small>
+          <b id="outVavg" style="font-size:1.5rem; color:var(--acc);">1.65 V</b>
+          <div class="sub-val" id="outVavgFormula">3.3 V &times; 50%</div>
+        </div>
+
+        <!-- 2. RMS Voltage -->
+        <div class="res-cell">
+          <small>RMS Voltage (V<sub>rms</sub>)</small>
+          <b id="outVrms">2.33 V</b>
+          <div class="sub-val" id="outVrmsFormula">3.3 V &times; &radic;(0.50)</div>
+        </div>
+
+        <!-- 3. Period Time -->
+        <div class="res-cell">
+          <small>Signal Period (T)</small>
+          <b id="outPeriod">200 µs</b>
+          <div class="sub-val" id="outPeriodFormula">1 / 5,000 Hz</div>
+        </div>
+
+        <!-- 4. HIGH Pulse Duration -->
+        <div class="res-cell">
+          <small>HIGH Pulse Time (t<sub>high</sub>)</small>
+          <b id="outThigh">100 µs</b>
+          <div class="sub-val" id="outThighFormula">200 µs &times; 50%</div>
+        </div>
+
+        <!-- 5. LOW Pulse Duration -->
+        <div class="res-cell">
+          <small>LOW Pulse Time (t<sub>low</sub>)</small>
+          <b id="outTlow">100 µs</b>
+          <div class="sub-val">T &minus; t<sub>high</sub></div>
+        </div>
+
+        <!-- 6. Maximum Bit Resolution -->
+        <div class="res-cell highlight">
+          <small>Max Possible Resolution</small>
+          <b id="outMaxBits" style="font-size:1.4rem; color:var(--acc);">13 bit</b>
+          <div class="sub-val" id="outBitsFormula">&lfloor;log<sub>2</sub>(80M / 5k)&rfloor;</div>
+        </div>
+
+        <!-- 7. Duty Register Value at this resolution -->
+        <div class="res-cell full-width">
+          <small>Duty Register Value at Max Resolution</small>
+          <b id="outDutyReg" style="font-size:1.25rem;">4096 of 8191</b>
+          <div class="sub-val" id="outDutyRegFormula">50% of (2<sup>13</sup> &minus; 1) counts</div>
+        </div>
+      </div>
+
+      <!-- Live Oscilloscope Waveform Display -->
+      <div class="waveform-card">
+        <div class="waveform-header">
+          <span><i class="fas fa-wave-square" style="color:var(--acc);"></i> Oscilloscope Pulse Train</span>
+          <div class="waveform-legend">
+            <div class="legend-tag">
+              <span class="legend-line" style="background:#06b6d4;"></span>
+              <span>PWM Signal</span>
+            </div>
+            <div class="legend-tag">
+              <span class="legend-line" style="background:#f59e0b; border-bottom:1px dashed #f59e0b;"></span>
+              <span>V<sub>avg</sub> Line</span>
+            </div>
+          </div>
+        </div>
+        <canvas id="waveCanvas" width="460" height="180"></canvas>
+      </div>
+
+      <!-- RC Low-Pass Filter DAC Estimator -->
+      <div class="filter-box">
+        <div class="filter-header">
+          <span><i class="fas fa-filter" style="color:var(--acc);"></i> PWM-to-DAC Smoothing (RC Filter)</span>
+          <span id="lblFilterFc" style="font-family:var(--mono); color:var(--acc); font-size:0.75rem;">fc &le; 250 Hz</span>
+        </div>
+        <div class="filter-body" id="filterBody">
+          To convert this 5 kHz PWM into pure DC with &lt;1% ripple, use an RC low-pass filter with a cutoff frequency around <strong>250 Hz</strong> (e.g. <strong>R = 10 k&Omega;</strong>, <strong>C = 68 nF</strong>).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hardware Note Alert Box -->
+  <div class="alert-box">
+    <i class="fas fa-microchip"></i>
+    <div>
+      <strong>ESP32 vs. Arduino PWM Architecture:</strong> The ESP32's dedicated <strong>LEDC peripheral</strong> is clocked from an 80 MHz high-speed bus, allowing configurable frequencies from 1 Hz up to 40 MHz and up to 20-bit duty precision. By contrast, an <strong>Arduino Uno</strong> uses hardware timers running at 16 MHz with fixed prescalers, giving fixed PWM frequencies around <strong>490 Hz</strong> (pins 3, 9, 10, 11) or <strong>980 Hz</strong> (pins 5, 6) locked to <strong>8-bit</strong> resolution (0 to 255).
+    </div>
+  </div>
+
+  <!-- Firmware Code Generator -->
+  <div class="content-card">
+    <h2><i class="fas fa-code"></i> Ready-to-Use Microcontroller Firmware</h2>
+    <p style="color:var(--mut); font-size:0.9rem; margin-bottom:1rem;">
+      Copy calibrated code snippets directly into your firmware project for your selected microcontroller architecture:
+    </p>
+
+    <div class="code-tabs">
+      <button class="code-tab-btn active" data-tab="esp32" type="button">ESP32 (Arduino 3.x / 2.x)</button>
+      <button class="code-tab-btn" data-tab="arduino" type="button">Arduino Uno (C++)</button>
+      <button class="code-tab-btn" data-tab="pico" type="button">Raspberry Pi Pico (MicroPython)</button>
+      <button class="code-tab-btn" data-tab="stm32" type="button">STM32 (HAL C)</button>
+    </div>
+
+    <div class="code-container">
+      <button class="code-copy-btn" id="btnCopyCode" type="button"><i class="fas fa-copy"></i> Copy Code</button>
+      <pre><code id="codeBlock">// Loading code snippet...</code></pre>
+    </div>
+  </div>
+
+  <!-- Theory & Mathematical Method of Calculation -->
+  <div class="content-card">
+    <h2><i class="fas fa-square-root-variable"></i> Method of Calculation & Mathematical Formulas</h2>
+    <p style="color:var(--mut); font-size:0.92rem; line-height:1.65;">
+      Pulse Width Modulation (PWM) is a modulation technique that encodes an analog voltage level into the duty cycle of a fixed-frequency digital square wave.
+    </p>
+
+    <h3 style="font-size:1.05rem; margin-top:1.15rem; color:var(--txt);">1. Average Voltage (V<sub>avg</sub>)</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      The DC equivalent average voltage delivered to an electrical load (such as a DC motor or LED) is the product of the HIGH logic level voltage and the duty cycle fraction:
+    </p>
+    <div class="formula-box">
+      V<sub>avg</sub> = V<sub>high</sub> &times; D = V<sub>high</sub> &times; (Duty% &divide; 100)
+    </div>
+
+    <h3 style="font-size:1.05rem; margin-top:1.15rem; color:var(--txt);">2. Period (T) and Pulse Widths (t<sub>high</sub>, t<sub>low</sub>)</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      The total signal period is the inverse of the PWM frequency, which is split into the active HIGH and idle LOW durations:
+    </p>
+    <div class="formula-box">
+      T = 1 &divide; f<sub>pwm</sub><br>
+      t<sub>high</sub> = T &times; D<br>
+      t<sub>low</sub> = T &minus; t<sub>high</sub> = T &times; (1 &minus; D)
+    </div>
+
+    <h3 style="font-size:1.05rem; margin-top:1.15rem; color:var(--txt);">3. Maximum Bit Resolution vs. Switching Frequency</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      Timer resolution represents how many discrete discrete duty cycle steps the hardware timer counter can count within one PWM period. As the PWM frequency increases, fewer timer clock ticks occur per cycle, decreasing the maximum resolution:
+    </p>
+    <div class="formula-box">
+      bits = &lfloor;log<sub>2</sub>(f<sub>clk</sub> &divide; f<sub>pwm</sub>)&rfloor;
+    </div>
+    <p style="color:var(--mut2); font-size:0.82rem;">
+      For example, on an ESP32 with <code>f<sub>clk</sub> = 80 MHz</code> at <code>f<sub>pwm</sub> = 5 kHz</code>: <code>80,000,000 / 5,000 = 16,000</code> ticks. Then <code>&lfloor;log<sub>2</sub>(16000)&rfloor; = 13 bits</code> (providing 8,192 discrete duty levels).
+    </p>
+
+    <h3 style="font-size:1.05rem; margin-top:1.15rem; color:var(--txt);">4. Timer Duty Register Count</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      The integer value to write into the hardware compare match register (e.g. <code>ledcWrite</code> or <code>OCRnA</code>) for an n-bit resolution:
+    </p>
+    <div class="formula-box">
+      Register Value = round(D &times; (2<sup>n</sup> &minus; 1))
+    </div>
+  </div>
+
+  <!-- Common PWM Frequencies & Applications Table -->
+  <div class="content-card">
+    <h2><i class="fas fa-table"></i> Common PWM Frequencies & Engineering Standards</h2>
+    <div class="table-responsive">
+      <table class="calc-table">
+        <thead>
+          <tr>
+            <th>Application / Standard</th>
+            <th>Typical Frequency</th>
+            <th>Target Period (T)</th>
+            <th>Why This Frequency?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>RC Hobby Servos</strong></td>
+            <td>50 Hz</td>
+            <td>20 ms</td>
+            <td>Standard analog servo control frame (1.0 ms to 2.0 ms pulse width).</td>
+          </tr>
+          <tr>
+            <td><strong>Arduino Uno analogWrite()</strong></td>
+            <td>490 Hz / 980 Hz</td>
+            <td>2.04 ms / 1.02 ms</td>
+            <td>Pre-configured default timer prescalers on ATmega328P.</td>
+          </tr>
+          <tr>
+            <td><strong>LED Dimming (Flicker-Free)</strong></td>
+            <td>1 kHz to 5 kHz</td>
+            <td>1 ms to 200 µs</td>
+            <td>Well above human visual persistence limit; prevents optical camera strobing.</td>
+          </tr>
+          <tr>
+            <td><strong>Silent DC Motor Drive</strong></td>
+            <td>20 kHz to 25 kHz</td>
+            <td>50 µs to 40 µs</td>
+            <td>Above 20 kHz human hearing threshold to eliminate irritating acoustic motor coil whine.</td>
+          </tr>
+          <tr>
+            <td><strong>Intel 4-Wire PC Cooling Fan</strong></td>
+            <td>25 kHz (&plusmn;4 kHz)</td>
+            <td>40 µs</td>
+            <td>Intel standard specification for whisper-quiet computer chassis and CPU fans.</td>
+          </tr>
+          <tr>
+            <td><strong>Class-D Audio & Switch-Mode Converters</strong></td>
+            <td>250 kHz to 2 MHz</td>
+            <td>4 µs to 500 ns</td>
+            <td>Minimizes required physical size of inductors and capacitors in power supplies.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Worked Practical Examples -->
+  <div class="content-card">
+    <h2><i class="fas fa-book-open"></i> Practical Worked Engineering Examples</h2>
+
+    <!-- Example 1 -->
+    <div style="background:var(--bg2); border:1px solid var(--br); border-radius:var(--r-sm); padding:1.15rem; margin-bottom:1rem;">
+      <h3 style="font-size:1rem; color:var(--txt); margin-bottom:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+        <span><strong>Example 1:</strong> Standard ESP32 5 kHz LEDC Dimming</span>
+        <button class="btn-sm" id="btnLoadEx1" type="button"><i class="fas fa-arrow-up-right-from-square"></i> Load This</button>
+      </h3>
+      <p style="color:var(--mut); font-size:0.88rem; line-height:1.55;">
+        An ESP32 running at 3.3V controls an LED strip with 50% duty cycle at 5 kHz using its 80 MHz clock:
+      </p>
+      <div style="margin-top:0.5rem; font-family:var(--mono); font-size:0.82rem; color:var(--acc);">
+        &bull; V<sub>avg</sub> = 3.3V &times; 0.50 = <strong>1.65 V</strong><br>
+        &bull; Period T = 1 / 5000 = <strong>200 µs</strong> &bull; t<sub>high</sub> = <strong>100 µs</strong><br>
+        &bull; Maximum Resolution = &lfloor;log<sub>2</sub>(80M / 5k)&rfloor; = <strong>13 bits</strong> &bull; Duty count = <strong>4096 of 8191</strong>
+      </div>
+    </div>
+
+    <!-- Example 2 -->
+    <div style="background:var(--bg2); border:1px solid var(--br); border-radius:var(--r-sm); padding:1.15rem; margin-bottom:1rem;">
+      <h3 style="font-size:1rem; color:var(--txt); margin-bottom:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+        <span><strong>Example 2:</strong> Inaudible Silent DC Motor Drive (20 kHz)</span>
+        <button class="btn-sm" id="btnLoadEx2" type="button"><i class="fas fa-arrow-up-right-from-square"></i> Load This</button>
+      </h3>
+      <p style="color:var(--mut); font-size:0.88rem; line-height:1.55;">
+        To eliminate annoying acoustic coil whine from a robotic motor driver, the PWM frequency is set to 20 kHz (ultrasonic) on an ESP32:
+      </p>
+      <div style="margin-top:0.5rem; font-family:var(--mono); font-size:0.82rem; color:var(--acc);">
+        &bull; Ticks per cycle = 80,000,000 &divide; 20,000 = <strong>4,000</strong><br>
+        &bull; Max Resolution = &lfloor;log<sub>2</sub>(4000)&rfloor; = <strong>11 bits</strong> (counts 0 to <strong>2047</strong>)<br>
+        &bull; Period T = <strong>50 µs</strong> &bull; At 50% duty: t<sub>high</sub> = <strong>25 µs</strong> &bull; Reg count = <strong>1024</strong>
+      </div>
+    </div>
+
+    <!-- Example 3 -->
+    <div style="background:var(--bg2); border:1px solid var(--br); border-radius:var(--r-sm); padding:1.15rem;">
+      <h3 style="font-size:1rem; color:var(--txt); margin-bottom:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+        <span><strong>Example 3:</strong> Arduino Uno 8-Bit analogWrite() on Pin 9</span>
+        <button class="btn-sm" id="btnLoadEx3" type="button"><i class="fas fa-arrow-up-right-from-square"></i> Load This</button>
+      </h3>
+      <p style="color:var(--mut); font-size:0.88rem; line-height:1.55;">
+        An Arduino Uno (5V, 16 MHz) driving an analogWrite(9, 128) signal:
+      </p>
+      <div style="margin-top:0.5rem; font-family:var(--mono); font-size:0.82rem; color:var(--acc);">
+        &bull; f<sub>pwm</sub> = <strong>490 Hz</strong> &bull; Period T = <strong>2.04 ms</strong><br>
+        &bull; Duty Cycle = 128 / 255 = <strong>50.2%</strong> &bull; V<sub>avg</sub> = <strong>2.51 V</strong><br>
+        &bull; t<sub>high</sub> = <strong>1.02 ms</strong> &bull; Fixed 8-bit hardware counter (0 to 255)
+      </div>
+    </div>
+  </div>
+
+  <!-- Frequently Asked Questions (FAQ) -->
+  <div class="content-card">
+    <h2><i class="fas fa-circle-question"></i> Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary class="faq-question">
+          <span>Why is 20 kHz or 25 kHz preferred for driving DC motors and fans?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          Human hearing typically spans 20 Hz to 20,000 Hz. When electric motors are driven by PWM frequencies in the audible spectrum (e.g. 500 Hz or 2 kHz), the rapid magnetic flux switching causes the motor coils to physically vibrate like an acoustic speaker, emitting an annoying high-pitched hum. Driving at &ge; 20 kHz pushes the switching acoustic noise completely above human perception.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>What is the difference between Average Voltage and RMS Voltage in PWM?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          <strong>Average voltage</strong> (<code>V<sub>avg</sub> = V<sub>high</sub> &times; D</code>) governs inductive and linear mechanical systems like DC motor speed or low-pass filtered analog voltages. <strong>RMS voltage</strong> (<code>V<sub>rms</sub> = V<sub>high</sub> &times; &radic;D</code>) governs thermal and power dissipation in resistive loads like heating elements and incandescent lamps, where instantaneous power is proportional to voltage squared (P = V<sup>2</sup> / R).
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>How do I convert a PWM signal into a clean analog DC voltage (PWM DAC)?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          Connect an RC low-pass filter (a series resistor R followed by a shunt capacitor C to ground). Choose the filter's cutoff frequency <code>f<sub>c</sub> = 1 / (2&pi;RC)</code> to be at least 10 to 20 times lower than the PWM frequency. The filter blocks the high-frequency switching carrier while letting the average DC voltage pass through with minimal ripple.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Why does increasing PWM frequency decrease timer bit resolution?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          A digital timer increments its internal counter once per clock tick (1 / f<sub>clk</sub>). The number of total ticks that can occur during one PWM period (1 / f<sub>pwm</sub>) is <code>f<sub>clk</sub> / f<sub>pwm</sub></code>. If you double the PWM frequency, the period is cut in half, so the counter has half as many ticks to count between zero and top, reducing the available bit depth by 1 bit.
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Saved Calculations History -->
+  <div class="history-card">
+    <div class="history-header">
+      <h3><i class="fas fa-clock-rotate-left"></i> Saved Calculations</h3>
+      <div class="history-actions">
+        <button class="btn-sm" id="btnExportJson" type="button" title="Export as JSON">
+          <i class="fas fa-download"></i> Export JSON
+        </button>
+        <button class="btn-sm del" id="btnClearHistory" type="button" title="Clear History">
+          <i class="fas fa-trash"></i> Clear All
+        </button>
+      </div>
+    </div>
+    <div class="history-list" id="historyList">
+      <div class="empty-state">No saved calculations yet. Click "Save Calc" above to store your readings.</div>
+    </div>
+  </div>
+</main>
+
+<!-- Advanced Tools Modal -->
+<div class="modal-overlay" id="advToolsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="modalTitle"><i class="fas fa-star" style="color:var(--acc);"></i> Advanced Engineering Tools</h3>
+      <button class="close-modal-btn" id="btnCloseModal" type="button" aria-label="Close dialog">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+    <p style="color:var(--mut); font-size:0.88rem; margin-bottom:1.25rem;">
+      Explore related microcontroller interfacing, signal processing, and electronics calculators:
+    </p>
+    <div class="tools-grid">
+      <a href="/sites/adc-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-microchip"></i> ADC Calculator</div>
+        <p>Convert ADC digital counts to analog voltages, calculate LSB step size, and size input voltage dividers.</p>
+      </a>
+      <a href="/sites/rc-time-constant-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-stopwatch"></i> RC Time Constant Calculator</div>
+        <p>Design low-pass filters to smooth PWM signals into pure analog DC voltages with low ripple.</p>
+      </a>
+      <a href="/sites/555-timer-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-clock"></i> 555 Timer Calculator</div>
+        <p>Astable frequencies, monostable pulse widths, and bistable latch simulation with duty cycle control.</p>
+      </a>
+      <a href="/sites/voltage-divider-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-divide"></i> Voltage Divider Calculator</div>
+        <p>Calculate precision resistor networks, potentiometer settings, and loaded voltage drops.</p>
+      </a>
+      <a href="/sites/buck-boost-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-bolt"></i> Buck-Boost Converter Calculator</div>
+        <p>Design DC-DC switching power stages, inductor values, and duty cycle modulation parameters.</p>
+      </a>
+      <a href="/sites/solar-inverter-sizing-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-plug-circle-bolt"></i> Solar Inverter Sizing Calculator</div>
+        <p>Size pure sine wave inverters with inductive motor starting surge capacity and DC battery amps.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"><i class="fas fa-check-circle" style="color:var(--ok);"></i> <span id="toastMsg">Calculation saved!</span></div>
+
+<!-- Footer Chrome -->
+<footer class="mta-foot" role="contentinfo">
+  <div class="mta-foot-in">
+    <div class="mta-social">
+      <a href="https://github.com/Mohamed-Tarek-Abdelhady" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/mohamed-tarek-abdelhady/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="/">Back to Portfolio</a></p>
+    <div class="mta-actions">
+      <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+      <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+    </div>
+  </div>
+</footer>
+
+<!-- Interactive Logic -->
+<script>
+(function() {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  // Form Controls
+  const inpVhigh = $('inpVhigh');
+  const inpDuty = $('inpDuty');
+  const rangeDuty = $('rangeDuty');
+  const lblDutyFraction = $('lblDutyFraction');
+  const inpFclk = $('inpFclk');
+  const selFclkUnit = $('selFclkUnit');
+  const inpFpwm = $('inpFpwm');
+  const selFpwmUnit = $('selFpwmUnit');
+
+  // Outputs
+  const outVavg = $('outVavg');
+  const outVavgFormula = $('outVavgFormula');
+  const outVrms = $('outVrms');
+  const outVrmsFormula = $('outVrmsFormula');
+  const outPeriod = $('outPeriod');
+  const outPeriodFormula = $('outPeriodFormula');
+  const outThigh = $('outThigh');
+  const outThighFormula = $('outThighFormula');
+  const outTlow = $('outTlow');
+  const outMaxBits = $('outMaxBits');
+  const outBitsFormula = $('outBitsFormula');
+  const outDutyReg = $('outDutyReg');
+  const outDutyRegFormula = $('outDutyRegFormula');
+  const filterBody = $('filterBody');
+  const lblFilterFc = $('lblFilterFc');
+
+  // Canvas
+  const waveCanvas = $('waveCanvas');
+
+  // Buttons & Modals
+  const btnSaveCalc = $('btnSaveCalc');
+  const btnPrintPdf = $('btnPrintPdf');
+  const btnAdvTools = $('btnAdvTools');
+  const btnReset = $('btnReset');
+  const btnLoadExample = $('btnLoadExample');
+  const btnLoadEx1 = $('btnLoadEx1');
+  const btnLoadEx2 = $('btnLoadEx2');
+  const btnLoadEx3 = $('btnLoadEx3');
+  const btnCloseModal = $('btnCloseModal');
+  const advToolsModal = $('advToolsModal');
+  const toast = $('toast');
+  const toastMsg = $('toastMsg');
+  const historyList = $('historyList');
+  const btnExportJson = $('btnExportJson');
+  const btnClearHistory = $('btnClearHistory');
+  const btnCopyCode = $('btnCopyCode');
+  const codeBlock = $('codeBlock');
+
+  const STORAGE_KEY = 'mta_pwm_calc_history';
+  let currentCalcState = null;
+
+  function showToast(msg) {
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2600);
+  }
+
+  // Time formatter
+  function formatTime(s) {
+    if (!isFinite(s) || s <= 0) return '0 s';
+    if (s < 1e-6) return (s * 1e9).toFixed(2) + ' ns';
+    if (s < 1e-3) return (s * 1e6).toFixed(2) + ' µs';
+    if (s < 1) return (s * 1e3).toFixed(2) + ' ms';
+    return s.toFixed(3) + ' s';
+  }
+
+  // Frequency formatter
+  function formatFrequency(hz) {
+    if (!isFinite(hz) || hz <= 0) return '0 Hz';
+    if (hz >= 1e6) return (hz / 1e6).toFixed(2) + ' MHz';
+    if (hz >= 1e3) return (hz / 1e3).toFixed(2) + ' kHz';
+    return hz.toFixed(1) + ' Hz';
+  }
+
+  // Main Calculation Function
+  function calculate() {
+    let vHigh = parseFloat(inpVhigh.value);
+    if (isNaN(vHigh) || vHigh < 0) vHigh = 3.3;
+
+    let dutyPct = parseFloat(inpDuty.value);
+    if (isNaN(dutyPct)) dutyPct = 50;
+    if (dutyPct < 0) dutyPct = 0;
+    if (dutyPct > 100) dutyPct = 100;
+    rangeDuty.value = dutyPct;
+
+    const dFraction = dutyPct / 100;
+    lblDutyFraction.textContent = `${dFraction.toFixed(3)} ratio`;
+
+    const fClkRaw = parseFloat(inpFclk.value) || 80;
+    const fClkUnit = parseFloat(selFclkUnit.value) || 1e6;
+    const fClk = fClkRaw * fClkUnit;
+
+    const fPwmRaw = parseFloat(inpFpwm.value) || 5000;
+    const fPwmUnit = parseFloat(selFpwmUnit.value) || 1;
+    const fPwm = fPwmRaw * fPwmUnit;
+
+    // 1. Average & RMS Voltage
+    const vAvg = vHigh * dFraction;
+    const vRms = vHigh * Math.sqrt(dFraction);
+
+    // 2. Period and Pulse Times
+    const periodSec = fPwm > 0 ? (1 / fPwm) : 0;
+    const tHighSec = periodSec * dFraction;
+    const tLowSec = periodSec - tHighSec;
+
+    // 3. Max Bit Resolution: bits = floor(log2(f_clk / f_pwm))
+    let bits = 0;
+    let ticksPerCycle = 0;
+    if (fClk > 0 && fPwm > 0) {
+      ticksPerCycle = fClk / fPwm;
+      if (ticksPerCycle >= 2) {
+        bits = Math.floor(Math.log2(ticksPerCycle));
+      }
+    }
+    if (bits > 24) bits = 24; // practical max limit on microcontrollers
+
+    // 4. Duty Register Value at Max Resolution
+    const maxCount = bits > 0 ? (Math.pow(2, bits) - 1) : 0;
+    const totalLevels = bits > 0 ? Math.pow(2, bits) : 0;
+    const dutyRegVal = Math.round(dFraction * totalLevels);
+
+    // Render Outputs
+    outVavg.textContent = `${vAvg.toFixed(2)} V`;
+    outVavgFormula.textContent = `${vHigh} V × ${dutyPct.toFixed(1)}%`;
+
+    outVrms.textContent = `${vRms.toFixed(2)} V`;
+    outVrmsFormula.textContent = `${vHigh} V × √(${dFraction.toFixed(2)})`;
+
+    outPeriod.textContent = formatTime(periodSec);
+    outPeriodFormula.textContent = `1 / ${formatFrequency(fPwm)}`;
+
+    outThigh.textContent = formatTime(tHighSec);
+    outThighFormula.textContent = `${formatTime(periodSec)} × ${dutyPct.toFixed(1)}%`;
+
+    outTlow.textContent = formatTime(tLowSec);
+
+    outMaxBits.textContent = bits > 0 ? `${bits} bit` : '0 bit (Exceeds Clock)';
+    outBitsFormula.textContent = bits > 0
+      ? `⌊log₂( ${formatFrequency(fClk)} / ${formatFrequency(fPwm)} )⌋`
+      : 'f_pwm > f_clk';
+
+    outDutyReg.textContent = bits > 0 ? `${dutyRegVal.toLocaleString()} of ${maxCount.toLocaleString()}` : '–';
+    outDutyRegFormula.textContent = bits > 0
+      ? `${dutyPct.toFixed(1)}% of 2^${bits} (${totalLevels.toLocaleString()} levels)`
+      : '–';
+
+    // Filter DAC Sizing suggestion
+    const fcSuggested = fPwm / 20; // 20x attenuation
+    lblFilterFc.textContent = `fc ≤ ${formatFrequency(fcSuggested)}`;
+    const rSuggest = 10000; // 10k
+    const cSuggest = 1 / (2 * Math.PI * rSuggest * fcSuggested);
+    let cStr = '';
+    if (cSuggest < 1e-9) cStr = `${(cSuggest * 1e12).toFixed(0)} pF`;
+    else if (cSuggest < 1e-6) cStr = `${(cSuggest * 1e9).toFixed(1)} nF`;
+    else cStr = `${(cSuggest * 1e6).toFixed(2)} µF`;
+
+    filterBody.innerHTML = `To filter this <strong>${formatFrequency(fPwm)}</strong> PWM into a ripple-free DC voltage of <strong>${vAvg.toFixed(2)}V</strong>, place an RC low-pass filter with cutoff &le; <strong>${formatFrequency(fcSuggested)}</strong> (e.g. <strong>R = 10 k&Omega;</strong> and <strong>C &approx; ${cStr}</strong>).`;
+
+    // Redraw Oscilloscope Canvas Waveform
+    drawWaveform(vHigh, vAvg, dFraction, periodSec);
+
+    // Update Code Snippets
+    updateCodeSnippet(vHigh, dutyPct, fPwm, bits, dutyRegVal, maxCount);
+
+    // Cache calculation state
+    currentCalcState = {
+      vHigh: vHigh,
+      dutyPct: dutyPct,
+      fPwm: fPwm,
+      fPwmStr: formatFrequency(fPwm),
+      fClk: fClk,
+      fClkStr: formatFrequency(fClk),
+      vAvg: vAvg.toFixed(2),
+      vRms: vRms.toFixed(2),
+      periodStr: formatTime(periodSec),
+      tHighStr: formatTime(tHighSec),
+      bits: bits,
+      dutyRegVal: dutyRegVal,
+      maxCount: maxCount,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+  }
+
+  // Draw Pulse Waveform on Canvas
+  function drawWaveform(vHigh, vAvg, dFraction, periodSec) {
+    if (!waveCanvas) return;
+    const ctx = waveCanvas.getContext('2d');
+    const width = waveCanvas.parentElement.clientWidth - 32;
+    const height = 180;
+
+    const dpr = window.devicePixelRatio || 1;
+    waveCanvas.width = width * dpr;
+    waveCanvas.height = height * dpr;
+    waveCanvas.style.width = width + 'px';
+    waveCanvas.style.height = height + 'px';
+    ctx.scale(dpr, dpr);
+
+    ctx.clearRect(0, 0, width, height);
+
+    const pad = { top: 30, right: 25, bottom: 35, left: 45 };
+    const plotW = width - pad.left - pad.right;
+    const plotH = height - pad.top - pad.bottom;
+
+    const yLow = pad.top + plotH;
+    const yHigh = pad.top;
+    const yAvg = yLow - (vAvg / (vHigh || 1)) * plotH;
+
+    // Grid lines (Horizontal)
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(pad.left, yHigh);
+    ctx.lineTo(width - pad.right, yHigh);
+    ctx.moveTo(pad.left, yLow);
+    ctx.lineTo(width - pad.right, yLow);
+    ctx.stroke();
+
+    // Axis Labels
+    ctx.fillStyle = '#64748b';
+    ctx.font = '10px "JetBrains Mono", monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(`${vHigh.toFixed(1)}V`, pad.left - 6, yHigh + 3);
+    ctx.fillText('0V', pad.left - 6, yLow + 3);
+
+    // Number of cycles to draw: 2 cycles
+    const cycles = 2;
+    const cycleW = plotW / cycles;
+
+    // Draw Average Voltage Dashed Line (Amber)
+    ctx.strokeStyle = '#f59e0b';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([5, 4]);
+    ctx.beginPath();
+    ctx.moveTo(pad.left, yAvg);
+    ctx.lineTo(width - pad.right, yAvg);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.fillStyle = '#f59e0b';
+    ctx.textAlign = 'left';
+    ctx.fillText(`Vavg = ${vAvg.toFixed(2)}V`, pad.left + 8, Math.min(Math.max(yAvg - 6, pad.top + 12), yLow - 8));
+
+    // Draw PWM Pulse Waveform (Cyan)
+    ctx.strokeStyle = '#06b6d4';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+
+    let curX = pad.left;
+    ctx.moveTo(curX, yLow);
+
+    for (let c = 0; c < cycles; c++) {
+      const startX = pad.left + c * cycleW;
+      const highW = cycleW * dFraction;
+      const lowW = cycleW * (1 - dFraction);
+
+      if (dFraction > 0) {
+        ctx.lineTo(startX, yHigh);
+        ctx.lineTo(startX + highW, yHigh);
+      }
+      if (dFraction < 1) {
+        ctx.lineTo(startX + highW, yLow);
+        ctx.lineTo(startX + cycleW, yLow);
+      }
+    }
+    ctx.stroke();
+
+    // Fill underneath active pulse with translucent cyan glow
+    ctx.fillStyle = 'rgba(6, 182, 212, 0.08)';
+    for (let c = 0; c < cycles; c++) {
+      const startX = pad.left + c * cycleW;
+      const highW = cycleW * dFraction;
+      if (dFraction > 0) {
+        ctx.fillRect(startX, yHigh, highW, plotH);
+      }
+    }
+
+    // Annotate Period & High Time on first cycle
+    if (cycleW > 40) {
+      const firstCycleHighW = cycleW * dFraction;
+      ctx.fillStyle = '#94a3b8';
+      ctx.textAlign = 'center';
+
+      // t_high marker
+      if (firstCycleHighW > 25) {
+        ctx.fillText(`thigh: ${(dFraction * 100).toFixed(0)}%`, pad.left + firstCycleHighW / 2, yHigh - 8);
+      }
+
+      // Period marker below axis
+      ctx.fillText(`Cycle 1 (T = ${formatTime(periodSec)})`, pad.left + cycleW / 2, height - 10);
+      ctx.fillText(`Cycle 2`, pad.left + cycleW * 1.5, height - 10);
+    }
+  }
+
+  // Update Code Snippets
+  function updateCodeSnippet(vHigh, dutyPct, fPwm, bits, dutyRegVal, maxCount) {
+    const activeTab = document.querySelector('.code-tab-btn.active');
+    const tabName = activeTab ? activeTab.getAttribute('data-tab') : 'esp32';
+    const roundedFreq = Math.round(fPwm);
+
+    let code = '';
+    if (tabName === 'esp32') {
+      code = `// ESP32 Arduino Core PWM Example (Compatible with Core 2.x & 3.x)\n` +
+             `const int PWM_PIN = 18;             // GPIO output pin\n` +
+             `const int PWM_FREQ = ${roundedFreq};          // ${roundedFreq} Hz\n` +
+             `const int PWM_RESOLUTION = ${bits};       // ${bits}-bit resolution (0 to ${maxCount})\n` +
+             `const int DUTY_CYCLE = ${dutyRegVal};         // ${dutyPct}% duty cycle\n\n` +
+             `void setup() {\n` +
+             `  Serial.begin(115200);\n` +
+             `  // ESP32 3.x API (ledcAttach):\n` +
+             `  ledcAttach(PWM_PIN, PWM_FREQ, PWM_RESOLUTION);\n` +
+             `  ledcWrite(PWM_PIN, DUTY_CYCLE);\n\n` +
+             `  /* For ESP32 2.x legacy core use:\n` +
+             `  ledcSetup(0, PWM_FREQ, PWM_RESOLUTION);\n` +
+             `  ledcAttachPin(PWM_PIN, 0);\n` +
+             `  ledcWrite(0, DUTY_CYCLE);\n` +
+             `  */\n` +
+             `  Serial.printf("PWM active on GPIO %d at %d Hz\\n", PWM_PIN, PWM_FREQ);\n` +
+             `}\n\n` +
+             `void loop() {\n` +
+             `  // Dynamically update duty cycle:\n` +
+             `  ledcWrite(PWM_PIN, DUTY_CYCLE);\n` +
+             `  delay(1000);\n` +
+             `}`;
+    } else if (tabName === 'arduino') {
+      const arduinoDuty = Math.round((dutyPct / 100) * 255);
+      code = `// Arduino Uno / Nano PWM (analogWrite)\n` +
+             `// Note: Default frequency on Pin 9, 10, 11, 3 is ~490 Hz (8-bit: 0-255)\n` +
+             `const int PWM_PIN = 9;              // OC1A (Timer 1)\n` +
+             `const int DUTY_8BIT = ${arduinoDuty};          // ${dutyPct}% of 255\n\n` +
+             `void setup() {\n` +
+             `  pinMode(PWM_PIN, OUTPUT);\n` +
+             `  analogWrite(PWM_PIN, DUTY_8BIT);   // Output ~${((vHigh * dutyPct)/100).toFixed(2)}V average\n` +
+             `}\n\n` +
+             `void loop() {\n` +
+             `  // analogWrite accepts values from 0 to 255:\n` +
+             `  analogWrite(PWM_PIN, DUTY_8BIT);\n` +
+             `  delay(500);\n` +
+             `}`;
+    } else if (tabName === 'pico') {
+      const u16Duty = Math.round((dutyPct / 100) * 65535);
+      code = `# Raspberry Pi Pico / RP2040 (MicroPython)\n` +
+             `import machine\n` +
+             `import time\n\n` +
+             `pwm_pin = machine.Pin(15)\n` +
+             `pwm = machine.PWM(pwm_pin)\n\n` +
+             `pwm.freq(${roundedFreq})                 # Set carrier frequency to ${roundedFreq} Hz\n` +
+             `pwm.duty_u16(${u16Duty})             # 16-bit duty (${dutyPct}% of 65535)\n\n` +
+             `print("Pico PWM active on GP15 at ${roundedFreq} Hz")\n` +
+             `while True:\n` +
+             `    time.sleep(1)`;
+    } else if (tabName === 'stm32') {
+      code = `/* STM32 HAL Timer PWM Configuration */\n` +
+             `// Generated via STM32CubeMX for TIM1 / TIM2\n` +
+             `// Prescaler (PSC) and Auto-Reload Register (ARR = ${maxCount})\n\n` +
+             `TIM_HandleTypeDef htim1;\n\n` +
+             `void set_pwm_duty(uint32_t channel, uint16_t duty_val) {\n` +
+             `    __HAL_TIM_SET_COMPARE(&htim1, channel, duty_val);\n` +
+             `}\n\n` +
+             `int main(void) {\n` +
+             `    HAL_Init();\n` +
+             `    MX_TIM1_Init();\n` +
+             `    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);\n\n` +
+             `    // Set ${dutyPct}% duty cycle (${dutyRegVal} of ${maxCount}):\n` +
+             `    set_pwm_duty(TIM_CHANNEL_1, ${dutyRegVal});\n\n` +
+             `    while (1) {\n` +
+             `        HAL_Delay(500);\n` +
+             `    }\n` +
+             `}`;
+    }
+
+    codeBlock.textContent = code;
+  }
+
+  // Code Tab Handlers
+  document.querySelectorAll('.code-tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.code-tab-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      calculate();
+    });
+  });
+
+  btnCopyCode.addEventListener('click', () => {
+    navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+      showToast('Code copied to clipboard!');
+    }).catch(() => {
+      showToast('Failed to copy code.');
+    });
+  });
+
+  // Event Listeners for Inputs
+  inpVhigh.addEventListener('input', calculate);
+
+  inpDuty.addEventListener('input', () => {
+    rangeDuty.value = inpDuty.value;
+    calculate();
+  });
+
+  rangeDuty.addEventListener('input', () => {
+    inpDuty.value = rangeDuty.value;
+    calculate();
+  });
+
+  inpFclk.addEventListener('input', calculate);
+  selFclkUnit.addEventListener('change', calculate);
+
+  inpFpwm.addEventListener('input', calculate);
+  selFpwmUnit.addEventListener('change', calculate);
+
+  // Vhigh Presets
+  document.querySelectorAll('.preset-btn[data-vhigh]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.preset-btn[data-vhigh]').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      inpVhigh.value = this.getAttribute('data-vhigh');
+      calculate();
+    });
+  });
+
+  // Duty Presets
+  document.querySelectorAll('.preset-btn[data-duty]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.preset-btn[data-duty]').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      inpDuty.value = this.getAttribute('data-duty');
+      rangeDuty.value = this.getAttribute('data-duty');
+      calculate();
+    });
+  });
+
+  // Clock Presets
+  document.querySelectorAll('.preset-btn[data-fclk]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.preset-btn[data-fclk]').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      inpFclk.value = this.getAttribute('data-fclk');
+      selFclkUnit.value = this.getAttribute('data-fclk-unit');
+      calculate();
+    });
+  });
+
+  // Frequency Presets
+  document.querySelectorAll('.preset-btn[data-fpwm]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.preset-btn[data-fpwm]').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      inpFpwm.value = this.getAttribute('data-fpwm');
+      selFpwmUnit.value = this.getAttribute('data-fpwm-unit');
+      calculate();
+    });
+  });
+
+  // Reset to Defaults (Benchmark 1: 3.3V, 50%, 80 MHz, 5000 Hz)
+  btnReset.addEventListener('click', () => {
+    inpVhigh.value = '3.3';
+    inpDuty.value = '50';
+    rangeDuty.value = '50';
+    inpFclk.value = '80';
+    selFclkUnit.value = '1e6';
+    inpFpwm.value = '5000';
+    selFpwmUnit.value = '1';
+
+    // Reset active buttons
+    document.querySelectorAll('.preset-btn[data-vhigh]').forEach(b => b.classList.toggle('active', b.getAttribute('data-vhigh') === '3.3'));
+    document.querySelectorAll('.preset-btn[data-duty]').forEach(b => b.classList.toggle('active', b.getAttribute('data-duty') === '50'));
+    document.querySelectorAll('.preset-btn[data-fclk]').forEach(b => b.classList.toggle('active', b.getAttribute('data-fclk') === '80'));
+    document.querySelectorAll('.preset-btn[data-fpwm]').forEach(b => b.classList.toggle('active', b.getAttribute('data-fpwm') === '5000'));
+
+    calculate();
+    showToast('Reset to default values (3.3V, 50%, 80 MHz, 5 kHz).');
+  });
+
+  // Load Benchmark 2: 20 kHz Silent Motor Drive
+  function loadSilentMotorBenchmark() {
+    inpVhigh.value = '3.3';
+    inpDuty.value = '50';
+    rangeDuty.value = '50';
+    inpFclk.value = '80';
+    selFclkUnit.value = '1e6';
+    inpFpwm.value = '20';
+    selFpwmUnit.value = '1e3'; // 20 kHz
+
+    document.querySelectorAll('.preset-btn[data-vhigh]').forEach(b => b.classList.toggle('active', b.getAttribute('data-vhigh') === '3.3'));
+    document.querySelectorAll('.preset-btn[data-duty]').forEach(b => b.classList.toggle('active', b.getAttribute('data-duty') === '50'));
+    document.querySelectorAll('.preset-btn[data-fclk]').forEach(b => b.classList.toggle('active', b.getAttribute('data-fclk') === '80'));
+    document.querySelectorAll('.preset-btn[data-fpwm]').forEach(b => b.classList.toggle('active', b.getAttribute('data-fpwm') === '20'));
+
+    calculate();
+    showToast('Loaded benchmark: 20 kHz Silent Motor (11-bit, 0-2047).');
+  }
+
+  btnLoadExample.addEventListener('click', loadSilentMotorBenchmark);
+  btnLoadEx2.addEventListener('click', loadSilentMotorBenchmark);
+
+  // Load Example 1: 5 kHz ESP32 Default
+  btnLoadEx1.addEventListener('click', () => {
+    btnReset.click();
+  });
+
+  // Load Example 3: Arduino Uno 490 Hz, 5V
+  btnLoadEx3.addEventListener('click', () => {
+    inpVhigh.value = '5.0';
+    inpDuty.value = '50.2';
+    rangeDuty.value = '50.2';
+    inpFclk.value = '16';
+    selFclkUnit.value = '1e6';
+    inpFpwm.value = '490';
+    selFpwmUnit.value = '1';
+
+    document.querySelectorAll('.preset-btn[data-vhigh]').forEach(b => b.classList.toggle('active', b.getAttribute('data-vhigh') === '5.0'));
+    document.querySelectorAll('.preset-btn[data-duty]').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.preset-btn[data-fclk]').forEach(b => b.classList.toggle('active', b.getAttribute('data-fclk') === '16'));
+    document.querySelectorAll('.preset-btn[data-fpwm]').forEach(b => b.classList.toggle('active', b.getAttribute('data-fpwm') === '490'));
+
+    calculate();
+    showToast('Loaded Arduino Uno Pin 9 (490 Hz, 5V, 8-bit).');
+  });
+
+  // Advanced Tools Modal
+  btnAdvTools.addEventListener('click', () => advToolsModal.classList.add('open'));
+  btnCloseModal.addEventListener('click', () => advToolsModal.classList.remove('open'));
+  advToolsModal.addEventListener('click', (e) => {
+    if (e.target === advToolsModal) advToolsModal.classList.remove('open');
+  });
+
+  // PDF Report
+  btnPrintPdf.addEventListener('click', () => {
+    const printDate = $('printDate');
+    if (printDate) printDate.textContent = new Date().toLocaleString();
+    window.print();
+  });
+
+  // History Management
+  function getHistory() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch(e) {
+      return [];
+    }
+  }
+
+  function renderHistory() {
+    const list = getHistory();
+    if (!list.length) {
+      historyList.innerHTML = '<div class="empty-state">No saved calculations yet. Click "Save Calc" above to store your readings.</div>';
+      return;
+    }
+
+    let html = '';
+    list.forEach((item, index) => {
+      html += `
+        <div class="history-item">
+          <div class="history-meta">
+            <strong>${item.vAvg}V Avg (${item.dutyPct}% Duty • ${item.fPwmStr})</strong>
+            <span>V_high: ${item.vHigh}V • Period: ${item.periodStr} • Max Res: ${item.bits}-bit • Saved: ${item.timestamp}</span>
+          </div>
+          <div style="display:flex; gap:0.4rem;">
+            <button class="btn-sm" onclick="window.mtaLoadHistoryItem(${index})"><i class="fas fa-arrow-rotate-left"></i> Load</button>
+            <button class="btn-sm del" onclick="window.mtaDeleteHistoryItem(${index})"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      `;
+    });
+    historyList.innerHTML = html;
+  }
+
+  window.mtaLoadHistoryItem = function(index) {
+    const list = getHistory();
+    const item = list[index];
+    if (!item) return;
+
+    inpVhigh.value = item.vHigh;
+    inpDuty.value = item.dutyPct;
+    rangeDuty.value = item.dutyPct;
+    inpFpwm.value = item.fPwm;
+    selFpwmUnit.value = '1';
+    inpFclk.value = item.fClk / 1e6;
+    selFclkUnit.value = '1e6';
+
+    calculate();
+    showToast(`Loaded ${item.vAvg}V (${item.fPwmStr}) calculation.`);
+  };
+
+  window.mtaDeleteHistoryItem = function(index) {
+    let list = getHistory();
+    list.splice(index, 1);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    renderHistory();
+    showToast('Record deleted.');
+  };
+
+  btnSaveCalc.addEventListener('click', () => {
+    if (!currentCalcState) return;
+    let list = getHistory();
+    list.unshift(currentCalcState);
+    if (list.length > 25) list = list.slice(0, 25);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    renderHistory();
+    showToast(`Saved ${currentCalcState.vAvg}V (${currentCalcState.fPwmStr}) to history.`);
+  });
+
+  btnExportJson.addEventListener('click', () => {
+    const list = getHistory();
+    if (!list.length) {
+      showToast('No saved calculations to export.');
+      return;
+    }
+    const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'pwm-calculations-history.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Exported history as JSON!');
+  });
+
+  btnClearHistory.addEventListener('click', () => {
+    if (confirm('Are you sure you want to clear all saved calculations?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      renderHistory();
+      showToast('Cleared calculation history.');
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (currentCalcState) calculate();
+  });
+
+  const observer = new MutationObserver(() => {
+    if (currentCalcState) calculate();
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  // Initial Calculation & Render
+  calculate();
+  renderHistory();
+})();
+</script>
+
+<script src="/pwa.js" defer></script>
+<script src="mta-chrome.js" defer></script>
+<!-- Vercel Speed Insights -->
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+
+</body>
+</html>

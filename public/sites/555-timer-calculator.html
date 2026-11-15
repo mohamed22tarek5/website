@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/555-timer-calculator.html">
   <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>555 Timer Calculator | Mohamed Tarek Abdelhady</title>
-  <meta name="description" content="Free 555 timer calculator: astable frequency, duty cycle, HIGH/LOW times and monostable pulse width with E12 part suggestions.">
+  <meta name="description" content="Free 555 timer calculator: astable frequency & duty cycle, monostable pulse width, and bistable flip-flop latch with interactive logic simulator and practical checks.">
   <meta name="author" content="Mohamed Tarek Abdelhady"><meta name="robots" content="index, follow"><meta name="theme-color" content="#0a0e1a">
   <meta property="og:type" content="website"><meta property="og:title" content="555 Timer Calculator | Mohamed Tarek Abdelhady">
-  <meta property="og:description" content="Astable frequency + duty and monostable pulse width for NE555."><meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:description" content="Astable frequency + duty, monostable pulse width, and bistable flip-flop latch for NE555."><meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
   <meta property="og:image:width" content="851">
   <meta property="og:image:height" content="1134">
   <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
-  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/555-timer-calculator.html"><meta property="og:updated_time" content="2026-10-04T00:00:00+03:00">
-  <meta property="article:modified_time" content="2026-10-04T00:00:00+03:00">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/555-timer-calculator.html"><meta property="og:updated_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="article:modified_time" content="2026-11-15T00:00:00+02:00">
   <meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="555 Timer Calculator | Mohamed Tarek Abdelhady">
-  <meta name="twitter:description" content="Astable frequency + duty and monostable pulse width for NE555."><meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta name="twitter:description" content="Astable frequency + duty, monostable pulse width, and bistable flip-flop latch for NE555."><meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -31,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"555 Timer Calculator","description":"Astable and monostable NE555 calculator.","url":"https://mohamed-tarek-abdelhady.vercel.app/sites/555-timer-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","author":{"@type":"Person","name":"Mohamed Tarek Abdelhady","url":"https://mohamed-tarek-abdelhady.vercel.app"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"555 Timer Calculator","description":"Astable, monostable, and bistable NE555 timer calculator with interactive latch simulator.","url":"https://mohamed-tarek-abdelhady.vercel.app/sites/555-timer-calculator.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","author":{"@type":"Person","name":"Mohamed Tarek Abdelhady","url":"https://mohamed-tarek-abdelhady.vercel.app"}}</script>
   <style>
     :root{--bg:#0a0e1a;--bg2:#0f1322;--card:#161b2e;--acc:#3b82f6;--txt:#f1f5f9;--mut:#94a3b8;--mut2:#64748b;--br:rgba(255,255,255,.08);--ok:#22c55e;--warn:#f59e0b;--err:#ef4444;--r:14px;--mono:'JetBrains Mono',monospace}
     [data-theme="light"]{--bg:#f8fafc;--bg2:#f1f5f9;--card:#fff;--txt:#0f172a;--mut:#475569;--mut2:#94a3b8;--br:rgba(0,0,0,.1)}
@@ -41,7 +40,7 @@
     .theme{margin-left:auto;background:var(--card);border:1px solid var(--br);color:var(--mut);width:40px;height:40px;border-radius:10px;cursor:pointer}
     .hero{text-align:center;padding:2.6rem 0 1.4rem}.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);background:rgba(59,130,246,.12);padding:.3rem .9rem;border-radius:999px;margin-bottom:.9rem}
     .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800}.hero p{color:var(--mut);max-width:660px;margin:.6rem auto 0}
-    .seg{display:flex;background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:4px;gap:4px;margin:1.2rem auto 0;max-width:420px}.seg button{flex:1;border:0;background:transparent;color:var(--mut);font-weight:700;font-size:.85rem;padding:.6rem;border-radius:8px;cursor:pointer}.seg button.on{background:var(--acc);color:#fff}
+    .seg{display:flex;background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:4px;gap:4px;margin:1.2rem auto 0;max-width:480px}.seg button{flex:1;border:0;background:transparent;color:var(--mut);font-weight:700;font-size:.85rem;padding:.6rem;border-radius:8px;cursor:pointer;transition:all 150ms ease}.seg button.on{background:var(--acc);color:#fff}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.2rem}@media(max-width:860px){.grid{grid-template-columns:1fr}}
     .card{background:var(--card);border:1px solid var(--br);border-radius:var(--r);padding:1.5rem}
     .card h2{font-size:1.05rem;margin-bottom:.6rem}.card h2 i{color:var(--acc);margin-right:.5rem}
@@ -68,8 +67,8 @@
   </div>
 </header>
 <main class="wrap" id="main">
-  <div class="hero"><span class="pill">Timers · NE555 / LM555</span><h1>555 Timer Calculator</h1><p>Design astable oscillators and monostable one-shots. Live frequency, duty, pulse width and practical checks.</p></div>
-  <div class="seg"><button class="on" id="bA">Astable</button><button id="bM">Monostable</button></div>
+  <div class="hero"><span class="pill">Timers · NE555 / LM555</span><h1>555 Timer Calculator</h1><p>Design astable oscillators, monostable one-shots, and bistable flip-flop latches. Live frequency, duty, pulse width, trigger levels and practical checks.</p></div>
+  <div class="seg" role="tablist"><button class="on" id="bA" role="tab" aria-selected="true">Astable</button><button id="bM" role="tab" aria-selected="false">Monostable</button><button id="bB" role="tab" aria-selected="false">Bistable</button></div>
   <div class="grid">
     <div class="card">
       <h2><i class="fas fa-sliders"></i> Inputs</h2>
@@ -87,12 +86,54 @@
         <label class="lbl" for="cm">C timing capacitor</label>
         <div class="row"><input id="cm" type="number" value="10" step="any" min="0" aria-label="C timing capacitance value"><select id="cmu" aria-label="C capacitance unit"><option value="1e-6" selected>µF</option><option value="1e-9">nF</option><option value="1e-12">pF</option></select></div>
       </div>
+      <div id="bis" style="display:none">
+        <label class="lbl" for="vcc">Supply voltage Vcc</label>
+        <div class="row">
+          <input id="vcc" type="number" value="5" step="0.1" min="2" max="18" aria-label="Supply voltage in volts">
+          <select id="vccQuick" aria-label="Preset supply voltages">
+            <option value="5" selected>5 V</option>
+            <option value="3.3">3.3 V</option>
+            <option value="9">9 V</option>
+            <option value="12">12 V</option>
+            <option value="15">15 V</option>
+          </select>
+        </div>
+        <label class="lbl" for="icFam">555 Timer Family</label>
+        <select id="icFam" aria-label="555 Timer IC type">
+          <option value="bipolar" selected>NE555 / LM555 (Bipolar, 4.5V–16V)</option>
+          <option value="cmos">TLC555 / LMC555 / ICM7555 (CMOS, 2V–18V)</option>
+        </select>
+        <label class="lbl" for="rpu">Pull-up resistors (Pin 2 &amp; Pin 4)</label>
+        <div class="row">
+          <input id="rpu" type="number" value="10" step="any" min="0.1" aria-label="Pull up resistance value">
+          <select id="rpuUnit" aria-label="Pull up resistance unit">
+            <option value="1e3" selected>kΩ</option>
+            <option value="1">Ω</option>
+            <option value="1e6">MΩ</option>
+          </select>
+        </div>
+      </div>
       <button class="btn" id="go"><i class="fas fa-bolt"></i> Calculate</button>
       <div class="formula" id="fml">f = 1.44 / ((R1+2·R2)·C)</div>
     </div>
     <div class="card"><h2><i class="fas fa-wave-square"></i> Results</h2>
       <div class="res" id="res"></div>
       <div class="bar" id="dutybar" title="Duty visual"><div class="bh" id="dh"></div><div class="bl" id="dl"></div></div>
+      <div id="bisSim" style="display:none; margin-top:.9rem; background:var(--bg2); border:1px solid var(--br); border-radius:10px; padding:.9rem;">
+        <small style="display:block; color:var(--mut2); font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; margin-bottom:.6rem;">Interactive Latch Simulator</small>
+        <div style="display:flex; gap:.6rem; margin-bottom:.75rem;">
+          <button type="button" id="btnSet" style="flex:1; background:var(--ok); color:#fff; font-weight:700; border:0; border-radius:8px; padding:.65rem; cursor:pointer; font-size:.85rem; display:flex; align-items:center; justify-content:center; gap:.4rem;">
+            <i class="fas fa-play"></i> SET (Pin 2 &darr;)
+          </button>
+          <button type="button" id="btnRst" style="flex:1; background:var(--err); color:#fff; font-weight:700; border:0; border-radius:8px; padding:.65rem; cursor:pointer; font-size:.85rem; display:flex; align-items:center; justify-content:center; gap:.4rem;">
+            <i class="fas fa-stop"></i> RESET (Pin 4 &darr;)
+          </button>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:.65rem .85rem; background:var(--card); border:1px solid var(--br); border-radius:8px;">
+          <span style="font-size:.85rem; color:var(--mut);">Output State (Pin 3):</span>
+          <b id="simState" style="font-family:var(--mono); color:var(--ok);">HIGH · ON</b>
+        </div>
+      </div>
       <div class="note" id="note"></div>
     </div>
   </div>
@@ -116,10 +157,23 @@
 const $=id=>document.getElementById(id);
 $('th').onclick=()=>{const h=document.documentElement;h.dataset.theme=h.dataset.theme==='light'?'dark':'light';};
 let mode='a';
-$('bA').onclick=()=>{mode='a';$('bA').classList.add('on');$('bM').classList.remove('on');$('ast').style.display='';$('mon').style.display='none';$('fml').textContent='f = 1.44 / ((R1+2·R2)·C)   ·   TH=0.693(R1+R2)C   ·   TL=0.693·R2·C';calc();};
-$('bM').onclick=()=>{mode='m';$('bM').classList.add('on');$('bA').classList.remove('on');$('ast').style.display='none';$('mon').style.display='';$('fml').textContent='T = 1.1 · R · C  (output HIGH pulse width)';calc();};
+let bistableState=true;
+$('bA').onclick=()=>{mode='a';$('bA').classList.add('on');$('bM').classList.remove('on');$('bB').classList.remove('on');$('ast').style.display='';$('mon').style.display='none';$('bis').style.display='none';$('bisSim').style.display='none';$('dutybar').style.display='flex';$('fml').textContent='f = 1.44 / ((R1+2·R2)·C)   ·   TH=0.693(R1+R2)C   ·   TL=0.693·R2·C';calc();};
+$('bM').onclick=()=>{mode='m';$('bM').classList.add('on');$('bA').classList.remove('on');$('bB').classList.remove('on');$('ast').style.display='none';$('mon').style.display='';$('bis').style.display='none';$('bisSim').style.display='none';$('dutybar').style.display='none';$('fml').textContent='T = 1.1 · R · C  (output HIGH pulse width)';calc();};
+$('bB').onclick=()=>{mode='b';$('bB').classList.add('on');$('bA').classList.remove('on');$('bM').classList.remove('on');$('ast').style.display='none';$('mon').style.display='none';$('bis').style.display='';$('bisSim').style.display='block';$('dutybar').style.display='none';$('fml').textContent='Pin 2 < 1/3·Vcc → SET (HIGH)   ·   Pin 4 < 0.7V → RESET (LOW)   ·   Pin 6 → GND';calc();};
 function fmtT(s){if(!isFinite(s)||s<0)return'–';if(s<1e-6)return(s*1e9).toFixed(1)+' ns';if(s<1e-3)return(s*1e6).toFixed(2)+' µs';if(s<1)return(s*1e3).toFixed(2)+' ms';if(s<60)return s.toFixed(3)+' s';return (s/60).toFixed(2)+' min';}
 function fmtF(f){if(!isFinite(f)||f<0)return'–';if(f>=1e6)return(f/1e6).toFixed(4)+' MHz';if(f>=1e3)return(f/1e3).toFixed(4)+' kHz';return f.toFixed(3)+' Hz';}
+function updateBisSim(){
+  if(mode!=='b')return;
+  const Vcc=parseFloat($('vcc').value)||5,isCmos=$('icFam').value==='cmos';
+  const vOH=isCmos?(Vcc-0.05):Math.max(0,Vcc-1.5),vOL=isCmos?0.02:0.15;
+  const st=$('simState');
+  if(bistableState){
+    st.innerHTML=`<span style="color:var(--ok);"><i class="fas fa-circle-dot"></i> HIGH (~${vOH.toFixed(2)} V) · ON</span>`;
+  }else{
+    st.innerHTML=`<span style="color:var(--mut2);"><i class="fas fa-circle"></i> LOW (~${vOL.toFixed(2)} V) · OFF</span>`;
+  }
+}
 function calc(){
   if(mode==='a'){
     const R1=parseFloat($('r1').value)*parseFloat($('r1u').value),R2=parseFloat($('r2').value)*parseFloat($('r2u').value),C=parseFloat($('cap').value)*parseFloat($('capu').value);
@@ -129,16 +183,32 @@ function calc(){
     $('dh').style.width=d+'%';$('dl').style.width=(100-d)+'%';$('dutybar').style.display='flex';
     let w=[];if(R1<1000)w.push('R1 < 1kΩ — use ≥1kΩ to protect discharge pin.');if(d<=50)w.push('Standard astable cannot go below 50% duty — add diode across R2 for <50%.');if(f>100e3)w.push('f > 100kHz — use CMOS 7555 for accuracy.');if(C<1e-9)w.push('C < 1nF — stray capacitance will dominate.');
     $('note').innerHTML=(w.length?'<span style="color:var(--warn)">⚠ '+w.join('<br>')+'</span><br>':'<span style="color:var(--ok)">✓ Practical values.</span><br>')+'T<sub>H</sub>=0.693(R1+R2)C · T<sub>L</sub>=0.693·R2·C · standard duty always >50%.';
-  }else{
+  }else if(mode==='m'){
     const R=parseFloat($('rm').value)*parseFloat($('rmu').value),C=parseFloat($('cm').value)*parseFloat($('cmu').value);
     if(!(R>0&&C>0)){$('note').textContent='Enter R, C > 0.';$('res').innerHTML='';return;}
     const T=1.1*R*C;
     $('res').innerHTML=`<div class="cell hl"><small>Pulse width</small><b>${fmtT(T)}</b></div><div class="cell"><small>Max retrigger rate</small><b>${fmtF(1/(T||1))}</b></div><div class="cell"><small>R</small><b>${R>=1e6?(R/1e6)+' MΩ':R>=1e3?(R/1e3)+' kΩ':R+' Ω'}</b></div><div class="cell"><small>C</small><b>${C>=1e-6?(C*1e6)+' µF':(C*1e9)+' nF'}</b></div>`;
     $('dutybar').style.display='none';
     $('note').innerHTML='Trigger with a <1/3 Vcc negative pulse. Add 10nF from pin 5 to GND for noise immunity.';
+  }else{
+    const Vcc=parseFloat($('vcc').value)||5,isCmos=$('icFam').value==='cmos',Rpu=(parseFloat($('rpu').value)||10)*parseFloat($('rpuUnit').value);
+    if(Vcc<=0){$('note').textContent='Enter Vcc > 0.';$('res').innerHTML='';return;}
+    const vTrig=Vcc/3,vReset=0.7,vOH=isCmos?(Vcc-0.05):Math.max(0,Vcc-1.5),vOL=isCmos?0.02:0.15,iMax=isCmos?'±50 mA (typ)':'±200 mA (max)',iPress=(Vcc/Rpu)*1000;
+    $('res').innerHTML=`<div class="cell hl"><small>Set Trigger (Pin 2)</small><b>&lt; ${vTrig.toFixed(2)} V</b></div><div class="cell"><small>Reset Voltage (Pin 4)</small><b>&lt; ${vReset.toFixed(2)} V</b></div><div class="cell"><small>High Output V_OH</small><b>~${vOH.toFixed(2)} V</b></div><div class="cell"><small>Low Output V_OL</small><b>~${vOL.toFixed(2)} V</b></div><div class="cell"><small>Max Output Current</small><b>${iMax}</b></div><div class="cell"><small>Button Press Current</small><b>${iPress<1?(iPress*1000).toFixed(0)+' µA':iPress.toFixed(2)+' mA'}</b></div>`;
+    $('dutybar').style.display='none';
+    let w=[];
+    if(!isCmos&&Vcc<4.5)w.push('NE555 minimum recommended Vcc is 4.5V (use CMOS for low voltage).');
+    if(Vcc>16&&!isCmos)w.push('Vcc exceeds 16V recommended rating for standard NE555.');
+    if(Vcc>18)w.push('Vcc exceeds 18V absolute maximum.');
+    $('note').innerHTML=(w.length?'<span style="color:var(--warn)">⚠ '+w.join('<br>')+'</span><br>':'<span style="color:var(--ok)">✓ Clean bistable flip-flop circuit.</span><br>')+'<strong>Wiring:</strong> Pull Pin 2 &amp; Pin 4 to Vcc via 10kΩ with pushbuttons to GND. Tie Pin 6 to GND. Leave Pin 7 floating. Decouple Pin 5 with 10nF to GND.';
+    updateBisSim();
   }
 }
-$('go').onclick=calc;document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',calc));calc();
+$('go').onclick=calc;
+$('btnSet').onclick=()=>{bistableState=true;updateBisSim();};
+$('btnRst').onclick=()=>{bistableState=false;updateBisSim();};
+$('vccQuick').onchange=()=>{$('vcc').value=$('vccQuick').value;calc();};
+document.querySelectorAll('input,select').forEach(e=>e.addEventListener('input',calc));calc();
 </script>
 <script src="/sites/mta-chrome.js" defer></script>
 <!-- Vercel Speed Insights -->
@@ -146,6 +216,6 @@ $('go').onclick=calc;document.querySelectorAll('input,select').forEach(e=>e.addE
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
-  <script src="/pwa.js" defer></script>
+<script src="/pwa.js" defer></script>
 </body>
 </html>

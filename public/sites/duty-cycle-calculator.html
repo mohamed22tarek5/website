@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/duty-cycle-calculator.html">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Duty Cycle Calculator (Pulse & DC-DC Converters) | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Calculate Duty Cycle for periodic pulse signals and switching power supplies: Step-Up Boost, Step-Down Buck, Buck-Boost, Ćuk, and SEPIC converters. Free engineering calculator with interactive schematics and waveforms.">
+  <meta name="author" content="Mohamed Tarek Abdelhady">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Duty Cycle Calculator (Pulse & DC-DC Converters) | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Calculate Duty Cycle for periodic pulse waveforms, Step-Up Boost converters, Step-Down Buck, Buck-Boost, and Ćuk topologies with live circuit schematics.">
+  <meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="851">
+  <meta property="og:image:height" content="1134">
+  <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/duty-cycle-calculator.html">
+  <meta property="og:updated_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="article:modified_time" content="2026-11-15T00:00:00+02:00">
+  <meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Duty Cycle Calculator (Pulse & DC-DC Converters) | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Calculate Duty Cycle for periodic pulse waveforms, Step-Up Boost converters, Step-Down Buck, Buck-Boost, and Ćuk topologies with live circuit schematics.">
+  <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+
+  <!-- PWA & Mobile Icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M. Tarek">
+  <meta name="application-name" content="M. Tarek">
+  <meta name="msapplication-TileColor" content="#0a0e1a">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
+  <link rel="stylesheet" href="mta-chrome.css">
+
+  <!-- Schema.org WebApplication & BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Duty Cycle Calculator",
+    "description": "Calculate Duty Cycle for periodic pulse signals, Step-Up Boost converters, Step-Down Buck, Buck-Boost, and Ćuk switching topologies with volt-second balance modeling.",
+    "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/duty-cycle-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek Abdelhady",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tools",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/tools.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Duty Cycle Calculator",
+        "item": "https://mohamed-tarek-abdelhady.vercel.app/sites/duty-cycle-calculator.html"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1322;
+      --bg3: #141829;
+      --card: #161b2e;
+      --card2: #1c2240;
+      --acc: #f59e0b;
+      --acc-hover: #d97706;
+      --acc-subtle: rgba(245, 158, 11, 0.12);
+      --acc-border: rgba(245, 158, 11, 0.35);
+      --txt: #f1f5f9;
+      --mut: #94a3b8;
+      --mut2: #64748b;
+      --br: rgba(255, 255, 255, 0.08);
+      --br-hover: rgba(255, 255, 255, 0.16);
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --err: #ef4444;
+      --cyan: #06b6d4;
+      --r: 14px;
+      --r-sm: 8px;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+      --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+      --gradient-glow: radial-gradient(circle at top center, rgba(245, 158, 11, 0.18) 0%, transparent 70%);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --bg3: #e2e8f0;
+      --card: #ffffff;
+      --card2: #f8fafc;
+      --acc: #d97706;
+      --acc-hover: #b45309;
+      --acc-subtle: rgba(217, 119, 6, 0.08);
+      --acc-border: rgba(217, 119, 6, 0.25);
+      --txt: #0f172a;
+      --mut: #475569;
+      --mut2: #94a3b8;
+      --br: rgba(0, 0, 0, 0.08);
+      --br-hover: rgba(0, 0, 0, 0.15);
+      --gradient-glow: radial-gradient(circle at top center, rgba(217, 119, 6, 0.08) 0%, transparent 70%);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.65;
+      min-height: 100vh;
+      background-image: var(--gradient-glow);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      background: var(--acc-subtle);
+      border: 1px solid var(--acc-border);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--acc);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+    }
+
+    .pill .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--ok);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--ok);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.85rem, 4vw, 2.75rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero h1 .grad {
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--mut);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Brief / Summary Card */
+    .summary-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-left: 4px solid var(--ok);
+      border-radius: var(--r);
+      padding: 1.15rem 1.4rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .summary-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--ok);
+      margin-bottom: 0.45rem;
+    }
+
+    .summary-card p {
+      color: var(--mut);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .summary-card strong {
+      color: var(--txt);
+    }
+
+    /* Segmented Navigation Tabs */
+    .segmented-nav {
+      display: flex;
+      flex-wrap: wrap;
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 0.4rem;
+      gap: 0.35rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .seg-btn {
+      flex: 1;
+      min-width: 140px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 0.85rem;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--r-sm);
+      color: var(--mut);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 150ms ease;
+      white-space: nowrap;
+    }
+
+    .seg-btn:hover {
+      color: var(--txt);
+      background: var(--bg2);
+    }
+
+    .seg-btn.active {
+      color: #ffffff;
+      background: var(--gradient-accent);
+      box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+    }
+
+    /* Grid layout */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+      position: relative;
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--txt);
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .card h2 i {
+      color: var(--acc);
+      font-size: 1.05rem;
+    }
+
+    /* Form Inputs */
+    .lbl {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin-bottom: 0.4rem;
+      margin-top: 0.9rem;
+    }
+
+    .lbl:first-of-type {
+      margin-top: 0;
+    }
+
+    .lbl span.opt {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--mut2);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .input-row input {
+      flex: 1;
+    }
+
+    .input-row select {
+      min-width: 95px;
+    }
+
+    input[type="number"], select {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--txt);
+      padding: 0.75rem 0.95rem;
+      border-radius: var(--r-sm);
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    input[type="number"]:focus, select:focus {
+      border-color: var(--acc);
+      box-shadow: 0 0 0 3px var(--acc-subtle);
+    }
+
+    /* Presets Pills */
+    .preset-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.45rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .preset-btn {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 120ms ease;
+      font-family: var(--mono);
+    }
+
+    .preset-btn:hover {
+      background: var(--card2);
+      border-color: var(--acc-border);
+      color: var(--acc);
+    }
+
+    .preset-btn.active {
+      background: var(--acc-subtle);
+      border-color: var(--acc);
+      color: var(--acc);
+    }
+
+    /* Action Buttons Row */
+    .btn-toolbar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (max-width: 500px) {
+      .btn-toolbar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.75rem 0.6rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      color: var(--txt);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 150ms ease;
+      text-decoration: none;
+    }
+
+    .action-btn:hover {
+      background: var(--card2);
+      border-color: var(--acc-border);
+      color: var(--acc);
+      transform: translateY(-1px);
+    }
+
+    .action-btn.primary {
+      background: var(--gradient-accent);
+      border: none;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+    }
+
+    .action-btn.primary:hover {
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Results Grid */
+    .res-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .res-cell {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 0.85rem 1rem;
+      transition: border-color 150ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .res-cell:hover {
+      border-color: var(--br-hover);
+    }
+
+    .res-cell.highlight {
+      border-color: var(--acc-border);
+      background: var(--acc-subtle);
+    }
+
+    .res-cell.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .res-cell small {
+      display: block;
+      color: var(--mut2);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+
+    .res-cell b {
+      font-family: var(--mono);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--txt);
+      display: block;
+      word-break: break-word;
+    }
+
+    .res-cell.highlight b {
+      color: var(--acc);
+    }
+
+    .res-cell .sub-val {
+      font-size: 0.75rem;
+      color: var(--mut);
+      margin-top: 0.25rem;
+      font-family: var(--mono);
+    }
+
+    /* Visual Schematic & Waveform Box */
+    .visual-card {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1rem 1.15rem;
+      margin-top: 1.25rem;
+    }
+
+    .visual-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.65rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+    }
+
+    .visual-svg {
+      width: 100%;
+      height: 140px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* Alerts */
+    .alert-box {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: var(--r);
+      padding: 1rem 1.25rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      color: var(--txt);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .alert-box.err {
+      background: rgba(239, 68, 68, 0.08);
+      border-color: rgba(239, 68, 68, 0.35);
+    }
+
+    .alert-box.err i {
+      color: var(--err);
+    }
+
+    .alert-box i {
+      color: var(--warn);
+      font-size: 1.25rem;
+      margin-top: 0.15rem;
+      flex-shrink: 0;
+    }
+
+    .alert-box strong {
+      color: var(--txt);
+    }
+
+    /* Content Cards */
+    .content-card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .content-card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--txt);
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .formula-box {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-left: 3px solid var(--acc);
+      border-radius: var(--r-sm);
+      padding: 1rem 1.25rem;
+      margin: 0.85rem 0;
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      color: var(--txt);
+      overflow-x: auto;
+    }
+
+    /* Table */
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+
+    table.calc-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    table.calc-table th {
+      padding: 0.75rem 0.95rem;
+      background: var(--bg2);
+      color: var(--mut);
+      font-weight: 600;
+      border-bottom: 1px solid var(--br);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    table.calc-table td {
+      padding: 0.75rem 0.95rem;
+      border-bottom: 1px solid var(--br);
+      color: var(--txt);
+    }
+
+    table.calc-table tr:hover td {
+      background: var(--bg2);
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .faq-item {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      transition: border-color 150ms ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--br-hover);
+    }
+
+    .faq-question {
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+      color: var(--txt);
+    }
+
+    .faq-question i {
+      color: var(--acc);
+      transition: transform 200ms ease;
+      font-size: 0.85rem;
+    }
+
+    .faq-item[open] .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0 1.25rem 1rem;
+      color: var(--mut);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* Saved Calculations Drawer / Card */
+    .history-card {
+      margin-top: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.5rem;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .history-header h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .history-actions {
+      display: flex;
+      gap: 0.45rem;
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--bg3);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      transition: all 150ms ease;
+    }
+
+    .btn-sm:hover {
+      color: var(--txt);
+      border-color: var(--acc);
+    }
+
+    .btn-sm.del:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 0.95rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      font-size: 0.85rem;
+    }
+
+    .history-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .history-meta strong {
+      color: var(--txt);
+      font-family: var(--mono);
+    }
+
+    .history-meta span {
+      color: var(--mut2);
+      font-size: 0.75rem;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 1.75rem 1rem;
+      color: var(--mut2);
+      font-size: 0.88rem;
+    }
+
+    /* Modal Dialog */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease;
+      padding: 1rem;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: var(--card);
+      border: 1px solid var(--br-hover);
+      border-radius: var(--r);
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.75rem;
+    }
+
+    .modal-header h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--txt);
+    }
+
+    .close-modal-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .close-modal-btn:hover {
+      color: var(--err);
+      border-color: var(--err);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .tool-tile {
+      display: block;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: var(--r-sm);
+      padding: 1rem;
+      text-decoration: none;
+      color: var(--txt);
+      transition: all 150ms ease;
+    }
+
+    .tool-tile:hover {
+      border-color: var(--acc-border);
+      background: var(--card2);
+      transform: translateY(-2px);
+    }
+
+    .tool-tile-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+      color: var(--acc);
+    }
+
+    .tool-tile p {
+      font-size: 0.82rem;
+      color: var(--mut);
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--card2);
+      border: 1px solid var(--acc-border);
+      color: var(--txt);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--r-sm);
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transform: translateY(100px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 250ms ease, opacity 250ms ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Print Specific Styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11pt;
+      }
+
+      .mta-bar, .mta-foot, .btn-toolbar, .modal-overlay, .toast, .btn-sm, #th, [data-mta-top], .segmented-nav, .preset-pills {
+        display: none !important;
+      }
+
+      .wrap {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .card, .summary-card, .content-card, .history-card {
+        background: #ffffff !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+        color: #000000 !important;
+        page-break-inside: avoid;
+        margin-bottom: 1rem !important;
+        padding: 1rem !important;
+      }
+
+      .print-header {
+        display: block !important;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+      }
+
+      .print-header h1 {
+        font-size: 18pt;
+        margin: 0;
+      }
+
+      .res-cell {
+        background: #f8f8f8 !important;
+        border: 1px solid #ddd !important;
+        color: #000 !important;
+      }
+
+      .res-cell b {
+        color: #000 !important;
+      }
+
+      .formula-box, .faq-item {
+        border: 1px solid #ddd !important;
+        background: #fff !important;
+      }
+
+      .faq-item details {
+        display: block !important;
+      }
+
+      .faq-item[open] .faq-answer {
+        display: block !important;
+      }
+    }
+
+    .print-header {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header Chrome -->
+<header class="mta-bar" id="header" role="banner">
+  <div class="mta-bar-in">
+    <nav aria-label="Breadcrumb" class="mta-crumbs">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools.html">Tools</a></li>
+        <li aria-current="page">Duty Cycle Calculator</li>
+      </ol>
+    </nav>
+    <button class="mta-btn" id="th" type="button" aria-label="Toggle dark/light mode">
+      <i class="fas fa-moon" data-mta-icon></i>
+    </button>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <!-- Print Only Header -->
+  <div class="print-header">
+    <h1>Mohamed Tarek Abdelhady — Engineering Calculation Report</h1>
+    <p><strong>Tool:</strong> Duty Cycle Calculator for Switching Converters & Pulse Waveforms</p>
+    <p><strong>Date Generated:</strong> <span id="printDate"></span></p>
+  </div>
+
+  <!-- Hero Header -->
+  <div class="hero">
+    <div class="pill">
+      <span class="dot"></span>
+      Power Electronics & Periodic Waveforms
+    </div>
+    <h1>Duty Cycle <span class="grad">& Power Stage</span> Calculator</h1>
+    <p>
+      Calculate active on-time percentages, complementary duty cycle, and voltage transfer ratios for Step-Up Boost, Step-Down Buck, Buck-Boost, Ćuk, and periodic pulse signals.
+    </p>
+  </div>
+
+  <!-- Quick Overview / In a Nutshell -->
+  <div class="summary-card">
+    <div class="summary-card-header">
+      <i class="fas fa-circle-check"></i>
+      <span>In a Nutshell</span>
+    </div>
+    <p>
+      A <strong>Duty Cycle</strong> (or Power Cycle) is the fraction of one complete period during which an active signal or electronic power switch is turned ON (<strong>D = T<sub>on</sub> / T</strong>). In switching DC-DC power converters, the duty cycle creates the fundamental voltage conversion relationship between the supply voltage (V<sub>supply</sub>) and the output voltage (V<sub>out</sub>).
+    </p>
+  </div>
+
+  <!-- Segmented Navigation for Topologies -->
+  <nav class="segmented-nav" aria-label="Converter Topology Selector">
+    <button class="seg-btn active" data-mode="boost" type="button"><i class="fas fa-arrow-trend-up"></i> Boost (Step-Up)</button>
+    <button class="seg-btn" data-mode="buck" type="button"><i class="fas fa-arrow-trend-down"></i> Buck (Step-Down)</button>
+    <button class="seg-btn" data-mode="buckboost" type="button"><i class="fas fa-arrows-up-down"></i> Buck-Boost</button>
+    <button class="seg-btn" data-mode="cuk" type="button"><i class="fas fa-rotate"></i> Ćuk Converter</button>
+    <button class="seg-btn" data-mode="pulse" type="button"><i class="fas fa-wave-square"></i> Periodic Pulse</button>
+  </nav>
+
+  <!-- Main Calculator Grid -->
+  <div class="grid">
+    <!-- Left Card: Input Controls -->
+    <div class="card">
+      <h2 id="cardInputTitle"><i class="fas fa-sliders"></i> Converter Parameters</h2>
+
+      <!-- DC-DC Mode Inputs (Boost, Buck, BuckBoost, Cuk) -->
+      <div id="dcdcInputs">
+        <!-- Output Voltage -->
+        <label class="lbl" for="inpVout">
+          <span>Output Voltage V<sub>out</sub></span>
+          <span class="opt" id="lblVoutNote">Target converted voltage</span>
+        </label>
+        <div class="input-row">
+          <input type="number" id="inpVout" step="0.1" min="0.001" value="12" placeholder="e.g. 12">
+          <select id="selVoutUnit">
+            <option value="1" selected>V</option>
+            <option value="1e-3">mV</option>
+          </select>
+        </div>
+
+        <!-- Supply / Input Voltage -->
+        <label class="lbl" for="inpVin" style="margin-top: 0.9rem;">
+          <span>Supply Voltage V<sub>supply</sub> (V<sub>in</sub>)</span>
+          <span class="opt">Input DC power source</span>
+        </label>
+        <div class="input-row">
+          <input type="number" id="inpVin" step="0.1" min="0.001" value="5" placeholder="e.g. 5">
+          <select id="selVinUnit">
+            <option value="1" selected>V</option>
+            <option value="1e-3">mV</option>
+          </select>
+        </div>
+
+        <!-- Quick Voltage Presets -->
+        <div class="preset-pills" id="voltagePresets">
+          <button type="button" class="preset-btn active" data-vin="5" data-vout="12">5V &rarr; 12V (Boost)</button>
+          <button type="button" class="preset-btn" data-vin="3.7" data-vout="5">3.7V &rarr; 5V (Li-Ion)</button>
+          <button type="button" class="preset-btn" data-vin="12" data-vout="24">12V &rarr; 24V (2&times;)</button>
+          <button type="button" class="preset-btn" data-vin="12" data-vout="5">12V &rarr; 5V (Buck)</button>
+          <button type="button" class="preset-btn" data-vin="24" data-vout="12">24V &rarr; 12V (Buck)</button>
+        </div>
+
+        <!-- Switching Frequency (Optional) -->
+        <label class="lbl" for="inpFreq" style="margin-top: 0.9rem;">
+          <span>Switching Frequency f<sub>sw</sub></span>
+          <span class="opt">Power switch rate</span>
+        </label>
+        <div class="input-row">
+          <input type="number" id="inpFreq" step="1" min="1" value="100" placeholder="e.g. 100">
+          <select id="selFreqUnit">
+            <option value="1e3" selected>kHz</option>
+            <option value="1">Hz</option>
+            <option value="1e6">MHz</option>
+          </select>
+        </div>
+
+        <!-- Efficiency & Diode Drop Options -->
+        <div style="margin-top:0.9rem; padding-top:0.75rem; border-top:1px dashed var(--br);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+            <label class="lbl" for="inpEff" style="margin:0;">
+              <span>Estimated Efficiency &eta; (%)</span>
+            </label>
+            <span id="lblEffVal" style="font-size:0.8rem; font-family:var(--mono); color:var(--acc);">90%</span>
+          </div>
+          <input type="range" id="inpEff" min="60" max="100" value="90" style="width:100%; accent-color:var(--acc);">
+        </div>
+      </div>
+
+      <!-- Pulse Waveform Mode Inputs (Hidden by default) -->
+      <div id="pulseInputs" style="display:none;">
+        <!-- On Time -->
+        <label class="lbl" for="inpTon">
+          <span>Active Turn-On Time (T<sub>on</sub>)</span>
+          <span class="opt">High state duration</span>
+        </label>
+        <div class="input-row">
+          <input type="number" id="inpTon" step="0.1" min="0.000001" value="2.5" placeholder="e.g. 2.5">
+          <select id="selTonUnit">
+            <option value="1e-6" selected>µs</option>
+            <option value="1e-3">ms</option>
+            <option value="1">s</option>
+            <option value="1e-9">ns</option>
+          </select>
+        </div>
+
+        <!-- Off Time -->
+        <label class="lbl" for="inpToff" style="margin-top: 0.9rem;">
+          <span>Turn-Off Time (T<sub>off</sub>)</span>
+          <span class="opt">Low state duration</span>
+        </label>
+        <div class="input-row">
+          <input type="number" id="inpToff" step="0.1" min="0.000001" value="7.5" placeholder="e.g. 7.5">
+          <select id="selToffUnit">
+            <option value="1e-6" selected>µs</option>
+            <option value="1e-3">ms</option>
+            <option value="1">s</option>
+            <option value="1e-9">ns</option>
+          </select>
+        </div>
+
+        <!-- Quick Pulse Presets -->
+        <div class="preset-pills" style="margin-top:0.8rem;">
+          <button type="button" class="preset-btn active" data-ton="2.5" data-toff="7.5">25% (2.5µs / 7.5µs)</button>
+          <button type="button" class="preset-btn" data-ton="5" data-toff="5">50% Square Wave</button>
+          <button type="button" class="preset-btn" data-ton="7.5" data-toff="2.5">75% (7.5µs / 2.5µs)</button>
+          <button type="button" class="preset-btn" data-ton="1.5" data-toff="18.5">RC Servo (1.5ms / 20ms)</button>
+        </div>
+      </div>
+
+      <!-- Action Toolbar -->
+      <div class="btn-toolbar">
+        <button class="action-btn primary" id="btnSaveCalc" type="button" aria-label="Save calculation">
+          <i class="fas fa-floppy-disk"></i> Save Calc
+        </button>
+        <button class="action-btn" id="btnPrintPdf" type="button" aria-label="Export PDF report">
+          <i class="fas fa-file-pdf"></i> PDF Report
+        </button>
+        <button class="action-btn" id="btnAdvTools" type="button" aria-label="Open advanced tools">
+          <i class="fas fa-star"></i> Adv. Tools
+        </button>
+      </div>
+
+      <div style="margin-top: 0.85rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem;">
+        <button type="button" id="btnReset" style="color:var(--mut2); text-decoration:underline; background:none; border:none; cursor:pointer;">
+          <i class="fas fa-rotate-left"></i> Reset Defaults
+        </button>
+        <button type="button" id="btnLoadExample" style="color:var(--acc); background:none; border:none; cursor:pointer; font-weight:600;">
+          <i class="fas fa-lightbulb"></i> Load 5V to 12V Boost
+        </button>
+      </div>
+    </div>
+
+    <!-- Right Card: Calculated Results -->
+    <div class="card">
+      <h2><i class="fas fa-chart-pie"></i> Calculation Results</h2>
+
+      <!-- Sanity Warning Alert (Dynamic) -->
+      <div class="alert-box" id="calcWarning" style="display:none; margin-top:0; margin-bottom:1rem;">
+        <i class="fas fa-triangle-exclamation"></i>
+        <div id="calcWarningMsg">Warning message here</div>
+      </div>
+
+      <div class="res-grid">
+        <!-- 1. Duty Cycle Percentage -->
+        <div class="res-cell highlight full-width">
+          <small id="lblMainDutyTitle">Calculated Duty Cycle (D)</small>
+          <b id="outDutyPct" style="font-size:2rem; color:var(--acc);">58.33 %</b>
+          <div class="sub-val" id="outDutyFormula">(12V - 5V) / 12V</div>
+        </div>
+
+        <!-- 2. Duty Cycle Decimal Fraction -->
+        <div class="res-cell">
+          <small>Duty Ratio (Fraction)</small>
+          <b id="outDutyDecimal">0.583</b>
+          <div class="sub-val">D = T<sub>on</sub> / T</div>
+        </div>
+
+        <!-- 3. Complementary Off-Duty (D') -->
+        <div class="res-cell">
+          <small>Off-Duty Cycle (1 &minus; D)</small>
+          <b id="outOffDuty">41.67 %</b>
+          <div class="sub-val" id="outOffDutyDecimal">0.417 fraction</div>
+        </div>
+
+        <!-- 4. Voltage Conversion Gain / Period -->
+        <div class="res-cell" id="cellGain">
+          <small id="lblGainTitle">Voltage Gain Ratio (M)</small>
+          <b id="outGain">2.40 &times;</b>
+          <div class="sub-val" id="outGainFormula">V<sub>out</sub> / V<sub>supply</sub></div>
+        </div>
+
+        <!-- 5. Practical Duty (with Efficiency) -->
+        <div class="res-cell" id="cellPracticalDuty">
+          <small>Practical Duty (at 90% &eta;)</small>
+          <b id="outPracticalDuty">62.50 %</b>
+          <div class="sub-val">Compensates for losses</div>
+        </div>
+
+        <!-- 6. Switch Turn-On Time (Ton) -->
+        <div class="res-cell">
+          <small>Turn-On Time (T<sub>on</sub>)</small>
+          <b id="outTon">5.83 µs</b>
+          <div class="sub-val" id="outTonSub">Active switch closed</div>
+        </div>
+
+        <!-- 7. Switch Turn-Off Time (Toff) -->
+        <div class="res-cell">
+          <small>Turn-Off Time (T<sub>off</sub>)</small>
+          <b id="outToff">4.17 µs</b>
+          <div class="sub-val" id="outToffSub">Diode freewheeling</div>
+        </div>
+      </div>
+
+      <!-- Visual Schematic / Waveform Box -->
+      <div class="visual-card">
+        <div class="visual-header">
+          <span id="visualHeaderTitle"><i class="fas fa-microchip" style="color:var(--acc);"></i> Boost Converter Topology</span>
+          <span id="lblVisualSub" style="font-family:var(--mono); color:var(--acc); font-size:0.75rem;">CCM Mode</span>
+        </div>
+        <svg class="visual-svg" id="visualSvg" viewBox="0 0 460 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Dynamically filled by JavaScript -->
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Educational Theory & Formulas -->
+  <div class="content-card">
+    <h2><i class="fas fa-square-root-variable"></i> Fundamental Formulas & Operating Principles</h2>
+    <p style="color:var(--mut); font-size:0.92rem; line-height:1.65;">
+      The <strong>Duty Cycle</strong> (denoted as <strong>D</strong>) is the fundamental control variable in pulse-width modulation and switched-mode power supplies (SMPS). It dictates the steady-state voltage transformation based on the <strong>Principle of Inductor Volt-Second Balance</strong>.
+    </p>
+
+    <!-- 1. Periodic Pulse Signal -->
+    <h3 style="font-size:1.05rem; margin-top:1.25rem; color:var(--txt);">1. Periodic Pulse Waveform</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      For any periodic pulse train of frequency <strong>f</strong> and period <strong>T = 1 / f = T<sub>on</sub> + T<sub>off</sub></strong>:
+    </p>
+    <div class="formula-box">
+      Duty Cycle: &nbsp;D = T<sub>on</sub> &divide; T = T<sub>on</sub> &divide; (T<sub>on</sub> + T<sub>off</sub>) = T<sub>on</sub> &times; f<br>
+      Percentage: D(%) = D &times; 100%
+    </div>
+
+    <!-- 2. Step-Up Boost Converter -->
+    <h3 style="font-size:1.05rem; margin-top:1.25rem; color:var(--txt);">2. Step-Up (Boost) Converter</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      A Boost converter steps up a lower input supply voltage to a higher output voltage (V<sub>out</sub> &gt; V<sub>supply</sub>). Applying volt-second balance across the inductor in Continuous Conduction Mode (CCM):
+    </p>
+    <div class="formula-box">
+      Voltage Transfer: &nbsp;V<sub>out</sub> &divide; V<sub>supply</sub> = 1 &divide; (1 &minus; D)<br>
+      Ideal Duty Cycle: &nbsp;D = (V<sub>out</sub> &minus; V<sub>supply</sub>) &divide; V<sub>out</sub> = 1 &minus; (V<sub>supply</sub> &divide; V<sub>out</sub>)<br>
+      With Efficiency &eta;: &nbsp;D = 1 &minus; ((V<sub>supply</sub> &times; &eta;) &divide; V<sub>out</sub>)
+    </div>
+
+    <!-- 3. Step-Down Buck Converter -->
+    <h3 style="font-size:1.05rem; margin-top:1.25rem; color:var(--txt);">3. Step-Down (Buck) Converter</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      A Buck converter produces an output voltage strictly lower than the input supply (V<sub>out</sub> &lt; V<sub>supply</sub>):
+    </p>
+    <div class="formula-box">
+      Voltage Transfer: &nbsp;V<sub>out</sub> &divide; V<sub>supply</sub> = D<br>
+      Ideal Duty Cycle: &nbsp;D = V<sub>out</sub> &divide; V<sub>supply</sub><br>
+      With Efficiency &eta;: &nbsp;D = V<sub>out</sub> &divide; (V<sub>supply</sub> &times; &eta;)
+    </div>
+
+    <!-- 4. Buck-Boost & Cuk Converter -->
+    <h3 style="font-size:1.05rem; margin-top:1.25rem; color:var(--txt);">4. Buck-Boost & Ćuk Converters</h3>
+    <p style="color:var(--mut); font-size:0.9rem;">
+      These topologies can step up or step down the magnitude of the supply voltage while inverting the output polarity:
+    </p>
+    <div class="formula-box">
+      Voltage Transfer: &nbsp;|V<sub>out</sub>| &divide; V<sub>supply</sub> = D &divide; (1 &minus; D)<br>
+      Ideal Duty Cycle: &nbsp;D = |V<sub>out</sub>| &divide; (|V<sub>out</sub>| + V<sub>supply</sub>)
+    </div>
+  </div>
+
+  <!-- Converter Topologies Comparison Table -->
+  <div class="content-card">
+    <h2><i class="fas fa-table"></i> DC-DC Converter Topologies Comparison</h2>
+    <div class="table-responsive">
+      <table class="calc-table">
+        <thead>
+          <tr>
+            <th>Topology</th>
+            <th>Type</th>
+            <th>Voltage Transfer (V<sub>out</sub> / V<sub>in</sub>)</th>
+            <th>Duty Cycle Formula (D)</th>
+            <th>Typical Max Gain</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Boost</strong></td>
+            <td>Step-Up</td>
+            <td>1 / (1 &minus; D)</td>
+            <td>(V<sub>out</sub> &minus; V<sub>in</sub>) / V<sub>out</sub></td>
+            <td>4&times; to 6&times; (limited by parasitics)</td>
+          </tr>
+          <tr>
+            <td><strong>Buck</strong></td>
+            <td>Step-Down</td>
+            <td>D</td>
+            <td>V<sub>out</sub> / V<sub>in</sub></td>
+            <td>&lt; 1.0 (step down only)</td>
+          </tr>
+          <tr>
+            <td><strong>Buck-Boost</strong></td>
+            <td>Inverting Step-Up/Down</td>
+            <td>&minus;D / (1 &minus; D)</td>
+            <td>|V<sub>out</sub>| / (|V<sub>out</sub>| + V<sub>in</sub>)</td>
+            <td>Flexible step-up and step-down</td>
+          </tr>
+          <tr>
+            <td><strong>Ćuk</strong></td>
+            <td>Inverting Step-Up/Down</td>
+            <td>&minus;D / (1 &minus; D)</td>
+            <td>|V<sub>out</sub>| / (|V<sub>out</sub>| + V<sub>in</sub>)</td>
+            <td>Low ripple on both input & output</td>
+          </tr>
+          <tr>
+            <td><strong>SEPIC</strong></td>
+            <td>Non-Inverting Step-Up/Down</td>
+            <td>D / (1 &minus; D)</td>
+            <td>V<sub>out</sub> / (V<sub>out</sub> + V<sub>in</sub>)</td>
+            <td>Great for wide-ranging battery voltages</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Worked Examples -->
+  <div class="content-card">
+    <h2><i class="fas fa-book-open"></i> Practical Worked Engineering Examples</h2>
+
+    <!-- Example 1: 5V to 12V Boost -->
+    <div style="background:var(--bg2); border:1px solid var(--br); border-radius:var(--r-sm); padding:1.15rem; margin-bottom:1rem;">
+      <h3 style="font-size:1rem; color:var(--txt); margin-bottom:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+        <span><strong>Example 1:</strong> 5V USB to 12V DC Step-Up (Boost Converter)</span>
+        <button class="btn-sm" id="btnLoadEx1" type="button"><i class="fas fa-arrow-up-right-from-square"></i> Load This</button>
+      </h3>
+      <p style="color:var(--mut); font-size:0.88rem; line-height:1.55;">
+        A USB 5V rail powers a 12V cooling fan using a boost switching regulator at 100 kHz:
+      </p>
+      <div style="margin-top:0.5rem; font-family:var(--mono); font-size:0.82rem; color:var(--acc);">
+        &bull; D = (12 &minus; 5) / 12 = 7 / 12 = <strong>58.33%</strong><br>
+        &bull; Period T = 10 µs &bull; T<sub>on</sub> = <strong>5.83 µs</strong>, T<sub>off</sub> = <strong>4.17 µs</strong><br>
+        &bull; With 90% efficiency: D = 1 &minus; (5 &times; 0.90 / 12) = <strong>62.5%</strong>
+      </div>
+    </div>
+
+    <!-- Example 2: 12V to 5V Buck -->
+    <div style="background:var(--bg2); border:1px solid var(--br); border-radius:var(--r-sm); padding:1.15rem; margin-bottom:1rem;">
+      <h3 style="font-size:1rem; color:var(--txt); margin-bottom:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+        <span><strong>Example 2:</strong> 12V Car Battery to 5V USB Step-Down (Buck Converter)</span>
+        <button class="btn-sm" id="btnLoadEx2" type="button"><i class="fas fa-arrow-up-right-from-square"></i> Load This</button>
+      </h3>
+      <p style="color:var(--mut); font-size:0.88rem; line-height:1.55;">
+        Stepping down 12V vehicle power to 5.0V phone charging:
+      </p>
+      <div style="margin-top:0.5rem; font-family:var(--mono); font-size:0.82rem; color:var(--acc);">
+        &bull; D = 5.0 / 12.0 = <strong>41.67%</strong> &bull; T<sub>on</sub> = 4.17 µs of a 10 µs cycle (at 100 kHz)
+      </div>
+    </div>
+
+    <!-- Example 3: Pulse Signal -->
+    <div style="background:var(--bg2); border:1px solid var(--br); border-radius:var(--r-sm); padding:1.15rem;">
+      <h3 style="font-size:1rem; color:var(--txt); margin-bottom:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+        <span><strong>Example 3:</strong> 100 kHz Periodic Pulse Signal</span>
+        <button class="btn-sm" id="btnLoadEx3" type="button"><i class="fas fa-arrow-up-right-from-square"></i> Load This</button>
+      </h3>
+      <p style="color:var(--mut); font-size:0.88rem; line-height:1.55;">
+        A signal is active for 2.5 µs and inactive for 7.5 µs:
+      </p>
+      <div style="margin-top:0.5rem; font-family:var(--mono); font-size:0.82rem; color:var(--acc);">
+        &bull; Total Period T = 2.5 + 7.5 = 10 µs (100 kHz)<br>
+        &bull; D = 2.5 / 10 = <strong>25.0%</strong> &bull; Average Voltage = 0.25 &times; V<sub>peak</sub>
+      </div>
+    </div>
+  </div>
+
+  <!-- Frequently Asked Questions (FAQ) -->
+  <div class="content-card">
+    <h2><i class="fas fa-circle-question"></i> Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary class="faq-question">
+          <span>Why is a Boost Converter's duty cycle practically limited to ~85%?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          While the theoretical formula <code>V<sub>out</sub> / V<sub>in</sub> = 1 / (1 &minus; D)</code> implies infinite voltage gain as D approaches 1.0 (100%), real-world circuits contain parasitic resistances: inductor DC resistance (DCR), switch R<sub>ds(on)</sub>, and diode voltage drop. As D exceeds 85%, the switch spends almost the entire cycle shorting the inductor to ground, leaving negligible time to transfer energy to the output capacitor. The resulting I<sup>2</sup>R conduction losses cause the output voltage and efficiency to collapse rapidly.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>Can a Boost converter step down voltage if Vsupply &gt; Vout?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          No. In a standard Boost topology, there is an uninterrupted forward path from V<sub>supply</sub> through the inductor and the freewheeling diode directly to V<sub>out</sub>. If V<sub>supply</sub> &gt; V<sub>out</sub>, current will conduct uncontrolled through the diode to the output. To step up and step down flexibly, you must use a <strong>Buck-Boost</strong>, <strong>Ćuk</strong>, or <strong>4-Switch Buck-Boost</strong> converter.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-question">
+          <span>How does duty cycle relate to power in heating and lighting?</span>
+          <i class="fas fa-chevron-down"></i>
+        </summary>
+        <div class="faq-answer">
+          Average electrical power in a resistive load (such as a heater or incandescent filament) scales with the square of RMS voltage: <code>P<sub>avg</sub> = V<sub>rms</sub><sup>2</sup> / R = (V<sub>peak</sub><sup>2</sup> &times; D) / R</code>. Therefore, the average power delivered is directly proportional to the duty cycle <strong>D</strong>. A 50% duty cycle delivers exactly 50% of the maximum continuous power.
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <!-- Saved Calculations History -->
+  <div class="history-card">
+    <div class="history-header">
+      <h3><i class="fas fa-clock-rotate-left"></i> Saved Calculations</h3>
+      <div class="history-actions">
+        <button class="btn-sm" id="btnExportJson" type="button" title="Export as JSON">
+          <i class="fas fa-download"></i> Export JSON
+        </button>
+        <button class="btn-sm del" id="btnClearHistory" type="button" title="Clear History">
+          <i class="fas fa-trash"></i> Clear All
+        </button>
+      </div>
+    </div>
+    <div class="history-list" id="historyList">
+      <div class="empty-state">No saved calculations yet. Click "Save Calc" above to store your readings.</div>
+    </div>
+  </div>
+</main>
+
+<!-- Advanced Tools Modal -->
+<div class="modal-overlay" id="advToolsModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="modalTitle"><i class="fas fa-star" style="color:var(--acc);"></i> Advanced Engineering Tools</h3>
+      <button class="close-modal-btn" id="btnCloseModal" type="button" aria-label="Close dialog">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+    <p style="color:var(--mut); font-size:0.88rem; margin-bottom:1.25rem;">
+      Explore related power electronics, PWM signal processing, and circuit calculators:
+    </p>
+    <div class="tools-grid">
+      <a href="/sites/buck-boost-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-bolt"></i> Buck-Boost Converter Calculator</div>
+        <p>Complete component sizing: calculate minimum inductance (L), output capacitance (C), and ripple currents.</p>
+      </a>
+      <a href="/sites/pwm-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-wave-square"></i> PWM Calculator</div>
+        <p>Calculate PWM average voltage, timer bit resolution, and compare match register values for ESP32 and Arduino.</p>
+      </a>
+      <a href="/sites/555-timer-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-clock"></i> 555 Timer Calculator</div>
+        <p>Generate precise astable duty cycles and monostable pulse widths with NE555 timer ICs.</p>
+      </a>
+      <a href="/sites/rc-time-constant-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-stopwatch"></i> RC Time Constant Calculator</div>
+        <p>Filter switching PWM harmonics into pure analog DC voltage levels with low ripple.</p>
+      </a>
+      <a href="/sites/voltage-divider-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-divide"></i> Voltage Divider Calculator</div>
+        <p>Design feedback resistor dividers to set regulator output voltages (V_out to V_ref pin).</p>
+      </a>
+      <a href="/sites/solar-inverter-sizing-calculator.html" class="tool-tile">
+        <div class="tool-tile-header"><i class="fas fa-plug-circle-bolt"></i> Solar Inverter Sizing Calculator</div>
+        <p>Size off-grid sine wave inverters with inductive motor starting surge capacity and DC battery amps.</p>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast"><i class="fas fa-check-circle" style="color:var(--ok);"></i> <span id="toastMsg">Calculation saved!</span></div>
+
+<!-- Footer Chrome -->
+<footer class="mta-foot" role="contentinfo">
+  <div class="mta-foot-in">
+    <div class="mta-social">
+      <a href="https://github.com/Mohamed-Tarek-Abdelhady" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/mohamed-tarek-abdelhady/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="/">Back to Portfolio</a></p>
+    <div class="mta-actions">
+      <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+      <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+    </div>
+  </div>
+</footer>
+
+<!-- Interactive Logic -->
+<script>
+(function() {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+
+  let currentMode = 'boost'; // 'boost', 'buck', 'buckboost', 'cuk', 'pulse'
+
+  // Input Elements
+  const inpVout = $('inpVout');
+  const selVoutUnit = $('selVoutUnit');
+  const inpVin = $('inpVin');
+  const selVinUnit = $('selVinUnit');
+  const inpFreq = $('inpFreq');
+  const selFreqUnit = $('selFreqUnit');
+  const inpEff = $('inpEff');
+  const lblEffVal = $('lblEffVal');
+
+  const inpTon = $('inpTon');
+  const selTonUnit = $('selTonUnit');
+  const inpToff = $('inpToff');
+  const selToffUnit = $('selToffUnit');
+
+  // Containers
+  const dcdcInputs = $('dcdcInputs');
+  const pulseInputs = $('pulseInputs');
+  const cardInputTitle = $('cardInputTitle');
+  const calcWarning = $('calcWarning');
+  const calcWarningMsg = $('calcWarningMsg');
+
+  // Results Elements
+  const lblMainDutyTitle = $('lblMainDutyTitle');
+  const outDutyPct = $('outDutyPct');
+  const outDutyFormula = $('outDutyFormula');
+  const outDutyDecimal = $('outDutyDecimal');
+  const outOffDuty = $('outOffDuty');
+  const outOffDutyDecimal = $('outOffDutyDecimal');
+  const cellGain = $('cellGain');
+  const lblGainTitle = $('lblGainTitle');
+  const outGain = $('outGain');
+  const outGainFormula = $('outGainFormula');
+  const cellPracticalDuty = $('cellPracticalDuty');
+  const outPracticalDuty = $('outPracticalDuty');
+  const outTon = $('outTon');
+  const outTonSub = $('outTonSub');
+  const outToff = $('outToff');
+  const outToffSub = $('outToffSub');
+
+  // SVG Elements
+  const visualHeaderTitle = $('visualHeaderTitle');
+  const lblVisualSub = $('lblVisualSub');
+  const visualSvg = $('visualSvg');
+
+  // Buttons & Dialogs
+  const btnSaveCalc = $('btnSaveCalc');
+  const btnPrintPdf = $('btnPrintPdf');
+  const btnAdvTools = $('btnAdvTools');
+  const btnReset = $('btnReset');
+  const btnLoadExample = $('btnLoadExample');
+  const btnLoadEx1 = $('btnLoadEx1');
+  const btnLoadEx2 = $('btnLoadEx2');
+  const btnLoadEx3 = $('btnLoadEx3');
+  const btnCloseModal = $('btnCloseModal');
+  const advToolsModal = $('advToolsModal');
+  const toast = $('toast');
+  const toastMsg = $('toastMsg');
+  const historyList = $('historyList');
+  const btnExportJson = $('btnExportJson');
+  const btnClearHistory = $('btnClearHistory');
+
+  const STORAGE_KEY = 'mta_duty_cycle_history';
+  let currentCalcState = null;
+
+  function showToast(msg) {
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2600);
+  }
+
+  function formatTime(s) {
+    if (!isFinite(s) || s < 0) return '–';
+    if (s === 0) return '0 s';
+    if (s < 1e-9) return (s * 1e12).toFixed(2) + ' ps';
+    if (s < 1e-6) return (s * 1e9).toFixed(2) + ' ns';
+    if (s < 1e-3) return (s * 1e6).toFixed(2) + ' µs';
+    if (s < 1) return (s * 1e3).toFixed(2) + ' ms';
+    return s.toFixed(3) + ' s';
+  }
+
+  // Calculate Function
+  function calculate() {
+    calcWarning.style.display = 'none';
+
+    if (currentMode === 'pulse') {
+      calculatePulse();
+    } else {
+      calculateConverter();
+    }
+  }
+
+  // Calculate DC-DC Converters
+  function calculateConverter() {
+    const vout = parseFloat(inpVout.value) * parseFloat(selVoutUnit.value);
+    const vin = parseFloat(inpVin.value) * parseFloat(selVinUnit.value);
+    const fsw = parseFloat(inpFreq.value) * parseFloat(selFreqUnit.value);
+    const eff = parseFloat(inpEff.value) / 100;
+    lblEffVal.textContent = Math.round(eff * 100) + '%';
+
+    cellGain.style.display = 'block';
+    cellPracticalDuty.style.display = 'block';
+
+    if (!(vout > 0 && vin > 0)) {
+      outDutyPct.textContent = '–';
+      return;
+    }
+
+    let dIdeal = 0;
+    let dPractical = 0;
+    let formulaStr = '';
+    let gainStr = '';
+    const gain = vout / vin;
+
+    if (currentMode === 'boost') {
+      // Boost: Vout must be > Vin
+      if (vout <= vin) {
+        calcWarning.style.display = 'flex';
+        calcWarning.classList.add('err');
+        calcWarningMsg.innerHTML = `<strong>Invalid Parameters for Boost:</strong> In a Step-Up Boost converter, V<sub>out</sub> (${vout}V) must be strictly greater than V<sub>supply</sub> (${vin}V). Switch to Buck if stepping down.`;
+      }
+      dIdeal = (vout - vin) / vout;
+      dPractical = 1 - ((vin * eff) / vout);
+      formulaStr = `(${vout}V - ${vin}V) / ${vout}V`;
+      gainStr = `${gain.toFixed(2)}× (Step-Up)`;
+    } else if (currentMode === 'buck') {
+      // Buck: Vout must be < Vin
+      if (vout >= vin) {
+        calcWarning.style.display = 'flex';
+        calcWarning.classList.add('err');
+        calcWarningMsg.innerHTML = `<strong>Invalid Parameters for Buck:</strong> In a Step-Down Buck converter, V<sub>out</sub> (${vout}V) must be strictly less than V<sub>supply</sub> (${vin}V). Switch to Boost if stepping up.`;
+      }
+      dIdeal = vout / vin;
+      dPractical = vout / (vin * eff);
+      formulaStr = `${vout}V / ${vin}V`;
+      gainStr = `${gain.toFixed(2)}× (Step-Down)`;
+    } else if (currentMode === 'buckboost' || currentMode === 'cuk') {
+      // Inverting Buck-Boost / Cuk: Vout magnitude
+      dIdeal = vout / (vout + vin);
+      dPractical = vout / (vout + (vin * eff));
+      formulaStr = `${vout}V / (${vout}V + ${vin}V)`;
+      gainStr = `${gain.toFixed(2)}× (${vout > vin ? 'Step-Up' : 'Step-Down'})`;
+    }
+
+    // High Duty cycle warning
+    if (dIdeal > 0.85 && currentMode === 'boost') {
+      calcWarning.style.display = 'flex';
+      calcWarning.classList.remove('err');
+      calcWarningMsg.innerHTML = `<strong>High Duty Cycle Warning (&gt;85%):</strong> Parasitic resistances limit real-world Boost converters to ~4× to 6× maximum gain. Operating above 85% causes high switch conduction stress and poor efficiency.`;
+    }
+
+    // Bound duty cycles
+    const dClamped = Math.max(0, Math.min(dIdeal, 0.999));
+    const dPct = dClamped * 100;
+    const offDutyPct = (1 - dClamped) * 100;
+
+    const period = fsw > 0 ? (1 / fsw) : 0;
+    const ton = period * dClamped;
+    const toff = period * (1 - dClamped);
+
+    // Outputs
+    outDutyPct.textContent = `${dPct.toFixed(2)} %`;
+    outDutyFormula.textContent = formulaStr;
+    outDutyDecimal.textContent = dClamped.toFixed(3);
+
+    outOffDuty.textContent = `${offDutyPct.toFixed(2)} %`;
+    outOffDutyDecimal.textContent = `${(1 - dClamped).toFixed(3)} fraction`;
+
+    lblGainTitle.textContent = 'Voltage Conversion Gain (M)';
+    outGain.textContent = `${gain.toFixed(2)} ×`;
+    outGainFormula.textContent = gainStr;
+
+    outPracticalDuty.textContent = `${(Math.min(dPractical, 0.999) * 100).toFixed(2)} %`;
+
+    outTon.textContent = formatTime(ton);
+    outTonSub.textContent = `At ${inpFreq.value} ${selFreqUnit.options[selFreqUnit.selectedIndex].text}`;
+    outToff.textContent = formatTime(toff);
+    outToffSub.textContent = `Period: ${formatTime(period)}`;
+
+    // Draw Schematic
+    drawConverterSchematic(vin, vout, dPct);
+
+    // Cache state
+    currentCalcState = {
+      mode: currentMode,
+      vin: vin,
+      vout: vout,
+      dutyPct: dPct.toFixed(2),
+      gain: gain.toFixed(2),
+      tonStr: formatTime(ton),
+      toffStr: formatTime(toff),
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+  }
+
+  // Calculate Periodic Pulse Mode
+  function calculatePulse() {
+    const ton = parseFloat(inpTon.value) * parseFloat(selTonUnit.value);
+    const toff = parseFloat(inpToff.value) * parseFloat(selToffUnit.value);
+
+    cellGain.style.display = 'block';
+    cellPracticalDuty.style.display = 'none';
+
+    if (!(ton > 0 && toff >= 0)) {
+      outDutyPct.textContent = '–';
+      return;
+    }
+
+    const period = ton + toff;
+    const d = ton / period;
+    const dPct = d * 100;
+    const freq = period > 0 ? (1 / period) : 0;
+
+    outDutyPct.textContent = `${dPct.toFixed(2)} %`;
+    outDutyFormula.textContent = `${formatTime(ton)} / (${formatTime(ton)} + ${formatTime(toff)})`;
+    outDutyDecimal.textContent = d.toFixed(3);
+
+    outOffDuty.textContent = `${((1 - d) * 100).toFixed(2)} %`;
+    outOffDutyDecimal.textContent = `${(1 - d).toFixed(3)} fraction`;
+
+    lblGainTitle.textContent = 'Pulse Frequency';
+    if (freq >= 1e6) {
+      outGain.textContent = `${(freq / 1e6).toFixed(2)} MHz`;
+    } else if (freq >= 1e3) {
+      outGain.textContent = `${(freq / 1e3).toFixed(2)} kHz`;
+    } else {
+      outGain.textContent = `${freq.toFixed(1)} Hz`;
+    }
+    outGainFormula.textContent = `Period T = ${formatTime(period)}`;
+
+    outTon.textContent = formatTime(ton);
+    outTonSub.textContent = 'Active High time';
+    outToff.textContent = formatTime(toff);
+    outToffSub.textContent = 'Inactive Low time';
+
+    drawPulseWaveform(d, period, ton, toff);
+
+    currentCalcState = {
+      mode: 'Pulse Waveform',
+      tonStr: formatTime(ton),
+      toffStr: formatTime(toff),
+      dutyPct: dPct.toFixed(2),
+      periodStr: formatTime(period),
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+  }
+
+  // Draw SVG Converter Topology
+  function drawConverterSchematic(vin, vout, dutyPct) {
+    visualHeaderTitle.innerHTML = `<i class="fas fa-microchip" style="color:var(--acc);"></i> ${currentMode.toUpperCase()} Converter Schematic`;
+    lblVisualSub.textContent = `Duty: ${dutyPct.toFixed(1)}%`;
+
+    let svgHtml = '';
+
+    if (currentMode === 'boost') {
+      svgHtml = `
+        <!-- Boost Circuit -->
+        <circle cx="35" cy="70" r="5" fill="#f59e0b" />
+        <text x="35" y="55" fill="#f1f5f9" font-size="11" font-weight="700" text-anchor="middle">${vin.toFixed(1)}V</text>
+        <text x="35" y="92" fill="#94a3b8" font-size="9" text-anchor="middle">Vin</text>
+
+        <!-- Inductor L -->
+        <line x1="35" y1="70" x2="110" y2="70" stroke="#f59e0b" stroke-width="2.5" />
+        <rect x="110" y="60" width="60" height="20" rx="4" fill="#1c2240" stroke="#f59e0b" stroke-width="2" />
+        <text x="140" y="74" fill="#f1f5f9" font-size="10" font-family="monospace" text-anchor="middle">Inductor L</text>
+
+        <!-- Node to Switch Q & Diode D -->
+        <line x1="170" y1="70" x2="230" y2="70" stroke="#f59e0b" stroke-width="2.5" />
+        <circle cx="230" cy="70" r="4" fill="#06b6d4" />
+
+        <!-- Switch Q to Ground -->
+        <line x1="230" y1="70" x2="230" y2="95" stroke="#64748b" stroke-width="2" />
+        <rect x="220" y="95" width="20" height="20" rx="3" fill="#141829" stroke="#06b6d4" stroke-width="1.5" />
+        <text x="250" y="108" fill="#06b6d4" font-size="9" font-family="monospace">Q (MOSFET)</text>
+        <line x1="230" y1="115" x2="230" y2="125" stroke="#64748b" stroke-width="2" />
+        <line x1="222" y1="125" x2="238" y2="125" stroke="#64748b" stroke-width="2" />
+        <line x1="226" y1="129" x2="234" y2="129" stroke="#64748b" stroke-width="1.5" />
+
+        <!-- Diode D -->
+        <line x1="230" y1="70" x2="280" y2="70" stroke="#f59e0b" stroke-width="2" />
+        <polygon points="280,63 295,70 280,77" fill="#f59e0b" />
+        <line x1="295" y1="63" x2="295" y2="77" stroke="#f59e0b" stroke-width="2.5" />
+        <text x="288" y="55" fill="#94a3b8" font-size="9" text-anchor="middle">Diode</text>
+
+        <!-- Output Node with Cap C -->
+        <line x1="295" y1="70" x2="350" y2="70" stroke="#f59e0b" stroke-width="2.5" />
+        <line x1="350" y1="70" x2="350" y2="95" stroke="#64748b" stroke-width="2" />
+        <line x1="340" y1="95" x2="360" y2="95" stroke="#06b6d4" stroke-width="2" />
+        <line x1="340" y1="100" x2="360" y2="100" stroke="#06b6d4" stroke-width="2" />
+        <text x="375" y="100" fill="#94a3b8" font-size="9">C_out</text>
+        <line x1="350" y1="100" x2="350" y2="125" stroke="#64748b" stroke-width="2" />
+        <line x1="342" y1="125" x2="358" y2="125" stroke="#64748b" stroke-width="2" />
+
+        <!-- Output Vout -->
+        <line x1="350" y1="70" x2="415" y2="70" stroke="#22c55e" stroke-width="2.5" />
+        <circle cx="415" cy="70" r="5" fill="#22c55e" />
+        <text x="415" y="55" fill="#f1f5f9" font-size="11" font-weight="700" text-anchor="middle">${vout.toFixed(1)}V</text>
+        <text x="415" y="92" fill="#94a3b8" font-size="9" text-anchor="middle">Vout</text>
+      `;
+    } else if (currentMode === 'buck') {
+      svgHtml = `
+        <!-- Buck Circuit -->
+        <circle cx="35" cy="70" r="5" fill="#f59e0b" />
+        <text x="35" y="55" fill="#f1f5f9" font-size="11" font-weight="700" text-anchor="middle">${vin.toFixed(1)}V</text>
+        <text x="35" y="92" fill="#94a3b8" font-size="9" text-anchor="middle">Vin</text>
+
+        <!-- Switch Q High Side -->
+        <line x1="35" y1="70" x2="100" y2="70" stroke="#f59e0b" stroke-width="2.5" />
+        <rect x="100" y="60" width="50" height="20" rx="3" fill="#141829" stroke="#06b6d4" stroke-width="2" />
+        <text x="125" y="74" fill="#06b6d4" font-size="10" font-family="monospace" text-anchor="middle">Switch Q</text>
+
+        <!-- Mid Switching Node -->
+        <line x1="150" y1="70" x2="200" y2="70" stroke="#f59e0b" stroke-width="2.5" />
+        <circle cx="200" cy="70" r="4" fill="#06b6d4" />
+
+        <!-- Catch Diode D to GND -->
+        <line x1="200" y1="70" x2="200" y2="85" stroke="#64748b" stroke-width="2" />
+        <polygon points="200,85 193,98 207,98" fill="#f59e0b" />
+        <line x1="193" y1="85" x2="207" y2="85" stroke="#f59e0b" stroke-width="2.5" />
+        <text x="230" y="96" fill="#94a3b8" font-size="9">Diode</text>
+        <line x1="200" y1="98" x2="200" y2="125" stroke="#64748b" stroke-width="2" />
+        <line x1="192" y1="125" x2="208" y2="125" stroke="#64748b" stroke-width="2" />
+
+        <!-- Inductor L -->
+        <line x1="200" y1="70" x2="250" y2="70" stroke="#f59e0b" stroke-width="2.5" />
+        <rect x="250" y="60" width="60" height="20" rx="4" fill="#1c2240" stroke="#f59e0b" stroke-width="2" />
+        <text x="280" y="74" fill="#f1f5f9" font-size="10" font-family="monospace" text-anchor="middle">Inductor L</text>
+
+        <!-- Cap C -->
+        <line x1="310" y1="70" x2="360" y2="70" stroke="#f59e0b" stroke-width="2.5" />
+        <line x1="360" y1="70" x2="360" y2="95" stroke="#64748b" stroke-width="2" />
+        <line x1="350" y1="95" x2="370" y2="95" stroke="#06b6d4" stroke-width="2" />
+        <line x1="350" y1="100" x2="370" y2="100" stroke="#06b6d4" stroke-width="2" />
+        <text x="385" y="100" fill="#94a3b8" font-size="9">C_out</text>
+        <line x1="360" y1="100" x2="360" y2="125" stroke="#64748b" stroke-width="2" />
+        <line x1="352" y1="125" x2="368" y2="125" stroke="#64748b" stroke-width="2" />
+
+        <!-- Output Vout -->
+        <line x1="360" y1="70" x2="415" y2="70" stroke="#22c55e" stroke-width="2.5" />
+        <circle cx="415" cy="70" r="5" fill="#22c55e" />
+        <text x="415" y="55" fill="#f1f5f9" font-size="11" font-weight="700" text-anchor="middle">${vout.toFixed(1)}V</text>
+        <text x="415" y="92" fill="#94a3b8" font-size="9" text-anchor="middle">Vout</text>
+      `;
+    } else {
+      // Inverting Buck-Boost / Cuk schematic
+      svgHtml = `
+        <circle cx="35" cy="70" r="5" fill="#f59e0b" />
+        <text x="35" y="55" fill="#f1f5f9" font-size="11" font-weight="700" text-anchor="middle">${vin.toFixed(1)}V</text>
+        <text x="35" y="92" fill="#94a3b8" font-size="9" text-anchor="middle">Vin</text>
+
+        <!-- Switch Q -->
+        <line x1="35" y1="70" x2="110" y2="70" stroke="#f59e0b" stroke-width="2.5" />
+        <rect x="110" y="60" width="50" height="20" rx="3" fill="#141829" stroke="#06b6d4" stroke-width="2" />
+        <text x="135" y="74" fill="#06b6d4" font-size="10" font-family="monospace" text-anchor="middle">Switch</text>
+
+        <!-- Node to Shunt Inductor L -->
+        <line x1="160" y1="70" x2="220" y2="70" stroke="#f59e0b" stroke-width="2.5" />
+        <circle cx="220" cy="70" r="4" fill="#f59e0b" />
+        <line x1="220" y1="70" x2="220" y2="90" stroke="#64748b" stroke-width="2" />
+        <rect x="210" y="90" width="20" height="25" rx="3" fill="#1c2240" stroke="#f59e0b" stroke-width="1.5" />
+        <text x="240" y="106" fill="#94a3b8" font-size="9">L to GND</text>
+        <line x1="220" y1="115" x2="220" y2="125" stroke="#64748b" stroke-width="2" />
+        <line x1="212" y1="125" x2="228" y2="125" stroke="#64748b" stroke-width="2" />
+
+        <!-- Reversed Diode for Inverting -->
+        <line x1="220" y1="70" x2="280" y2="70" stroke="#f59e0b" stroke-width="2" />
+        <polygon points="295,63 280,70 295,77" fill="#f59e0b" />
+        <line x1="280" y1="63" x2="280" y2="77" stroke="#f59e0b" stroke-width="2.5" />
+        <text x="288" y="55" fill="#94a3b8" font-size="9" text-anchor="middle">Diode (Rev)</text>
+
+        <!-- Cap & Output -->
+        <line x1="295" y1="70" x2="350" y2="70" stroke="#f59e0b" stroke-width="2.5" />
+        <line x1="350" y1="70" x2="350" y2="95" stroke="#64748b" stroke-width="2" />
+        <line x1="340" y1="95" x2="360" y2="95" stroke="#06b6d4" stroke-width="2" />
+        <line x1="340" y1="100" x2="360" y2="100" stroke="#06b6d4" stroke-width="2" />
+        <line x1="350" y1="100" x2="350" y2="125" stroke="#64748b" stroke-width="2" />
+        <line x1="342" y1="125" x2="358" y2="125" stroke="#64748b" stroke-width="2" />
+
+        <line x1="350" y1="70" x2="415" y2="70" stroke="#22c55e" stroke-width="2.5" />
+        <circle cx="415" cy="70" r="5" fill="#22c55e" />
+        <text x="415" y="55" fill="#f1f5f9" font-size="11" font-weight="700" text-anchor="middle">-${vout.toFixed(1)}V</text>
+        <text x="415" y="92" fill="#94a3b8" font-size="9" text-anchor="middle">Vout (Inv)</text>
+      `;
+    }
+
+    visualSvg.innerHTML = svgHtml;
+  }
+
+  // Draw Pulse Waveform SVG
+  function drawPulseWaveform(d, period, ton, toff) {
+    visualHeaderTitle.innerHTML = `<i class="fas fa-wave-square" style="color:var(--acc);"></i> Periodic Pulse Waveform`;
+    lblVisualSub.textContent = `Duty: ${(d * 100).toFixed(1)}%`;
+
+    const cycles = 2;
+    const totalW = 400;
+    const cycleW = totalW / cycles;
+    const startX = 30;
+    const yHigh = 35;
+    const yLow = 105;
+
+    let pathD = `M ${startX} ${yLow}`;
+    let fillD = '';
+
+    for (let c = 0; c < cycles; c++) {
+      const cx = startX + c * cycleW;
+      const onW = cycleW * d;
+      const offW = cycleW * (1 - d);
+
+      pathD += ` L ${cx} ${yHigh} L ${cx + onW} ${yHigh} L ${cx + onW} ${yLow} L ${cx + cycleW} ${yLow}`;
+      fillD += `<rect x="${cx}" y="${yHigh}" width="${onW}" height="${yLow - yHigh}" fill="rgba(245, 158, 11, 0.12)" />`;
+    }
+
+    const firstOnW = cycleW * d;
+
+    visualSvg.innerHTML = `
+      <!-- Grid -->
+      <line x1="${startX}" y1="${yHigh}" x2="${startX + totalW}" y2="${yHigh}" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+      <line x1="${startX}" y1="${yLow}" x2="${startX + totalW}" y2="${yLow}" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+
+      <!-- Fills -->
+      ${fillD}
+
+      <!-- Waveform Path -->
+      <path d="${pathD}" fill="none" stroke="#f59e0b" stroke-width="2.5" />
+
+      <!-- Annotations -->
+      <text x="${startX - 6}" y="${yHigh + 4}" fill="#94a3b8" font-size="10" text-anchor="end">HIGH</text>
+      <text x="${startX - 6}" y="${yLow + 4}" fill="#94a3b8" font-size="10" text-anchor="end">LOW</text>
+
+      <!-- Ton Marker -->
+      <line x1="${startX}" y1="${yHigh - 8}" x2="${startX + firstOnW}" y2="${yHigh - 8}" stroke="#06b6d4" stroke-width="1.5" />
+      <text x="${startX + firstOnW / 2}" y="${yHigh - 12}" fill="#06b6d4" font-size="10" font-family="monospace" text-anchor="middle">Ton: ${formatTime(ton)}</text>
+
+      <!-- Period Marker -->
+      <line x1="${startX}" y1="${yLow + 16}" x2="${startX + cycleW}" y2="${yLow + 16}" stroke="#22c55e" stroke-width="1.5" />
+      <text x="${startX + cycleW / 2}" y="${yLow + 28}" fill="#22c55e" font-size="10" font-family="monospace" text-anchor="middle">Period T = ${formatTime(period)}</text>
+    `;
+  }
+
+  // Segmented Mode Navigation Click Handler
+  document.querySelectorAll('.seg-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      currentMode = this.getAttribute('data-mode');
+
+      if (currentMode === 'pulse') {
+        dcdcInputs.style.display = 'none';
+        pulseInputs.style.display = 'block';
+        cardInputTitle.innerHTML = '<i class="fas fa-sliders"></i> Pulse Time Parameters';
+        lblMainDutyTitle.textContent = 'Calculated Duty Cycle (D)';
+      } else {
+        dcdcInputs.style.display = 'block';
+        pulseInputs.style.display = 'none';
+        cardInputTitle.innerHTML = `<i class="fas fa-sliders"></i> ${currentMode.toUpperCase()} Parameters`;
+        lblMainDutyTitle.textContent = `${currentMode.toUpperCase()} Duty Cycle (D)`;
+
+        // Adjust default voltages if needed
+        if (currentMode === 'buck' && parseFloat(inpVout.value) >= parseFloat(inpVin.value)) {
+          inpVout.value = '5';
+          inpVin.value = '12';
+        } else if (currentMode === 'boost' && parseFloat(inpVout.value) <= parseFloat(inpVin.value)) {
+          inpVout.value = '12';
+          inpVin.value = '5';
+        }
+      }
+
+      calculate();
+    });
+  });
+
+  // Voltage Presets
+  document.querySelectorAll('#voltagePresets .preset-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('#voltagePresets .preset-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      inpVin.value = this.getAttribute('data-vin');
+      inpVout.value = this.getAttribute('data-vout');
+
+      const vin = parseFloat(this.getAttribute('data-vin'));
+      const vout = parseFloat(this.getAttribute('data-vout'));
+
+      // Auto switch mode to match preset if needed
+      if (vout > vin && currentMode === 'buck') {
+        document.querySelector('.seg-btn[data-mode="boost"]').click();
+      } else if (vout < vin && currentMode === 'boost') {
+        document.querySelector('.seg-btn[data-mode="buck"]').click();
+      } else {
+        calculate();
+      }
+    });
+  });
+
+  // Pulse Presets
+  document.querySelectorAll('#pulseInputs .preset-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('#pulseInputs .preset-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      inpTon.value = this.getAttribute('data-ton');
+      inpToff.value = this.getAttribute('data-toff');
+      if (this.textContent.includes('RC Servo')) {
+        selTonUnit.value = '1e-3';
+        selToffUnit.value = '1e-3';
+      } else {
+        selTonUnit.value = '1e-6';
+        selToffUnit.value = '1e-6';
+      }
+      calculate();
+    });
+  });
+
+  // Input Listeners
+  [inpVout, selVoutUnit, inpVin, selVinUnit, inpFreq, selFreqUnit, inpEff, inpTon, selTonUnit, inpToff, selToffUnit].forEach(el => {
+    el.addEventListener('input', calculate);
+    el.addEventListener('change', calculate);
+  });
+
+  // Reset to Defaults (Boost 5V -> 12V)
+  btnReset.addEventListener('click', () => {
+    document.querySelector('.seg-btn[data-mode="boost"]').click();
+    inpVin.value = '5';
+    inpVout.value = '12';
+    selVinUnit.value = '1';
+    selVoutUnit.value = '1';
+    inpFreq.value = '100';
+    selFreqUnit.value = '1e3';
+    inpEff.value = '90';
+    inpTon.value = '2.5';
+    inpToff.value = '7.5';
+    selTonUnit.value = '1e-6';
+    selToffUnit.value = '1e-6';
+    calculate();
+    showToast('Reset to default values (5V to 12V Boost, 58.3% Duty).');
+  });
+
+  // Example Loader 1: 5V to 12V Boost
+  function loadBoostEx1() {
+    document.querySelector('.seg-btn[data-mode="boost"]').click();
+    inpVin.value = '5';
+    inpVout.value = '12';
+    inpFreq.value = '100';
+    inpEff.value = '90';
+    calculate();
+    showToast('Loaded Example 1: 5V to 12V Boost Converter (D = 58.3%).');
+  }
+  btnLoadExample.addEventListener('click', loadBoostEx1);
+  btnLoadEx1.addEventListener('click', loadBoostEx1);
+
+  // Example Loader 2: 12V to 5V Buck
+  btnLoadEx2.addEventListener('click', () => {
+    document.querySelector('.seg-btn[data-mode="buck"]').click();
+    inpVin.value = '12';
+    inpVout.value = '5';
+    inpFreq.value = '100';
+    inpEff.value = '90';
+    calculate();
+    showToast('Loaded Example 2: 12V to 5V Buck Converter (D = 41.7%).');
+  });
+
+  // Example Loader 3: Pulse Signal
+  btnLoadEx3.addEventListener('click', () => {
+    document.querySelector('.seg-btn[data-mode="pulse"]').click();
+    inpTon.value = '2.5';
+    inpToff.value = '7.5';
+    selTonUnit.value = '1e-6';
+    selToffUnit.value = '1e-6';
+    calculate();
+    showToast('Loaded Example 3: Pulse Signal 2.5µs / 7.5µs (D = 25.0%).');
+  });
+
+  // Advanced Tools Modal
+  btnAdvTools.addEventListener('click', () => advToolsModal.classList.add('open'));
+  btnCloseModal.addEventListener('click', () => advToolsModal.classList.remove('open'));
+  advToolsModal.addEventListener('click', (e) => {
+    if (e.target === advToolsModal) advToolsModal.classList.remove('open');
+  });
+
+  // PDF Report
+  btnPrintPdf.addEventListener('click', () => {
+    const printDate = $('printDate');
+    if (printDate) printDate.textContent = new Date().toLocaleString();
+    window.print();
+  });
+
+  // History Management
+  function getHistory() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch(e) {
+      return [];
+    }
+  }
+
+  function renderHistory() {
+    const list = getHistory();
+    if (!list.length) {
+      historyList.innerHTML = '<div class="empty-state">No saved calculations yet. Click "Save Calc" above to store your readings.</div>';
+      return;
+    }
+
+    let html = '';
+    list.forEach((item, index) => {
+      let desc = '';
+      if (item.mode === 'Pulse Waveform') {
+        desc = `Ton: ${item.tonStr} • Toff: ${item.toffStr} • Period: ${item.periodStr}`;
+      } else {
+        desc = `Vin: ${item.vin}V &rarr; Vout: ${item.vout}V • Gain: ${item.gain}× (Ton: ${item.tonStr})`;
+      }
+
+      html += `
+        <div class="history-item">
+          <div class="history-meta">
+            <strong>${item.dutyPct}% Duty (${item.mode.toUpperCase()})</strong>
+            <span>${desc} • Saved: ${item.timestamp}</span>
+          </div>
+          <div style="display:flex; gap:0.4rem;">
+            <button class="btn-sm" onclick="window.mtaLoadHistoryItem(${index})"><i class="fas fa-arrow-rotate-left"></i> Load</button>
+            <button class="btn-sm del" onclick="window.mtaDeleteHistoryItem(${index})"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      `;
+    });
+    historyList.innerHTML = html;
+  }
+
+  window.mtaLoadHistoryItem = function(index) {
+    const list = getHistory();
+    const item = list[index];
+    if (!item) return;
+
+    if (item.mode === 'Pulse Waveform') {
+      document.querySelector('.seg-btn[data-mode="pulse"]').click();
+    } else {
+      const modeBtn = document.querySelector(`.seg-btn[data-mode="${item.mode}"]`);
+      if (modeBtn) modeBtn.click();
+      inpVin.value = item.vin;
+      inpVout.value = item.vout;
+    }
+
+    calculate();
+    showToast(`Loaded ${item.dutyPct}% duty calculation.`);
+  };
+
+  window.mtaDeleteHistoryItem = function(index) {
+    let list = getHistory();
+    list.splice(index, 1);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    renderHistory();
+    showToast('Record deleted.');
+  };
+
+  btnSaveCalc.addEventListener('click', () => {
+    if (!currentCalcState) return;
+    let list = getHistory();
+    list.unshift(currentCalcState);
+    if (list.length > 25) list = list.slice(0, 25);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    renderHistory();
+    showToast(`Saved ${currentCalcState.dutyPct}% duty to history.`);
+  });
+
+  btnExportJson.addEventListener('click', () => {
+    const list = getHistory();
+    if (!list.length) {
+      showToast('No saved calculations to export.');
+      return;
+    }
+    const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'duty-cycle-calculations.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Exported history as JSON!');
+  });
+
+  btnClearHistory.addEventListener('click', () => {
+    if (confirm('Are you sure you want to clear all saved calculations?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      renderHistory();
+      showToast('Cleared calculation history.');
+    }
+  });
+
+  // Initial Calculation & Render
+  calculate();
+  renderHistory();
+})();
+</script>
+
+<script src="/pwa.js" defer></script>
+<script src="mta-chrome.js" defer></script>
+<!-- Vercel Speed Insights -->
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+
+</body>
+</html>
