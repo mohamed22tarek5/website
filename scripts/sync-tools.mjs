@@ -1,0 +1,1084 @@
+import fs from 'fs';
+import path from 'path';
+
+const tools = [
+  // ============================================
+  // CIRCUITS & ELECTRONICS (16 tools)
+  // ============================================
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: "Ohm's Law Calculator",
+    desc: 'Calculate voltage, current, resistance and power with interactive IV curves and circuit analysis.',
+    tag: 'V = I × R',
+    href: '/sites/ohms-law-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm-16 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 320a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 416a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>',
+    viewBox: '0 0 384 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'Resistor Color Code Calculator',
+    desc: '4, 5, and 6-band resistor color codes, SMD markings, tolerance limits, and power ratings.',
+    tag: 'Color Bands & SMD',
+    href: '/sites/resistor-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/>',
+    viewBox: '0 0 384 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'LED Series Resistor Calculator',
+    desc: 'Calculate current-limiting series resistance, forward voltage drop, and safe LED power rating.',
+    tag: 'Diode Limiting',
+    href: '/sites/resistor-for-led.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 61.4H244.6c11.5-22.5 26.9-43.7 39.8-61.4l0 0c4.7-6.4 9.1-12.3 12.8-17.7zM352 176c0 38.4-14 73.5-37.4 100.8c-7.7 9-16.6 19.9-25.6 30.9c-15 18.3-30.5 37.2-39.9 58.7c-2.4 5.4-7.7 8.9-13.6 8.9H148.5c-5.9 0-11.2-3.5-13.6-8.9c-9.4-21.5-24.9-40.4-39.9-58.7c-9-11-17.9-21.9-25.6-30.9C46 249.5 32 214.4 32 176C32 87.6 103.6 16 192 16s160 71.6 160 160zM128 416c0-8.8 7.2-16 16-16h96c8.8 0 16 7.2 16 16v16c0 8.8-7.2 16-16 16H144c-8.8 0-16-7.2-16-16V416zm32 64h64c8.8 0 16 7.2 16 16s-7.2 16-16 16H160c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/>',
+    viewBox: '0 0 384 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'Capacitor Calculator',
+    desc: 'Capacitance, stored energy (Joules), charge curves, and series/parallel bank configurations.',
+    tag: 'Energy & RC Time',
+    href: '/sites/capacitor-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'Inductance & Coil Calculator',
+    desc: 'Air core coil inductor sizing, inductive reactance (XL), turns calculation, and permeability.',
+    tag: 'XL & Air Core',
+    href: '/sites/inductance-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/>',
+    viewBox: '0 0 384 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'Voltage Divider Calculator',
+    desc: 'Solve Vout, R1, or R2 under load resistance, with power dissipation and E12/E24 standard picks.',
+    tag: 'Loaded Divider',
+    href: '/sites/voltage-divider-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm-16 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 320a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 416a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>',
+    viewBox: '0 0 384 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'RC Time Constant Calculator',
+    desc: 'Calculate RC circuit time constant (τ), capacitor charging/discharging curves, and -3dB cutoff frequency.',
+    tag: 'τ = R × C Tau',
+    href: '/sites/rc-time-constant-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 236.8V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'RC Filter & LC Resonance',
+    desc: 'Calculate cutoff frequency (-3dB), resonant frequency (f0), and impedance for audio/RF circuits.',
+    tag: 'Bode & Resonance',
+    href: '/sites/rc-filter-lc-resonance-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'Op-Amp Gain Calculator',
+    desc: 'Inverting, non-inverting, differential, and voltage follower amplifier gain with clipping check.',
+    tag: 'Operational Amp',
+    href: '/sites/op-amp-gain-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M224 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H128C92.7 64 64 92.7 64 128v32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H64v64H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H64v32c0 35.3 28.7 64 64 64h32v32c0 17.7 14.3 32 32 32s32-14.3 32-32V448h64v32c0 17.7 14.3 32 32 32s32-14.3 32-32V448h32c35.3 0 64-28.7 64-64V352h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H448V224h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H448V128c0-35.3-28.7-64-64-64H352V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H224V32zM128 128H384V384H128V128z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: '555 Timer IC Calculator',
+    desc: 'Astable multivibrator frequency, duty cycle, and monostable pulse width generator for NE555.',
+    tag: 'NE555 Timer',
+    href: '/sites/555-timer-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 236.8V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'ADC Calculator',
+    desc: 'Calculate ADC bit resolution, LSB voltage step size, raw counts to analog voltage, and input voltage divider ratios.',
+    tag: 'ADC & LSB Step',
+    href: '/sites/adc-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M176 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64c-35.3 0-64 28.7-64 64H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v56H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v56H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64c0 35.3 28.7 64 64 64v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h56v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h56v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448c35.3 0 64-28.7 64-64h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V280h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V176h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448c0-35.3-28.7-64-64-64V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H280V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H176V24zM160 128H352c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H160c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32zm192 32H160V352H352V160z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'PWM Calculator',
+    desc: 'Calculate PWM average voltage, pulse widths, maximum bit resolution, and timer register counts for ESP32 and Arduino.',
+    tag: 'Timer & Duty',
+    href: '/sites/pwm-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'UART Baud Rate Calculator',
+    desc: 'Calculate AVR UBRR register values, actual baud rates, and percentage timing error with Double Speed (U2X) mode.',
+    tag: 'UART & UBRR',
+    href: '/sites/uart-baud-rate-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M288 32c-35.3 0-64 28.7-64 64V160c0 35.3 28.7 64 64 64s64-28.7 64-64V96c0-35.3-28.7-64-64-64zm0 256c-17.7 0-32 14.3-32 32v32H160c-17.7 0-32 14.3-32 32v32H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32H160c17.7 0 32-14.3 32-32V480c0-35.3-28.7-64-64-64H96V384H256v32c0 17.7 14.3 32 32 32s32-14.3 32-32V384H480v32H448c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32H544c17.7 0 32-14.3 32-32V480c0-35.3-28.7-64-64-64H448V384c0-17.7-14.3-32-32-32H320V320c0-17.7-14.3-32-32-32z"/>',
+    viewBox: '0 0 576 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'LCD Character Generator',
+    desc: 'Interactive 5x8 dot matrix editor for HD44780 LCD displays with exportable Arduino C++ binary code.',
+    tag: 'HD44780 / Arduino',
+    href: '/sites/lcd-custom-character-generator.html',
+    cta: 'Launch Generator',
+    svg: '<path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM153 239c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-64 64c-9.4 9.4-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L105.9 256 153 239zm151 113c0-13.3-10.7-24-24-24H200c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'Electrical System Calculator',
+    desc: 'Comprehensive electrical engineering formulas, single-phase, 3-phase, and Ohm\'s wheel relations.',
+    tag: 'Single & 3-Phase',
+    href: '/sites/electrical-calculation.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/>',
+    viewBox: '0 0 384 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'Length & PCB Unit Converter',
+    desc: 'Convert mils, inches, millimeters, microns, and PCB layout trace dimensions effortlessly.',
+    tag: 'Metric / Mils / AWG',
+    href: '/sites/length-converter.html',
+    cta: 'Launch Converter',
+    svg: '<path d="M495.9 166.1l-150-150c-21.5-21.5-56.3-21.5-77.8 0L16.1 268.1c-21.5 21.5-21.5 56.3 0 77.8l150 150c21.5 21.5 56.3 21.5 77.8 0L495.9 243.9c21.5-21.5 21.5-56.3 0-77.8zM218.4 461.4L68.4 311.4 125 254.8l28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L147.6 232.2l22.6-22.6 42.4 42.4c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L192.8 187l22.6-22.6 28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L238 141.8l22.6-22.6 42.4 42.4c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L283.2 96.6l22.6-22.6 28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L328.4 51.4l56.6 56.6-166.6 353.4z"/>',
+    viewBox: '0 0 512 512'
+  },
+
+  // ============================================
+  // POWER, SOLAR & RF (14 tools)
+  // ============================================
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'PCB Trace Width Calculator',
+    desc: 'IPC-2221 industry standard trace width sizing for current, temperature rise, resistance and vias.',
+    tag: 'IPC-2221 Standard',
+    href: '/sites/pcb-trace-width-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M224 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H128C92.7 64 64 92.7 64 128v32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H64v64H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H64v32c0 35.3 28.7 64 64 64h32v32c0 17.7 14.3 32 32 32s32-14.3 32-32V448h64v32c0 17.7 14.3 32 32 32s32-14.3 32-32V448h32c35.3 0 64-28.7 64-64V352h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H448V224h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H448V128c0-35.3-28.7-64-64-64H352V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H224V32zM128 128H384V384H128V128z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'Buck-Boost Converter Calculator',
+    desc: 'Design DC-DC step-up and step-down converters with inductor ripple, duty cycle, and MOSFET ratings.',
+    tag: 'SMPS DC-DC',
+    href: '/sites/buck-boost-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/>',
+    viewBox: '0 0 384 512'
+  },
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'Duty Cycle Calculator',
+    desc: 'Calculate Duty Cycle for periodic pulse waveforms, Step-Up Boost, Step-Down Buck, Buck-Boost, and Ćuk converters.',
+    tag: 'PWM & Switching',
+    href: '/sites/duty-cycle-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM256 416c35.3 0 64-28.7 64-64c0-23.7-12.9-44.4-32-55.4V192c0-17.7-14.3-32-32-32s-32 14.3-32 32v104.6c-19.1 11-32 31.7-32 55.4c0 35.3 28.7 64 64 64z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'Solar System Sizing Calculator',
+    desc: 'Calculate required solar panels (Wp), battery storage (Ah), inverter wattage, and MPPT charge controller.',
+    tag: 'Off-Grid PV Sizing',
+    href: '/sites/solar-system-sizing-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M361.5 32c9.5 0 17.9 5.8 21.2 14.6l128 352c4.4 12.1-1.7 25.5-13.8 29.9s-25.5-1.7-29.9-13.8L382 181.8l-98.8 141.2c-5.7 8.2-15 13-24.9 13s-19.2-4.9-24.9-13L134.6 181.8 50.9 414.8c-4.4 12.1-17.8 18.2-29.9 13.8s-18.2-17.8-13.8-29.9l128-352C138.6 37.8 147 32 156.5 32H361.5z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'Solar Battery Wiring Calculator',
+    desc: 'Calculate required solar battery capacity, series and parallel string wiring (Ns × Np), and total battery modules.',
+    tag: 'Ns × Np Matrix',
+    href: '/sites/solar-battery-series-parallel-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M464 160c8.8 0 16 7.2 16 16V336c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16H464zM80 96C35.8 96 0 131.8 0 176V336c0 44.2 35.8 80 80 80H464c44.2 0 80-35.8 80-80V320c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32V176c0-44.2-35.8-80-80-80H80zm304 96H128v128h256V192z"/>',
+    viewBox: '0 0 576 512'
+  },
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'Solar Inverter Sizing Calculator',
+    desc: 'Size continuous power (W), motor starting surge (kVA/kW), and DC battery current for solar inverters with safety margins.',
+    tag: 'Inverter & Surge',
+    href: '/sites/solar-inverter-sizing-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/>',
+    viewBox: '0 0 384 512'
+  },
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'Battery & Solar Sizing',
+    desc: 'Size solar PV panels (Watts), solar charge controller (Amps), and battery bank capacity (Ah).',
+    tag: 'Solar PV Sizing',
+    href: '/sites/battery-solar-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M361.5 32c9.5 0 17.9 5.8 21.2 14.6l128 352c4.4 12.1-1.7 25.5-13.8 29.9s-25.5-1.7-29.9-13.8L382 181.8l-98.8 141.2c-5.7 8.2-15 13-24.9 13s-19.2-4.9-24.9-13L134.6 181.8 50.9 414.8c-4.4 12.1-17.8 18.2-29.9 13.8s-18.2-17.8-13.8-29.9l128-352C138.6 37.8 147 32 156.5 32H361.5z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'Battery Capacity & Runtime',
+    desc: 'Estimate battery operating hours from mAh/Wh consumption with Peukert efficiency factor.',
+    tag: 'Peukert Runtime',
+    href: '/sites/battery-capacity-runtime-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M464 160c8.8 0 16 7.2 16 16V336c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16H464zM80 96C35.8 96 0 131.8 0 176V336c0 44.2 35.8 80 80 80H464c44.2 0 80-35.8 80-80V320c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32V176c0-44.2-35.8-80-80-80H80zm304 96H128v128h256V192z"/>',
+    viewBox: '0 0 576 512'
+  },
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'Wire Size & Breaker Calculator',
+    desc: 'Calculate conductor cross-section, voltage drop, and circuit breaker sizing per IEC 60364 and NEC standards.',
+    tag: 'IEC & NEC Breaker',
+    href: '/sites/wire-size-voltage-drop-breaker-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M495.9 166.1l-150-150c-21.5-21.5-56.3-21.5-77.8 0L16.1 268.1c-21.5 21.5-21.5 56.3 0 77.8l150 150c21.5 21.5 56.3 21.5 77.8 0L495.9 243.9c21.5-21.5 21.5-56.3 0-77.8zM218.4 461.4L68.4 311.4 125 254.8l28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L147.6 232.2l22.6-22.6 42.4 42.4c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L192.8 187l22.6-22.6 28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L238 141.8l22.6-22.6 42.4 42.4c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L283.2 96.6l22.6-22.6 28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L328.4 51.4l56.6 56.6-166.6 353.4z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'Wire Gauge (AWG) Calculator',
+    desc: 'AWG cable sizing, copper resistance per meter, voltage drop over distance, and ampacity limits.',
+    tag: 'AWG & Voltage Drop',
+    href: '/sites/wire-gauge-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M495.9 166.1l-150-150c-21.5-21.5-56.3-21.5-77.8 0L16.1 268.1c-21.5 21.5-21.5 56.3 0 77.8l150 150c21.5 21.5 56.3 21.5 77.8 0L495.9 243.9c21.5-21.5 21.5-56.3 0-77.8zM218.4 461.4L68.4 311.4 125 254.8l28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L147.6 232.2l22.6-22.6 42.4 42.4c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L192.8 187l22.6-22.6 28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L238 141.8l22.6-22.6 42.4 42.4c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L283.2 96.6l22.6-22.6 28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L328.4 51.4l56.6 56.6-166.6 353.4z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'Power Factor Correction',
+    desc: 'Calculate active power (kW), reactive power (kVAR), and capacitor bank needed to reach target PF.',
+    tag: 'kVAR Correction',
+    href: '/sites/power-factor-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM256 416c35.3 0 64-28.7 64-64c0-23.7-12.9-44.4-32-55.4V192c0-17.7-14.3-32-32-32s-32 14.3-32 32v104.6c-19.1 11-32 31.7-32 55.4c0 35.3 28.7 64 64 64z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'Power Triangle Calculator',
+    desc: 'Visualize real (P), reactive (Q), and apparent power (S) with phase angle theta and power factor.',
+    tag: 'P-Q-S Triangle',
+    href: '/sites/power-triangle-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'Transformer Turns Ratio',
+    desc: 'Primary and secondary winding turns, step-up/down voltage, current ratios, and core area.',
+    tag: 'Core & Turns',
+    href: '/sites/transformer-turns-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/>',
+    viewBox: '0 0 384 512'
+  },
+  {
+    category: 'power',
+    badge: 'Power & Solar',
+    title: 'dB / dBm & RF Calculator',
+    desc: 'Power/voltage ratio to decibels (dB), dBm to Watts/mW conversion, and cascaded RF link budget.',
+    tag: 'RF & Attenuation',
+    href: '/sites/decibel-dbm-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM256 416c35.3 0 64-28.7 64-64c0-23.7-12.9-44.4-32-55.4V192c0-17.7-14.3-32-32-32s-32 14.3-32 32v104.6c-19.1 11-32 31.7-32 55.4c0 35.3 28.7 64 64 64z"/>',
+    viewBox: '0 0 512 512'
+  },
+
+  // ============================================
+  // PRODUCTIVITY & AI (4 tools)
+  // ============================================
+  {
+    category: 'productivity',
+    badge: 'Productivity & AI',
+    title: 'Mastering Linux Commands',
+    desc: 'Interactive reference guide to terminal commands, networking utilities, package managers, and bash.',
+    tag: 'Linux / CLI',
+    href: '/sites/mastering-linux-commands.html',
+    cta: 'Open Guide',
+    svg: '<path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM153 239c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-64 64c-9.4 9.4-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L105.9 256 153 239zm151 113c0-13.3-10.7-24-24-24H200c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'productivity',
+    badge: 'Productivity & AI',
+    title: 'AI Tools & Models Directory',
+    desc: 'Curated collection of artificial intelligence tools, prompt workflows, LLMs, and API integrations.',
+    tag: 'AI / LLM Directory',
+    href: '/sites/ai-sites-list.html',
+    cta: 'Explore Tools',
+    svg: '<path d="M320 0c17.7 0 32 14.3 32 32V96H480c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H160c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64H288V32c0-17.7 14.3-32 32-32zM208 384c-17.7 0-32 14.3-32 32s14.3 32 32 32h224c17.7 0 32-14.3 32-32s-14.3-32-32-32H208zm-16-160a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm256 0a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/>',
+    viewBox: '0 0 640 512'
+  },
+  {
+    category: 'productivity',
+    badge: 'Productivity & AI',
+    title: 'To-Do List & Task Manager',
+    desc: 'Productive browser-based task organizer with priority tags, categories, and local storage autosave.',
+    tag: 'Productivity',
+    href: '/sites/to-do-list.html',
+    cta: 'Open App',
+    svg: '<path d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L9.4 105.4c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l20.4 20.4 54.5-60.6c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L9.4 265.4c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l20.4 20.4 54.5-60.6c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L9.4 425.4c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l20.4 20.4 54.5-60.6c8.9-9.9 24-10.7 33.9-1.8zM240 96h240c13.3 0 24 10.7 24 24s-10.7 24-24 24H240c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 160h240c13.3 0 24 10.7 24 24s-10.7 24-24 24H240c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 160h240c13.3 0 24 10.7 24 24s-10.7 24-24 24H240c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'productivity',
+    badge: 'Productivity & AI',
+    title: 'Medication Reminder App',
+    desc: 'Schedule prescription doses, set recurring daily intervals, and monitor intake with alerts.',
+    tag: 'Health & Alerts',
+    href: '/sites/medication-reminder.html',
+    cta: 'Open App',
+    svg: '<path d="M224 32c-35.3 0-64 28.7-64 64V224h128V96c0-35.3-28.7-64-64-64zm96 224V384c0 35.3-28.7 64-64 64s-64-28.7-64-64V256H320zM224 480c53 0 96-43 96-96V256h32c35.3 0 64-28.7 64-64s-28.7-64-64-64H320V96c0-53-43-96-96-96s-96 43-96 96v32H96c-35.3 0-64 28.7-64 64s28.7 64 64 64h32v128c0 53 43 96 96 96z"/>',
+    viewBox: '0 0 512 512'
+  },
+
+  // ============================================
+  // SIMULATIONS & GAMES (3 tools)
+  // ============================================
+  {
+    category: 'games',
+    badge: 'Simulations',
+    title: '3D Car Drive Simulator',
+    desc: 'Interactive 3D WebGL physics-based driving simulator with vehicle dynamics and camera controls.',
+    tag: 'WebGL 3D',
+    href: '/sites/3d-car-game.html',
+    cta: 'Play Simulation',
+    svg: '<path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L0 288v160c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V416h256v32c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V288l-32-160zM96 352a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm256 0a48 48 0 1 1 96 0 48 48 0 1 1 -96 0z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'games',
+    badge: 'Simulations',
+    title: 'Classic Dino Runner',
+    desc: 'The beloved offline obstacle jumping game built in HTML5 canvas with high score tracking.',
+    tag: 'Offline Canvas',
+    href: '/sites/dino-game.html',
+    cta: 'Play Game',
+    svg: '<path d="M192 64C86 64 0 150 0 256S86 448 192 448c30.2 0 58.7-7 84-19.4L320 400l44 28.6c25.3 12.4 53.8 19.4 84 19.4 106 0 192-86 192-192S554 64 448 64c-30.2 0-58.7 7-84 19.4L320 112 276 83.4C250.7 71 222.2 64 192 64zM160 216v-32c0-13.3 10.7-24 24-24s24 10.7 24 24v32h32c13.3 0 24 10.7 24 24s-10.7 24-24 24h-32v32c0 13.3-10.7 24-24 24s-24-10.7-24-24v-32h-32c-13.3 0-24-10.7-24-24s10.7-24 24-24h32zm288 48a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm48-64a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm-96 0a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm48 64a24 24 0 1 1 0-48 24 24 0 1 1 0 48z"/>',
+    viewBox: '0 0 640 512'
+  },
+  {
+    category: 'games',
+    badge: 'Simulations',
+    title: 'Circuit Race Game',
+    desc: 'Top-down retro arcade racer with challenging tracks, responsive controls, and lap timers.',
+    tag: 'Arcade Racing',
+    href: '/sites/race-game.html',
+    cta: 'Play Game',
+    svg: '<path d="M192 64C86 64 0 150 0 256S86 448 192 448c30.2 0 58.7-7 84-19.4L320 400l44 28.6c25.3 12.4 53.8 19.4 84 19.4 106 0 192-86 192-192S554 64 448 64c-30.2 0-58.7 7-84 19.4L320 112 276 83.4C250.7 71 222.2 64 192 64zM160 216v-32c0-13.3 10.7-24 24-24s24 10.7 24 24v32h32c13.3 0 24 10.7 24 24s-10.7 24-24 24h-32v32c0 13.3-10.7 24-24 24s-24-10.7-24-24v-32h-32c-13.3 0-24-10.7-24-24s10.7-24 24-24h32zm288 48a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm48-64a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm-96 0a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm48 64a24 24 0 1 1 0-48 24 24 0 1 1 0 48z"/>',
+    viewBox: '0 0 640 512'
+  },
+
+  // ============================================
+  // PC & WINDOWS UTILITIES (9 tools)
+  // ============================================
+  {
+    category: 'windows',
+    badge: 'PC Utility',
+    title: 'M.T.A. Cleaner Tool',
+    desc: 'Windows system cleanup utility that purges temp files, caches, and optimizes disk performance.',
+    tag: 'Windows Utility',
+    href: '/tools/M.T.A.%20Cleaner%20Tool.zip',
+    rarHref: '/tools/M.T.A.%20Cleaner%20Tool.rar',
+    isDownload: true,
+    cta: 'Download ZIP',
+    svg: '<path d="M380.7 75.3c9.4-9.4 24.6-9.4 33.9 0l22.1 22.1c9.4 9.4 9.4 24.6 0 33.9L242.4 325.6l-56-56L380.7 75.3zM151.7 304.3l56 56-94.6 94.6c-18.7 18.7-49.1 18.7-67.9 0l-22.1-22.1c-18.7-18.7-18.7-49.1 0-67.9l94.6-94.6 34 34z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'windows',
+    badge: 'PC Utility',
+    title: 'M.T.A. repair Tool',
+    desc: 'Automated DISM and SFC system repair tool to resolve corrupted Windows system files and errors.',
+    tag: 'System Repair',
+    href: '/tools/M.T.A.%20%20repair%20%20Tool.zip',
+    rarHref: '/tools/M.T.A.%20%20repair%20%20Tool.rar',
+    isDownload: true,
+    cta: 'Download ZIP',
+    svg: '<path d="M78.6 5c-9.5-7.4-23-6.1-31 3L8.8 53.6c-8 9.2-7.5 22.8 1.1 31.4l91.7 91.7c8.6 8.6 22.2 9.1 31.4 1.1l45.6-38.8c9.1-7.9 10.4-21.5 3-31L89.9 17.3c-2.8-3.6-6.8-9.4-11.3-12.3zM255.4 160.7L385.6 30.5c12.5-12.5 32.8-12.5 45.3 0l50.6 50.6c12.5 12.5 12.5 32.8 0 45.3L351.3 256.6 255.4 160.7zM192.4 223.7l95.9 95.9-195 195c-12.5 12.5-32.8 12.5-45.3 0L3.4 464c-12.5-12.5-12.5-32.8 0-45.3l189-195z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'windows',
+    badge: 'PC Utility',
+    title: 'M.T.A. Tweaking Tool',
+    desc: 'Windows performance tweaker to streamline background processes, reduce input lag, and boost response.',
+    tag: 'Performance Tweak',
+    href: '/tools/M.T.A.%20Tweaking%20Tool.zip',
+    rarHref: '/tools/M.T.A.%20Tweaking%20Tool.rar',
+    isDownload: true,
+    cta: 'Download ZIP',
+    svg: '<path d="M0 416c0-17.7 14.3-32 32-32l54.7 0c12.3-28.3 40.5-48 73.3-48s61 19.7 73.3 48L480 384c17.7 0 32 14.3 32 32s-14.3 32-32 32l-246.7 0c-12.3 28.3-40.5 48-73.3 48s-61-19.7-73.3-48L32 448c-17.7 0-32-14.3-32-32zm192 0a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM320 256c0-17.7 14.3-32 32-32l54.7 0c12.3-28.3 40.5-48 73.3-48s61 19.7 73.3 48l18.7 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-18.7 0c-12.3 28.3-40.5 48-73.3 48s-61-19.7-73.3-48L352 288c-17.7 0-32-14.3-32-32zm160 0a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM0 96C0 78.3 14.3 64 32 64l182.7 0c12.3-28.3 40.5-48 73.3-48s61 19.7 73.3 48L480 64c17.7 0 32 14.3 32 32s-14.3 32-32 32l-118.7 0c-12.3 28.3-40.5 48-73.3 48s-61-19.7-73.3-48L32 128C14.3 128 0 113.7 0 96zM320 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'windows',
+    badge: 'PC Utility',
+    title: 'M.T.A. UltimatePerformance',
+    desc: 'Enables Windows Ultimate Performance power plan, unparks CPU cores, and minimizes throttle.',
+    tag: 'Power Scheme',
+    href: '/tools/M.T.A.%20UltimatePerformance%20Tool.zip',
+    rarHref: '/tools/M.T.A.%20UltimatePerformance%20Tool.rar',
+    isDownload: true,
+    cta: 'Download ZIP',
+    svg: '<path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/>',
+    viewBox: '0 0 384 512'
+  },
+  {
+    category: 'windows',
+    badge: 'PC Utility',
+    title: 'M.T.A. Win11 Defender Tool',
+    desc: 'Security and Defender control utility for rapid exclusion management and diagnostic reporting.',
+    tag: 'Security Assistant',
+    href: '/tools/M.T.A.%20Win11%20Defender%20Tool.zip',
+    rarHref: '/tools/M.T.A.%20Win11%20Defender%20Tool.rar',
+    isDownload: true,
+    cta: 'Download ZIP',
+    svg: '<path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0zm0 66.8V434.8c130.6-64.8 165.6-209.6 168-294.8L256 66.8z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'windows',
+    badge: 'PC Utility',
+    title: 'M.T.A. PCInfo Tool',
+    desc: 'Deep diagnostic batch script reporting motherboard, CPU, RAM, GPU, and BIOS hardware specs.',
+    tag: 'Hardware Specs',
+    href: '/tools/M.T.A.%20PCInfo%20Tool.zip',
+    rarHref: '/tools/M.T.A.%20PCInfo%20Tool.rar',
+    isDownload: true,
+    cta: 'Download ZIP',
+    svg: '<path d="M64 0C28.7 0 0 28.7 0 64V352c0 35.3 28.7 64 64 64H240l-10.7 32H160c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H346.7L336 416H512c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM512 64V288H64V64H512z"/>',
+    viewBox: '0 0 576 512'
+  },
+  {
+    category: 'windows',
+    badge: 'PC Utility',
+    title: 'M.T.A. IP & MAC Tool',
+    desc: 'Displays internal IP, public IP, default gateway, and physical network adapter MAC addresses.',
+    tag: 'Network Diagnostics',
+    href: '/tools/M.T.A.%20ip%20and%20mac%20Tool.zip',
+    rarHref: '/tools/M.T.A.%20ip%20and%20mac%20Tool.rar',
+    isDownload: true,
+    cta: 'Download ZIP',
+    svg: '<path d="M288 32c-35.3 0-64 28.7-64 64V160c0 35.3 28.7 64 64 64s64-28.7 64-64V96c0-35.3-28.7-64-64-64zm0 256c-17.7 0-32 14.3-32 32v32H160c-17.7 0-32 14.3-32 32v32H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32H160c17.7 0 32-14.3 32-32V480c0-35.3-28.7-64-64-64H96V384H256v32c0 17.7 14.3 32 32 32s32-14.3 32-32V384H480v32H448c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32H544c17.7 0 32-14.3 32-32V480c0-35.3-28.7-64-64-64H448V384c0-17.7-14.3-32-32-32H320V320c0-17.7-14.3-32-32-32z"/>',
+    viewBox: '0 0 576 512'
+  },
+  {
+    category: 'windows',
+    badge: 'PC Utility',
+    title: 'M.T.A. Downloader Tool',
+    desc: 'Automated batch downloader for critical engineering runtimes, utilities, and development packages.',
+    tag: 'Fast Downloader',
+    href: '/tools/M.T.A.%20Downloader%20Tool.zip',
+    rarHref: '/tools/M.T.A.%20Downloader%20Tool.rar',
+    isDownload: true,
+    cta: 'Download ZIP',
+    svg: '<path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm-16 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 320a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 416a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>',
+    viewBox: '0 0 384 512'
+  },
+  {
+    category: 'windows',
+    badge: 'PC Utility',
+    title: 'M.T.A. Active 10 Utility',
+    desc: 'Windows 10 system license and activation status inspector and verification assistant.',
+    tag: 'Activation Status',
+    href: '/tools/M.T.A.%20active%2010%20Tool.zip',
+    rarHref: '/tools/M.T.A.%20active%2010%20Tool.rar',
+    isDownload: true,
+    cta: 'Download ZIP',
+    svg: '<path d="M336 0c-97.2 0-176 78.8-176 176c0 19.4 3.1 38.1 8.9 55.6L9.4 401.4C3.4 407.4 0 415.6 0 424.2V488c0 13.3 10.7 24 24 24h64c13.3 0 24-10.7 24-24V464h40c13.3 0 24-10.7 24-24V416h40c8.6 0 16.9-3.4 22.9-9.4l41.6-41.6c17.5 5.7 36.2 8.9 55.6 8.9c97.2 0 176-78.8 176-176S433.2 0 336 0zm48 176a48 48 0 1 1 0-96 48 48 0 1 1 0 96z"/>',
+    viewBox: '0 0 512 512'
+  }
+];
+
+function generateCardHtml(t, forToolsPage = false) {
+  const isDown = !!t.isDownload;
+  const targetAttr = isDown ? 'download' : 'target="_blank" rel="noopener noreferrer"';
+  const ariaLabel = `${t.title} — ${t.desc}`;
+  const dataTitle = t.title.toLowerCase();
+  const dataDesc = t.desc.toLowerCase();
+  const dataTag = t.tag.toLowerCase();
+
+  const arrowSvg = `<svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>`;
+
+  let footerContent = '';
+  if (forToolsPage && isDown && t.rarHref) {
+    footerContent = `
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">${t.tag}</span>
+              <div class="tool-card-cta-group">
+                <span class="tool-card-cta">${t.cta} ${arrowSvg}</span>
+                <a href="${t.rarHref}" class="tool-card-rar-link" download title="Download ${t.title} as RAR" onclick="event.stopPropagation();">RAR</a>
+              </div>
+            </div>`;
+  } else {
+    footerContent = `
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">${t.tag}</span>
+              <span class="tool-card-cta">${t.cta} ${arrowSvg}</span>
+            </div>`;
+  }
+
+  return `          <a href="${t.href}" class="tool-card reveal" data-category="${t.category}" data-title="${dataTitle}" data-desc="${dataDesc}" data-tag="${dataTag}" ${targetAttr} aria-label="${ariaLabel}">
+            <div class="tool-card-head">
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="${t.viewBox}" aria-hidden="true">${t.svg}</svg></div>
+              <span class="tool-card-badge">${t.badge}</span>
+            </div>
+            <h3 class="tool-card-title">${t.title}</h3>
+            <p class="tool-card-desc">${t.desc}</p>${footerContent}
+          </a>`;
+}
+
+// Counts
+const counts = {
+  all: tools.length,
+  circuits: tools.filter(t => t.category === 'circuits').length,
+  power: tools.filter(t => t.category === 'power').length,
+  productivity: tools.filter(t => t.category === 'productivity').length,
+  games: tools.filter(t => t.category === 'games').length,
+  windows: tools.filter(t => t.category === 'windows').length
+};
+
+console.log('Tool counts:', counts);
+
+// ============================================
+// 1. UPDATE public/index.html
+// ============================================
+const indexPath = path.resolve('public/index.html');
+let indexContent = fs.readFileSync(indexPath, 'utf8');
+
+// Update FAQ schema answer
+indexContent = indexContent.replace(
+  /"text": "Yes\. All \d+ interactive calculators and engineering utilities[^"]+"/,
+  `"text": "Yes. All ${counts.all} interactive calculators, simulations, and engineering utilities—including Ohm's Law, Resistor Color Codes, Solar Sizing, Buck-Boost Design, 555 Timer, and Windows utilities—operate 100% client-side in the browser or offline, require no login, and are completely free."`
+);
+
+// Update section subtitle
+indexContent = indexContent.replace(
+  /<p class="section-subtitle">A production-grade suite of \d+ electronics calculators[^<]+<\/p>/,
+  `<p class="section-subtitle">A production-grade suite of ${counts.all} electronics calculators, IoT tools, simulations, and desktop utilities engineered by Mohamed Tarek Abdelhady. 100% free, browser-based, and offline PWA ready.</p>`
+);
+
+// Update search input placeholder
+indexContent = indexContent.replace(
+  /placeholder="Search \d+\+ calculators, formulas, or utilities[^"]+"/,
+  `placeholder="Search ${counts.all}+ calculators, formulas, or utilities (e.g. Ohm, PCB, Solar, 555, Cleaner)..."`
+);
+
+// Update filter pills in index.html
+const indexPillsHtml = `          <div class="tools-filter-pills" role="tablist" aria-label="Filter tools by discipline">
+            <button class="tools-filter-pill active" data-filter="all" role="tab" aria-selected="true">
+              All Tools <span class="pill-count" id="count-all">${counts.all}</span>
+            </button>
+            <button class="tools-filter-pill" data-filter="circuits" role="tab" aria-selected="false">
+              Circuits &amp; Electronics <span class="pill-count">${counts.circuits}</span>
+            </button>
+            <button class="tools-filter-pill" data-filter="power" role="tab" aria-selected="false">
+              Power &amp; Solar <span class="pill-count">${counts.power}</span>
+            </button>
+            <button class="tools-filter-pill" data-filter="productivity" role="tab" aria-selected="false">
+              Productivity &amp; AI <span class="pill-count">${counts.productivity}</span>
+            </button>
+            <button class="tools-filter-pill" data-filter="games" role="tab" aria-selected="false">
+              Simulations &amp; Games <span class="pill-count">${counts.games}</span>
+            </button>
+            <button class="tools-filter-pill" data-filter="windows" role="tab" aria-selected="false">
+              PC &amp; Windows Utilities <span class="pill-count">${counts.windows}</span>
+            </button>
+          </div>`;
+
+indexContent = indexContent.replace(
+  /<div class="tools-filter-pills"[\s\S]*?<\/div>\s*<\/div>/,
+  `${indexPillsHtml}\n        </div>`
+);
+
+// Replace grid in index.html
+const indexCardsHtml = tools.map(t => generateCardHtml(t, false)).join('\n');
+
+const emptyStateHtml = `<!-- Empty Search State -->
+          <div class="tools-empty-state" id="toolsEmptyState">
+            <div style="font-size:2.5rem;margin-bottom:0.75rem" aria-hidden="true">🔍</div>
+            <h3 style="font-size:1.25rem;margin-bottom:0.5rem;color:#ffffff">No matching tools found</h3>
+            <p style="color:var(--color-text-secondary);font-size:0.9rem;margin-bottom:1.25rem">Try searching for a different keyword or switch categories.</p>
+            <button id="toolsResetFilterBtn" class="btn btn-primary" style="padding:8px 18px;font-size:0.85rem">Reset Filters</button>
+          </div>`;
+
+const newGridHtml = `        <!-- ${counts.all} Pro Tool Cards Grid -->\n        <div class="tools-grid" id="toolsGrid">\n\n${indexCardsHtml}\n\n          ${emptyStateHtml}\n        </div>`;
+
+indexContent = indexContent.replace(
+  /<!-- \d+ Pro Tool Cards Grid -->\s*<div class="tools-grid" id="toolsGrid">[\s\S]*?<\/div>\s*<!-- Bottom Showcase Banner -->/,
+  `${newGridHtml}\n\n        <!-- Bottom Showcase Banner -->`
+);
+
+// Update FAQ in body text
+indexContent = indexContent.replace(
+  /Yes\. All \d+ interactive calculators and engineering utilities—including Ohm's Law[^<]+/,
+  `Yes. All ${counts.all} interactive calculators, simulations, and engineering utilities—including Ohm's Law, Resistor Color Codes, Solar Sizing, Buck-Boost Design, and 555 Timer—operate 100% client-side in the browser, require no login, and are completely free.\n            `
+);
+
+fs.writeFileSync(indexPath, indexContent, 'utf8');
+console.log('Updated public/index.html successfully!');
+
+// ============================================
+// 2. GENERATE public/tools.html
+// ============================================
+const toolsCardsHtml = tools.map(t => generateCardHtml(t, true)).join('\n');
+
+const toolsPageHtml = `<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Engineering Tools &amp; Calculators Hub | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Production-grade suite of ${counts.all} free engineering tools by Mohamed Tarek Abdelhady — PCB trace, solar system sizing, battery storage, Ohm's law, op-amp, 555 timer, ADC, PWM, and Windows utilities.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/tools.html">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
+  <link rel="payment" href="/api/x402">
+  <link rel="ucp" href="/.well-known/ucp">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Engineering Tools &amp; Calculators Hub | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Explore ${counts.all} free engineering tools, PCB calculators, solar sizing systems, embedded IoT apps, and Windows utilities engineered by Mohamed Tarek Abdelhady.">
+  <meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="851">
+  <meta property="og:image:height" content="1134">
+  <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/tools.html">
+  <meta property="og:site_name" content="Mohamed Tarek Abdelhady — Communication Engineer">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:updated_time" content="2026-11-15T00:00:00+03:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Engineering Tools &amp; Calculators Hub | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Explore ${counts.all} free engineering tools, PCB calculators, solar sizing systems, embedded IoT apps, and Windows utilities engineered by Mohamed Tarek Abdelhady.">
+  <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Mohamed Tarek Abdelhady | Engineering Tools & Calculators Hub",
+    "description": "Collection of ${counts.all} professional engineering tools, calculators, simulations, and desktop utilities by Mohamed Tarek Abdelhady.",
+    "url": "https://mohamed-tarek-abdelhady.vercel.app/tools.html",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek Abdelhady",
+      "alternateName": ["Mohamed Tarek", "M. Tarek Abdelhady", "Eng. Mohamed Tarek", "Eng.M.T.A.", "المهندس محمد طارق"],
+      "jobTitle": "Communication Engineer",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app"
+    }
+  }
+  </script>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M. Tarek Tools">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" href="/common.css">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></noscript>
+
+  <style>
+    /* Page-specific styling */
+    .page-hero {
+      padding-top: calc(var(--header-height) + 3.5rem);
+      padding-bottom: 2.5rem;
+      text-align: center;
+      background: var(--color-bg-primary);
+      position: relative;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+
+    .page-hero .container { position: relative; z-index: 1; }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--color-border-accent);
+      box-shadow: 0 0 35px rgba(59, 130, 246, 0.18);
+      margin: 0 auto 1.25rem;
+      transition: transform var(--transition-base);
+      display: block;
+    }
+
+    .profile-avatar:hover {
+      transform: scale(1.06);
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2rem, 4.5vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      background: var(--gradient-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-hero p.hero-subtitle {
+      font-size: 1.0625rem;
+      color: var(--color-text-secondary);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .tools-hub-section {
+      padding: 1.5rem 0 5rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .tool-card-cta-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tool-card-rar-link {
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--color-text-secondary);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+      transition: all var(--transition-fast);
+    }
+
+    .tool-card-rar-link:hover {
+      background: var(--color-accent);
+      color: #ffffff;
+      border-color: var(--color-accent);
+    }
+  </style>
+  <noscript><style>.loader{display:none!important}</style></noscript>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Loading tools suite...</p>
+  </div>
+
+  <!-- Skip Link -->
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header" id="header" role="banner">
+    <div class="container">
+      <a href="/" class="logo" aria-label="Mohamed Tarek Abdelhady - Home">
+        <span class="logo-icon">MT</span>
+        <span>Mohamed Tarek Abdelhady</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about.html" class="nav-link">About</a>
+        <a href="/services.html" class="nav-link">Services</a>
+        <a href="/projects.html" class="nav-link">Projects</a>
+        <a href="/tools.html" class="nav-link active" aria-current="page">Tools &amp; Calculators</a>
+        <a href="/certificates.html" class="nav-link">Certificates</a>
+        <a href="/cv.html" class="nav-cta">CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main">
+    <!-- Hero Section -->
+    <section class="page-hero">
+      <div class="container">
+        <img src="/photo.jpg" alt="Mohamed Tarek Abdelhady" class="profile-avatar reveal" width="120" height="120" loading="eager" decoding="async">
+        <h1 class="reveal reveal-delay-1">Engineering Tools &amp; Calculators Hub</h1>
+        <p class="hero-subtitle reveal reveal-delay-2">A production-grade suite of ${counts.all} electronics calculators, solar sizing systems, embedded IoT utilities, and Windows tools engineered by Mohamed Tarek Abdelhady. 100% free, browser-based, and offline PWA ready.</p>
+      </div>
+    </section>
+
+    <!-- Engineering Tools & Interactive Suite (Matching index.html) -->
+    <section class="tools-discovery tools-hub-section" id="tools" aria-labelledby="tools-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Tools &amp; Calculators</span>
+          <h2 class="section-title" id="tools-title">Engineering Calculators &amp; Interactive Apps</h2>
+          <p class="section-subtitle">Browse through all ${counts.all} utilities categorized by discipline. Use live search or filter by domain to quickly launch any tool.</p>
+        </div>
+
+        <!-- Controls: Live Search & Filter Pills -->
+        <div class="tools-toolbar reveal reveal-delay-1">
+          <div class="tools-search-box">
+            <span class="tools-search-icon" aria-hidden="true"><svg viewBox="0 0 512 512" style="width:16px;height:16px;fill:currentColor"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0s208 93.1 208 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg></span>
+            <input type="search" id="toolsSearchInput" class="tools-search-input" placeholder="Search ${counts.all}+ calculators, formulas, or utilities (e.g. Ohm, PCB, Solar, 555, Cleaner)..." aria-label="Search engineering tools">
+            <button id="toolsClearSearchBtn" class="tools-clear-btn" aria-label="Clear search">&times;</button>
+          </div>
+
+          <div class="tools-filter-pills" role="tablist" aria-label="Filter tools by discipline">
+            <button class="tools-filter-pill active" data-filter="all" role="tab" aria-selected="true">
+              All Tools <span class="pill-count" id="count-all">${counts.all}</span>
+            </button>
+            <button class="tools-filter-pill" data-filter="circuits" role="tab" aria-selected="false">
+              Circuits &amp; Electronics <span class="pill-count">${counts.circuits}</span>
+            </button>
+            <button class="tools-filter-pill" data-filter="power" role="tab" aria-selected="false">
+              Power &amp; Solar <span class="pill-count">${counts.power}</span>
+            </button>
+            <button class="tools-filter-pill" data-filter="productivity" role="tab" aria-selected="false">
+              Productivity &amp; AI <span class="pill-count">${counts.productivity}</span>
+            </button>
+            <button class="tools-filter-pill" data-filter="games" role="tab" aria-selected="false">
+              Simulations &amp; Games <span class="pill-count">${counts.games}</span>
+            </button>
+            <button class="tools-filter-pill" data-filter="windows" role="tab" aria-selected="false">
+              PC &amp; Windows Utilities <span class="pill-count">${counts.windows}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ${counts.all} Pro Tool Cards Grid -->
+        <div class="tools-grid" id="toolsGrid">
+
+${toolsCardsHtml}
+
+          <!-- Empty Search State -->
+          <div class="tools-empty-state" id="toolsEmptyState">
+            <div style="font-size:2.5rem;margin-bottom:0.75rem" aria-hidden="true">🔍</div>
+            <h3 style="font-size:1.25rem;margin-bottom:0.5rem;color:#ffffff">No matching tools found</h3>
+            <p style="color:var(--color-text-secondary);font-size:0.9rem;margin-bottom:1.25rem">Try searching for a different keyword or switch categories.</p>
+            <button id="toolsResetFilterBtn" class="btn btn-primary" style="padding:8px 18px;font-size:0.85rem">Reset Filters</button>
+          </div>
+        </div>
+
+        <!-- Bottom Showcase Banner -->
+        <div class="tools-bottom-banner reveal">
+          <div>
+            <h3>Need Custom Hardware Engineering or Firmware?</h3>
+            <p>I design high-performance embedded systems, custom PCBs, and IoT solutions for clients worldwide.</p>
+          </div>
+          <div class="tools-bottom-actions">
+            <a href="/projects.html" class="btn btn-primary">
+              View Engineering Projects <svg viewBox="0 0 448 512" aria-hidden="true" style="width:14px;height:14px;fill:currentColor"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+            </a>
+            <a href="/cv.html" class="btn btn-secondary">
+              View Curriculum Vitae
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <p>&copy; <span id="currentYear"></span> Mohamed Tarek Abdelhady. All rights reserved.</p>
+        <p>Designed &amp; built with <i class="fas fa-heart" style="color: var(--color-error);"></i> by Mohamed Tarek Abdelhady</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <script>
+    (() => {
+      'use strict';
+
+      /* ----------------------------------------
+         TOOLS FILTER & LIVE SEARCH
+         ---------------------------------------- */
+      const toolsSearchInput = document.getElementById("toolsSearchInput");
+      const toolsClearSearchBtn = document.getElementById("toolsClearSearchBtn");
+      const toolsFilterPills = document.querySelectorAll(".tools-filter-pill");
+      const toolCards = document.querySelectorAll(".tools-grid .tool-card");
+      const toolsEmptyState = document.getElementById("toolsEmptyState");
+      const toolsResetFilterBtn = document.getElementById("toolsResetFilterBtn");
+      let currentToolFilter = "all";
+
+      function applyToolFilters() {
+        const query = (toolsSearchInput ? toolsSearchInput.value : "").trim().toLowerCase();
+        if (toolsClearSearchBtn) {
+          toolsClearSearchBtn.style.display = query ? "flex" : "none";
+        }
+
+        let visibleCount = 0;
+        toolCards.forEach((card) => {
+          const category = card.getAttribute("data-category");
+          const title = card.getAttribute("data-title") || "";
+          const desc = card.getAttribute("data-desc") || "";
+          const tag = card.getAttribute("data-tag") || "";
+
+          const matchesCategory = (currentToolFilter === "all" || category === currentToolFilter);
+          const matchesQuery = !query || title.includes(query) || desc.includes(query) || tag.includes(query);
+
+          if (matchesCategory && matchesQuery) {
+            card.style.display = "flex";
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        if (toolsEmptyState) {
+          toolsEmptyState.classList.toggle("visible", visibleCount === 0);
+        }
+      }
+
+      if (toolsSearchInput) {
+        toolsSearchInput.addEventListener("input", applyToolFilters);
+      }
+
+      if (toolsClearSearchBtn) {
+        toolsClearSearchBtn.addEventListener("click", () => {
+          if (toolsSearchInput) {
+            toolsSearchInput.value = "";
+            toolsSearchInput.focus();
+            applyToolFilters();
+          }
+        });
+      }
+
+      toolsFilterPills.forEach((pill) => {
+        pill.addEventListener("click", () => {
+          toolsFilterPills.forEach((p) => {
+            p.classList.remove("active");
+            p.setAttribute("aria-selected", "false");
+          });
+          pill.classList.add("active");
+          pill.setAttribute("aria-selected", "true");
+          currentToolFilter = pill.getAttribute("data-filter") || "all";
+          applyToolFilters();
+        });
+      });
+
+      if (toolsResetFilterBtn) {
+        toolsResetFilterBtn.addEventListener("click", () => {
+          if (toolsSearchInput) toolsSearchInput.value = "";
+          currentToolFilter = "all";
+          toolsFilterPills.forEach((p) => {
+            const isAll = p.getAttribute("data-filter") === "all";
+            p.classList.toggle("active", isAll);
+            p.setAttribute("aria-selected", String(isAll));
+          });
+          applyToolFilters();
+        });
+      }
+    })();
+  </script>
+  <script src="/pwa.js" defer></script>
+  <script src="/common.js" defer></script>
+<!-- Vercel Speed Insights -->
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
+`;
+
+fs.writeFileSync(path.resolve('public/tools.html'), toolsPageHtml, 'utf8');
+console.log('Updated public/tools.html successfully!');

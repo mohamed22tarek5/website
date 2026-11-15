@@ -47,6 +47,10 @@ Based in Egypt, specializing in custom circuit design, embedded firmware, IoT ha
 - [Linux Commands Reference](https://mohamed-tarek-abdelhady.vercel.app/sites/mastering-linux-commands.html): Command-line reference guide for embedded Linux and system administration.
 - [Interactive To-Do List](https://mohamed-tarek-abdelhady.vercel.app/sites/to-do-list.html): Client-side productivity manager with priority tagging and local persistence.
 - [Medication Reminder App](https://mohamed-tarek-abdelhady.vercel.app/sites/medication-reminder.html): Standalone schedule manager with audio alerts and compliance history.
+- [AI Tools & Models Directory](https://mohamed-tarek-abdelhady.vercel.app/sites/ai-sites-list.html): Curated collection of artificial intelligence tools, prompt workflows, LLMs, and API integrations.
+- [3D Car Drive Simulator](https://mohamed-tarek-abdelhady.vercel.app/sites/3d-car-game.html): Interactive 3D WebGL physics-based driving simulator with vehicle dynamics.
+- [Classic Dino Runner Game](https://mohamed-tarek-abdelhady.vercel.app/sites/dino-game.html): Offline canvas obstacle jumping game with high score tracking.
+- [Circuit Race Game](https://mohamed-tarek-abdelhady.vercel.app/sites/race-game.html): Top-down retro arcade racer with challenging tracks and lap timers.
 
 ## APIs & Machine-Readable Catalogs
 - [OpenAPI Specification](https://mohamed-tarek-abdelhady.vercel.app/openapi.json): Machine-readable documentation of portfolio endpoints and tools.
