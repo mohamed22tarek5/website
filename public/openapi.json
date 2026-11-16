@@ -49,8 +49,12 @@
           }
         ],
         "responses": {
-          "200": { "description": "Payment verified access granted" },
-          "402": { "description": "Payment Required (x402 / MPP)" }
+          "200": {
+            "description": "Payment verified access granted"
+          },
+          "402": {
+            "description": "Payment Required (x402 / MPP)"
+          }
         }
       }
     },
@@ -86,9 +90,16 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "message": { "type": "string" },
-                    "resource": { "type": "string" },
-                    "timestamp": { "type": "string", "format": "date-time" }
+                    "message": {
+                      "type": "string"
+                    },
+                    "resource": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
                   }
                 }
               }
@@ -99,7 +110,9 @@
             "headers": {
               "PAYMENT-REQUIRED": {
                 "description": "Base64url-encoded PaymentRequirements object",
-                "schema": { "type": "string" }
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -107,24 +120,45 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "x402Version": { "type": "integer", "example": 1 },
+                    "x402Version": {
+                      "type": "integer",
+                      "example": 1
+                    },
                     "accepts": {
                       "type": "array",
                       "items": {
                         "type": "object",
                         "properties": {
-                          "scheme": { "type": "string" },
-                          "network": { "type": "string" },
-                          "maxAmountRequired": { "type": "string" },
-                          "resource": { "type": "string" },
-                          "description": { "type": "string" },
-                          "mimeType": { "type": "string" },
-                          "payTo": { "type": "string" }
+                          "scheme": {
+                            "type": "string"
+                          },
+                          "network": {
+                            "type": "string"
+                          },
+                          "maxAmountRequired": {
+                            "type": "string"
+                          },
+                          "resource": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "mimeType": {
+                            "type": "string"
+                          },
+                          "payTo": {
+                            "type": "string"
+                          }
                         }
                       }
                     },
-                    "ordering": { "type": "string" },
-                    "maxTimeoutSeconds": { "type": "integer" }
+                    "ordering": {
+                      "type": "string"
+                    },
+                    "maxTimeoutSeconds": {
+                      "type": "integer"
+                    }
                   }
                 }
               }
@@ -139,7 +173,9 @@
         "summary": "Portfolio homepage",
         "description": "Main portfolio page — free, no payment required.",
         "responses": {
-          "200": { "description": "Homepage HTML" }
+          "200": {
+            "description": "Homepage HTML"
+          }
         }
       }
     },
@@ -149,7 +185,9 @@
         "summary": "Ohm's Law Calculator",
         "description": "Calculate voltage, current, resistance, or power using Ohm's Law.",
         "responses": {
-          "200": { "description": "Calculator page" }
+          "200": {
+            "description": "Calculator page"
+          }
         }
       }
     },
@@ -159,7 +197,45 @@
         "summary": "Voltage Divider Calculator",
         "description": "Solve Vout, R1 or R2 with optional load, power and E12 suggestions.",
         "responses": {
-          "200": { "description": "Calculator page" }
+          "200": {
+            "description": "Calculator page"
+          }
+        }
+      }
+    },
+    "/sites/standard-resistor-capacitor-finder.html": {
+      "get": {
+        "operationId": "standardResistorCapacitorFinder",
+        "summary": "Standard Resistor & Capacitor Value Finder",
+        "description": "Find nearest standard EIA values (E6 to E96) for resistors and capacitors, or synthesize exact values with series/parallel pairs.",
+        "responses": {
+          "200": {
+            "description": "Calculator page"
+          }
+        }
+      }
+    },
+    "/sites/rectifier-filter-capacitor-calculator.html": {
+      "get": {
+        "operationId": "rectifierFilterCapacitorCalculator",
+        "summary": "Rectifier Filter Capacitor Calculator",
+        "description": "Calculate power supply smoothing capacitor values, ripple voltage, peak DC voltage, and safe capacitor ratings for bridge and half-wave rectifiers.",
+        "responses": {
+          "200": {
+            "description": "Calculator page"
+          }
+        }
+      }
+    },
+    "/sites/lm317-voltage-regulator-calculator.html": {
+      "get": {
+        "operationId": "lm317VoltageRegulatorCalculator",
+        "summary": "LM317 Voltage Regulator Calculator",
+        "description": "Calculate LM317 resistor values (R1, R2), target Vout, power dissipation, dropout voltage, and heatsink sizing.",
+        "responses": {
+          "200": {
+            "description": "Calculator page"
+          }
         }
       }
     },
@@ -169,7 +245,9 @@
         "summary": "555 Timer Calculator",
         "description": "Astable frequency/duty and monostable pulse width for NE555.",
         "responses": {
-          "200": { "description": "Calculator page" }
+          "200": {
+            "description": "Calculator page"
+          }
         }
       }
     },
@@ -179,7 +257,9 @@
         "summary": "PCB Trace Width Calculator",
         "description": "IPC-2221 trace width, resistance, drop and via sizing.",
         "responses": {
-          "200": { "description": "Calculator page" }
+          "200": {
+            "description": "Calculator page"
+          }
         }
       }
     },
@@ -189,7 +269,9 @@
         "summary": "dB dBm Calculator",
         "description": "Ratios to dB, dBm to power/voltage, cascade gain.",
         "responses": {
-          "200": { "description": "Calculator page" }
+          "200": {
+            "description": "Calculator page"
+          }
         }
       }
     },
@@ -199,7 +281,9 @@
         "summary": "Op-Amp Gain Calculator",
         "description": "Inverting, non-inverting, differential and follower gain with clipping check.",
         "responses": {
-          "200": { "description": "Calculator page" }
+          "200": {
+            "description": "Calculator page"
+          }
         }
       }
     },
@@ -209,13 +293,22 @@
         "summary": "Battery Life and Solar Calculator",
         "description": "Battery runtime plus solar panel and battery sizing.",
         "responses": {
-          "200": { "description": "Calculator page" }
+          "200": {
+            "description": "Calculator page"
+          }
         }
       }
     }
   },
   "x-service-info": {
-    "categories": ["engineering", "calculators", "portfolio"],
-    "payment_protocols": ["x402", "mpp"]
+    "categories": [
+      "engineering",
+      "calculators",
+      "portfolio"
+    ],
+    "payment_protocols": [
+      "x402",
+      "mpp"
+    ]
   }
 }

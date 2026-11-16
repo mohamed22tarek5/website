@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/rectifier-filter-capacitor-calculator.html">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Rectifier Filter Capacitor Calculator | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Calculate smoothing filter capacitor size (mF / µF), peak-to-peak ripple voltage, peak DC voltage, and safe capacitor voltage rating for full-wave bridge and half-wave rectifiers.">
+  <meta name="author" content="Mohamed Tarek Abdelhady">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rectifier Filter Capacitor Calculator | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Calculate DC power supply smoothing capacitor values, ripple voltage, peak/valley voltages, and safe voltage ratings for bridge rectifiers.">
+  <meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="851">
+  <meta property="og:image:height" content="1134">
+  <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/rectifier-filter-capacitor-calculator.html">
+  <meta property="og:updated_time" content="2026-11-16T00:00:00+02:00">
+  <meta property="article:modified_time" content="2026-11-16T00:00:00+02:00">
+  <meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rectifier Filter Capacitor Calculator | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Calculate DC power supply smoothing capacitor values, ripple voltage, peak/valley voltages, and safe voltage ratings.">
+  <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Filter Cap Calc">
+  <meta name="application-name" content="Filter Cap Calc">
+  <meta name="msapplication-TileColor" content="#0a0e1a">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Rectifier Filter Capacitor Calculator",
+    "description": "Calculate power supply smoothing capacitor values, ripple voltage, peak DC voltage, and safe capacitor ratings for full-wave bridge and half-wave rectifiers.",
+    "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/rectifier-filter-capacitor-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek Abdelhady",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1322;
+      --bg3: #141829;
+      --card: #161b2e;
+      --card2: #1c2240;
+      --acc: #3b82f6;
+      --acc2: #2563eb;
+      --acc-subtle: rgba(59, 130, 246, 0.12);
+      --acc-border: rgba(59, 130, 246, 0.35);
+      --txt: #f1f5f9;
+      --mut: #94a3b8;
+      --mut2: #64748b;
+      --br: rgba(255, 255, 255, 0.08);
+      --br-hover: rgba(255, 255, 255, 0.16);
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --err: #ef4444;
+      --cyan: #06b6d4;
+      --purple: #a855f7;
+      --r: 14px;
+      --r-sm: 8px;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --bg3: #e2e8f0;
+      --card: #ffffff;
+      --card2: #f8fafc;
+      --acc: #2563eb;
+      --acc2: #1d4ed8;
+      --acc-subtle: rgba(37, 99, 235, 0.08);
+      --acc-border: rgba(37, 99, 235, 0.25);
+      --txt: #0f172a;
+      --mut: #475569;
+      --mut2: #94a3b8;
+      --br: rgba(0, 0, 0, 0.09);
+      --br-hover: rgba(0, 0, 0, 0.16);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 2.5rem 0 1.5rem;
+    }
+
+    .hero .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--acc);
+      background: var(--acc-subtle);
+      border: 1px solid var(--acc-border);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: var(--mut);
+      max-width: 680px;
+      margin: 0.75rem auto 0;
+      font-size: 0.98rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.35rem;
+      margin-top: 1.4rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.4rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-weight: 700;
+    }
+
+    .card h2 i {
+      color: var(--acc);
+    }
+
+    .seg {
+      display: flex;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: 1.1rem;
+    }
+
+    .seg button {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      color: var(--mut);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 160ms ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .seg button:hover:not(.on) {
+      color: var(--txt);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .seg button.on {
+      background: var(--acc);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+    }
+
+    label.lbl {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin: 0.85rem 0 0.35rem;
+    }
+
+    label.lbl .subtip {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--mut2);
+    }
+
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--txt);
+      border-radius: 10px;
+      padding: 0.72rem 3.2rem 0.72rem 0.85rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      font-weight: 500;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .input-wrap input:focus {
+      outline: none;
+      border-color: var(--acc);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .input-wrap .unit {
+      position: absolute;
+      right: 0.9rem;
+      color: var(--mut2);
+      font-size: 0.82rem;
+      font-family: var(--mono);
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    .presets-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.45rem;
+    }
+
+    .preset-pill {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 0.75rem;
+      font-family: var(--mono);
+      font-weight: 600;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 140ms ease;
+    }
+
+    .preset-pill:hover {
+      border-color: var(--acc);
+      color: var(--acc);
+      background: var(--acc-subtle);
+    }
+
+    .preset-pill.active {
+      background: var(--acc-subtle);
+      border-color: var(--acc);
+      color: var(--acc);
+    }
+
+    .section-divider {
+      border: 0;
+      border-top: 1px dashed var(--br);
+      margin: 1.15rem 0 0.85rem;
+    }
+
+    .section-title-sm {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--mut2);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+    }
+
+    @media (max-width: 500px) {
+      .row2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 1.25rem;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff;
+      font-weight: 700;
+      border: 0;
+      border-radius: 10px;
+      padding: 0.82rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+    }
+
+    .formula {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      padding: 0.7rem 0.9rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      color: var(--mut);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    /* Waveform & Schematic Card */
+    .visual-box {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1.1rem;
+      position: relative;
+    }
+
+    .visual-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--mut);
+    }
+
+    .visual-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: visible;
+    }
+
+    /* Results Grid */
+    .res {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 500px) {
+      .res {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cell {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 0.8rem 0.95rem;
+      transition: border-color 150ms ease;
+    }
+
+    .cell small {
+      display: block;
+      color: var(--mut2);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.2rem;
+      font-weight: 600;
+    }
+
+    .cell b {
+      font-family: var(--mono);
+      font-size: 1.1rem;
+      color: var(--txt);
+      display: block;
+      line-height: 1.25;
+    }
+
+    .cell .subtext {
+      font-size: 0.75rem;
+      color: var(--mut);
+      margin-top: 0.25rem;
+      font-family: var(--mono);
+    }
+
+    .cell.hl {
+      border-color: rgba(59, 130, 246, 0.45);
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .cell.hl b {
+      color: #60a5fa;
+    }
+
+    .cell.hl-green {
+      border-color: rgba(34, 197, 94, 0.4);
+      background: rgba(34, 197, 94, 0.07);
+    }
+
+    .cell.hl-green b {
+      color: var(--ok);
+    }
+
+    .note {
+      margin-top: 0.95rem;
+      font-size: 0.85rem;
+      color: var(--mut);
+      background: var(--bg2);
+      border: 1px dashed var(--br);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      line-height: 1.55;
+    }
+
+    /* Table styling */
+    .table-card {
+      margin-top: 1.35rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 0.75rem;
+      border-radius: 10px;
+      border: 1px solid var(--br);
+    }
+
+    table.std-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+      text-align: left;
+    }
+
+    table.std-table th {
+      background: var(--bg2);
+      padding: 0.7rem 0.85rem;
+      color: var(--mut);
+      font-weight: 600;
+      border-bottom: 1px solid var(--br);
+      white-space: nowrap;
+    }
+
+    table.std-table td {
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--br);
+      color: var(--txt);
+      white-space: nowrap;
+    }
+
+    table.std-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    table.std-table tr:hover td {
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    table.std-table .mono {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+    }
+
+    .btn-apply {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--acc);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 140ms ease;
+    }
+
+    .btn-apply:hover {
+      background: var(--acc);
+      color: #fff;
+    }
+
+    /* Engineering Guide cards */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 0.9rem;
+    }
+
+    .guide-item {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .guide-item h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--acc);
+    }
+
+    .guide-item p {
+      font-size: 0.82rem;
+      color: var(--mut);
+      line-height: 1.55;
+    }
+  </style>
+
+  <link rel="stylesheet" href="mta-chrome.css">
+</head>
+<body>
+
+<header class="mta-bar" id="header" role="banner">
+  <div class="mta-bar-in">
+    <nav aria-label="Breadcrumb" class="mta-crumbs">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools.html">Tools</a></li>
+        <li aria-current="page">Rectifier Filter Capacitor Calculator</li>
+      </ol>
+    </nav>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mohamed-tarek-abdelhady.vercel.app/"},
+        {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://mohamed-tarek-abdelhady.vercel.app/tools.html"},
+        {"@type": "ListItem", "position": 3, "name": "Rectifier Filter Capacitor Calculator", "item": "https://mohamed-tarek-abdelhady.vercel.app/sites/rectifier-filter-capacitor-calculator.html"}
+      ]
+    }
+    </script>
+    <button class="mta-btn" id="th" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <!-- Hero -->
+  <div class="hero">
+    <span class="pill"><i class="fas fa-bolt"></i> Power Supplies · AC-to-DC Smoothing</span>
+    <h1>Rectifier Filter Capacitor Calculator</h1>
+    <p>Calculate the smoothing filter capacitor to minimize DC voltage ripple after diode rectifiers, compute peak and valley voltages, and select the safe capacitor voltage rating.</p>
+  </div>
+
+  <div class="grid">
+    <!-- INPUTS CARD -->
+    <div class="card">
+      <h2><i class="fas fa-sliders"></i> Rectifier &amp; Load Inputs</h2>
+
+      <!-- Rectifier Mode Selector -->
+      <div class="seg" role="tablist" aria-label="Rectifier Configuration">
+        <button type="button" class="on" id="btnModeBridge" role="tab" aria-selected="true">
+          <i class="fas fa-diamond"></i> Bridge (Full-Wave)
+        </button>
+        <button type="button" id="btnModeHalf" role="tab" aria-selected="false">
+          <i class="fas fa-wave-square"></i> Single Diode (Half-Wave)
+        </button>
+      </div>
+
+      <!-- Load Current (Iload) -->
+      <label class="lbl" for="inputIload">
+        <span>Load Current (I)</span>
+        <span class="subtip">DC current drawn by load</span>
+      </label>
+      <div class="input-wrap">
+        <input id="inputIload" type="number" value="1" step="0.1" min="0.01" max="100" aria-label="Load current in amperes">
+        <span class="unit">A</span>
+      </div>
+
+      <!-- Quick Current Presets -->
+      <div class="presets-row" aria-label="Quick load current presets">
+        <button type="button" class="preset-pill" data-i="0.1">100 mA</button>
+        <button type="button" class="preset-pill" data-i="0.5">500 mA</button>
+        <button type="button" class="preset-pill active" data-i="1">1.0 A</button>
+        <button type="button" class="preset-pill" data-i="2">2.0 A</button>
+        <button type="button" class="preset-pill" data-i="3">3.0 A</button>
+        <button type="button" class="preset-pill" data-i="5">5.0 A</button>
+      </div>
+
+      <!-- Allowed Ripple (Vpp) -->
+      <label class="lbl" for="inputVripple">
+        <span>Allowed Ripple Voltage (Vpp)</span>
+        <span class="subtip">Lower ripple requires a larger capacitor</span>
+      </label>
+      <div class="input-wrap">
+        <input id="inputVripple" type="number" value="1" step="0.05" min="0.01" max="50" aria-label="Peak-to-peak allowed ripple voltage">
+        <span class="unit">V</span>
+      </div>
+
+      <!-- Quick Ripple Presets -->
+      <div class="presets-row" aria-label="Quick ripple presets">
+        <button type="button" class="preset-pill" data-vr="0.2">0.2 V (Tight)</button>
+        <button type="button" class="preset-pill" data-vr="0.5">0.5 V</button>
+        <button type="button" class="preset-pill active" data-vr="1">1.0 V (Standard)</button>
+        <button type="button" class="preset-pill" data-vr="2">2.0 V</button>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- AC Source & Frequency -->
+      <div class="section-title-sm">
+        <i class="fas fa-plug"></i> Transformer &amp; AC Mains
+      </div>
+
+      <div class="row2">
+        <div>
+          <label class="lbl" for="inputVrms">
+            <span>Transformer AC (Vrms)</span>
+            <span class="subtip">Secondary RMS</span>
+          </label>
+          <div class="input-wrap">
+            <input id="inputVrms" type="number" value="12" step="0.5" min="1" max="1000" aria-label="Transformer secondary AC RMS voltage">
+            <span class="unit">V</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="lbl" for="inputFreq">
+            <span>Mains Frequency (f)</span>
+            <span class="subtip">50Hz Egypt/EU, 60Hz US</span>
+          </label>
+          <div class="input-wrap">
+            <input id="inputFreq" type="number" value="50" step="10" min="10" max="10000" aria-label="AC mains frequency in Hertz">
+            <span class="unit">Hz</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frequency Presets -->
+      <div class="presets-row" style="margin-top:0.4rem;">
+        <button type="button" class="preset-pill active" data-freq="50">50 Hz (Egypt, Europe, UK, Asia)</button>
+        <button type="button" class="preset-pill" data-freq="60">60 Hz (Americas)</button>
+      </div>
+
+      <button type="button" class="btn" id="btnCalc"><i class="fas fa-bolt"></i> Update Calculation</button>
+
+      <!-- Formula Preview -->
+      <div class="formula" id="formulaPreview">
+        C = I / (2 &middot; f &middot; Vripple) &nbsp;|&nbsp; Vpeak = Vrms &middot; &radic;2 - 2 &middot; 0.7V
+      </div>
+    </div>
+
+    <!-- RESULTS & WAVEFORM CARD -->
+    <div class="card">
+      <h2><i class="fas fa-chart-line"></i> Filter Outputs &amp; Waveform</h2>
+
+      <!-- Visual Waveform & Schematic Box -->
+      <div class="visual-box">
+        <div class="visual-header">
+          <span><i class="fas fa-wave-square"></i> DC Waveform &middot; After Bridge Filter</span>
+          <span id="svgStatusPill" style="font-family:var(--mono); color:var(--acc);">Ripple: 1.00 V</span>
+        </div>
+
+        <svg class="visual-svg" viewBox="0 0 460 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background coordinate grid -->
+          <line x1="40" y1="20" x2="40" y2="140" stroke="#334155" stroke-width="1.5" />
+          <line x1="40" y1="140" x2="440" y2="140" stroke="#334155" stroke-width="1.5" />
+
+          <!-- Axis zero label -->
+          <text x="32" y="144" fill="#64748b" font-size="10" font-family="monospace" text-anchor="end">0V</text>
+
+          <!-- Raw pulsating rectified humps (dashed line) -->
+          <path d="M 40 140 Q 65 30 90 140 Q 115 30 140 140 Q 165 30 190 140 Q 215 30 240 140 Q 265 30 290 140 Q 315 30 340 140 Q 365 30 390 140 Q 415 30 440 140"
+                stroke="#64748b" stroke-width="1.5" stroke-dasharray="3 3" fill="none" opacity="0.6" />
+
+          <!-- Filtered DC line with capacitor discharge curve -->
+          <path id="svgFilteredWave"
+                d="M 40 38 L 65 30 L 115 50 L 140 30 L 190 50 L 215 30 L 265 50 L 290 30 L 340 50 L 365 30 L 415 50 L 440 30"
+                stroke="#22c55e" stroke-width="2.5" fill="none" />
+
+          <!-- Vpeak horizontal line -->
+          <line x1="40" y1="30" x2="440" y2="30" stroke="#f59e0b" stroke-width="1" stroke-dasharray="2 2" />
+          <text x="442" y="34" fill="#f59e0b" font-size="10" font-weight="700" font-family="monospace" id="svgVpeakLabel">15.6V (Vpeak)</text>
+
+          <!-- Vmin horizontal line -->
+          <line x1="40" y1="50" x2="440" y2="50" stroke="#3b82f6" stroke-width="1" stroke-dasharray="2 2" />
+          <text x="442" y="54" fill="#3b82f6" font-size="10" font-weight="700" font-family="monospace" id="svgVminLabel">14.6V (Vmin)</text>
+
+          <!-- Ripple Delta bracket -->
+          <line x1="215" y1="30" x2="215" y2="50" stroke="#ef4444" stroke-width="2" />
+          <line x1="210" y1="30" x2="220" y2="30" stroke="#ef4444" stroke-width="1.5" />
+          <line x1="210" y1="50" x2="220" y2="50" stroke="#ef4444" stroke-width="1.5" />
+          <text x="225" y="44" fill="#ef4444" font-size="10" font-weight="700" font-family="monospace" id="svgVrippleLabel">&Delta;V: 1.0V</text>
+
+          <!-- Time period callout -->
+          <line x1="140" y1="146" x2="215" y2="146" stroke="#94a3b8" stroke-width="1" />
+          <polyline points="144,143 140,146 144,149" stroke="#94a3b8" stroke-width="1" fill="none" />
+          <polyline points="211,143 215,146 211,149" stroke="#94a3b8" stroke-width="1" fill="none" />
+          <text x="177" y="158" fill="#94a3b8" font-size="9" font-family="monospace" text-anchor="middle" id="svgPeriodLabel">T = 10 ms (100 Hz)</text>
+        </svg>
+      </div>
+
+      <!-- Key Results Grid -->
+      <div class="res">
+        <div class="cell hl-green">
+          <small>Use Capacitor (Standard)</small>
+          <b id="valStdCap">10 mF</b>
+          <div class="subtext" id="subStdCapUf">10,000 µF</div>
+        </div>
+
+        <div class="cell hl">
+          <small>Capacitor Voltage (At least)</small>
+          <b id="valStdVolt">25 V</b>
+          <div class="subtext" id="subVoltMargin">&ge; 19.5 V (25% safety margin)</div>
+        </div>
+
+        <div class="cell">
+          <small>Calculated Capacitance</small>
+          <b id="valCalcCap">10 mF</b>
+          <div class="subtext" id="subCalcCapUf">Exact: 10,000 µF</div>
+        </div>
+
+        <div class="cell">
+          <small>Peak DC Voltage (Vpeak)</small>
+          <b id="valVpeak">15.6 V</b>
+          <div class="subtext" id="subVpeakFormula">Vrms &times; &radic;2 - 1.4V</div>
+        </div>
+
+        <div class="cell">
+          <small>Minimum Voltage (After Ripple)</small>
+          <b id="valVmin">14.6 V</b>
+          <div class="subtext">Vpeak - Vripple</div>
+        </div>
+
+        <div class="cell">
+          <small>Ripple with Standard Cap</small>
+          <b id="valActualRipple">1 V</b>
+          <div class="subtext" id="subRipplePct">6.6% ripple factor</div>
+        </div>
+
+        <div class="cell">
+          <small>Ripple Frequency</small>
+          <b id="valRippleFreq">100 Hz</b>
+          <div class="subtext" id="subRippleFreqMode">Full-Wave (2 &times; 50 Hz)</div>
+        </div>
+
+        <div class="cell">
+          <small>Average DC Voltage</small>
+          <b id="valVavg">15.1 V</b>
+          <div class="subtext">Vpeak - (Vripple / 2)</div>
+        </div>
+      </div>
+
+      <!-- Explanatory Note Box -->
+      <div class="note" id="generalNote">
+        <i class="fas fa-circle-check" style="color:var(--ok);"></i> Standard capacitor chosen from nearest higher commercial values (1.0, 1.5, 2.2, 3.3, 4.7, 6.8, 10 mF). Capacitor voltage rating is sized with a <strong>25% safety margin</strong> over peak DC voltage.
+      </div>
+    </div>
+  </div>
+
+  <!-- Standard Filter Capacitor Reference Table -->
+  <div class="card table-card">
+    <h2><i class="fas fa-table-cells"></i> Common Power Supply Reference Table (50 Hz &middot; Bridge Rectifier)</h2>
+    <p style="color:var(--mut); font-size:0.86rem; margin-top:-0.4rem;">
+      Standard secondary voltages, load currents, capacitor recommendations, and resulting DC voltages. Click <strong>Apply</strong> to load any configuration directly.
+    </p>
+
+    <div class="table-wrap">
+      <table class="std-table" id="stdTable">
+        <thead>
+          <tr>
+            <th>Transformer (AC)</th>
+            <th>Load (I)</th>
+            <th>Allowed Ripple</th>
+            <th>Recommended Cap</th>
+            <th>Min Voltage Rating</th>
+            <th>Vpeak</th>
+            <th>Vmin (Valley)</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Engineering Guidelines Card -->
+  <div class="card" style="margin-top:1.35rem;">
+    <h2><i class="fas fa-book-open"></i> Filter Capacitor Design Guide &amp; Best Practices</h2>
+    <div class="guide-grid">
+      <div class="guide-item">
+        <h3><i class="fas fa-shield-halved"></i> Voltage Derating (+25% to +50%)</h3>
+        <p>Always specify an electrolytic capacitor with a working voltage at least <strong>25% higher</strong> than Vpeak (e.g., 25V rating for a 15.6V peak). AC mains voltage can fluctuate up to +10%, and exceeding the rated dielectric voltage drastically shortens electrolytic capacitor lifespan or causes venting.</p>
+      </div>
+
+      <div class="guide-item">
+        <h3><i class="fas fa-fire-burner"></i> Ripple Current &amp; ESR Heating</h3>
+        <p>In linear rectifiers, the capacitor charges in short, intense pulses. The RMS ripple current passing through the capacitor is typically <strong>1.5&times; to 2.5&times; the DC load current</strong>. Select a high-ripple-current, 105&deg;C rated capacitor to prevent internal overheating from ESR dissipation.</p>
+      </div>
+
+      <div class="guide-item">
+        <h3><i class="fas fa-arrows-split-up-and-left"></i> High-Frequency Noise Bypassing</h3>
+        <p>Large electrolytic capacitors have significant parasitic internal inductance (ESL) at radio and audio frequencies. Always wire a <strong>0.1 µF (100 nF) ceramic capacitor</strong> in parallel with the large reservoir capacitor to shunt high-frequency diode switching spikes to ground.</p>
+      </div>
+
+      <div class="guide-item">
+        <h3><i class="fas fa-battery-half"></i> Linear Regulator Headroom</h3>
+        <p>If feeding an LM7805, LM7812, or LM317 linear regulator after the filter, the <strong>minimum valley voltage (Vmin)</strong> must always remain higher than the regulated output plus the regulator dropout voltage (e.g. <code>Vmin &ge; Vout + 2.5V</code>) even at lowest mains line voltage.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mta-foot" role="contentinfo">
+    <div class="mta-foot-in">
+      <div class="mta-social">
+        <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="/">Back to Portfolio</a></p>
+      <div class="mta-actions">
+        <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+        <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<script>
+(function() {
+  'use strict';
+
+  // Standard Commercial Electrolytic Capacitors (in µF)
+  const STD_CAPS_UF = [
+    100, 220, 330, 470, 680,
+    1000, 1500, 2200, 3300, 4700, 6800,
+    10000, 15000, 22000, 33000, 47000, 68000,
+    100000, 150000, 220000
+  ];
+
+  // Standard Capacitor Voltage Ratings (in Volts)
+  const STD_VOLTAGES = [6.3, 10, 16, 25, 35, 50, 63, 100, 160, 200, 250, 350, 400, 450, 500];
+
+  function getNextStdCap(uF) {
+    for (let c of STD_CAPS_UF) {
+      if (c >= uF) return c;
+    }
+    return STD_CAPS_UF[STD_CAPS_UF.length - 1];
+  }
+
+  function getNextStdVoltage(v) {
+    for (let sv of STD_VOLTAGES) {
+      if (sv >= v) return sv;
+    }
+    return STD_VOLTAGES[STD_VOLTAGES.length - 1];
+  }
+
+  function fmtCap(uF) {
+    if (uF === undefined || isNaN(uF) || uF <= 0) return '–';
+    if (uF >= 1000) {
+      const mF = uF / 1000;
+      return (mF % 1 === 0 ? mF : mF.toFixed(1)) + ' mF';
+    }
+    return Math.round(uF) + ' µF';
+  }
+
+  function fmtV(v) {
+    if (v === undefined || isNaN(v)) return '–';
+    return v.toFixed(1) + ' V';
+  }
+
+  function fmtVexact(v) {
+    if (v === undefined || isNaN(v)) return '–';
+    return v.toFixed(2) + ' V';
+  }
+
+  // DOM Elements
+  const $ = id => document.getElementById(id);
+  const btnModeBridge = $('btnModeBridge');
+  const btnModeHalf = $('btnModeHalf');
+
+  const inIload = $('inputIload');
+  const inVripple = $('inputVripple');
+  const inVrms = $('inputVrms');
+  const inFreq = $('inputFreq');
+
+  const valStdCap = $('valStdCap');
+  const subStdCapUf = $('subStdCapUf');
+  const valStdVolt = $('valStdVolt');
+  const subVoltMargin = $('subVoltMargin');
+  const valCalcCap = $('valCalcCap');
+  const subCalcCapUf = $('subCalcCapUf');
+  const valVpeak = $('valVpeak');
+  const subVpeakFormula = $('subVpeakFormula');
+  const valVmin = $('valVmin');
+  const valActualRipple = $('valActualRipple');
+  const subRipplePct = $('subRipplePct');
+  const valRippleFreq = $('valRippleFreq');
+  const subRippleFreqMode = $('subRippleFreqMode');
+  const valVavg = $('valVavg');
+  const formulaPreview = $('formulaPreview');
+  const generalNote = $('generalNote');
+
+  // SVG Elements
+  const svgVpeakLabel = $('svgVpeakLabel');
+  const svgVminLabel = $('svgVminLabel');
+  const svgVrippleLabel = $('svgVrippleLabel');
+  const svgPeriodLabel = $('svgPeriodLabel');
+  const svgStatusPill = $('svgStatusPill');
+
+  let isBridge = true; // true = Bridge (Full-Wave), false = Single Diode (Half-Wave)
+
+  function setMode(bridge) {
+    isBridge = bridge;
+    if (isBridge) {
+      btnModeBridge.classList.add('on');
+      btnModeBridge.setAttribute('aria-selected', 'true');
+      btnModeHalf.classList.remove('on');
+      btnModeHalf.setAttribute('aria-selected', 'false');
+      formulaPreview.textContent = 'C = I / (2 · f · Vripple)  |  Vpeak = Vrms · √2 - 2 · 0.7V';
+    } else {
+      btnModeHalf.classList.add('on');
+      btnModeHalf.setAttribute('aria-selected', 'true');
+      btnModeBridge.classList.remove('on');
+      btnModeBridge.setAttribute('aria-selected', 'false');
+      formulaPreview.textContent = 'C = I / (f · Vripple)  |  Vpeak = Vrms · √2 - 0.7V';
+    }
+    calculate();
+  }
+
+  btnModeBridge.addEventListener('click', () => setMode(true));
+  btnModeHalf.addEventListener('click', () => setMode(false));
+
+  // Quick Preset Handlers
+  document.querySelectorAll('.preset-pill[data-i]').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.preset-pill[data-i]').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      inIload.value = p.dataset.i;
+      calculate();
+    });
+  });
+
+  document.querySelectorAll('.preset-pill[data-vr]').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.preset-pill[data-vr]').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      inVripple.value = p.dataset.vr;
+      calculate();
+    });
+  });
+
+  document.querySelectorAll('.preset-pill[data-freq]').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.preset-pill[data-freq]').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      inFreq.value = p.dataset.freq;
+      calculate();
+    });
+  });
+
+  // Main Calculation Logic
+  function calculate() {
+    const I = parseFloat(inIload.value) || 1.0;
+    const Vripple = parseFloat(inVripple.value) || 1.0;
+    const Vrms = parseFloat(inVrms.value) || 12.0;
+    const f = parseFloat(inFreq.value) || 50.0;
+
+    // Ripple frequency
+    const f_ripple = isBridge ? 2 * f : f;
+    const diodeDrop = isBridge ? 1.4 : 0.7;
+
+    // Peak DC Voltage
+    const Vpeak = Math.max(0, (Vrms * Math.SQRT2) - diodeDrop);
+
+    // Exact Capacitance Formula: C = I / (f_ripple * Vripple)
+    const C_exact = I / (f_ripple * Vripple); // in Farads
+    const C_exact_uF = C_exact * 1e6;
+    const C_exact_mF = C_exact * 1e3;
+
+    // Standard Capacitor Selection
+    const stdCap_uF = getNextStdCap(C_exact_uF);
+    const stdCap_mF = stdCap_uF / 1000;
+
+    // Minimum Voltage (Valley)
+    const Vmin = Math.max(0, Vpeak - Vripple);
+
+    // Actual Ripple with the chosen standard capacitor
+    const actualVripple = I / (f_ripple * (stdCap_uF * 1e-6));
+
+    // Safe Voltage Rating (with 25% safety margin above Vpeak)
+    const minSafeVoltage = Vpeak * 1.25;
+    const stdVoltage = getNextStdVoltage(minSafeVoltage);
+
+    // Average DC output
+    const Vavg = Math.max(0, Vpeak - (actualVripple / 2));
+
+    // Update DOM
+    valStdCap.textContent = fmtCap(stdCap_uF);
+    subStdCapUf.textContent = `${stdCap_uF.toLocaleString()} µF`;
+
+    valStdVolt.textContent = `${stdVoltage} V`;
+    subVoltMargin.textContent = `≥ ${minSafeVoltage.toFixed(1)} V (25% safety margin)`;
+
+    valCalcCap.textContent = fmtCap(C_exact_uF);
+    subCalcCapUf.textContent = `Exact: ${Math.round(C_exact_uF).toLocaleString()} µF`;
+
+    valVpeak.textContent = fmtV(Vpeak);
+    subVpeakFormula.textContent = isBridge ? 'Vrms × √2 - 1.4V (Bridge)' : 'Vrms × √2 - 0.7V (1 Diode)';
+
+    valVmin.textContent = fmtV(Vmin);
+
+    // Format actual ripple (if close to integer, show clean e.g. 1 V)
+    const actualRippleDisplay = Math.abs(actualVripple - Math.round(actualVripple)) < 0.02
+      ? Math.round(actualVripple) + ' V'
+      : actualVripple.toFixed(2) + ' V';
+    valActualRipple.textContent = actualRippleDisplay;
+
+    const rippleFactorPct = Vavg > 0 ? ((actualVripple / Vavg) * 100).toFixed(1) : '0';
+    subRipplePct.textContent = `${rippleFactorPct}% ripple factor`;
+
+    valRippleFreq.textContent = `${Math.round(f_ripple)} Hz`;
+    subRippleFreqMode.textContent = isBridge ? `Full-Wave (2 × ${f} Hz)` : `Half-Wave (${f} Hz)`;
+
+    valVavg.textContent = fmtV(Vavg);
+
+    // Update SVG Labels
+    svgVpeakLabel.textContent = `${fmtV(Vpeak)} (Vpeak)`;
+    svgVminLabel.textContent = `${fmtV(Vmin)} (Vmin)`;
+    svgVrippleLabel.textContent = `ΔV: ${actualRippleDisplay}`;
+    const period_ms = (1000 / f_ripple).toFixed(1).replace(/\.0$/, '');
+    svgPeriodLabel.textContent = `T = ${period_ms} ms (${Math.round(f_ripple)} Hz)`;
+    svgStatusPill.textContent = `Ripple: ${actualRippleDisplay}`;
+
+    // Note message
+    generalNote.innerHTML = `
+      <i class="fas fa-circle-check" style="color:var(--ok);"></i>
+      Standard capacitor chosen from nearest higher commercial values (1.0, 1.5, 2.2, 3.3, 4.7, 6.8, 10 mF).
+      Capacitor voltage rating is sized with a <strong>25% safety margin</strong> over peak DC voltage.
+    `;
+  }
+
+  // Populate Reference Table
+  function buildStdTable() {
+    const presets = [
+      { vrms: 6, i: 0.5, vr: 0.5 },
+      { vrms: 9, i: 1.0, vr: 1.0 },
+      { vrms: 12, i: 0.5, vr: 0.5 },
+      { vrms: 12, i: 1.0, vr: 1.0 },
+      { vrms: 15, i: 1.5, vr: 1.0 },
+      { vrms: 18, i: 1.0, vr: 1.0 },
+      { vrms: 24, i: 1.0, vr: 1.0 },
+      { vrms: 24, i: 2.0, vr: 1.5 }
+    ];
+
+    const f = 50;
+    const f_rip = 100; // Bridge full-wave
+    const tbody = $('tableBody');
+    tbody.innerHTML = '';
+
+    presets.forEach(p => {
+      const vpeak = (p.vrms * Math.SQRT2) - 1.4;
+      const vmin = vpeak - p.vr;
+      const c_exact_uF = (p.i / (f_rip * p.vr)) * 1e6;
+      const stdC = getNextStdCap(c_exact_uF);
+      const stdV = getNextStdVoltage(vpeak * 1.25);
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="mono"><strong>${p.vrms} V AC</strong></td>
+        <td class="mono">${p.i} A</td>
+        <td class="mono">${p.vr} V</td>
+        <td class="mono" style="color:var(--ok);"><strong>${fmtCap(stdC)}</strong></td>
+        <td class="mono" style="color:var(--acc);"><strong>${stdV} V</strong></td>
+        <td class="mono">${fmtV(vpeak)}</td>
+        <td class="mono">${fmtV(vmin)}</td>
+        <td><button type="button" class="btn-apply" data-vrms="${p.vrms}" data-i="${p.i}" data-vr="${p.vr}">Apply</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    tbody.querySelectorAll('.btn-apply').forEach(btn => {
+      btn.addEventListener('click', () => {
+        inVrms.value = btn.dataset.vrms;
+        inIload.value = btn.dataset.i;
+        inVripple.value = btn.dataset.vr;
+        setMode(true);
+        window.scrollTo({ top: $('main').offsetTop, behavior: 'smooth' });
+      });
+    });
+  }
+
+  // Event Listeners for inputs
+  const inputs = [inIload, inVripple, inVrms, inFreq];
+  inputs.forEach(el => {
+    el.addEventListener('input', calculate);
+    el.addEventListener('change', calculate);
+  });
+
+  $('btnCalc').addEventListener('click', calculate);
+
+  // Initial calculation & table load
+  buildStdTable();
+  calculate();
+
+})();
+</script>
+
+<script src="/pwa.js" defer></script>
+<script src="mta-chrome.js" defer></script>
+<!-- Vercel Speed Insights -->
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

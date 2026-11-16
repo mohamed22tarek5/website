@@ -16,8 +16,10 @@ Based in Egypt, specializing in custom circuit design, embedded firmware, IoT ha
 ## Online Engineering Calculators & Tools
 - [Ohm's Law Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/ohms-law-calculator.html): Compute voltage, current, resistance, and electrical power with circuit analysis.
 - [Resistor Color Code Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/resistor-calculator.html): Decode 4-band and 5-band standard resistor color values and tolerances.
+- [Standard Resistor & Capacitor Value Finder](https://mohamed-tarek-abdelhady.vercel.app/sites/standard-resistor-capacitor-finder.html): Find nearest standard commercial resistor or capacitor values across E6, E12, E24, and E96 series, and calculate exact two-component series and parallel combinations.
 - [LED Current Limiting Resistor Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/resistor-for-led.html): Calculate series resistor values and power dissipation for LED circuits.
 - [Capacitor Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/capacitor-calculator.html): Determine capacitance, RC time constants, reactance, and energy storage.
+- [Rectifier Filter Capacitor Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/rectifier-filter-capacitor-calculator.html): Calculate smoothing capacitor values, ripple voltage, peak DC voltage, and safe capacitor ratings for bridge and half-wave rectifiers.
 - [Inductance Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/inductance-calculator.html): Air-core coil inductance, inductive reactance, and resonance calculations.
 - [Buck-Boost Converter Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/buck-boost-calculator.html): Design DC-DC switching regulator components, inductor sizing, and duty cycles.
 - [Duty Cycle Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/duty-cycle-calculator.html): Calculate duty cycle for periodic pulse signals, Step-Up Boost, Step-Down Buck, Buck-Boost, Ćuk, and SEPIC converters.
@@ -30,9 +32,10 @@ Based in Egypt, specializing in custom circuit design, embedded firmware, IoT ha
 - [PWM (Pulse Width Modulation) Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/pwm-calculator.html): Average and RMS voltage, period, HIGH/LOW pulse durations, timer bit resolution, and duty register values for ESP32, Arduino, and microcontrollers.
 - [UART Baud Rate & Error Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/uart-baud-rate-calculator.html): AVR UBRR register calculation, actual baud rates, percentage timing error, Double Speed (U2X) mode, and magic crystal selection.
 - [Voltage Divider Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/voltage-divider-calculator.html): Resistor divider outputs with loaded and unloaded circuit modeling.
+- [LM317 Voltage Regulator Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/lm317-voltage-regulator-calculator.html): Calculate resistors (R1, R2), target output voltage, power dissipation, heatsink requirements, and nearest standard E24 resistors.
 - [ADC (Analog to Digital Converter) Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/adc-calculator.html): ADC bit resolution, LSB voltage step size, raw counts to analog voltage, and input voltage divider ratios for Arduino, ESP32, and MCUs.
 - [Decibel & dBm RF Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/decibel-dbm-calculator.html): Power and voltage gain in dB, dBm to watts conversion, and cascaded RF stages.
-- [Op-Amp Gain Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/op-amp-gain-calculator.html): Inverting, non-inverting, differential, and summing operational amplifier circuits.
+- [Op-Amp Gain & Waveform Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/op-amp-gain-calculator.html): Calculate inverting and non-inverting op-amp gain, dB, resistor values (Rin, Rf), peak output swing, rail-clipping, and live signal waveform simulation.
 - [PCB Trace Width Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/pcb-trace-width-calculator.html): IPC-2221 conductor current capacity, temperature rise, and trace width.
 - [Power Factor Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/power-factor-calculator.html): Real, reactive, and apparent power analysis with power factor correction.
 - [Power Triangle Calculator](https://mohamed-tarek-abdelhady.vercel.app/sites/power-triangle-calculator.html): Apparent power (kVA), active power (kW), and reactive power (kVAR) trigonometry.

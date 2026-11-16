@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/standard-resistor-capacitor-finder.html">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Standard Resistor &amp; Capacitor Value Finder | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Find the nearest standard commercial resistor or capacitor value across EIA E6, E12, E24, and E96 series, or synthesize exact values with 2-component series and parallel combinations.">
+  <meta name="author" content="Mohamed Tarek Abdelhady">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Standard Resistor &amp; Capacitor Value Finder | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Find the nearest standard commercial resistor or capacitor value across E6, E12, E24, and E96 series, or synthesize exact values using 2-component series or parallel pairs.">
+  <meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="851">
+  <meta property="og:image:height" content="1134">
+  <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/standard-resistor-capacitor-finder.html">
+  <meta property="og:updated_time" content="2026-11-16T00:00:00+02:00">
+  <meta property="article:modified_time" content="2026-11-16T00:00:00+02:00">
+  <meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Standard Resistor &amp; Capacitor Value Finder | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Find the nearest standard commercial resistor or capacitor value across E6, E12, E24, and E96 series, or synthesize exact values with 2-component series and parallel combinations.">
+  <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="E-Series Finder">
+  <meta name="application-name" content="E-Series Finder">
+  <meta name="msapplication-TileColor" content="#0a0e1a">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Standard Resistor & Capacitor Value Finder",
+    "description": "Find nearest standard commercial resistor or capacitor values across EIA E6, E12, E24, and E96 series, and calculate exact two-component series and parallel combinations.",
+    "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/standard-resistor-capacitor-finder.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek Abdelhady",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1322;
+      --bg3: #141829;
+      --card: #161b2e;
+      --card2: #1c2240;
+      --acc: #3b82f6;
+      --acc2: #2563eb;
+      --acc-subtle: rgba(59, 130, 246, 0.12);
+      --acc-border: rgba(59, 130, 246, 0.35);
+      --txt: #f1f5f9;
+      --mut: #94a3b8;
+      --mut2: #64748b;
+      --br: rgba(255, 255, 255, 0.08);
+      --br-hover: rgba(255, 255, 255, 0.16);
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --err: #ef4444;
+      --cyan: #06b6d4;
+      --purple: #a855f7;
+      --r: 14px;
+      --r-sm: 8px;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --bg3: #e2e8f0;
+      --card: #ffffff;
+      --card2: #f8fafc;
+      --acc: #2563eb;
+      --acc2: #1d4ed8;
+      --acc-subtle: rgba(37, 99, 235, 0.08);
+      --acc-border: rgba(37, 99, 235, 0.25);
+      --txt: #0f172a;
+      --mut: #475569;
+      --mut2: #94a3b8;
+      --br: rgba(0, 0, 0, 0.09);
+      --br-hover: rgba(0, 0, 0, 0.16);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 2.5rem 0 1.5rem;
+    }
+
+    .hero .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--acc);
+      background: var(--acc-subtle);
+      border: 1px solid var(--acc-border);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: var(--mut);
+      max-width: 680px;
+      margin: 0.75rem auto 0;
+      font-size: 0.98rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.35rem;
+      margin-top: 1.4rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.4rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-weight: 700;
+    }
+
+    .card h2 i {
+      color: var(--acc);
+    }
+
+    /* Component Type Selector */
+    .seg {
+      display: flex;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: 1.1rem;
+    }
+
+    .seg button {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      color: var(--mut);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 160ms ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .seg button:hover:not(.on) {
+      color: var(--txt);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .seg button.on {
+      background: var(--acc);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+    }
+
+    /* Series Selector Pills */
+    .series-bar {
+      display: flex;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 8px;
+      padding: 3px;
+      gap: 3px;
+      margin-bottom: 1.15rem;
+    }
+
+    .series-bar button {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      color: var(--mut2);
+      font-weight: 700;
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      padding: 0.5rem 0.4rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 140ms ease;
+    }
+
+    .series-bar button:hover:not(.on) {
+      color: var(--txt);
+    }
+
+    .series-bar button.on {
+      background: var(--card2);
+      color: var(--acc);
+      border: 1px solid var(--acc-border);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    label.lbl {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin: 0.85rem 0 0.35rem;
+    }
+
+    label.lbl .subtip {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--mut2);
+    }
+
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 100px;
+      gap: 0.6rem;
+    }
+
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrap input, select.unit-select {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--txt);
+      border-radius: 10px;
+      padding: 0.72rem 0.85rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      font-weight: 500;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    select.unit-select {
+      cursor: pointer;
+      font-family: var(--mono);
+      font-weight: 600;
+      padding-right: 1.5rem;
+    }
+
+    .input-wrap input:focus, select.unit-select:focus {
+      outline: none;
+      border-color: var(--acc);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .presets-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.45rem;
+    }
+
+    .preset-pill {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 0.75rem;
+      font-family: var(--mono);
+      font-weight: 600;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 140ms ease;
+    }
+
+    .preset-pill:hover {
+      border-color: var(--acc);
+      color: var(--acc);
+      background: var(--acc-subtle);
+    }
+
+    .preset-pill.active {
+      background: var(--acc-subtle);
+      border-color: var(--acc);
+      color: var(--acc);
+    }
+
+    .section-divider {
+      border: 0;
+      border-top: 1px dashed var(--br);
+      margin: 1.15rem 0 0.85rem;
+    }
+
+    .section-title-sm {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--mut2);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 1.25rem;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff;
+      font-weight: 700;
+      border: 0;
+      border-radius: 10px;
+      padding: 0.82rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+    }
+
+    /* Hero Matching Banner */
+    .match-banner {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(34, 197, 94, 0.08));
+      border: 1px solid var(--acc-border);
+      border-radius: 12px;
+      padding: 1.1rem;
+      margin-bottom: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .match-left small {
+      display: block;
+      color: var(--mut);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .match-left .match-val {
+      font-family: var(--mono);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #60a5fa;
+    }
+
+    .match-right {
+      text-align: right;
+    }
+
+    .match-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.3rem 0.65rem;
+      border-radius: 8px;
+    }
+
+    .badge-exact {
+      background: rgba(34, 197, 94, 0.18);
+      color: var(--ok);
+      border: 1px solid rgba(34, 197, 94, 0.35);
+    }
+
+    .badge-diff {
+      background: rgba(59, 130, 246, 0.15);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    /* Results Grid */
+    .res {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 500px) {
+      .res {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cell {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 0.8rem 0.95rem;
+      transition: border-color 150ms ease;
+    }
+
+    .cell small {
+      display: block;
+      color: var(--mut2);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.2rem;
+      font-weight: 600;
+    }
+
+    .cell b {
+      font-family: var(--mono);
+      font-size: 1.15rem;
+      color: var(--txt);
+      display: block;
+      line-height: 1.25;
+    }
+
+    .cell .subtext {
+      font-size: 0.75rem;
+      color: var(--mut);
+      margin-top: 0.25rem;
+      font-family: var(--mono);
+    }
+
+    .cell.hl {
+      border-color: rgba(59, 130, 246, 0.45);
+      background: rgba(59, 130, 246, 0.08);
+    }
+    .cell.hl b { color: #60a5fa; }
+
+    /* 2-Component Synthesis Card */
+    .synth-card {
+      margin-top: 1.15rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 12px;
+      padding: 1.1rem;
+    }
+
+    .synth-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--mut);
+    }
+
+    .synth-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 560px) {
+      .synth-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .synth-box {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 0.85rem;
+      position: relative;
+    }
+
+    .synth-box-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--acc);
+      margin-bottom: 0.4rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .synth-box-val {
+      font-family: var(--mono);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--txt);
+      margin-bottom: 0.2rem;
+    }
+
+    .synth-box-sub {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--ok);
+      font-weight: 600;
+    }
+
+    /* Color Code Resistor Preview */
+    .resistor-preview-box {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .resistor-svg {
+      width: 100%;
+      height: 60px;
+      display: block;
+    }
+
+    .note {
+      margin-top: 0.95rem;
+      font-size: 0.85rem;
+      color: var(--mut);
+      background: var(--bg2);
+      border: 1px dashed var(--br);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      line-height: 1.55;
+    }
+
+    /* Comparison Table across EIA series */
+    .table-card {
+      margin-top: 1.35rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 0.75rem;
+      border-radius: 10px;
+      border: 1px solid var(--br);
+    }
+
+    table.std-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+      text-align: left;
+    }
+
+    table.std-table th {
+      background: var(--bg2);
+      padding: 0.7rem 0.85rem;
+      color: var(--mut);
+      font-weight: 600;
+      border-bottom: 1px solid var(--br);
+      white-space: nowrap;
+    }
+
+    table.std-table td {
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--br);
+      color: var(--txt);
+      white-space: nowrap;
+    }
+
+    table.std-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    table.std-table tr:hover td {
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    table.std-table .mono {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+    }
+
+    /* Engineering Guide Cards */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 0.9rem;
+    }
+
+    .guide-item {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .guide-item h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--acc);
+    }
+
+    .guide-item p {
+      font-size: 0.82rem;
+      color: var(--mut);
+      line-height: 1.55;
+    }
+  </style>
+
+  <link rel="stylesheet" href="mta-chrome.css">
+</head>
+<body>
+
+<header class="mta-bar" id="header" role="banner">
+  <div class="mta-bar-in">
+    <nav aria-label="Breadcrumb" class="mta-crumbs">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools.html">Tools</a></li>
+        <li aria-current="page">Standard Component Value Finder</li>
+      </ol>
+    </nav>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mohamed-tarek-abdelhady.vercel.app/"},
+        {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://mohamed-tarek-abdelhady.vercel.app/tools.html"},
+        {"@type": "ListItem", "position": 3, "name": "Standard Component Value Finder", "item": "https://mohamed-tarek-abdelhady.vercel.app/sites/standard-resistor-capacitor-finder.html"}
+      ]
+    }
+    </script>
+    <button class="mta-btn" id="th" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <!-- Hero -->
+  <div class="hero">
+    <span class="pill"><i class="fas fa-barcode"></i> Passive Components · EIA E-Series Standards</span>
+    <h1>Standard Resistor &amp; Capacitor Value Finder</h1>
+    <p>Enter any desired value to find the nearest commercially available resistor or capacitor in standard E6 to E96 series, or discover an exact 2-component combination.</p>
+  </div>
+
+  <div class="grid">
+    <!-- INPUTS CARD -->
+    <div class="card">
+      <h2><i class="fas fa-sliders"></i> Component &amp; Target Value</h2>
+
+      <!-- Component Type Selector -->
+      <div class="seg" role="tablist" aria-label="Component Type">
+        <button type="button" class="on" id="btnTypeRes" role="tab" aria-selected="true">
+          <i class="fas fa-grip-lines"></i> Resistor (مقاومة)
+        </button>
+        <button type="button" id="btnTypeCap" role="tab" aria-selected="false">
+          <i class="fas fa-battery-half"></i> Capacitor (مكثف)
+        </button>
+      </div>
+
+      <!-- EIA Series Selector -->
+      <label class="lbl">
+        <span>Standard EIA Decade Series</span>
+        <span class="subtip" id="lblSeriesSubtip">E96 (1% Precision)</span>
+      </label>
+      <div class="series-bar" role="tablist" aria-label="EIA Standard Series">
+        <button type="button" data-series="E6" title="E6: 20% tolerance, 6 values/decade">E6 (20%)</button>
+        <button type="button" data-series="E12" title="E12: 10% tolerance, 12 values/decade">E12 (10%)</button>
+        <button type="button" data-series="E24" title="E24: 5% tolerance, 24 values/decade">E24 (5%)</button>
+        <button type="button" class="on" data-series="E96" title="E96: 1% tolerance, 96 values/decade">E96 (1%)</button>
+      </div>
+
+      <!-- Target Value Input -->
+      <label class="lbl" for="inputValue">
+        <span>Required Target Value (القيمة المطلوبة)</span>
+        <span class="subtip">Enter any decimal value</span>
+      </label>
+      <div class="input-row">
+        <div class="input-wrap">
+          <input id="inputValue" type="number" value="4.8" step="any" min="0.0001" max="1e12" aria-label="Target component value">
+        </div>
+        <select class="unit-select" id="selectUnit" aria-label="Component unit">
+          <option value="1">Ω</option>
+          <option value="1e3" selected>kΩ</option>
+          <option value="1e6">MΩ</option>
+        </select>
+      </div>
+
+      <!-- Quick Value Presets -->
+      <div class="presets-row" id="presetsRow" aria-label="Quick value presets">
+        <button type="button" class="preset-pill active" data-v="4.8" data-u="1e3">4.8 kΩ</button>
+        <button type="button" class="preset-pill" data-v="1" data-u="1e3">1 kΩ</button>
+        <button type="button" class="preset-pill" data-v="4.7" data-u="1e3">4.7 kΩ</button>
+        <button type="button" class="preset-pill" data-v="10" data-u="1e3">10 kΩ</button>
+        <button type="button" class="preset-pill" data-v="33" data-u="1e3">33 kΩ</button>
+        <button type="button" class="preset-pill" data-v="100" data-u="1e3">100 kΩ</button>
+      </div>
+
+      <!-- Resistor Visual Color Code preview box -->
+      <div class="resistor-preview-box" id="boxColorCode">
+        <div style="font-size:0.75rem; font-weight:700; color:var(--mut); margin-bottom:0.35rem; display:flex; justify-content:space-between;">
+          <span><i class="fas fa-palette"></i> Resistor Color Code Bands</span>
+          <span id="lblBandsSummary" style="font-family:var(--mono); color:var(--acc);">Yellow-Violet-Green-Brown-Brown</span>
+        </div>
+        <svg class="resistor-svg" viewBox="0 0 340 50" fill="none" xmlns="http://www.w3.org/2000/svg" id="svgResistorBands">
+          <!-- Rendered by JS -->
+        </svg>
+      </div>
+
+      <button type="button" class="btn" id="btnCalc"><i class="fas fa-bolt"></i> Update Lookup</button>
+    </div>
+
+    <!-- RESULTS CARD -->
+    <div class="card">
+      <h2><i class="fas fa-bullseye"></i> Nearest Standard Matches</h2>
+
+      <!-- Hero Matching Banner -->
+      <div class="match-banner">
+        <div class="match-left">
+          <small>Closest Standard Value</small>
+          <div class="match-val" id="bannerMatchVal">4.8 kΩ &rarr; 4.75 kΩ</div>
+        </div>
+        <div class="match-right">
+          <span class="match-badge badge-diff" id="bannerDiffBadge">-1.04% Error</span>
+        </div>
+      </div>
+
+      <!-- Key Results Grid -->
+      <div class="res">
+        <div class="cell hl">
+          <small>Nearest Value (أقرب قيمة)</small>
+          <b id="valClosest">4.75 kΩ</b>
+          <div class="subtext" id="subClosestSeries">In E96 series</div>
+        </div>
+
+        <div class="cell">
+          <small>Difference / Error (الفرق)</small>
+          <b id="valDiff">-1.04%</b>
+          <div class="subtext" id="subDiffAbs">-50 Ω difference</div>
+        </div>
+
+        <div class="cell">
+          <small>Nearest Lower (أقرب أقل)</small>
+          <b id="valLower">4.75 kΩ</b>
+          <div class="subtext" id="subLowerDiff">-1.04% from target</div>
+        </div>
+
+        <div class="cell">
+          <small>Nearest Higher (أقرب أكبر)</small>
+          <b id="valUpper">4.87 kΩ</b>
+          <div class="subtext" id="subUpperDiff">+1.46% from target</div>
+        </div>
+      </div>
+
+      <!-- 2-Component Synthesis Network ("أو استخدم مقاومتين") -->
+      <div class="synth-card">
+        <div class="synth-header">
+          <span><i class="fas fa-diagram-project"></i> 2-Component Synthesis ("أو استخدم مقاومتين")</span>
+          <span style="font-family:var(--mono); color:var(--ok);">Standard E24 Pairs</span>
+        </div>
+
+        <div class="synth-row">
+          <!-- Series Box -->
+          <div class="synth-box">
+            <div class="synth-box-title">
+              <span>Series (توالي)</span>
+              <span id="badgeSeriesErr" style="color:var(--ok);">0% Error</span>
+            </div>
+            <div class="synth-box-val" id="txtSeriesFormula">100 Ω + 4.7 kΩ</div>
+            <div class="synth-box-sub" id="txtSeriesResult">= 4.8 kΩ (Exact)</div>
+          </div>
+
+          <!-- Parallel Box -->
+          <div class="synth-box">
+            <div class="synth-box-title">
+              <span>Parallel (توازي)</span>
+              <span id="badgeParallelErr" style="color:var(--ok);">+0.03% Error</span>
+            </div>
+            <div class="synth-box-val" id="txtParallelFormula">5.1 kΩ ‖ 82 kΩ</div>
+            <div class="synth-box-sub" id="txtParallelResult">= 4.801 kΩ</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Explanatory Note Box -->
+      <div class="note" id="generalNote">
+        <i class="fas fa-circle-info"></i> <strong>E6 &amp; E12:</strong> Common values available in any electronics store (&plusmn;10&ndash;20%). <strong>E24:</strong> Popular 5% standard resistors. <strong>E96:</strong> High-precision 1% metal film resistors.
+      </div>
+    </div>
+  </div>
+
+  <!-- Comparison Across All EIA Series Table -->
+  <div class="card table-card">
+    <h2><i class="fas fa-table-cells"></i> Multi-Series Comparison (E6 vs. E12 vs. E24 vs. E96)</h2>
+    <p style="color:var(--mut); font-size:0.86rem; margin-top:-0.4rem;">
+      See which standard value each tolerance series offers for your requested target, and how close you can get with standard parts.
+    </p>
+
+    <div class="table-wrap">
+      <table class="std-table" id="seriesCompTable">
+        <thead>
+          <tr>
+            <th>EIA Series</th>
+            <th>Typical Tolerance</th>
+            <th>Nearest Value</th>
+            <th>Nearest Lower</th>
+            <th>Nearest Higher</th>
+            <th>Error (%)</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Engineering Guidelines Card -->
+  <div class="card" style="margin-top:1.35rem;">
+    <h2><i class="fas fa-book-open"></i> Standard Component Values Guide</h2>
+    <div class="guide-grid">
+      <div class="guide-item">
+        <h3><i class="fas fa-layer-group"></i> How EIA Logarithmic Series Work</h3>
+        <p>E-series numbers are logarithmically spaced so that consecutive values have overlapping tolerance bands. E6 has 6 steps per decade ($\sqrt[6]{10} \approx 1.47$), E24 has 24 steps ($\sqrt[24]{10} \approx 1.10$), and E96 has 96 steps ($\sqrt[96]{10} \approx 1.024$).</p>
+      </div>
+
+      <div class="guide-item">
+        <h3><i class="fas fa-screwdriver-wrench"></i> Resistor vs. Capacitor Combination Rules</h3>
+        <p>Resistors add in <strong>Series</strong> ($R_1 + R_2$) and divide in <strong>Parallel</strong> ($R_1 \parallel R_2$). Capacitors behave inversely: they add in <strong>Parallel</strong> ($C_1 + C_2$) and divide in <strong>Series</strong> ($C_1 \cdot C_2 / (C_1 + C_2)$).</p>
+      </div>
+
+      <div class="guide-item">
+        <h3><i class="fas fa-shop"></i> Store Availability &amp; Cost</h3>
+        <p>E12 and E24 values are standard commodity stock and cost pennies. E96 1% metal-film resistors are widely available in surface-mount (SMD 0805, 0603) and 1/4W through-hole, while E192 (0.1%–0.5%) are specialty high-cost parts.</p>
+      </div>
+
+      <div class="guide-item">
+        <h3><i class="fas fa-temperature-arrow-up"></i> Tolerances &amp; Temperature Drift</h3>
+        <p>Picking an exact E96 resistor does not eliminate drift. Carbon resistors can drift 5% over temperature, while 1% metal-film resistors have temperature coefficients typically around &plusmn;50 to &plusmn;100 ppm/&deg;C.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mta-foot" role="contentinfo">
+    <div class="mta-foot-in">
+      <div class="mta-social">
+        <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="/">Back to Portfolio</a></p>
+      <div class="mta-actions">
+        <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+        <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<script>
+(function() {
+  'use strict';
+
+  // EIA Decade Multipliers
+  const SERIES = {
+    E6: [1.0, 1.5, 2.2, 3.3, 4.7, 6.8],
+    E12: [1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2],
+    E24: [
+      1.0, 1.1, 1.2, 1.3, 1.5, 1.6, 1.8, 2.0, 2.2, 2.4, 2.7, 3.0,
+      3.3, 3.6, 3.9, 4.3, 4.7, 5.1, 5.6, 6.2, 6.8, 7.5, 8.2, 9.1
+    ],
+    E96: [
+      1.00, 1.02, 1.05, 1.07, 1.10, 1.13, 1.15, 1.18, 1.21, 1.24, 1.27, 1.30,
+      1.33, 1.37, 1.40, 1.43, 1.47, 1.50, 1.54, 1.58, 1.62, 1.65, 1.69, 1.74,
+      1.78, 1.82, 1.87, 1.91, 1.96, 2.00, 2.05, 2.10, 2.15, 2.21, 2.26, 2.32,
+      2.37, 2.43, 2.49, 2.55, 2.61, 2.67, 2.74, 2.80, 2.87, 2.94, 3.01, 3.09,
+      3.16, 3.24, 3.32, 3.40, 3.48, 3.57, 3.65, 3.74, 3.83, 3.92, 4.02, 4.12,
+      4.22, 4.32, 4.42, 4.53, 4.64, 4.75, 4.87, 4.99, 5.11, 5.23, 5.36, 5.49,
+      5.62, 5.76, 5.90, 6.04, 6.19, 6.34, 6.49, 6.65, 6.81, 6.98, 7.15, 7.32,
+      7.50, 7.68, 7.87, 8.06, 8.25, 8.45, 8.66, 8.87, 9.09, 9.31, 9.53, 9.76
+    ]
+  };
+
+  // Pre-generate full series values (from 10^-1 to 10^7)
+  const FULL_SERIES = {};
+  for (const [key, baseArr] of Object.entries(SERIES)) {
+    const list = [];
+    for (let dec = -1; dec <= 8; dec++) {
+      const mult = Math.pow(10, dec);
+      for (const b of baseArr) {
+        list.push(Math.round(b * mult * 1000) / 1000);
+      }
+    }
+    FULL_SERIES[key] = list;
+  }
+
+  // Pre-calculate E24 for 2-component search
+  const E24_FULL = FULL_SERIES['E24'];
+
+  // DOM Elements
+  const $ = id => document.getElementById(id);
+  const btnTypeRes = $('btnTypeRes');
+  const btnTypeCap = $('btnTypeCap');
+  const inputValue = $('inputValue');
+  const selectUnit = $('selectUnit');
+  const presetsRow = $('presetsRow');
+  const lblSeriesSubtip = $('lblSeriesSubtip');
+
+  const bannerMatchVal = $('bannerMatchVal');
+  const bannerDiffBadge = $('bannerDiffBadge');
+  const valClosest = $('valClosest');
+  const subClosestSeries = $('subClosestSeries');
+  const valDiff = $('valDiff');
+  const subDiffAbs = $('subDiffAbs');
+  const valLower = $('valLower');
+  const subLowerDiff = $('subLowerDiff');
+  const valUpper = $('valUpper');
+  const subUpperDiff = $('subUpperDiff');
+
+  const txtSeriesFormula = $('txtSeriesFormula');
+  const txtSeriesResult = $('txtSeriesResult');
+  const badgeSeriesErr = $('badgeSeriesErr');
+
+  const txtParallelFormula = $('txtParallelFormula');
+  const txtParallelResult = $('txtParallelResult');
+  const badgeParallelErr = $('badgeParallelErr');
+
+  const boxColorCode = $('boxColorCode');
+  const svgResistorBands = $('svgResistorBands');
+  const lblBandsSummary = $('lblBandsSummary');
+  const tableBody = $('tableBody');
+
+  let currentType = 'res'; // 'res' or 'cap'
+  let currentSeries = 'E96'; // default E96 per prompt
+
+  const RES_PRESETS = [
+    { v: 4.8, u: 1e3, label: '4.8 kΩ' },
+    { v: 1, u: 1e3, label: '1 kΩ' },
+    { v: 4.7, u: 1e3, label: '4.7 kΩ' },
+    { v: 10, u: 1e3, label: '10 kΩ' },
+    { v: 33, u: 1e3, label: '33 kΩ' },
+    { v: 100, u: 1e3, label: '100 kΩ' }
+  ];
+
+  const CAP_PRESETS = [
+    { v: 100, u: 1e-12, label: '100 pF' },
+    { v: 1, u: 1e-9, label: '1 nF' },
+    { v: 10, u: 1e-9, label: '10 nF' },
+    { v: 100, u: 1e-9, label: '100 nF' },
+    { v: 1, u: 1e-6, label: '1 µF' },
+    { v: 10, u: 1e-6, label: '10 µF' }
+  ];
+
+  function setType(type) {
+    currentType = type;
+    if (type === 'res') {
+      btnTypeRes.classList.add('on');
+      btnTypeRes.setAttribute('aria-selected', 'true');
+      btnTypeCap.classList.remove('on');
+      btnTypeCap.setAttribute('aria-selected', 'false');
+
+      selectUnit.innerHTML = `
+        <option value="1">Ω</option>
+        <option value="1e3" selected>kΩ</option>
+        <option value="1e6">MΩ</option>
+      `;
+      boxColorCode.style.display = 'block';
+      renderPresets(RES_PRESETS);
+    } else {
+      btnTypeCap.classList.add('on');
+      btnTypeCap.setAttribute('aria-selected', 'true');
+      btnTypeRes.classList.remove('on');
+      btnTypeRes.setAttribute('aria-selected', 'false');
+
+      selectUnit.innerHTML = `
+        <option value="1e-12">pF</option>
+        <option value="1e-9">nF</option>
+        <option value="1e-6" selected>µF</option>
+        <option value="1e-3">mF</option>
+      `;
+      boxColorCode.style.display = 'none';
+      renderPresets(CAP_PRESETS);
+    }
+    calculate();
+  }
+
+  function renderPresets(list) {
+    presetsRow.innerHTML = '';
+    list.forEach((p, idx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = `preset-pill ${idx === 0 ? 'active' : ''}`;
+      btn.textContent = p.label;
+      btn.dataset.v = p.v;
+      btn.dataset.u = p.u;
+      btn.addEventListener('click', () => {
+        presetsRow.querySelectorAll('.preset-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        inputValue.value = p.v;
+        selectUnit.value = p.u;
+        calculate();
+      });
+      presetsRow.appendChild(btn);
+    });
+  }
+
+  btnTypeRes.addEventListener('click', () => setType('res'));
+  btnTypeCap.addEventListener('click', () => setType('cap'));
+
+  // Series Selection Handler
+  document.querySelectorAll('.series-bar button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.series-bar button').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      currentSeries = b.dataset.series;
+      const desc = {
+        E6: 'E6 (20% Tolerance · 6/decade)',
+        E12: 'E12 (10% Tolerance · 12/decade)',
+        E24: 'E24 (5% Standard · 24/decade)',
+        E96: 'E96 (1% Precision · 96/decade)'
+      };
+      lblSeriesSubtip.textContent = desc[currentSeries];
+      calculate();
+    });
+  });
+
+  // Formatting Helper
+  function formatVal(val, type) {
+    if (val === undefined || isNaN(val) || val <= 0) return '–';
+    if (type === 'res') {
+      if (val >= 1e6) {
+        const v = val / 1e6;
+        return (v % 1 === 0 ? v : v.toFixed(2).replace(/\.00$/, '')) + ' MΩ';
+      }
+      if (val >= 1e3) {
+        const v = val / 1e3;
+        return (v % 1 === 0 ? v : v.toFixed(2).replace(/\.00$/, '')) + ' kΩ';
+      }
+      return (val % 1 === 0 ? val : val.toFixed(2).replace(/\.00$/, '')) + ' Ω';
+    } else {
+      if (val >= 1e-3) {
+        const v = val * 1e3;
+        return (v % 1 === 0 ? v : v.toFixed(2).replace(/\.00$/, '')) + ' mF';
+      }
+      if (val >= 1e-6) {
+        const v = val * 1e6;
+        return (v % 1 === 0 ? v : v.toFixed(2).replace(/\.00$/, '')) + ' µF';
+      }
+      if (val >= 1e-9) {
+        const v = val * 1e9;
+        return (v % 1 === 0 ? v : v.toFixed(2).replace(/\.00$/, '')) + ' nF';
+      }
+      const v = val * 1e12;
+      return (v % 1 === 0 ? v : v.toFixed(2).replace(/\.00$/, '')) + ' pF';
+    }
+  }
+
+  // Find nearest, lower, and higher in a given list
+  function findNearest(target, list) {
+    let lower = list[0];
+    let upper = list[list.length - 1];
+
+    for (let i = 0; i < list.length; i++) {
+      if (list[i] <= target) lower = list[i];
+      if (list[i] >= target) {
+        upper = list[i];
+        break;
+      }
+    }
+
+    const closest = Math.abs(lower - target) <= Math.abs(upper - target) ? lower : upper;
+    const diffPct = ((closest - target) / target) * 100;
+    const lowerDiffPct = ((lower - target) / target) * 100;
+    const upperDiffPct = ((upper - target) / target) * 100;
+
+    return { closest, lower, upper, diffPct, lowerDiffPct, upperDiffPct };
+  }
+
+  // Synthesize best 2-component combinations from standard E24
+  function synthesizePairs(target, type) {
+    let bestSeries = { v1: 0, v2: 0, total: 0, errPct: Infinity };
+    let bestParallel = { v1: 0, v2: 0, total: 0, errPct: Infinity };
+
+    const candidates = E24_FULL.filter(v => v >= target * 0.005 && v <= target * 200);
+
+    // 1. Series Search:
+    // For resistors: R_total = R1 + R2
+    // For capacitors: C_total = (C1 * C2) / (C1 + C2)
+    if (type === 'res') {
+      for (let i = 0; i < candidates.length; i++) {
+        const r1 = candidates[i];
+        if (r1 > target) continue;
+        for (let j = i; j < candidates.length; j++) {
+          const r2 = candidates[j];
+          const total = r1 + r2;
+          const err = Math.abs((total - target) / target);
+          if (err < bestSeries.errPct) {
+            bestSeries = { v1: r1, v2: r2, total, errPct: err };
+            if (err === 0) break;
+          }
+        }
+        if (bestSeries.errPct === 0) break;
+      }
+
+      // Parallel Search: R_total = (R1 * R2) / (R1 + R2)
+      for (let i = 0; i < candidates.length; i++) {
+        const r1 = candidates[i];
+        if (r1 < target) continue;
+        for (let j = i; j < candidates.length; j++) {
+          const r2 = candidates[j];
+          const total = (r1 * r2) / (r1 + r2);
+          const err = Math.abs((total - target) / target);
+          if (err < bestParallel.errPct) {
+            bestParallel = { v1: r1, v2: r2, total, errPct: err };
+            if (err === 0) break;
+          }
+        }
+      }
+    } else {
+      // Capacitor: Parallel adds (C1 + C2), Series divides
+      for (let i = 0; i < candidates.length; i++) {
+        const c1 = candidates[i];
+        if (c1 > target) continue;
+        for (let j = i; j < candidates.length; j++) {
+          const c2 = candidates[j];
+          const total = c1 + c2;
+          const err = Math.abs((total - target) / target);
+          if (err < bestParallel.errPct) {
+            bestParallel = { v1: c1, v2: c2, total, errPct: err };
+            if (err === 0) break;
+          }
+        }
+        if (bestParallel.errPct === 0) break;
+      }
+
+      for (let i = 0; i < candidates.length; i++) {
+        const c1 = candidates[i];
+        if (c1 < target) continue;
+        for (let j = i; j < candidates.length; j++) {
+          const c2 = candidates[j];
+          const total = (c1 * c2) / (c1 + c2);
+          const err = Math.abs((total - target) / target);
+          if (err < bestSeries.errPct) {
+            bestSeries = { v1: c1, v2: c2, total, errPct: err };
+            if (err === 0) break;
+          }
+        }
+      }
+    }
+
+    return { bestSeries, bestParallel };
+  }
+
+  // Draw 5-Band or 4-Band Resistor Color Code
+  function drawResistorBands(resValue) {
+    const COLOR_NAMES = ['Black', 'Brown', 'Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Violet', 'Gray', 'White'];
+    const COLOR_HEX = ['#1e293b', '#92400e', '#dc2626', '#ea580c', '#eab308', '#16a34a', '#2563eb', '#7c3aed', '#64748b', '#f8fafc'];
+
+    // Standard 5-band representation for 1% resistors
+    // Sig digits (3 digits) + multiplier + tolerance (Brown = 1%)
+    let mantissa = resValue;
+    let exp = 0;
+    while (mantissa >= 1000) { mantissa /= 10; exp++; }
+    while (mantissa < 100 && mantissa > 0) { mantissa *= 10; exp--; }
+    mantissa = Math.round(mantissa);
+
+    const d1 = Math.floor(mantissa / 100);
+    const d2 = Math.floor((mantissa % 100) / 10);
+    const d3 = mantissa % 10;
+    const mult = exp; // 10^exp
+
+    if (d1 >= 0 && d1 <= 9 && d2 >= 0 && d2 <= 9 && d3 >= 0 && d3 <= 9) {
+      const b1 = COLOR_HEX[d1];
+      const b2 = COLOR_HEX[d2];
+      const b3 = COLOR_HEX[d3];
+      const b4 = COLOR_HEX[Math.min(9, Math.max(0, mult))];
+      const b5 = '#92400e'; // Brown = 1%
+
+      const names = `${COLOR_NAMES[d1]} - ${COLOR_NAMES[d2]} - ${COLOR_NAMES[d3]} - ${COLOR_NAMES[Math.min(9, Math.max(0, mult))]} - Brown (1%)`;
+      lblBandsSummary.textContent = names;
+
+      svgResistorBands.innerHTML = `
+        <!-- Resistor Leads -->
+        <line x1="20" y1="25" x2="70" y2="25" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" />
+        <line x1="270" y1="25" x2="320" y2="25" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" />
+
+        <!-- Resistor Body -->
+        <rect x="70" y="8" width="200" height="34" rx="10" fill="#cbd5e1" stroke="#94a3b8" stroke-width="2" />
+
+        <!-- 5 Bands -->
+        <rect x="100" y="8" width="10" height="34" fill="${b1}" />
+        <rect x="130" y="8" width="10" height="34" fill="${b2}" />
+        <rect x="160" y="8" width="10" height="34" fill="${b3}" />
+        <rect x="195" y="8" width="10" height="34" fill="${b4}" />
+        <rect x="235" y="8" width="10" height="34" fill="${b5}" />
+      `;
+    }
+  }
+
+  // Main Calculation Logic
+  function calculate() {
+    const rawVal = parseFloat(inputValue.value) || 4.8;
+    const unitMult = parseFloat(selectUnit.value) || 1000;
+    const target = rawVal * unitMult;
+
+    if (target <= 0) return;
+
+    // 1. Find nearest in selected series
+    const activeList = FULL_SERIES[currentSeries] || FULL_SERIES['E96'];
+    const res = findNearest(target, activeList);
+
+    const fmtTarget = formatVal(target, currentType);
+    const fmtClosest = formatVal(res.closest, currentType);
+    const fmtLower = formatVal(res.lower, currentType);
+    const fmtUpper = formatVal(res.upper, currentType);
+
+    // Update Hero Banner
+    bannerMatchVal.textContent = `${fmtTarget} → ${fmtClosest}`;
+    const diffSigned = (res.diffPct >= 0 ? '+' : '') + res.diffPct.toFixed(2) + '%';
+    bannerDiffBadge.textContent = `${diffSigned} Error`;
+    if (Math.abs(res.diffPct) < 0.01) {
+      bannerDiffBadge.className = 'match-badge badge-exact';
+      bannerDiffBadge.textContent = 'Exact 0% Error';
+    } else {
+      bannerDiffBadge.className = 'match-badge badge-diff';
+    }
+
+    // Update Numerical Cards
+    valClosest.textContent = fmtClosest;
+    subClosestSeries.textContent = `In ${currentSeries} series`;
+
+    valDiff.textContent = diffSigned;
+    valDiff.style.color = Math.abs(res.diffPct) < 1.5 ? 'var(--ok)' : 'var(--warn)';
+    const diffAbs = Math.abs(res.closest - target);
+    subDiffAbs.textContent = `${(res.closest >= target ? '+' : '-')}${formatVal(diffAbs, currentType)} absolute`;
+
+    valLower.textContent = fmtLower;
+    subLowerDiff.textContent = `${(res.lowerDiffPct >= 0 ? '+' : '')}${res.lowerDiffPct.toFixed(2)}% from target`;
+
+    valUpper.textContent = fmtUpper;
+    subUpperDiff.textContent = `${(res.upperDiffPct >= 0 ? '+' : '')}${res.upperDiffPct.toFixed(2)}% from target`;
+
+    // 2. Synthesize 2-Component Pairs
+    const pairs = synthesizePairs(target, currentType);
+
+    const sV1 = formatVal(pairs.bestSeries.v1, currentType);
+    const sV2 = formatVal(pairs.bestSeries.v2, currentType);
+    const sTot = formatVal(pairs.bestSeries.total, currentType);
+    const sErrPct = pairs.bestSeries.errPct * 100;
+
+    const pV1 = formatVal(pairs.bestParallel.v1, currentType);
+    const pV2 = formatVal(pairs.bestParallel.v2, currentType);
+    const pTot = formatVal(pairs.bestParallel.total, currentType);
+    const pErrPct = pairs.bestParallel.errPct * 100;
+
+    if (currentType === 'res') {
+      txtSeriesFormula.textContent = `${sV1} + ${sV2}`;
+      txtSeriesResult.textContent = `= ${sTot} ${sErrPct < 0.01 ? '(Exact)' : ''}`;
+      badgeSeriesErr.textContent = sErrPct < 0.01 ? '0% Error' : `${sErrPct.toFixed(2)}% Error`;
+
+      txtParallelFormula.textContent = `${pV1} ‖ ${pV2}`;
+      txtParallelResult.textContent = `= ${pTot}`;
+      badgeParallelErr.textContent = pErrPct < 0.01 ? '0% Error' : `+${pErrPct.toFixed(2)}% Error`;
+    } else {
+      // Capacitors add in parallel and divide in series
+      txtSeriesFormula.textContent = `${sV1} in Series with ${sV2}`;
+      txtSeriesResult.textContent = `= ${sTot}`;
+      badgeSeriesErr.textContent = sErrPct < 0.01 ? '0% Error' : `${sErrPct.toFixed(2)}% Error`;
+
+      txtParallelFormula.textContent = `${pV1} + ${pV2} in Parallel`;
+      txtParallelResult.textContent = `= ${pTot} ${pErrPct < 0.01 ? '(Exact)' : ''}`;
+      badgeParallelErr.textContent = pErrPct < 0.01 ? '0% Error' : `+${pErrPct.toFixed(2)}% Error`;
+    }
+
+    // 3. Color Code Bands preview
+    if (currentType === 'res') {
+      drawResistorBands(res.closest);
+    }
+
+    // 4. Multi-Series Comparison Table
+    buildSeriesTable(target);
+  }
+
+  // Populate Multi-Series Comparison Table
+  function buildSeriesTable(target) {
+    const order = ['E6', 'E12', 'E24', 'E96'];
+    const tolMap = { E6: '±20%', E12: '±10%', E24: '±5%', E96: '±1%' };
+    tbody.innerHTML = '';
+
+    order.forEach(s => {
+      const match = findNearest(target, FULL_SERIES[s]);
+      const diffStr = (match.diffPct >= 0 ? '+' : '') + match.diffPct.toFixed(2) + '%';
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="mono"><strong>${s}</strong></td>
+        <td><span style="color:var(--mut);">${tolMap[s]}</span></td>
+        <td class="mono" style="color:var(--acc);"><strong>${formatVal(match.closest, currentType)}</strong></td>
+        <td class="mono">${formatVal(match.lower, currentType)}</td>
+        <td class="mono">${formatVal(match.upper, currentType)}</td>
+        <td class="mono" style="color:${Math.abs(match.diffPct) < 2 ? 'var(--ok)' : 'var(--warn)'};"><strong>${diffStr}</strong></td>
+        <td><button type="button" class="btn-apply" data-s="${s}">Select</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    tbody.querySelectorAll('.btn-apply').forEach(b => {
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.series-bar button').forEach(x => {
+          x.classList.toggle('on', x.dataset.series === b.dataset.s);
+        });
+        currentSeries = b.dataset.s;
+        calculate();
+        window.scrollTo({ top: $('main').offsetTop, behavior: 'smooth' });
+      });
+    });
+  }
+
+  const tbody = $('tableBody');
+
+  // Input Listeners
+  inputValue.addEventListener('input', calculate);
+  selectUnit.addEventListener('change', calculate);
+  $('btnCalc').addEventListener('click', calculate);
+
+  // Initial Run with prompt default 4.8 kΩ and E96
+  renderPresets(RES_PRESETS);
+  calculate();
+
+})();
+</script>
+
+<script src="/pwa.js" defer></script>
+<script src="mta-chrome.js" defer></script>
+<!-- Vercel Speed Insights -->
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

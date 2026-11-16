@@ -30,6 +30,17 @@ const tools = [
   {
     category: 'circuits',
     badge: 'Circuits',
+    title: 'Standard Resistor & Capacitor Finder',
+    desc: 'Find nearest standard EIA values (E6 to E96) for resistors and capacitors, or synthesize exact values with series/parallel pairs.',
+    tag: 'E6 to E96 EIA Values',
+    href: '/sites/standard-resistor-capacitor-finder.html',
+    cta: 'Launch Finder',
+    svg: '<path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/>',
+    viewBox: '0 0 384 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
     title: 'LED Series Resistor Calculator',
     desc: 'Calculate current-limiting series resistance, forward voltage drop, and safe LED power rating.',
     tag: 'Diode Limiting',
@@ -45,6 +56,17 @@ const tools = [
     desc: 'Capacitance, stored energy (Joules), charge curves, and series/parallel bank configurations.',
     tag: 'Energy & RC Time',
     href: '/sites/capacitor-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/>',
+    viewBox: '0 0 512 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
+    title: 'Rectifier Filter Capacitor Calculator',
+    desc: 'Calculate power supply smoothing capacitor values, ripple voltage, peak DC voltage, and safe capacitor ratings.',
+    tag: 'Bridge Smoothing',
+    href: '/sites/rectifier-filter-capacitor-calculator.html',
     cta: 'Launch Calculator',
     svg: '<path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/>',
     viewBox: '0 0 512 512'
@@ -74,6 +96,17 @@ const tools = [
   {
     category: 'circuits',
     badge: 'Circuits',
+    title: 'LM317 Voltage Regulator Calculator',
+    desc: 'Calculate resistors (R1, R2), target Vout, power dissipation, dropout voltage, and heatsink requirements.',
+    tag: 'LM317 Linear Regulator',
+    href: '/sites/lm317-voltage-regulator-calculator.html',
+    cta: 'Launch Calculator',
+    svg: '<path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/>',
+    viewBox: '0 0 384 512'
+  },
+  {
+    category: 'circuits',
+    badge: 'Circuits',
     title: 'RC Time Constant Calculator',
     desc: 'Calculate RC circuit time constant (τ), capacitor charging/discharging curves, and -3dB cutoff frequency.',
     tag: 'τ = R × C Tau',
@@ -96,8 +129,8 @@ const tools = [
   {
     category: 'circuits',
     badge: 'Circuits',
-    title: 'Op-Amp Gain Calculator',
-    desc: 'Inverting, non-inverting, differential, and voltage follower amplifier gain with clipping check.',
+    title: 'Op-Amp Gain & Waveform Calculator',
+    desc: 'Inverting and non-inverting gain, dB, resistor sizing, and real-time amplified waveform simulation with saturation clipping.',
     tag: 'Operational Amp',
     href: '/sites/op-amp-gain-calculator.html',
     cta: 'Launch Calculator',

@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <link rel="canonical" href="https://mohamed-tarek-abdelhady.vercel.app/sites/lm317-voltage-regulator-calculator.html">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>LM317 Voltage Regulator Calculator | Mohamed Tarek Abdelhady</title>
+  <meta name="description" content="Calculate LM317 resistor values (R1, R2), target output voltage, power dissipation, heatsink requirements, dropout voltage, and nearest standard E24 resistors.">
+  <meta name="author" content="Mohamed Tarek Abdelhady">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LM317 Voltage Regulator Calculator | Mohamed Tarek Abdelhady">
+  <meta property="og:description" content="Calculate LM317 resistor values (R1, R2), output voltage, power dissipation, and heatsink sizing with live circuit schematic and standard E24 resistor picks.">
+  <meta property="og:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+  <meta property="og:image:width" content="851">
+  <meta property="og:image:height" content="1134">
+  <meta property="og:image:alt" content="Mohamed Tarek Abdelhady — Communication Engineer">
+  <meta property="og:url" content="https://mohamed-tarek-abdelhady.vercel.app/sites/lm317-voltage-regulator-calculator.html">
+  <meta property="og:updated_time" content="2026-11-16T00:00:00+02:00">
+  <meta property="article:modified_time" content="2026-11-16T00:00:00+02:00">
+  <meta property="og:site_name" content="Mohamed Tarek Abdelhady Portfolio">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LM317 Voltage Regulator Calculator | Mohamed Tarek Abdelhady">
+  <meta name="twitter:description" content="Calculate LM317 resistor values (R1, R2), output voltage, power dissipation, and heatsink sizing with live circuit schematic.">
+  <meta name="twitter:image" content="https://mohamed-tarek-abdelhady.vercel.app/photo.jpg">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="LM317 Calc">
+  <meta name="application-name" content="LM317 Calc">
+  <meta name="msapplication-TileColor" content="#0a0e1a">
+  <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icon.png" type="image/png" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "LM317 Voltage Regulator Calculator",
+    "description": "Calculate LM317 adjustable linear voltage regulator resistors (R1, R2), power dissipation, thermal heatsink requirements, and nearest standard E24 resistor values.",
+    "url": "https://mohamed-tarek-abdelhady.vercel.app/sites/lm317-voltage-regulator-calculator.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "author": {
+      "@type": "Person",
+      "name": "Mohamed Tarek Abdelhady",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1322;
+      --bg3: #141829;
+      --card: #161b2e;
+      --card2: #1c2240;
+      --acc: #3b82f6;
+      --acc2: #2563eb;
+      --acc-subtle: rgba(59, 130, 246, 0.12);
+      --acc-border: rgba(59, 130, 246, 0.35);
+      --txt: #f1f5f9;
+      --mut: #94a3b8;
+      --mut2: #64748b;
+      --br: rgba(255, 255, 255, 0.08);
+      --br-hover: rgba(255, 255, 255, 0.16);
+      --ok: #22c55e;
+      --warn: #f59e0b;
+      --err: #ef4444;
+      --orange: #f97316;
+      --cyan: #06b6d4;
+      --r: 14px;
+      --r-sm: 8px;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg2: #f1f5f9;
+      --bg3: #e2e8f0;
+      --card: #ffffff;
+      --card2: #f8fafc;
+      --acc: #2563eb;
+      --acc2: #1d4ed8;
+      --acc-subtle: rgba(37, 99, 235, 0.08);
+      --acc-border: rgba(37, 99, 235, 0.25);
+      --txt: #0f172a;
+      --mut: #475569;
+      --mut2: #94a3b8;
+      --br: rgba(0, 0, 0, 0.09);
+      --br-hover: rgba(0, 0, 0, 0.16);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 2.5rem 0 1.5rem;
+    }
+
+    .hero .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--acc);
+      background: var(--acc-subtle);
+      border: 1px solid var(--acc-border);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      color: var(--mut);
+      max-width: 680px;
+      margin: 0.75rem auto 0;
+      font-size: 0.98rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.35rem;
+      margin-top: 1.4rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--br);
+      border-radius: var(--r);
+      padding: 1.4rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-weight: 700;
+    }
+
+    .card h2 i {
+      color: var(--acc);
+    }
+
+    .seg {
+      display: flex;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: 1.2rem;
+    }
+
+    .seg button {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      color: var(--mut);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.6rem 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 160ms ease;
+    }
+
+    .seg button:hover:not(.on) {
+      color: var(--txt);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .seg button.on {
+      background: var(--acc);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+    }
+
+    label.lbl {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      margin: 0.85rem 0 0.35rem;
+    }
+
+    label.lbl .subtip {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--mut2);
+    }
+
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--txt);
+      border-radius: 10px;
+      padding: 0.72rem 3rem 0.72rem 0.85rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      font-weight: 500;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .input-wrap input:focus {
+      outline: none;
+      border-color: var(--acc);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+
+    .input-wrap .unit {
+      position: absolute;
+      right: 0.9rem;
+      color: var(--mut2);
+      font-size: 0.82rem;
+      font-family: var(--mono);
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    .presets-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.45rem;
+    }
+
+    .preset-pill {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--mut);
+      font-size: 0.75rem;
+      font-family: var(--mono);
+      font-weight: 600;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 140ms ease;
+    }
+
+    .preset-pill:hover {
+      border-color: var(--acc);
+      color: var(--acc);
+      background: var(--acc-subtle);
+    }
+
+    .preset-pill.active {
+      background: var(--acc-subtle);
+      border-color: var(--acc);
+      color: var(--acc);
+    }
+
+    .section-divider {
+      border: 0;
+      border-top: 1px dashed var(--br);
+      margin: 1.15rem 0 0.85rem;
+    }
+
+    .section-title-sm {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--mut2);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+    }
+
+    @media (max-width: 500px) {
+      .row2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 1.25rem;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff;
+      font-weight: 700;
+      border: 0;
+      border-radius: 10px;
+      padding: 0.82rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+    }
+
+    .formula {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      padding: 0.7rem 0.9rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      color: var(--mut);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    /* Schematic Box */
+    .schematic-box {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1.1rem;
+      position: relative;
+    }
+
+    .schematic-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--mut);
+    }
+
+    .schematic-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: visible;
+    }
+
+    /* Results Grid */
+    .res {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 500px) {
+      .res {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cell {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 0.8rem 0.95rem;
+      transition: border-color 150ms ease;
+    }
+
+    .cell small {
+      display: block;
+      color: var(--mut2);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.2rem;
+      font-weight: 600;
+    }
+
+    .cell b {
+      font-family: var(--mono);
+      font-size: 1.1rem;
+      color: var(--txt);
+      display: block;
+      line-height: 1.25;
+    }
+
+    .cell .subtext {
+      font-size: 0.75rem;
+      color: var(--mut);
+      margin-top: 0.25rem;
+      font-family: var(--mono);
+    }
+
+    .cell.hl {
+      border-color: rgba(59, 130, 246, 0.45);
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .cell.hl b {
+      color: #60a5fa;
+    }
+
+    .cell.heat-ok {
+      border-color: rgba(34, 197, 94, 0.35);
+      background: rgba(34, 197, 94, 0.06);
+    }
+    .cell.heat-ok b { color: var(--ok); }
+
+    .cell.heat-warm {
+      border-color: rgba(245, 158, 11, 0.35);
+      background: rgba(245, 158, 11, 0.06);
+    }
+    .cell.heat-warm b { color: var(--warn); }
+
+    .cell.heat-hot {
+      border-color: rgba(249, 115, 22, 0.45);
+      background: rgba(249, 115, 22, 0.08);
+    }
+    .cell.heat-hot b { color: var(--orange); }
+
+    .cell.heat-crit {
+      border-color: rgba(239, 68, 68, 0.45);
+      background: rgba(239, 68, 68, 0.08);
+    }
+    .cell.heat-crit b { color: var(--err); }
+
+    /* Heat Thermal Bar */
+    .thermal-card {
+      margin-top: 0.9rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 0.9rem;
+    }
+
+    .thermal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.45rem;
+    }
+
+    .thermal-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--mut);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .thermal-status-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      font-family: var(--mono);
+      text-transform: uppercase;
+    }
+
+    .badge-ok { background: rgba(34, 197, 94, 0.15); color: var(--ok); border: 1px solid rgba(34, 197, 94, 0.3); }
+    .badge-warm { background: rgba(245, 158, 11, 0.15); color: var(--warn); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-hot { background: rgba(249, 115, 22, 0.15); color: var(--orange); border: 1px solid rgba(249, 115, 22, 0.3); }
+    .badge-crit { background: rgba(239, 68, 68, 0.15); color: var(--err); border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    .power-track {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+      margin: 0.45rem 0;
+    }
+
+    .power-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 200ms ease, background-color 200ms ease;
+    }
+
+    .thermal-desc {
+      font-size: 0.82rem;
+      color: var(--mut);
+      line-height: 1.5;
+      margin-top: 0.45rem;
+    }
+
+    /* Note block */
+    .note {
+      margin-top: 0.95rem;
+      font-size: 0.85rem;
+      color: var(--mut);
+      background: var(--bg2);
+      border: 1px dashed var(--br);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      line-height: 1.55;
+    }
+
+    .note.warn-box {
+      border-color: rgba(245, 158, 11, 0.4);
+      background: rgba(245, 158, 11, 0.05);
+      color: #fbbf24;
+    }
+
+    .note.err-box {
+      border-color: rgba(239, 68, 68, 0.4);
+      background: rgba(239, 68, 68, 0.05);
+      color: #fca5a5;
+    }
+
+    /* Reference Table */
+    .table-card {
+      margin-top: 1.35rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 0.75rem;
+      border-radius: 10px;
+      border: 1px solid var(--br);
+    }
+
+    table.e24-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+      text-align: left;
+    }
+
+    table.e24-table th {
+      background: var(--bg2);
+      padding: 0.7rem 0.85rem;
+      color: var(--mut);
+      font-weight: 600;
+      border-bottom: 1px solid var(--br);
+      white-space: nowrap;
+    }
+
+    table.e24-table td {
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--br);
+      color: var(--txt);
+      white-space: nowrap;
+    }
+
+    table.e24-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    table.e24-table tr:hover td {
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    table.e24-table .mono {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+    }
+
+    .btn-apply {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      color: var(--acc);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 140ms ease;
+    }
+
+    .btn-apply:hover {
+      background: var(--acc);
+      color: #fff;
+    }
+
+    /* Design Guide cards */
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 0.9rem;
+    }
+
+    .guide-item {
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .guide-item h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--acc);
+    }
+
+    .guide-item p {
+      font-size: 0.82rem;
+      color: var(--mut);
+      line-height: 1.55;
+    }
+
+    /* Collapsible advanced */
+    details.advanced-details {
+      margin-top: 0.85rem;
+      background: var(--bg2);
+      border: 1px solid var(--br);
+      border-radius: 10px;
+      padding: 0.65rem 0.85rem;
+    }
+
+    details.advanced-details summary {
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--mut);
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    details.advanced-details summary:hover {
+      color: var(--txt);
+    }
+
+    details.advanced-details[open] summary {
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid var(--br);
+      padding-bottom: 0.5rem;
+    }
+  </style>
+
+  <link rel="stylesheet" href="mta-chrome.css">
+</head>
+<body>
+
+<header class="mta-bar" id="header" role="banner">
+  <div class="mta-bar-in">
+    <nav aria-label="Breadcrumb" class="mta-crumbs">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li><a href="/tools.html">Tools</a></li>
+        <li aria-current="page">LM317 Voltage Regulator Calculator</li>
+      </ol>
+    </nav>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://mohamed-tarek-abdelhady.vercel.app/"},
+        {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://mohamed-tarek-abdelhady.vercel.app/tools.html"},
+        {"@type": "ListItem", "position": 3, "name": "LM317 Voltage Regulator Calculator", "item": "https://mohamed-tarek-abdelhady.vercel.app/sites/lm317-voltage-regulator-calculator.html"}
+      ]
+    }
+    </script>
+    <button class="mta-btn" id="th" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <!-- Hero -->
+  <div class="hero">
+    <span class="pill"><i class="fas fa-bolt"></i> Power Electronics · Adjustable Linear Regulator</span>
+    <h1>LM317 Voltage Regulator Calculator</h1>
+    <p>Calculate resistors (R1, R2) to get your target output voltage with the LM317 regulator, evaluate power dissipation, heat output, minimum input voltage, and heatsink requirements.</p>
+  </div>
+
+  <div class="grid">
+    <!-- INPUT CARD -->
+    <div class="card">
+      <h2><i class="fas fa-sliders"></i> Calculator Inputs</h2>
+
+      <!-- Mode Selector -->
+      <div class="seg" role="tablist" aria-label="Calculation Mode">
+        <button type="button" class="on" id="btnModeR2" data-m="r2" role="tab" aria-selected="true">
+          <i class="fas fa-calculator"></i> Calculate R2 (Target Vout)
+        </button>
+        <button type="button" id="btnModeVout" data-m="vout" role="tab" aria-selected="false">
+          <i class="fas fa-wave-square"></i> Calculate Vout (From Resistors)
+        </button>
+      </div>
+
+      <!-- Mode 1: Target Vout -->
+      <div id="groupTargetVout">
+        <label class="lbl" for="targetVout">
+          <span>Target Output Voltage (Vout)</span>
+          <span class="subtip">Range: 1.25V – 37V</span>
+        </label>
+        <div class="input-wrap">
+          <input id="targetVout" type="number" value="5" step="0.01" min="1.25" max="37" aria-label="Target output voltage in volts">
+          <span class="unit">V</span>
+        </div>
+
+        <!-- Quick Voltage Presets -->
+        <div class="presets-row" aria-label="Quick output voltage presets">
+          <button type="button" class="preset-pill" data-vout="1.25">1.25V</button>
+          <button type="button" class="preset-pill" data-vout="1.5">1.5V</button>
+          <button type="button" class="preset-pill" data-vout="1.8">1.8V</button>
+          <button type="button" class="preset-pill" data-vout="2.5">2.5V</button>
+          <button type="button" class="preset-pill" data-vout="3.3">3.3V</button>
+          <button type="button" class="preset-pill active" data-vout="5">5.0V</button>
+          <button type="button" class="preset-pill" data-vout="6">6.0V</button>
+          <button type="button" class="preset-pill" data-vout="9">9.0V</button>
+          <button type="button" class="preset-pill" data-vout="12">12.0V</button>
+          <button type="button" class="preset-pill" data-vout="15">15.0V</button>
+        </div>
+      </div>
+
+      <!-- Mode 2: R2 input (visible only when finding Vout) -->
+      <div id="groupR2Input" style="display:none;">
+        <label class="lbl" for="inputR2">
+          <span>R2 (between ADJ and GND)</span>
+          <span class="subtip">Ground leg resistor</span>
+        </label>
+        <div class="input-wrap">
+          <input id="inputR2" type="number" value="680" step="any" min="0" aria-label="R2 resistor value in ohms">
+          <span class="unit">Ω</span>
+        </div>
+      </div>
+
+      <!-- R1 input -->
+      <label class="lbl" for="inputR1">
+        <span>R1 (between OUT and ADJ)</span>
+        <span class="subtip">Standard: 240 Ω or 220 Ω</span>
+      </label>
+      <div class="input-wrap">
+        <input id="inputR1" type="number" value="240" step="any" min="1" aria-label="R1 resistor value in ohms">
+        <span class="unit">Ω</span>
+      </div>
+
+      <!-- Quick R1 Presets -->
+      <div class="presets-row">
+        <button type="button" class="preset-pill active" data-r1="240">240 Ω (LM317 Standard)</button>
+        <button type="button" class="preset-pill" data-r1="220">220 Ω (Common)</button>
+        <button type="button" class="preset-pill" data-r1="120">120 Ω (LM117 Military)</button>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- Operating & Thermal Conditions -->
+      <div class="section-title-sm">
+        <i class="fas fa-fire-flame-curved"></i> Operating &amp; Thermal Conditions
+      </div>
+
+      <div class="row2">
+        <div>
+          <label class="lbl" for="inputVin">
+            <span>Input Voltage (Vin)</span>
+            <span class="subtip">Optional</span>
+          </label>
+          <div class="input-wrap">
+            <input id="inputVin" type="number" value="12" step="0.1" min="0" aria-label="Input voltage Vin in volts">
+            <span class="unit">V</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="lbl" for="inputIload">
+            <span>Load Current (Iload)</span>
+            <span class="subtip">Optional</span>
+          </label>
+          <div class="input-wrap">
+            <input id="inputIload" type="number" value="500" step="10" min="0" max="1500" aria-label="Load current in milliamperes">
+            <span class="unit">mA</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Settings Collapsible -->
+      <details class="advanced-details">
+        <summary><i class="fas fa-cog"></i> Advanced Parameters (Vref &amp; Iadj)</summary>
+        <div class="row2" style="margin-top:0.6rem;">
+          <div>
+            <label class="lbl" for="inputVref">
+              <span>Reference Voltage (Vref)</span>
+            </label>
+            <div class="input-wrap">
+              <input id="inputVref" type="number" value="1.25" step="0.01" min="1.20" max="1.30" aria-label="Internal reference voltage in volts">
+              <span class="unit">V</span>
+            </div>
+          </div>
+          <div>
+            <label class="lbl" for="inputIadj">
+              <span>Adjust Pin Current (Iadj)</span>
+            </label>
+            <div class="input-wrap">
+              <input id="inputIadj" type="number" value="50" step="5" min="0" max="100" aria-label="Adjust pin current in microamperes">
+              <span class="unit">µA</span>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <button type="button" class="btn" id="btnCalc"><i class="fas fa-bolt"></i> Update Calculation</button>
+
+      <!-- Formula Preview -->
+      <div class="formula">
+        Vout = Vref &middot; (1 + R2/R1) + Iadj &middot; R2 &nbsp;|&nbsp; Vref = 1.25 V
+      </div>
+    </div>
+
+    <!-- RESULTS & SCHEMATIC CARD -->
+    <div class="card">
+      <h2><i class="fas fa-microchip"></i> Circuit Model &amp; Results</h2>
+
+      <!-- Interactive SVG Schematic -->
+      <div class="schematic-box">
+        <div class="schematic-header">
+          <span><i class="fas fa-diagram-project"></i> LM317 Linear Regulator Schematic</span>
+          <span id="svgStatusPill" style="font-family:var(--mono); color:var(--acc);">Vref = 1.25 V</span>
+        </div>
+
+        <svg class="schematic-svg" viewBox="0 0 460 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Background Grid Guides subtle -->
+          <line x1="30" y1="60" x2="160" y2="60" stroke="#64748b" stroke-width="2.5" />
+          <line x1="260" y1="60" x2="430" y2="60" stroke="#64748b" stroke-width="2.5" />
+
+          <!-- Input Terminal Vin -->
+          <circle cx="30" cy="60" r="5" fill="#3b82f6" />
+          <text x="30" y="42" fill="#94a3b8" font-size="11" font-weight="600" text-anchor="middle">Vin</text>
+          <text x="30" y="80" fill="#3b82f6" font-size="12" font-weight="700" font-family="monospace" text-anchor="middle" id="svgVinText">12 V</text>
+
+          <!-- Input Capacitor Cin to GND -->
+          <line x1="85" y1="60" x2="85" y2="85" stroke="#64748b" stroke-width="2" />
+          <line x1="73" y1="85" x2="97" y2="85" stroke="#94a3b8" stroke-width="2" />
+          <line x1="73" y1="91" x2="97" y2="91" stroke="#94a3b8" stroke-width="2" />
+          <line x1="85" y1="91" x2="85" y2="105" stroke="#64748b" stroke-width="2" />
+          <text x="63" y="92" fill="#64748b" font-size="9" font-family="monospace" text-anchor="end">Cin 0.1µF</text>
+          <!-- Ground symbol for Cin -->
+          <line x1="77" y1="105" x2="93" y2="105" stroke="#64748b" stroke-width="2" />
+          <line x1="81" y1="109" x2="89" y2="109" stroke="#64748b" stroke-width="1.5" />
+          <line x1="83" y1="113" x2="87" y2="113" stroke="#64748b" stroke-width="1" />
+
+          <!-- LM317 IC Box -->
+          <rect x="160" y="30" width="100" height="70" rx="8" fill="#1c2240" stroke="#3b82f6" stroke-width="2" id="svgIcBox" />
+          <!-- TO-220 Heatsink Tab representation -->
+          <rect x="180" y="24" width="60" height="6" rx="2" fill="#475569" stroke="#64748b" stroke-width="1" />
+          <circle cx="210" cy="27" r="1.5" fill="#161b2e" />
+
+          <text x="210" y="58" fill="#f1f5f9" font-size="13" font-weight="800" text-anchor="middle">LM317</text>
+          <text x="175" y="76" fill="#94a3b8" font-size="10" font-weight="600">IN</text>
+          <text x="235" y="76" fill="#94a3b8" font-size="10" font-weight="600">OUT</text>
+          <text x="210" y="92" fill="#94a3b8" font-size="9" font-weight="600" text-anchor="middle">ADJ</text>
+
+          <!-- ADJ Pin line coming down -->
+          <line x1="210" y1="100" x2="210" y2="135" stroke="#64748b" stroke-width="2" />
+
+          <!-- Output Node Junction -->
+          <circle cx="310" cy="60" r="3.5" fill="#3b82f6" />
+
+          <!-- Output Terminal Vout -->
+          <circle cx="430" cy="60" r="5" fill="#22c55e" />
+          <text x="430" y="42" fill="#94a3b8" font-size="11" font-weight="600" text-anchor="middle">Vout</text>
+          <text x="430" y="80" fill="#22c55e" font-size="12" font-weight="700" font-family="monospace" text-anchor="middle" id="svgVoutText">4.83 V</text>
+
+          <!-- Output Capacitor Cout to GND -->
+          <line x1="390" y1="60" x2="390" y2="85" stroke="#64748b" stroke-width="2" />
+          <line x1="378" y1="85" x2="402" y2="85" stroke="#94a3b8" stroke-width="2" />
+          <line x1="378" y1="91" x2="402" y2="91" stroke="#94a3b8" stroke-width="2" />
+          <line x1="390" y1="91" x2="390" y2="105" stroke="#64748b" stroke-width="2" />
+          <text x="412" y="92" fill="#64748b" font-size="9" font-family="monospace">Cout 1µF</text>
+          <!-- Ground symbol for Cout -->
+          <line x1="382" y1="105" x2="398" y2="105" stroke="#64748b" stroke-width="2" />
+          <line x1="386" y1="109" x2="394" y2="109" stroke="#64748b" stroke-width="1.5" />
+          <line x1="388" y1="113" x2="392" y2="113" stroke="#64748b" stroke-width="1" />
+
+          <!-- Feedback wire from OUT down to R1 -->
+          <line x1="310" y1="60" x2="310" y2="135" stroke="#64748b" stroke-width="2" />
+          <line x1="310" y1="135" x2="280" y2="135" stroke="#64748b" stroke-width="2" />
+
+          <!-- Resistor R1 (between OUT and ADJ) -->
+          <rect x="235" y="125" width="45" height="20" rx="4" fill="#161b2e" stroke="#3b82f6" stroke-width="1.8" />
+          <text x="257" y="139" fill="#f1f5f9" font-size="10" font-weight="600" font-family="monospace" text-anchor="middle" id="svgR1Text">240 Ω</text>
+          <text x="257" y="120" fill="#f59e0b" font-size="9" font-weight="700" font-family="monospace" text-anchor="middle">1.25 V</text>
+          <text x="257" y="157" fill="#94a3b8" font-size="9" text-anchor="middle">R1</text>
+
+          <!-- Line from R1 to ADJ node -->
+          <line x1="235" y1="135" x2="210" y2="135" stroke="#64748b" stroke-width="2" />
+          <circle cx="210" cy="135" r="3.5" fill="#3b82f6" />
+
+          <!-- Resistor R2 (between ADJ and GND) -->
+          <line x1="210" y1="135" x2="210" y2="155" stroke="#64748b" stroke-width="2" />
+          <rect x="200" y="155" width="20" height="30" rx="4" fill="#161b2e" stroke="#8b5cf6" stroke-width="1.8" />
+          <text x="232" y="173" fill="#f1f5f9" font-size="10" font-weight="600" font-family="monospace" id="svgR2Text">680 Ω</text>
+          <text x="190" y="173" fill="#94a3b8" font-size="9" text-anchor="end">R2</text>
+
+          <!-- Ground connection for R2 -->
+          <line x1="210" y1="185" x2="210" y2="198" stroke="#64748b" stroke-width="2" />
+          <line x1="200" y1="198" x2="220" y2="198" stroke="#64748b" stroke-width="2" />
+          <line x1="204" y1="202" x2="216" y2="202" stroke="#64748b" stroke-width="1.5" />
+          <line x1="207" y1="206" x2="213" y2="206" stroke="#64748b" stroke-width="1" />
+        </svg>
+      </div>
+
+      <!-- Results Grid -->
+      <div class="res">
+        <div class="cell hl">
+          <small id="lblR2Result">Calculated R2</small>
+          <b id="valCalcR2">713 Ω</b>
+          <div class="subtext" id="subCalcR2">Exact target match</div>
+        </div>
+
+        <div class="cell">
+          <small>Minimum Input Voltage</small>
+          <b id="valMinVin">7.83 V</b>
+          <div class="subtext">Vout + 3.0V dropout</div>
+        </div>
+
+        <div class="cell">
+          <small>Nearest Lower (E24)</small>
+          <b id="valLowerE24">680 Ω → 4.83 V</b>
+          <div class="subtext" id="subLowerErr">-3.4% below target</div>
+        </div>
+
+        <div class="cell">
+          <small>Nearest Higher (E24)</small>
+          <b id="valUpperE24">750 Ω → 5.19 V</b>
+          <div class="subtext" id="subUpperErr">+3.8% above target</div>
+        </div>
+
+        <div class="cell" id="cardPower">
+          <small>Heat in Regulator (Pd)</small>
+          <b id="valPd">3.59 W</b>
+          <div class="subtext" id="subPdEff">(Vin - Vout) &times; Iload</div>
+        </div>
+
+        <div class="cell">
+          <small>Power Conversion Efficiency</small>
+          <b id="valEff">40.3%</b>
+          <div class="subtext" id="subHeadroom">Dropout Headroom: 4.17 V</div>
+        </div>
+      </div>
+
+      <!-- Thermal / Heatsink Card -->
+      <div class="thermal-card" id="thermalBox">
+        <div class="thermal-header">
+          <div class="thermal-title">
+            <i class="fas fa-temperature-arrow-up"></i> Thermal Sizing &amp; Dissipation
+          </div>
+          <span class="thermal-status-badge badge-hot" id="badgeThermal">Heatsink Required</span>
+        </div>
+
+        <div class="power-track">
+          <div class="power-fill" id="barThermal" style="width: 71.8%; background: var(--orange);"></div>
+        </div>
+
+        <div class="thermal-desc" id="txtThermalDesc">
+          <strong>Heatsink Required:</strong> This power (3.59 W) requires a heatsink. Any dissipation above ~1W will cause the LM317 to overheat significantly without one.
+        </div>
+      </div>
+
+      <!-- Note / Advisory Box -->
+      <div class="note" id="generalNote">
+        <i class="fas fa-circle-info"></i> Minimum load current through R1 is <strong>5.21 mA</strong> (exceeds the 5.0 mA LM317 minimum requirement for proper regulation).
+      </div>
+    </div>
+  </div>
+
+  <!-- Standard E24 Resistor Reference Table -->
+  <div class="card table-card">
+    <h2><i class="fas fa-table-cells"></i> Standard E24 Resistor Quick-Reference (R1 = 240 Ω)</h2>
+    <p style="color:var(--mut); font-size:0.86rem; margin-top:-0.4rem;">
+      Common output voltages with exact calculated R2 vs. nearest standard 5% (E24) resistors and actual resulting voltages. Click <strong>Apply</strong> to load any row directly into the calculator.
+    </p>
+
+    <div class="table-wrap">
+      <table class="e24-table" id="e24Table">
+        <thead>
+          <tr>
+            <th>Target Vout</th>
+            <th>R1</th>
+            <th>Calculated R2</th>
+            <th>Nearest E24</th>
+            <th>Actual Vout</th>
+            <th>Error</th>
+            <th>Min Vin</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- LM317 Engineering Design Guide -->
+  <div class="card" style="margin-top:1.35rem;">
+    <h2><i class="fas fa-book-open"></i> LM317 Circuit Design Guidelines &amp; Best Practices</h2>
+    <div class="guide-grid">
+      <div class="guide-item">
+        <h3><i class="fas fa-shield-halved"></i> Minimum Load Current</h3>
+        <p>The LM317 requires a quiescent current between <strong>3.5 mA and 10 mA</strong> (typically 5 mA) through OUT to maintain proper regulation. Setting <strong>R1 = 240 Ω</strong> guarantees <code>1.25V / 240Ω = 5.2 mA</code> divider current, keeping it regulated even with no external load connected.</p>
+      </div>
+
+      <div class="guide-item">
+        <h3><i class="fas fa-plug-circle-bolt"></i> Dropout Voltage &amp; Headroom</h3>
+        <p>The LM317 is a standard linear regulator with a dropout voltage of <strong>2.0V to 3.0V</strong> (worst-case under full 1.5A load over temperature). Always supply at least <code>Vout + 3.0V</code> at the input to prevent output ripple and loss of regulation.</p>
+      </div>
+
+      <div class="guide-item">
+        <h3><i class="fas fa-compact-disc"></i> Decoupling Capacitors</h3>
+        <p>Place a <strong>0.1 µF ceramic</strong> or 1 µF tantalum capacitor close to the IN pin to prevent high-frequency oscillations. Add a <strong>1 µF to 10 µF</strong> capacitor on OUT for improved transient response and reduced ringing.</p>
+      </div>
+
+      <div class="guide-item">
+        <h3><i class="fas fa-arrow-right-arrow-left"></i> Reverse Protection Diodes</h3>
+        <p>When Vout exceeds 25V or when using large output capacitors (>25 µF), add a 1N4002 diode from OUT (anode) to IN (cathode). This protects the LM317's internal pass transistor if the input power is abruptly shorted to ground.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mta-foot" role="contentinfo">
+    <div class="mta-foot-in">
+      <div class="mta-social">
+        <a href="https://www.linkedin.com/in/mohamedtarek225" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/mohamed22tarek5" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/_m7md_tarek_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/+201090637406" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <p class="mta-copy">&copy; <span id="currentYear">2026</span> Mohamed Tarek Abdelhady. All Rights Reserved. | <a href="/">Back to Portfolio</a></p>
+      <div class="mta-actions">
+        <button class="mta-btn" data-mta-toggle type="button" aria-label="Toggle dark/light mode"><i class="fas fa-moon" data-mta-icon></i></button>
+        <button class="mta-btn" id="backToTop" data-mta-top type="button" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<script>
+(function() {
+  'use strict';
+
+  // Standard E24 decade multipliers
+  const E24_BASE = [
+    1.0, 1.1, 1.2, 1.3, 1.5, 1.6, 1.8, 2.0, 2.2, 2.4, 2.7, 3.0,
+    3.3, 3.6, 3.9, 4.3, 4.7, 5.1, 5.6, 6.2, 6.8, 7.5, 8.2, 9.1
+  ];
+
+  // Pre-generate full range of E24 values from 1 ohm to 10 Mohm
+  const ALL_E24 = [];
+  for (let dec = 0; dec <= 6; dec++) {
+    const mult = Math.pow(10, dec);
+    for (let i = 0; i < E24_BASE.length; i++) {
+      ALL_E24.push(Math.round(E24_BASE[i] * mult * 100) / 100);
+    }
+  }
+
+  // Find nearest lower and nearest higher standard E24 resistor
+  function getNearestE24(val) {
+    if (val <= 0) return { lower: 0, upper: ALL_E24[0] };
+    let lower = ALL_E24[0];
+    let upper = ALL_E24[ALL_E24.length - 1];
+
+    for (let i = 0; i < ALL_E24.length; i++) {
+      if (ALL_E24[i] <= val) {
+        lower = ALL_E24[i];
+      }
+      if (ALL_E24[i] >= val) {
+        upper = ALL_E24[i];
+        break;
+      }
+    }
+    return { lower, upper };
+  }
+
+  function fmtR(r) {
+    if (r === undefined || isNaN(r) || r < 0) return '–';
+    if (r === 0) return '0 Ω';
+    if (r >= 1e6) {
+      return (r / 1e6).toFixed(2).replace(/\.00$/, '') + ' MΩ';
+    }
+    if (r >= 1e3) {
+      return (r / 1e3).toFixed(2).replace(/\.00$/, '') + ' kΩ';
+    }
+    return Math.round(r) + ' Ω';
+  }
+
+  function fmtV(v) {
+    if (v === undefined || isNaN(v)) return '–';
+    return v.toFixed(2) + ' V';
+  }
+
+  function fmtW(w) {
+    if (w === undefined || isNaN(w) || w < 0) return '0.00 W';
+    return w.toFixed(2) + ' W';
+  }
+
+  // DOM Elements
+  const $ = id => document.getElementById(id);
+  const btnModeR2 = $('btnModeR2');
+  const btnModeVout = $('btnModeVout');
+  const groupTargetVout = $('groupTargetVout');
+  const groupR2Input = $('groupR2Input');
+
+  const inTargetVout = $('targetVout');
+  const inR1 = $('inputR1');
+  const inR2 = $('inputR2');
+  const inVin = $('inputVin');
+  const inIload = $('inputIload');
+  const inVref = $('inputVref');
+  const inIadj = $('inputIadj');
+
+  const valCalcR2 = $('valCalcR2');
+  const subCalcR2 = $('subCalcR2');
+  const valMinVin = $('valMinVin');
+  const valLowerE24 = $('valLowerE24');
+  const subLowerErr = $('subLowerErr');
+  const valUpperE24 = $('valUpperE24');
+  const subUpperErr = $('subUpperErr');
+  const valPd = $('valPd');
+  const valEff = $('valEff');
+  const subHeadroom = $('subHeadroom');
+  const cardPower = $('cardPower');
+  const badgeThermal = $('badgeThermal');
+  const barThermal = $('barThermal');
+  const txtThermalDesc = $('txtThermalDesc');
+  const generalNote = $('generalNote');
+
+  // SVG Elements
+  const svgVinText = $('svgVinText');
+  const svgVoutText = $('svgVoutText');
+  const svgR1Text = $('svgR1Text');
+  const svgR2Text = $('svgR2Text');
+  const svgIcBox = $('svgIcBox');
+  const svgStatusPill = $('svgStatusPill');
+
+  let currentMode = 'r2'; // 'r2' (find R2) or 'vout' (find Vout)
+
+  function setMode(mode) {
+    currentMode = mode;
+    if (mode === 'r2') {
+      btnModeR2.classList.add('on');
+      btnModeR2.setAttribute('aria-selected', 'true');
+      btnModeVout.classList.remove('on');
+      btnModeVout.setAttribute('aria-selected', 'false');
+      groupTargetVout.style.display = 'block';
+      groupR2Input.style.display = 'none';
+      $('lblR2Result').textContent = 'Calculated R2';
+    } else {
+      btnModeVout.classList.add('on');
+      btnModeVout.setAttribute('aria-selected', 'true');
+      btnModeR2.classList.remove('on');
+      btnModeR2.setAttribute('aria-selected', 'false');
+      groupTargetVout.style.display = 'none';
+      groupR2Input.style.display = 'block';
+      $('lblR2Result').textContent = 'Resulting Vout';
+    }
+    calculate();
+  }
+
+  btnModeR2.addEventListener('click', () => setMode('r2'));
+  btnModeVout.addEventListener('click', () => setMode('vout'));
+
+  // Quick Preset Handlers
+  document.querySelectorAll('.preset-pill[data-vout]').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.preset-pill[data-vout]').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      inTargetVout.value = p.dataset.vout;
+      if (currentMode !== 'r2') setMode('r2');
+      else calculate();
+    });
+  });
+
+  document.querySelectorAll('.preset-pill[data-r1]').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('.preset-pill[data-r1]').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      inR1.value = p.dataset.r1;
+      calculate();
+    });
+  });
+
+  // Main Calculation Logic
+  function calculate() {
+    const Vref = parseFloat(inVref.value) || 1.25;
+    const Iadj = (parseFloat(inIadj.value) || 50) * 1e-6; // Amps
+    const R1 = parseFloat(inR1.value) || 240;
+    const Vin = parseFloat(inVin.value) || 12;
+    const Iload_mA = parseFloat(inIload.value) || 500;
+    const Iload = Iload_mA / 1000; // Amps
+
+    // SVG updates for inputs
+    svgVinText.textContent = Vin.toFixed(1).replace(/\.0$/, '') + ' V';
+    svgR1Text.textContent = fmtR(R1);
+
+    if (currentMode === 'r2') {
+      const targetVout = parseFloat(inTargetVout.value) || 5.0;
+
+      if (targetVout < Vref) {
+        valCalcR2.textContent = 'Invalid Vout';
+        subCalcR2.textContent = 'Vout must be ≥ ' + Vref + 'V';
+        return;
+      }
+
+      // Formula: R2 = (Vout - Vref) / (Vref / R1 + Iadj)
+      const denominator = (Vref / R1) + Iadj;
+      const exactR2 = (targetVout - Vref) / denominator;
+
+      valCalcR2.textContent = fmtR(exactR2);
+      subCalcR2.textContent = 'Exact ' + Math.round(exactR2) + ' Ω';
+
+      // Standard E24 evaluation
+      const e24 = getNearestE24(exactR2);
+
+      // Actual Vout with nearest lower E24
+      const voutLower = Vref * (1 + e24.lower / R1) + (Iadj * e24.lower);
+      const errLower = ((voutLower - targetVout) / targetVout) * 100;
+      valLowerE24.textContent = fmtR(e24.lower) + ' → ' + fmtV(voutLower);
+      subLowerErr.textContent = (errLower >= 0 ? '+' : '') + errLower.toFixed(1) + '% from target';
+
+      // Actual Vout with nearest higher E24
+      const voutUpper = Vref * (1 + e24.upper / R1) + (Iadj * e24.upper);
+      const errUpper = ((voutUpper - targetVout) / targetVout) * 100;
+      valUpperE24.textContent = fmtR(e24.upper) + ' → ' + fmtV(voutUpper);
+      subUpperErr.textContent = (errUpper >= 0 ? '+' : '') + errUpper.toFixed(1) + '% from target';
+
+      // Pick representative Vout for downstream thermal & minimum input calculations
+      // If lower E24 is close, use that (matches prompt where 680 Ω → 4.83 V is primary)
+      const selectedR2 = e24.lower;
+      const representativeVout = voutLower;
+
+      // Minimum Vin required (Dropout is guaranteed 3.0V worst case full load)
+      const DROPOUT_V = 3.0;
+      const minVin = representativeVout + DROPOUT_V;
+      valMinVin.textContent = fmtV(minVin);
+
+      // SVG schematic update
+      svgVoutText.textContent = fmtV(representativeVout);
+      svgR2Text.textContent = fmtR(selectedR2);
+
+      // Power dissipation: Pd = (Vin - Vout) * Iload
+      updateThermalAndEfficiency(Vin, representativeVout, Iload, minVin, R1);
+
+    } else {
+      // Mode Vout: User entered R2 directly
+      const inputR2 = parseFloat(inR2.value) || 0;
+      const resultingVout = Vref * (1 + inputR2 / R1) + (Iadj * inputR2);
+
+      valCalcR2.textContent = fmtV(resultingVout);
+      subCalcR2.textContent = 'From R2 = ' + fmtR(inputR2);
+
+      const e24 = getNearestE24(inputR2);
+      const voutLower = Vref * (1 + e24.lower / R1) + (Iadj * e24.lower);
+      const voutUpper = Vref * (1 + e24.upper / R1) + (Iadj * e24.upper);
+
+      valLowerE24.textContent = fmtR(e24.lower) + ' → ' + fmtV(voutLower);
+      subLowerErr.textContent = 'Lower standard E24';
+
+      valUpperE24.textContent = fmtR(e24.upper) + ' → ' + fmtV(voutUpper);
+      subUpperErr.textContent = 'Upper standard E24';
+
+      const DROPOUT_V = 3.0;
+      const minVin = resultingVout + DROPOUT_V;
+      valMinVin.textContent = fmtV(minVin);
+
+      // SVG schematic update
+      svgVoutText.textContent = fmtV(resultingVout);
+      svgR2Text.textContent = fmtR(inputR2);
+
+      updateThermalAndEfficiency(Vin, resultingVout, Iload, minVin, R1);
+    }
+  }
+
+  function updateThermalAndEfficiency(Vin, Vout, Iload, minVin, R1) {
+    const Vref = parseFloat(inVref.value) || 1.25;
+    const dividerCurrent = (Vref / R1) * 1000; // mA
+
+    // Power Dissipation
+    let Pd = 0;
+    if (Vin >= Vout) {
+      Pd = (Vin - Vout) * Iload;
+    }
+    valPd.textContent = fmtW(Pd);
+
+    // Headroom & Efficiency
+    const headroom = Vin - Vout;
+    subHeadroom.textContent = 'Dropout Headroom: ' + headroom.toFixed(2) + ' V';
+
+    if (Vin > 0 && Iload > 0) {
+      const Pout = Vout * Iload;
+      const Pin = Vin * Iload;
+      const eff = (Pout / Pin) * 100;
+      valEff.textContent = eff.toFixed(1) + '%';
+    } else {
+      valEff.textContent = '–';
+    }
+
+    // Thermal Status & Heatsink Advisory
+    cardPower.className = 'cell';
+    badgeThermal.className = 'thermal-status-badge';
+
+    // Track width percentage (scale 0W to 5W)
+    const pct = Math.min(100, Math.max(5, (Pd / 5.0) * 100));
+    barThermal.style.width = pct + '%';
+
+    if (Vin < minVin) {
+      // Dropout warning
+      cardPower.classList.add('heat-crit');
+      badgeThermal.className = 'thermal-status-badge badge-crit';
+      badgeThermal.textContent = 'Dropout Violated!';
+      barThermal.style.background = 'var(--err)';
+      txtThermalDesc.innerHTML = `<span style="color:var(--err); font-weight:700;">Warning: Vin (${Vin.toFixed(1)}V) is lower than minimum input (${minVin.toFixed(2)}V)!</span> The regulator has dropped out of regulation and cannot sustain the desired output voltage. Increase Vin above ${minVin.toFixed(2)}V.`;
+      svgStatusPill.textContent = 'Dropout Violated!';
+      svgStatusPill.style.color = 'var(--err)';
+      svgIcBox.setAttribute('stroke', '#ef4444');
+    } else if (Pd < 0.5) {
+      // Safe cold
+      cardPower.classList.add('heat-ok');
+      badgeThermal.className = 'thermal-status-badge badge-ok';
+      badgeThermal.textContent = 'Safe · No Heatsink';
+      barThermal.style.background = 'var(--ok)';
+      txtThermalDesc.innerHTML = `<strong>Safe Operation:</strong> Heat dissipation is minimal (${fmtW(Pd)}). The TO-220 package can safely operate in open ambient air without any heatsink.`;
+      svgStatusPill.textContent = 'Normal · Safe';
+      svgStatusPill.style.color = 'var(--ok)';
+      svgIcBox.setAttribute('stroke', '#22c55e');
+    } else if (Pd < 1.0) {
+      // Warm
+      cardPower.classList.add('heat-warm');
+      badgeThermal.className = 'thermal-status-badge badge-warm';
+      badgeThermal.textContent = 'Warm · Small Heatsink';
+      barThermal.style.background = 'var(--warn)';
+      txtThermalDesc.innerHTML = `<strong>Moderate Warmth:</strong> Power dissipation is ${fmtW(Pd)}. While acceptable, a small clip-on heatsink is recommended for long-term reliability.`;
+      svgStatusPill.textContent = 'Warm · 0.5W–1W';
+      svgStatusPill.style.color = 'var(--warn)';
+      svgIcBox.setAttribute('stroke', '#f59e0b');
+    } else if (Pd <= 5.0) {
+      // Hot: EXACT USER TEXT
+      cardPower.classList.add('heat-hot');
+      badgeThermal.className = 'thermal-status-badge badge-hot';
+      badgeThermal.textContent = 'Heatsink Required';
+      barThermal.style.background = 'var(--orange)';
+      txtThermalDesc.innerHTML = `<strong>Heatsink Required:</strong> This power (${fmtW(Pd)}) requires a heatsink. Any dissipation above ~1W will cause the LM317 to overheat significantly without one.`;
+      svgStatusPill.textContent = 'Hot · Heatsink Req';
+      svgStatusPill.style.color = 'var(--orange)';
+      svgIcBox.setAttribute('stroke', '#f97316');
+    } else {
+      // Critical heat
+      cardPower.classList.add('heat-crit');
+      badgeThermal.className = 'thermal-status-badge badge-crit';
+      badgeThermal.textContent = 'Critical · Switch to Buck';
+      barThermal.style.background = 'var(--err)';
+      txtThermalDesc.innerHTML = `<strong style="color:var(--err);">Excessive Heat (${fmtW(Pd)}):</strong> Thermal dissipation is too high for a standard heatsink. Strongly consider replacing the LM317 with a step-down DC-DC switching buck converter for superior efficiency.`;
+      svgStatusPill.textContent = 'Extreme · Consider Buck';
+      svgStatusPill.style.color = 'var(--err)';
+      svgIcBox.setAttribute('stroke', '#ef4444');
+    }
+
+    // Regulation note regarding minimum current
+    if (dividerCurrent >= 5.0) {
+      generalNote.className = 'note';
+      generalNote.innerHTML = `<i class="fas fa-circle-check" style="color:var(--ok);"></i> Divider current through R1 is <strong>${dividerCurrent.toFixed(2)} mA</strong>, which satisfies the &ge; 5 mA LM317 requirement for stiff output regulation without external load.`;
+    } else {
+      generalNote.className = 'note warn-box';
+      generalNote.innerHTML = `<i class="fas fa-triangle-exclamation"></i> Divider current through R1 is <strong>${dividerCurrent.toFixed(2)} mA</strong> (less than recommended 5 mA). Decrease R1 to 240 Ω or 220 Ω to guarantee proper voltage regulation.`;
+    }
+  }
+
+  // Populate E24 Reference Table
+  function buildE24Table() {
+    const targets = [1.25, 1.5, 1.8, 2.5, 3.3, 5.0, 6.0, 9.0, 12.0, 15.0, 18.0, 24.0];
+    const R1 = 240;
+    const Vref = 1.25;
+    const Iadj = 50e-6;
+    const DROPOUT = 3.0;
+
+    const tbody = $('tableBody');
+    tbody.innerHTML = '';
+
+    targets.forEach(v => {
+      let exactR2 = 0;
+      let e24R2 = 0;
+      let actualVout = 1.25;
+      let err = 0;
+
+      if (v > Vref) {
+        exactR2 = (v - Vref) / ((Vref / R1) + Iadj);
+        const e24 = getNearestE24(exactR2);
+        // choose whichever gives smaller error
+        const vL = Vref * (1 + e24.lower / R1) + (Iadj * e24.lower);
+        const vU = Vref * (1 + e24.upper / R1) + (Iadj * e24.upper);
+        if (Math.abs(vL - v) <= Math.abs(vU - v)) {
+          e24R2 = e24.lower;
+          actualVout = vL;
+        } else {
+          e24R2 = e24.upper;
+          actualVout = vU;
+        }
+        err = ((actualVout - v) / v) * 100;
+      } else {
+        exactR2 = 0;
+        e24R2 = 0;
+        actualVout = 1.25;
+        err = 0;
+      }
+
+      const minVin = actualVout + DROPOUT;
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="mono"><strong>${v.toFixed(2)} V</strong></td>
+        <td class="mono">${R1} Ω</td>
+        <td class="mono">${exactR2 === 0 ? '0 Ω (tied to GND)' : fmtR(exactR2)}</td>
+        <td class="mono"><strong>${fmtR(e24R2)}</strong></td>
+        <td class="mono" style="color:var(--ok);">${fmtV(actualVout)}</td>
+        <td class="mono" style="color:${Math.abs(err) > 3 ? 'var(--warn)' : 'var(--mut)'};">${(err >= 0 ? '+' : '') + err.toFixed(1)}%</td>
+        <td class="mono">${fmtV(minVin)}</td>
+        <td><button type="button" class="btn-apply" data-target="${v}" data-r1="${R1}" data-r2="${e24R2}">Apply</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    // Wire up apply buttons
+    tbody.querySelectorAll('.btn-apply').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetV = parseFloat(btn.dataset.target);
+        inTargetVout.value = targetV;
+        inR1.value = btn.dataset.r1;
+        setMode('r2');
+        // Update active preset highlight if applicable
+        document.querySelectorAll('.preset-pill[data-vout]').forEach(p => {
+          p.classList.toggle('active', parseFloat(p.dataset.vout) === targetV);
+        });
+        window.scrollTo({ top: $('main').offsetTop, behavior: 'smooth' });
+      });
+    });
+  }
+
+  // Event Listeners for inputs
+  const inputs = [inTargetVout, inR1, inR2, inVin, inIload, inVref, inIadj];
+  inputs.forEach(el => {
+    el.addEventListener('input', calculate);
+    el.addEventListener('change', calculate);
+  });
+
+  $('btnCalc').addEventListener('click', calculate);
+
+  // Initial calculation & table load
+  buildE24Table();
+  calculate();
+
+})();
+</script>
+
+<script src="/pwa.js" defer></script>
+<script src="mta-chrome.js" defer></script>
+<!-- Vercel Speed Insights -->
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
