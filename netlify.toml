@@ -42,6 +42,15 @@
     Vary = "Accept"
     Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
 
+
+# --- M.T.A. Lab & Articles Hub ---
+[[headers]]
+  for = "/article/*"
+  [headers.values]
+    Link = '</.well-known/agent-skills/index.json>; rel="linkset", </sitemap.xml>; rel="sitemap"'
+    Vary = "Accept"
+    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+
 # --- Engineering tools ---
 [[headers]]
   for = "/sites/*"
@@ -500,3 +509,25 @@
   from = "/sites/"
   to = "/tools.html"
   status = 301
+
+
+[[redirects]]
+  from = "/articles/*"
+  to = "/article/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/articles"
+  to = "/article/"
+  status = 200
+
+[[redirects]]
+  from = "/mta-lab/*"
+  to = "/article/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/mta-lab"
+  to = "/article/"
+  status = 200
+

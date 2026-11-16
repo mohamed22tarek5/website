@@ -133,6 +133,8 @@ website/
 │   ├── index.md / projects.md / Mohamed - Services.md
 │   ├── Project/ / Certificates/ # Static assets
 │   ├── sites/                  # Engineering tools + games (see Features)
+│   ├── article/                # M.T.A. Lab & Articles Hub (Articles, AI Tools, Prompts, Resources)
+│   ├── tools/                  # Windows utilities (M.T.A. Cleaner, Defender, Tweaking, PCInfo, etc.)
 │   └── .well-known/            # Agent / MCP / ACP / UCP / OAuth discovery
 ├── api/                        # Vercel serverless functions
 │   ├── markdown.js             # Accept: text/markdown negotiation
@@ -141,7 +143,6 @@ website/
 │   └── oauth-*.js
 ├── skills/
 │   └── engineering-calculators.md
-├── tools/                      # Windows utilities (M.T.A. Cleaner, Defender, Tweaking, info pc)
 ├── vercel.json                 # Headers, rewrites, functions config
 ├── seo-config.json
 ├── openapi.json                # Root copy (also served from public/)

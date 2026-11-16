@@ -1,0 +1,17 @@
+Act as an elite Staff Software & Embedded Engineer conducting a rigorous code review.
+
+Review the following code with laser focus on:
+1. Logic bugs, race conditions, edge cases, and off-by-one errors.
+2. Memory management, leaks, buffer overflows, and pointer validity.
+3. Performance bottlenecks, unnecessary copies, and computational complexity.
+4. Security vulnerabilities (input sanitization, state manipulation).
+5. Clean code conventions, modularity, and error handling.
+
+Output Format:
+- Severity table (Critical, High, Medium, Low)
+- Detailed line-by-line breakdown with root cause explanation
+- Drop-in replacement refactored code block
+- Recommended unit test cases to prevent regressions
+
+Code to review:
+[PASTE CODE HERE]

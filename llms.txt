@@ -10,6 +10,7 @@ Based in Egypt, specializing in custom circuit design, embedded firmware, IoT ha
 - [Engineering Services](https://mohamed-tarek-abdelhady.vercel.app/services.html): Embedded systems design, schematic & PCB layout, Arduino programming, and IoT product prototyping.
 - [Engineering Projects](https://mohamed-tarek-abdelhady.vercel.app/projects.html): Hardware prototypes, automation systems, smart IoT monitors, and full-stack applications.
 - [Certificates](https://mohamed-tarek-abdelhady.vercel.app/certificates.html): Verified credentials in CCNA, Linux administration, IoT, embedded systems, and electronics.
+- [M.T.A. Lab & Articles Hub](https://mohamed-tarek-abdelhady.vercel.app/article/): Technical publishing platform featuring engineering articles, curated AI tools directory, production prompt libraries, and downloadable resources.
 - [Online Engineering Tools](https://mohamed-tarek-abdelhady.vercel.app/tools.html): Interactive suite of calculators for electrical, electronics, and embedded systems engineering.
 - [Contact & Profiles](https://mohamed-tarek-abdelhady.vercel.app/social-media.html): Direct contact via email, WhatsApp, LinkedIn, and GitHub.
 

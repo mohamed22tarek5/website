@@ -586,6 +586,23 @@
           "value": "public, max-age=86400, stale-while-revalidate=604800"
         }
       ]
+    },
+    {
+      "source": "/article/(.*)",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</.well-known/agent-skills/index.json>; rel=linkset, </sitemap.xml>; rel=sitemap"
+        },
+        {
+          "key": "Vary",
+          "value": "Accept"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
     }
   ],
   "rewrites": [
@@ -676,6 +693,22 @@
     {
       "source": "/api/markdown/:path*",
       "destination": "/api/markdown"
+    },
+    {
+      "source": "/articles",
+      "destination": "/article/index.html"
+    },
+    {
+      "source": "/articles/:path*",
+      "destination": "/article/index.html"
+    },
+    {
+      "source": "/mta-lab",
+      "destination": "/article/index.html"
+    },
+    {
+      "source": "/mta-lab/:path*",
+      "destination": "/article/index.html"
     }
   ]
 }

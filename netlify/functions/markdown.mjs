@@ -68,6 +68,7 @@ Mirrors: https://website-mohamed.vercel.app/ | https://eng-mta.netlify.app/
 - [Services](/services.html) — Available services and tools
 - [Certificates](/certificates.html) — Professional certifications
 - [Social Media](/social-media.html) — Contact and social links
+- [M.T.A. Lab & Articles Hub](/article/) — Technical publishing platform: articles, AI tools, prompts, workflows
 - [Apps & Tools](/tools.html) — All engineering tools
 
 ## Engineering Tools

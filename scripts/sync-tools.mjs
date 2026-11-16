@@ -428,8 +428,19 @@ const tools = [
   },
 
   // ============================================
-  // PRODUCTIVITY & AI (4 tools)
+  // PRODUCTIVITY & AI
   // ============================================
+  {
+    category: 'productivity',
+    badge: 'Platform',
+    title: 'M.T.A. Lab & Articles Hub',
+    desc: 'Engineering articles, tutorials, curated AI tools directory, production prompts library, and downloadable resources.',
+    tag: 'Articles & AI Hub',
+    href: '/article/',
+    cta: 'Explore M.T.A. Lab',
+    svg: '<path d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H304c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H304c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm0 64c0-8.8 7.2-16 16-16H240c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16z"/>',
+    viewBox: '0 0 512 512'
+  },
   {
     category: 'productivity',
     badge: 'Directory',
@@ -1070,6 +1081,7 @@ const toolsPageHtml = `<!DOCTYPE html>
         <a href="/about.html" class="nav-link">About</a>
         <a href="/services.html" class="nav-link">Services</a>
         <a href="/projects.html" class="nav-link">Projects</a>
+        <a href="/article/" class="nav-link">M.T.A. Lab</a>
         <a href="/tools.html" class="nav-link active" aria-current="page">Tools &amp; Calculators</a>
         <a href="/certificates.html" class="nav-link">Certificates</a>
         <a href="/cv.html" class="nav-cta">CV</a>

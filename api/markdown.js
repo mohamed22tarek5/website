@@ -69,6 +69,7 @@ Mirrors: https://website-mohamed.vercel.app/ | https://eng-mta.netlify.app/
 - [Services](/services.html) — Available services and tools
 - [Certificates](/certificates.html) — Professional certifications
 - [Social Media](/social-media.html) — Contact and social links
+- [M.T.A. Lab & Articles Hub](/article/) — Technical publishing platform: articles, AI tools, prompts, workflows
 - [Apps & Tools](/tools.html) — All engineering tools
 
 ## Engineering Calculators
@@ -128,6 +129,18 @@ Engineering services and free calculation tools.
 - Embedded Systems: Arduino, ESP32, STM32 firmware and IoT prototyping
 - Web Development: Vanilla ES6+, responsive sites, PWAs
 - Technical Consulting: Circuit analysis and electronics consulting
+`,
+  '/article': `# M.T.A. Lab — Articles • AI • Prompts • Knowledge
+
+Personal publishing platform by Mohamed Tarek Abdelhady: AI articles, tutorials, tools, prompt collections, engineering content and downloadable resources.
+
+Live site: https://mohamed-tarek-abdelhady.vercel.app/article/
+
+## Sections
+- Articles: Deep dive technical engineering, AI, and electronics tutorials.
+- AI Tools: Curated directory of top AI platforms and assistants.
+- Prompts: Tested prompt engineering recipes with one-click copy.
+- Resources: Direct download packages and technical guides.
 `,
   '/tools': `# Engineering Tools & Calculators — Mohamed Tarek Abdelhady
 
