@@ -1074,6 +1074,104 @@ section {
   border-radius: var(--radius-full);
 }
 
+/* Tools Category Group Layout */
+.tools-discovery .tools-groups-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.tools-discovery .tools-category-group {
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+.tools-discovery .tools-category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding-bottom: 1.1rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tools-discovery .tools-category-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tools-discovery .tools-category-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  color: #60a5fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.tools-discovery .tools-category-icon-box svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.tools-discovery .tools-category-group:hover .tools-category-icon-box {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.45);
+  transform: scale(1.05);
+}
+
+.tools-discovery .tools-category-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.01em;
+}
+
+.tools-discovery .tools-category-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.tools-discovery .tools-category-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.775rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  background: rgba(59, 130, 246, 0.1);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .tools-discovery .tools-category-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .tools-discovery .tools-category-badge {
+    align-self: flex-start;
+  }
+  .tools-discovery .tools-groups-container {
+    gap: 2.5rem;
+  }
+}
+
 .tools-discovery .tools-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

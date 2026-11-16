@@ -216,7 +216,7 @@
         <div class="section-header reveal">
           <span class="section-label">Tools &amp; Calculators</span>
           <h2 class="section-title" id="tools-title">Engineering Calculators &amp; Interactive Apps</h2>
-          <p class="section-subtitle">Browse through all 49 utilities categorized by discipline. Use live search or filter by domain to quickly launch any tool.</p>
+          <p class="section-subtitle">Browse through all 49 utilities arranged by discipline. Use live search or filter by domain to quickly launch any tool.</p>
         </div>
 
         <!-- Controls: Live Search & Filter Pills -->
@@ -249,9 +249,24 @@
           </div>
         </div>
 
-        <!-- 49 Pro Tool Cards Grid -->
-        <div class="tools-grid" id="toolsGrid">
+        <!-- 49 Pro Tools Arranged by Discipline -->
+        <div class="tools-groups-container" id="toolsGrid">
 
+          <!-- Category: Circuits & Electronics (19) -->
+          <div class="tools-category-group" data-category="circuits" id="category-circuits">
+            <div class="tools-category-header reveal">
+              <div class="tools-category-info">
+                <div class="tools-category-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 512 512" aria-hidden="true"><path d="M224 32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h32c17.7 0 32 14.3 32 32v32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H384v64h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H384v64h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H384v32c0 17.7-14.3 32-32 32H320v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V448H224v32c0 17.7-14.3 32-32 32s-32-14.3-32-32V448H128c-17.7 0-32-14.3-32-32V384H64c-17.7 0-32-14.3-32-32s14.3-32 32-32H96V256H64c-17.7 0-32-14.3-32-32s14.3-32 32-32H96V128c0-17.7 14.3-32 32-32h32V64c0-17.7 14.3-32 32-32s32 14.3 32 32V64h32V32zM160 128H352V384H160V128zm64 64c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32H224z"/></svg>
+                </div>
+                <div>
+                  <h3 class="tools-category-title">Circuits & Electronics</h3>
+                  <p class="tools-category-desc">Ohm’s law, passive component EIA standards, filter networks, op-amps, and microcontrollers.</p>
+                </div>
+              </div>
+              <span class="tools-category-badge">19 Calculators</span>
+            </div>
+            <div class="tools-grid">
           <a href="/sites/ohms-law-calculator.html" class="tool-card reveal" data-category="circuits" data-title="ohm's law calculator" data-desc="calculate voltage, current, resistance and power with interactive iv curves and circuit analysis." data-tag="v = i × r" target="_blank" rel="noopener noreferrer" aria-label="Ohm's Law Calculator — Calculate voltage, current, resistance and power with interactive IV curves and circuit analysis.">
             <div class="tool-card-head">
               <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm-16 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 320a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 416a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg></div>
@@ -300,6 +315,30 @@
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
+          <a href="/sites/voltage-divider-calculator.html" class="tool-card reveal" data-category="circuits" data-title="voltage divider calculator" data-desc="solve vout, r1, or r2 under load resistance, with power dissipation and e12/e24 standard picks." data-tag="loaded divider" target="_blank" rel="noopener noreferrer" aria-label="Voltage Divider Calculator — Solve Vout, R1, or R2 under load resistance, with power dissipation and E12/E24 standard picks.">
+            <div class="tool-card-head">
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm-16 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 320a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 416a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg></div>
+              <span class="tool-card-badge">Circuits</span>
+            </div>
+            <h3 class="tool-card-title">Voltage Divider Calculator</h3>
+            <p class="tool-card-desc">Solve Vout, R1, or R2 under load resistance, with power dissipation and E12/E24 standard picks.</p>
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">Loaded Divider</span>
+              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+            </div>
+          </a>
+          <a href="/sites/lm317-voltage-regulator-calculator.html" class="tool-card reveal" data-category="circuits" data-title="lm317 voltage regulator calculator" data-desc="calculate resistors (r1, r2), target vout, power dissipation, dropout voltage, and heatsink requirements." data-tag="linear regulator" target="_blank" rel="noopener noreferrer" aria-label="LM317 Voltage Regulator Calculator — Calculate resistors (R1, R2), target Vout, power dissipation, dropout voltage, and heatsink requirements.">
+            <div class="tool-card-head">
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm-16 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 320a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 416a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg></div>
+              <span class="tool-card-badge">Circuits</span>
+            </div>
+            <h3 class="tool-card-title">LM317 Voltage Regulator Calculator</h3>
+            <p class="tool-card-desc">Calculate resistors (R1, R2), target Vout, power dissipation, dropout voltage, and heatsink requirements.</p>
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">Linear Regulator</span>
+              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+            </div>
+          </a>
           <a href="/sites/capacitor-calculator.html" class="tool-card reveal" data-category="circuits" data-title="capacitor calculator" data-desc="capacitance, stored energy (joules), charge curves, and series/parallel bank configurations." data-tag="energy & rc time" target="_blank" rel="noopener noreferrer" aria-label="Capacitor Calculator — Capacitance, stored energy (Joules), charge curves, and series/parallel bank configurations.">
             <div class="tool-card-head">
               <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/></svg></div>
@@ -336,370 +375,400 @@
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/voltage-divider-calculator.html" class="tool-card reveal" data-category="circuits" data-title="voltage divider calculator" data-desc="solve vout, r1, or r2 under load resistance, with power dissipation and e12/e24 standard picks." data-tag="loaded divider" target="_blank" rel="noopener noreferrer" aria-label="Voltage Divider Calculator — Solve Vout, R1, or R2 under load resistance, with power dissipation and E12/E24 standard picks.">
+          <a href="/sites/rc-time-constant-calculator.html" class="tool-card reveal" data-category="circuits" data-title="rc time constant calculator" data-desc="rc charging & discharging curves, time constant (tau), cutoff frequency, and capacitor voltages at time t." data-tag="τ = r × c" target="_blank" rel="noopener noreferrer" aria-label="RC Time Constant Calculator — RC charging & discharging curves, time constant (Tau), cutoff frequency, and capacitor voltages at time t.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm-16 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 320a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 416a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg></div>
-              <span class="tool-card-badge">Circuits</span>
-            </div>
-            <h3 class="tool-card-title">Voltage Divider Calculator</h3>
-            <p class="tool-card-desc">Solve Vout, R1, or R2 under load resistance, with power dissipation and E12/E24 standard picks.</p>
-            <div class="tool-card-footer">
-              <span class="tool-card-tag">Loaded Divider</span>
-              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-            </div>
-          </a>
-          <a href="/sites/lm317-voltage-regulator-calculator.html" class="tool-card reveal" data-category="circuits" data-title="lm317 voltage regulator calculator" data-desc="calculate resistors (r1, r2), target vout, power dissipation, dropout voltage, and heatsink requirements." data-tag="lm317 linear regulator" target="_blank" rel="noopener noreferrer" aria-label="LM317 Voltage Regulator Calculator — Calculate resistors (R1, R2), target Vout, power dissipation, dropout voltage, and heatsink requirements.">
-            <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
-              <span class="tool-card-badge">Circuits</span>
-            </div>
-            <h3 class="tool-card-title">LM317 Voltage Regulator Calculator</h3>
-            <p class="tool-card-desc">Calculate resistors (R1, R2), target Vout, power dissipation, dropout voltage, and heatsink requirements.</p>
-            <div class="tool-card-footer">
-              <span class="tool-card-tag">LM317 Linear Regulator</span>
-              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-            </div>
-          </a>
-          <a href="/sites/rc-time-constant-calculator.html" class="tool-card reveal" data-category="circuits" data-title="rc time constant calculator" data-desc="calculate rc circuit time constant (τ), capacitor charging/discharging curves, and -3db cutoff frequency." data-tag="τ = r × c tau" target="_blank" rel="noopener noreferrer" aria-label="RC Time Constant Calculator — Calculate RC circuit time constant (τ), capacitor charging/discharging curves, and -3dB cutoff frequency.">
-            <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 236.8V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg></div>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg></div>
               <span class="tool-card-badge">Circuits</span>
             </div>
             <h3 class="tool-card-title">RC Time Constant Calculator</h3>
-            <p class="tool-card-desc">Calculate RC circuit time constant (τ), capacitor charging/discharging curves, and -3dB cutoff frequency.</p>
+            <p class="tool-card-desc">RC charging & discharging curves, time constant (Tau), cutoff frequency, and capacitor voltages at time t.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">τ = R × C Tau</span>
+              <span class="tool-card-tag">τ = R × C</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/rc-filter-lc-resonance-calculator.html" class="tool-card reveal" data-category="circuits" data-title="rc filter & lc resonance" data-desc="calculate cutoff frequency (-3db), resonant frequency (f0), and impedance for audio/rf circuits." data-tag="bode & resonance" target="_blank" rel="noopener noreferrer" aria-label="RC Filter & LC Resonance — Calculate cutoff frequency (-3dB), resonant frequency (f0), and impedance for audio/RF circuits.">
+          <a href="/sites/rc-filter-lc-resonance-calculator.html" class="tool-card reveal" data-category="circuits" data-title="rc filter & lc resonance" data-desc="low/high pass rc filter cutoff frequencies (-3db point) and lc tank resonant frequencies." data-tag="f₀ resonance" target="_blank" rel="noopener noreferrer" aria-label="RC Filter & LC Resonance — Low/high pass RC filter cutoff frequencies (-3dB point) and LC tank resonant frequencies.">
             <div class="tool-card-head">
               <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/></svg></div>
               <span class="tool-card-badge">Circuits</span>
             </div>
             <h3 class="tool-card-title">RC Filter & LC Resonance</h3>
-            <p class="tool-card-desc">Calculate cutoff frequency (-3dB), resonant frequency (f0), and impedance for audio/RF circuits.</p>
+            <p class="tool-card-desc">Low/high pass RC filter cutoff frequencies (-3dB point) and LC tank resonant frequencies.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Bode & Resonance</span>
+              <span class="tool-card-tag">f₀ Resonance</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/op-amp-gain-calculator.html" class="tool-card reveal" data-category="circuits" data-title="op-amp gain & waveform calculator" data-desc="inverting and non-inverting gain, db, resistor sizing, and real-time amplified waveform simulation with saturation clipping." data-tag="operational amp" target="_blank" rel="noopener noreferrer" aria-label="Op-Amp Gain & Waveform Calculator — Inverting and non-inverting gain, dB, resistor sizing, and real-time amplified waveform simulation with saturation clipping.">
+          <a href="/sites/op-amp-gain-calculator.html" class="tool-card reveal" data-category="circuits" data-title="op-amp gain & waveform calculator" data-desc="calculate inverting, non-inverting, summing, and differential op-amp circuits with interactive waveform visualization." data-tag="gain & waveform" target="_blank" rel="noopener noreferrer" aria-label="Op-Amp Gain & Waveform Calculator — Calculate inverting, non-inverting, summing, and differential op-amp circuits with interactive waveform visualization.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M224 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H128C92.7 64 64 92.7 64 128v32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H64v64H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H64v32c0 35.3 28.7 64 64 64h32v32c0 17.7 14.3 32 32 32s32-14.3 32-32V448h64v32c0 17.7 14.3 32 32 32s32-14.3 32-32V448h32c35.3 0 64-28.7 64-64V352h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H448V224h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H448V128c0-35.3-28.7-64-64-64H352V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H224V32zM128 128H384V384H128V128z"/></svg></div>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/></svg></div>
               <span class="tool-card-badge">Circuits</span>
             </div>
             <h3 class="tool-card-title">Op-Amp Gain & Waveform Calculator</h3>
-            <p class="tool-card-desc">Inverting and non-inverting gain, dB, resistor sizing, and real-time amplified waveform simulation with saturation clipping.</p>
+            <p class="tool-card-desc">Calculate inverting, non-inverting, summing, and differential op-amp circuits with interactive waveform visualization.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Operational Amp</span>
+              <span class="tool-card-tag">Gain & Waveform</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/555-timer-calculator.html" class="tool-card reveal" data-category="circuits" data-title="555 timer ic calculator" data-desc="astable multivibrator frequency, duty cycle, and monostable pulse width generator for ne555." data-tag="ne555 timer" target="_blank" rel="noopener noreferrer" aria-label="555 Timer IC Calculator — Astable multivibrator frequency, duty cycle, and monostable pulse width generator for NE555.">
+          <a href="/sites/555-timer-calculator.html" class="tool-card reveal" data-category="circuits" data-title="555 timer ic calculator" data-desc="astable frequency, duty cycle, mark/space times, and monostable pulse width timer sizing." data-tag="astable & monostable" target="_blank" rel="noopener noreferrer" aria-label="555 Timer IC Calculator — Astable frequency, duty cycle, mark/space times, and monostable pulse width timer sizing.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 236.8V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg></div>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg></div>
               <span class="tool-card-badge">Circuits</span>
             </div>
             <h3 class="tool-card-title">555 Timer IC Calculator</h3>
-            <p class="tool-card-desc">Astable multivibrator frequency, duty cycle, and monostable pulse width generator for NE555.</p>
+            <p class="tool-card-desc">Astable frequency, duty cycle, mark/space times, and monostable pulse width timer sizing.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">NE555 Timer</span>
+              <span class="tool-card-tag">Astable & Monostable</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/adc-calculator.html" class="tool-card reveal" data-category="circuits" data-title="adc calculator" data-desc="calculate adc bit resolution, lsb voltage step size, raw counts to analog voltage, and input voltage divider ratios." data-tag="adc & lsb step" target="_blank" rel="noopener noreferrer" aria-label="ADC Calculator — Calculate ADC bit resolution, LSB voltage step size, raw counts to analog voltage, and input voltage divider ratios.">
+          <a href="/sites/adc-calculator.html" class="tool-card reveal" data-category="circuits" data-title="adc calculator" data-desc="adc bit resolution (8 to 24-bit), lsb voltage step, raw digital counts to analog volts, and input voltage dividers." data-tag="bit resolution" target="_blank" rel="noopener noreferrer" aria-label="ADC Calculator — ADC bit resolution (8 to 24-bit), LSB voltage step, raw digital counts to analog volts, and input voltage dividers.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M176 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64c-35.3 0-64 28.7-64 64H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v56H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v56H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64c0 35.3 28.7 64 64 64v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h56v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h56v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448c35.3 0 64-28.7 64-64h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V280h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V176h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448c0-35.3-28.7-64-64-64V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H280V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H176V24zM160 128H352c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H160c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32zm192 32H160V352H352V160z"/></svg></div>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm-16 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 320a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 416a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg></div>
               <span class="tool-card-badge">Circuits</span>
             </div>
             <h3 class="tool-card-title">ADC Calculator</h3>
-            <p class="tool-card-desc">Calculate ADC bit resolution, LSB voltage step size, raw counts to analog voltage, and input voltage divider ratios.</p>
+            <p class="tool-card-desc">ADC bit resolution (8 to 24-bit), LSB voltage step, raw digital counts to analog volts, and input voltage dividers.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">ADC & LSB Step</span>
+              <span class="tool-card-tag">Bit Resolution</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/pwm-calculator.html" class="tool-card reveal" data-category="circuits" data-title="pwm calculator" data-desc="calculate pwm average voltage, pulse widths, maximum bit resolution, and timer register counts for esp32 and arduino." data-tag="timer & duty" target="_blank" rel="noopener noreferrer" aria-label="PWM Calculator — Calculate PWM average voltage, pulse widths, maximum bit resolution, and timer register counts for ESP32 and Arduino.">
+          <a href="/sites/pwm-calculator.html" class="tool-card reveal" data-category="circuits" data-title="pwm calculator" data-desc="pwm average voltage, high/low pulse widths, max bit resolution, and hardware timer register values for arduino and esp32." data-tag="duty cycle & timers" target="_blank" rel="noopener noreferrer" aria-label="PWM Calculator — PWM average voltage, high/low pulse widths, max bit resolution, and hardware timer register values for Arduino and ESP32.">
             <div class="tool-card-head">
               <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/></svg></div>
               <span class="tool-card-badge">Circuits</span>
             </div>
             <h3 class="tool-card-title">PWM Calculator</h3>
-            <p class="tool-card-desc">Calculate PWM average voltage, pulse widths, maximum bit resolution, and timer register counts for ESP32 and Arduino.</p>
+            <p class="tool-card-desc">PWM average voltage, high/low pulse widths, max bit resolution, and hardware timer register values for Arduino and ESP32.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Timer & Duty</span>
+              <span class="tool-card-tag">Duty Cycle & Timers</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/uart-baud-rate-calculator.html" class="tool-card reveal" data-category="circuits" data-title="uart baud rate calculator" data-desc="calculate avr ubrr register values, actual baud rates, and percentage timing error with double speed (u2x) mode." data-tag="uart & ubrr" target="_blank" rel="noopener noreferrer" aria-label="UART Baud Rate Calculator — Calculate AVR UBRR register values, actual baud rates, and percentage timing error with Double Speed (U2X) mode.">
+          <a href="/sites/uart-baud-rate-calculator.html" class="tool-card reveal" data-category="circuits" data-title="uart baud rate calculator" data-desc="avr/pic ubrr register values, actual baud rates, clock divisors, and percentage error with double speed (u2x) mode." data-tag="ubrr register & error" target="_blank" rel="noopener noreferrer" aria-label="UART Baud Rate Calculator — AVR/PIC UBRR register values, actual baud rates, clock divisors, and percentage error with Double Speed (U2X) mode.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 576 512" aria-hidden="true"><path d="M288 32c-35.3 0-64 28.7-64 64V160c0 35.3 28.7 64 64 64s64-28.7 64-64V96c0-35.3-28.7-64-64-64zm0 256c-17.7 0-32 14.3-32 32v32H160c-17.7 0-32 14.3-32 32v32H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32H160c17.7 0 32-14.3 32-32V480c0-35.3-28.7-64-64-64H96V384H256v32c0 17.7 14.3 32 32 32s32-14.3 32-32V384H480v32H448c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32H544c17.7 0 32-14.3 32-32V480c0-35.3-28.7-64-64-64H448V384c0-17.7-14.3-32-32-32H320V320c0-17.7-14.3-32-32-32z"/></svg></div>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/></svg></div>
               <span class="tool-card-badge">Circuits</span>
             </div>
             <h3 class="tool-card-title">UART Baud Rate Calculator</h3>
-            <p class="tool-card-desc">Calculate AVR UBRR register values, actual baud rates, and percentage timing error with Double Speed (U2X) mode.</p>
+            <p class="tool-card-desc">AVR/PIC UBRR register values, actual baud rates, clock divisors, and percentage error with Double Speed (U2X) mode.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">UART & UBRR</span>
+              <span class="tool-card-tag">UBRR Register & Error</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/lcd-custom-character-generator.html" class="tool-card reveal" data-category="circuits" data-title="lcd character generator" data-desc="interactive 5x8 dot matrix editor for hd44780 lcd displays with exportable arduino c++ binary code." data-tag="hd44780 / arduino" target="_blank" rel="noopener noreferrer" aria-label="LCD Character Generator — Interactive 5x8 dot matrix editor for HD44780 LCD displays with exportable Arduino C++ binary code.">
+          <a href="/sites/lcd-character-generator.html" class="tool-card reveal" data-category="circuits" data-title="lcd character generator" data-desc="visual 5x8 dot matrix bitmap pixel editor with instant byte array hex output for hd44780 displays." data-tag="hd44780 5x8 matrix" target="_blank" rel="noopener noreferrer" aria-label="LCD Character Generator — Visual 5x8 dot matrix bitmap pixel editor with instant byte array hex output for HD44780 displays.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM153 239c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-64 64c-9.4 9.4-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L105.9 256 153 239zm151 113c0-13.3-10.7-24-24-24H200c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24z"/></svg></div>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M64 0C28.7 0 0 28.7 0 64V352c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM448 352H64V64H448V352zM160 448H352c17.7 0 32 14.3 32 32s-14.3 32-32 32H160c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/></svg></div>
               <span class="tool-card-badge">Circuits</span>
             </div>
             <h3 class="tool-card-title">LCD Character Generator</h3>
-            <p class="tool-card-desc">Interactive 5x8 dot matrix editor for HD44780 LCD displays with exportable Arduino C++ binary code.</p>
+            <p class="tool-card-desc">Visual 5x8 dot matrix bitmap pixel editor with instant byte array hex output for HD44780 displays.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">HD44780 / Arduino</span>
+              <span class="tool-card-tag">HD44780 5x8 Matrix</span>
               <span class="tool-card-cta">Launch Generator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/electrical-calculation.html" class="tool-card reveal" data-category="circuits" data-title="electrical system calculator" data-desc="comprehensive electrical engineering formulas, single-phase, 3-phase, and ohm's wheel relations." data-tag="single & 3-phase" target="_blank" rel="noopener noreferrer" aria-label="Electrical System Calculator — Comprehensive electrical engineering formulas, single-phase, 3-phase, and Ohm's wheel relations.">
+          <a href="/sites/electrical-system-calculator.html" class="tool-card reveal" data-category="circuits" data-title="electrical system calculator" data-desc="comprehensive calculator for single-phase and three-phase ac systems, power factor, apparent power, and impedance." data-tag="1-phase & 3-phase" target="_blank" rel="noopener noreferrer" aria-label="Electrical System Calculator — Comprehensive calculator for single-phase and three-phase AC systems, power factor, apparent power, and impedance.">
             <div class="tool-card-head">
               <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
               <span class="tool-card-badge">Circuits</span>
             </div>
             <h3 class="tool-card-title">Electrical System Calculator</h3>
-            <p class="tool-card-desc">Comprehensive electrical engineering formulas, single-phase, 3-phase, and Ohm's wheel relations.</p>
+            <p class="tool-card-desc">Comprehensive calculator for single-phase and three-phase AC systems, power factor, apparent power, and impedance.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Single & 3-Phase</span>
+              <span class="tool-card-tag">1-Phase & 3-Phase</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/length-converter.html" class="tool-card reveal" data-category="circuits" data-title="length & pcb unit converter" data-desc="convert mils, inches, millimeters, microns, and pcb layout trace dimensions effortlessly." data-tag="metric / mils / awg" target="_blank" rel="noopener noreferrer" aria-label="Length & PCB Unit Converter — Convert mils, inches, millimeters, microns, and PCB layout trace dimensions effortlessly.">
+          <a href="/sites/length-converter.html" class="tool-card reveal" data-category="circuits" data-title="length & pcb unit converter" data-desc="convert between mil, mm, inch, oz copper thickness, pcb trace dimensions, and metric units." data-tag="mil / mm / inch / oz" target="_blank" rel="noopener noreferrer" aria-label="Length & PCB Unit Converter — Convert between mil, mm, inch, oz copper thickness, PCB trace dimensions, and metric units.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M495.9 166.1l-150-150c-21.5-21.5-56.3-21.5-77.8 0L16.1 268.1c-21.5 21.5-21.5 56.3 0 77.8l150 150c21.5 21.5 56.3 21.5 77.8 0L495.9 243.9c21.5-21.5 21.5-56.3 0-77.8zM218.4 461.4L68.4 311.4 125 254.8l28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L147.6 232.2l22.6-22.6 42.4 42.4c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L192.8 187l22.6-22.6 28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L238 141.8l22.6-22.6 42.4 42.4c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L283.2 96.6l22.6-22.6 28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L328.4 51.4l56.6 56.6-166.6 353.4z"/></svg></div>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/></svg></div>
               <span class="tool-card-badge">Circuits</span>
             </div>
             <h3 class="tool-card-title">Length & PCB Unit Converter</h3>
-            <p class="tool-card-desc">Convert mils, inches, millimeters, microns, and PCB layout trace dimensions effortlessly.</p>
+            <p class="tool-card-desc">Convert between mil, mm, inch, oz copper thickness, PCB trace dimensions, and metric units.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Metric / Mils / AWG</span>
+              <span class="tool-card-tag">mil / mm / inch / oz</span>
               <span class="tool-card-cta">Launch Converter <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/pcb-trace-width-calculator.html" class="tool-card reveal" data-category="power" data-title="pcb trace width calculator" data-desc="ipc-2221 industry standard trace width sizing for current, temperature rise, resistance and vias." data-tag="ipc-2221 standard" target="_blank" rel="noopener noreferrer" aria-label="PCB Trace Width Calculator — IPC-2221 industry standard trace width sizing for current, temperature rise, resistance and vias.">
-            <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M224 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H128C92.7 64 64 92.7 64 128v32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H64v64H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H64v32c0 35.3 28.7 64 64 64h32v32c0 17.7 14.3 32 32 32s32-14.3 32-32V448h64v32c0 17.7 14.3 32 32 32s32-14.3 32-32V448h32c35.3 0 64-28.7 64-64V352h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H448V224h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H448V128c0-35.3-28.7-64-64-64H352V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H224V32zM128 128H384V384H128V128z"/></svg></div>
-              <span class="tool-card-badge">Power & Solar</span>
             </div>
-            <h3 class="tool-card-title">PCB Trace Width Calculator</h3>
-            <p class="tool-card-desc">IPC-2221 industry standard trace width sizing for current, temperature rise, resistance and vias.</p>
-            <div class="tool-card-footer">
-              <span class="tool-card-tag">IPC-2221 Standard</span>
-              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+          </div>
+
+          <!-- Category: Power, Solar & RF (14) -->
+          <div class="tools-category-group" data-category="power" id="category-power">
+            <div class="tools-category-header reveal">
+              <div class="tools-category-info">
+                <div class="tools-category-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg>
+                </div>
+                <div>
+                  <h3 class="tools-category-title">Power, Solar & RF</h3>
+                  <p class="tools-category-desc">Photovoltaic array sizing, solar battery banks, inverter surge margins, PCB thermals, and RF conversions.</p>
+                </div>
+              </div>
+              <span class="tools-category-badge">14 Calculators</span>
             </div>
-          </a>
-          <a href="/sites/buck-boost-calculator.html" class="tool-card reveal" data-category="power" data-title="buck-boost converter calculator" data-desc="design dc-dc step-up and step-down converters with inductor ripple, duty cycle, and mosfet ratings." data-tag="smps dc-dc" target="_blank" rel="noopener noreferrer" aria-label="Buck-Boost Converter Calculator — Design DC-DC step-up and step-down converters with inductor ripple, duty cycle, and MOSFET ratings.">
+            <div class="tools-grid">
+          <a href="/sites/solar-system-sizing-calculator.html" class="tool-card reveal" data-category="power" data-title="solar system sizing calculator" data-desc="calculate required solar panels (wp), battery storage (ah), inverter wattage, and mppt charge controller sizing." data-tag="pv array & inverter" target="_blank" rel="noopener noreferrer" aria-label="Solar System Sizing Calculator — Calculate required solar panels (Wp), battery storage (Ah), inverter wattage, and MPPT charge controller sizing.">
             <div class="tool-card-head">
               <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
-              <span class="tool-card-badge">Power & Solar</span>
-            </div>
-            <h3 class="tool-card-title">Buck-Boost Converter Calculator</h3>
-            <p class="tool-card-desc">Design DC-DC step-up and step-down converters with inductor ripple, duty cycle, and MOSFET ratings.</p>
-            <div class="tool-card-footer">
-              <span class="tool-card-tag">SMPS DC-DC</span>
-              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-            </div>
-          </a>
-          <a href="/sites/duty-cycle-calculator.html" class="tool-card reveal" data-category="power" data-title="duty cycle calculator" data-desc="calculate duty cycle for periodic pulse waveforms, step-up boost, step-down buck, buck-boost, and ćuk converters." data-tag="pwm & switching" target="_blank" rel="noopener noreferrer" aria-label="Duty Cycle Calculator — Calculate Duty Cycle for periodic pulse waveforms, Step-Up Boost, Step-Down Buck, Buck-Boost, and Ćuk converters.">
-            <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM256 416c35.3 0 64-28.7 64-64c0-23.7-12.9-44.4-32-55.4V192c0-17.7-14.3-32-32-32s-32 14.3-32 32v104.6c-19.1 11-32 31.7-32 55.4c0 35.3 28.7 64 64 64z"/></svg></div>
-              <span class="tool-card-badge">Power & Solar</span>
-            </div>
-            <h3 class="tool-card-title">Duty Cycle Calculator</h3>
-            <p class="tool-card-desc">Calculate Duty Cycle for periodic pulse waveforms, Step-Up Boost, Step-Down Buck, Buck-Boost, and Ćuk converters.</p>
-            <div class="tool-card-footer">
-              <span class="tool-card-tag">PWM & Switching</span>
-              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-            </div>
-          </a>
-          <a href="/sites/solar-system-sizing-calculator.html" class="tool-card reveal" data-category="power" data-title="solar system sizing calculator" data-desc="calculate required solar panels (wp), battery storage (ah), inverter wattage, and mppt charge controller." data-tag="off-grid pv sizing" target="_blank" rel="noopener noreferrer" aria-label="Solar System Sizing Calculator — Calculate required solar panels (Wp), battery storage (Ah), inverter wattage, and MPPT charge controller.">
-            <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M361.5 32c9.5 0 17.9 5.8 21.2 14.6l128 352c4.4 12.1-1.7 25.5-13.8 29.9s-25.5-1.7-29.9-13.8L382 181.8l-98.8 141.2c-5.7 8.2-15 13-24.9 13s-19.2-4.9-24.9-13L134.6 181.8 50.9 414.8c-4.4 12.1-17.8 18.2-29.9 13.8s-18.2-17.8-13.8-29.9l128-352C138.6 37.8 147 32 156.5 32H361.5z"/></svg></div>
-              <span class="tool-card-badge">Power & Solar</span>
+              <span class="tool-card-badge">Solar & Power</span>
             </div>
             <h3 class="tool-card-title">Solar System Sizing Calculator</h3>
-            <p class="tool-card-desc">Calculate required solar panels (Wp), battery storage (Ah), inverter wattage, and MPPT charge controller.</p>
+            <p class="tool-card-desc">Calculate required solar panels (Wp), battery storage (Ah), inverter wattage, and MPPT charge controller sizing.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Off-Grid PV Sizing</span>
-              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+              <span class="tool-card-tag">PV Array & Inverter</span>
+              <span class="tool-card-cta">Launch Sizing Tool <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/solar-battery-series-parallel-calculator.html" class="tool-card reveal" data-category="power" data-title="solar battery wiring calculator" data-desc="calculate required solar battery capacity, series and parallel string wiring (ns × np), and total battery modules." data-tag="ns × np matrix" target="_blank" rel="noopener noreferrer" aria-label="Solar Battery Wiring Calculator — Calculate required solar battery capacity, series and parallel string wiring (Ns × Np), and total battery modules.">
-            <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 576 512" aria-hidden="true"><path d="M464 160c8.8 0 16 7.2 16 16V336c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16H464zM80 96C35.8 96 0 131.8 0 176V336c0 44.2 35.8 80 80 80H464c44.2 0 80-35.8 80-80V320c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32V176c0-44.2-35.8-80-80-80H80zm304 96H128v128h256V192z"/></svg></div>
-              <span class="tool-card-badge">Power & Solar</span>
-            </div>
-            <h3 class="tool-card-title">Solar Battery Wiring Calculator</h3>
-            <p class="tool-card-desc">Calculate required solar battery capacity, series and parallel string wiring (Ns × Np), and total battery modules.</p>
-            <div class="tool-card-footer">
-              <span class="tool-card-tag">Ns × Np Matrix</span>
-              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-            </div>
-          </a>
-          <a href="/sites/solar-inverter-sizing-calculator.html" class="tool-card reveal" data-category="power" data-title="solar inverter sizing calculator" data-desc="size continuous power (w), motor starting surge (kva/kw), and dc battery current for solar inverters with safety margins." data-tag="inverter & surge" target="_blank" rel="noopener noreferrer" aria-label="Solar Inverter Sizing Calculator — Size continuous power (W), motor starting surge (kVA/kW), and DC battery current for solar inverters with safety margins.">
+          <a href="/sites/solar-battery-series-parallel-calculator.html" class="tool-card reveal" data-category="power" data-title="solar battery wiring calculator" data-desc="calculate required solar battery capacity, series and parallel string wiring (ns x np), and total battery modules." data-tag="ns × np bank strings" target="_blank" rel="noopener noreferrer" aria-label="Solar Battery Wiring Calculator — Calculate required solar battery capacity, series and parallel string wiring (Ns x Np), and total battery modules.">
             <div class="tool-card-head">
               <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
-              <span class="tool-card-badge">Power & Solar</span>
+              <span class="tool-card-badge">Solar & Power</span>
+            </div>
+            <h3 class="tool-card-title">Solar Battery Wiring Calculator</h3>
+            <p class="tool-card-desc">Calculate required solar battery capacity, series and parallel string wiring (Ns x Np), and total battery modules.</p>
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">Ns × Np Bank Strings</span>
+              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+            </div>
+          </a>
+          <a href="/sites/solar-inverter-sizing-calculator.html" class="tool-card reveal" data-category="power" data-title="solar inverter sizing calculator" data-desc="size continuous power (w), motor starting surge (kva/kw), and dc battery current for solar inverters with safety margins." data-tag="surge & continuous w" target="_blank" rel="noopener noreferrer" aria-label="Solar Inverter Sizing Calculator — Size continuous power (W), motor starting surge (kVA/kW), and DC battery current for solar inverters with safety margins.">
+            <div class="tool-card-head">
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
+              <span class="tool-card-badge">Solar & Power</span>
             </div>
             <h3 class="tool-card-title">Solar Inverter Sizing Calculator</h3>
             <p class="tool-card-desc">Size continuous power (W), motor starting surge (kVA/kW), and DC battery current for solar inverters with safety margins.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Inverter & Surge</span>
-              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+              <span class="tool-card-tag">Surge & Continuous W</span>
+              <span class="tool-card-cta">Launch Sizing Tool <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/battery-solar-calculator.html" class="tool-card reveal" data-category="power" data-title="battery & solar sizing" data-desc="size solar pv panels (watts), solar charge controller (amps), and battery bank capacity (ah)." data-tag="solar pv sizing" target="_blank" rel="noopener noreferrer" aria-label="Battery & Solar Sizing — Size solar PV panels (Watts), solar charge controller (Amps), and battery bank capacity (Ah).">
+          <a href="/sites/battery-solar-calculator.html" class="tool-card reveal" data-category="power" data-title="battery & solar sizing" data-desc="off-grid solar system sizing: daily load kwh, battery autonomy days, and solar array peak power." data-tag="off-grid energy" target="_blank" rel="noopener noreferrer" aria-label="Battery & Solar Sizing — Off-grid solar system sizing: daily load kWh, battery autonomy days, and solar array peak power.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M361.5 32c9.5 0 17.9 5.8 21.2 14.6l128 352c4.4 12.1-1.7 25.5-13.8 29.9s-25.5-1.7-29.9-13.8L382 181.8l-98.8 141.2c-5.7 8.2-15 13-24.9 13s-19.2-4.9-24.9-13L134.6 181.8 50.9 414.8c-4.4 12.1-17.8 18.2-29.9 13.8s-18.2-17.8-13.8-29.9l128-352C138.6 37.8 147 32 156.5 32H361.5z"/></svg></div>
-              <span class="tool-card-badge">Power & Solar</span>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
+              <span class="tool-card-badge">Solar & Power</span>
             </div>
             <h3 class="tool-card-title">Battery & Solar Sizing</h3>
-            <p class="tool-card-desc">Size solar PV panels (Watts), solar charge controller (Amps), and battery bank capacity (Ah).</p>
+            <p class="tool-card-desc">Off-grid solar system sizing: daily load kWh, battery autonomy days, and solar array peak power.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Solar PV Sizing</span>
+              <span class="tool-card-tag">Off-Grid Energy</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/battery-capacity-runtime-calculator.html" class="tool-card reveal" data-category="power" data-title="battery capacity & runtime" data-desc="estimate battery operating hours from mah/wh consumption with peukert efficiency factor." data-tag="peukert runtime" target="_blank" rel="noopener noreferrer" aria-label="Battery Capacity & Runtime — Estimate battery operating hours from mAh/Wh consumption with Peukert efficiency factor.">
+          <a href="/sites/battery-capacity-calculator.html" class="tool-card reveal" data-category="power" data-title="battery capacity & runtime" data-desc="battery discharge duration, peukert’s exponent, c-rate, and state of charge (soc) estimation." data-tag="peukert runtime" target="_blank" rel="noopener noreferrer" aria-label="Battery Capacity & Runtime — Battery discharge duration, Peukert’s exponent, C-rate, and state of charge (SoC) estimation.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 576 512" aria-hidden="true"><path d="M464 160c8.8 0 16 7.2 16 16V336c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16H464zM80 96C35.8 96 0 131.8 0 176V336c0 44.2 35.8 80 80 80H464c44.2 0 80-35.8 80-80V320c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32V176c0-44.2-35.8-80-80-80H80zm304 96H128v128h256V192z"/></svg></div>
-              <span class="tool-card-badge">Power & Solar</span>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
+              <span class="tool-card-badge">Solar & Power</span>
             </div>
             <h3 class="tool-card-title">Battery Capacity & Runtime</h3>
-            <p class="tool-card-desc">Estimate battery operating hours from mAh/Wh consumption with Peukert efficiency factor.</p>
+            <p class="tool-card-desc">Battery discharge duration, Peukert’s exponent, C-rate, and state of charge (SoC) estimation.</p>
             <div class="tool-card-footer">
               <span class="tool-card-tag">Peukert Runtime</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/wire-size-voltage-drop-breaker-calculator.html" class="tool-card reveal" data-category="power" data-title="wire size & breaker calculator" data-desc="calculate conductor cross-section, voltage drop, and circuit breaker sizing per iec 60364 and nec standards." data-tag="iec & nec breaker" target="_blank" rel="noopener noreferrer" aria-label="Wire Size & Breaker Calculator — Calculate conductor cross-section, voltage drop, and circuit breaker sizing per IEC 60364 and NEC standards.">
+          <a href="/sites/pcb-trace-calculator.html" class="tool-card reveal" data-category="power" data-title="pcb trace width calculator" data-desc="calculate internal and external trace widths, current capacity, cross-sectional area, and thermal temperature rise." data-tag="ipc-2152 / 2221" target="_blank" rel="noopener noreferrer" aria-label="PCB Trace Width Calculator — Calculate internal and external trace widths, current capacity, cross-sectional area, and thermal temperature rise.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M495.9 166.1l-150-150c-21.5-21.5-56.3-21.5-77.8 0L16.1 268.1c-21.5 21.5-21.5 56.3 0 77.8l150 150c21.5 21.5 56.3 21.5 77.8 0L495.9 243.9c21.5-21.5 21.5-56.3 0-77.8zM218.4 461.4L68.4 311.4 125 254.8l28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L147.6 232.2l22.6-22.6 42.4 42.4c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L192.8 187l22.6-22.6 28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L238 141.8l22.6-22.6 42.4 42.4c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L283.2 96.6l22.6-22.6 28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L328.4 51.4l56.6 56.6-166.6 353.4z"/></svg></div>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
+              <span class="tool-card-badge">Power & PCB</span>
+            </div>
+            <h3 class="tool-card-title">PCB Trace Width Calculator</h3>
+            <p class="tool-card-desc">Calculate internal and external trace widths, current capacity, cross-sectional area, and thermal temperature rise.</p>
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">IPC-2152 / 2221</span>
+              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+            </div>
+          </a>
+          <a href="/sites/buck-boost-calculator.html" class="tool-card reveal" data-category="power" data-title="buck-boost converter calculator" data-desc="calculate inductor, capacitor, and ripple current values for dc-dc switch-mode buck and boost converters." data-tag="smps inductor & cap" target="_blank" rel="noopener noreferrer" aria-label="Buck-Boost Converter Calculator — Calculate inductor, capacitor, and ripple current values for DC-DC switch-mode buck and boost converters.">
+            <div class="tool-card-head">
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
+              <span class="tool-card-badge">Power Electronics</span>
+            </div>
+            <h3 class="tool-card-title">Buck-Boost Converter Calculator</h3>
+            <p class="tool-card-desc">Calculate inductor, capacitor, and ripple current values for DC-DC switch-mode buck and boost converters.</p>
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">SMPS Inductor & Cap</span>
+              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+            </div>
+          </a>
+          <a href="/sites/duty-cycle-calculator.html" class="tool-card reveal" data-category="power" data-title="duty cycle calculator" data-desc="calculate duty cycle for periodic pulse waveforms, step-up boost, step-down buck, buck-boost, and ćuk converters." data-tag="pwm & smps topologies" target="_blank" rel="noopener noreferrer" aria-label="Duty Cycle Calculator — Calculate duty cycle for periodic pulse waveforms, Step-Up Boost, Step-Down Buck, Buck-Boost, and Ćuk converters.">
+            <div class="tool-card-head">
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg></div>
+              <span class="tool-card-badge">Power Electronics</span>
+            </div>
+            <h3 class="tool-card-title">Duty Cycle Calculator</h3>
+            <p class="tool-card-desc">Calculate duty cycle for periodic pulse waveforms, Step-Up Boost, Step-Down Buck, Buck-Boost, and Ćuk converters.</p>
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">PWM & SMPS Topologies</span>
+              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+            </div>
+          </a>
+          <a href="/sites/wire-size-voltage-drop-breaker-calculator.html" class="tool-card reveal" data-category="power" data-title="wire size & breaker calculator" data-desc="calculate conductor cross-section, voltage drop, and circuit breaker sizing per iec 60364 and nec standards." data-tag="iec 60364 & nec" target="_blank" rel="noopener noreferrer" aria-label="Wire Size & Breaker Calculator — Calculate conductor cross-section, voltage drop, and circuit breaker sizing per IEC 60364 and NEC standards.">
+            <div class="tool-card-head">
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
               <span class="tool-card-badge">Power & Solar</span>
             </div>
             <h3 class="tool-card-title">Wire Size & Breaker Calculator</h3>
             <p class="tool-card-desc">Calculate conductor cross-section, voltage drop, and circuit breaker sizing per IEC 60364 and NEC standards.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">IEC & NEC Breaker</span>
-              <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+              <span class="tool-card-tag">IEC 60364 & NEC</span>
+              <span class="tool-card-cta">Launch Sizing Tool <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/wire-gauge-calculator.html" class="tool-card reveal" data-category="power" data-title="wire gauge (awg) calculator" data-desc="awg cable sizing, copper resistance per meter, voltage drop over distance, and ampacity limits." data-tag="awg & voltage drop" target="_blank" rel="noopener noreferrer" aria-label="Wire Gauge (AWG) Calculator — AWG cable sizing, copper resistance per meter, voltage drop over distance, and ampacity limits.">
+          <a href="/sites/wire-gauge-calculator.html" class="tool-card reveal" data-category="power" data-title="wire gauge (awg) calculator" data-desc="awg to diameter/cross-section conversion, resistance per meter/foot, and safe copper wire ampacity." data-tag="awg to mm²" target="_blank" rel="noopener noreferrer" aria-label="Wire Gauge (AWG) Calculator — AWG to diameter/cross-section conversion, resistance per meter/foot, and safe copper wire ampacity.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M495.9 166.1l-150-150c-21.5-21.5-56.3-21.5-77.8 0L16.1 268.1c-21.5 21.5-21.5 56.3 0 77.8l150 150c21.5 21.5 56.3 21.5 77.8 0L495.9 243.9c21.5-21.5 21.5-56.3 0-77.8zM218.4 461.4L68.4 311.4 125 254.8l28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L147.6 232.2l22.6-22.6 42.4 42.4c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L192.8 187l22.6-22.6 28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L238 141.8l22.6-22.6 42.4 42.4c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L283.2 96.6l22.6-22.6 28.3 28.3c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L328.4 51.4l56.6 56.6-166.6 353.4z"/></svg></div>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
               <span class="tool-card-badge">Power & Solar</span>
             </div>
             <h3 class="tool-card-title">Wire Gauge (AWG) Calculator</h3>
-            <p class="tool-card-desc">AWG cable sizing, copper resistance per meter, voltage drop over distance, and ampacity limits.</p>
+            <p class="tool-card-desc">AWG to diameter/cross-section conversion, resistance per meter/foot, and safe copper wire ampacity.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">AWG & Voltage Drop</span>
+              <span class="tool-card-tag">AWG to mm²</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/power-factor-calculator.html" class="tool-card reveal" data-category="power" data-title="power factor correction" data-desc="calculate active power (kw), reactive power (kvar), and capacitor bank needed to reach target pf." data-tag="kvar correction" target="_blank" rel="noopener noreferrer" aria-label="Power Factor Correction — Calculate active power (kW), reactive power (kVAR), and capacitor bank needed to reach target PF.">
+          <a href="/sites/power-factor-calculator.html" class="tool-card reveal" data-category="power" data-title="power factor correction" data-desc="target power factor correction, required capacitor bank kvar, reactive power, and current reduction." data-tag="kvar bank sizing" target="_blank" rel="noopener noreferrer" aria-label="Power Factor Correction — Target power factor correction, required capacitor bank kVAR, reactive power, and current reduction.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM256 416c35.3 0 64-28.7 64-64c0-23.7-12.9-44.4-32-55.4V192c0-17.7-14.3-32-32-32s-32 14.3-32 32v104.6c-19.1 11-32 31.7-32 55.4c0 35.3 28.7 64 64 64z"/></svg></div>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
               <span class="tool-card-badge">Power & Solar</span>
             </div>
             <h3 class="tool-card-title">Power Factor Correction</h3>
-            <p class="tool-card-desc">Calculate active power (kW), reactive power (kVAR), and capacitor bank needed to reach target PF.</p>
+            <p class="tool-card-desc">Target power factor correction, required capacitor bank kVAR, reactive power, and current reduction.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">kVAR Correction</span>
+              <span class="tool-card-tag">kVAR Bank Sizing</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/power-triangle-calculator.html" class="tool-card reveal" data-category="power" data-title="power triangle calculator" data-desc="visualize real (p), reactive (q), and apparent power (s) with phase angle theta and power factor." data-tag="p-q-s triangle" target="_blank" rel="noopener noreferrer" aria-label="Power Triangle Calculator — Visualize real (P), reactive (Q), and apparent power (S) with phase angle theta and power factor.">
+          <a href="/sites/power-triangle-calculator.html" class="tool-card reveal" data-category="power" data-title="power triangle calculator" data-desc="real (p), reactive (q), and apparent power (s) calculation, power factor, and ac phase angle." data-tag="kw, kva & kvar" target="_blank" rel="noopener noreferrer" aria-label="Power Triangle Calculator — Real (P), reactive (Q), and apparent power (S) calculation, power factor, and AC phase angle.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/></svg></div>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
               <span class="tool-card-badge">Power & Solar</span>
             </div>
             <h3 class="tool-card-title">Power Triangle Calculator</h3>
-            <p class="tool-card-desc">Visualize real (P), reactive (Q), and apparent power (S) with phase angle theta and power factor.</p>
+            <p class="tool-card-desc">Real (P), reactive (Q), and apparent power (S) calculation, power factor, and AC phase angle.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">P-Q-S Triangle</span>
+              <span class="tool-card-tag">kW, kVA & kVAR</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/transformer-turns-calculator.html" class="tool-card reveal" data-category="power" data-title="transformer turns ratio" data-desc="primary and secondary winding turns, step-up/down voltage, current ratios, and core area." data-tag="core & turns" target="_blank" rel="noopener noreferrer" aria-label="Transformer Turns Ratio — Primary and secondary winding turns, step-up/down voltage, current ratios, and core area.">
+          <a href="/sites/transformer-calculator.html" class="tool-card reveal" data-category="power" data-title="transformer turns ratio" data-desc="primary/secondary voltage, current, turns ratio, and impedance transformation for step-up/down transformers." data-tag="np/ns & impedance" target="_blank" rel="noopener noreferrer" aria-label="Transformer Turns Ratio — Primary/secondary voltage, current, turns ratio, and impedance transformation for step-up/down transformers.">
             <div class="tool-card-head">
               <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
               <span class="tool-card-badge">Power & Solar</span>
             </div>
             <h3 class="tool-card-title">Transformer Turns Ratio</h3>
-            <p class="tool-card-desc">Primary and secondary winding turns, step-up/down voltage, current ratios, and core area.</p>
+            <p class="tool-card-desc">Primary/secondary voltage, current, turns ratio, and impedance transformation for step-up/down transformers.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Core & Turns</span>
+              <span class="tool-card-tag">Np/Ns & Impedance</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/decibel-dbm-calculator.html" class="tool-card reveal" data-category="power" data-title="db / dbm & rf calculator" data-desc="power/voltage ratio to decibels (db), dbm to watts/mw conversion, and cascaded rf link budget." data-tag="rf & attenuation" target="_blank" rel="noopener noreferrer" aria-label="dB / dBm & RF Calculator — Power/voltage ratio to decibels (dB), dBm to Watts/mW conversion, and cascaded RF link budget.">
+          <a href="/sites/db-calculator.html" class="tool-card reveal" data-category="power" data-title="db / dbm & rf calculator" data-desc="power ratios in decibels, dbm to watts conversion, signal-to-noise ratio (snr), and rf link attenuation." data-tag="db, dbm, dbw & watts" target="_blank" rel="noopener noreferrer" aria-label="dB / dBm & RF Calculator — Power ratios in decibels, dBm to Watts conversion, signal-to-noise ratio (SNR), and RF link attenuation.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM256 416c35.3 0 64-28.7 64-64c0-23.7-12.9-44.4-32-55.4V192c0-17.7-14.3-32-32-32s-32 14.3-32 32v104.6c-19.1 11-32 31.7-32 55.4c0 35.3 28.7 64 64 64z"/></svg></div>
-              <span class="tool-card-badge">Power & Solar</span>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/></svg></div>
+              <span class="tool-card-badge">RF & Telecom</span>
             </div>
             <h3 class="tool-card-title">dB / dBm & RF Calculator</h3>
-            <p class="tool-card-desc">Power/voltage ratio to decibels (dB), dBm to Watts/mW conversion, and cascaded RF link budget.</p>
+            <p class="tool-card-desc">Power ratios in decibels, dBm to Watts conversion, signal-to-noise ratio (SNR), and RF link attenuation.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">RF & Attenuation</span>
+              <span class="tool-card-tag">dB, dBm, dBW & Watts</span>
               <span class="tool-card-cta">Launch Calculator <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/mastering-linux-commands.html" class="tool-card reveal" data-category="productivity" data-title="mastering linux commands" data-desc="interactive reference guide to terminal commands, networking utilities, package managers, and bash." data-tag="linux / cli" target="_blank" rel="noopener noreferrer" aria-label="Mastering Linux Commands — Interactive reference guide to terminal commands, networking utilities, package managers, and bash.">
-            <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM153 239c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-64 64c-9.4 9.4-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L105.9 256 153 239zm151 113c0-13.3-10.7-24-24-24H200c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24z"/></svg></div>
-              <span class="tool-card-badge">Productivity & AI</span>
             </div>
-            <h3 class="tool-card-title">Mastering Linux Commands</h3>
-            <p class="tool-card-desc">Interactive reference guide to terminal commands, networking utilities, package managers, and bash.</p>
-            <div class="tool-card-footer">
-              <span class="tool-card-tag">Linux / CLI</span>
-              <span class="tool-card-cta">Open Guide <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+          </div>
+
+          <!-- Category: Productivity & AI (4) -->
+          <div class="tools-category-group" data-category="productivity" id="category-productivity">
+            <div class="tools-category-header reveal">
+              <div class="tools-category-info">
+                <div class="tools-category-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 512 512" aria-hidden="true"><path d="M371.8 1.5c-4.2-2-9.1-2-13.3 0L247.9 54.4c-4.3 2.1-7.1 6.5-7.1 11.2c0 4.7 2.8 9.1 7.1 11.2l110.6 52.9c4.2 2 9.1 2 13.3 0l110.6-52.9c4.3-2.1 7.1-6.5 7.1-11.2c0-4.7-2.8-9.1-7.1-11.2L371.8 1.5zM207.9 146.4c-4.2-2-9.1-2-13.3 0L84 199.3c-4.3 2.1-7.1 6.5-7.1 11.2c0 4.7 2.8 9.1 7.1 11.2l110.6 52.9c4.2 2 9.1 2 13.3 0l110.6-52.9c4.3-2.1 7.1-6.5 7.1-11.2c0-4.7-2.8-9.1-7.1-11.2l-110.6-52.9zM7.1 343.3C2.8 345.4 0 349.8 0 354.5c0 4.7 2.8 9.1 7.1 11.2l110.6 52.9c4.2 2 9.1 2 13.3 0l110.6-52.9c4.3-2.1 7.1-6.5 7.1-11.2c0-4.7-2.8-9.1-7.1-11.2L131 290.4c-4.2-2-9.1-2-13.3 0L7.1 343.3z"/></svg>
+                </div>
+                <div>
+                  <h3 class="tools-category-title">Productivity & AI</h3>
+                  <p class="tools-category-desc">Curated AI directory, Linux command cheat sheet, daily task management, and health schedules.</p>
+                </div>
+              </div>
+              <span class="tools-category-badge">4 Tools</span>
             </div>
-          </a>
-          <a href="/sites/ai-sites-list.html" class="tool-card reveal" data-category="productivity" data-title="ai tools & models directory" data-desc="curated collection of artificial intelligence tools, prompt workflows, llms, and api integrations." data-tag="ai / llm directory" target="_blank" rel="noopener noreferrer" aria-label="AI Tools & Models Directory — Curated collection of artificial intelligence tools, prompt workflows, LLMs, and API integrations.">
+            <div class="tools-grid">
+          <a href="/sites/ai-sites-list.html" class="tool-card reveal" data-category="productivity" data-title="ai tools & models directory" data-desc="curated directory of top ai platforms, llms, image/video generators, and coding assistants." data-tag="llms & ai stack" target="_blank" rel="noopener noreferrer" aria-label="AI Tools & Models Directory — Curated directory of top AI platforms, LLMs, image/video generators, and coding assistants.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 640 512" aria-hidden="true"><path d="M320 0c17.7 0 32 14.3 32 32V96H480c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H160c-35.3 0-64-28.7-64-64V160c0-35.3 28.7-64 64-64H288V32c0-17.7 14.3-32 32-32zM208 384c-17.7 0-32 14.3-32 32s14.3 32 32 32h224c17.7 0 32-14.3 32-32s-14.3-32-32-32H208zm-16-160a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm256 0a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/></svg></div>
-              <span class="tool-card-badge">Productivity & AI</span>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M371.8 1.5c-4.2-2-9.1-2-13.3 0L247.9 54.4c-4.3 2.1-7.1 6.5-7.1 11.2c0 4.7 2.8 9.1 7.1 11.2l110.6 52.9c4.2 2 9.1 2 13.3 0l110.6-52.9c4.3-2.1 7.1-6.5 7.1-11.2c0-4.7-2.8-9.1-7.1-11.2L371.8 1.5zM207.9 146.4c-4.2-2-9.1-2-13.3 0L84 199.3c-4.3 2.1-7.1 6.5-7.1 11.2c0 4.7 2.8 9.1 7.1 11.2l110.6 52.9c4.2 2 9.1 2 13.3 0l110.6-52.9c4.3-2.1 7.1-6.5 7.1-11.2c0-4.7-2.8-9.1-7.1-11.2l-110.6-52.9zM7.1 343.3C2.8 345.4 0 349.8 0 354.5c0 4.7 2.8 9.1 7.1 11.2l110.6 52.9c4.2 2 9.1 2 13.3 0l110.6-52.9c4.3-2.1 7.1-6.5 7.1-11.2c0-4.7-2.8-9.1-7.1-11.2L131 290.4c-4.2-2-9.1-2-13.3 0L7.1 343.3z"/></svg></div>
+              <span class="tool-card-badge">Directory</span>
             </div>
             <h3 class="tool-card-title">AI Tools & Models Directory</h3>
-            <p class="tool-card-desc">Curated collection of artificial intelligence tools, prompt workflows, LLMs, and API integrations.</p>
+            <p class="tool-card-desc">Curated directory of top AI platforms, LLMs, image/video generators, and coding assistants.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">AI / LLM Directory</span>
-              <span class="tool-card-cta">Explore Tools <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+              <span class="tool-card-tag">LLMs & AI Stack</span>
+              <span class="tool-card-cta">Explore Directory <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/to-do-list.html" class="tool-card reveal" data-category="productivity" data-title="to-do list & task manager" data-desc="productive browser-based task organizer with priority tags, categories, and local storage autosave." data-tag="productivity" target="_blank" rel="noopener noreferrer" aria-label="To-Do List & Task Manager — Productive browser-based task organizer with priority tags, categories, and local storage autosave.">
+          <a href="/sites/linux-commands.html" class="tool-card reveal" data-category="productivity" data-title="mastering linux commands" data-desc="comprehensive terminal guide covering navigation, package management, permissions, and bash syntax." data-tag="cheat sheet" target="_blank" rel="noopener noreferrer" aria-label="Mastering Linux Commands — Comprehensive terminal guide covering navigation, package management, permissions, and bash syntax.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L9.4 105.4c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l20.4 20.4 54.5-60.6c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L9.4 265.4c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l20.4 20.4 54.5-60.6c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L9.4 425.4c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l20.4 20.4 54.5-60.6c8.9-9.9 24-10.7 33.9-1.8zM240 96h240c13.3 0 24 10.7 24 24s-10.7 24-24 24H240c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 160h240c13.3 0 24 10.7 24 24s-10.7 24-24 24H240c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 160h240c13.3 0 24 10.7 24 24s-10.7 24-24 24H240c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/></svg></div>
-              <span class="tool-card-badge">Productivity & AI</span>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/></svg></div>
+              <span class="tool-card-badge">Productivity</span>
+            </div>
+            <h3 class="tool-card-title">Mastering Linux Commands</h3>
+            <p class="tool-card-desc">Comprehensive terminal guide covering navigation, package management, permissions, and bash syntax.</p>
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">Cheat Sheet</span>
+              <span class="tool-card-cta">Open Terminal Guide <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+            </div>
+          </a>
+          <a href="/sites/todo-list.html" class="tool-card reveal" data-category="productivity" data-title="to-do list & task manager" data-desc="clean task organizer with local persistence, priority tagging, categorization, and progress tracking." data-tag="local storage" target="_blank" rel="noopener noreferrer" aria-label="To-Do List & Task Manager — Clean task organizer with local persistence, priority tagging, categorization, and progress tracking.">
+            <div class="tool-card-head">
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm-16 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 320a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 416a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg></div>
+              <span class="tool-card-badge">Productivity</span>
             </div>
             <h3 class="tool-card-title">To-Do List & Task Manager</h3>
-            <p class="tool-card-desc">Productive browser-based task organizer with priority tags, categories, and local storage autosave.</p>
+            <p class="tool-card-desc">Clean task organizer with local persistence, priority tagging, categorization, and progress tracking.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Productivity</span>
-              <span class="tool-card-cta">Open App <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+              <span class="tool-card-tag">Local Storage</span>
+              <span class="tool-card-cta">Open Task Manager <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/medication-reminder.html" class="tool-card reveal" data-category="productivity" data-title="medication reminder app" data-desc="schedule prescription doses, set recurring daily intervals, and monitor intake with alerts." data-tag="health & alerts" target="_blank" rel="noopener noreferrer" aria-label="Medication Reminder App — Schedule prescription doses, set recurring daily intervals, and monitor intake with alerts.">
+          <a href="/sites/medication-reminder.html" class="tool-card reveal" data-category="productivity" data-title="medication reminder app" data-desc="dosage tracking, recurring schedule alarms, audio notifications, and adherence logging." data-tag="health schedule" target="_blank" rel="noopener noreferrer" aria-label="Medication Reminder App — Dosage tracking, recurring schedule alarms, audio notifications, and adherence logging.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M224 32c-35.3 0-64 28.7-64 64V224h128V96c0-35.3-28.7-64-64-64zm96 224V384c0 35.3-28.7 64-64 64s-64-28.7-64-64V256H320zM224 480c53 0 96-43 96-96V256h32c35.3 0 64-28.7 64-64s-28.7-64-64-64H320V96c0-53-43-96-96-96s-96 43-96 96v32H96c-35.3 0-64 28.7-64 64s28.7 64 64 64h32v128c0 53 43 96 96 96z"/></svg></div>
-              <span class="tool-card-badge">Productivity & AI</span>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg></div>
+              <span class="tool-card-badge">Productivity</span>
             </div>
             <h3 class="tool-card-title">Medication Reminder App</h3>
-            <p class="tool-card-desc">Schedule prescription doses, set recurring daily intervals, and monitor intake with alerts.</p>
+            <p class="tool-card-desc">Dosage tracking, recurring schedule alarms, audio notifications, and adherence logging.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Health & Alerts</span>
-              <span class="tool-card-cta">Open App <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+              <span class="tool-card-tag">Health Schedule</span>
+              <span class="tool-card-cta">Open Reminder App <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
+            </div>
+          </div>
+
+          <!-- Category: Simulations & Games (3) -->
+          <div class="tools-category-group" data-category="games" id="category-games">
+            <div class="tools-category-header reveal">
+              <div class="tools-category-info">
+                <div class="tools-category-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 640 512" aria-hidden="true"><path d="M192 64C86 64 0 150 0 256S86 448 192 448c56.3 0 106.8-24.3 141.9-63.1c11.9-13.1 30.2-20.9 49.3-20.9h60.8c19.1 0 37.4 7.8 49.3 20.9C527.2 423.7 577.7 448 634 448c106 0 192-86 192-192S740 64 634 64c-56.3 0-106.8 24.3-141.9 63.1c-11.9 13.1-30.2 20.9-49.3 20.9H382.1c-19.1 0-37.4-7.8-49.3-20.9C298.8 88.3 248.3 64 192 64zM160 192c0-8.8 7.2-16 16-16h32v-32c0-8.8 7.2-16 16-16s16 7.2 16 16v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v32c0 8.8-7.2 16-16 16s-16-7.2-16-16v-32h-32c-8.8 0-16-7.2-16-16zm320 0a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm48 48a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm-48 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm-48-48a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></svg>
+                </div>
+                <div>
+                  <h3 class="tools-category-title">Simulations & Games</h3>
+                  <p class="tools-category-desc">Interactive 3D vehicle physics simulation, circuit racer, and classic offline obstacle runner.</p>
+                </div>
+              </div>
+              <span class="tools-category-badge">3 Apps</span>
+            </div>
+            <div class="tools-grid">
           <a href="/sites/3d-car-game.html" class="tool-card reveal" data-category="games" data-title="3d car drive simulator" data-desc="interactive 3d webgl physics-based driving simulator with vehicle dynamics and camera controls." data-tag="webgl 3d" target="_blank" rel="noopener noreferrer" aria-label="3D Car Drive Simulator — Interactive 3D WebGL physics-based driving simulator with vehicle dynamics and camera controls.">
             <div class="tool-card-head">
               <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L0 288v160c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V416h256v32c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V288l-32-160zM96 352a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm256 0a48 48 0 1 1 96 0 48 48 0 1 1 -96 0z"/></svg></div>
-              <span class="tool-card-badge">Simulations</span>
+              <span class="tool-card-badge">Simulation</span>
             </div>
             <h3 class="tool-card-title">3D Car Drive Simulator</h3>
             <p class="tool-card-desc">Interactive 3D WebGL physics-based driving simulator with vehicle dynamics and camera controls.</p>
@@ -708,165 +777,185 @@
               <span class="tool-card-cta">Play Simulation <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/dino-game.html" class="tool-card reveal" data-category="games" data-title="classic dino runner" data-desc="the beloved offline obstacle jumping game built in html5 canvas with high score tracking." data-tag="offline canvas" target="_blank" rel="noopener noreferrer" aria-label="Classic Dino Runner — The beloved offline obstacle jumping game built in HTML5 canvas with high score tracking.">
+          <a href="/sites/circuit-race-game.html" class="tool-card reveal" data-category="games" data-title="circuit race game" data-desc="retro electronic-themed top-down racing game on circuit board tracks with collision physics and lap timers." data-tag="canvas 2d" target="_blank" rel="noopener noreferrer" aria-label="Circuit Race Game — Retro electronic-themed top-down racing game on circuit board tracks with collision physics and lap timers.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 640 512" aria-hidden="true"><path d="M192 64C86 64 0 150 0 256S86 448 192 448c30.2 0 58.7-7 84-19.4L320 400l44 28.6c25.3 12.4 53.8 19.4 84 19.4 106 0 192-86 192-192S554 64 448 64c-30.2 0-58.7 7-84 19.4L320 112 276 83.4C250.7 71 222.2 64 192 64zM160 216v-32c0-13.3 10.7-24 24-24s24 10.7 24 24v32h32c13.3 0 24 10.7 24 24s-10.7 24-24 24h-32v32c0 13.3-10.7 24-24 24s-24-10.7-24-24v-32h-32c-13.3 0-24-10.7-24-24s10.7-24 24-24h32zm288 48a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm48-64a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm-96 0a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm48 64a24 24 0 1 1 0-48 24 24 0 1 1 0 48z"/></svg></div>
-              <span class="tool-card-badge">Simulations</span>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 640 512" aria-hidden="true"><path d="M192 64C86 64 0 150 0 256S86 448 192 448c56.3 0 106.8-24.3 141.9-63.1c11.9-13.1 30.2-20.9 49.3-20.9h60.8c19.1 0 37.4 7.8 49.3 20.9C527.2 423.7 577.7 448 634 448c106 0 192-86 192-192S740 64 634 64c-56.3 0-106.8 24.3-141.9 63.1c-11.9 13.1-30.2 20.9-49.3 20.9H382.1c-19.1 0-37.4-7.8-49.3-20.9C298.8 88.3 248.3 64 192 64z"/></svg></div>
+              <span class="tool-card-badge">Arcade Game</span>
+            </div>
+            <h3 class="tool-card-title">Circuit Race Game</h3>
+            <p class="tool-card-desc">Retro electronic-themed top-down racing game on circuit board tracks with collision physics and lap timers.</p>
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">Canvas 2D</span>
+              <span class="tool-card-cta">Start Race <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+            </div>
+          </a>
+          <a href="/sites/dino-game.html" class="tool-card reveal" data-category="games" data-title="classic dino runner" data-desc="fast-paced canvas obstacle jumping game inspired by the classic offline browser runner." data-tag="offline canvas" target="_blank" rel="noopener noreferrer" aria-label="Classic Dino Runner — Fast-paced canvas obstacle jumping game inspired by the classic offline browser runner.">
+            <div class="tool-card-head">
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 640 512" aria-hidden="true"><path d="M192 64C86 64 0 150 0 256S86 448 192 448c56.3 0 106.8-24.3 141.9-63.1c11.9-13.1 30.2-20.9 49.3-20.9h60.8c19.1 0 37.4 7.8 49.3 20.9C527.2 423.7 577.7 448 634 448c106 0 192-86 192-192S740 64 634 64c-56.3 0-106.8 24.3-141.9 63.1c-11.9 13.1-30.2 20.9-49.3 20.9H382.1c-19.1 0-37.4-7.8-49.3-20.9C298.8 88.3 248.3 64 192 64z"/></svg></div>
+              <span class="tool-card-badge">Arcade Game</span>
             </div>
             <h3 class="tool-card-title">Classic Dino Runner</h3>
-            <p class="tool-card-desc">The beloved offline obstacle jumping game built in HTML5 canvas with high score tracking.</p>
+            <p class="tool-card-desc">Fast-paced canvas obstacle jumping game inspired by the classic offline browser runner.</p>
             <div class="tool-card-footer">
               <span class="tool-card-tag">Offline Canvas</span>
               <span class="tool-card-cta">Play Game <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>
-          <a href="/sites/race-game.html" class="tool-card reveal" data-category="games" data-title="circuit race game" data-desc="top-down retro arcade racer with challenging tracks, responsive controls, and lap timers." data-tag="arcade racing" target="_blank" rel="noopener noreferrer" aria-label="Circuit Race Game — Top-down retro arcade racer with challenging tracks, responsive controls, and lap timers.">
-            <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 640 512" aria-hidden="true"><path d="M192 64C86 64 0 150 0 256S86 448 192 448c30.2 0 58.7-7 84-19.4L320 400l44 28.6c25.3 12.4 53.8 19.4 84 19.4 106 0 192-86 192-192S554 64 448 64c-30.2 0-58.7 7-84 19.4L320 112 276 83.4C250.7 71 222.2 64 192 64zM160 216v-32c0-13.3 10.7-24 24-24s24 10.7 24 24v32h32c13.3 0 24 10.7 24 24s-10.7 24-24 24h-32v32c0 13.3-10.7 24-24 24s-24-10.7-24-24v-32h-32c-13.3 0-24-10.7-24-24s10.7-24 24-24h32zm288 48a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm48-64a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm-96 0a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm48 64a24 24 0 1 1 0-48 24 24 0 1 1 0 48z"/></svg></div>
-              <span class="tool-card-badge">Simulations</span>
             </div>
-            <h3 class="tool-card-title">Circuit Race Game</h3>
-            <p class="tool-card-desc">Top-down retro arcade racer with challenging tracks, responsive controls, and lap timers.</p>
-            <div class="tool-card-footer">
-              <span class="tool-card-tag">Arcade Racing</span>
-              <span class="tool-card-cta">Play Game <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-            </div>
-          </a>
-          <a href="/tools/M.T.A.%20Cleaner%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. cleaner tool" data-desc="windows system cleanup utility that purges temp files, caches, and optimizes disk performance." data-tag="windows utility" download aria-label="M.T.A. Cleaner Tool — Windows system cleanup utility that purges temp files, caches, and optimizes disk performance.">
-            <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M380.7 75.3c9.4-9.4 24.6-9.4 33.9 0l22.1 22.1c9.4 9.4 9.4 24.6 0 33.9L242.4 325.6l-56-56L380.7 75.3zM151.7 304.3l56 56-94.6 94.6c-18.7 18.7-49.1 18.7-67.9 0l-22.1-22.1c-18.7-18.7-18.7-49.1 0-67.9l94.6-94.6 34 34z"/></svg></div>
-              <span class="tool-card-badge">PC Utility</span>
-            </div>
-            <h3 class="tool-card-title">M.T.A. Cleaner Tool</h3>
-            <p class="tool-card-desc">Windows system cleanup utility that purges temp files, caches, and optimizes disk performance.</p>
-            <div class="tool-card-footer">
-              <span class="tool-card-tag">Windows Utility</span>
-              <div class="tool-card-cta-group">
-                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-                <a href="/tools/M.T.A.%20Cleaner%20Tool.rar" class="tool-card-rar-link" download title="Download M.T.A. Cleaner Tool as RAR" onclick="event.stopPropagation();">RAR</a>
+          </div>
+
+          <!-- Category: PC & Windows Utilities (9) -->
+          <div class="tools-category-group" data-category="windows" id="category-windows">
+            <div class="tools-category-header reveal">
+              <div class="tools-category-info">
+                <div class="tools-category-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8V446.3zM448 32L203.8 65.7v179.9H448V32z"/></svg>
+                </div>
+                <div>
+                  <h3 class="tools-category-title">PC & Windows Utilities</h3>
+                  <p class="tools-category-desc">Lightweight desktop optimization tools, system repair, cache cleaner, and network diagnostic utilities.</p>
+                </div>
               </div>
+              <span class="tools-category-badge">9 Utilities</span>
             </div>
-          </a>
-          <a href="/tools/M.T.A.%20%20repair%20%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. repair tool" data-desc="automated dism and sfc system repair tool to resolve corrupted windows system files and errors." data-tag="system repair" download aria-label="M.T.A. repair Tool — Automated DISM and SFC system repair tool to resolve corrupted Windows system files and errors.">
+            <div class="tools-grid">
+          <a href="/tools/M.T.A.%20UltimatePerformance%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. ultimateperformance" data-desc="unlock windows ultimate performance power plan for zero-latency cpu scaling and maximum responsiveness." data-tag="zip & rar (.exe)" download aria-label="M.T.A. UltimatePerformance — Unlock Windows Ultimate Performance power plan for zero-latency CPU scaling and maximum responsiveness.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M78.6 5c-9.5-7.4-23-6.1-31 3L8.8 53.6c-8 9.2-7.5 22.8 1.1 31.4l91.7 91.7c8.6 8.6 22.2 9.1 31.4 1.1l45.6-38.8c9.1-7.9 10.4-21.5 3-31L89.9 17.3c-2.8-3.6-6.8-9.4-11.3-12.3zM255.4 160.7L385.6 30.5c12.5-12.5 32.8-12.5 45.3 0l50.6 50.6c12.5 12.5 12.5 32.8 0 45.3L351.3 256.6 255.4 160.7zM192.4 223.7l95.9 95.9-195 195c-12.5 12.5-32.8 12.5-45.3 0L3.4 464c-12.5-12.5-12.5-32.8 0-45.3l189-195z"/></svg></div>
-              <span class="tool-card-badge">PC Utility</span>
-            </div>
-            <h3 class="tool-card-title">M.T.A. repair Tool</h3>
-            <p class="tool-card-desc">Automated DISM and SFC system repair tool to resolve corrupted Windows system files and errors.</p>
-            <div class="tool-card-footer">
-              <span class="tool-card-tag">System Repair</span>
-              <div class="tool-card-cta-group">
-                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-                <a href="/tools/M.T.A.%20%20repair%20%20Tool.rar" class="tool-card-rar-link" download title="Download M.T.A. repair Tool as RAR" onclick="event.stopPropagation();">RAR</a>
-              </div>
-            </div>
-          </a>
-          <a href="/tools/M.T.A.%20Tweaking%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. tweaking tool" data-desc="windows performance tweaker to streamline background processes, reduce input lag, and boost response." data-tag="performance tweak" download aria-label="M.T.A. Tweaking Tool — Windows performance tweaker to streamline background processes, reduce input lag, and boost response.">
-            <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M0 416c0-17.7 14.3-32 32-32l54.7 0c12.3-28.3 40.5-48 73.3-48s61 19.7 73.3 48L480 384c17.7 0 32 14.3 32 32s-14.3 32-32 32l-246.7 0c-12.3 28.3-40.5 48-73.3 48s-61-19.7-73.3-48L32 448c-17.7 0-32-14.3-32-32zm192 0a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM320 256c0-17.7 14.3-32 32-32l54.7 0c12.3-28.3 40.5-48 73.3-48s61 19.7 73.3 48l18.7 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-18.7 0c-12.3 28.3-40.5 48-73.3 48s-61-19.7-73.3-48L352 288c-17.7 0-32-14.3-32-32zm160 0a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM0 96C0 78.3 14.3 64 32 64l182.7 0c12.3-28.3 40.5-48 73.3-48s61 19.7 73.3 48L480 64c17.7 0 32 14.3 32 32s-14.3 32-32 32l-118.7 0c-12.3 28.3-40.5 48-73.3 48s-61-19.7-73.3-48L32 128C14.3 128 0 113.7 0 96zM320 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg></div>
-              <span class="tool-card-badge">PC Utility</span>
-            </div>
-            <h3 class="tool-card-title">M.T.A. Tweaking Tool</h3>
-            <p class="tool-card-desc">Windows performance tweaker to streamline background processes, reduce input lag, and boost response.</p>
-            <div class="tool-card-footer">
-              <span class="tool-card-tag">Performance Tweak</span>
-              <div class="tool-card-cta-group">
-                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-                <a href="/tools/M.T.A.%20Tweaking%20Tool.rar" class="tool-card-rar-link" download title="Download M.T.A. Tweaking Tool as RAR" onclick="event.stopPropagation();">RAR</a>
-              </div>
-            </div>
-          </a>
-          <a href="/tools/M.T.A.%20UltimatePerformance%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. ultimateperformance" data-desc="enables windows ultimate performance power plan, unparks cpu cores, and minimizes throttle." data-tag="power scheme" download aria-label="M.T.A. UltimatePerformance — Enables Windows Ultimate Performance power plan, unparks CPU cores, and minimizes throttle.">
-            <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/></svg></div>
-              <span class="tool-card-badge">PC Utility</span>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8V446.3zM448 32L203.8 65.7v179.9H448V32z"/></svg></div>
+              <span class="tool-card-badge">Windows Tool</span>
             </div>
             <h3 class="tool-card-title">M.T.A. UltimatePerformance</h3>
-            <p class="tool-card-desc">Enables Windows Ultimate Performance power plan, unparks CPU cores, and minimizes throttle.</p>
+            <p class="tool-card-desc">Unlock Windows Ultimate Performance power plan for zero-latency CPU scaling and maximum responsiveness.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Power Scheme</span>
+              <span class="tool-card-tag">ZIP & RAR (.exe)</span>
               <div class="tool-card-cta-group">
-                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-                <a href="/tools/M.T.A.%20UltimatePerformance%20Tool.rar" class="tool-card-rar-link" download title="Download M.T.A. UltimatePerformance as RAR" onclick="event.stopPropagation();">RAR</a>
+                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+                <a href="/tools/M.T.A.%20UltimatePerformance%20Tool.rar" class="tool-card-rar-link" download title="Download RAR archive">.RAR</a>
               </div>
             </div>
           </a>
-          <a href="/tools/M.T.A.%20Win11%20Defender%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. win11 defender tool" data-desc="security and defender control utility for rapid exclusion management and diagnostic reporting." data-tag="security assistant" download aria-label="M.T.A. Win11 Defender Tool — Security and Defender control utility for rapid exclusion management and diagnostic reporting.">
+          <a href="/tools/M.T.A.%20Tweaking%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. tweaking tool" data-desc="deep os optimization tool to disable telemetry, bloatware services, and enhance gaming performance." data-tag="zip & rar (.exe)" download aria-label="M.T.A. Tweaking Tool — Deep OS optimization tool to disable telemetry, bloatware services, and enhance gaming performance.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0zm0 66.8V434.8c130.6-64.8 165.6-209.6 168-294.8L256 66.8z"/></svg></div>
-              <span class="tool-card-badge">PC Utility</span>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8V446.3zM448 32L203.8 65.7v179.9H448V32z"/></svg></div>
+              <span class="tool-card-badge">Windows Tool</span>
+            </div>
+            <h3 class="tool-card-title">M.T.A. Tweaking Tool</h3>
+            <p class="tool-card-desc">Deep OS optimization tool to disable telemetry, bloatware services, and enhance gaming performance.</p>
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">ZIP & RAR (.exe)</span>
+              <div class="tool-card-cta-group">
+                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+                <a href="/tools/M.T.A.%20Tweaking%20Tool.rar" class="tool-card-rar-link" download title="Download RAR archive">.RAR</a>
+              </div>
+            </div>
+          </a>
+          <a href="/tools/M.T.A.%20Cleaner%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. cleaner tool" data-desc="comprehensive junk cleaner: temporary files, system caches, browser caches, and windows log cleanup." data-tag="zip & rar (.exe)" download aria-label="M.T.A. Cleaner Tool — Comprehensive junk cleaner: temporary files, system caches, browser caches, and Windows log cleanup.">
+            <div class="tool-card-head">
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8V446.3zM448 32L203.8 65.7v179.9H448V32z"/></svg></div>
+              <span class="tool-card-badge">Windows Tool</span>
+            </div>
+            <h3 class="tool-card-title">M.T.A. Cleaner Tool</h3>
+            <p class="tool-card-desc">Comprehensive junk cleaner: temporary files, system caches, browser caches, and Windows log cleanup.</p>
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">ZIP & RAR (.exe)</span>
+              <div class="tool-card-cta-group">
+                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+                <a href="/tools/M.T.A.%20Cleaner%20Tool.rar" class="tool-card-rar-link" download title="Download RAR archive">.RAR</a>
+              </div>
+            </div>
+          </a>
+          <a href="/tools/M.T.A.%20%20repair%20%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. repair tool" data-desc="automated windows system repair utility utilizing sfc, dism, and component store integrity verification." data-tag="zip & rar (.exe)" download aria-label="M.T.A. repair Tool — Automated Windows system repair utility utilizing SFC, DISM, and component store integrity verification.">
+            <div class="tool-card-head">
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8V446.3zM448 32L203.8 65.7v179.9H448V32z"/></svg></div>
+              <span class="tool-card-badge">Windows Tool</span>
+            </div>
+            <h3 class="tool-card-title">M.T.A. repair Tool</h3>
+            <p class="tool-card-desc">Automated Windows system repair utility utilizing SFC, DISM, and component store integrity verification.</p>
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">ZIP & RAR (.exe)</span>
+              <div class="tool-card-cta-group">
+                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+                <a href="/tools/M.T.A.%20%20repair%20%20Tool.rar" class="tool-card-rar-link" download title="Download RAR archive">.RAR</a>
+              </div>
+            </div>
+          </a>
+          <a href="/tools/M.T.A.%20Win11%20Defender%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. win11 defender tool" data-desc="windows defender manager and security configuration utility for windows 11 and 10." data-tag="zip & rar (.exe)" download aria-label="M.T.A. Win11 Defender Tool — Windows Defender manager and security configuration utility for Windows 11 and 10.">
+            <div class="tool-card-head">
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8V446.3zM448 32L203.8 65.7v179.9H448V32z"/></svg></div>
+              <span class="tool-card-badge">Windows Tool</span>
             </div>
             <h3 class="tool-card-title">M.T.A. Win11 Defender Tool</h3>
-            <p class="tool-card-desc">Security and Defender control utility for rapid exclusion management and diagnostic reporting.</p>
+            <p class="tool-card-desc">Windows Defender manager and security configuration utility for Windows 11 and 10.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Security Assistant</span>
+              <span class="tool-card-tag">ZIP & RAR (.exe)</span>
               <div class="tool-card-cta-group">
-                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-                <a href="/tools/M.T.A.%20Win11%20Defender%20Tool.rar" class="tool-card-rar-link" download title="Download M.T.A. Win11 Defender Tool as RAR" onclick="event.stopPropagation();">RAR</a>
+                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+                <a href="/tools/M.T.A.%20Win11%20Defender%20Tool.rar" class="tool-card-rar-link" download title="Download RAR archive">.RAR</a>
               </div>
             </div>
           </a>
-          <a href="/tools/M.T.A.%20PCInfo%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. pcinfo tool" data-desc="deep diagnostic batch script reporting motherboard, cpu, ram, gpu, and bios hardware specs." data-tag="hardware specs" download aria-label="M.T.A. PCInfo Tool — Deep diagnostic batch script reporting motherboard, CPU, RAM, GPU, and BIOS hardware specs.">
+          <a href="/tools/M.T.A.%20PCInfo%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. pcinfo tool" data-desc="detailed hardware specs, cpu/gpu temperatures, ram frequency, disk health, and bios version info." data-tag="zip & rar (.exe)" download aria-label="M.T.A. PCInfo Tool — Detailed hardware specs, CPU/GPU temperatures, RAM frequency, disk health, and BIOS version info.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 576 512" aria-hidden="true"><path d="M64 0C28.7 0 0 28.7 0 64V352c0 35.3 28.7 64 64 64H240l-10.7 32H160c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H346.7L336 416H512c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM512 64V288H64V64H512z"/></svg></div>
-              <span class="tool-card-badge">PC Utility</span>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8V446.3zM448 32L203.8 65.7v179.9H448V32z"/></svg></div>
+              <span class="tool-card-badge">Windows Tool</span>
             </div>
             <h3 class="tool-card-title">M.T.A. PCInfo Tool</h3>
-            <p class="tool-card-desc">Deep diagnostic batch script reporting motherboard, CPU, RAM, GPU, and BIOS hardware specs.</p>
+            <p class="tool-card-desc">Detailed hardware specs, CPU/GPU temperatures, RAM frequency, disk health, and BIOS version info.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Hardware Specs</span>
+              <span class="tool-card-tag">ZIP & RAR (.exe)</span>
               <div class="tool-card-cta-group">
-                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-                <a href="/tools/M.T.A.%20PCInfo%20Tool.rar" class="tool-card-rar-link" download title="Download M.T.A. PCInfo Tool as RAR" onclick="event.stopPropagation();">RAR</a>
+                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+                <a href="/tools/M.T.A.%20PCInfo%20Tool.rar" class="tool-card-rar-link" download title="Download RAR archive">.RAR</a>
               </div>
             </div>
           </a>
-          <a href="/tools/M.T.A.%20ip%20and%20mac%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. ip & mac tool" data-desc="displays internal ip, public ip, default gateway, and physical network adapter mac addresses." data-tag="network diagnostics" download aria-label="M.T.A. IP & MAC Tool — Displays internal IP, public IP, default gateway, and physical network adapter MAC addresses.">
+          <a href="/tools/M.T.A.%20ip%20and%20mac%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. ip & mac tool" data-desc="network adapter diagnostics, local/public ip lookup, mac address cloning/spoofing, and dns flusher." data-tag="zip & rar (.exe)" download aria-label="M.T.A. IP & MAC Tool — Network adapter diagnostics, local/public IP lookup, MAC address cloning/spoofing, and DNS flusher.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 576 512" aria-hidden="true"><path d="M288 32c-35.3 0-64 28.7-64 64V160c0 35.3 28.7 64 64 64s64-28.7 64-64V96c0-35.3-28.7-64-64-64zm0 256c-17.7 0-32 14.3-32 32v32H160c-17.7 0-32 14.3-32 32v32H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32H160c17.7 0 32-14.3 32-32V480c0-35.3-28.7-64-64-64H96V384H256v32c0 17.7 14.3 32 32 32s32-14.3 32-32V384H480v32H448c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32H544c17.7 0 32-14.3 32-32V480c0-35.3-28.7-64-64-64H448V384c0-17.7-14.3-32-32-32H320V320c0-17.7-14.3-32-32-32z"/></svg></div>
-              <span class="tool-card-badge">PC Utility</span>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8V446.3zM448 32L203.8 65.7v179.9H448V32z"/></svg></div>
+              <span class="tool-card-badge">Windows Tool</span>
             </div>
             <h3 class="tool-card-title">M.T.A. IP & MAC Tool</h3>
-            <p class="tool-card-desc">Displays internal IP, public IP, default gateway, and physical network adapter MAC addresses.</p>
+            <p class="tool-card-desc">Network adapter diagnostics, local/public IP lookup, MAC address cloning/spoofing, and DNS flusher.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Network Diagnostics</span>
+              <span class="tool-card-tag">ZIP & RAR (.exe)</span>
               <div class="tool-card-cta-group">
-                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-                <a href="/tools/M.T.A.%20ip%20and%20mac%20Tool.rar" class="tool-card-rar-link" download title="Download M.T.A. IP & MAC Tool as RAR" onclick="event.stopPropagation();">RAR</a>
+                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+                <a href="/tools/M.T.A.%20ip%20and%20mac%20Tool.rar" class="tool-card-rar-link" download title="Download RAR archive">.RAR</a>
               </div>
             </div>
           </a>
-          <a href="/tools/M.T.A.%20Downloader%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. downloader tool" data-desc="automated batch downloader for critical engineering runtimes, utilities, and development packages." data-tag="fast downloader" download aria-label="M.T.A. Downloader Tool — Automated batch downloader for critical engineering runtimes, utilities, and development packages.">
+          <a href="/tools/M.T.A.%20Downloader%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. downloader tool" data-desc="multi-threaded batch file downloader with automatic resume, checksum verification, and speed optimization." data-tag="zip & rar (.exe)" download aria-label="M.T.A. Downloader Tool — Multi-threaded batch file downloader with automatic resume, checksum verification, and speed optimization.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm-16 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 320a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 416a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg></div>
-              <span class="tool-card-badge">PC Utility</span>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8V446.3zM448 32L203.8 65.7v179.9H448V32z"/></svg></div>
+              <span class="tool-card-badge">Windows Tool</span>
             </div>
             <h3 class="tool-card-title">M.T.A. Downloader Tool</h3>
-            <p class="tool-card-desc">Automated batch downloader for critical engineering runtimes, utilities, and development packages.</p>
+            <p class="tool-card-desc">Multi-threaded batch file downloader with automatic resume, checksum verification, and speed optimization.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Fast Downloader</span>
+              <span class="tool-card-tag">ZIP & RAR (.exe)</span>
               <div class="tool-card-cta-group">
-                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-                <a href="/tools/M.T.A.%20Downloader%20Tool.rar" class="tool-card-rar-link" download title="Download M.T.A. Downloader Tool as RAR" onclick="event.stopPropagation();">RAR</a>
+                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+                <a href="/tools/M.T.A.%20Downloader%20Tool.rar" class="tool-card-rar-link" download title="Download RAR archive">.RAR</a>
               </div>
             </div>
           </a>
-          <a href="/tools/M.T.A.%20active%2010%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. active 10 utility" data-desc="windows 10 system license and activation status inspector and verification assistant." data-tag="activation status" download aria-label="M.T.A. Active 10 Utility — Windows 10 system license and activation status inspector and verification assistant.">
+          <a href="/tools/M.T.A.%20active%2010%20Tool.zip" class="tool-card reveal" data-category="windows" data-title="m.t.a. active 10 utility" data-desc="system activation helper and status inspector for windows 10/11 operating systems." data-tag="zip & rar (.exe)" download aria-label="M.T.A. Active 10 Utility — System activation helper and status inspector for Windows 10/11 operating systems.">
             <div class="tool-card-head">
-              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M336 0c-97.2 0-176 78.8-176 176c0 19.4 3.1 38.1 8.9 55.6L9.4 401.4C3.4 407.4 0 415.6 0 424.2V488c0 13.3 10.7 24 24 24h64c13.3 0 24-10.7 24-24V464h40c13.3 0 24-10.7 24-24V416h40c8.6 0 16.9-3.4 22.9-9.4l41.6-41.6c17.5 5.7 36.2 8.9 55.6 8.9c97.2 0 176-78.8 176-176S433.2 0 336 0zm48 176a48 48 0 1 1 0-96 48 48 0 1 1 0 96z"/></svg></div>
-              <span class="tool-card-badge">PC Utility</span>
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="0 0 448 512" aria-hidden="true"><path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8V446.3zM448 32L203.8 65.7v179.9H448V32z"/></svg></div>
+              <span class="tool-card-badge">Windows Tool</span>
             </div>
             <h3 class="tool-card-title">M.T.A. Active 10 Utility</h3>
-            <p class="tool-card-desc">Windows 10 system license and activation status inspector and verification assistant.</p>
+            <p class="tool-card-desc">System activation helper and status inspector for Windows 10/11 operating systems.</p>
             <div class="tool-card-footer">
-              <span class="tool-card-tag">Activation Status</span>
+              <span class="tool-card-tag">ZIP & RAR (.exe)</span>
               <div class="tool-card-cta-group">
-                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
-                <a href="/tools/M.T.A.%20active%2010%20Tool.rar" class="tool-card-rar-link" download title="Download M.T.A. Active 10 Utility as RAR" onclick="event.stopPropagation();">RAR</a>
+                <span class="tool-card-cta">Download ZIP <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
+                <a href="/tools/M.T.A.%20active%2010%20Tool.rar" class="tool-card-rar-link" download title="Download RAR archive">.RAR</a>
               </div>
             </div>
           </a>
+            </div>
+          </div>
 
           <!-- Empty Search State -->
           <div class="tools-empty-state" id="toolsEmptyState">
@@ -887,9 +976,7 @@
             <a href="/projects.html" class="btn btn-primary">
               View Engineering Projects <svg viewBox="0 0 448 512" aria-hidden="true" style="width:14px;height:14px;fill:currentColor"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
             </a>
-            <a href="/cv.html" class="btn btn-secondary">
-              View Curriculum Vitae
-            </a>
+            <a href="/#contact" class="btn btn-secondary">Get in Touch</a>
           </div>
         </div>
       </div>
@@ -899,21 +986,19 @@
   <!-- Footer -->
   <footer class="footer" role="contentinfo">
     <div class="container">
-      <div class="footer-inner">
+      <div class="footer-bottom">
         <p>&copy; <span id="currentYear"></span> Mohamed Tarek Abdelhady. All rights reserved.</p>
-        <p>Designed &amp; built with <i class="fas fa-heart" style="color: var(--color-error);"></i> by Mohamed Tarek Abdelhady</p>
       </div>
     </div>
   </footer>
 
-  <!-- Back to Top -->
+  <!-- Floating Controls -->
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    <i class="fas fa-arrow-up"></i>
+    <svg viewBox="0 0 384 512" aria-hidden="true"><path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 109.3 329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/></svg>
   </button>
-
-  <!-- Theme Toggle -->
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
-    <i class="fas fa-moon"></i>
+    <svg class="moon-icon" viewBox="0 0 384 512" aria-hidden="true"><path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/></svg>
+    <svg class="sun-icon" viewBox="0 0 512 512" aria-hidden="true"><path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.5c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.5 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.5c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.5 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM256 160a96 96 0 1 0 0 192 96 96 0 1 0 0-192z"/></svg>
   </button>
 
   <script>
@@ -926,7 +1011,7 @@
       const toolsSearchInput = document.getElementById("toolsSearchInput");
       const toolsClearSearchBtn = document.getElementById("toolsClearSearchBtn");
       const toolsFilterPills = document.querySelectorAll(".tools-filter-pill");
-      const toolCards = document.querySelectorAll(".tools-grid .tool-card");
+      const categoryGroups = document.querySelectorAll(".tools-category-group");
       const toolsEmptyState = document.getElementById("toolsEmptyState");
       const toolsResetFilterBtn = document.getElementById("toolsResetFilterBtn");
       let currentToolFilter = "all";
@@ -937,26 +1022,44 @@
           toolsClearSearchBtn.style.display = query ? "flex" : "none";
         }
 
-        let visibleCount = 0;
-        toolCards.forEach((card) => {
-          const category = card.getAttribute("data-category");
-          const title = card.getAttribute("data-title") || "";
-          const desc = card.getAttribute("data-desc") || "";
-          const tag = card.getAttribute("data-tag") || "";
+        let totalVisible = 0;
+        categoryGroups.forEach((group) => {
+          const groupCategory = group.getAttribute("data-category");
+          const categoryMatches = (currentToolFilter === "all" || groupCategory === currentToolFilter);
 
-          const matchesCategory = (currentToolFilter === "all" || category === currentToolFilter);
-          const matchesQuery = !query || title.includes(query) || desc.includes(query) || tag.includes(query);
+          if (!categoryMatches) {
+            group.style.display = "none";
+            return;
+          }
 
-          if (matchesCategory && matchesQuery) {
-            card.style.display = "flex";
-            visibleCount++;
+          const cards = group.querySelectorAll(".tool-card");
+          let groupVisibleCards = 0;
+
+          cards.forEach((card) => {
+            const title = card.getAttribute("data-title") || "";
+            const desc = card.getAttribute("data-desc") || "";
+            const tag = card.getAttribute("data-tag") || "";
+            const matchesQuery = !query || title.includes(query) || desc.includes(query) || tag.includes(query);
+
+            if (matchesQuery) {
+              card.style.display = "flex";
+              card.classList.add("revealed");
+              groupVisibleCards++;
+              totalVisible++;
+            } else {
+              card.style.display = "none";
+            }
+          });
+
+          if (groupVisibleCards > 0) {
+            group.style.display = "block";
           } else {
-            card.style.display = "none";
+            group.style.display = "none";
           }
         });
 
         if (toolsEmptyState) {
-          toolsEmptyState.classList.toggle("visible", visibleCount === 0);
+          toolsEmptyState.classList.toggle("visible", totalVisible === 0);
         }
       }
 
