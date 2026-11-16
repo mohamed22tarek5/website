@@ -642,24 +642,13 @@ console.log('Tool counts:', counts);
 // ============================================
 function generateCardHtml(t, isHubPage = false) {
   const isWindows = t.category === 'windows';
-  const downloadAttr = isWindows ? ' download' : '';
-  const targetAttr = isWindows ? '' : ' target="_blank" rel="noopener noreferrer"';
-  
-  let ctaHtml;
-  if (isWindows && t.rarHref) {
-    ctaHtml = `<div class="tool-card-cta-group">
-                <span class="tool-card-cta">${t.cta} <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>
-                <a href="${t.rarHref}" class="tool-card-rar-link" download title="Download RAR archive">.RAR</a>
-              </div>`;
-  } else if (isWindows) {
-    ctaHtml = `<span class="tool-card-cta">${t.cta} <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></span>`;
-  } else {
-    ctaHtml = `<span class="tool-card-cta">${t.cta} <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>`;
-  }
-
   const ariaLabel = `${t.title} — ${t.desc}`;
 
-  return `          <a href="${t.href}" class="tool-card reveal" data-category="${t.category}" data-title="${t.title.toLowerCase()}" data-desc="${t.desc.toLowerCase()}" data-tag="${t.tag.toLowerCase()}"${targetAttr}${downloadAttr} aria-label="${ariaLabel}">
+  if (isWindows) {
+    const rarLink = t.rarHref
+      ? `<a href="${t.rarHref}" class="tool-card-rar-link" download title="Download RAR archive" aria-label="Download ${t.title} (.RAR)">.RAR</a>`
+      : '';
+    return `          <div class="tool-card tool-card-download reveal" data-category="${t.category}" data-title="${t.title.toLowerCase()}" data-desc="${t.desc.toLowerCase()}" data-tag="${t.tag.toLowerCase()}" role="region" aria-label="${ariaLabel}">
             <div class="tool-card-head">
               <div class="tool-card-icon" aria-hidden="true"><svg viewBox="${t.viewBox}" aria-hidden="true">${t.svg}</svg></div>
               <span class="tool-card-badge">${t.badge}</span>
@@ -668,7 +657,25 @@ function generateCardHtml(t, isHubPage = false) {
             <p class="tool-card-desc">${t.desc}</p>
             <div class="tool-card-footer">
               <span class="tool-card-tag">${t.tag}</span>
-              ${ctaHtml}
+              <div class="tool-card-cta-group">
+                <a href="${t.href}" class="tool-card-cta" download aria-label="Download ${t.title} (.ZIP)">${t.cta} <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></a>
+                ${rarLink}
+              </div>
+            </div>
+          </div>`;
+  }
+
+  const targetAttr = ' target="_blank" rel="noopener noreferrer"';
+  return `          <a href="${t.href}" class="tool-card reveal" data-category="${t.category}" data-title="${t.title.toLowerCase()}" data-desc="${t.desc.toLowerCase()}" data-tag="${t.tag.toLowerCase()}"${targetAttr} aria-label="${ariaLabel}">
+            <div class="tool-card-head">
+              <div class="tool-card-icon" aria-hidden="true"><svg viewBox="${t.viewBox}" aria-hidden="true">${t.svg}</svg></div>
+              <span class="tool-card-badge">${t.badge}</span>
+            </div>
+            <h3 class="tool-card-title">${t.title}</h3>
+            <p class="tool-card-desc">${t.desc}</p>
+            <div class="tool-card-footer">
+              <span class="tool-card-tag">${t.tag}</span>
+              <span class="tool-card-cta">${t.cta} <svg viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
             </div>
           </a>`;
 }
@@ -1034,25 +1041,32 @@ const toolsPageHtml = `<!DOCTYPE html>
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      position: relative;
+      z-index: 2;
     }
 
     .tool-card-rar-link {
       font-size: 0.72rem;
       font-weight: 700;
       font-family: var(--font-mono);
-      padding: 2px 8px;
+      padding: 3px 8px;
       border-radius: 4px;
       background: rgba(255, 255, 255, 0.06);
       color: var(--color-text-secondary);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       text-decoration: none;
       transition: all var(--transition-fast);
+      line-height: 1.2;
+      position: relative;
+      z-index: 3;
     }
 
     .tool-card-rar-link:hover {
       background: var(--color-accent);
       color: #ffffff;
       border-color: var(--color-accent);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
     }
   </style>
   <noscript><style>.loader{display:none!important}</style></noscript>
