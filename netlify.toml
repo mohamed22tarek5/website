@@ -512,6 +512,21 @@
 
 
 [[redirects]]
+  from = "/css/*"
+  to = "/article/css/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/js/*"
+  to = "/article/js/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/data/*"
+  to = "/article/data/:splat"
+  status = 200
+
+[[redirects]]
   from = "/articles/*"
   to = "/article/:splat"
   status = 200

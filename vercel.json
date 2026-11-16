@@ -588,6 +588,23 @@
       ]
     },
     {
+      "source": "/article",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</.well-known/agent-skills/index.json>; rel=linkset, </sitemap.xml>; rel=sitemap"
+        },
+        {
+          "key": "Vary",
+          "value": "Accept"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
       "source": "/article/(.*)",
       "headers": [
         {
@@ -601,6 +618,45 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/article/css/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/css; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/article/js/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/article/data/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
         }
       ]
     }
@@ -695,12 +751,60 @@
       "destination": "/api/markdown"
     },
     {
+      "source": "/article",
+      "destination": "/article/index.html"
+    },
+    {
+      "source": "/css/:path*",
+      "destination": "/article/css/:path*"
+    },
+    {
+      "source": "/js/:path*",
+      "destination": "/article/js/:path*"
+    },
+    {
+      "source": "/data/:path*",
+      "destination": "/article/data/:path*"
+    },
+    {
+      "source": "/articles/css/:path*",
+      "destination": "/article/css/:path*"
+    },
+    {
+      "source": "/articles/js/:path*",
+      "destination": "/article/js/:path*"
+    },
+    {
+      "source": "/articles/data/:path*",
+      "destination": "/article/data/:path*"
+    },
+    {
+      "source": "/articles/assets/:path*",
+      "destination": "/article/assets/:path*"
+    },
+    {
       "source": "/articles",
       "destination": "/article/index.html"
     },
     {
       "source": "/articles/:path*",
       "destination": "/article/index.html"
+    },
+    {
+      "source": "/mta-lab/css/:path*",
+      "destination": "/article/css/:path*"
+    },
+    {
+      "source": "/mta-lab/js/:path*",
+      "destination": "/article/js/:path*"
+    },
+    {
+      "source": "/mta-lab/data/:path*",
+      "destination": "/article/data/:path*"
+    },
+    {
+      "source": "/mta-lab/assets/:path*",
+      "destination": "/article/assets/:path*"
     },
     {
       "source": "/mta-lab",

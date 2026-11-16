@@ -292,7 +292,7 @@ function fileEditor(f, draft){
     '<div class="form-group"><label class="form-label">اسم الملف</label><input class="form-input" id="fe-name" value="' + UI.esc(f.name) + '" dir="ltr"></div>' +
     '<div class="form-row"><div class="form-group"><label class="form-label">النوع</label><input class="form-input" id="fe-type" value="' + UI.esc(f.type) + '" dir="ltr"></div>' +
     '<div class="form-group"><label class="form-label">الحجم</label><input class="form-input" id="fe-size" value="' + UI.esc(f.size) + '" dir="ltr"></div></div>' +
-    '<div class="form-group"><label class="form-label">المسار داخل المشروع</label><input class="form-input" id="fe-path" value="' + UI.esc(f.path || 'assets/files/') + '" dir="ltr"><p class="form-hint">مثال: assets/files/guide.pdf</p></div>',
+    '<div class="form-group"><label class="form-label">المسار داخل المشروع</label><input class="form-input" id="fe-path" value="' + UI.esc(f.path || '/article/assets/files/') + '" dir="ltr"><p class="form-hint">مثال: /article/assets/files/guide.pdf</p></div>',
     {footer:'<button class="btn btn-primary btn-sm" id="fe-save">إضافة</button>'});
   m2.body.querySelector('#fe-pick').addEventListener('change', function(e){
     var file = e.target.files[0]; if(!file) return;
@@ -300,7 +300,7 @@ function fileEditor(f, draft){
     var ext = (file.name.split('.').pop() || '').toUpperCase();
     m2.body.querySelector('#fe-type').value = ext;
     m2.body.querySelector('#fe-size').value = file.size > 1048576 ? (file.size/1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(file.size/1024)) + ' KB';
-    m2.body.querySelector('#fe-path').value = 'assets/files/' + file.name;
+    m2.body.querySelector('#fe-path').value = '/article/assets/files/' + file.name;
     m2.body.querySelector('#fe-msg').textContent = 'انسخ هذا الملف يدويًا إلى مجلد assets/files/ في المشروع ليصبح التحميل حقيقيًا.';
   });
   m2.overlay.querySelector('#fe-save').onclick = function(){

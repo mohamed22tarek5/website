@@ -44,7 +44,7 @@ window.DEMO_RESOURCES = [
     {t:'tip', title:'نصيحة', text:'احفظ الأوضاع في صفحة المحفوظات (♥) لتصل إليها بسرعة من أي جهاز عبر ملف التصدير.'},
     {t:'warning', title:'تنبيه', text:'الوضع الصارم ينتقد العمل فقط، لا تستخدمه في محادثات حساسة أو مع نصوص شخصية.'}
   ],
-  files:[{name:'chatgpt-modes-cheatsheet.md', type:'MD', size:'3 KB', path:'assets/files/chatgpt-modes-cheatsheet.md'}]
+  files:[{name:'chatgpt-modes-cheatsheet.md', type:'MD', size:'3 KB', path:'/article/assets/files/chatgpt-modes-cheatsheet.md'}]
 },
 {
   slug:'chatgpt-for-programmers', title:'دليل استخدام ChatGPT للمبرمجين',
@@ -83,7 +83,7 @@ window.DEMO_RESOURCES = [
     {t:'p', text:'الصق هذا البرومبت ثم الكود تحته مباشرة. يعمل بشكل أفضل عندما تذكر لغة البرمجة وإصدارها في أول سطر.'},
     {t:'quote', text:'المراجعة الجيدة لا تقول "هذا سيئ" بل تقول "هذا سيكسر عندما…" مع رقم السطر.'}
   ],
-  files:[{name:'code-review-prompt.txt', type:'TXT', size:'2 KB', path:'assets/files/code-review-prompt.txt'}]
+  files:[{name:'code-review-prompt.txt', type:'TXT', size:'2 KB', path:'/article/assets/files/code-review-prompt.txt'}]
 },
 {
   slug:'research-prompt', title:'برومبت البحث العلمي والتلخيص',
@@ -149,7 +149,7 @@ window.DEMO_RESOURCES = [
     {t:'table', head:['العائلة','مثال استخدام','نصيحة'], rows:[['مساعدات الكود','كتابة سكربتات الاختبار','راجع مخرجاتها على عتاد حقيقي'],['أدوات التوثيق','تحويل الملاحظات لتقارير','أضف الأرقام بنفسك دائمًا'],['أدوات البحث','مقارنة المكونات','تحقق من الأسعار والتوفر']]},
     {t:'tip', title:'نصيحة', text:'ابدأ بالأداة المجانية التي تحل أكثر مهمة تكرارًا في يومك، لا بالأداة الأشهر.'}
   ],
-  files:[{name:'ai-tools-list.csv', type:'CSV', size:'1 KB', path:'assets/files/ai-tools-list.csv'}]
+  files:[{name:'ai-tools-list.csv', type:'CSV', size:'1 KB', path:'/article/assets/files/ai-tools-list.csv'}]
 },
 {
   slug:'kicad-pcb-tool', title:'أداة KiCad لتصميم الدوائر المطبوعة',
@@ -175,7 +175,7 @@ window.DEMO_RESOURCES = [
     {t:'p', text:'بيئة التطوير الرسمية من أردوينو: محرر بسيط، مراقب تسلسلي، ومدير لوحات يدعم ESP32 وESP8266 بإضافة رابط واحد.'},
     {t:'code', lang:'cpp', code:'void setup() {\n  Serial.begin(115200);\n  pinMode(LED_BUILTIN, OUTPUT);\n}\nvoid loop() {\n  digitalWrite(LED_BUILTIN, HIGH);\n  delay(500);\n  digitalWrite(LED_BUILTIN, LOW);\n  delay(500);\n}'}
   ],
-  files:[{name:'arduino-blink.ino', type:'INO', size:'1 KB', path:'assets/files/arduino-blink.ino'}]
+  files:[{name:'arduino-blink.ino', type:'INO', size:'1 KB', path:'/article/assets/files/arduino-blink.ino'}]
 },
 {
   slug:'esp32-first-project', title:'أول مشروع ESP32: من الوميض إلى الإنترنت',
@@ -195,7 +195,7 @@ window.DEMO_RESOURCES = [
     {t:'warning', title:'تنبيه', text:'أطراف ESP32 تعمل بمنطق 3.3V فقط — لا توصل 5V مباشرة إلى أي طرف إدخال.'},
     {t:'prompt', promptId:'esp-debug'}
   ],
-  files:[{name:'arduino-blink.ino', type:'INO', size:'1 KB', path:'assets/files/arduino-blink.ino'}]
+  files:[{name:'arduino-blink.ino', type:'INO', size:'1 KB', path:'/article/assets/files/arduino-blink.ino'}]
 },
 {
   slug:'seo-basics-ai', title:'أساسيات SEO مع أدوات الذكاء الاصطناعي',
@@ -244,11 +244,11 @@ window.DEMO_RESOURCES = [
     {t:'info', title:'ملاحظة', text:'أحجام الملفات المعروضة حقيقية ومحسوبة من الملفات الفعلية في المشروع.'}
   ],
   files:[
-    {name:'chatgpt-modes-cheatsheet.md', type:'MD', size:'3 KB', path:'assets/files/chatgpt-modes-cheatsheet.md'},
-    {name:'code-review-prompt.txt', type:'TXT', size:'2 KB', path:'assets/files/code-review-prompt.txt'},
-    {name:'arduino-blink.ino', type:'INO', size:'1 KB', path:'assets/files/arduino-blink.ino'},
-    {name:'ai-tools-list.csv', type:'CSV', size:'1 KB', path:'assets/files/ai-tools-list.csv'},
-    {name:'prompts-starter-pack.json', type:'JSON', size:'2 KB', path:'assets/files/prompts-starter-pack.json'}
+    {name:'chatgpt-modes-cheatsheet.md', type:'MD', size:'3 KB', path:'/article/assets/files/chatgpt-modes-cheatsheet.md'},
+    {name:'code-review-prompt.txt', type:'TXT', size:'2 KB', path:'/article/assets/files/code-review-prompt.txt'},
+    {name:'arduino-blink.ino', type:'INO', size:'1 KB', path:'/article/assets/files/arduino-blink.ino'},
+    {name:'ai-tools-list.csv', type:'CSV', size:'1 KB', path:'/article/assets/files/ai-tools-list.csv'},
+    {name:'prompts-starter-pack.json', type:'JSON', size:'2 KB', path:'/article/assets/files/prompts-starter-pack.json'}
   ]
 },
 {

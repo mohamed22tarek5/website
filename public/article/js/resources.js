@@ -183,7 +183,11 @@ function copyPrompt(key, btn){
 }
 function downloadFile(slug, path, name){
   Analytics.trackDownload(slug);
-  var a = document.createElement('a'); a.href = path; a.setAttribute('download', name || ''); document.body.appendChild(a); a.click(); a.remove();
+  var fullPath = path || '';
+  if(!fullPath.startsWith('/') && !fullPath.startsWith('http')){
+    fullPath = '/article/' + fullPath;
+  }
+  var a = document.createElement('a'); a.href = fullPath; a.setAttribute('download', name || ''); document.body.appendChild(a); a.click(); a.remove();
   UI.toast(I18n.t('dl_started'), 'success');
 }
 window.ResourcesPage = {renderArticles:renderArticles, renderHub:renderHub, renderCategory:renderCategory, renderDetail:renderDetail, copyFirst:copyFirst, copyPrompt:copyPrompt, downloadFile:downloadFile, published:published, isArticle:isArticle};
