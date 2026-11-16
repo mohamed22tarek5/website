@@ -47,7 +47,7 @@ Based in Egypt, specializing in custom circuit design, embedded firmware, IoT ha
 - [Length & Unit Converter](https://mohamed-tarek-abdelhady.vercel.app/sites/length-converter.html): Engineering unit conversion for imperial and metric dimensions.
 - [Electrical Calculation](https://mohamed-tarek-abdelhady.vercel.app/sites/electrical-calculation.html): Comprehensive single-phase and three-phase AC/DC circuit analysis.
 - [LCD Custom Character Generator](https://mohamed-tarek-abdelhady.vercel.app/sites/lcd-custom-character-generator.html): 5x8 pixel bitmap matrix designer generating C/C++ byte arrays for HD44780 displays.
-- [Linux Commands Reference](https://mohamed-tarek-abdelhady.vercel.app/sites/mastering-linux-commands.html): Command-line reference guide for embedded Linux and system administration.
+- [Linux Commands Reference](https://mohamed-tarek-abdelhady.vercel.app/sites/mastering-mastering-linux-commands.html): Command-line reference guide for embedded Linux and system administration.
 - [Interactive To-Do List](https://mohamed-tarek-abdelhady.vercel.app/sites/to-do-list.html): Client-side productivity manager with priority tagging and local persistence.
 - [Medication Reminder App](https://mohamed-tarek-abdelhady.vercel.app/sites/medication-reminder.html): Standalone schedule manager with audio alerts and compliance history.
 - [AI Tools & Models Directory](https://mohamed-tarek-abdelhady.vercel.app/sites/ai-sites-list.html): Curated collection of artificial intelligence tools, prompt workflows, LLMs, and API integrations.

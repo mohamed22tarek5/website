@@ -241,7 +241,7 @@ const tools = [
     title: 'LCD Character Generator',
     desc: 'Visual 5x8 dot matrix bitmap pixel editor with instant byte array hex output for HD44780 displays.',
     tag: 'HD44780 5x8 Matrix',
-    href: '/sites/lcd-character-generator.html',
+    href: '/sites/lcd-custom-character-generator.html',
     cta: 'Launch Generator',
     svg: '<path d="M64 0C28.7 0 0 28.7 0 64V352c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM448 352H64V64H448V352zM160 448H352c17.7 0 32 14.3 32 32s-14.3 32-32 32H160c-17.7 0-32-14.3-32-32s14.3-32 32-32z"/>',
     viewBox: '0 0 512 512'
@@ -252,7 +252,7 @@ const tools = [
     title: 'Electrical System Calculator',
     desc: 'Comprehensive calculator for single-phase and three-phase AC systems, power factor, apparent power, and impedance.',
     tag: '1-Phase & 3-Phase',
-    href: '/sites/electrical-system-calculator.html',
+    href: '/sites/electrical-calculation.html',
     cta: 'Launch Calculator',
     svg: '<path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/>',
     viewBox: '0 0 384 512'
@@ -322,7 +322,7 @@ const tools = [
     title: 'Battery Capacity & Runtime',
     desc: 'Battery discharge duration, Peukert’s exponent, C-rate, and state of charge (SoC) estimation.',
     tag: 'Peukert Runtime',
-    href: '/sites/battery-capacity-calculator.html',
+    href: '/sites/battery-capacity-runtime-calculator.html',
     cta: 'Launch Calculator',
     svg: '<path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/>',
     viewBox: '0 0 384 512'
@@ -333,7 +333,7 @@ const tools = [
     title: 'PCB Trace Width Calculator',
     desc: 'Calculate internal and external trace widths, current capacity, cross-sectional area, and thermal temperature rise.',
     tag: 'IPC-2152 / 2221',
-    href: '/sites/pcb-trace-calculator.html',
+    href: '/sites/pcb-trace-width-calculator.html',
     cta: 'Launch Calculator',
     svg: '<path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/>',
     viewBox: '0 0 384 512'
@@ -410,7 +410,7 @@ const tools = [
     title: 'Transformer Turns Ratio',
     desc: 'Primary/secondary voltage, current, turns ratio, and impedance transformation for step-up/down transformers.',
     tag: 'Np/Ns & Impedance',
-    href: '/sites/transformer-calculator.html',
+    href: '/sites/transformer-turns-calculator.html',
     cta: 'Launch Calculator',
     svg: '<path d="M0 256L224 0 160 208h176L80 512 160 288H0z"/>',
     viewBox: '0 0 384 512'
@@ -421,7 +421,7 @@ const tools = [
     title: 'dB / dBm & RF Calculator',
     desc: 'Power ratios in decibels, dBm to Watts conversion, signal-to-noise ratio (SNR), and RF link attenuation.',
     tag: 'dB, dBm, dBW & Watts',
-    href: '/sites/db-calculator.html',
+    href: '/sites/decibel-dbm-calculator.html',
     cta: 'Launch Calculator',
     svg: '<path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/>',
     viewBox: '0 0 512 512'
@@ -447,7 +447,7 @@ const tools = [
     title: 'Mastering Linux Commands',
     desc: 'Comprehensive terminal guide covering navigation, package management, permissions, and bash syntax.',
     tag: 'Cheat Sheet',
-    href: '/sites/linux-commands.html',
+    href: '/sites/mastering-linux-commands.html',
     cta: 'Open Terminal Guide',
     svg: '<path d="M0 256a32 32 0 0 1 32-32h72.2l51.6-116.1c11.6-26.1 48.7-27.4 62.1-2.4L278.4 374l48.8-90.8A32 32 0 0 1 355.2 267H480a32 32 0 0 1 0 64H374.8l-48.8 90.8c-12 22.3-43.7 24.2-58.4 3.7L208.4 179l-49.6 111.6A32 32 0 0 1 129.6 311H32A32 32 0 0 1 0 256z"/>',
     viewBox: '0 0 512 512'
@@ -458,7 +458,7 @@ const tools = [
     title: 'To-Do List & Task Manager',
     desc: 'Clean task organizer with local persistence, priority tagging, categorization, and progress tracking.',
     tag: 'Local Storage',
-    href: '/sites/todo-list.html',
+    href: '/sites/to-do-list.html',
     cta: 'Open Task Manager',
     svg: '<path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm-16 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 320a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM80 416a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm112 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>',
     viewBox: '0 0 384 512'
@@ -495,7 +495,7 @@ const tools = [
     title: 'Circuit Race Game',
     desc: 'Retro electronic-themed top-down racing game on circuit board tracks with collision physics and lap timers.',
     tag: 'Canvas 2D',
-    href: '/sites/circuit-race-game.html',
+    href: '/sites/race-game.html',
     cta: 'Start Race',
     svg: '<path d="M192 64C86 64 0 150 0 256S86 448 192 448c56.3 0 106.8-24.3 141.9-63.1c11.9-13.1 30.2-20.9 49.3-20.9h60.8c19.1 0 37.4 7.8 49.3 20.9C527.2 423.7 577.7 448 634 448c106 0 192-86 192-192S740 64 634 64c-56.3 0-106.8 24.3-141.9 63.1c-11.9 13.1-30.2 20.9-49.3 20.9H382.1c-19.1 0-37.4-7.8-49.3-20.9C298.8 88.3 248.3 64 192 64z"/>',
     viewBox: '0 0 640 512'
@@ -645,10 +645,7 @@ function generateCardHtml(t, isHubPage = false) {
   const ariaLabel = `${t.title} — ${t.desc}`;
 
   if (isWindows) {
-    const rarLink = t.rarHref
-      ? `<a href="${t.rarHref}" class="tool-card-rar-link" download title="Download RAR archive" aria-label="Download ${t.title} (.RAR)">.RAR</a>`
-      : '';
-    return `          <div class="tool-card tool-card-download reveal" data-category="${t.category}" data-title="${t.title.toLowerCase()}" data-desc="${t.desc.toLowerCase()}" data-tag="${t.tag.toLowerCase()}" role="region" aria-label="${ariaLabel}">
+    return `          <div class="tool-card reveal tool-card-download" data-category="${t.category}" data-title="${t.title.toLowerCase()}" data-desc="${t.desc.toLowerCase()}" data-tag="${t.tag.toLowerCase()}">
             <div class="tool-card-head">
               <div class="tool-card-icon" aria-hidden="true"><svg viewBox="${t.viewBox}" aria-hidden="true">${t.svg}</svg></div>
               <span class="tool-card-badge">${t.badge}</span>
@@ -658,15 +655,14 @@ function generateCardHtml(t, isHubPage = false) {
             <div class="tool-card-footer">
               <span class="tool-card-tag">${t.tag}</span>
               <div class="tool-card-cta-group">
-                <a href="${t.href}" class="tool-card-cta" download aria-label="Download ${t.title} (.ZIP)">${t.cta} <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></a>
-                ${rarLink}
+                <a href="${t.href}" class="tool-card-cta" download aria-label="Download ${t.title} ZIP">${t.cta} <svg viewBox="0 0 384 512" aria-hidden="true" style="width:12px;height:12px;fill:currentColor"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg></a>
+                ${t.rarHref ? `<a href="${t.rarHref}" class="tool-card-rar-link" download title="Download RAR archive" aria-label="Download ${t.title} RAR">.RAR</a>` : ''}
               </div>
             </div>
           </div>`;
   }
 
-  const targetAttr = ' target="_blank" rel="noopener noreferrer"';
-  return `          <a href="${t.href}" class="tool-card reveal" data-category="${t.category}" data-title="${t.title.toLowerCase()}" data-desc="${t.desc.toLowerCase()}" data-tag="${t.tag.toLowerCase()}"${targetAttr} aria-label="${ariaLabel}">
+  return `          <a href="${t.href}" class="tool-card reveal" data-category="${t.category}" data-title="${t.title.toLowerCase()}" data-desc="${t.desc.toLowerCase()}" data-tag="${t.tag.toLowerCase()}" target="_blank" rel="noopener noreferrer" aria-label="${ariaLabel}">
             <div class="tool-card-head">
               <div class="tool-card-icon" aria-hidden="true"><svg viewBox="${t.viewBox}" aria-hidden="true">${t.svg}</svg></div>
               <span class="tool-card-badge">${t.badge}</span>
@@ -1035,38 +1031,6 @@ const toolsPageHtml = `<!DOCTYPE html>
     .tools-hub-section {
       padding: 1.5rem 0 5rem;
       border-top: 1px solid var(--color-border);
-    }
-
-    .tool-card-cta-group {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .tool-card-rar-link {
-      font-size: 0.72rem;
-      font-weight: 700;
-      font-family: var(--font-mono);
-      padding: 3px 8px;
-      border-radius: 4px;
-      background: rgba(255, 255, 255, 0.06);
-      color: var(--color-text-secondary);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      text-decoration: none;
-      transition: all var(--transition-fast);
-      line-height: 1.2;
-      position: relative;
-      z-index: 3;
-    }
-
-    .tool-card-rar-link:hover {
-      background: var(--color-accent);
-      color: #ffffff;
-      border-color: var(--color-accent);
-      transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
     }
   </style>
   <noscript><style>.loader{display:none!important}</style></noscript>
