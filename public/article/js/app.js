@@ -48,12 +48,12 @@ function home(){
     '<section class="section"><div class="container">' +
     UI.emptyState('✨', (ar ? 'المختبر جاهز' : 'M.T.A. Lab is Ready'), (ar ? 'لا يوجد محتوى منشور حالياً. يمكنك إضافة مقالات وبرومبتات وأدوات جديدة من لوحة التحكم.' : 'No content published yet. You can add new articles, prompts, and tools from the admin panel.'), '<a class="btn btn-primary" href="#/admin">' + (ar ? 'لوحة التحكم' : 'Admin Panel') + '</a>') +
     '</div></section>' : '') +
-  '<section class="section section-alt"><div class="container"><div class="section-header"><span class="section-label">Browse</span><h2 class="section-title" data-i18n="categories">' + UI.esc(I18n.t('categories')) + '</h2></div><div class="grid grid-4">' +
+  (cats.length ? '<section class="section section-alt"><div class="container"><div class="section-header"><span class="section-label">Browse</span><h2 class="section-title" data-i18n="categories">' + UI.esc(I18n.t('categories')) + '</h2></div><div class="grid grid-4">' +
   cats.map(function(c){
     var n = pub().filter(function(r){ return r.category === c.id; }).length;
     var nm = I18n.lang() === 'ar' ? c.name : (c.name_en || c.name);
     return '<a class="cat-card reveal revealed" href="#/category/' + UI.esc(c.id) + '"><div class="cat-icon">' + UI.esc(c.icon||'📁') + '</div><div class="cat-name">' + UI.esc(nm) + '</div><div class="cat-count">' + n + '</div></a>';
-  }).join('') + '</div></div></section>';
+  }).join('') + '</div></div></section>' : '');
   document.getElementById('hero-search').addEventListener('submit', function(e){
     e.preventDefault();
     location.hash = '#/search?q=' + encodeURIComponent(document.getElementById('hero-q').value.trim());

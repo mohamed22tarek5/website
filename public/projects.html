@@ -85,7 +85,18 @@
     .projects-section { padding: 2rem 0 4rem; }
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.5rem; }
 
-    .project-card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; transition: all var(--transition-base); }
+    @keyframes cardFadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .project-card {
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--transition-base);
+      animation: cardFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    }
     .project-card:hover { border-color: var(--color-border-hover); transform: translateY(-6px); box-shadow: var(--shadow-xl); }
 
     .project-image { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--color-bg-tertiary); }
@@ -378,7 +389,8 @@
 
       filtered.forEach((project, i) => {
         const card = document.createElement('article');
-        card.className = 'project-card reveal';
+        card.className = 'project-card';
+        card.style.animationDelay = (i * 0.04) + 's';
         card.style.transitionDelay = (i * 0.05) + 's';
         const primaryCat = getPrimaryCategory(project.category);
         const badgeLabel = categoryLabels[primaryCat] || 'Project';
@@ -407,17 +419,10 @@
         projectsGrid.appendChild(card);
       });
 
-      requestAnimationFrame(() => {
-        document.querySelectorAll('.reveal:not(.revealed)').forEach(el => {
-          if (revealObserver) {
-            revealObserver.observe(el);
-          }
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight + 150 || !revealObserver) {
-            el.classList.add('revealed');
-          }
-        });
-      });
+      // All cards render immediately with CSS fade-in
+      if (typeof revealObserver !== 'undefined' && revealObserver) {
+        document.querySelectorAll('.reveal:not(.revealed)').forEach(el => revealObserver.observe(el));
+      }
     }
 
     filterButtons.forEach(btn => {

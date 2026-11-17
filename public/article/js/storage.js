@@ -19,29 +19,16 @@ function slugify(s){
 }
 function uid(p){ return (p||'id')+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7); }
 
-var CURRENT_DB_VERSION = '2.0.0_clean';
+var CURRENT_DB_VERSION = '2.1.0_clean_all';
 
 function seed(){
   var storedVersion = localStorage.getItem('mta_lab_v');
   if (storedVersion !== CURRENT_DB_VERSION) {
-    // If the stored data consists only of the old default demo items, purge them
-    var oldRes = read(K.resources, null);
-    if (oldRes !== null) {
-      var isDefaultDemo = !oldRes.length || oldRes.every(function(r){
-        return [
-          'chatgpt-secret-modes','chatgpt-for-programmers','code-review-prompt',
-          'research-prompt','content-writing-prompt','deep-thinking-system',
-          'ai-tools-for-engineers','kicad-pcb-tool','arduino-ide-tool',
-          'esp32-first-project','seo-basics-ai','morning-focus-workflow',
-          'starter-files-pack','pcb-design-beginners','modern-web-basics'
-        ].indexOf(r.slug) >= 0;
-      });
-      if (isDefaultDemo) {
-        write(K.resources, window.DEMO_RESOURCES || []);
-        write(K.analytics, {views:{}, copies:{}, downloads:{}, visits:0});
-        write(K.saved, {resources:[], prompts:[]});
-      }
-    }
+    // Purge previous demo data and demo categories
+    write(K.resources, window.DEMO_RESOURCES || []);
+    write(K.categories, window.DEMO_CATEGORIES || []);
+    write(K.analytics, {views:{}, copies:{}, downloads:{}, visits:0});
+    write(K.saved, {resources:[], prompts:[]});
     localStorage.setItem('mta_lab_v', CURRENT_DB_VERSION);
   }
 
