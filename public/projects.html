@@ -352,6 +352,18 @@
     const filterButtons = document.querySelectorAll('.filter-btn');
     let currentFilter = 'all';
 
+    // Intersection Observer for scroll animations
+    const revealObserver = typeof IntersectionObserver !== 'undefined'
+      ? new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' })
+      : null;
+
     function getPrimaryCategory(cat) { return cat.split(' ')[0]; }
 
     function renderProjects() {
@@ -395,7 +407,17 @@
         projectsGrid.appendChild(card);
       });
 
-      document.querySelectorAll('.reveal:not(.revealed)').forEach(el => revealObserver.observe(el));
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.reveal:not(.revealed)').forEach(el => {
+          if (revealObserver) {
+            revealObserver.observe(el);
+          }
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight + 150 || !revealObserver) {
+            el.classList.add('revealed');
+          }
+        });
+      });
     }
 
     filterButtons.forEach(btn => {

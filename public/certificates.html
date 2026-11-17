@@ -401,6 +401,18 @@
       { id:12, title:"Python & Machine Learning", description:"Python programming with machine learning basics", category:"internship", issuer:"Summer Training", image:"Certificates/12.jpg", date:"2023", isRecent:true }
     ];
 
+    // Intersection Observer for scroll animations
+    const revealObserver = typeof IntersectionObserver !== 'undefined'
+      ? new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' })
+      : null;
+
     const certsGrid = document.getElementById('certs-grid');
     const searchInput = document.getElementById('cert-search');
     const noResults = document.getElementById('no-results');
@@ -459,28 +471,35 @@
         `;
         certsGrid.appendChild(card);
         const image = card.querySelector('.cert-img');
-        let retries = 0;
-        const recoverImage = () => {
-          if (retries === 0) {
-            retries += 1;
-            window.setTimeout(() => {
-              image.src = `${cert.image}?retry=${Date.now()}`;
-            }, 250);
-            return;
-          }
-          image.removeEventListener('error', recoverImage);
-          image.removeAttribute('src');
-          image.src = 'icon.png';
-          image.alt = `${cert.title} certificate preview unavailable`;
-          image.classList.add('cert-img-fallback');
-        };
-        image.addEventListener('error', recoverImage);
+        if (image) {
+          let retries = 0;
+          const recoverImage = () => {
+            if (retries === 0) {
+              retries += 1;
+              window.setTimeout(() => {
+                image.src = `${cert.image}?retry=${Date.now()}`;
+              }, 250);
+              return;
+            }
+            image.removeEventListener('error', recoverImage);
+            image.removeAttribute('src');
+            image.src = 'icon.png';
+            image.alt = `${cert.title} certificate preview unavailable`;
+            image.classList.add('cert-img-fallback');
+          };
+          image.addEventListener('error', recoverImage);
+        }
       });
 
       requestAnimationFrame(() => {
-        certsGrid.querySelectorAll('.reveal').forEach(el => {
-          if (revealObserver) revealObserver.observe(el);
-          else el.classList.add('revealed');
+        certsGrid.querySelectorAll('.reveal:not(.revealed)').forEach(el => {
+          if (revealObserver) {
+            revealObserver.observe(el);
+          }
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight + 150 || !revealObserver) {
+            el.classList.add('revealed');
+          }
         });
       });
     }
