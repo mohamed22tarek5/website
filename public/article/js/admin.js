@@ -92,7 +92,7 @@ function bindBackup(root){
     };
   };
   root.querySelector('#rst').onclick = function(){
-    UI.confirmModal('إعادة الديمو', 'استبدال كل المحتوى الحالي بالديمو؟', function(){ Storage.resetDemo(); UI.toast('تمت الاستعادة', 'success'); render(['dashboard']); }, 'استعادة');
+    UI.confirmModal('إفراغ المحتوى', 'هل تريد إفراغ كل المحتوى والبدء من جديد؟', function(){ Storage.resetDemo(); UI.toast('تم إفراغ المحتوى بنجاح', 'success'); render(['dashboard']); }, 'إفراغ');
   };
 }
 /* ---------- Resources ---------- */
