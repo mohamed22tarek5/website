@@ -26,6 +26,8 @@ Live page: https://mohamed-tarek-abdelhady.vercel.app/certificates.html
    - Focus: Core Python programming concepts including data structures, control statements, functions, and modules.
 10. **SQL & Relational Databases (Mimo, July 2022)**
     - Focus: Core SQL concepts, creating tables, writing single- and multi-table queries, and managing relational databases.
+11. **Managerial Awareness for Fresh Graduate Engineers (Injada, Aug 2025)**
+    - Focus: Online webinar on managerial awareness for fresh graduate engineers and its impact on career development (held 29-08-2025).
 
 ## Verification & Contact
 To verify any credential or request documentation:
