@@ -38,12 +38,12 @@ function renderArticles(){
     '<option value="views"' + (artState.sort==='views'?' selected':'') + '>' + UI.esc(I18n.t('sort_views')) + '</option>' +
     '<option value="copies"' + (artState.sort==='copies'?' selected':'') + '>' + UI.esc(I18n.t('sort_copies')) + '</option>' +
     '<option value="az"' + (artState.sort==='az'?' selected':'') + '>A-Z</option></select></div>' +
-    '<div class="chips">' + '<button class="chip' + (!artState.cat?' active':'') + '" data-acat="">' + UI.esc(I18n.t('f_all')) + '</button>' +
+    (cats.length ? '<div class="chips">' + '<button class="chip' + (!artState.cat?' active':'') + '" data-acat="">' + UI.esc(I18n.t('f_all')) + '</button>' +
     cats.map(function(c){
       var n = I18n.lang() === 'ar' ? c.name : (c.name_en || c.name);
       var count = published().filter(function(r){ return isArticle(r) && r.category === c.id; }).length;
       return '<button class="chip' + (artState.cat===c.id?' active':'') + '" data-acat="' + UI.esc(c.id) + '">' + UI.esc(c.icon||'') + ' ' + UI.esc(n) + ' (' + count + ')</button>';
-    }).join('') + '</div>' +
+    }).join('') + '</div>' : '') +
     '<p class="form-hint" id="art-count" style="margin:10px 0 12px"></p><div id="art-grid"></div></div>';
   function paint(){
     var list = articleList(), g = document.getElementById('art-grid'); if(!g) return;

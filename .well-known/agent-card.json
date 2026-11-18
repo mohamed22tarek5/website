@@ -75,6 +75,12 @@
       "tags": ["ucp", "commerce", "protocol"]
     },
     {
+      "id": "mta-lab",
+      "name": "M.T.A. Lab — Technical Articles, AI Tools & Prompts Hub",
+      "description": "Personal bilingual (Arabic/English) knowledge platform by Mohamed Tarek Abdelhady for technical articles, AI tools, prompt libraries, engineering workflows, and downloadable resources at /article/.",
+      "tags": ["mta-lab", "articles", "ai-tools", "prompts", "engineering", "knowledge-hub"]
+    },
+    {
       "id": "markdown-negotiation",
       "name": "Markdown for Agents",
       "description": "Content negotiation returning text/markdown when Accept: text/markdown is requested.",

@@ -19,21 +19,21 @@ function slugify(s){
 }
 function uid(p){ return (p||'id')+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7); }
 
-var CURRENT_DB_VERSION = '2.1.0_clean_all';
+var CURRENT_DB_VERSION = '3.0.0_empty_all';
 
 function seed(){
   var storedVersion = localStorage.getItem('mta_lab_v');
   if (storedVersion !== CURRENT_DB_VERSION) {
-    // Purge previous demo data and demo categories
-    write(K.resources, window.DEMO_RESOURCES || []);
-    write(K.categories, window.DEMO_CATEGORIES || []);
+    // Purge all previous default/demo content and categories across all devices
+    write(K.resources, []);
+    write(K.categories, []);
     write(K.analytics, {views:{}, copies:{}, downloads:{}, visits:0});
     write(K.saved, {resources:[], prompts:[]});
     localStorage.setItem('mta_lab_v', CURRENT_DB_VERSION);
   }
 
-  if(!localStorage.getItem(K.resources)) write(K.resources, window.DEMO_RESOURCES || []);
-  if(!localStorage.getItem(K.categories)) write(K.categories, window.DEMO_CATEGORIES || []);
+  if(!localStorage.getItem(K.resources)) write(K.resources, []);
+  if(!localStorage.getItem(K.categories)) write(K.categories, []);
   if(!localStorage.getItem(K.settings)) write(K.settings, window.DEMO_SETTINGS || {});
   if(!localStorage.getItem(K.analytics)) write(K.analytics, {views:{}, copies:{}, downloads:{}, visits:0});
   if(!localStorage.getItem(K.saved)) write(K.saved, {resources:[], prompts:[]});
@@ -43,11 +43,12 @@ window.Storage = {
   KEYS: K, uid: uid, slugify: slugify,
   init: function(){ seed(); },
   resetDemo: function(){
-    write(K.resources, window.DEMO_RESOURCES || []);
-    write(K.categories, window.DEMO_CATEGORIES || []);
+    write(K.resources, []);
+    write(K.categories, []);
     write(K.settings, window.DEMO_SETTINGS || {});
     write(K.analytics, {views:{}, copies:{}, downloads:{}, visits:0});
     write(K.saved, {resources:[], prompts:[]});
+    localStorage.setItem('mta_lab_v', CURRENT_DB_VERSION);
   },
   exportData: function(){
     return {app:'mta-lab', version:1, exportedAt:new Date().toISOString(),

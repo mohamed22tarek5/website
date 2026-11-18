@@ -49,7 +49,7 @@
   [headers.values]
     Link = '</.well-known/agent-skills/index.json>; rel="linkset", </sitemap.xml>; rel="sitemap"'
     Vary = "Accept"
-    Cache-Control = "public, max-age=3600, stale-while-revalidate=86400"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 # --- Engineering tools ---
 [[headers]]

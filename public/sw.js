@@ -1,10 +1,10 @@
 /**
  * Service Worker — Mohamed Tarek Abdelhady Portfolio & Engineering Suite
- * Version: v2.0.0
+ * Version: v2.1.0
  * Comprehensive offline support, intelligent caching, Android & iOS optimization
  */
 
-const VERSION = 'v2.0.0';
+const VERSION = 'v2.1.0';
 const STATIC_CACHE = `mta-static-${VERSION}`;
 const HTML_CACHE = `mta-html-${VERSION}`;
 const TOOLS_CACHE = `mta-tools-${VERSION}`;
@@ -137,6 +137,20 @@ self.addEventListener('fetch', (event) => {
                 url.hostname.includes('cdnjs.cloudflare.com');
   if (isCdn) {
     event.respondWith(staleWhileRevalidate(req, STATIC_CACHE));
+    return;
+  }
+
+  // 2b. M.T.A. Lab (/article, /articles, /mta-lab): Network-first so content & script updates propagate immediately across all devices
+  if (url.origin === self.location.origin && (url.pathname.startsWith('/article') || url.pathname.startsWith('/mta-lab'))) {
+    event.respondWith(
+      fetch(req).then(async (fresh) => {
+        if (fresh && fresh.status === 200) {
+          const cache = await caches.open(STATIC_CACHE);
+          cache.put(req, fresh.clone());
+        }
+        return fresh;
+      }).catch(() => caches.match(req))
+    );
     return;
   }
 

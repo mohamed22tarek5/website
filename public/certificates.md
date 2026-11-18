@@ -28,6 +28,8 @@ Live page: https://mohamed-tarek-abdelhady.vercel.app/certificates.html
     - Focus: Core SQL concepts, creating tables, writing single- and multi-table queries, and managing relational databases.
 11. **Managerial Awareness for Fresh Graduate Engineers (Injada, Aug 2025)**
     - Focus: Online webinar on managerial awareness for fresh graduate engineers and its impact on career development (held 29-08-2025).
+12. **Cisco CCNA Training Program (WE / Telecom Egypt, Feb 2026)**
+    - Focus: Completed the Cisco CCNA training program with WE (Telecom Egypt) Training and Development Chief Sector (January 24 – February 5, 2026).
 
 ## Verification & Contact
 To verify any credential or request documentation:

@@ -64,7 +64,7 @@ function dash(M){
     '<div class="res-card" style="margin-top:14px"><div class="res-body"><h3>نسخة احتياطية</h3><p class="form-hint">تصدير mta-lab-data.json بكل المحتوى والإعدادات.</p>' +
     '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn btn-secondary btn-sm" id="exp">Export Data</button>' +
     '<button class="btn btn-secondary btn-sm" id="imp">Import Data</button>' +
-    '<button class="btn btn-danger btn-sm" id="rst">إعادة الديمو</button></div></div></div>';
+    '<button class="btn btn-danger btn-sm" id="rst">إفراغ الكل</button></div></div></div>';
   function card(n,l){ return '<div class="admin-stat"><div class="admin-stat-num">' + n + '</div><div class="admin-stat-label">' + l + '</div></div>'; }
   bindBackup(M);
 }
@@ -133,7 +133,7 @@ function readForm(m, names){
 }
 function resourceForm(r){
   var isNew = !r;
-  r = r || {title:'',title_en:'',description:'',description_en:'',type:'GUIDE',platform:'ChatGPT',category:'prompts',tags:'',cover:'',readingTime:5,author:'فريق المصادر',website:'',date:new Date().toISOString().slice(0,10),featured:false,published:true,prompts:[],blocks:[],files:[]};
+  r = r || {title:'',title_en:'',description:'',description_en:'',type:'GUIDE',platform:'ChatGPT',category:'',tags:'',cover:'',readingTime:5,author:'Mohamed Tarek Abdelhady',website:'',date:new Date().toISOString().slice(0,10),featured:false,published:true,prompts:[],blocks:[],files:[]};
   var tagStr = Array.isArray(r.tags) ? r.tags.join('، ') : (r.tags || '');
   var draft = JSON.parse(JSON.stringify({prompts:r.prompts||[], blocks:r.blocks||[], files:r.files||[]}));
   var m = UI.openModal(isNew ? 'إضافة مصدر' : 'تعديل مصدر',
@@ -141,7 +141,7 @@ function resourceForm(r){
     field('وصف قصير','description',r.description,'textarea') + field('Short Description (EN)','description_en',r.description_en || '') +
     '<div class="form-row"><div class="form-group"><label class="form-label">النوع</label><select class="form-input" name="type">' + TYPES.map(function(t){ return '<option value="' + t + '"' + (r.type===t?' selected':'') + '>' + t + '</option>'; }).join('') + '</select></div>' +
     '<div class="form-group"><label class="form-label">المنصة</label><select class="form-input" name="platform">' + PLATFORMS.map(function(p){ return '<option' + (r.platform===p?' selected':'') + '>' + p + '</option>'; }).join('') + '</select></div></div>' +
-    '<div class="form-row"><div class="form-group"><label class="form-label">التصنيف</label><select class="form-input" name="category">' + Storage.getCategories().map(function(c){ return '<option value="' + UI.esc(c.id) + '"' + (r.category===c.id?' selected':'') + '>' + UI.esc(c.name) + '</option>'; }).join('') + '</select></div>' +
+    '<div class="form-row"><div class="form-group"><label class="form-label">التصنيف</label><select class="form-input" name="category"><option value="">— بدون تصنيف —</option>' + Storage.getCategories().map(function(c){ return '<option value="' + UI.esc(c.id) + '"' + (r.category===c.id?' selected':'') + '>' + UI.esc(c.name) + '</option>'; }).join('') + '</select></div>' +
     field('المؤلف','author',r.author) + '</div>' +
     '<div class="form-row">' + field('زمن القراءة (دقيقة)','readingTime',r.readingTime,'number') + field('التاريخ','date',r.date,'date') + '</div>' +
     field('الوسوم (افصل بفاصلة)','tags',tagStr) + field('صورة الغلاف (رابط أو assets/images/…)','cover',r.cover || '') + field('رابط الأداة الرسمي (للأدوات فقط)','website',r.website || '','url') +
@@ -357,7 +357,7 @@ function settings(M){
     '<div class="form-group"><label class="form-label">كلمة جديدة</label><input type="password" class="form-input" id="np"></div>' +
     '<button class="btn btn-secondary btn-sm" id="save-p">تحديث</button></div></div>' +
     '<div class="res-card" style="margin-top:14px"><div class="res-body"><h3>نسخة احتياطية</h3>' +
-    '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-secondary btn-sm" id="exp">Export Data</button><button class="btn btn-secondary btn-sm" id="imp">Import Data</button><button class="btn btn-danger btn-sm" id="rst">إعادة الديمو</button></div></div></div>';
+    '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-secondary btn-sm" id="exp">Export Data</button><button class="btn btn-secondary btn-sm" id="imp">Import Data</button><button class="btn btn-danger btn-sm" id="rst">إفراغ الكل</button></div></div></div>';
   M.querySelector('#save-s').onclick = function(){
     var cur = Storage.getSettings();
     cur.siteNameAr = M.querySelector('[name="siteNameAr"]').value; cur.siteName = M.querySelector('[name="siteName"]').value; cur.tagline = M.querySelector('[name="tagline"]').value;

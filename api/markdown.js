@@ -130,17 +130,17 @@ Engineering services and free calculation tools.
 - Web Development: Vanilla ES6+, responsive sites, PWAs
 - Technical Consulting: Circuit analysis and electronics consulting
 `,
-  '/article': `# M.T.A. Lab — Articles • AI • Prompts • Knowledge
+  '/article': `# M.T.A. Lab — Technical Articles, AI Tools, Prompts & Engineering Knowledge Hub
 
-Personal publishing platform by Mohamed Tarek Abdelhady: AI articles, tutorials, tools, prompt collections, engineering content and downloadable resources.
+M.T.A. Lab (مختبر M.T.A.) is the personal bilingual (Arabic & English) technical publishing platform and knowledge hub by Eng. Mohamed Tarek Abdelhady (Communication & Electronics Engineer, PCB Designer, Embedded Systems & Web Developer).
 
 Live site: https://mohamed-tarek-abdelhady.vercel.app/article/
 
 ## Sections
-- Articles: Deep dive technical engineering, AI, and electronics tutorials.
-- AI Tools: Curated directory of top AI platforms and assistants.
-- Prompts: Tested prompt engineering recipes with one-click copy.
-- Resources: Direct download packages and technical guides.
+- Articles: Technical engineering, AI, Arduino, PCB design, embedded systems, and IoT tutorials.
+- AI Tools: Curated directory of top AI platforms and developer productivity tools.
+- Prompts: Tested, copy-ready prompt engineering recipes.
+- Resources: Downloadable technical guides, templates, and reference links.
 `,
   '/tools': `# Engineering Tools & Calculators — Mohamed Tarek Abdelhady
 

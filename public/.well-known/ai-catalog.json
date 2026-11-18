@@ -138,6 +138,19 @@
       ]
     },
     {
+      "identifier": "urn:air:mohamed-tarek-abdelhady.vercel.app:page:mta-lab",
+      "displayName": "M.T.A. Lab — Technical Articles, AI Tools & Prompts Hub",
+      "description": "Personal technical knowledge hub by Eng. Mohamed Tarek Abdelhady covering engineering articles, AI tools, copy-ready prompts, PCB design, Arduino, embedded systems, and practical workflows in Arabic and English.",
+      "type": "text/html",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/article/",
+      "representativeQueries": [
+        "M.T.A. Lab Mohamed Tarek Abdelhady",
+        "MTA Lab AI tools prompts engineering articles",
+        "مختبر MTA مقالات تقنية وأدوات ذكاء اصطناعي",
+        "Mohamed Tarek technical articles PCB Arduino embedded systems"
+      ]
+    },
+    {
       "identifier": "urn:air:mohamed-tarek-abdelhady.vercel.app:endpoint:x402",
       "displayName": "x402 HTTP Payment Protocol Endpoint",
       "description": "Agent-native HTTP payments via x402 protocol returning HTTP 402.",

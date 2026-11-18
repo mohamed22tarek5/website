@@ -1,8 +1,0 @@
-Name,Category,Pricing,URL,Description
-ChatGPT,LLM & Reasoning,Freemium,https://chatgpt.com,"OpenAI flagship conversational assistant and reasoning model."
-Claude,LLM & Coding,Freemium,https://claude.ai,"Anthropic conversational model with 200k context window and code analysis."
-Gemini,Multimodal & Search,Freemium,https://gemini.google.com,"Google native multimodal assistant integrated with Google Workspace."
-Perplexity,AI Search & Research,Freemium,https://perplexity.ai,"Citation-backed answer engine with live web synthesis."
-v0 by Vercel,Frontend & UI Generation,Freemium,https://v0.dev,"Generative UI design system turning prompts into modern React/HTML code."
-Cursor,AI Code Editor,Freemium,https://cursor.com,"VS Code fork built specifically for AI-assisted programming."
-Hugging Face,Open Models Hub,Free/Paid,https://huggingface.co,"Open source repository of machine learning weights and datasets."

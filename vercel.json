@@ -600,7 +600,7 @@
         },
         {
           "key": "Cache-Control",
-          "value": "public, max-age=3600, stale-while-revalidate=86400"
+          "value": "public, max-age=0, must-revalidate"
         }
       ]
     },
@@ -617,7 +617,7 @@
         },
         {
           "key": "Cache-Control",
-          "value": "public, max-age=3600, stale-while-revalidate=86400"
+          "value": "public, max-age=0, must-revalidate"
         }
       ]
     },
@@ -630,7 +630,7 @@
         },
         {
           "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
+          "value": "public, max-age=0, must-revalidate"
         }
       ]
     },
@@ -643,7 +643,7 @@
         },
         {
           "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
+          "value": "public, max-age=0, must-revalidate"
         }
       ]
     },
@@ -656,7 +656,7 @@
         },
         {
           "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
+          "value": "public, max-age=0, must-revalidate"
         }
       ]
     }
@@ -694,6 +694,61 @@
         }
       ],
       "destination": "/api/markdown?path=/sites/:slug.html"
+    },
+    {
+      "source": "/article",
+      "has": [
+        {
+          "type": "header",
+          "key": "Accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/api/markdown?path=/article"
+    },
+    {
+      "source": "/article/",
+      "has": [
+        {
+          "type": "header",
+          "key": "Accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/api/markdown?path=/article"
+    },
+    {
+      "source": "/article/index.html",
+      "has": [
+        {
+          "type": "header",
+          "key": "Accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/api/markdown?path=/article"
+    },
+    {
+      "source": "/mta-lab",
+      "has": [
+        {
+          "type": "header",
+          "key": "Accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/api/markdown?path=/article"
+    },
+    {
+      "source": "/articles",
+      "has": [
+        {
+          "type": "header",
+          "key": "Accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/api/markdown?path=/article"
     },
     {
       "source": "/:slug.html",

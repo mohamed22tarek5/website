@@ -8,6 +8,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://mohamed-tarek-abdelhady.vercel.app/sitemap.xml
+Sitemap: https://mohamed-tarek-abdelhady.vercel.app/article/sitemap.xml
 
 # ARD manifest for agent discovery
 Agentmap: https://mohamed-tarek-abdelhady.vercel.app/.well-known/ai-catalog.json
@@ -16,13 +17,16 @@ Agentmap: https://mohamed-tarek-abdelhady.vercel.app/.well-known/ai-catalog.json
 # https://mohamed-tarek-abdelhady.vercel.app/llms.txt
 
 # Content Signals — AI content usage preferences
-Content-Signal: ai-train=no, search=yes, ai-input=no
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 # Blocked paths
 Disallow: /cache/
 Disallow: /admin/
 
-# AI Search & Retrieval Crawlers (Allowed for real-time citations & search)
+# Search & AI Retrieval Crawlers (Allowed for real-time citations & search)
+User-agent: Googlebot
+Allow: /
+
 User-agent: OAI-SearchBot
 Allow: /
 
@@ -33,6 +37,9 @@ User-agent: PerplexityBot
 Allow: /
 
 User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
 Allow: /
 
 User-agent: Applebot
