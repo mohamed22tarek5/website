@@ -54,7 +54,7 @@
       "name": "Mohamed Tarek Abdelhady",
       "alternateName": ["Mohamed Tarek", "M. Tarek Abdelhady", "Eng. Mohamed Tarek", "Eng. Mohamed Tarek Abdelhady Ali", "M. Tarek Abdelhady Ali", "Eng.M.T.A.", "محمد طارق عبدالهادي علي", "Eng.M.T.A.A.", "Eng. M. Tarek Abdelhady Ali", "Eng. Mohamed T. A.", "المهندس محمد طارق"],
       "jobTitle": "Communication Engineer & Web Developer",
-      "knowsAbout": ["CCNA", "Linux", "IoT", "Embedded Systems", "Web Development"]
+      "knowsAbout": ["CCNA", "Linux", "IoT", "Embedded Systems", "Web Development", "PCB Design", "Information Security", "Python", "SQL"]
     }
   }
   </script>
@@ -225,7 +225,11 @@
       max-width: 100%; max-height: 70vh; border-radius: var(--radius-md);
       margin: 0 auto;
     }
-    .cert-modal-
+    .cert-modal-footer {
+      padding: var(--space-md) var(--space-xl) var(--space-lg);
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+    }
   </style>
   <noscript><style>.loader{display:none!important}</style></noscript>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -274,7 +278,7 @@
         </div>
 
         <div class="cert-counter reveal">
-          Displaying <strong id="cert-count">0</strong> out of <strong>12</strong> certificates
+          Displaying <strong id="cert-count">0</strong> out of <strong id="cert-total">17</strong> certificates
         </div>
 
         <div class="search-bar reveal">
@@ -306,6 +310,11 @@
           <article class="cert-card"><div class="cert-img-wrap"><img src="/Certificates/10.jpg" alt="Motor Drive Systems Certificate" class="cert-img" loading="lazy" width="400" height="300" decoding="async"></div><div class="cert-body"><h3>Motor Drive Systems</h3><p>Electric motor drive systems and control</p><div class="cert-meta"><span>Summer Internship &bull; 2023</span></div><div class="cert-actions"><a href="/Certificates/10.jpg" download class="btn-download">Download</a></div></div></article>
           <article class="cert-card"><div class="cert-img-wrap"><img src="/Certificates/11.jpg" alt="Webinar Participation Certificate" class="cert-img" loading="lazy" width="400" height="300" decoding="async"></div><div class="cert-body"><h3>Webinar Participation</h3><p>Professional development webinar series</p><div class="cert-meta"><span>Summer Internship &bull; 2023</span></div><div class="cert-actions"><a href="/Certificates/11.jpg" download class="btn-download">Download</a></div></div></article>
           <article class="cert-card"><div class="cert-img-wrap"><img src="/Certificates/12.jpg" alt="Python and Machine Learning Certificate" class="cert-img" loading="lazy" width="400" height="300" decoding="async"></div><div class="cert-body"><h3>Python &amp; Machine Learning</h3><p>Python programming with machine learning basics</p><div class="cert-meta"><span>Summer Training &bull; 2023</span></div><div class="cert-actions"><a href="/Certificates/12.jpg" download class="btn-download">Download</a></div></div></article>
+          <article class="cert-card"><div class="cert-img-wrap"><img src="/Certificates/13.jpeg" alt="SQL Certificate" class="cert-img" loading="lazy" width="400" height="300" decoding="async"></div><div class="cert-body"><h3>SQL</h3><p>Core SQL concepts, multi-table queries, and relational database management</p><div class="cert-meta"><span>Mimo &bull; July 2022</span></div><div class="cert-actions"><a href="/Certificates/13.jpeg" download class="btn-download">Download</a></div></div></article>
+          <article class="cert-card"><div class="cert-img-wrap"><img src="/Certificates/14.jpeg" alt="Printed Circuit Board Certificate" class="cert-img" loading="lazy" width="400" height="300" decoding="async"></div><div class="cert-body"><h3>Printed Circuit Board</h3><p>Printed circuit board (PCB) design fundamentals (6-hour certified course)</p><div class="cert-meta"><span>M3aarf Platform &bull; Aug 2023</span></div><div class="cert-actions"><a href="/Certificates/14.jpeg" download class="btn-download">Download</a></div></div></article>
+          <article class="cert-card"><div class="cert-img-wrap"><img src="/Certificates/15.jpeg" alt="Information Security Certificate" class="cert-img" loading="lazy" width="400" height="300" decoding="async"></div><div class="cert-body"><h3>Information Security</h3><p>Information security fundamentals and data protection principles (2-hour course)</p><div class="cert-meta"><span>M3aarf Platform &bull; July 2023</span></div><div class="cert-actions"><a href="/Certificates/15.jpeg" download class="btn-download">Download</a></div></div></article>
+          <article class="cert-card"><div class="cert-img-wrap"><img src="/Certificates/16.jpeg" alt="Python Certificate" class="cert-img" loading="lazy" width="400" height="300" decoding="async"></div><div class="cert-body"><h3>Python</h3><p>Core Python programming concepts including data structures, functions, and modules</p><div class="cert-meta"><span>Mimo &bull; July 2022</span></div><div class="cert-actions"><a href="/Certificates/16.jpeg" download class="btn-download">Download</a></div></div></article>
+          <article class="cert-card"><div class="cert-img-wrap"><img src="/Certificates/17.jpeg" alt="2024 Certificate of IEEE Membership" class="cert-img" loading="lazy" width="400" height="300" decoding="async"></div><div class="cert-body"><h3>IEEE Student Membership</h3><p>2024 Certificate of IEEE Membership recognizing commitment to advancing technology</p><div class="cert-meta"><span>IEEE &bull; 2024</span></div><div class="cert-actions"><a href="/Certificates/17.jpeg" download class="btn-download">Download</a></div></div></article>
           <div class="no-results" id="no-results" style="display:none;">
             <i class="fas fa-search"></i>
             <h3>No certificates found</h3>
@@ -403,7 +412,12 @@
       { id:9, title:"PLC Programming", description:"Programmable Logic Controllers training", category:"internship", issuer:"Summer Internship", image:"Certificates/9.jpg", date:"2023", isRecent:true },
       { id:10, title:"Motor Drive Systems", description:"Electric motor drive systems and control", category:"internship", issuer:"Summer Internship", image:"Certificates/10.jpg", date:"2023", isRecent:true },
       { id:11, title:"Webinar Participation", description:"Professional development webinar series", category:"internship", issuer:"Summer Internship", image:"Certificates/11.jpg", date:"2023", isRecent:true },
-      { id:12, title:"Python & Machine Learning", description:"Python programming with machine learning basics", category:"internship", issuer:"Summer Training", image:"Certificates/12.jpg", date:"2023", isRecent:true }
+      { id:12, title:"Python & Machine Learning", description:"Python programming with machine learning basics", category:"internship", issuer:"Summer Training", image:"Certificates/12.jpg", date:"2023", isRecent:true },
+      { id:13, title:"SQL", description:"Core SQL concepts, multi-table queries, and relational database management", category:"training", issuer:"Mimo", image:"Certificates/13.jpeg", date:"July 2022", isRecent:false },
+      { id:14, title:"Printed Circuit Board", description:"Printed circuit board (PCB) design fundamentals (6-hour certified course)", category:"technical", issuer:"M3aarf Platform", image:"Certificates/14.jpeg", date:"Aug 2023", isRecent:true },
+      { id:15, title:"Information Security", description:"Information security fundamentals and data protection principles (2-hour course)", category:"technical", issuer:"M3aarf Platform", image:"Certificates/15.jpeg", date:"July 2023", isRecent:true },
+      { id:16, title:"Python", description:"Core Python programming concepts including data structures, functions, and modules", category:"training", issuer:"Mimo", image:"Certificates/16.jpeg", date:"July 2022", isRecent:false },
+      { id:17, title:"IEEE Student Membership", description:"2024 Certificate of IEEE Membership recognizing commitment to advancing technology", category:"technical", issuer:"IEEE", image:"Certificates/17.jpeg", date:"2024", isRecent:true }
     ];
 
     // Intersection Observer for scroll animations
@@ -422,6 +436,8 @@
     const searchInput = document.getElementById('cert-search');
     const noResults = document.getElementById('no-results');
     const certCount = document.getElementById('cert-count');
+    const certTotal = document.getElementById('cert-total');
+    if (certTotal) certTotal.textContent = certificatesData.length;
     let currentFilter = 'all', currentSearch = '';
 
     function renderCertificates() {
@@ -453,6 +469,7 @@
         card.style.transitionDelay = (i * 0.05) + 's';
         const badge = cert.category === 'internship' ? 'Internship' :
           cert.category === 'training' ? 'Training' : 'Technical';
+        const ext = cert.image.split('.').pop();
         card.innerHTML = `
           <div class="cert-img-wrap">
             <span class="cert-badge">${badge}</span>
@@ -469,7 +486,7 @@
               <button class="btn-view open-cert-modal" data-img="${cert.image}" data-title="${cert.title}">
                 <i class="fas fa-eye"></i> View
               </button>
-              <a href="${cert.image}" download="Mohamed_Tarek_${cert.title.replace(/\s+/g,'_')}_Certificate.jpg" class="btn-download">
+              <a href="${cert.image}" download="Mohamed_Tarek_${cert.title.replace(/\s+/g,'_')}_Certificate.${ext}" class="btn-download">
                 <i class="fas fa-download"></i> Download
               </a>
             </div>
@@ -524,7 +541,10 @@
       document.getElementById('modal-cert-title').textContent = btn.dataset.title;
       document.getElementById('modal-cert-img').src = btn.dataset.img;
       document.getElementById('modal-cert-img').alt = btn.dataset.title + ' Certificate';
-      document.getElementById('modal-cert-download').href = btn.dataset.img;
+      const modalDownload = document.getElementById('modal-cert-download');
+      const modalExt = btn.dataset.img.split('.').pop();
+      modalDownload.href = btn.dataset.img;
+      modalDownload.download = `Mohamed_Tarek_${btn.dataset.title.replace(/\s+/g,'_')}_Certificate.${modalExt}`;
       certModal.classList.add('active');
       certModal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';

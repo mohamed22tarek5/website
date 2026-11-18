@@ -16,8 +16,16 @@ Live page: https://mohamed-tarek-abdelhady.vercel.app/certificates.html
    - Focus: Industrial motor control circuits, relays, contactors, timers, push buttons, safety interlocks.
 5. **Full Stack Web Development Foundations**
    - Focus: HTML5, CSS3, JavaScript (ES6+), responsive design, RESTful APIs, modern web standards.
-6. **IEEE & GDSC Technical Workshop Completions**
-   - Active participation in workshops, hackathons, and technical mentorship sessions.
+6. **IEEE Student Membership (2024)**
+   - Focus: 2024 Certificate of IEEE Membership recognizing personal and professional commitment to the advancement of technology, alongside IEEE & GDSC technical workshops and mentorship sessions.
+7. **Printed Circuit Board (M3aarf Platform, Aug 2023)**
+   - Focus: 6-hour certified course in Printed Circuit Board (PCB) design fundamentals (Certified No: 12974884226).
+8. **Information Security (M3aarf Platform, July 2023)**
+   - Focus: 2-hour certified course in information security fundamentals and data protection principles (Certified No: 12974887292).
+9. **Python Programming (Mimo, July 2022)**
+   - Focus: Core Python programming concepts including data structures, control statements, functions, and modules.
+10. **SQL & Relational Databases (Mimo, July 2022)**
+    - Focus: Core SQL concepts, creating tables, writing single- and multi-table queries, and managing relational databases.
 
 ## Verification & Contact
 To verify any credential or request documentation:
