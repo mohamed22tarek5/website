@@ -7,7 +7,20 @@ var PLATFORMS = ['ChatGPT','Claude','Gemini','Multi','AI Tools'];
 var BLOCK_TYPES = [['h','عنوان'],['p','فقرة'],['list','قائمة'],['quote','اقتباس'],['img','صورة'],['code','كود'],['tip','نصيحة'],['warning','تحذير'],['info','معلومة'],['prompt','برومبت'],['table','جدول']];
 
 function authed(){ try{ return sessionStorage.getItem('admin_auth') === '1'; }catch(e){ return false; } }
-function getPw(){ return (Storage.getSettings() || {}).adminPassword || ''; }
+function getPwHash(){
+  var s = Storage.getSettings() || {};
+  return s.adminPasswordHash || '';
+}
+function getLegacyPw(){ return (Storage.getSettings() || {}).adminPassword || ''; }
+function hasPwSet(){ return !!(getPwHash() || getLegacyPw()); }
+async function hashPw(pw){
+  if (window.crypto && crypto.subtle) {
+    var data = new TextEncoder().encode('mta-lab-local::' + pw);
+    var buf = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+  }
+  return 'plain:' + pw;
+}
 
 function render(sub){
   Router.setMeta('الإدارة', '');
@@ -28,16 +41,28 @@ function render(sub){
   else dash(M);
 }
 function gate(app){
-  var hasPw = !!getPw();
+  var hasPw = hasPwSet();
   app.innerHTML = '<div class="container page"><div class="admin-login"><h2>' + (hasPw ? 'دخول الإدارة' : 'إنشاء كلمة مرور') + '</h2>' +
     '<div class="notice notice-warn">Client-side admin only. This static version does not provide server-side security.</div>' +
     '<div class="form-group"><label class="form-label" for="pw">كلمة المرور</label><input class="form-input" type="password" id="pw"></div>' +
     '<button class="btn btn-primary" id="go" style="width:100%">' + (hasPw ? 'فتح اللوحة' : 'تعيين وفتح') + '</button><p class="form-hint" id="pw-err"></p></div></div>';
-  function go(){
+  async function go(){
     var v = document.getElementById('pw').value;
     if(!v || v.length < 4){ document.getElementById('pw-err').textContent = '4 أحرف على الأقل.'; return; }
-    if(hasPw){ if(v !== getPw()){ document.getElementById('pw-err').textContent = 'كلمة خاطئة.'; return; } }
-    else { var s = Storage.getSettings(); s.adminPassword = v; Storage.saveSettings(s); }
+    var h = await hashPw(v);
+    if(hasPw){
+      var storedHash = getPwHash();
+      var legacyPw = getLegacyPw();
+      if(storedHash){
+        if(h !== storedHash){ document.getElementById('pw-err').textContent = 'كلمة خاطئة.'; return; }
+      } else if(legacyPw){
+        if(v !== legacyPw){ document.getElementById('pw-err').textContent = 'كلمة خاطئة.'; return; }
+        // Migrate legacy plaintext password to SHA-256 hash and clear plaintext
+        var sm = Storage.getSettings(); delete sm.adminPassword; sm.adminPasswordHash = h; Storage.saveSettings(sm);
+      }
+    } else {
+      var s = Storage.getSettings(); delete s.adminPassword; s.adminPasswordHash = h; Storage.saveSettings(s);
+    }
     try{ sessionStorage.setItem('admin_auth', '1'); }catch(e){}
     Router.render();
   }
@@ -363,10 +388,10 @@ function settings(M){
     cur.siteNameAr = M.querySelector('[name="siteNameAr"]').value; cur.siteName = M.querySelector('[name="siteName"]').value; cur.tagline = M.querySelector('[name="tagline"]').value;
     Storage.saveSettings(cur); UI.toast('تم الحفظ', 'success');
   };
-  M.querySelector('#save-p').onclick = function(){
+  M.querySelector('#save-p').onclick = async function(){
     var v = M.querySelector('#np').value;
     if(!v || v.length < 4){ UI.toast('4 أحرف على الأقل', 'error'); return; }
-    var cur = Storage.getSettings(); cur.adminPassword = v; Storage.saveSettings(cur);
+    var cur = Storage.getSettings(); delete cur.adminPassword; cur.adminPasswordHash = await hashPw(v); Storage.saveSettings(cur);
     UI.toast('تم تحديث الكلمة', 'success'); M.querySelector('#np').value = '';
   };
   bindBackup(M);

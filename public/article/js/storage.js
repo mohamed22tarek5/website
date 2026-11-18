@@ -51,20 +51,40 @@ window.Storage = {
     localStorage.setItem('mta_lab_v', CURRENT_DB_VERSION);
   },
   exportData: function(){
+    var safeSettings = Object.assign({}, this.getSettings());
+    delete safeSettings.adminPassword;
+    delete safeSettings.adminPasswordHash;
     return {app:'mta-lab', version:1, exportedAt:new Date().toISOString(),
       resources:this.getResources(), categories:this.getCategories(),
-      settings:this.getSettings(), analytics:this.getAnalytics(), saved:this.getSaved()};
+      settings:safeSettings, analytics:this.getAnalytics(), saved:this.getSaved()};
   },
   importData: function(d){
     if(!d || typeof d !== 'object') return {ok:false, error:'ملف البيانات غير صالح'};
     if(!Array.isArray(d.resources) || !Array.isArray(d.categories)) return {ok:false, error:'ملف البيانات غير صالح'};
+    var cleanResources = [];
     for(var i=0;i<d.resources.length;i++){
       var r = d.resources[i];
       if(!r || typeof r.slug !== 'string' || typeof r.title !== 'string' || typeof r.type !== 'string')
         return {ok:false, error:'ملف البيانات غير صالح'};
+      cleanResources.push(Object.assign({}, r, {
+        views: Number(r.views) || 0,
+        copies: Number(r.copies) || 0,
+        downloads: Number(r.downloads) || 0,
+        readingTime: Number(r.readingTime) || 5,
+        prompts: Array.isArray(r.prompts) ? r.prompts : [],
+        blocks: Array.isArray(r.blocks) ? r.blocks : [],
+        files: Array.isArray(r.files) ? r.files : [],
+        tags: Array.isArray(r.tags) ? r.tags : []
+      }));
     }
-    write(K.resources, d.resources); write(K.categories, d.categories);
-    if(d.settings) write(K.settings, d.settings);
+    write(K.resources, cleanResources); write(K.categories, d.categories);
+    if(d.settings && typeof d.settings === 'object'){
+      var curSettings = this.getSettings();
+      var imported = Object.assign({}, d.settings);
+      delete imported.adminPassword;
+      delete imported.adminPasswordHash;
+      write(K.settings, Object.assign({}, curSettings, imported));
+    }
     return {ok:true};
   },
   getResources: function(){ var v = read(K.resources, []); return Array.isArray(v) ? v : []; },

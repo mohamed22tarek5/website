@@ -2,9 +2,23 @@
  * OAuth Protected Resource Metadata (RFC 9728)
  * Serves JSON at /.well-known/oauth-protected-resource via rewrite in vercel.json.
  *
- * Returns resource identifier derived from request Host so the metadata
- * always matches the scanned origin (production, preview, or custom domain).
+ * Host-aware against an explicit allowlist of production domains.
  */
+
+const PRIMARY_HOST = 'mohamed-tarek-abdelhady.vercel.app';
+const ALLOWED_HOSTS = new Set([
+  PRIMARY_HOST,
+  'website-mohamed.vercel.app',
+  'eng-mta.netlify.app'
+]);
+
+function safeHost(raw) {
+  const candidate = String(Array.isArray(raw) ? raw[0] : (raw || ''))
+    .split(',')[0]
+    .trim()
+    .toLowerCase();
+  return ALLOWED_HOSTS.has(candidate) ? candidate : PRIMARY_HOST;
+}
 
 export default function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -17,16 +31,10 @@ export default function handler(req, res) {
     return res.end();
   }
 
-  const forwardedHost = req.headers['x-forwarded-host'];
-  const host = (Array.isArray(forwardedHost) ? forwardedHost[0] : forwardedHost) ||
-    req.headers.host ||
-    'mohamed-tarek-abdelhady.vercel.app';
-  const protoHeader = req.headers['x-forwarded-proto'];
-  const proto = (Array.isArray(protoHeader) ? protoHeader[0] : protoHeader) || 'https';
-  const base = `${proto}://${host}`;
+  const host = safeHost(req.headers['x-forwarded-host'] || req.headers.host);
+  const base = `https://${host}`;
 
-  res.setHeader('Content-Type', 'application/json');
-
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.statusCode = 200;
   return res.end(JSON.stringify({
     resource: base,

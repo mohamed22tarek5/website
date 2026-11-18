@@ -7,7 +7,22 @@
  */
 
 import { readFileSync, existsSync } from 'fs';
-import { join, resolve } from 'path';
+import { resolve, sep } from 'path';
+
+const PRIMARY_HOST = 'mohamed-tarek-abdelhady.vercel.app';
+const ALLOWED_HOSTS = new Set([
+  PRIMARY_HOST,
+  'website-mohamed.vercel.app',
+  'eng-mta.netlify.app'
+]);
+
+function safeHost(rawHost) {
+  const host = String(Array.isArray(rawHost) ? rawHost[0] : (rawHost || ''))
+    .split(',')[0]
+    .trim()
+    .toLowerCase();
+  return ALLOWED_HOSTS.has(host) ? host : PRIMARY_HOST;
+}
 
 /* Self-contained HTML->Markdown converter */
 function htmlToMarkdown(html) {
@@ -37,7 +52,7 @@ function htmlToMarkdown(html) {
   md = md.replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gi, (m, c) => '\n' + String(c).replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, '- $1\n'));
   md = md.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi, (m, c) => {
     let i = 0;
-    return '\n' + String(c).replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, () => `${++i}. $1\n`);
+    return '\n' + String(c).replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, (_, item) => `${++i}. ${item}\n`);
   });
   md = md.replace(/<br[^>]*\/?>/gi, '\n');
   md = md.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, '\n$1\n');
@@ -144,7 +159,7 @@ Live site: https://mohamed-tarek-abdelhady.vercel.app/article/
 `,
   '/tools': `# Engineering Tools & Calculators — Mohamed Tarek Abdelhady
 
-Collection of 11+ client-side electronics calculators.
+Collection of 35+ client-side electronics calculators and utilities.
 Live suite: https://mohamed-tarek-abdelhady.vercel.app/tools.html
 `
 };
@@ -160,14 +175,14 @@ function normalizePath(raw) {
   }
   // Sanitize path traversal sequences
   p = p.replace(/\.\./g, '').replace(/[\\]/g, '/');
-  p = p.replace(/[^a-zA-Z0-9_\-\.\/]/g, '');
+  p = p.replace(/[^a-zA-Z0-9_\-./]/g, '');
   if (!p.startsWith('/')) p = '/' + p;
   if (p === '/' || p === '/index' || p === '/index.html' || p === '/index.md') {
     return '/index';
   }
   p = p.replace(/\.html?$/i, '').replace(/\.md$/i, '');
   if (p.length > 1 && p.endsWith('/')) p = p.slice(0, -1);
-  return p;
+  return p || '/index';
 }
 
 function sendMarkdown(res, markdown, isHead = false) {
@@ -226,6 +241,7 @@ export default function handler(req, res) {
 
   const normalized = normalizePath(rawPath);
   const publicDir = resolve(process.cwd(), 'public');
+  const publicPrefix = publicDir.endsWith(sep) ? publicDir : publicDir + sep;
   const safeRel = normalized.replace(/^\/+/, '');
 
   // 1) Try pre-generated markdown in public/<normalized>.md
@@ -235,7 +251,7 @@ export default function handler(req, res) {
   ];
 
   for (const mdPath of mdCandidates) {
-    if (!mdPath.startsWith(publicDir)) continue;
+    if (!mdPath.startsWith(publicPrefix)) continue;
     if (existsSync(mdPath)) {
       try {
         const content = readFileSync(mdPath, 'utf-8');
@@ -255,7 +271,7 @@ export default function handler(req, res) {
   ];
 
   for (const htmlPath of htmlCandidates) {
-    if (!htmlPath.startsWith(publicDir)) continue;
+    if (!htmlPath.startsWith(publicPrefix)) continue;
     if (existsSync(htmlPath)) {
       try {
         const html = readFileSync(htmlPath, 'utf-8');
@@ -280,7 +296,7 @@ export default function handler(req, res) {
     .replace(/[-_]/g, ' ')
     .replace(/\b\w/g, (c) => c.toUpperCase()) || 'Home';
 
-  const siteBase = `https://${req.headers.host || 'mohamed-tarek-abdelhady.vercel.app'}`;
+  const siteBase = `https://${safeHost(req.headers['x-forwarded-host'] || req.headers.host)}`;
   const pageUrl = `${siteBase}${normalized === '/index' ? '/' : normalized}`;
   const fallbackMd = `# ${title}\n\nEngineering portfolio resource by Mohamed Tarek Abdelhady.\n\nFull page: [${title}](${pageUrl})\n\nContact: mohammed.tarek.abdelhady.ali@gmail.com\n`;
 

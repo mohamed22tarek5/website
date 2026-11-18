@@ -114,6 +114,27 @@
       "description": "Engineering services offered including web development, Arduino programming, PCB design, and embedded systems.",
       "url": "https://mohamed-tarek-abdelhady.vercel.app/services.html",
       "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "x402-payment",
+      "type": "skill-md",
+      "description": "Agent-native HTTP payments via x402 protocol on Base Sepolia. Protected routes return HTTP 402.",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/api/x402",
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "mpp-payment",
+      "type": "skill-md",
+      "description": "Machine Payment Protocol (MPP) payment discovery via /openapi.json x-payment-info extensions.",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/openapi.json",
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dns-aid",
+      "type": "skill-md",
+      "description": "DNS for AI Discovery (DNS-AID) records under _agents namespace using ServiceMode SVCB/HTTPS records with DNSSEC.",
+      "url": "https://mohamed-tarek-abdelhady.vercel.app/llms.txt",
+      "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   ]
 }

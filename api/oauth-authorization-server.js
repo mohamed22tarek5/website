@@ -3,13 +3,24 @@
  * Serves /.well-known/oauth-authorization-server and
  * /.well-known/openid-configuration via rewrites in vercel.json.
  *
- * Host-aware: issuer and all endpoint URLs are derived from the request
- * host so primary (mohamed-tarek-abdelhady.vercel.app) and secondary
- * domains (website-mohamed.vercel.app, eng-mta.netlify.app) validate
- * consistently. Static JSON files remain as fallbacks with primary-canonical URLs.
+ * Host-aware against an explicit allowlist of production domains so
+ * arbitrary x-forwarded-host headers cannot poison metadata URLs.
  */
 
 const PRIMARY_HOST = 'mohamed-tarek-abdelhady.vercel.app';
+const ALLOWED_HOSTS = new Set([
+  PRIMARY_HOST,
+  'website-mohamed.vercel.app',
+  'eng-mta.netlify.app'
+]);
+
+function safeHost(raw) {
+  const candidate = String(Array.isArray(raw) ? raw[0] : (raw || ''))
+    .split(',')[0]
+    .trim()
+    .toLowerCase();
+  return ALLOWED_HOSTS.has(candidate) ? candidate : PRIMARY_HOST;
+}
 
 export default function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -22,16 +33,10 @@ export default function handler(req, res) {
     return res.end();
   }
 
-  const forwardedHost = req.headers['x-forwarded-host'];
-  const host = (Array.isArray(forwardedHost) ? forwardedHost[0] : forwardedHost) ||
-    req.headers.host ||
-    PRIMARY_HOST;
-  const protoHeader = req.headers['x-forwarded-proto'];
-  const proto = (Array.isArray(protoHeader) ? protoHeader[0] : protoHeader) || 'https';
-  const base = `${proto}://${host}`;
+  const host = safeHost(req.headers['x-forwarded-host'] || req.headers.host);
+  const base = `https://${host}`;
 
-  res.setHeader('Content-Type', 'application/json');
-
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.statusCode = 200;
   return res.end(JSON.stringify({
     issuer: base,

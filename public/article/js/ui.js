@@ -7,6 +7,15 @@ function safeUrl(u){
   try{ var p = new URL(u, location.href); return ['http:','https:','mailto:'].indexOf(p.protocol) >= 0; }
   catch(e){ return false; }
 }
+function safeImgUrl(u){
+  if(!u || typeof u !== 'string') return false;
+  var t = u.trim();
+  if(!t || t.indexOf('//') === 0) return false;
+  try{
+    var p = new URL(t, location.href);
+    return p.protocol === 'https:' || (p.protocol === location.protocol && p.origin === location.origin);
+  }catch(e){ return false; }
+}
 function toast(msg, type){
   var c = document.getElementById('toast-container'); if(!c) return;
   var t = document.createElement('div'); t.className = 'toast ' + (type || ''); t.setAttribute('role','status'); t.textContent = msg;
@@ -102,13 +111,15 @@ function resourceCard(r, highlight){
     ? '<button class="btn btn-primary btn-sm" data-copy-first="' + esc(r.slug) + '">⧉ ' + esc(I18n.t('copy_prompt')) + '</button>'
     : '<a class="btn btn-primary btn-sm" href="#/resource/' + esc(r.slug) + '">' + esc(I18n.t('read')) + '</a>';
   var saved = Storage.isSavedResource(r.slug);
+  var views = Number(r.views) || 0;
+  var copies = Number(r.copies) || 0;
   return '<article class="res-card reveal revealed' + (r.featured ? ' feat' : '') + '">' +
-    (r.cover ? '<img class="res-cover" src="' + esc(r.cover) + '" alt="" loading="lazy">' : '') + '<div class="res-body">' +
+    (r.cover && safeImgUrl(r.cover) ? '<img class="res-cover" src="' + esc(r.cover) + '" alt="" loading="lazy">' : '') + '<div class="res-body">' +
     '<div class="res-badges"><span class="type-badge type-' + esc(r.type) + '">' + esc(I18n.typeIcon(r.type)) + ' ' + esc(I18n.t('type_' + r.type)) + '</span>' +
     (r.platform ? '<span class="plat-badge">' + H(r.platform) + '</span>' : '') + feat + '</div>' +
     '<h3 class="res-title"><a href="#/resource/' + esc(r.slug) + '">' + H(titleOf(r)) + '</a></h3>' +
     '<p class="res-desc">' + H(descOf(r)) + '</p>' +
-    '<div class="res-meta"><span>⏱ ' + esc(String(r.readingTime || 5)) + ' ' + esc(I18n.t('min_read')) + '</span><span>📅 ' + esc(r.date || '') + '</span><span>👁 ' + (r.views || 0) + '</span>' + ((r.copies||0) ? '<span>⧉ ' + r.copies + '</span>' : '') + '</div>' +
+    '<div class="res-meta"><span>⏱ ' + esc(String(Number(r.readingTime) || 5)) + ' ' + esc(I18n.t('min_read')) + '</span><span>📅 ' + esc(r.date || '') + '</span><span>👁 ' + views + '</span>' + (copies ? '<span>⧉ ' + copies + '</span>' : '') + '</div>' +
     '<div class="res-tags">' + ((r.tags||[]).slice(0,4).map(function(t){ return '<span class="tag">' + H(t) + '</span>'; }).join('')) + '</div>' +
     '<div class="res-footer">' + btn + web +
     '<button class="save-btn' + (saved ? ' active' : '') + '" data-save-res="' + esc(r.slug) + '" aria-label="Save" aria-pressed="' + saved + '">♥</button></div>' +
@@ -133,7 +144,7 @@ function renderBlocks(blocks, slug){
     if(b.t === 'p') return '<p>' + esc(b.text) + '</p>';
     if(b.t === 'list') return '<ul>' + ((b.items||[]).map(function(i){ return '<li>' + esc(i) + '</li>'; }).join('')) + '</ul>';
     if(b.t === 'quote') return '<div class="quote-box">' + esc(b.text) + '</div>';
-    if(b.t === 'img') return '<img src="' + esc(b.src) + '" alt="' + esc(b.alt || '') + '" loading="lazy">';
+    if(b.t === 'img') return safeImgUrl(b.src) ? '<img src="' + esc(b.src) + '" alt="' + esc(b.alt || '') + '" loading="lazy">' : '';
     if(b.t === 'code') return '<div class="code-block"><span class="cb-lang">' + esc(b.lang || 'code') + '</span>' + esc(b.code) + '</div>';
     if(b.t === 'tip') return '<div class="tip-box"><strong>💡 ' + esc(b.title || 'نصيحة') + '</strong>' + esc(b.text) + '</div>';
     if(b.t === 'warning') return '<div class="warning-box"><strong>⚠️ ' + esc(b.title || 'تنبيه') + '</strong>' + esc(b.text) + '</div>';
@@ -146,7 +157,7 @@ function renderBlocks(blocks, slug){
 function emptyState(icon, title, sub, btn){
   return '<div class="empty"><div class="empty-icon">' + icon + '</div><h3>' + esc(title) + '</h3><p>' + esc(sub || '') + '</p>' + (btn || '') + '</div>';
 }
-window.UI = {esc:esc, safeUrl:safeUrl, toast:toast, openModal:openModal, confirmModal:confirmModal,
+window.UI = {esc:esc, safeUrl:safeUrl, safeImgUrl:safeImgUrl, toast:toast, openModal:openModal, confirmModal:confirmModal,
   copyText:copyText, hl:hl, titleOf:titleOf, descOf:descOf, catName:catName,
   resourceCard:resourceCard, promptBlock:promptBlock, renderBlocks:renderBlocks, emptyState:emptyState};
 })();

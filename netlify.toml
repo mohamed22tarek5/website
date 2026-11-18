@@ -22,7 +22,7 @@
   [headers.values]
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "SAMEORIGIN"
-    Content-Security-Policy = "frame-ancestors 'self'"
+    Content-Security-Policy = "base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self' mailto:; upgrade-insecure-requests"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
@@ -509,6 +509,86 @@
   from = "/sites/"
   to = "/tools.html"
   status = 301
+
+# --- Short-slug single-hop 301 redirects (matching vercel.json) ---
+[[redirects]]
+  from = "/sites/battery-capacity-calculator.html"
+  to = "/sites/battery-capacity-runtime-calculator.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites/circuit-race-game.html"
+  to = "/sites/race-game.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites/db-calculator.html"
+  to = "/sites/decibel-dbm-calculator.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites/electrical-system-calculator.html"
+  to = "/sites/electrical-calculation.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites/filter-capacitor-calculator.html"
+  to = "/sites/rectifier-filter-capacitor-calculator.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites/lcd-character-generator.html"
+  to = "/sites/lcd-custom-character-generator.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites/linux-commands.html"
+  to = "/sites/mastering-linux-commands.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites/lm317-calculator.html"
+  to = "/sites/lm317-voltage-regulator-calculator.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites/nearest-standard-value-calculator.html"
+  to = "/sites/standard-resistor-capacitor-finder.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites/op-amp-calculator.html"
+  to = "/sites/op-amp-gain-calculator.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites/pcb-trace-calculator.html"
+  to = "/sites/pcb-trace-width-calculator.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites/todo-list.html"
+  to = "/sites/to-do-list.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/sites/transformer-calculator.html"
+  to = "/sites/transformer-turns-calculator.html"
+  status = 301
+  force = true
+
 
 
 [[redirects]]

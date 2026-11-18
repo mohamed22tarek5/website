@@ -147,7 +147,8 @@ document.addEventListener('DOMContentLoaded', function(){
       var y = window.scrollY;
       header.classList.toggle('scrolled', y > 40);
       var h = document.documentElement.scrollHeight - window.innerHeight;
-      prog.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+      var ratio = h > 0 ? Math.min(1, Math.max(0, y / h)) : 0;
+      prog.style.transform = 'scaleX(' + ratio + ')';
       top.classList.toggle('visible', y > 500); tick = false;
     });
   }, {passive:true});

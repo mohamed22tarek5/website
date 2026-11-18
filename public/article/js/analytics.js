@@ -14,16 +14,17 @@ window.Analytics = {
     var r = Storage.getResource(slug); if(r) Storage.updateResource(slug, {downloads:(r.downloads || 0) + 1}); },
   totals:function(){
     var a = get();
-    function sum(o){ var s = 0; Object.keys(o || {}).forEach(function(k){ s += o[k]; }); return s; }
-    return {visits:a.visits || 0, views:sum(a.views), copies:sum(a.copies), downloads:sum(a.downloads)};
+    function sum(o){ var s = 0; Object.keys(o || {}).forEach(function(k){ s += (Number(o[k]) || 0); }); return s; }
+    return {visits:Number(a.visits) || 0, views:sum(a.views), copies:sum(a.copies), downloads:sum(a.downloads)};
   },
-  top:function(map, n){ return Object.keys(map || {}).map(function(k){ return {id:k, v:map[k]}; }).sort(function(a,b){ return b.v - a.v; }).slice(0, n || 5); },
+  top:function(map, n){ return Object.keys(map || {}).map(function(k){ return {id:k, v:Number(map[k]) || 0}; }).sort(function(a,b){ return b.v - a.v; }).slice(0, n || 5); },
   barChart:function(rows, labelFn){
     if(!rows.length) return '<p class="form-hint">لا توجد بيانات بعد.</p>';
-    var max = rows[0].v || 1;
+    var max = Number(rows[0].v) || 1;
     return rows.map(function(r){
-      var pct = Math.round((r.v / max) * 100);
-      return '<div style="margin-bottom:10px"><div class="stat-row"><span>' + labelFn(r) + '</span><strong>' + r.v + '</strong></div><div class="chart-bar"><span style="width:' + pct + '%"></span></div></div>';
+      var val = Number(r.v) || 0;
+      var pct = Math.min(100, Math.max(0, Math.round((val / max) * 100)));
+      return '<div style="margin-bottom:10px"><div class="stat-row"><span>' + labelFn(r) + '</span><strong>' + val + '</strong></div><div class="chart-bar"><span style="width:' + pct + '%"></span></div></div>';
     }).join('');
   }
 };

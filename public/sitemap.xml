@@ -213,7 +213,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://mohamed-tarek-abdelhady.vercel.app/sites/mastering-mastering-linux-commands.html</loc>
+    <loc>https://mohamed-tarek-abdelhady.vercel.app/sites/mastering-linux-commands.html</loc>
     <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -290,6 +290,18 @@
   <url>
     <loc>https://mohamed-tarek-abdelhady.vercel.app/sites/duty-cycle-calculator.html</loc>
     <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mohamed-tarek-abdelhady.vercel.app/sites/standard-resistor-capacitor-finder.html</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mohamed-tarek-abdelhady.vercel.app/sites/rectifier-filter-capacitor-calculator.html</loc>
+    <lastmod>2026-11-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

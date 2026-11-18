@@ -2,38 +2,62 @@
  * Agent Identity Endpoint
  * POST /api/agent/identity
  *
- * Returns a pre-signed identity assertion for anonymous agents.
- * Per AGENTIC.md Step 3 — Register.
+ * Returns a signed identity assertion for anonymous read-only agents.
+ * Configure AGENT_AUTH_SECRET in Vercel environment variables for HMAC-SHA256 signing.
  */
 
-/**
- * Vercel's Node runtime does not populate req.body, so parse the raw
- * stream ourselves. Kept local (no cross-directory import) to match the
- * self-contained style of the other functions in this project.
- */
+import { createHmac, randomBytes } from 'crypto';
+
+const PRIMARY_HOST = 'mohamed-tarek-abdelhady.vercel.app';
+const ALLOWED_HOSTS = new Set([
+  PRIMARY_HOST,
+  'website-mohamed.vercel.app',
+  'eng-mta.netlify.app'
+]);
+const MAX_BODY_BYTES = 16 * 1024;
+
+function safeHost(raw) {
+  const host = String(Array.isArray(raw) ? raw[0] : (raw || ''))
+    .split(',')[0]
+    .trim()
+    .toLowerCase();
+  return ALLOWED_HOSTS.has(host) ? host : PRIMARY_HOST;
+}
+
 function readJsonBody(req) {
   return new Promise((resolve) => {
-    if (req.body && typeof req.body === 'object') return resolve(req.body);
+    if (req.body && typeof req.body === 'object') return resolve({ ok: true, data: req.body });
     const chunks = [];
-    req.on('data', (c) => chunks.push(c));
+    let total = 0;
+    let tooLarge = false;
+    req.on('data', (c) => {
+      total += c.length;
+      if (total > MAX_BODY_BYTES) {
+        tooLarge = true;
+        return;
+      }
+      chunks.push(c);
+    });
     req.on('end', () => {
+      if (tooLarge) return resolve({ ok: false, status: 413 });
       const raw = Buffer.concat(chunks).toString('utf-8');
-      if (!raw) return resolve({});
+      if (!raw) return resolve({ ok: true, data: {} });
       try {
-        resolve(JSON.parse(raw));
+        resolve({ ok: true, data: JSON.parse(raw) });
       } catch {
-        resolve({});
+        resolve({ ok: false, status: 400 });
       }
     });
-    req.on('error', () => resolve({}));
+    req.on('error', () => resolve({ ok: false, status: 400 }));
   });
 }
 
 export default async function handler(req, res) {
-  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
 
   if (req.method === 'OPTIONS') {
     res.statusCode = 200;
@@ -41,15 +65,21 @@ export default async function handler(req, res) {
   }
 
   if (req.method !== 'POST') {
-    res.setHeader('Content-Type', 'application/json');
     res.statusCode = 405;
     return res.end(JSON.stringify({ error: 'Method not allowed' }));
   }
 
-  const { type } = await readJsonBody(req);
+  const parsed = await readJsonBody(req);
+  if (!parsed.ok) {
+    res.statusCode = parsed.status || 400;
+    return res.end(JSON.stringify({
+      error: parsed.status === 413 ? 'payload_too_large' : 'invalid_request',
+      error_description: parsed.status === 413 ? 'Request body exceeds 16 KB limit' : 'Malformed JSON body'
+    }));
+  }
 
+  const { type } = parsed.data;
   if (type !== 'anonymous') {
-    res.setHeader('Content-Type', 'application/json');
     res.statusCode = 400;
     return res.end(JSON.stringify({
       error: 'invalid_request',
@@ -57,31 +87,33 @@ export default async function handler(req, res) {
     }));
   }
 
-  // Generate a registration ID and identity assertion
-  const registrationId = `reg_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-  const assertionExpiry = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString();
+  const registrationId = `reg_${randomBytes(16).toString('hex')}`;
+  const nowSec = Math.floor(Date.now() / 1000);
+  const expSec = nowSec + 3600 * 24 * 30; // 30 days
+  const assertionExpiry = new Date(expSec * 1000).toISOString();
 
-  // Derive issuer/audience from the request host so assertions validate
-  // across primary (mohamed-tarek-abdelhady.vercel.app) and secondary
-  // domains (website-mohamed.vercel.app, eng-mta.netlify.app).
-  const fwdHost = req.headers['x-forwarded-host'];
-  const host = (Array.isArray(fwdHost) ? fwdHost[0] : fwdHost) ||
-    req.headers.host ||
-    'mohamed-tarek-abdelhady.vercel.app';
-  const protoHeader = req.headers['x-forwarded-proto'];
-  const proto = (Array.isArray(protoHeader) ? protoHeader[0] : protoHeader) || 'https';
-  const issuer = `${proto}://${host}`;
+  const issuer = `https://${safeHost(req.headers['x-forwarded-host'] || req.headers.host)}`;
+  const secret = (process.env.AGENT_AUTH_SECRET || '').trim();
+  const headerB64 = Buffer.from(JSON.stringify({
+    alg: secret ? 'HS256' : 'none',
+    typ: 'JWT'
+  })).toString('base64url');
 
-  // In production, this would be a signed JWT from the identity provider
-  const identityAssertion = `eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.${Buffer.from(JSON.stringify({
+  const payloadB64 = Buffer.from(JSON.stringify({
     iss: issuer,
     sub: registrationId,
     aud: issuer,
-    exp: Math.floor(Date.now() / 1000) + 31536000,
-    iat: Math.floor(Date.now() / 1000),
+    exp: expSec,
+    iat: nowSec,
     type: 'anonymous',
     scopes: ['read']
-  })).toString('base64url')}.signature-placeholder`;
+  })).toString('base64url');
+
+  const signingInput = `${headerB64}.${payloadB64}`;
+  const signature = secret
+    ? createHmac('sha256', secret).update(signingInput).digest('base64url')
+    : '';
+  const identityAssertion = `${signingInput}.${signature}`;
 
   res.statusCode = 200;
   return res.end(JSON.stringify({

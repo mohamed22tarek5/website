@@ -3,6 +3,17 @@
  * Port of api/oauth-protected-resource.js for dual-deploy.
  */
 
+const ALLOWED_HOSTS = new Set([
+  'mohamed-tarek-abdelhady.vercel.app',
+  'website-mohamed.vercel.app',
+  'eng-mta.netlify.app',
+]);
+
+function safeHost(raw) {
+  const candidate = String(raw || '').split(',')[0].trim().toLowerCase();
+  return ALLOWED_HOSTS.has(candidate) ? candidate : 'eng-mta.netlify.app';
+}
+
 export default async (req) => {
   const cors = {
     'Access-Control-Allow-Origin': '*',
@@ -15,10 +26,10 @@ export default async (req) => {
   }
 
   const url = new URL(req.url);
-  const host =
-    req.headers.get('x-forwarded-host') || req.headers.get('host') || url.host;
-  const proto = req.headers.get('x-forwarded-proto') || url.protocol.replace(':', '') || 'https';
-  const base = `${proto}://${host}`;
+  const host = safeHost(
+    req.headers.get('x-forwarded-host') || req.headers.get('host') || url.host
+  );
+  const base = `https://${host}`;
 
   return new Response(
     JSON.stringify({
@@ -29,6 +40,6 @@ export default async (req) => {
       scopes_supported: ['read', 'tools'],
       bearer_methods_supported: ['header'],
     }),
-    { status: 200, headers: { ...cors, 'Content-Type': 'application/json' } }
+    { status: 200, headers: { ...cors, 'Content-Type': 'application/json; charset=utf-8' } }
   );
 };

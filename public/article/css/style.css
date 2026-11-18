@@ -50,7 +50,7 @@ main#app{min-height:70vh;padding-top:var(--header-height)}
 .page{padding:var(--space-2xl) 0 var(--space-4xl)}
 .skip-link{position:fixed;top:-100%;right:var(--space-md);background:var(--color-accent);color:#fff;padding:var(--space-sm) var(--space-md);border-radius:var(--radius-sm);z-index:10000;font-weight:600;font-size:.85rem;transition:top var(--transition-fast)}
 .skip-link:focus{top:var(--space-md)}
-.scroll-progress{position:fixed;top:0;right:0;width:0%;height:3px;background:var(--gradient-accent);z-index:10001}
+.scroll-progress{position:fixed;top:0;inset-inline-start:0;width:100%;height:3px;background:var(--gradient-accent);z-index:10001;transform:scaleX(0);transform-origin:right center;will-change:transform}[dir="ltr"] .scroll-progress{transform-origin:left center}
 /* Header */
 .header{position:fixed;top:0;right:0;left:0;height:var(--header-height);z-index:1000;background:transparent;transition:all var(--transition-base)}
 .header.scrolled{background:rgba(10,14,26,.86);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid var(--color-border)}

@@ -26,7 +26,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "frame-ancestors 'self'"
+          "value": "base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self' mailto:; upgrade-insecure-requests"
         },
         {
           "key": "Referrer-Policy",
@@ -41,6 +41,10 @@
     {
       "source": "/Mohamed_Tarek_Abdelhady_Engineer_CV.pdf",
       "headers": [
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
+        },
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
@@ -284,6 +288,10 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
         }
       ]
     },
@@ -305,6 +313,10 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type, Authorization"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
         }
       ]
     },
@@ -406,6 +418,10 @@
         {
           "key": "Vary",
           "value": "PAYMENT-SIGNATURE, Accept"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
         }
       ]
     },
@@ -868,6 +884,199 @@
     {
       "source": "/mta-lab/:path*",
       "destination": "/article/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "website-mohamed.vercel.app"
+        }
+      ],
+      "destination": "https://mohamed-tarek-abdelhady.vercel.app/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/Mohamed%20-%20CV.html",
+      "destination": "/cv.html",
+      "permanent": true
+    },
+    {
+      "source": "/Mohamed%20-%20Certificates.html",
+      "destination": "/certificates.html",
+      "permanent": true
+    },
+    {
+      "source": "/Mohamed%20-%20Personal%20Information.html",
+      "destination": "/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/Mohamed%20-%20Project.html",
+      "destination": "/projects.html",
+      "permanent": true
+    },
+    {
+      "source": "/Mohamed%20-%20Services.html",
+      "destination": "/services.html",
+      "permanent": true
+    },
+    {
+      "source": "/Mohamed%20-%20my-sites.html",
+      "destination": "/tools.html",
+      "permanent": true
+    },
+    {
+      "source": "/Mohamed%20-%20social-media.html",
+      "destination": "/social-media.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites",
+      "destination": "/tools.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/",
+      "destination": "/tools.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/index.html",
+      "destination": "/tools.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/Battery-Capacity-&-Runtime-Calculator.html",
+      "destination": "/sites/battery-capacity-runtime-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/Battery-Capacity-%26-Runtime-Calculator.html",
+      "destination": "/sites/battery-capacity-runtime-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/RC-Filter-&-LC-Resonance-Calculator.html",
+      "destination": "/sites/rc-filter-lc-resonance-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/Indactance-calculator.html",
+      "destination": "/sites/inductance-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/Mastering%20Linux%20Commands.html",
+      "destination": "/sites/mastering-linux-commands.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/LCD-Custom-Character-Generator.html",
+      "destination": "/sites/lcd-custom-character-generator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/Length-Converter.html",
+      "destination": "/sites/length-converter.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/Medication-Reminder.html",
+      "destination": "/sites/medication-reminder.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/Power-Factor-Calculator.html",
+      "destination": "/sites/power-factor-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/Power-Triangle-Calculator.html",
+      "destination": "/sites/power-triangle-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/Transformer-Turns-Calculator.html",
+      "destination": "/sites/transformer-turns-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/Wire-Gauge-Calculator.html",
+      "destination": "/sites/wire-gauge-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/Race-Game.html",
+      "destination": "/sites/race-game.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/battery-capacity-calculator.html",
+      "destination": "/sites/battery-capacity-runtime-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/circuit-race-game.html",
+      "destination": "/sites/race-game.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/db-calculator.html",
+      "destination": "/sites/decibel-dbm-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/electrical-system-calculator.html",
+      "destination": "/sites/electrical-calculation.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/filter-capacitor-calculator.html",
+      "destination": "/sites/rectifier-filter-capacitor-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/lcd-character-generator.html",
+      "destination": "/sites/lcd-custom-character-generator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/linux-commands.html",
+      "destination": "/sites/mastering-linux-commands.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/lm317-calculator.html",
+      "destination": "/sites/lm317-voltage-regulator-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/nearest-standard-value-calculator.html",
+      "destination": "/sites/standard-resistor-capacitor-finder.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/op-amp-calculator.html",
+      "destination": "/sites/op-amp-gain-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/pcb-trace-calculator.html",
+      "destination": "/sites/pcb-trace-width-calculator.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/todo-list.html",
+      "destination": "/sites/to-do-list.html",
+      "permanent": true
+    },
+    {
+      "source": "/sites/transformer-calculator.html",
+      "destination": "/sites/transformer-turns-calculator.html",
+      "permanent": true
     }
   ]
 }

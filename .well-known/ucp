@@ -82,6 +82,7 @@
     "catalog": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/ai-catalog.json",
     "mcp": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/mcp/server-card.json",
     "auth": "https://mohamed-tarek-abdelhady.vercel.app/auth.md",
-    "ucp": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/ucp"
+    "ucp": "https://mohamed-tarek-abdelhady.vercel.app/.well-known/ucp",
+    "x402": "https://mohamed-tarek-abdelhady.vercel.app/api/x402"
   }
 }

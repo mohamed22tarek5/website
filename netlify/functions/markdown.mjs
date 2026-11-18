@@ -8,7 +8,13 @@
  */
 
 import { readFileSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { resolve, sep } from 'node:path';
+
+const ALLOWED_HOSTS = new Set([
+  'mohamed-tarek-abdelhady.vercel.app',
+  'website-mohamed.vercel.app',
+  'eng-mta.netlify.app',
+]);
 
 function htmlToMarkdown(html) {
   let md = String(html || '');
@@ -37,7 +43,7 @@ function htmlToMarkdown(html) {
   md = md.replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gi, (m, c) => '\n' + String(c).replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, '- $1\n'));
   md = md.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi, (m, c) => {
     let i = 0;
-    return '\n' + String(c).replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, () => `${++i}. $1\n`);
+    return '\n' + String(c).replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, (_, item) => `${++i}. ${item}\n`);
   });
   md = md.replace(/<br[^>]*\/?>/gi, '\n');
   md = md.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, '\n$1\n');
@@ -100,7 +106,7 @@ Mirrors: https://website-mohamed.vercel.app/ | https://eng-mta.netlify.app/
 `;
 
 function normalizePath(raw) {
-  if (!raw) return '/';
+  if (!raw) return '/index';
   let p = String(raw);
   p = p.split('?')[0].split('#')[0];
   try {
@@ -108,22 +114,26 @@ function normalizePath(raw) {
   } catch {
     // keep as-is
   }
+  // Prevent directory traversal outside public/
+  p = p.replace(/\.\./g, '').replace(/[\\]/g, '/');
+  p = p.replace(/[^a-zA-Z0-9_\-./]/g, '');
   if (!p.startsWith('/')) p = '/' + p;
   if (p === '/' || p === '/index' || p === '/index.html' || p === '/index.md') {
     return '/index';
   }
   p = p.replace(/\.html?$/i, '').replace(/\.md$/i, '');
   if (p.length > 1 && p.endsWith('/')) p = p.slice(0, -1);
-  return p;
+  return p || '/index';
 }
 
 function getHost(req, url) {
-  return (
+  const raw =
     req.headers.get('x-forwarded-host') ||
     req.headers.get('host') ||
     url.host ||
-    'eng-mta.netlify.app'
-  );
+    'eng-mta.netlify.app';
+  const candidate = String(raw).split(',')[0].trim().toLowerCase();
+  return ALLOWED_HOSTS.has(candidate) ? candidate : 'eng-mta.netlify.app';
 }
 
 export default async (req) => {
@@ -132,7 +142,7 @@ export default async (req) => {
       status: 200,
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, OPTIONS',
+        'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
         'Access-Control-Allow-Headers': 'Accept, Content-Type',
       },
     });
@@ -141,7 +151,6 @@ export default async (req) => {
   const url = new URL(req.url);
   const accept = req.headers.get('accept') || '';
 
-  // ?path=/ (from rewrites) or /api/markdown/<subpath> style
   let rawPath = url.searchParams.get('path');
   if (!rawPath) {
     const m = url.pathname.match(/^\/(?:api\/markdown|\.netlify\/functions\/markdown)(\/.*)?$/);
@@ -158,15 +167,17 @@ export default async (req) => {
         usage: 'Set Accept: text/markdown header to get markdown version',
         example: 'curl -H "Accept: text/markdown" https://eng-mta.netlify.app/',
       }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
+      { status: 200, headers: { 'Content-Type': 'application/json; charset=utf-8' } }
     );
   }
 
   const normalized = normalizePath(rawPath);
-  const publicDir = join(process.cwd(), 'public');
+  const publicDir = resolve(process.cwd(), 'public');
+  const publicPrefix = publicDir.endsWith(sep) ? publicDir : publicDir + sep;
+  const safeRel = normalized.replace(/^\/+/, '');
 
   const sendMarkdown = (markdown) =>
-    new Response(markdown, {
+    new Response(req.method === 'HEAD' ? null : markdown, {
       status: 200,
       headers: {
         'Content-Type': 'text/markdown; charset=utf-8',
@@ -174,11 +185,13 @@ export default async (req) => {
         Vary: 'Accept',
         'Cache-Control': 'public, max-age=3600, stale-while-revalidate=86400',
         'Access-Control-Allow-Origin': '*',
+        'Access-Control-Expose-Headers': 'x-markdown-tokens, Content-Type',
       },
     });
 
-  for (const name of [`${normalized}.md`, `${normalized}.MD`]) {
-    const mdPath = join(publicDir, name);
+  for (const name of [`${safeRel}.md`, `${safeRel}.MD`]) {
+    const mdPath = resolve(publicDir, name);
+    if (!mdPath.startsWith(publicPrefix)) continue;
     if (existsSync(mdPath)) {
       try {
         return sendMarkdown(readFileSync(mdPath, 'utf-8'));
@@ -188,8 +201,9 @@ export default async (req) => {
     }
   }
 
-  for (const name of [`${normalized}.html`, `${normalized}.HTML`]) {
-    const htmlPath = join(publicDir, name);
+  for (const name of [`${safeRel}.html`, `${safeRel}.HTML`]) {
+    const htmlPath = resolve(publicDir, name);
+    if (!htmlPath.startsWith(publicPrefix)) continue;
     if (existsSync(htmlPath)) {
       try {
         const md = htmlToMarkdown(readFileSync(htmlPath, 'utf-8'));
@@ -206,8 +220,7 @@ export default async (req) => {
     normalized.replace(/^\//, '').replace(/[-_]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()) ||
     'Home';
   const host = getHost(req, url);
-  const proto = req.headers.get('x-forwarded-proto') || url.protocol.replace(':', '') || 'https';
-  const pageUrl = `${proto}://${host}${normalized === '/index' ? '/' : normalized}`;
+  const pageUrl = `https://${host}${normalized === '/index' ? '/' : normalized}`;
   return sendMarkdown(
     `# ${title}\n\nThis page is part of Mohamed Tarek Abdelhady's portfolio.\n\nVisit [${title}](${pageUrl}) for the full experience.\n`
   );

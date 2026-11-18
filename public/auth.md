@@ -115,5 +115,5 @@ Authorization: Bearer <access_token>
 
 ## Contact
 
-- **GitHub**: [MohamedTarek20](https://github.com/MohamedTarek20)
-- **LinkedIn**: [Mohamed Tarek Abdelhady](https://www.linkedin.com/in/mohamedtarek20)
+- **GitHub**: [mohamed22tarek5](https://github.com/mohamed22tarek5)
+- **LinkedIn**: [Mohamed Tarek Abdelhady](https://www.linkedin.com/in/mohamedtarek225)

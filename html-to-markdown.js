@@ -55,8 +55,8 @@ export function htmlToMarkdown(html) {
   // Ordered lists
   md = md.replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi, (match, content) => {
     let i = 0;
-    return '\n' + content.replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, () => {
-      return `${++i}. $1\n`;
+    return '\n' + content.replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, (_, item) => {
+      return `${++i}. ${item}\n`;
     });
   });
 

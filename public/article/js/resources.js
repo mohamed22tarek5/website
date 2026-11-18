@@ -121,9 +121,9 @@ function renderDetail(slug){
     '<span class="plat-badge">' + UI.esc(UI.catName(r.category)) + '</span>' + (r.featured ? '<span class="feat-badge">★</span>' : '') + '</div>' +
     '<h1>' + UI.esc(UI.titleOf(r)) + '</h1><p class="detail-desc">' + UI.esc(UI.descOf(r)) + '</p>' +
     '<div class="detail-meta"><span>✍️ ' + UI.esc(r.author || '') + '</span><span>📅 ' + UI.esc(r.date || '') + '</span>' +
-    '<span>⏱ ' + UI.esc(String(r.readingTime || 5)) + ' ' + UI.esc(I18n.t('min_read')) + '</span><span>👁 ' + (r.views || 0) + '</span></div>' +
+    '<span>⏱ ' + UI.esc(String(Number(r.readingTime) || 5)) + ' ' + UI.esc(I18n.t('min_read')) + '</span><span>👁 ' + (Number(r.views) || 0) + '</span></div>' +
     '<div class="res-tags" style="justify-content:center;display:flex;flex-wrap:wrap;gap:6px">' + ((r.tags||[]).map(function(t){ return '<span class="tag">' + UI.esc(t) + '</span>'; }).join('')) + '</div></div>' +
-    (r.cover ? '<img src="' + UI.esc(r.cover) + '" alt="" loading="lazy" style="border-radius:14px;margin:22px auto;max-width:820px">' : '') +
+    (r.cover && UI.safeImgUrl(r.cover) ? '<img src="' + UI.esc(r.cover) + '" alt="" loading="lazy" style="border-radius:14px;margin:22px auto;max-width:820px">' : '') +
     '<div class="detail-layout"><aside class="toc"><h4>' + UI.esc(I18n.t('toc')) + '</h4>' +
     (toc.length ? toc.map(function(t, k){ return '<a href="#sec-' + k + '">' + UI.esc(String(t.text).slice(0, 60)) + '</a>'; }).join('') : '<span class="form-hint">—</span>') +
     '<div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-secondary btn-sm" id="share-btn">' + UI.esc(I18n.t('share')) + '</button>' +
@@ -182,12 +182,14 @@ function copyPrompt(key, btn){
   Analytics.trackCopy(r.slug); UI.copyText(p.content, btn);
 }
 function downloadFile(slug, path, name){
-  Analytics.trackDownload(slug);
-  var fullPath = path || '';
-  if(!fullPath.startsWith('/') && !fullPath.startsWith('http')){
-    fullPath = '/article/' + fullPath;
+  var raw = String(path || '').trim();
+  if(!raw || raw.indexOf('..') >= 0 || raw.indexOf('//') === 0 || /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(raw)){
+    UI.toast('مسار الملف غير صالح', 'error');
+    return;
   }
-  var a = document.createElement('a'); a.href = fullPath; a.setAttribute('download', name || ''); document.body.appendChild(a); a.click(); a.remove();
+  var fullPath = raw.startsWith('/article/') ? raw : ('/article/' + raw.replace(/^\/+/, ''));
+  Analytics.trackDownload(slug);
+  var a = document.createElement('a'); a.href = fullPath; a.setAttribute('download', String(name || '').replace(/[\\/:*?"<>|]/g, '_')); document.body.appendChild(a); a.click(); a.remove();
   UI.toast(I18n.t('dl_started'), 'success');
 }
 window.ResourcesPage = {renderArticles:renderArticles, renderHub:renderHub, renderCategory:renderCategory, renderDetail:renderDetail, copyFirst:copyFirst, copyPrompt:copyPrompt, downloadFile:downloadFile, published:published, isArticle:isArticle};
